@@ -9,9 +9,9 @@ export const roPageMeta = {
       'Agenție de marketing digital din București. Facem promovare online, web design, SEO și Google Ads. Consultație gratuită 30 de minute, remote în toată România.',
   },
   '/about-2/': {
-    title: 'Despre noi | agenție marketing București',
+    title: 'Despre noi | Cunoaște Echipa de Tocilari',
     description:
-      'Echipa de Tocilari este agenția de marketing digital din București. Facem site-uri, SEO și campanii pentru firme din România — fără jargon de umplutură.',
+      'Cunoaște Echipa de Tocilari, agenție de marketing digital din București. Design, dezvoltare web și SEO, cu atenție la detalii și comunicare deschisă.',
   },
   '/creare-site-web/': {
     title: 'Creare site web București | prezentare și landing',
@@ -34,9 +34,9 @@ export const roPageMeta = {
       'Contactează Echipa de Tocilari pentru creare site, SEO sau Google Ads. Consultație gratuită 30 de minute — lucrăm remote în toată România.',
   },
   '/portofoliu/': {
-    title: 'Portofoliu web design | site-uri realizate',
+    title: 'Modele de site-uri și portofoliu web design | Echipa de Tocilari',
     description:
-      'Portofoliu de web design: site-uri de prezentare, landing page-uri și direcții vizuale pentru branduri din România. Vezi ce putem construi pentru tine.',
+      'Explorează 20 de modele demonstrative pentru site-uri de prezentare, magazine și bloguri. Alegem împreună un design pe care îl adaptăm afacerii tale.',
   },
   '/services/': {
     title: 'Servicii marketing digital: site, SEO, Ads',

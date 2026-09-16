@@ -29,3 +29,8 @@ scripts/content-extract.txt
 # misc
 .audit/
 .claude/
+
+# Local deployment tooling and sign-in state
+.tmp/npm-cache/
+.tmp/vercel-cli-cache/
+.tmp/vercel-auth/

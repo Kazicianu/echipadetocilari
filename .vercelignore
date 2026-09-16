@@ -1,0 +1,28 @@
+# Exclude local client documents, research, screenshots, caches and secrets.
+.git
+.env*
+.vercel
+node_modules
+dist
+.tmp
+tmp
+output
+docs
+Screaming Frog files
+.audit
+.claude
+.cursor
+.vscode
+AGENTS.md
+CLAUDE.md
+README.md
+tests
+scripts/keyword-research
+scripts/preview.mjs
+scripts/mirror-site.mjs
+scripts/import-portfolio.mjs
+scripts/new-page.mjs
+scripts/fix-animations.mjs
+scripts/i18n/extract-ro.mjs
+scripts/i18n/find-ro-leftovers.mjs
+**/*.test.mjs

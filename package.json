@@ -7,10 +7,10 @@
     "node": ">=22.12.0"
   },
   "scripts": {
+    "test": "node --test tests/contact.test.mjs scripts/lib/standalone-assets.test.mjs scripts/lib/navigation.test.mjs",
     "build": "node scripts/build-static.mjs",
-    "preview": "npx --yes serve dist -l 3000",
+    "preview": "node --env-file-if-exists=.env.local scripts/preview.mjs",
     "mirror": "node scripts/mirror-site.mjs",
     "new-page": "node scripts/new-page.mjs"
-  },
-  "dependencies": {}
+  }
 }

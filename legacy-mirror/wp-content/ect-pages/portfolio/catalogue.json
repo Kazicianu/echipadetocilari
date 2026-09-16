@@ -1,0 +1,249 @@
+{
+  "importedAt": "2026-09-16T14:51:23.869Z",
+  "source": "https://www.echipadetocilari.ro/wp-json/wp/v2/astra-portfolio?per_page=100",
+  "kind": "Existing website template examples; not claimed as completed client projects.",
+  "categories": [
+    {
+      "id": 17,
+      "name": "Blog",
+      "slug": "blog"
+    },
+    {
+      "id": 18,
+      "name": "Business",
+      "slug": "business"
+    },
+    {
+      "id": 19,
+      "name": "eCommerce",
+      "slug": "ecommerce"
+    },
+    {
+      "id": 21,
+      "name": "Other",
+      "slug": "other"
+    }
+  ],
+  "items": [
+    {
+      "id": 4959,
+      "slug": "blog-de-fashion-si-lifestyle",
+      "title": "Blog de Fashion si Lifestyle",
+      "categories": [
+        17
+      ],
+      "demoUrl": "https://websitedemos.net/fashion-lifestyle-02",
+      "image": "/wp-content/ect-pages/portfolio/images/4959-fashion-lifestyle-02-homepage-scaled.jpg",
+      "imageSource": "https://www.echipadetocilari.ro/wp-content/uploads/2024/03/fashion-lifestyle-02-homepage-scaled.jpg"
+    },
+    {
+      "id": 4962,
+      "slug": "magazin-de-dulciuri",
+      "title": "Magazin de Dulciuri",
+      "categories": [
+        18
+      ],
+      "demoUrl": "https://websitedemos.net/sweet-shop-04",
+      "image": "/wp-content/ect-pages/portfolio/images/4962-sweet-shop-home-scaled.jpg",
+      "imageSource": "https://www.echipadetocilari.ro/wp-content/uploads/2024/03/sweet-shop-home-scaled.jpg"
+    },
+    {
+      "id": 4964,
+      "slug": "ong",
+      "title": "ONG",
+      "categories": [
+        21
+      ],
+      "demoUrl": "https://websitedemos.net/charity-04",
+      "image": "/wp-content/ect-pages/portfolio/images/4964-charity-04-home-scaled.jpg",
+      "imageSource": "https://www.echipadetocilari.ro/wp-content/uploads/2024/03/charity-04-home-scaled.jpg"
+    },
+    {
+      "id": 4966,
+      "slug": "artist-freelancer",
+      "title": "Artist Freelancer",
+      "categories": [
+        19
+      ],
+      "demoUrl": "https://websitedemos.net/artist-02",
+      "image": "/wp-content/ect-pages/portfolio/images/4966-artist-christine-home-page.jpg",
+      "imageSource": "https://www.echipadetocilari.ro/wp-content/uploads/2024/03/artist-christine-home-page.jpg"
+    },
+    {
+      "id": 4968,
+      "slug": "home-decor",
+      "title": "Design de Interior",
+      "categories": [
+        17
+      ],
+      "demoUrl": "https://websitedemos.net/blog-02",
+      "image": "/wp-content/ect-pages/portfolio/images/4968-blog-02-1-scaled.jpg",
+      "imageSource": "https://www.echipadetocilari.ro/wp-content/uploads/2024/03/blog-02-1-scaled.jpg"
+    },
+    {
+      "id": 4971,
+      "slug": "agentie",
+      "title": "Agentie",
+      "categories": [
+        18
+      ],
+      "demoUrl": "https://websitedemos.net/agency-04",
+      "image": "/wp-content/ect-pages/portfolio/images/4971-real-estate-agency-04-homepage-02-scaled.jpg",
+      "imageSource": "https://www.echipadetocilari.ro/wp-content/uploads/2024/03/real-estate-agency-04-homepage-02-scaled.jpg"
+    },
+    {
+      "id": 4970,
+      "slug": "spa",
+      "title": "Spa",
+      "categories": [
+        18
+      ],
+      "demoUrl": "https://websitedemos.net/lotus-spa-04",
+      "image": "/wp-content/ect-pages/portfolio/images/4970-lotus-spa-04-homepage-scaled.jpg",
+      "imageSource": "https://www.echipadetocilari.ro/wp-content/uploads/2024/03/lotus-spa-04-homepage-scaled.jpg"
+    },
+    {
+      "id": 4973,
+      "slug": "freelancer",
+      "title": "Freelancer",
+      "categories": [
+        18
+      ],
+      "demoUrl": "https://websitedemos.net/freelancer-04",
+      "image": "/wp-content/ect-pages/portfolio/images/4973-freelancer-04-homepage-scaled.jpg",
+      "imageSource": "https://www.echipadetocilari.ro/wp-content/uploads/2024/03/freelancer-04-homepage-scaled.jpg"
+    },
+    {
+      "id": 4975,
+      "slug": "reparatii-masini",
+      "title": "Reparatii Masini",
+      "categories": [
+        18
+      ],
+      "demoUrl": "https://websitedemos.net/car-repair-02",
+      "image": "/wp-content/ect-pages/portfolio/images/4975-car-repair-02-homepage-scaled.jpg",
+      "imageSource": "https://www.echipadetocilari.ro/wp-content/uploads/2024/03/car-repair-02-homepage-scaled.jpg"
+    },
+    {
+      "id": 4977,
+      "slug": "agentie-digitala",
+      "title": "Agentie Digitala",
+      "categories": [
+        18
+      ],
+      "demoUrl": "https://websitedemos.net/agency-02",
+      "image": "/wp-content/ect-pages/portfolio/images/4977-digital-agency-homepage-scaled.jpg",
+      "imageSource": "https://www.echipadetocilari.ro/wp-content/uploads/2024/03/digital-agency-homepage-scaled.jpg"
+    },
+    {
+      "id": 4979,
+      "slug": "firma-gradinarit",
+      "title": "Firma Gradinarit",
+      "categories": [
+        18
+      ],
+      "demoUrl": "https://websitedemos.net/gardener-02",
+      "image": "/wp-content/ect-pages/portfolio/images/4979-gardener-02-home-scaled.jpg",
+      "imageSource": "https://www.echipadetocilari.ro/wp-content/uploads/2024/03/gardener-02-home-scaled.jpg"
+    },
+    {
+      "id": 4981,
+      "slug": "firma-constructii",
+      "title": "Firma Constructii",
+      "categories": [
+        18
+      ],
+      "demoUrl": "https://websitedemos.net/construction-02",
+      "image": "/wp-content/ect-pages/portfolio/images/4981-construction-co-homepage-scaled.jpg",
+      "imageSource": "https://www.echipadetocilari.ro/wp-content/uploads/2024/03/construction-co-homepage-scaled.jpg"
+    },
+    {
+      "id": 4983,
+      "slug": "co-working-space",
+      "title": "Co-Working Space",
+      "categories": [
+        18
+      ],
+      "demoUrl": "https://websitedemos.net/co-working-space-02",
+      "image": "/wp-content/ect-pages/portfolio/images/4983-co-working-space-02-home-scaled.jpg",
+      "imageSource": "https://www.echipadetocilari.ro/wp-content/uploads/2024/03/co-working-space-02-home-scaled.jpg"
+    },
+    {
+      "id": 4986,
+      "slug": "firma-avocatura",
+      "title": "Firma Avocatura",
+      "categories": [
+        18
+      ],
+      "demoUrl": "https://websitedemos.net/law-02",
+      "image": "/wp-content/ect-pages/portfolio/images/4986-law-firm-homepage-scaled.jpg",
+      "imageSource": "https://www.echipadetocilari.ro/wp-content/uploads/2024/03/law-firm-homepage-scaled.jpg"
+    },
+    {
+      "id": 4985,
+      "slug": "invitatie-nunta",
+      "title": "Invitatie Nunta",
+      "categories": [
+        21
+      ],
+      "demoUrl": "https://websitedemos.net/wedding-02",
+      "image": "/wp-content/ect-pages/portfolio/images/4985-wedding-invite-onepage-scaled.jpg",
+      "imageSource": "https://www.echipadetocilari.ro/wp-content/uploads/2024/03/wedding-invite-onepage-scaled.jpg"
+    },
+    {
+      "id": 4992,
+      "slug": "electrician",
+      "title": "Electrician",
+      "categories": [
+        18
+      ],
+      "demoUrl": "https://websitedemos.net/electrician-02",
+      "image": "/wp-content/ect-pages/portfolio/images/4992-electrician-home-page-scaled.jpg",
+      "imageSource": "https://www.echipadetocilari.ro/wp-content/uploads/2024/03/electrician-home-page-scaled.jpg"
+    },
+    {
+      "id": 4994,
+      "slug": "clinica-dentara",
+      "title": "Clinica Dentara",
+      "categories": [
+        18
+      ],
+      "demoUrl": "https://websitedemos.net/dental-02",
+      "image": "/wp-content/ect-pages/portfolio/images/4994-dental-clinic-home-page-scaled.jpg",
+      "imageSource": "https://www.echipadetocilari.ro/wp-content/uploads/2024/03/dental-clinic-home-page-scaled.jpg"
+    },
+    {
+      "id": 4996,
+      "slug": "makeup-artist",
+      "title": "Makeup Artist",
+      "categories": [
+        18
+      ],
+      "demoUrl": "https://websitedemos.net/makeup-artist-02",
+      "image": "/wp-content/ect-pages/portfolio/images/4996-makeup-artist-homepage-scaled.jpg",
+      "imageSource": "https://www.echipadetocilari.ro/wp-content/uploads/2024/03/makeup-artist-homepage-scaled.jpg"
+    },
+    {
+      "id": 4998,
+      "slug": "servicii-de-curatenie",
+      "title": "Servicii de Curatenie",
+      "categories": [
+        18
+      ],
+      "demoUrl": "https://websitedemos.net/cleaner-02",
+      "image": "/wp-content/ect-pages/portfolio/images/4998-cleaning-services-home-page-scaled.jpg",
+      "imageSource": "https://www.echipadetocilari.ro/wp-content/uploads/2024/03/cleaning-services-home-page-scaled.jpg"
+    },
+    {
+      "id": 5000,
+      "slug": "hotel-si-pensiune",
+      "title": "Hotel si Pensiune",
+      "categories": [
+        18
+      ],
+      "demoUrl": "https://websitedemos.net/hotel-02",
+      "image": "/wp-content/ect-pages/portfolio/images/5000-hotel-mountain-homepage-scaled.jpg",
+      "imageSource": "https://www.echipadetocilari.ro/wp-content/uploads/2024/03/hotel-mountain-homepage-scaled.jpg"
+    }
+  ]
+}

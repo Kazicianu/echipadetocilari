@@ -63,7 +63,6 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 /*# sourceURL=global-styles-inline-css */
 </style>
 <link rel="stylesheet" id="dashicons-css" href="../wp-includes/css/dashicons.min_ver=7.0.2.css" media="all">
-<link rel="stylesheet" id="portfolio-front-style-css" href="../wp-content/plugins/astra-portfolio/dist/fscript_ver=1.13.3.css" media="all">
 <link rel="stylesheet" id="hello-elementor-css" href="../wp-content/themes/hello-elementor/style.min_ver=3.0.1.css" media="all">
 <link rel="stylesheet" id="hello-elementor-theme-style-css" href="../wp-content/themes/hello-elementor/theme.min_ver=3.0.1.css" media="all">
 <link rel="stylesheet" id="hello-elementor-header-footer-css" href="../wp-content/themes/hello-elementor/header-footer.min_ver=3.0.1.css" media="all">
@@ -116,6 +115,7 @@ window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(argumen
 <link rel="apple-touch-icon" href="../wp-content/uploads/2024/02/Logo_Echipa_de_Tocilari-1024x1024.webp">
 <meta name="msapplication-TileImage" content="/wp-content/uploads/2024/02/Logo_Echipa_de_Tocilari-1024x1024.webp">
   <style>/* ect-invis-fallback */.elementor-invisible{opacity:0}.elementor-invisible.animated,.elementor-invisible[data-ect-revealed="1"]{opacity:1}@media(prefers-reduced-motion:reduce){.elementor-invisible{opacity:1!important}}</style>
+<link id="ect-portfolio-css" rel="stylesheet" href="/wp-content/ect-pages/portfolio/portfolio.css">
 </head>
 <body class="wp-singular page-template-default page page-id-4988 wp-custom-logo wp-theme-hello-elementor elementor-default elementor-kit-3353 elementor-page elementor-page-4988">
 
@@ -188,244 +188,168 @@ window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(argumen
 				</div>
 				<div class="elementor-element elementor-element-ee7bad5 elementor-widget elementor-widget-shortcode" data-id="ee7bad5" data-element_type="widget" data-e-type="widget" data-widget_type="shortcode.default">
 				<div class="elementor-widget-container">
-							<div class="elementor-shortcode"><div id="astra-portfolio" class="astra-portfolio-wrap astra-portfolio-style-1 astra-portfolio-show-on-scroll" data-other-categories="" data-categories="" data-tags="">
-		<div class="astra-portfolio-filters">
-
-		<!-- All Filters -->
-		<div class="filters-wrap">
-							<div class="astra-portfolio-other-categories-wrap"></div>
-							
-							<div class="astra-portfolio-categories-wrap"></div>
-							
-		</div>
-
-					<div class="search-form">
-				<label class="screen-reader-text" for="astra-portfolio-search">Search </label>
-				<input placeholder="Search..." type="search" aria-describedby="live-search-desc" class="astra-portfolio-search">
-			</div>
-		
-	</div>
-	
-	<!-- All Astra Portfolio -->
-	<div class="astra-portfolio-shortcode-wrap astra-portfolio-grid astra-portfolio astra-portfolio-row"></div><!-- .astra-portfolio -->
-
-</div><!-- .astra-portfolio. -->
-
-			<script type="text/template" id="tmpl-astra-portfolio-responsive-view">
-				<span class="responsive-view">
-	<span class="actions">
-		<a class="desktop" href="#"><span data-view="desktop " class="active dashicons dashicons-desktop"></span></a>
-		<a class="tablet" href="#"><span data-view="tablet" class="dashicons dashicons-tablet"></span></a>
-		<a class="mobile" href="#"><span data-view="mobile" class="dashicons dashicons-smartphone"></span></a>
-	</span>
-</span>
-			</script>
-
-						<script type="text/template" id="tmpl-astra-portfolio-filters">
-
-				<# if ( data ) { #>
-
-	<ul class="{{ data.args.wrapper_class }} {{ data.args.class }}">
-
-		<# if ( data.args.show_all ) { #>
-			<li>
-				<a href="#" data-group="all">
-					All				</a>
-			</li>
-		<# } #>
-
-		<# for ( key in data.items ) { #>
-
-			<# if ( data.items[ key ].count ) { #>
-
-				<li>
-					<a href="#" data-group='{{ data.items[ key ].id }}' class="{{ data.items[ key ].name }}">
-						{{{ data.items[ key ].name }}}
-					</a>
-				</li>
-
-			<# } #>
-
-		<# } #>
-
-	</ul>
-<# } #>
-
-			</script>
-
-						<script type="text/template" id="tmpl-astra-portfolio-no-items-found">
-
-				<div class="astra-portfolio-not-found">
-	<p>
-		No items found.<br/>
-	</p>
-</div>
-
-			</script>
-
-						<script type="text/template" id="tmpl-astra-portfolio-list">
-
-				<# if ( data.items.length ) { #>
-	<# for ( key in data.items ) {
-
-		var item_classes = '';
-		if( 1 == data.items[ key ]['astra-site-open-in-new-tab'] )
-		{
-			item_classes = ' open-in-new-tab ';
-		}
-
-		var open_in = data.items[ key ]['astra-site-open-portfolio-in'] || '';
-
-		item_classes += ' ' + open_in + ' ';
-		var style = 'style-1';
-		var speed = '3';
-		#>
-
-		<div class="site-single {{ item_classes }} astra-portfolio-col-md-4 {{ data.items[ key ]['portfolio-type'] }}" data-slug="{{ data.items[ key ]['slug'] }}" data-id="{{data.items[ key ]['id']}}" data-portfolio-type="{{data.items[ key ]['portfolio-type']}}">
-			<div class="inner">
-								<#
-				var css = '';
-				if( 'style-1' == style && '' !== data.items[ key ]['thumbnail-image-url'] ) {
-					css = "background-image:url('"+data.items[ key ]['thumbnail-image-url']+"'); ";
-					if( '' !== speed ) {
-						css += "transition: all ease-in-out " + speed + "s;";
-					}
-				}
-
-				var type = data.items[ key ]['portfolio-type'] || '';
-
-				switch( type ) {
-					case 'page': 
-									var permalink = data.items[ key ]['link'] || '';
-									var target = '_blank';
-									if( 'same-tab' == open_in )
-									{
-										target = '_self';
-									}
-									if( 'iframe' == open_in )
-									{ #>
-										<span class="site-preview" data-href="{{ permalink }}TB_iframe=true&width=600&height=550" data-title="{{ data.items[ key ].title.rendered }}" style="{{css}}">
-									<# } else { #>
-										<a target="{{ target }}" class="site-preview" title="{{ data.items[ key ].title.rendered }}" href="{{{permalink}}}" data-elementor-open-lightbox="no" style="{{css}}">
-									<# } #>
-										<# if( 'style-1' !== style && '' !== data.items[ key ]['thumbnail-image-url'] ) { #>
-											<img class="lazy" data-src="{{ data.items[ key ]['thumbnail-image-url'] }}" alt="{{ data.items[ key ]['thumbnail-image-meta']['alt'] }}" title="{{ data.items[ key ]['thumbnail-image-meta']['title'] }}" />
-											<noscript>
-												<img decoding="async" src="{{ data.items[ key ]['thumbnail-image-url'] }}" alt="{{ data.items[ key ]['thumbnail-image-meta']['alt'] }}" title="{{ data.items[ key ]['thumbnail-image-meta']['title'] }}" />
-											</noscript>
-										<# } #>
-																				<span class="view-demo-wrap">
-											<span class="view-demo"> Quick View </span>
-										</span>
-																			<# if( 'iframe' == open_in )
-									{ #>
-										</span>
-									<# } else { #>
-										</a>
-									<# }
-						break;
-					case 'video': 
-									var video_url = data.items[ key ]['portfolio-video-url'] || '';
-									#>										
-									<a class="site-preview" title="{{ data.items[ key ].title.rendered }}" href="{{{video_url}}}" data-elementor-open-lightbox="no" style="{{css}}">
-										<# if( 'style-1' !== style && '' !== data.items[ key ]['thumbnail-image-url'] ) { #>
-											<img class="lazy" data-src="{{ data.items[ key ]['thumbnail-image-url'] }}" alt="{{ data.items[ key ]['thumbnail-image-meta']['alt'] }}" title="{{ data.items[ key ]['thumbnail-image-meta']['title'] }}" />
-											<noscript>
-												<img decoding="async" src="{{ data.items[ key ]['thumbnail-image-url'] }}" alt="{{ data.items[ key ]['thumbnail-image-meta']['alt'] }}" title="{{ data.items[ key ]['thumbnail-image-meta']['title'] }}" />
-											</noscript>
-										<# } #>
-																				<span class="view-demo-wrap">
-											<span class="view-demo"> Quick View </span>
-										</span>
-																			</a>
-									<#
-						break;
-					case 'image': 
-									var image_url = data.items[ key ]['lightbox-image-url'] || '';
-									if( '' === image_url ) {
-										image_url = data.items[ key ]['thumbnail-image-url'] || '';
-									}
-									#>
-									<a class="site-preview" title="{{ data.items[ key ].title.rendered }}" href="{{{image_url}}}" data-elementor-open-lightbox="no" style="{{css}}">
-										<# if( 'style-1' !== style && '' !== data.items[ key ]['thumbnail-image-url'] ) { #>
-											<img class="lazy" data-src="{{ data.items[ key ]['thumbnail-image-url'] }}" alt="{{ data.items[ key ]['thumbnail-image-meta']['alt'] }}" title="{{ data.items[ key ]['thumbnail-image-meta']['title'] }}" />
-											<noscript>
-												<img decoding="async" src="{{ data.items[ key ]['thumbnail-image-url'] }}" alt="{{ data.items[ key ]['thumbnail-image-meta']['alt'] }}" title="{{ data.items[ key ]['thumbnail-image-meta']['title'] }}" />
-											</noscript>
-										<# } #>
-																				<span class="view-demo-wrap">
-											<span class="view-demo"> Quick View </span>
-										</span>
-																			</a>
-									<#
-						break;
-
-					case 'iframe': 
-					default:
-
-									if( 1 == data.items[ key ]['astra-site-open-in-new-tab'] ) { #>
-										<a class="site-preview" href="{{ data.items[ key ]['astra-site-url'] }}" target="_blank" data-title="{{ data.items[ key ].title.rendered }}" data-elementor-open-lightbox="no" style="{{css}}" aria-label="Visit {{ data.items[key].title.rendered }} website">
-									<# } else { #>
-										<span class="site-preview" data-href="{{ data.items[ key ]['astra-site-url'] }}TB_iframe=true&width=600&height=550" data-title="{{ data.items[ key ].title.rendered }}" style="{{css}}" aria-label="Visit {{ data.items[key].title.rendered }} website">
-									<# } #>
-										<# if( 'style-1' !== style && '' !== data.items[ key ]['thumbnail-image-url'] ) { #>
-											<img class="lazy" data-src="{{ data.items[ key ]['thumbnail-image-url'] }}" alt="{{ data.items[ key ]['thumbnail-image-meta']['alt'] }}" title="{{ data.items[ key ]['thumbnail-image-meta']['title'] }}" />
-											<noscript>
-												<img decoding="async" src="{{ data.items[ key ]['thumbnail-image-url'] }}" alt="{{ data.items[ key ]['thumbnail-image-meta']['alt'] }}" title="{{ data.items[ key ]['thumbnail-image-meta']['title'] }}" />
-											</noscript>
-										<# } #>
-																				<span class="view-demo-wrap">
-											<span class="view-demo"> Quick View </span>
-										</span>
-																			<# if( 1 == data.items[ key ]['astra-site-open-in-new-tab'] ) { #>
-										</a>
-									<# } else { #>
-										</span>
-									<# }
-						break;
-				}
-				#>
-									<div class="template-meta">
-						<div class="item-title">
-							{{{ data.items[ key ].title.rendered }}}
-							<# if ( data.items[ key ]['astra-site-type'] ) { #>
-								<span class="site-type {{data.items[ key ]['astra-site-type']}}">{{data.items[ key ]['astra-site-type']}}</span>
-							<# } #>
-						</div>
-					</div>
-							</div>
-		</div>
-	<# } #>
-<# } else { #>
-	<div class="astra-portfolio-not-found">
-		<p>
-			No items found.<br/>
-		</p>
-	</div>
-<# } #>
-
-			</script>
-			
-<script type="text/template" id="tmpl-astra-portfolio-load-more-sites">
-	<button class="astra-portfolio-load-more-sites">Load More</button>
-</script>
-
-<script type="text/template" id="tmpl-astra-portfolio-spinner">
-	<span class="spinner is-active"></span>
-</script>
-
-<script type="text/template" id="tmpl-astra-portfolio-not-found">
-	<span class="astra-portfolio-not-found">
-		<p>
-			No items found.<br/>
-		</p>
-	</span>
-</script>
-
-<script type="text/template" id="tmpl-astra-portfolio-no-more-demos">
-	<span class="no-more-demos">
-			</span>
-</script>
+							<div class="elementor-shortcode"><!-- ect-portfolio:start -->
+<section id="ect-portfolio" aria-label="Modele de site-uri web" data-count-label="modele" data-count-label-singular="model">
+  <p class="ect-portfolio-note">Modele demonstrative de site-uri web, pe care le putem adapta afacerii tale. Previzualizările se deschid într-o filă nouă.</p>
+  <div class="ect-portfolio-controls" hidden>
+    <div class="ect-portfolio-filters" role="group" aria-label="Filtrează după categorie">
+      <button type="button" data-category="all" aria-pressed="true">Toate</button>
+<button type="button" data-category="17" aria-pressed="false">Blog</button>
+<button type="button" data-category="18" aria-pressed="false">Business</button>
+<button type="button" data-category="19" aria-pressed="false">eCommerce</button>
+<button type="button" data-category="21" aria-pressed="false">Altele</button>
+    </div>
+    <div class="ect-portfolio-search">
+      <label for="ect-portfolio-search" class="screen-reader-text">Caută modele</label>
+      <input id="ect-portfolio-search" type="search" placeholder="Caută un model..." aria-controls="ect-portfolio-grid">
+    </div>
+  </div>
+  <p class="ect-portfolio-count" role="status" aria-live="polite" aria-atomic="true">20 modele</p>
+  <div id="ect-portfolio-grid" class="ect-portfolio-grid">
+    <article class="ect-portfolio-card" data-categories="17">
+  <a class="ect-portfolio-preview" href="https://websitedemos.net/fashion-lifestyle-02" target="_blank" rel="noopener noreferrer" data-elementor-open-lightbox="no" aria-labelledby="ect-model-4959">
+    <img src="/wp-content/ect-pages/portfolio/images/4959-fashion-lifestyle-02-homepage-scaled.jpg" alt="" loading="eager" decoding="async">
+    <span class="ect-portfolio-overlay"><span>Vezi modelul</span></span>
+  </a>
+  <h3 id="ect-model-4959"><a href="https://websitedemos.net/fashion-lifestyle-02" target="_blank" rel="noopener noreferrer">Blog de Fashion si Lifestyle</a></h3>
+</article>
+<article class="ect-portfolio-card" data-categories="18">
+  <a class="ect-portfolio-preview" href="https://websitedemos.net/sweet-shop-04" target="_blank" rel="noopener noreferrer" data-elementor-open-lightbox="no" aria-labelledby="ect-model-4962">
+    <img src="/wp-content/ect-pages/portfolio/images/4962-sweet-shop-home-scaled.jpg" alt="" loading="eager" decoding="async">
+    <span class="ect-portfolio-overlay"><span>Vezi modelul</span></span>
+  </a>
+  <h3 id="ect-model-4962"><a href="https://websitedemos.net/sweet-shop-04" target="_blank" rel="noopener noreferrer">Magazin de Dulciuri</a></h3>
+</article>
+<article class="ect-portfolio-card" data-categories="21">
+  <a class="ect-portfolio-preview" href="https://websitedemos.net/charity-04" target="_blank" rel="noopener noreferrer" data-elementor-open-lightbox="no" aria-labelledby="ect-model-4964">
+    <img src="/wp-content/ect-pages/portfolio/images/4964-charity-04-home-scaled.jpg" alt="" loading="eager" decoding="async">
+    <span class="ect-portfolio-overlay"><span>Vezi modelul</span></span>
+  </a>
+  <h3 id="ect-model-4964"><a href="https://websitedemos.net/charity-04" target="_blank" rel="noopener noreferrer">ONG</a></h3>
+</article>
+<article class="ect-portfolio-card" data-categories="19">
+  <a class="ect-portfolio-preview" href="https://websitedemos.net/artist-02" target="_blank" rel="noopener noreferrer" data-elementor-open-lightbox="no" aria-labelledby="ect-model-4966">
+    <img src="/wp-content/ect-pages/portfolio/images/4966-artist-christine-home-page.jpg" alt="" loading="lazy" decoding="async">
+    <span class="ect-portfolio-overlay"><span>Vezi modelul</span></span>
+  </a>
+  <h3 id="ect-model-4966"><a href="https://websitedemos.net/artist-02" target="_blank" rel="noopener noreferrer">Artist Freelancer</a></h3>
+</article>
+<article class="ect-portfolio-card" data-categories="17">
+  <a class="ect-portfolio-preview" href="https://websitedemos.net/blog-02" target="_blank" rel="noopener noreferrer" data-elementor-open-lightbox="no" aria-labelledby="ect-model-4968">
+    <img src="/wp-content/ect-pages/portfolio/images/4968-blog-02-1-scaled.jpg" alt="" loading="lazy" decoding="async">
+    <span class="ect-portfolio-overlay"><span>Vezi modelul</span></span>
+  </a>
+  <h3 id="ect-model-4968"><a href="https://websitedemos.net/blog-02" target="_blank" rel="noopener noreferrer">Design de Interior</a></h3>
+</article>
+<article class="ect-portfolio-card" data-categories="18">
+  <a class="ect-portfolio-preview" href="https://websitedemos.net/agency-04" target="_blank" rel="noopener noreferrer" data-elementor-open-lightbox="no" aria-labelledby="ect-model-4971">
+    <img src="/wp-content/ect-pages/portfolio/images/4971-real-estate-agency-04-homepage-02-scaled.jpg" alt="" loading="lazy" decoding="async">
+    <span class="ect-portfolio-overlay"><span>Vezi modelul</span></span>
+  </a>
+  <h3 id="ect-model-4971"><a href="https://websitedemos.net/agency-04" target="_blank" rel="noopener noreferrer">Agentie</a></h3>
+</article>
+<article class="ect-portfolio-card" data-categories="18">
+  <a class="ect-portfolio-preview" href="https://websitedemos.net/lotus-spa-04" target="_blank" rel="noopener noreferrer" data-elementor-open-lightbox="no" aria-labelledby="ect-model-4970">
+    <img src="/wp-content/ect-pages/portfolio/images/4970-lotus-spa-04-homepage-scaled.jpg" alt="" loading="lazy" decoding="async">
+    <span class="ect-portfolio-overlay"><span>Vezi modelul</span></span>
+  </a>
+  <h3 id="ect-model-4970"><a href="https://websitedemos.net/lotus-spa-04" target="_blank" rel="noopener noreferrer">Spa</a></h3>
+</article>
+<article class="ect-portfolio-card" data-categories="18">
+  <a class="ect-portfolio-preview" href="https://websitedemos.net/freelancer-04" target="_blank" rel="noopener noreferrer" data-elementor-open-lightbox="no" aria-labelledby="ect-model-4973">
+    <img src="/wp-content/ect-pages/portfolio/images/4973-freelancer-04-homepage-scaled.jpg" alt="" loading="lazy" decoding="async">
+    <span class="ect-portfolio-overlay"><span>Vezi modelul</span></span>
+  </a>
+  <h3 id="ect-model-4973"><a href="https://websitedemos.net/freelancer-04" target="_blank" rel="noopener noreferrer">Freelancer</a></h3>
+</article>
+<article class="ect-portfolio-card" data-categories="18">
+  <a class="ect-portfolio-preview" href="https://websitedemos.net/car-repair-02" target="_blank" rel="noopener noreferrer" data-elementor-open-lightbox="no" aria-labelledby="ect-model-4975">
+    <img src="/wp-content/ect-pages/portfolio/images/4975-car-repair-02-homepage-scaled.jpg" alt="" loading="lazy" decoding="async">
+    <span class="ect-portfolio-overlay"><span>Vezi modelul</span></span>
+  </a>
+  <h3 id="ect-model-4975"><a href="https://websitedemos.net/car-repair-02" target="_blank" rel="noopener noreferrer">Reparatii Masini</a></h3>
+</article>
+<article class="ect-portfolio-card" data-categories="18">
+  <a class="ect-portfolio-preview" href="https://websitedemos.net/agency-02" target="_blank" rel="noopener noreferrer" data-elementor-open-lightbox="no" aria-labelledby="ect-model-4977">
+    <img src="/wp-content/ect-pages/portfolio/images/4977-digital-agency-homepage-scaled.jpg" alt="" loading="lazy" decoding="async">
+    <span class="ect-portfolio-overlay"><span>Vezi modelul</span></span>
+  </a>
+  <h3 id="ect-model-4977"><a href="https://websitedemos.net/agency-02" target="_blank" rel="noopener noreferrer">Agentie Digitala</a></h3>
+</article>
+<article class="ect-portfolio-card" data-categories="18">
+  <a class="ect-portfolio-preview" href="https://websitedemos.net/gardener-02" target="_blank" rel="noopener noreferrer" data-elementor-open-lightbox="no" aria-labelledby="ect-model-4979">
+    <img src="/wp-content/ect-pages/portfolio/images/4979-gardener-02-home-scaled.jpg" alt="" loading="lazy" decoding="async">
+    <span class="ect-portfolio-overlay"><span>Vezi modelul</span></span>
+  </a>
+  <h3 id="ect-model-4979"><a href="https://websitedemos.net/gardener-02" target="_blank" rel="noopener noreferrer">Firma Gradinarit</a></h3>
+</article>
+<article class="ect-portfolio-card" data-categories="18">
+  <a class="ect-portfolio-preview" href="https://websitedemos.net/construction-02" target="_blank" rel="noopener noreferrer" data-elementor-open-lightbox="no" aria-labelledby="ect-model-4981">
+    <img src="/wp-content/ect-pages/portfolio/images/4981-construction-co-homepage-scaled.jpg" alt="" loading="lazy" decoding="async">
+    <span class="ect-portfolio-overlay"><span>Vezi modelul</span></span>
+  </a>
+  <h3 id="ect-model-4981"><a href="https://websitedemos.net/construction-02" target="_blank" rel="noopener noreferrer">Firma Constructii</a></h3>
+</article>
+<article class="ect-portfolio-card" data-categories="18">
+  <a class="ect-portfolio-preview" href="https://websitedemos.net/co-working-space-02" target="_blank" rel="noopener noreferrer" data-elementor-open-lightbox="no" aria-labelledby="ect-model-4983">
+    <img src="/wp-content/ect-pages/portfolio/images/4983-co-working-space-02-home-scaled.jpg" alt="" loading="lazy" decoding="async">
+    <span class="ect-portfolio-overlay"><span>Vezi modelul</span></span>
+  </a>
+  <h3 id="ect-model-4983"><a href="https://websitedemos.net/co-working-space-02" target="_blank" rel="noopener noreferrer">Co-Working Space</a></h3>
+</article>
+<article class="ect-portfolio-card" data-categories="18">
+  <a class="ect-portfolio-preview" href="https://websitedemos.net/law-02" target="_blank" rel="noopener noreferrer" data-elementor-open-lightbox="no" aria-labelledby="ect-model-4986">
+    <img src="/wp-content/ect-pages/portfolio/images/4986-law-firm-homepage-scaled.jpg" alt="" loading="lazy" decoding="async">
+    <span class="ect-portfolio-overlay"><span>Vezi modelul</span></span>
+  </a>
+  <h3 id="ect-model-4986"><a href="https://websitedemos.net/law-02" target="_blank" rel="noopener noreferrer">Firma Avocatura</a></h3>
+</article>
+<article class="ect-portfolio-card" data-categories="21">
+  <a class="ect-portfolio-preview" href="https://websitedemos.net/wedding-02" target="_blank" rel="noopener noreferrer" data-elementor-open-lightbox="no" aria-labelledby="ect-model-4985">
+    <img src="/wp-content/ect-pages/portfolio/images/4985-wedding-invite-onepage-scaled.jpg" alt="" loading="lazy" decoding="async">
+    <span class="ect-portfolio-overlay"><span>Vezi modelul</span></span>
+  </a>
+  <h3 id="ect-model-4985"><a href="https://websitedemos.net/wedding-02" target="_blank" rel="noopener noreferrer">Invitatie Nunta</a></h3>
+</article>
+<article class="ect-portfolio-card" data-categories="18">
+  <a class="ect-portfolio-preview" href="https://websitedemos.net/electrician-02" target="_blank" rel="noopener noreferrer" data-elementor-open-lightbox="no" aria-labelledby="ect-model-4992">
+    <img src="/wp-content/ect-pages/portfolio/images/4992-electrician-home-page-scaled.jpg" alt="" loading="lazy" decoding="async">
+    <span class="ect-portfolio-overlay"><span>Vezi modelul</span></span>
+  </a>
+  <h3 id="ect-model-4992"><a href="https://websitedemos.net/electrician-02" target="_blank" rel="noopener noreferrer">Electrician</a></h3>
+</article>
+<article class="ect-portfolio-card" data-categories="18">
+  <a class="ect-portfolio-preview" href="https://websitedemos.net/dental-02" target="_blank" rel="noopener noreferrer" data-elementor-open-lightbox="no" aria-labelledby="ect-model-4994">
+    <img src="/wp-content/ect-pages/portfolio/images/4994-dental-clinic-home-page-scaled.jpg" alt="" loading="lazy" decoding="async">
+    <span class="ect-portfolio-overlay"><span>Vezi modelul</span></span>
+  </a>
+  <h3 id="ect-model-4994"><a href="https://websitedemos.net/dental-02" target="_blank" rel="noopener noreferrer">Clinica Dentara</a></h3>
+</article>
+<article class="ect-portfolio-card" data-categories="18">
+  <a class="ect-portfolio-preview" href="https://websitedemos.net/makeup-artist-02" target="_blank" rel="noopener noreferrer" data-elementor-open-lightbox="no" aria-labelledby="ect-model-4996">
+    <img src="/wp-content/ect-pages/portfolio/images/4996-makeup-artist-homepage-scaled.jpg" alt="" loading="lazy" decoding="async">
+    <span class="ect-portfolio-overlay"><span>Vezi modelul</span></span>
+  </a>
+  <h3 id="ect-model-4996"><a href="https://websitedemos.net/makeup-artist-02" target="_blank" rel="noopener noreferrer">Makeup Artist</a></h3>
+</article>
+<article class="ect-portfolio-card" data-categories="18">
+  <a class="ect-portfolio-preview" href="https://websitedemos.net/cleaner-02" target="_blank" rel="noopener noreferrer" data-elementor-open-lightbox="no" aria-labelledby="ect-model-4998">
+    <img src="/wp-content/ect-pages/portfolio/images/4998-cleaning-services-home-page-scaled.jpg" alt="" loading="lazy" decoding="async">
+    <span class="ect-portfolio-overlay"><span>Vezi modelul</span></span>
+  </a>
+  <h3 id="ect-model-4998"><a href="https://websitedemos.net/cleaner-02" target="_blank" rel="noopener noreferrer">Servicii de Curatenie</a></h3>
+</article>
+<article class="ect-portfolio-card" data-categories="18">
+  <a class="ect-portfolio-preview" href="https://websitedemos.net/hotel-02" target="_blank" rel="noopener noreferrer" data-elementor-open-lightbox="no" aria-labelledby="ect-model-5000">
+    <img src="/wp-content/ect-pages/portfolio/images/5000-hotel-mountain-homepage-scaled.jpg" alt="" loading="lazy" decoding="async">
+    <span class="ect-portfolio-overlay"><span>Vezi modelul</span></span>
+  </a>
+  <h3 id="ect-model-5000"><a href="https://websitedemos.net/hotel-02" target="_blank" rel="noopener noreferrer">Hotel si Pensiune</a></h3>
+</article>
+  </div>
+  <p class="ect-portfolio-empty" hidden>Nu am găsit modele pentru această căutare. Încearcă alt termen sau altă categorie.</p>
+</section>
+<!-- ect-portfolio:end -->
 </div>
 						</div>
 				</div>
@@ -611,41 +535,12 @@ window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(argumen
 					document.addEventListener( event, lazyloadRunObserver );
 				} );
 			</script>
-			<link rel="stylesheet" id="astra-portfolio-lightbox-css" href="../wp-content/plugins/astra-portfolio/assets/vendor/css/min/magnific-popup.min_ver=1.13.3.css" media="all">
-<link rel="stylesheet" id="astra-portfolio-shortcode-css" href="../wp-content/plugins/astra-portfolio/assets/css/min/shortcode.min_ver=1.13.3.css" media="all">
-<style id="astra-portfolio-shortcode-inline-css">
-
-                .spinner {
-                    background-image: url(/wp-includes/images/spinner.gif);
-                }
-            
-/*# sourceURL=astra-portfolio-shortcode-inline-css */
-</style>
-<link rel="stylesheet" id="astra-portfolio-grid-css" href="../wp-content/plugins/astra-portfolio/assets/css/min/grid.min_ver=1.13.3.css" media="all">
-<link rel="stylesheet" id="thickbox-css" href="../wp-includes/js/thickbox/thickbox_ver=7.0.2.css" media="all">
-<script id="astra-portfolio-lightbox-js" src="../wp-content/plugins/astra-portfolio/assets/vendor/js/min/magnific-popup.min_ver=1.13.3.js"></script>
-<script id="react-js" src="../wp-includes/js/dist/vendor/react.min_ver=18.3.1.1.js"></script>
-<script id="react-dom-js" src="../wp-includes/js/dist/vendor/react-dom.min_ver=18.3.1.1.js"></script>
-<script id="wp-escape-html-js" src="../wp-includes/js/dist/escape-html.min_ver=3f093e5cca67aa0f8b56.js"></script>
-<script id="wp-element-js" src="../wp-includes/js/dist/element.min_ver=15ba804677f72a8db97b.js"></script>
-<script id="wp-hooks-js" src="../wp-includes/js/dist/hooks.min_ver=7496969728ca0f95732d.js"></script>
+			<script id="wp-hooks-js" src="../wp-includes/js/dist/hooks.min_ver=7496969728ca0f95732d.js"></script>
 <script id="wp-i18n-js" src="../wp-includes/js/dist/i18n.min_ver=781d11515ad3d91786ec.js"></script>
 <script id="wp-i18n-js-after">
 wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
 //# sourceURL=wp-i18n-js-after
 </script>
-<script id="wp-dom-ready-js" src="../wp-includes/js/dist/dom-ready.min_ver=a06281ae5cf5500e9317.js"></script>
-<script id="portfolio-front-block-script-js-extra">
-var columnClass = {"1":"astra-portfolio-col-md-12","2":"astra-portfolio-col-md-6","3":"astra-portfolio-col-md-4","4":"astra-portfolio-col-md-3"};
-var astraPortfolioData = {"apiUrl":"https://www.echipadetocilari.ro/wp-json/wp/v2/astra-portfolio"};
-//# sourceURL=portfolio-front-block-script-js-extra
-</script>
-<script id="portfolio-front-block-script-js" src="../wp-content/plugins/astra-portfolio/dist/fscript_ver=1.13.3.js"></script>
-<script id="starter-templates-zip-preview-js-extra">
-var starter_templates_zip_preview = {"AstColorPaletteVarPrefix":"--ast-global-","AstEleColorPaletteVarPrefix":"--ast-global-"};
-//# sourceURL=starter-templates-zip-preview-js-extra
-</script>
-<script id="starter-templates-zip-preview-js" src="../wp-content/plugins/astra-pro-sites/inc/lib/onboarding/assets/dist/template-preview/main_ver=aabd2ae4238bd052108b.js"></script>
 <script id="hello-theme-frontend-js" src="../wp-content/themes/hello-elementor/assets/js/hello-frontend.min_ver=3.0.1.js"></script>
 <script id="elementor-webpack-runtime-js" src="../wp-content/plugins/elementor/assets/js/webpack.runtime.min_ver=4.1.4.js"></script>
 <script id="elementor-frontend-modules-js" src="../wp-content/plugins/elementor/assets/js/frontend-modules.min_ver=4.1.4.js"></script>
@@ -656,32 +551,6 @@ var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false
 </script>
 <script id="elementor-frontend-js" src="../wp-content/plugins/elementor/assets/js/frontend.min_ver=4.1.4.js"></script>
 <script id="smartmenus-js" src="../wp-content/plugins/elementor-pro/assets/lib/smartmenus/jquery.smartmenus.min_ver=1.2.1.js"></script>
-<script id="underscore-js" src="../wp-includes/js/underscore.min_ver=1.13.8.js"></script>
-<script id="wp-util-js-extra">
-var _wpUtilSettings = {"ajax":{"url":"/wp-admin/admin-ajax.php"}};
-//# sourceURL=wp-util-js-extra
-</script>
-<script id="wp-util-js" src="../wp-includes/js/wp-util.min_ver=7.0.2.js"></script>
-<script id="astra-portfolio-api-js-extra">
-var astraPortfolioApi = {"ApiURL":"https://www.echipadetocilari.ro/wp-json/wp/v2/","filters":{"page_builder":{"title":"Page Builder","slug":"astra-portfolio-other-categories","trigger":"astra-api-category-loaded"},"categories":{"title":"Categories","slug":"astra-portfolio-categories","trigger":"astra-api-category-loaded"}}};
-//# sourceURL=astra-portfolio-api-js-extra
-</script>
-<script id="astra-portfolio-api-js" src="../wp-content/plugins/astra-portfolio/assets/js/min/astra-portfolio-api.min_ver=1.13.3.js"></script>
-<script id="imagesloaded-js" src="../wp-includes/js/imagesloaded.min_ver=5.0.0.js"></script>
-<script id="astra-portfolio-lazyload-js" src="../wp-content/plugins/astra-portfolio/assets/vendor/js/min/lazy.min_ver=1.13.3.js"></script>
-<script id="astra-portfolio-history-js" src="../wp-content/plugins/astra-portfolio/assets/vendor/js/min/history.min_ver=1.13.3.js"></script>
-<script id="masonry-js" src="../wp-includes/js/masonry.min_ver=4.2.2.js"></script>
-<script id="jquery-masonry-js" src="../wp-includes/js/jquery/jquery.masonry.min_ver=3.1.2b.js"></script>
-<script id="astra-portfolio-shortcode-js-extra">
-var astraPortfolio = {"scrollToTop":"1","apiEndpoint":"https://www.echipadetocilari.ro/wp-json/wp/v2/","apiDomain":"https://www.echipadetocilari.ro","ajaxurl":"https://www.echipadetocilari.ro/wp-admin/admin-ajax.php","ApiURLSep":"?","settings":{"per-page":15,"show-portfolio-on":"scroll","no-of-columns":3,"show-search":"yes","categories":"","other-categories":"","no-more-sites-message":"","preview-bar-loc":"bottom","responsive-button":"1","rewrite":"astra-portfolio","rewrite-tags":"astra-portfolio-tags","rewrite-categories":"astra-portfolio-categories","rewrite-other-categories":"astra-portfolio-other-categories","grid-style":"style-1","enable-masonry":"1","page-builder":"","portfolio-title-loc":"bottom","scroll-speed":"3","columns":3,"show-other-categories":"yes","show-categories":"yes","tags":"","quick-view-text":"Quick View","show-quick-view":"yes","other-category-show-all":"no","category-show-all":"yes"},"siteLoadingEnabled":"1","siteLoadingTitle":"Loading...","siteLoadingMessage":"One moment please.","current_lang":null};
-//# sourceURL=astra-portfolio-shortcode-js-extra
-</script>
-<script id="astra-portfolio-shortcode-js" src="../wp-content/plugins/astra-portfolio/assets/js/min/shortcode.min_ver=1.13.3.js"></script>
-<script id="thickbox-js-extra">
-var thickboxL10n = {"next":"Next \u003E","prev":"\u003C Prev","image":"Image","of":"of","close":"Close","noiframes":"This feature requires inline frames. You have iframes disabled or your browser does not support them.","loadingAnimation":"/wp-includes/js/thickbox/loadingAnimation.gif"};
-//# sourceURL=thickbox-js-extra
-</script>
-<script id="thickbox-js" src="../wp-includes/js/thickbox/thickbox_ver=3.1-20121105.js"></script>
 <script id="elementor-pro-webpack-runtime-js" src="../wp-content/plugins/elementor-pro/assets/js/webpack-pro.runtime.min_ver=3.29.0.js"></script>
 <script id="elementor-pro-frontend-js-before">
 var ElementorProFrontendConfig = {"ajaxurl":"\/wp-admin\/admin-ajax.php","nonce":"1c1147ecfa","urls":{"assets":"\/wp-content\/plugins\/elementor-pro\/assets\/","rest":"\/wp-json\/"},"settings":{"lazy_load_background_images":true},"popup":{"hasPopUps":false},"shareButtonsNetworks":{"facebook":{"title":"Facebook","has_counter":true},"twitter":{"title":"Twitter"},"linkedin":{"title":"LinkedIn","has_counter":true},"pinterest":{"title":"Pinterest","has_counter":true},"reddit":{"title":"Reddit","has_counter":true},"vk":{"title":"VK","has_counter":true},"odnoklassniki":{"title":"OK","has_counter":true},"tumblr":{"title":"Tumblr"},"digg":{"title":"Digg"},"skype":{"title":"Skype"},"stumbleupon":{"title":"StumbleUpon","has_counter":true},"mix":{"title":"Mix"},"telegram":{"title":"Telegram"},"pocket":{"title":"Pocket","has_counter":true},"xing":{"title":"XING","has_counter":true},"whatsapp":{"title":"WhatsApp"},"email":{"title":"Email"},"print":{"title":"Print"},"x-twitter":{"title":"X"},"threads":{"title":"Threads"}},"facebook_sdk":{"lang":"en_US","app_id":""},"lottie":{"defaultAnimationUrl":"\/wp-content\/plugins\/elementor-pro\/modules\/lottie\/assets\/animations\/default.json"}};
@@ -703,4 +572,5 @@ const a=JSON.parse(document.getElementById("wp-emoji-settings").textContent),o=(
 
 
   <script src="/wp-content/ect-anim-polyfill.js" defer></script>
+<script id="ect-portfolio-js" src="/wp-content/ect-pages/portfolio/portfolio.js" defer></script>
 </body></html><!-- Cached by WP-Optimize (gzip) - https://teamupdraft.com/wp-optimize/ - Last modified: August 6, 2026 11:23 am (UTC:0) -->

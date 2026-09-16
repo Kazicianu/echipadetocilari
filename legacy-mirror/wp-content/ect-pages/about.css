@@ -1,0 +1,195 @@
+/* About page, using the homepage and service-page design tokens:
+   Montserrat, #fd8649, 45/54 headings, white cards and the shared blob assets.
+   Scoped to preserve the shared Elementor header and footer. */
+@font-face {
+  font-family: 'Caveat ECT';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('fonts/caveat-600.woff2') format('woff2');
+}
+
+.ect-about {
+  --about-ink: #27272d;
+  --about-orange: #fd8649;
+  color: var(--about-ink);
+  font-family: Montserrat, system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.4;
+  font-weight: 300;
+  overflow: clip;
+}
+.ect-about *, .ect-about *::before, .ect-about *::after { box-sizing: border-box; }
+.ect-about-wrap { max-width: 1150px; width: 100%; padding-inline: 20px; margin-inline: auto; }
+.ect-about p { margin: 0 0 20px; }
+.ect-about h1, .ect-about h2, .ect-about h3 { color: var(--about-ink); font-family: inherit; letter-spacing: normal; text-transform: capitalize; }
+.ect-about h1 { font-size: 45px; line-height: 1.2; font-weight: 900; color: var(--about-orange); text-transform: uppercase; margin: 0 0 24px; }
+.ect-about h2 { font-size: 45px; line-height: 1.2; font-weight: 500; margin: 0 0 28px; }
+.ect-about h3 { font-size: 20px; line-height: 1.2; font-weight: 500; color: var(--about-orange); margin: 0 0 14px; }
+.ect-about h2 > span { padding: .02em .16em .08em; border-radius: 15px; background: var(--about-orange); box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.ect-about .ect-about-eyebrow { font-size: 18px; line-height: 1.2; font-weight: 300; color: var(--about-orange); margin: 0 0 14px; }
+.ect-about .ect-about-lead { font-size: 18px; line-height: 24px; font-weight: 400; }
+.ect-about a:focus-visible, .ect-about:focus-visible { outline: 3px solid #4f4482; outline-offset: 6px; }
+.ect-about-section { padding-block: 80px; }
+.ect-about-hero { padding: 85px 0 70px; background: #fff url('/wp-content/uploads/2022/04/daycare-hero-bg.png') center / cover no-repeat; }
+.ect-about-hero__grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 50px; }
+.ect-about-hero .ect-about-eyebrow { color: var(--about-ink); font-size: 21px; font-weight: 400; margin-bottom: 20px; }
+.ect-about-hero__copy > p:not(.ect-about-eyebrow) { max-width: 535px; }
+.ect-about-actions { display: flex; flex-wrap: wrap; gap: 20px 25px; align-items: center; margin-top: 32px; }
+.ect-about .ect-about-button { display: inline-flex; justify-content: center; align-items: center; gap: 18px; border: 2px solid var(--about-orange); border-radius: 30px; background: #fff; color: var(--about-orange); font-size: 16px; line-height: 1.2; font-weight: 600; padding: 20px 40px; text-decoration: none; transition: background .3s ease, color .3s ease; }
+.ect-about .ect-about-button:hover { background: var(--about-orange); color: #fff; }
+.ect-about .ect-about-button > span { font-size: 22px; line-height: 1; }
+.ect-about .ect-about-text-link { display: inline-flex; align-items: center; gap: 12px; color: var(--about-ink); font-size: 15px; font-weight: 500; line-height: 1.4; text-decoration: underline; text-decoration-color: #fd864999; text-underline-offset: 5px; transition: color .3s ease; }
+.ect-about .ect-about-text-link:hover { color: var(--about-orange); }
+.ect-about-hero__visual { position: relative; margin: 0; padding: 25px 0 44px; }
+.ect-about-hero__visual img { display: block; width: 100%; height: auto; }
+.ect-about-note { margin-top: 14px; text-align: center; font-family: 'Caveat ECT', cursive; font-size: 25px; font-weight: 600; transform: rotate(-4deg); }
+.ect-about-principles { padding-block: 0 30px; }
+.ect-about-principles__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.ect-about-principles p { margin: 0; padding: 20px 22px; font-size: 16px; font-weight: 300; border-radius: 15px; background: #fff; box-shadow: 0 0 20px #0000000d; }
+.ect-about-principles p > span { margin-right: 8px; color: var(--about-orange); font-size: 15px; font-weight: 500; }
+.ect-about-story { scroll-margin-top: 30px; background: #fff url('/wp-content/uploads/2024/02/BG-more-Services.png') center / cover no-repeat; }
+.ect-about-story h2 { color: var(--about-orange); }
+.ect-about-story h2 > span { padding: 0; background: none; }
+.ect-about-story h2 > span { white-space: nowrap; }
+.ect-about-story__grid { display: grid; grid-template-columns: 1fr 1.08fr; gap: 70px; }
+.ect-about .ect-about-handwritten { font-family: 'Caveat ECT', cursive; font-size: 28px; font-weight: 600; color: var(--about-ink); margin-top: 28px; transform: rotate(-3deg); }
+.ect-about-story__text p { font-size: 16px; }
+.ect-about-story__text .ect-about-text-link { margin-top: 8px; }
+.ect-about-team { background: #fff url('/wp-content/uploads/2024/02/BG-home-new4.png') center / cover no-repeat; }
+.ect-about-section-head { text-align: center; max-width: 720px; margin: 0 auto 50px; }
+.ect-about-section-head h2 { margin-bottom: 0; }
+.ect-about-section-head > p { max-width: 620px; margin: 24px auto 0; font-size: 16px; }
+.ect-about-team__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
+.ect-about-specialty { display: flex; flex-direction: column; background: #fff; border-radius: 15px 15px 15px 70px; box-shadow: 0 0 20px #0000000d; padding: 35px 40px; transition: box-shadow .3s ease, transform .3s ease; }
+.ect-about-specialty:hover, .ect-about-specialty:focus-within { box-shadow: 0 0 20px #fd8649b0; transform: translateY(-10px); }
+.ect-about-specialty__symbol { display: flex; align-items: center; min-height: 48px; margin-bottom: 25px; color: var(--about-orange); }
+.ect-about-specialty__symbol svg { display: block; width: 48px; height: 48px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.ect-about-specialty p { font-size: 16px; line-height: 1.4; margin-bottom: 25px; }
+.ect-about-specialty .ect-about-text-link { margin-top: auto; font-size: 15px; gap: 12px; }
+.ect-about .ect-about-team__footnote { text-align: center; margin: 35px 0 0; font-size: 16px; }
+.ect-about-values { background: #fff url('/wp-content/uploads/2024/02/BG-Join-Clients.png') center / cover no-repeat; }
+.ect-about-values__grid { display: grid; grid-template-columns: 1fr 1.12fr; gap: 80px; }
+.ect-about-values__intro > p:not(.ect-about-eyebrow) { max-width: 400px; font-size: 16px; }
+.ect-about-values__intro .ect-about-text-link { margin-top: 8px; }
+.ect-about-values__list article { display: flex; align-items: baseline; gap: 24px; padding: 26px 0; border-top: 1px solid #27272d1a; }
+.ect-about-values__list article:first-child { padding-top: 0; border-top: 0; }
+.ect-about-values__list article:last-child { padding-bottom: 0; }
+.ect-about-values__number { color: var(--about-orange); font-size: 20px; font-weight: 500; }
+.ect-about-values__list h3 { margin-bottom: 8px; }
+.ect-about-values__list p { font-size: 16px; margin: 0; }
+.ect-about-cta { padding: 10px 20px 70px; text-align: center; }
+.ect-about-cta__inner { position: relative; padding: 45px 40px; border-radius: 30px; background: linear-gradient(270deg, #ff6c2a 0%, #fd8649 100%); box-shadow: 0 0 10px #fd8649; color: #fff; }
+.ect-about-cta .ect-about-eyebrow { color: #fff; }
+.ect-about-cta h2 { font-size: 35px; line-height: 1.2; color: #fff; max-width: 850px; margin-inline: auto; }
+.ect-about-cta__inner > p:not(.ect-about-eyebrow) { max-width: 600px; margin-inline: auto; }
+.ect-about .ect-about-button--light { background: #fff; border-color: #fff; color: #ff5600; margin-top: 10px; }
+.ect-about .ect-about-button--light:hover { background: transparent; color: #fff; }
+.ect-about .ect-about-cta__note { font-size: 14px; font-weight: 400; margin: 18px auto 0; }
+
+/* This header's original mobile breakpoint leaves its full menu crowded on tablets. */
+@media (min-width: 768px) and (max-width: 1024px) {
+  body.elementor-page-3410 .elementor-3359 .elementor-element-62711c56 > .e-con-inner {
+    flex-wrap: nowrap;
+    gap: 24px;
+  }
+  body.elementor-page-3410 .elementor-3359 .elementor-element-c11629b {
+    flex: 0 0 90px;
+    width: 90px;
+    max-width: 90px;
+  }
+  body.elementor-page-3410 .elementor-3359 .elementor-element-c11629b img {
+    width: 90px;
+    height: 75px;
+    object-fit: contain;
+  }
+  body.elementor-page-3410 .elementor-3359 .elementor-element-6c9dcdd8 {
+    flex: 0 0 auto;
+    width: auto;
+    max-width: none;
+    margin-left: auto;
+  }
+  body.elementor-page-3410 .elementor-3359 .elementor-element-6c9dcdd8 > .elementor-widget-container {
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+  }
+  body.elementor-page-3410 .elementor-3359 .elementor-nav-menu--main,
+  body.elementor-page-3410 .elementor-3359 .elementor-element-682f9a60 {
+    display: none;
+  }
+  body.elementor-page-3410 .elementor-3359 .ect-lang-wrap {
+    margin: 0 10px 0 0 !important;
+  }
+  body.elementor-page-3410 .elementor-3359 .elementor-menu-toggle {
+    display: flex;
+    min-width: 44px;
+    min-height: 44px;
+    margin: 0;
+    --nav-menu-icon-size: 25px;
+  }
+  body.elementor-page-3410 .elementor-3359 nav.elementor-nav-menu--dropdown {
+    display: block;
+    overflow-y: auto;
+    border-width: 0 0 1px;
+  }
+  body.elementor-page-3410 .elementor-3359 .elementor-nav-menu--dropdown a {
+    padding-block: 20px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .ect-about-wrap { padding-inline: 20px; }
+  .ect-about-hero { padding-block: 64px; }
+  .ect-about-hero__grid { gap: 25px; }
+  .ect-about h1 { font-size: 38px; }
+  .ect-about h2 { font-size: 32px; }
+  .ect-about-hero__visual { padding-bottom: 25px; }
+  .ect-about-note { font-size: 23px; }
+  .ect-about-story__grid, .ect-about-values__grid { gap: 40px; }
+  .ect-about-team__grid { grid-template-columns: repeat(2, 1fr); gap: 22px; }
+  .ect-about-specialty { padding: 30px; }
+  .ect-about-specialty .ect-about-text-link { font-size: 14px; }
+  .ect-about-section { padding-block: 60px; }
+  .ect-about-principles__grid { gap: 15px; }
+  .ect-about-principles p { font-size: 15px; padding: 18px; }
+  .ect-about-principles p > span { margin-right: 5px; }
+}
+@media (max-width: 767px) {
+  .ect-about-wrap { padding-inline: 20px; }
+  .ect-about h1 { font-size: 9.9vw; }
+  .ect-about h2 { font-size: 7.5vw; }
+  .ect-about .ect-about-eyebrow { font-size: 16px; margin-bottom: 14px; }
+  .ect-about .ect-about-lead { font-size: 16px; line-height: 1.4; }
+  .ect-about-hero { padding: 42px 0 46px; }
+  .ect-about-hero__grid { grid-template-columns: 1fr; gap: 38px; }
+  .ect-about-hero__copy > p { font-size: 16px; }
+  .ect-about-actions { gap: 23px; }
+  .ect-about .ect-about-button { font-size: 16px; padding: 20px 25px; }
+  .ect-about-hero__visual { width: 100%; max-width: 440px; margin-inline: auto; padding: 15px 0 40px; }
+  .ect-about-note { margin-top: 20px; }
+  .ect-about-principles__grid { grid-template-columns: 1fr; gap: 13px; padding-block: 25px; }
+  .ect-about-principles p { font-size: 16px; }
+  .ect-about-principles p > span { margin-right: 13px; }
+  .ect-about-section { padding-block: 50px; }
+  .ect-about-story__grid, .ect-about-values__grid { grid-template-columns: 1fr; gap: 28px; }
+  .ect-about .ect-about-handwritten { margin: 20px 0 8px; font-size: 28px; }
+  .ect-about-section-head { display: block; margin-bottom: 32px; }
+  .ect-about-section-head > p { margin-top: 23px; max-width: none; }
+  .ect-about-team__grid { grid-template-columns: 1fr; gap: 16px; }
+  .ect-about-specialty { padding: 30px; border-radius: 15px 15px 15px 50px; }
+  .ect-about-specialty__symbol { min-height: 35px; margin-bottom: 20px; }
+  .ect-about-specialty p { margin-bottom: 20px; }
+  .ect-about .ect-about-team__footnote { font-size: 16px; line-height: 1.4; }
+  .ect-about-values__intro > p:not(.ect-about-eyebrow) { max-width: none; }
+  .ect-about-values__list { margin-top: 12px; }
+  .ect-about-values__list article { gap: 17px; }
+  .ect-about-cta { padding: 10px 20px 50px; }
+  .ect-about-cta__inner { padding: 35px 20px; }
+  .ect-about-cta h2 { font-size: 28px; }
+  .ect-about-cta__inner > p { font-size: 16px; }
+  .ect-about .ect-about-cta__note { font-size: 13px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ect-about a, .ect-about-specialty { transition: none; }
+  .ect-about-specialty:hover, .ect-about-specialty:focus-within { transform: none; }
+}

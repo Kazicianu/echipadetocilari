@@ -36,6 +36,9 @@ import {
 import { faqPage, organization, service, webPage, website } from './lib/schema.mjs';
 import { junkRedirects, vercelRedirects } from './lib/junk-redirects.mjs';
 import { validateBuild } from './lib/validate.mjs';
+import { enhanceContactForms } from './lib/contact-forms.mjs';
+import { makeStandaloneAssets, validateStandaloneAssets } from './lib/standalone-assets.mjs';
+import { normalizePageLinks } from './lib/navigation.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
@@ -146,13 +149,7 @@ function enhanceHtml(file) {
   // The scraper wrote `?_ver%3D…`; the files on disk (and Vercel) use `_ver=`.
   html = html.replace(/(src|href)="([^"]*?)_ver%3D([^"]*)"/gi, '$1="$2_ver=$3"');
 
-  // The scrape left page links relative (`servicii-seo/index.html`). They resolve
-  // at the RO root but not from /en/, so every EN twin linked into a 404. Only
-  // paths that are real routes are rewritten; anything else stays untouched.
-  html = html.replace(/href="((?:\.\.\/)*)([\w\-/]*)index\.html"/gi, (match, _up, dir) => {
-    const target = '/' + dir.replace(/^\/+/, '');
-    return isOwnedPage(target) ? `href="${target}"` : match;
-  });
+  html = normalizePageLinks(html, { pageUrl: urlPath });
 
   html = setLang(html, 'ro');
 
@@ -222,6 +219,13 @@ const enPages = generateEnglishPages({ outDir, site: SITE, indexable: INDEXABLE 
 patchRomanianPages({ outDir, site: SITE });
 console.log('  EN pages:', enPages.join(', '));
 
+// Run after translation so form field names and runtime settings stay intact.
+console.log('→ Preparing standalone forms and local presentation assets…');
+for (const file of walkHtml(outDir)) {
+  const html = readFileSync(file, 'utf8');
+  writeFileSync(file, makeStandaloneAssets(enhanceContactForms(html)), 'utf8');
+}
+
 // ─── site-level files ───────────────────────────────────────────────────────
 
 // Staging keeps Disallow: / so Google never sees the site. Leftover URLs are
@@ -275,6 +279,7 @@ const errors = validateBuild({
   urlPathOf,
   indexable: INDEXABLE,
 });
+errors.push(...validateStandaloneAssets({ outDir, files: walkHtml(outDir), urlPathOf }));
 
 if (errors.length) {
   console.error(`✗ ${errors.length} problem(s) in dist/:`);

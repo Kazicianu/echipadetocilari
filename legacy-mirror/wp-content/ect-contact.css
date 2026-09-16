@@ -1,0 +1,10 @@
+.ect-contact-trap { position: absolute !important; left: -10000px !important; width: 1px !important; height: 1px !important; overflow: hidden !important; }
+.ect-contact-status:empty, .ect-contact-challenge:empty { display: none; }
+.ect-contact-status { margin: 16px 0 0; padding: 12px 14px; border: 1px solid currentColor; border-radius: 6px; font-size: 14px; line-height: 1.5; }
+.ect-contact-status[data-state="error"] { color: #9b1c1c; background: #fff1f1; }
+.ect-contact-status[data-state="success"] { color: #166534; background: #f0fdf4; }
+.ect-contact-status[data-state="sending"] { color: #334155; background: #f8fafc; }
+.ect-contact-fallback { margin: 12px 0 0; font-size: 13px; line-height: 1.5; }
+.ect-contact-fallback a { text-decoration: underline; overflow-wrap: anywhere; }
+.ect-contact-challenge { margin-top: 14px; }
+[data-ect-contact][aria-busy="true"] button[type="submit"] { opacity: .65; cursor: wait; }

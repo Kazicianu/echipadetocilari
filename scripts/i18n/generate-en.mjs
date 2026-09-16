@@ -4,7 +4,8 @@
  */
 import { mkdirSync, readFileSync, writeFileSync, existsSync } from 'fs';
 import path from 'path';
-import { routes, roToEn } from './routes.mjs';
+import { routes } from './routes.mjs';
+import { normalizePageLinks } from '../lib/navigation.mjs';
 import { dictionary, enPageMeta, enOrg, enFaqs } from './dictionary.mjs';
 import { injectLangSwitcher } from './lang-switcher.mjs';
 import {
@@ -67,34 +68,7 @@ function absolutizeAssets(html) {
     return `srcset="${fixed}"`;
   });
 
-  return out.replace(/href="(\.\.\/)?index\.html"/gi, 'href="/en/"');
-}
-
-/** Point every internal link at its EN twin. */
-function rewriteInternalLinks(html) {
-  let out = html;
-
-  // Longest RO path first so "/" does not swallow the others.
-  for (const ro of Object.keys(roToEn).sort((a, b) => b.length - a.length)) {
-    const en = roToEn[ro];
-    out = out.split(`https://www.echipadetocilari.ro${ro}`).join(en);
-    out = out.split(`https://echipadetocilari.ro${ro}`).join(en);
-
-    if (ro === '/') {
-      out = out.replaceAll('href="/"', 'href="/en/"');
-      continue;
-    }
-    const bare = ro.replace(/\/$/, '');
-    out = out
-      .replaceAll(`href="${ro}"`, `href="${en}"`)
-      .replaceAll(`href='${ro}'`, `href='${en}'`)
-      .replaceAll(`href="${bare}"`, `href="${en}"`)
-      // menus sometimes emit the path without a leading slash
-      .replaceAll(`href="${bare.slice(1)}/"`, `href="${en}"`)
-      .replaceAll(`href="${bare.slice(1)}"`, `href="${en}"`);
-  }
-
-  return out.replaceAll('/en/en/', '/en/');
+  return out;
 }
 
 function schemasFor(route, meta, site) {
@@ -147,7 +121,7 @@ export function generateEnglishPages({ outDir, site, indexable }) {
     html = stripJsonLd(html);
     html = applyDictionary(html);
     html = absolutizeAssets(html);
-    html = rewriteInternalLinks(html);
+    html = normalizePageLinks(html, { pageUrl: route.ro, language: 'en' });
     html = setLang(html, 'en');
 
     if (meta) {
