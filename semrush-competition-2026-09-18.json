@@ -1,0 +1,824 @@
+{
+  "consulted_at": "2026-09-18",
+  "database": "ro",
+  "method": "Competitors selected from five service SERPs; seven domain keyword samples; added keywords revalidated through phrase_these. Not a missing-keyword gap report.",
+  "serps": {
+    "creare site web bucuresti": {
+      "data": "Position;Domain;Url\n1;www.1website.ro;https://www.1website.ro/\n2;www.websitexpo.com;https://www.websitexpo.com/ro/creare-site-web-bucuresti/\n3;www.necesit.ro;https://www.necesit.ro/creare-site-web/bucuresti\n4;magnitudeweb.ro;https://magnitudeweb.ro/creare-site-web-magazin-online\n5;websitefactory.ro;https://websitefactory.ro/creare-site-bucuresti\n6;homerun.ro;https://homerun.ro/bucuresti-creare-site-web\n7;maie.ro;https://maie.ro/\n8;rointellia.ro;https://rointellia.ro/creare-site-web-bucuresti.html\n9;www.itexclusiv.ro;https://www.itexclusiv.ro/ce-servicii-oferim-ca-agentie-web-design-premium\n10;crearesiteweb.net;https://crearesiteweb.net/servicii-web-design.html\n",
+      "metadata": {
+        "format": "csv",
+        "pagination": {
+          "limit": 10
+        },
+        "url": "https://www.semrush.com/analytics/keywordoverview/?db=ro&display_limit=10&export_columns=position%2Cdomain%2Curl&q=creare+site+web+bucuresti",
+        "usage": {
+          "api_units": 500
+        }
+      }
+    },
+    "servicii seo bucuresti": {
+      "data": "Position;Domain;Url\n1;serviciiseobucuresti.ro;https://serviciiseobucuresti.ro/\n2;www.facebook.com;https://www.facebook.com/agentiemarketingbucuresti/?locale=ro_RO\n3;ro.linkedin.com;https://ro.linkedin.com/company/serviciiseobucuresti\n4;www.servicii-seo.com;https://www.servicii-seo.com/\n5;www.necesit.ro;https://www.necesit.ro/optimizare-seo-si-promovare-online/bucuresti\n6;agentieseobucuresti.ro;https://agentieseobucuresti.ro/\n7;servicii-seobucuresti.ro;https://servicii-seobucuresti.ro/\n8;awisee.com;https://awisee.com/ro/blog/agenti-seo-romania/\n9;www.bestjobs.eu;https://www.bestjobs.eu/company-profile/servicii-seo-bucuresti\n10;techbehemoths.com;https://techbehemoths.com/company/servicii-seo-bucuresti\n",
+      "metadata": {
+        "format": "csv",
+        "pagination": {
+          "limit": 10
+        },
+        "url": "https://www.semrush.com/analytics/keywordoverview/?db=ro&display_limit=10&export_columns=position%2Cdomain%2Curl&q=servicii+seo+bucuresti",
+        "usage": {
+          "api_units": 400
+        }
+      }
+    },
+    "mentenanta site": {
+      "data": "Position;Domain;Url\n1;www.webet.ro;https://www.webet.ro/mentenanta-site/\n2;www.adicoscai.com;https://www.adicoscai.com/administrare-site/\n3;www.hostgate.ro;https://www.hostgate.ro/mentenanta-site\n4;mentenanta-wp.ro;https://mentenanta-wp.ro/\n5;www.webinspire.ro;https://www.webinspire.ro/servicii/mentenanta-actualizare-intretinere-si-administrare-site-web/\n6;www.plummedia.ro;https://www.plummedia.ro/mentenanta-site/\n7;www.itexclusiv.ro;https://www.itexclusiv.ro/preturi-mentenanta-site-web\n8;www.wart.ro;https://www.wart.ro/ro/servicii-mentenanta-web-site\n9;www.biancaionel.ro;https://www.biancaionel.ro/mentenanta-web/\n10;www.itexclusiv.ro;https://www.itexclusiv.ro/preturi-mentenanta-site-web\n",
+      "metadata": {
+        "format": "csv",
+        "pagination": {
+          "limit": 10
+        },
+        "url": "https://www.semrush.com/analytics/keywordoverview/?db=ro&display_limit=10&export_columns=position%2Cdomain%2Curl&q=mentenanta+site",
+        "usage": {
+          "api_units": 500
+        }
+      }
+    },
+    "agentie google ads": {
+      "data": "Position;Domain;Url\n1;onedigital.ro;https://onedigital.ro/google-ads/\n2;www.sinaps.ro;https://www.sinaps.ro/agentie-google-ads/\n3;www.impact-ads.ro;https://www.impact-ads.ro/\n4;twoads.ro;https://twoads.ro/\n5;marketingdeck.com;https://marketingdeck.com/agentie-google-ads/\n6;vivinet.ro;https://vivinet.ro/agentie-google-ads/\n7;newlightdigital.com;https://newlightdigital.com/ro/servicii/agentie-google-ads/\n8;www.plummedia.ro;https://www.plummedia.ro/campanii-google-adwords/\n9;www.themarkers.ro;https://www.themarkers.ro/en/ce-este-google-ads-cat-costa-si-cum-gasesti-agentia-potrivita/\n10;omniflux.ro;https://omniflux.ro/agentie-campanii-ppc/google-ads/\n",
+      "metadata": {
+        "format": "csv",
+        "pagination": {
+          "limit": 10
+        },
+        "url": "https://www.semrush.com/analytics/keywordoverview/?db=ro&display_limit=10&export_columns=position%2Cdomain%2Curl&q=agentie+google+ads",
+        "usage": {
+          "api_units": 300
+        }
+      }
+    },
+    "creare logo firma": {
+      "data": "Position;Domain;Url\n1;www.logomaker.net;https://www.logomaker.net/ro\n2;logofirma.ro;https://logofirma.ro/\n3;smashinglogo.com;https://smashinglogo.com/ro/\n4;wizlogo.com;https://wizlogo.com/ro\n5;www.capcut.com;https://www.capcut.com/ro-ro/create/logo-maker\n6;startuplogo.ro;https://startuplogo.ro/\n7;kinglogodesign.net;https://kinglogodesign.net/\n8;www.logoify.ai;https://www.logoify.ai/ro\n9;www.realizarelogo.ro;https://www.realizarelogo.ro/\n10;www.realizarelogo.ro;https://www.realizarelogo.ro/\n",
+      "metadata": {
+        "format": "csv",
+        "pagination": {
+          "limit": 10
+        },
+        "url": "https://www.semrush.com/analytics/keywordoverview/?db=ro&display_limit=10&export_columns=position%2Cdomain%2Curl&q=creare+logo+firma",
+        "usage": {
+          "api_units": 500
+        }
+      }
+    }
+  },
+  "competitors": {
+    "1website.ro": {
+      "data": "Keyword;Position;Search Volume;Keyword Difficulty;Url\nfirma creare site;1;70;25.00;https://www.1website.ro/\nrealizare site web;4;480;30.00;https://www.1website.ro/\nfirma web design bucuresti;1;50;18.00;https://www.1website.ro/\ncreare site bucuresti;7;480;10.00;https://www.1website.ro/\nfirma web design;1;170;22.00;https://www.1website.ro/\nservicii de web design;1;110;26.00;https://www.1website.ro/\ncreare site web bucuresti;1;140;7.00;https://www.1website.ro/\nrealizare pagini web;4;260;27.00;https://www.1website.ro/\ncreare site profesional;3;110;30.00;https://www.1website.ro/\nservicii creare site;4;110;33.00;https://www.1website.ro/\nfirme de site uri;2;40;22.00;https://www.1website.ro/\nrealizare website;4;50;29.00;https://www.1website.ro/\ncreare site uri web;9;480;54.00;https://www.1website.ro/\nweb design bucuresti;10;260;34.00;https://www.1website.ro/\ncreare website bucuresti;10;480;18.00;https://www.1website.ro/\ncele mai bune firme de web design;3;40;6.00;https://www.1website.ro/\ndezvoltare site;6;50;12.00;https://www.1website.ro/\noferta realizare site web;13;40;23.00;https://www.1website.ro/\nadministrare website;47;50;5.00;https://www.1website.ro/\nservicii site web;26;140;26.00;https://www.1website.ro/\nweb design company;54;50;25.00;https://www.1website.ro/\nadministrare site web;47;50;14.00;https://www.1website.ro/\nagentie web design bucuresti;23;590;49.00;https://www.1website.ro/\nagentie web design bucuresti;56;590;49.00;https://www.1website.ro/contact/\nrealizare site;18;480;26.00;https://www.1website.ro/\npreturi seo;17;260;7.00;https://www.1website.ro/seo-administrare-site/\nagentie de web design;34;140;36.00;https://www.1website.ro/\nagentie web design;54;880;29.00;https://www.1website.ro/\nservicii web development;20;50;7.00;https://www.1website.ro/\nwebsite services;28;40;65.00;https://www.1website.ro/\n",
+      "metadata": {
+        "format": "csv",
+        "pagination": {
+          "limit": 30,
+          "sort": "traffic_desc"
+        },
+        "url": "https://www.semrush.com/analytics/organic/positions/?db=ro&display_limit=30&display_sort=traffic_desc&export_columns=keyword%2Cposition%2Cvolume%2Ckeyword_difficulty%2Curl&q=1website.ro",
+        "usage": {
+          "api_units": 1750
+        }
+      }
+    },
+    "webet.ro": {
+      "data": "Keyword;Position;Search Volume;Keyword Difficulty;Url\nservicii site web;1;140;26.00;https://www.webet.ro/\nmentenanta site;1;260;22.00;https://www.webet.ro/mentenanta-site/\nadministrare website;1;50;5.00;https://www.webet.ro/preturi-administrare-site/\nmentenanta web;2;260;10.00;https://www.webet.ro/\nmentenanta wordpress;1;70;17.00;https://www.webet.ro/administrare-site-wordpress/\nmentenanta website;7;260;12.00;https://www.webet.ro/mentenanta-site/\nmentenanta site wordpress;3;70;9.00;https://www.webet.ro/administrare-site-wordpress/\nviteza incarcare site;7;140;9.00;https://www.webet.ro/cum-sa-imbunatatesti-viteza-de-incarcare-a-site-ului/\nadministrare pagini web;1;40;11.00;https://www.webet.ro/\nadministrare site web;2;50;14.00;https://www.webet.ro/\nservicii mentenanta website;2;50;15.00;https://www.webet.ro/mentenanta-site/\nadministrare site;1;110;17.00;https://www.webet.ro/\nrealizare site web;14;480;30.00;https://www.webet.ro/\nadministrare website;17;50;5.00;https://www.webet.ro/\nadministrare website;86;50;5.00;https://www.webet.ro/mentenanta-site/\ncreare site web wordpress;23;260;26.00;https://www.webet.ro/realizare-site-wordpress/\nadministrare site web;18;50;14.00;https://www.webet.ro/administrare-site-wordpress/\nadministrare site web;55;50;14.00;https://www.webet.ro/mentenanta-site/\nadministrare site web;78;50;14.00;https://www.webet.ro/preturi-administrare-site/\ndezvoltare site;42;50;12.00;https://www.webet.ro/\nrealizare site;47;480;26.00;https://www.webet.ro/realizare-site-wordpress/\nrealizare site;88;480;26.00;https://www.webet.ro/realizare-site-wordpress/\nrealizare website;17;50;29.00;https://www.webet.ro/\nservicii mentenanta website;33;50;15.00;https://www.webet.ro/administrare-site-wordpress/\nservicii mentenanta website;58;50;15.00;https://www.webet.ro/\nservicii mentenanta website;95;50;15.00;https://www.webet.ro/preturi-administrare-site/\nmentenanta site;35;260;22.00;https://www.webet.ro/administrare-site-wordpress/\nmentenanta site;66;260;22.00;https://www.webet.ro/\ncreare site wordpress;17;260;29.00;https://www.webet.ro/realizare-site-wordpress/\ncreare website bucuresti;76;480;18.00;https://www.webet.ro/realizare-site-wordpress/\n",
+      "metadata": {
+        "format": "csv",
+        "pagination": {
+          "limit": 30,
+          "sort": "traffic_desc"
+        },
+        "url": "https://www.semrush.com/analytics/organic/positions/?db=ro&display_limit=30&display_sort=traffic_desc&export_columns=keyword%2Cposition%2Cvolume%2Ckeyword_difficulty%2Curl&q=webet.ro",
+        "usage": {
+          "api_units": 1750
+        }
+      }
+    },
+    "plummedia.ro": {
+      "data": "Keyword;Position;Search Volume;Keyword Difficulty;Url\ncompania mea;6;12100;23.00;https://www.plummedia.ro/google-compania-mea/\nagentie website;1;140;29.00;https://www.plummedia.ro/\noptimizare seo;9;1900;30.00;https://www.plummedia.ro/optimizare-seo/\nplum media;1;50;26.00;https://www.plummedia.ro/\nagentie web design bucuresti;6;590;49.00;https://www.plummedia.ro/\nagentie webdesign;6;880;30.00;https://www.plummedia.ro/\ngoogle academico;15;33100;61.00;https://www.plummedia.ro/blog/google-scholar/\nagentie web design;8;880;29.00;https://www.plummedia.ro/\narticole seo;6;390;15.00;https://www.plummedia.ro/advertoriale-seo/\noptimizare site wordpress;1;140;6.00;https://www.plummedia.ro/blog/optimizare-seo-cu-ai-pentru-wordpress/\nconsultanta website;1;140;9.00;https://www.plummedia.ro/consultanta-web/\noptimizare seo;10;1900;30.00;https://www.plummedia.ro/optimizare-seo/\nservicii optimizare seo;8;590;14.00;https://www.plummedia.ro/optimizare-seo/\noferta creare site web;3;260;18.00;https://www.plummedia.ro/creare-site-wordpress/\npreturi web design;3;140;18.00;https://www.plummedia.ro/pret-web-design/\nce este un browser;2;260;11.00;https://www.plummedia.ro/blog/browserul-web-ce-este-si-cum-functioneaza/\nmentenanta site;6;260;22.00;https://www.plummedia.ro/mentenanta-site/\nservicii seo local;6;260;6.00;https://www.plummedia.ro/blog/servicii-local-seo/\nbrowserul;4;170;38.00;https://www.plummedia.ro/blog/browserul-web-ce-este-si-cum-functioneaza/\nagentie optimizare seo;6;170;23.00;https://www.plummedia.ro/optimizare-seo/\nweb design preturi;3;140;14.00;https://www.plummedia.ro/pret-web-design/\nweb design bucuresti;7;260;34.00;https://www.plummedia.ro/\nmentenanta web;7;260;10.00;https://www.plummedia.ro/mentenanta-site/\nsite de prezentare;6;210;25.00;https://www.plummedia.ro/creare-site-web/\nagentie de web design;7;140;36.00;https://www.plummedia.ro/\nfirma optimizare seo;8;170;31.00;https://www.plummedia.ro/optimizare-seo/\nservicii de optimizare seo;6;170;27.00;https://www.plummedia.ro/optimizare-seo/\nacademic google;9;880;40.00;https://www.plummedia.ro/blog/google-scholar/\nagenție web design;6;140;46.00;https://www.plummedia.ro/\noptimizare seo profesionala;15;1000;13.00;https://www.plummedia.ro/optimizare-seo/\n",
+      "metadata": {
+        "format": "csv",
+        "pagination": {
+          "limit": 30,
+          "sort": "traffic_desc"
+        },
+        "url": "https://www.semrush.com/analytics/organic/positions/?db=ro&display_limit=30&display_sort=traffic_desc&export_columns=keyword%2Cposition%2Cvolume%2Ckeyword_difficulty%2Curl&q=plummedia.ro",
+        "usage": {
+          "api_units": 1750
+        }
+      }
+    },
+    "onedigital.ro": {
+      "data": "Keyword;Position;Search Volume;Keyword Difficulty;Url\none digital;1;110;35.00;https://onedigital.ro/\nagentie google ads;1;320;6.00;https://onedigital.ro/google-ads/\nagentie marketing online;2;480;59.00;https://onedigital.ro/\nagentie marketing digital;1;320;55.00;https://onedigital.ro/\nagentii de marketing cluj;2;390;17.00;https://onedigital.ro/\nagentii marketing cluj;3;170;20.00;https://onedigital.ro/\nweb design cluj;2;140;18.00;https://onedigital.ro/webdesign/\nagentie de marketing digital;2;40;52.00;https://onedigital.ro/\nservicii google ads;7;140;19.00;https://onedigital.ro/google-ads/\nagentie marketing;18;2900;48.00;https://onedigital.ro/\nagentie seo cluj;9;110;16.00;https://onedigital.ro/optimizare-seo-cluj/\nagentie marketing cluj;7;260;24.00;https://onedigital.ro/\nservicii seo cluj;5;70;9.00;https://onedigital.ro/optimizare-seo-cluj/\nagentie marketing online;13;480;59.00;https://onedigital.ro/\nservicii web design cluj;4;40;11.00;https://onedigital.ro/webdesign/\nseo cluj;10;70;13.00;https://onedigital.ro/optimizare-seo-cluj/\nagentie de marketing online;16;170;54.00;https://onedigital.ro/\nz01;40;110;18.00;https://www.onedigital.ro/wp-content/uploads/2018/09/certificat-rezidenta-fiscala-Facebook-2018-OneDigital.pdf\npromocrat;23;140;25.00;https://onedigital.ro/\nadsymphony;31;110;40.00;https://onedigital.ro/\nonline marketing;54;170;46.00;https://onedigital.ro/\nhcl online advertising;16;110;10.00;https://onedigital.ro/\npublicitate;71;1900;24.00;https://onedigital.ro/\nmarketing agency;27;390;37.00;https://onedigital.ro/\nagentie content marketing;44;2400;30.00;https://onedigital.ro/\nnetlogiq;23;110;21.00;https://onedigital.ro/\nservicii marketing;14;50;14.00;https://onedigital.ro/\ndaredigital;29;50;25.00;https://onedigital.ro/\nogilvy romania;50;170;18.00;https://onedigital.ro/\nfirme marketing;18;110;30.00;https://onedigital.ro/\n",
+      "metadata": {
+        "format": "csv",
+        "pagination": {
+          "limit": 30,
+          "sort": "traffic_desc"
+        },
+        "url": "https://www.semrush.com/analytics/organic/positions/?db=ro&display_limit=30&display_sort=traffic_desc&export_columns=keyword%2Cposition%2Cvolume%2Ckeyword_difficulty%2Curl&q=onedigital.ro",
+        "usage": {
+          "api_units": 1750
+        }
+      }
+    },
+    "servicii-seo.com": {
+      "data": "Keyword;Position;Search Volume;Keyword Difficulty;Url\nservicii seo bucuresti;4;720;28.00;https://www.servicii-seo.com/\nservicii seo profesionale;24;2400;33.00;https://www.servicii-seo.com/\nservicii seo;26;2900;34.00;https://www.servicii-seo.com/\nservicii optimizare seo;17;590;14.00;https://www.servicii-seo.com/\nconsultanta seo;14;390;6.00;https://www.servicii-seo.com/\nagentie seo bucuresti;16;880;38.00;https://www.servicii-seo.com/\npromovare seo bucuresti;13;170;12.00;https://www.servicii-seo.com/\nservicii optimizare seo;20;590;14.00;https://www.servicii-seo.com/\nagenție seo;27;210;37.00;https://www.servicii-seo.com/\ncompanie seo;29;390;26.00;https://www.servicii-seo.com/\ncompanie seo;30;390;26.00;https://www.servicii-seo.com/\nseo services;64;320;33.00;https://www.servicii-seo.com/\noptimizare seo bucuresti;14;260;10.00;https://www.servicii-seo.com/\noptimizare seo bucuresti;66;260;10.00;https://www.servicii-seo.com/optimizare-seo\nservicii seo romania;28;170;45.00;https://www.servicii-seo.com/\nagentia seo;32;110;35.00;https://www.servicii-seo.com/\nfirma optimizare seo;23;170;31.00;https://www.servicii-seo.com/\nagentie seo;41;2900;44.00;https://www.servicii-seo.com/\noptimizare website;49;140;11.00;https://www.servicii-seo.com/optimizare-seo\nservicii optimizare site;47;70;15.00;https://www.servicii-seo.com/optimizare-seo\nagentie servicii seo;13;50;38.00;https://www.servicii-seo.com/\nagentie seo romania;41;110;39.00;https://www.servicii-seo.com/\nseo consultant;69;140;33.00;https://www.servicii-seo.com/\nseo consultant;73;140;33.00;https://www.servicii-seo.com/\nseo agentie;30;210;42.00;https://www.servicii-seo.com/\nseo agentie;32;210;42.00;https://www.servicii-seo.com/\nservicii de optimizare seo;25;170;27.00;https://www.servicii-seo.com/\nservicii de optimizare seo;78;170;27.00;https://www.servicii-seo.com/optimizare-seo\nagentie optimizare seo;33;170;23.00;https://www.servicii-seo.com/\nagentie marketing seo;27;140;41.00;https://www.servicii-seo.com/\n",
+      "metadata": {
+        "format": "csv",
+        "pagination": {
+          "limit": 30,
+          "sort": "traffic_desc"
+        },
+        "url": "https://www.semrush.com/analytics/organic/positions/?db=ro&display_limit=30&display_sort=traffic_desc&export_columns=keyword%2Cposition%2Cvolume%2Ckeyword_difficulty%2Curl&q=servicii-seo.com",
+        "usage": {
+          "api_units": 1450
+        }
+      }
+    },
+    "logofirma.ro": {
+      "data": "Keyword;Position;Search Volume;Keyword Difficulty;Url\nlogo firma;8;390;18.00;https://logofirma.ro/\nformat vectorial;2;210;29.00;https://logofirma.ro/ce-este-format-vectorial-logo/\nemblema firma;2;110;11.00;https://logofirma.ro/\nlogo firma constructii;3;140;10.00;https://logofirma.ro/logo-firma-constructii/\nsigla firma;4;140;12.00;https://logofirma.ro/\nlogo firme;6;70;17.00;https://logofirma.ro/\ncreare logo firma;11;210;16.00;https://logofirma.ro/\nlogo uri;24;1300;16.00;https://logofirma.ro/\nlogouri sigle firme;9;40;10.00;https://logofirma.ro/\nembleme firme;10;110;5.00;https://logofirma.ro/\ndesign logo firma;17;50;14.00;https://logofirma.ro/\nce inseamna logo;32;110;4.00;https://logofirma.ro/tipuri-de-logo/\nsigla;54;590;26.00;https://logofirma.ro/\ncreare logo firma;46;210;16.00;https://logofirma.ro/cum-sa-faci-un-logo/\nce este un logo;13;70;2.00;https://logofirma.ro/cum-sa-faci-un-logo/\nun logo;24;110;11.00;https://logofirma.ro/cum-sa-faci-un-logo/\nun logo;70;110;11.00;https://logofirma.ro/tipuri-de-logo/\nservicii branding;15;70;19.00;https://logofirma.ro/servicii-branding/\nlogo personalizat;23;140;18.00;https://logofirma.ro/\ngrafică vectorială;59;90;8.00;https://logofirma.ro/ce-este-format-vectorial-logo/\nformat vectorial;45;210;29.00;https://logofirma.ro/vectorizare-logo/\nlogo design romania;46;50;10.00;https://logofirma.ro/\nlogo de firme;34;110;14.00;https://logofirma.ro/\nlogo de firme;60;110;14.00;https://logofirma.ro/portofoliu/\nsogla;53;70;26.00;https://logofirma.ro/\n",
+      "metadata": {
+        "format": "csv",
+        "pagination": {
+          "limit": 30,
+          "sort": "traffic_desc"
+        },
+        "url": "https://www.semrush.com/analytics/organic/positions/?db=ro&display_limit=30&display_sort=traffic_desc&export_columns=keyword%2Cposition%2Cvolume%2Ckeyword_difficulty%2Curl&q=logofirma.ro",
+        "usage": {
+          "api_units": 1750
+        }
+      }
+    },
+    "sinaps.ro": {
+      "data": "Keyword;Position;Search Volume;Keyword Difficulty;Url\nagentie google ads;4;320;6.00;https://www.sinaps.ro/agentie-google-ads/\npromovare site;8;140;8.00;https://www.sinaps.ro/promovare-google-ads/\npromovează;9;70;14.00;https://www.sinaps.ro/promovare-google-ads/\npromovarea pe google;2;110;18.00;https://www.sinaps.ro/promovare-google-ads/\npromovare site google;4;140;14.00;https://www.sinaps.ro/promovare-google-ads/\ngtm;22;1000;62.00;https://www.sinaps.ro/ce-este-google-tag-manager-si-de-ce-trebuie-sa-l-folosesti/\nservicii google ads;10;140;19.00;https://www.sinaps.ro/google-ads/\npromovare google ads;7;170;12.00;https://www.sinaps.ro/google-ads/\npromovare google ads;66;170;12.00;https://www.sinaps.ro/cum-functioneaza-promovarea-pe-google-ads/\npromovare google ads;87;170;12.00;https://www.sinaps.ro/cum-sa-ti-promovezi-afacerea-prin-google-ads-in-2023/\npromovarea pe google;39;110;18.00;https://www.sinaps.ro/cum-functioneaza-promovarea-pe-google-ads/\npromovarea pe google;40;110;18.00;https://www.sinaps.ro/cum-functioneaza-promovarea-pe-google-ads/\npromovarea pe google;94;110;18.00;https://www.sinaps.ro/cum-sa-ti-promovezi-afacerea-prin-google-ads-in-2023/\npromovare site google;80;140;14.00;https://www.sinaps.ro/cum-functioneaza-promovarea-pe-google-ads/\npromovare site google;97;140;14.00;https://www.sinaps.ro/cum-sa-ti-promovezi-afacerea-prin-google-ads-in-2023/\nga4;94;720;57.00;https://www.sinaps.ro/go4ga4-google-analytics-4-ce-este-de-ce-este-diferit-si-cum-se-instaleaza/\ngoogle analytics 4;20;1000;90.00;https://www.sinaps.ro/go4ga4-google-analytics-4-ce-este-de-ce-este-diferit-si-cum-se-instaleaza/\npromovare google;10;210;18.00;https://www.sinaps.ro/promovare-google-ads/\npromovare google;72;210;18.00;https://www.sinaps.ro/cum-sa-ti-promovezi-afacerea-prin-google-ads-in-2023/\ntag program;34;40;14.00;https://www.sinaps.ro/ce-este-google-tag-manager-si-de-ce-trebuie-sa-l-folosesti/\nsinaps;61;390;20.00;https://www.sinaps.ro/agentie-google-ads/\nsinaps;77;390;20.00;https://www.sinaps.ro/agentie-google-ads/\nsinaps;82;390;20.00;https://www.sinaps.ro/agentie-google-ads/\npublicitate google;12;50;30.00;https://www.sinaps.ro/promovare-google-ads/\npublicitate google;58;50;30.00;https://www.sinaps.ro/cum-sa-ti-promovezi-afacerea-prin-google-ads-in-2023/\npublicitate google;63;50;30.00;https://www.sinaps.ro/cum-sa-ti-promovezi-afacerea-prin-google-ads-in-2023/\npromovare site in google;6;140;19.00;https://www.sinaps.ro/promovare-google-ads/\npromovare site in google;76;140;19.00;https://www.sinaps.ro/cum-functioneaza-promovarea-pe-google-ads/\nservicii google ads;63;140;19.00;https://www.sinaps.ro/cum-functioneaza-promovarea-pe-google-ads/\ncampanii google ads;7;140;14.00;https://www.sinaps.ro/campanii-google-ads/\n",
+      "metadata": {
+        "format": "csv",
+        "pagination": {
+          "limit": 30,
+          "sort": "traffic_desc"
+        },
+        "url": "https://www.semrush.com/analytics/organic/positions/?db=ro&display_limit=30&display_sort=traffic_desc&export_columns=keyword%2Cposition%2Cvolume%2Ckeyword_difficulty%2Curl&q=sinaps.ro",
+        "usage": {
+          "api_units": 300
+        }
+      }
+    }
+  },
+  "validation": [
+    {
+      "data": "Keyword;Search Volume;Keyword Difficulty Index\nfirma creare site;70;25\nfirma web design bucuresti;50;22\ncreare site bucuresti;590;14\nfirma web design;170;22\nservicii de web design;110;30\nrealizare pagini web;260;10\ncreare site profesional;90;38\nservicii creare site;110;33\ncreare website bucuresti;590;13\noferta realizare site web;50;21\npreturi seo;260;6\nagentie web design;880;41\nagentie web design bucuresti;590;49\nadministrare website;50;6\nmentenanta web;260;9\nmentenanta wordpress;70;17\nservicii mentenanta website;50;12\ncreare site web wordpress;260;37\noferta creare site web;260;18\npreturi web design;140;21\nservicii optimizare seo;590;14\nservicii seo profesionale;2400;36\noptimizare seo profesionala;1000;20\noptimizare seo bucuresti;260;10\npromovare seo bucuresti;170;12\noptimizare site wordpress;140;6\nservicii seo local;260;6\nlogo firma;390;18\nemblema firma;110;11\nsigla firma;140;14\ndesign logo firma;50;14\nlogo personalizat;140;19\nlogo design romania;50;14\n",
+      "metadata": {
+        "format": "csv",
+        "url": "https://www.semrush.com/analytics/keywordoverview/?db=ro&export_columns=keyword%2Cvolume%2Ckeyword_difficulty&q=firma+creare+site%3Bfirma+web+design+bucuresti%3Bcreare+site+bucuresti%3Bfirma+web+design%3Bservicii+de+web+design%3Brealizare+pagini+web%3Bcreare+site+profesional%3Bservicii+creare+site%3Bcreare+website+bucuresti%3Boferta+realizare+site+web%3Bpreturi+seo%3Bagentie+web+design%3Bagentie+web+design+bucuresti%3Badministrare+website%3Bmentenanta+web%3Bmentenanta+wordpress%3Bservicii+mentenanta+website%3Bcreare+site+web+wordpress%3Boferta+creare+site+web%3Bpreturi+web+design%3Bservicii+optimizare+seo%3Bservicii+seo+profesionale%3Boptimizare+seo+profesionala%3Boptimizare+seo+bucuresti%3Bpromovare+seo+bucuresti%3Boptimizare+site+wordpress%3Bservicii+seo+local%3Blogo+firma%3Bemblema+firma%3Bsigla+firma%3Bdesign+logo+firma%3Blogo+personalizat%3Blogo+design+romania",
+        "usage": {
+          "api_units": 630
+        }
+      }
+    },
+    {
+      "data": "Keyword;Search Volume;Keyword Difficulty Index\npromovarea pe google;110;11\npromovare site google;140;14\npromovare google;210;13\npublicitate google;40;13\n",
+      "metadata": {
+        "format": "csv",
+        "url": "https://www.semrush.com/analytics/keywordoverview/?db=ro&export_columns=keyword%2Cvolume%2Ckeyword_difficulty&q=promovarea+pe+google%3Bpromovare+site+google%3Bpromovare+google%3Bpublicitate+google",
+        "usage": {
+          "api_units": 40
+        }
+      }
+    }
+  ],
+  "selected_keywords": [
+    {
+      "k": "firma creare site",
+      "v": "70",
+      "kd": "25",
+      "page": "/creare-site-web/",
+      "priority": "Secundară",
+      "evidence": [
+        {
+          "domain": "1website.ro",
+          "position": 1,
+          "url": "https://www.1website.ro/"
+        }
+      ]
+    },
+    {
+      "k": "firma web design bucuresti",
+      "v": "50",
+      "kd": "22",
+      "page": "/creare-site-web/",
+      "priority": "Secundară",
+      "evidence": [
+        {
+          "domain": "1website.ro",
+          "position": 1,
+          "url": "https://www.1website.ro/"
+        }
+      ]
+    },
+    {
+      "k": "creare site bucuresti",
+      "v": "590",
+      "kd": "14",
+      "page": "/creare-site-web/",
+      "priority": "Ridicată",
+      "evidence": [
+        {
+          "domain": "1website.ro",
+          "position": 7,
+          "url": "https://www.1website.ro/"
+        }
+      ]
+    },
+    {
+      "k": "firma web design",
+      "v": "170",
+      "kd": "22",
+      "page": "/creare-site-web/",
+      "priority": "Secundară",
+      "evidence": [
+        {
+          "domain": "1website.ro",
+          "position": 1,
+          "url": "https://www.1website.ro/"
+        }
+      ]
+    },
+    {
+      "k": "servicii de web design",
+      "v": "110",
+      "kd": "30",
+      "page": "/creare-site-web/",
+      "priority": "Secundară",
+      "evidence": [
+        {
+          "domain": "1website.ro",
+          "position": 1,
+          "url": "https://www.1website.ro/"
+        }
+      ]
+    },
+    {
+      "k": "realizare pagini web",
+      "v": "260",
+      "kd": "10",
+      "page": "/creare-site-web/",
+      "priority": "Secundară",
+      "evidence": [
+        {
+          "domain": "1website.ro",
+          "position": 4,
+          "url": "https://www.1website.ro/"
+        }
+      ]
+    },
+    {
+      "k": "creare site profesional",
+      "v": "90",
+      "kd": "38",
+      "page": "/creare-site-web/",
+      "priority": "Secundară",
+      "evidence": [
+        {
+          "domain": "1website.ro",
+          "position": 3,
+          "url": "https://www.1website.ro/"
+        }
+      ]
+    },
+    {
+      "k": "servicii creare site",
+      "v": "110",
+      "kd": "33",
+      "page": "/creare-site-web/",
+      "priority": "Secundară",
+      "evidence": [
+        {
+          "domain": "1website.ro",
+          "position": 4,
+          "url": "https://www.1website.ro/"
+        }
+      ]
+    },
+    {
+      "k": "creare website bucuresti",
+      "v": "590",
+      "kd": "13",
+      "page": "/creare-site-web/",
+      "priority": "Ridicată",
+      "evidence": [
+        {
+          "domain": "1website.ro",
+          "position": 10,
+          "url": "https://www.1website.ro/"
+        },
+        {
+          "domain": "webet.ro",
+          "position": 76,
+          "url": "https://www.webet.ro/realizare-site-wordpress/"
+        }
+      ]
+    },
+    {
+      "k": "oferta realizare site web",
+      "v": "50",
+      "kd": "21",
+      "page": "/creare-site-web/",
+      "priority": "Secundară",
+      "evidence": [
+        {
+          "domain": "1website.ro",
+          "position": 13,
+          "url": "https://www.1website.ro/"
+        }
+      ]
+    },
+    {
+      "k": "preturi seo",
+      "v": "260",
+      "kd": "6",
+      "page": "/servicii-seo/",
+      "priority": "Ridicată",
+      "evidence": [
+        {
+          "domain": "1website.ro",
+          "position": 17,
+          "url": "https://www.1website.ro/seo-administrare-site/"
+        }
+      ]
+    },
+    {
+      "k": "agentie web design",
+      "v": "880",
+      "kd": "41",
+      "page": "/creare-site-web/",
+      "priority": "Secundară",
+      "evidence": [
+        {
+          "domain": "plummedia.ro",
+          "position": 8,
+          "url": "https://www.plummedia.ro/"
+        },
+        {
+          "domain": "1website.ro",
+          "position": 54,
+          "url": "https://www.1website.ro/"
+        }
+      ]
+    },
+    {
+      "k": "agentie web design bucuresti",
+      "v": "590",
+      "kd": "49",
+      "page": "/creare-site-web/",
+      "priority": "Secundară",
+      "evidence": [
+        {
+          "domain": "plummedia.ro",
+          "position": 6,
+          "url": "https://www.plummedia.ro/"
+        },
+        {
+          "domain": "1website.ro",
+          "position": 23,
+          "url": "https://www.1website.ro/"
+        },
+        {
+          "domain": "1website.ro",
+          "position": 56,
+          "url": "https://www.1website.ro/contact/"
+        }
+      ]
+    },
+    {
+      "k": "administrare website",
+      "v": "50",
+      "kd": "6",
+      "page": "/administrare-site/",
+      "priority": "Ridicată",
+      "evidence": [
+        {
+          "domain": "webet.ro",
+          "position": 1,
+          "url": "https://www.webet.ro/preturi-administrare-site/"
+        },
+        {
+          "domain": "webet.ro",
+          "position": 17,
+          "url": "https://www.webet.ro/"
+        },
+        {
+          "domain": "1website.ro",
+          "position": 47,
+          "url": "https://www.1website.ro/"
+        },
+        {
+          "domain": "webet.ro",
+          "position": 86,
+          "url": "https://www.webet.ro/mentenanta-site/"
+        }
+      ]
+    },
+    {
+      "k": "mentenanta web",
+      "v": "260",
+      "kd": "9",
+      "page": "/administrare-site/",
+      "priority": "Ridicată",
+      "evidence": [
+        {
+          "domain": "webet.ro",
+          "position": 2,
+          "url": "https://www.webet.ro/"
+        },
+        {
+          "domain": "plummedia.ro",
+          "position": 7,
+          "url": "https://www.plummedia.ro/mentenanta-site/"
+        }
+      ]
+    },
+    {
+      "k": "mentenanta wordpress",
+      "v": "70",
+      "kd": "17",
+      "page": "/administrare-site/",
+      "priority": "Ridicată",
+      "evidence": [
+        {
+          "domain": "webet.ro",
+          "position": 1,
+          "url": "https://www.webet.ro/administrare-site-wordpress/"
+        }
+      ]
+    },
+    {
+      "k": "servicii mentenanta website",
+      "v": "50",
+      "kd": "12",
+      "page": "/administrare-site/",
+      "priority": "Ridicată",
+      "evidence": [
+        {
+          "domain": "webet.ro",
+          "position": 2,
+          "url": "https://www.webet.ro/mentenanta-site/"
+        },
+        {
+          "domain": "webet.ro",
+          "position": 33,
+          "url": "https://www.webet.ro/administrare-site-wordpress/"
+        },
+        {
+          "domain": "webet.ro",
+          "position": 58,
+          "url": "https://www.webet.ro/"
+        },
+        {
+          "domain": "webet.ro",
+          "position": 95,
+          "url": "https://www.webet.ro/preturi-administrare-site/"
+        }
+      ]
+    },
+    {
+      "k": "creare site web wordpress",
+      "v": "260",
+      "kd": "37",
+      "page": "/creare-site-web/",
+      "priority": "Secundară",
+      "evidence": [
+        {
+          "domain": "webet.ro",
+          "position": 23,
+          "url": "https://www.webet.ro/realizare-site-wordpress/"
+        }
+      ]
+    },
+    {
+      "k": "oferta creare site web",
+      "v": "260",
+      "kd": "18",
+      "page": "/creare-site-web/",
+      "priority": "Ridicată",
+      "evidence": [
+        {
+          "domain": "plummedia.ro",
+          "position": 3,
+          "url": "https://www.plummedia.ro/creare-site-wordpress/"
+        }
+      ]
+    },
+    {
+      "k": "preturi web design",
+      "v": "140",
+      "kd": "21",
+      "page": "/creare-site-web/",
+      "priority": "Ridicată",
+      "evidence": [
+        {
+          "domain": "plummedia.ro",
+          "position": 3,
+          "url": "https://www.plummedia.ro/pret-web-design/"
+        }
+      ]
+    },
+    {
+      "k": "servicii optimizare seo",
+      "v": "590",
+      "kd": "14",
+      "page": "/servicii-seo/",
+      "priority": "Ridicată",
+      "evidence": [
+        {
+          "domain": "plummedia.ro",
+          "position": 8,
+          "url": "https://www.plummedia.ro/optimizare-seo/"
+        },
+        {
+          "domain": "servicii-seo.com",
+          "position": 17,
+          "url": "https://www.servicii-seo.com/"
+        },
+        {
+          "domain": "servicii-seo.com",
+          "position": 20,
+          "url": "https://www.servicii-seo.com/"
+        }
+      ]
+    },
+    {
+      "k": "servicii seo profesionale",
+      "v": "2400",
+      "kd": "36",
+      "page": "/servicii-seo/",
+      "priority": "Secundară",
+      "evidence": [
+        {
+          "domain": "servicii-seo.com",
+          "position": 24,
+          "url": "https://www.servicii-seo.com/"
+        }
+      ]
+    },
+    {
+      "k": "optimizare seo profesionala",
+      "v": "1000",
+      "kd": "20",
+      "page": "/servicii-seo/",
+      "priority": "Secundară",
+      "evidence": [
+        {
+          "domain": "plummedia.ro",
+          "position": 15,
+          "url": "https://www.plummedia.ro/optimizare-seo/"
+        }
+      ]
+    },
+    {
+      "k": "optimizare seo bucuresti",
+      "v": "260",
+      "kd": "10",
+      "page": "/servicii-seo/",
+      "priority": "Ridicată",
+      "evidence": [
+        {
+          "domain": "servicii-seo.com",
+          "position": 14,
+          "url": "https://www.servicii-seo.com/"
+        },
+        {
+          "domain": "servicii-seo.com",
+          "position": 66,
+          "url": "https://www.servicii-seo.com/optimizare-seo"
+        }
+      ]
+    },
+    {
+      "k": "promovare seo bucuresti",
+      "v": "170",
+      "kd": "12",
+      "page": "/servicii-seo/",
+      "priority": "Secundară",
+      "evidence": [
+        {
+          "domain": "servicii-seo.com",
+          "position": 13,
+          "url": "https://www.servicii-seo.com/"
+        }
+      ]
+    },
+    {
+      "k": "optimizare site wordpress",
+      "v": "140",
+      "kd": "6",
+      "page": "/servicii-seo/",
+      "priority": "Secundară",
+      "evidence": [
+        {
+          "domain": "plummedia.ro",
+          "position": 1,
+          "url": "https://www.plummedia.ro/blog/optimizare-seo-cu-ai-pentru-wordpress/"
+        }
+      ]
+    },
+    {
+      "k": "servicii seo local",
+      "v": "260",
+      "kd": "6",
+      "page": "/servicii-seo/",
+      "priority": "Condiționat: ofertă SEO local",
+      "evidence": [
+        {
+          "domain": "plummedia.ro",
+          "position": 6,
+          "url": "https://www.plummedia.ro/blog/servicii-local-seo/"
+        }
+      ]
+    },
+    {
+      "k": "logo firma",
+      "v": "390",
+      "kd": "18",
+      "page": "/logo-design/",
+      "priority": "Secundară",
+      "evidence": [
+        {
+          "domain": "logofirma.ro",
+          "position": 8,
+          "url": "https://logofirma.ro/"
+        }
+      ]
+    },
+    {
+      "k": "emblema firma",
+      "v": "110",
+      "kd": "11",
+      "page": "/logo-design/",
+      "priority": "Secundară",
+      "evidence": [
+        {
+          "domain": "logofirma.ro",
+          "position": 2,
+          "url": "https://logofirma.ro/"
+        }
+      ]
+    },
+    {
+      "k": "sigla firma",
+      "v": "140",
+      "kd": "14",
+      "page": "/logo-design/",
+      "priority": "Secundară",
+      "evidence": [
+        {
+          "domain": "logofirma.ro",
+          "position": 4,
+          "url": "https://logofirma.ro/"
+        }
+      ]
+    },
+    {
+      "k": "design logo firma",
+      "v": "50",
+      "kd": "14",
+      "page": "/logo-design/",
+      "priority": "Ridicată",
+      "evidence": [
+        {
+          "domain": "logofirma.ro",
+          "position": 17,
+          "url": "https://logofirma.ro/"
+        }
+      ]
+    },
+    {
+      "k": "logo personalizat",
+      "v": "140",
+      "kd": "19",
+      "page": "/logo-design/",
+      "priority": "Ridicată",
+      "evidence": [
+        {
+          "domain": "logofirma.ro",
+          "position": 23,
+          "url": "https://logofirma.ro/"
+        }
+      ]
+    },
+    {
+      "k": "logo design romania",
+      "v": "50",
+      "kd": "14",
+      "page": "/logo-design/",
+      "priority": "Secundară",
+      "evidence": [
+        {
+          "domain": "logofirma.ro",
+          "position": 46,
+          "url": "https://logofirma.ro/"
+        }
+      ]
+    },
+    {
+      "k": "promovarea pe google",
+      "v": "110",
+      "kd": "11",
+      "page": "/pay-per-click/",
+      "priority": "Secundară",
+      "evidence": [
+        {
+          "domain": "sinaps.ro",
+          "position": 2,
+          "url": "https://www.sinaps.ro/promovare-google-ads/"
+        },
+        {
+          "domain": "sinaps.ro",
+          "position": 39,
+          "url": "https://www.sinaps.ro/cum-functioneaza-promovarea-pe-google-ads/"
+        },
+        {
+          "domain": "sinaps.ro",
+          "position": 40,
+          "url": "https://www.sinaps.ro/cum-functioneaza-promovarea-pe-google-ads/"
+        },
+        {
+          "domain": "sinaps.ro",
+          "position": 94,
+          "url": "https://www.sinaps.ro/cum-sa-ti-promovezi-afacerea-prin-google-ads-in-2023/"
+        }
+      ]
+    },
+    {
+      "k": "promovare site google",
+      "v": "140",
+      "kd": "14",
+      "page": "/pay-per-click/",
+      "priority": "Secundară",
+      "evidence": [
+        {
+          "domain": "sinaps.ro",
+          "position": 4,
+          "url": "https://www.sinaps.ro/promovare-google-ads/"
+        },
+        {
+          "domain": "sinaps.ro",
+          "position": 80,
+          "url": "https://www.sinaps.ro/cum-functioneaza-promovarea-pe-google-ads/"
+        },
+        {
+          "domain": "sinaps.ro",
+          "position": 97,
+          "url": "https://www.sinaps.ro/cum-sa-ti-promovezi-afacerea-prin-google-ads-in-2023/"
+        }
+      ]
+    },
+    {
+      "k": "promovare google",
+      "v": "210",
+      "kd": "13",
+      "page": "/pay-per-click/",
+      "priority": "Secundară",
+      "evidence": [
+        {
+          "domain": "sinaps.ro",
+          "position": 10,
+          "url": "https://www.sinaps.ro/promovare-google-ads/"
+        },
+        {
+          "domain": "sinaps.ro",
+          "position": 72,
+          "url": "https://www.sinaps.ro/cum-sa-ti-promovezi-afacerea-prin-google-ads-in-2023/"
+        }
+      ]
+    },
+    {
+      "k": "publicitate google",
+      "v": "40",
+      "kd": "13",
+      "page": "/pay-per-click/",
+      "priority": "Ridicată",
+      "evidence": [
+        {
+          "domain": "sinaps.ro",
+          "position": 12,
+          "url": "https://www.sinaps.ro/promovare-google-ads/"
+        },
+        {
+          "domain": "sinaps.ro",
+          "position": 58,
+          "url": "https://www.sinaps.ro/cum-sa-ti-promovezi-afacerea-prin-google-ads-in-2023/"
+        },
+        {
+          "domain": "sinaps.ro",
+          "position": 63,
+          "url": "https://www.sinaps.ro/cum-sa-ti-promovezi-afacerea-prin-google-ads-in-2023/"
+        }
+      ]
+    }
+  ]
+}

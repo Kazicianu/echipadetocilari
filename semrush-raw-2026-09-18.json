@@ -1,0 +1,87 @@
+{
+  "consulted_at": "2026-09-18",
+  "database": "ro",
+  "reports": {
+    "keywords": {
+      "data": "Keyword;Search Volume;Keyword Difficulty Index;Intent\ncreare site web;2900;42;1\ncreare site;2900;48;0\nrealizare site;480;26;0\nweb design;1300;25;1\ncreare site prezentare;390;17;1\ncreare magazin online;1300;35;1\ncreare site web pret;720;14;1\nservicii seo;2900;32;0\noptimizare seo;1900;26;1\nagentie seo;2900;44;0\naudit seo;260;61;1\nconsultanta seo;480;10;1\noptimizare seo pret;260;6;1\nadministrare site;110;17;2\nmentenanta site;260;6;1\nmentenanta site wordpress;70;16;1,0\nadministrare magazin online;20;0;\nmentenanta site pret;10;0;\ncreare logo;390;13;1\ndesign logo;590;85;1,3\nlogo design;590;85;1,3\nidentitate vizuala;140;7;1\ncreare logo pret;20;0;\nagentie google ads;260;13;1\nservicii google ads;140;10;1\ncampanii google ads;140;13;1,3\npromovare google ads;170;12;1\nagentie ppc;210;24;2\npay per click;110;29;1\nagentie marketing online;480;59;0\nagentie marketing digital;320;54;0\nservicii marketing online;70;11;1\nportofoliu web design;10;0;\n",
+      "metadata": {
+        "format": "csv",
+        "url": "https://www.semrush.com/analytics/keywordoverview/?db=ro&export_columns=keyword%2Cvolume%2Ckeyword_difficulty%2Cintent&q=creare+site+web%3Bcreare+site%3Brealizare+site%3Bweb+design%3Bcreare+site+prezentare%3Bcreare+magazin+online%3Bcreare+site+web+pret%3Bservicii+seo%3Boptimizare+seo%3Bagentie+seo%3Baudit+seo%3Bconsultanta+seo%3Boptimizare+seo+pret%3Badministrare+site%3Bmentenanta+site%3Bmentenanta+site+wordpress%3Badministrare+magazin+online%3Bmentenanta+site+pret%3Bcreare+logo%3Bdesign+logo%3Blogo+design%3Bidentitate+vizuala%3Bcreare+logo+pret%3Bagentie+google+ads%3Badministrare+google+ads%3Bservicii+google+ads%3Bcampanii+google+ads%3Bpromovare+google+ads%3Bagentie+ppc%3Bpay+per+click%3Bagentie+marketing+online%3Bagentie+marketing+digital%3Bservicii+marketing+online%3Bportofoliu+web+design%3Bmodele+site+prezentare",
+        "usage": {
+          "api_units": 330
+        }
+      }
+    },
+    "extra": {
+      "data": "Keyword;Search Volume;Keyword Difficulty Index\nagentie marketing online bucuresti;1300;51\ncreare site web bucuresti;140;9\nweb design bucuresti;260;34\nservicii seo bucuresti;720;28\nagentie seo bucuresti;880;38\nmentenanta website;260;6\nmentenanta site web;10;0\nadministrare site web;50;18\nadministrare site wordpress;20;0\ngoogle ads pret;0;0\ncreare magazin online pret;170;17\nrealizare magazin online;260;26\ncreare landing page;10;0\ncreare logo firma;210;16\nservicii marketing digital;30;0\nmodele site;10;0\nmodele site-uri;20;0\nfacebook ads;2400;93\nagentie facebook ads;140;13\ndezvoltare aplicatii mobile;170;18\ncopywriting;2400;26\n",
+      "metadata": {
+        "format": "csv",
+        "url": "https://www.semrush.com/analytics/keywordoverview/?db=ro&export_columns=keyword%2Cvolume%2Ckeyword_difficulty&q=agentie+marketing+online+bucuresti%3Bagentie+marketing+digital+bucuresti%3Bcreare+site+web+bucuresti%3Bweb+design+bucuresti%3Bservicii+seo+bucuresti%3Bagentie+seo+bucuresti%3Bmentenanta+website%3Bmentenanta+site+web%3Badministrare+site+web%3Badministrare+site+wordpress%3Badministrare+campanii+google+ads%3Bgoogle+ads+pret%3Bcreare+magazin+online+pret%3Brealizare+magazin+online%3Bcreare+landing+page%3Bcreare+logo+firma%3Bservicii+marketing+digital%3Bmodele+site%3Bmodele+site-uri%3Bfacebook+ads%3Bagentie+facebook+ads%3Bdezvoltare+aplicatii+mobile%3Bcopywriting",
+        "usage": {
+          "api_units": 710
+        }
+      }
+    },
+    "additional": {
+      "data": "Keyword;Search Volume;Keyword Difficulty Index\nservicii copywriting;30;0\nredactare articole seo;30;0\nservicii facebook ads;20;0\npromovare facebook;170;14\ndezvoltare aplicatii web;30;0\ncreare aplicatii mobile;10;0\n",
+      "metadata": {
+        "format": "csv",
+        "url": "https://www.semrush.com/analytics/keywordoverview/?db=ro&export_columns=keyword%2Cvolume%2Ckeyword_difficulty&q=servicii+copywriting%3Bcopywriting+pret%3Bagentie+copywriting%3Bredactare+articole+seo%3Bservicii+facebook+ads%3Bpromovare+facebook%3Bdezvoltare+aplicatii+web%3Bcreare+aplicatii+mobile",
+        "usage": {
+          "api_units": 60
+        }
+      }
+    },
+    "organic": {
+      "error": "McpServerError: {\"code\":\"internal\",\"message\":\"get domain_organic: ERROR 50 :: NOTHING FOUND\\nNo data found for this request. Verify your parameters are correct. If parameters are valid, try a different date range or target.\\nnot found\",\"retryable\":false,\"trace_id\":\"79f20e1521dae2f437e9055cc3041fef\"}",
+      "error_code": "UNAVAILABLE",
+      "error_data": {
+        "type": "json_rpc_error",
+        "code": -32603,
+        "message": "{\"code\":\"internal\",\"message\":\"get domain_organic: ERROR 50 :: NOTHING FOUND\\nNo data found for this request. Verify your parameters are correct. If parameters are valid, try a different date range or target.\\nnot found\",\"retryable\":false,\"trace_id\":\"79f20e1521dae2f437e9055cc3041fef\"}"
+      }
+    },
+    "mentenanta site": {
+      "data": "Keyword;Search Volume;Keyword Difficulty Index\nmentenanta site;260;6\nmentenanta site wordpress;70;16\ncontract mentenanta site;20;0\nmentenanta si administrare site;20;0\nmentenanta site anaf;20;0\nmentenanta site web pret;20;0\npachet mentenanta site;20;0\npret mentenanta site;20;0\nsite in mentenanta;20;0\nmentenanta site cluj;10;0\nmentenanta site pret;10;0\nmentenanta site web;10;0\naccesarea site-ului in modul mentenata;0;0\nacest site este in mentenanta wordpress;0;0\nadministrare si mentenanta site;0;0\nadministrare si mentenanta site web;0;0\nadministrare vs mentenanta site;0;0\nautovit mentenanta site;0;0\ncat costa mentenanta unui site;0;0\ncat costa mentenanta unui site web;0;0\nce este mentenanta unui site;0;0\nce include un pachet de mentenanta a siteului web;0;0\nce inseamna cand un site este in mentenanta;0;0\nce inseamna site in mentenanta;0;0\ncele mai bune mesaje pentru mentenanta site;0;0\ncentrul 102 mentenanta bucov site;0;0\ncod caen pentru constructie si mentenanta site web;0;0\ncontract de mentenanta site;0;0\ncontract mentenanta site web;0;0\ncost creare site si mentenanta;0;0\n",
+      "metadata": {
+        "format": "csv",
+        "pagination": {
+          "limit": 30,
+          "sort": "volume_desc"
+        },
+        "url": "https://www.semrush.com/analytics/keywordmagic/?db=ro&display_limit=30&display_sort=volume_desc&export_columns=keyword%2Cvolume%2Ckeyword_difficulty&q=mentenanta+site",
+        "usage": {
+          "api_units": 1800
+        }
+      }
+    },
+    "creare logo": {
+      "data": "Keyword;Search Volume;Keyword Difficulty Index\ncreare logo;390;13\ncreare logo gratis;260;24\ncreare logo firma;210;16\ncreare logo gratuit;210;23\ncreare logo online;90;24\naplicatii creare logo;40;0\ncome creare un logo;30;0\ncreare logo 3d;30;0\ncreare logo free online;30;0\ncreare logo site;30;0\npret creare logo;30;0\naplicatie creare logo;20;0\ncrear logo online;20;0\ncrear logo online gratis;20;0\ncreare logo brand;20;0\ncreare logo companie;20;0\ncreare logo firma free;20;0\ncreare logo firma gratis;20;0\ncreare logo firma gratuit;20;0\ncreare logo firma online;20;0\ncreare logo firma online gratis;20;0\ncreare logo free;20;0\ncreare logo gaming;20;0\ncreare logo gratis download;20;0\ncreare logo gratis online;20;0\ncreare logo gratuit online;20;0\ncreare logo online free;20;0\ncreare logo online gratis;20;0\ncreare logo online gratuit;20;0\ncreare logo pret;20;0\n",
+      "metadata": {
+        "format": "csv",
+        "pagination": {
+          "limit": 30,
+          "sort": "volume_desc"
+        },
+        "url": "https://www.semrush.com/analytics/keywordmagic/?db=ro&display_limit=30&display_sort=volume_desc&export_columns=keyword%2Cvolume%2Ckeyword_difficulty&q=creare+logo",
+        "usage": {
+          "api_units": 1800
+        }
+      }
+    },
+    "copywriting": {
+      "data": "Keyword;Search Volume;Keyword Difficulty Index\ncopywriting;2400;26\ncopywriting jobs;720;25\nremote copywriter jobs;260;28\nce inseamna copywriter;210;11\ncopywriter ce inseamna;210;12\njoburi copywriter;170;15\nce face un copywriter;140;11\ncurs copywriting;140;6\nce este copywriting;110;11\nwhat is copywriting;110;40\nce este un copywriter;90;10\ncopywriter romania;90;22\ncopywriting meaning;90;45\nromanian copywriter;70;29\nromanian copywriters;70;16\ncopywriting books;40;18\nfreelance copywriter romania;40;0\nseo copywriting;40;26\nwhat is a seo copywriter;40;0\nai copywriting tool;30;0\nangajari copywriter;30;0\ncarti despre copywriting;30;0\ncopywritely;30;0\ncopywriter dex;30;0\ncopywriter remote romania;30;0\ncopywriter salariu;30;0\ncopywriting certificate;30;0\ncopywriting cost per word;30;0\ncopywriting examples;30;0\ncopywriting formulas;30;0\n",
+      "metadata": {
+        "format": "csv",
+        "pagination": {
+          "limit": 30,
+          "sort": "volume_desc"
+        },
+        "url": "https://www.semrush.com/analytics/keywordmagic/?db=ro&display_limit=30&display_sort=volume_desc&export_columns=keyword%2Cvolume%2Ckeyword_difficulty&q=copywriting",
+        "usage": {
+          "api_units": 600
+        }
+      }
+    }
+  }
+}
