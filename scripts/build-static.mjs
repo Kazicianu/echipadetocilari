@@ -155,6 +155,24 @@ function enhanceHtml(file) {
 
   html = setLang(html, 'ro');
 
+  // Replace the GA4 tag inherited from the WordPress mirror before EN pages are generated.
+  html = html.replace(
+    /<script\b[^>]*\bid=["']google_gtagjs(?:-inline)?["'][^>]*>[\s\S]*?<\/script>\s*/gi,
+    ''
+  );
+  html = appendToHead(
+    html,
+    `<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PGM4B3VM9Z"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PGM4B3VM9Z');
+</script>`
+  );
+
   if (!/name=["']viewport["']/i.test(html)) {
     html = html.replace(
       /<head[^>]*>/i,
