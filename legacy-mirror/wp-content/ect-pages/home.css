@@ -116,9 +116,7 @@
   src: url('fonts/caveat-600.woff2') format('woff2');
 }
 
-/* No flat fill of its own. Every other block on the home page sits on white
-   with one of the theme's blob sheets behind it, painted on an Elementor
-   container's ::before; same trick here, by hand. */
+/* The section uses the theme's blob sheet behind the content at every width. */
 .ect-process {
   position: relative;
   font-family: Montserrat, system-ui, sans-serif;
@@ -224,8 +222,7 @@
   background: #fd8649;
 }
 
-/* Hand-drawn aside pointing at the chart. Decorative, so it only shows where
-   there is room for it beside the centred header. */
+/* Handwritten aside on wide screens, where it fits beside the header. */
 .ect-process__scribble {
   display: none;
 }
@@ -237,6 +234,10 @@
   line-height: 21px;
   font-weight: 300;
   color: rgba(39, 39, 45, 0.75);
+}
+
+.ect-process__swipe {
+  display: none;
 }
 
 /* ─── the chart ───────────────────────────────────────────────────────────── */
@@ -444,21 +445,152 @@
     transform: rotate(-7deg);
   }
 
-  .ect-process__arrow {
-    display: block;
-    width: 78px;
-    height: auto;
-    margin: 2px 0 0 10px;
-  }
 }
 
 @media (max-width: 767px) {
   .ect-process {
-    padding: 50px 0 60px;
+    overflow: hidden;
+    padding: 88px 0 56px;
+  }
+
+  .ect-process__eyebrow {
+    margin-bottom: 16px;
+  }
+
+  .ect-process__title {
+    font-size: clamp(37px, 10.5vw, 44px);
+  }
+
+  .ect-process__hl {
+    display: table;
+    margin: 8px auto 0;
+  }
+
+  .ect-process__lead {
+    max-width: 335px;
+    margin-top: 24px;
+  }
+
+  .ect-process__chips {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 48px;
+  }
+
+  .ect-process__chips li {
+    width: fit-content;
+    max-width: 100%;
+    text-align: left;
+  }
+
+  .ect-process__swipe {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: max-content;
+    max-width: 100%;
+    margin: 4px 18px 0 auto;
+    font-family: 'Caveat ECT', 'Segoe Script', cursive;
+    font-size: 14px;
+    line-height: 1.1;
+    font-weight: 600;
+    color: #27272d;
+    transform: rotate(-5deg);
+    transform-origin: right top;
+  }
+
+  .ect-process__swipe-arrow {
+    display: block;
+    width: 82px;
+    height: 25px;
+    margin: 2px 8px 0 0;
   }
 
   .ect-gantt {
-    margin-top: 36px;
+    width: 100%;
+    margin: 76px 0 14px;
+    padding: 0 0 10px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x proximity;
+    overscroll-behavior-inline: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .ect-gantt:focus-visible {
+    outline: 3px solid #27272d;
+    outline-offset: 3px;
+  }
+
+  .ect-gantt__phases {
+    display: grid;
+    grid-template-columns: repeat(5, 230px);
+    gap: 12px;
+    width: 1198px;
+    height: 39px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .ect-gantt__phases li {
+    padding: 9px 8px;
+    border-radius: 15px;
+    background: #fff1e7;
+    color: #27272d;
+    font-size: 15px;
+    line-height: 21px;
+    font-weight: 500;
+    text-align: center;
+    scroll-snap-align: start;
+  }
+
+  .ect-gantt__steps {
+    position: relative;
+    display: block;
+    width: 1198px;
+    height: 600px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .ect-gantt__steps::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(to right, transparent 0 238px, rgba(39, 39, 45, 0.1) 238px 239px, transparent 239px 242px);
+    pointer-events: none;
+  }
+
+  .ect-step {
+    box-sizing: border-box;
+    position: absolute;
+    z-index: 1;
+    width: 230px;
+    margin: 0;
+    padding: 17px 47px 19px 21px;
+  }
+
+  .ect-step:nth-child(1) { left: 0; top: 48px; }
+  .ect-step:nth-child(2) { left: 242px; top: 117px; width: 472px; }
+  .ect-step:nth-child(3) { left: 484px; top: 249px; }
+  .ect-step:nth-child(4) { left: 726px; top: 249px; }
+  .ect-step:nth-child(5) { left: 726px; top: 411px; }
+  .ect-step:nth-child(6) { left: 968px; top: 424px; }
+
+  /* The longer English copy needs more room within the same visual rhythm. */
+  html[lang="en"] .ect-gantt__steps { height: 655px; }
+  html[lang="en"] .ect-step:nth-child(3),
+  html[lang="en"] .ect-step:nth-child(4) { top: 259px; }
+  html[lang="en"] .ect-step:nth-child(5) { top: 440px; }
+  html[lang="en"] .ect-step:nth-child(6) { top: 453px; }
+
+  .ect-process__note {
+    max-width: 335px;
+    margin: 8px auto 0;
+    line-height: 22px;
   }
 }
 

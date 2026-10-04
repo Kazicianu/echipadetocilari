@@ -465,6 +465,7 @@ export const dictionary = [
   ['Un singur om de contact', 'One person to talk to'],
   ['Termen scris în ofertă', 'A deadline written into the quote'],
   ['Și fără ședințe inutile!', 'And no pointless meetings!'],
+  ['Glisează și vezi mai mult', 'Swipe to see more'],
 
   // Chart phases. Anchored on the tags: "Apelul" alone is short enough to hit
   // unrelated copy elsewhere in the document.
