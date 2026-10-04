@@ -21,3 +21,7 @@ Oglindă statică 1:1 a echipadetocilari.ro (scrape WordPress/Elementor) cu inje
 - Indexarea e controlată exclusiv de env-ul `PUBLIC_INDEXABLE` (nesetat = `noindex` peste tot)
 - Nu edita niciodată `dist/` direct — editează `legacy-mirror/` sau pipeline-ul
 - Paginile EN sunt generate, nu scrise de mână — actualizează `scripts/i18n/dictionary.mjs`
+
+## Reguli obligatorii pentru pagini
+
+- Fiecare pagină creată trebuie să aibă formularul de contact imediat deasupra footerului, după modelul de pe homepage. Regula se aplică atât paginilor deja create, cât și celor viitoare, în română și engleză. Refolosește structura, stilul și funcționalitatea formularului de pe homepage; un buton către pagina Contact nu înlocuiește formularul.

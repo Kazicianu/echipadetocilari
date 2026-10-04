@@ -48,6 +48,7 @@ export function validateBuild({ outDir, files, urlPathOf, indexable }) {
     if (html.includes('/en/en/')) errors.push(`${rel(file)}: doubled /en/en/ path`);
 
     if (owned) {
+      if (!/data-ect-contact=["'](?:ro|en)["']/.test(html)) errors.push(`${rel(file)}: contact form missing`);
       const desc = html.match(/<meta\s+name=["']description["'][^>]*content=["']([^"']*)["']/i);
       if (!desc || desc[1].trim().length < 50) {
         errors.push(`${rel(file)}: missing or too-short description`);

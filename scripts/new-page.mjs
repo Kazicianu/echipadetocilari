@@ -24,6 +24,7 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { ensureSharedContact } from './lib/shared-contact.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
@@ -77,7 +78,7 @@ const contentMatch = { index: contentStart };
 
 /** Start of the footer wrapper — walk back to its opening tag. */
 const footerIdx = html.indexOf('elementor-location-footer');
-const footerStart = html.lastIndexOf('<div', footerIdx);
+const footerStart = html.lastIndexOf('<footer', footerIdx);
 if (footerIdx === -1 || footerStart === -1) {
   console.error('Could not find the footer wrapper in the template.');
   process.exit(1);
@@ -307,7 +308,7 @@ if (existsSync(pageFile) && !('force' in args)) {
   process.exit(1);
 }
 
-writeFileSync(pageFile, head + content + suffix, 'utf8');
+writeFileSync(pageFile, ensureSharedContact(head + content + suffix, readFileSync(path.join(mirror, 'index.html'), 'utf8')), 'utf8');
 writeFileSync(path.join(cssDir, `${slug}.css`), css, 'utf8');
 
 console.log(`✓ legacy-mirror/${slug}/index.html`);

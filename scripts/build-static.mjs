@@ -39,6 +39,7 @@ import { validateBuild } from './lib/validate.mjs';
 import { enhanceContactForms } from './lib/contact-forms.mjs';
 import { makeStandaloneAssets, validateStandaloneAssets } from './lib/standalone-assets.mjs';
 import { normalizePageLinks } from './lib/navigation.mjs';
+import { ensureSharedContact } from './lib/shared-contact.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
@@ -145,6 +146,7 @@ function enhanceHtml(file) {
   const owned = isOwnedPage(urlPath);
   const meta = roPageMeta[urlPath];
   let html = readFileSync(file, 'utf8');
+  if (owned) html = ensureSharedContact(html, readFileSync(path.join(srcDir, 'index.html'), 'utf8'));
 
   // The scraper wrote `?_ver%3D…`; the files on disk (and Vercel) use `_ver=`.
   html = html.replace(/(src|href)="([^"]*?)_ver%3D([^"]*)"/gi, '$1="$2_ver=$3"');
