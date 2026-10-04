@@ -10,10 +10,9 @@
   fill: #fd8649;
 }
 
-/* ─── maintenance band + "all services" link ──────────────────────────────── */
+/* Maintenance band */
 
-.elementor-3381 .ect-band,
-.elementor-3381 .ect-allservices {
+.elementor-3381 .ect-band {
   flex: 0 0 100%;
   width: 100%;
   font-family: Montserrat, system-ui, sans-serif;
@@ -90,23 +89,6 @@
   .elementor-3381 .ect-band {
     padding-right: 90px;
   }
-}
-
-.elementor-3381 .ect-allservices {
-  margin: 22px 0 0;
-  text-align: center;
-  font-size: 16px;
-}
-
-.elementor-3381 .ect-allservices a {
-  color: #27272d;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  text-decoration-color: rgba(253, 134, 73, 0.6);
-}
-
-.elementor-3381 .ect-allservices a:hover {
-  color: #fd8649;
 }
 
 @media (max-width: 767px) {
