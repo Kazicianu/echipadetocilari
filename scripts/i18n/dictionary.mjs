@@ -1282,7 +1282,7 @@ export const dictionary = [
     'PPC also lets companies compete directly with rivals, since ads appear on the same search results page. Businesses can show ads only to users in a specific location or searching specific keywords.',
   ],
   [
-    'Reclama PPC este un mod eficient de publicitate, dar necesită o planificare și o gestionare atentă. Este important ca companiile să identifice cuvintele cheie relevante și să aibă o strategie de ofertare adecvată pentru a se asigura că anunțurile lor sunt afișate în locurile potrivite și că obțin un nivel ridicat de clicuri.',
+    'Reclama PPC este un mod eficient de publicitate, dar necesită o planificare și o gestionare atentă. Este important ca companiile să identifice cuvintele cheie relevante și să aibă o strategie de ofertare adecvată pentru a se asigura că anunțurile lor sunt afișate în locurile potrivite și că obțin un nivel ridicat de clickuri.',
     'PPC advertising is effective but needs careful planning and management. Companies must identify relevant keywords and set a sound bidding strategy so ads show in the right places and earn strong click-through rates.',
   ],
   [
@@ -1310,7 +1310,7 @@ export const dictionary = [
     'A landing page is a simple one-page website designed to capture attention and drive a specific action, fill a form, buy a product, or register for an event.',
   ],
   [
-    'De obicei, aceste anunțuri sunt afișate în partea de sus sau de jos a paginii de rezultate a căutării sau în alte zone relevante ale site-urilor partenere. Când cineva face clic pe anunț, compania plătește o sumă mică de bani, cunoscută sub numele de cost per click (CPC).',
+    'De obicei, aceste anunțuri sunt afișate în partea de sus sau de jos a paginii de rezultate a căutării sau în alte zone relevante ale site-urilor partenere. Când cineva face click pe anunț, compania plătește o sumă mică de bani, cunoscută sub numele de cost per click (CPC).',
     'These ads usually appear at the top or bottom of search results or on partner sites. When someone clicks, the company pays a small cost-per-click (CPC).',
   ],
   [
@@ -1338,7 +1338,7 @@ export const dictionary = [
     '** For custom SEO quotes tailored to your needs and budget, contact us anytime. Offer subject to terms and conditions. Pricing is informative and non-contractual.',
   ],
   [
-    'Reclama Pay-per-click (PPC) este o metodă de publicitate online în care companiile plătesc pentru fiecare clic pe anunțurile lor afișate în rezultatele căutării sau în alte zone ale site-urilor web.',
+    'Reclama Pay-per-click (PPC) este o metodă de publicitate online în care companiile plătesc pentru fiecare click pe anunțurile lor afișate în rezultatele căutării sau în alte zone ale site-urilor web.',
     'Pay-per-click (PPC) advertising is an online ads model where companies pay for each click on ads shown in search results or on partner websites.',
   ],
   [
@@ -1469,7 +1469,7 @@ export const enPageMeta = {
   },
   '/en/google-ads-agency/': {
   "title": "Google Ads Agency: Services and Campaigns | Echipa de Tocilari",
-  "description": "Bucharest Google Ads agency serving Romania. Search campaign setup, optimisation and reporting. Management from €99 / month, with ad spend paid separately."
+  "description": "Bucharest Google Ads agency serving Romania. Search campaigns, conversion tracking and reporting from €260 / month. Advertising budget paid separately."
 },
 };
 
