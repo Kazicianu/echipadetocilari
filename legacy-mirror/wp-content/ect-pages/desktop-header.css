@@ -234,7 +234,7 @@
     transform: rotate(45deg);
   }
 
-  /* RO | EN: two round 44px halves; the current language is ink on orange. */
+  /* RO | EN: two round 44px halves; the current language is white on orange. */
   #top #ect-lang-switch {
     overflow: visible;
     background: #fff;
@@ -258,7 +258,7 @@
   #top #ect-lang-switch a[aria-current="true"],
   #top #ect-lang-switch a[aria-current="true"]:hover {
     background: #fd8649;
-    color: #27272d;
+    color: #fff;
   }
 
   #top #ect-lang-switch a:not([aria-current="true"]):hover {
@@ -271,36 +271,7 @@
     outline-offset: 3px;
   }
 
-  /* "Ai o idee?": ink label on orange (5.3:1); white with an orange-deep label on hover. */
-  #top .elementor-element-682f9a60 .elementor-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 52px;
-    padding: 0 30px;
-    box-sizing: border-box;
-    border: 2px solid #ff6c2a;
-    border-radius: 30px;
-    background-color: #ff6c2a;
-    color: #27272d;
-    fill: #27272d;
-    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
-  }
-
-  #top .elementor-element-682f9a60 .elementor-button:focus:not(:focus-visible):not(:hover) {
-    background-color: #ff6c2a;
-    border-color: #ff6c2a;
-    color: #27272d;
-  }
-
-  #top .elementor-element-682f9a60 .elementor-button:hover,
-  #top .elementor-element-682f9a60 .elementor-button:focus-visible {
-    background-color: #fff;
-    border-color: #ad420f;
-    color: #ad420f;
-    fill: #ad420f;
-  }
-
+  /* Keep the original Elementor button appearance, with visible keyboard focus. */
   #top .elementor-element-682f9a60 .elementor-button:focus-visible {
     outline: 2px solid #ad420f;
     outline-offset: 3px;
