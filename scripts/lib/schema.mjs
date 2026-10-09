@@ -1,5 +1,5 @@
 /**
- * JSON-LD builders. Pure structure — all copy comes from the i18n meta files,
+ * JSON-LD builders. Pure structure, with copy from i18n metadata or visible HTML,
  * so RO and EN stay in sync by construction instead of by copy-paste.
  */
 

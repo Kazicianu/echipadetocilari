@@ -7,7 +7,7 @@
     "node": ">=22.12.0"
   },
   "scripts": {
-    "test": "node --test tests/contact.test.mjs scripts/lib/standalone-assets.test.mjs scripts/lib/navigation.test.mjs scripts/lib/shared-contact.test.mjs",
+    "test": "node --test tests/contact.test.mjs scripts/lib/standalone-assets.test.mjs scripts/lib/navigation.test.mjs scripts/lib/shared-contact.test.mjs scripts/lib/google-ads-faq.test.mjs",
     "build": "node scripts/build-static.mjs",
     "preview": "node --env-file-if-exists=.env.local scripts/preview.mjs",
     "mirror": "node scripts/mirror-site.mjs",

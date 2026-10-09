@@ -1232,9 +1232,9 @@ export const enPageMeta = {
       'Logo design and visual identity: distinctive marks ready for web, print, and social. Brief, iterations, and production-ready files.',
   },
   '/en/google-ads-agency/': {
-    title: "Google Ads Agency and Campaign Management | Echipa de Tocilari",
-    description: "We manage Google Ads campaigns for businesses. Search terms, ads, budget oversight and measurement are planned around clear goals and the data available.",
-  },
+  "title": "Google Ads Agency: Services and Campaigns | Echipa de Tocilari",
+  "description": "Bucharest Google Ads agency serving Romania. Search campaign setup, optimisation and reporting. Management from €99 / month, with ad spend paid separately."
+},
 };
 
 export const enOrg = {

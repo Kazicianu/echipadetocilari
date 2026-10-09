@@ -115,6 +115,8 @@
 .gads-faq-item[open] .gads-faq-plus { transform: rotate(45deg); }
 .gads-faq-answer { padding: 0 22px 22px; }
 .gads-faq-answer p { margin: 0; }
+.gads-faq-answer .gads-source { margin-top: 12px; font-size: 14px; line-height: 1.5; }
+.gads-faq-answer a { color: #27272d; font-weight: 500; }
 /* Avoid long translated labels forcing a page wider than the viewport. */
 .gads-plan :is(a,li), .gads-page a[href='#formular_contact_bottom'] { white-space: normal; overflow-wrap: anywhere; }
 /* The exported footer uses three fixed columns plus gaps. Let the last one fit. */

@@ -65,3 +65,21 @@ test('actual current-page menu links resolve correctly for every RO page and EN 
   }
   assert.ok(checkedCurrentLinks >= 12, 'checks the actual desktop and mobile current-page menus');
 });
+
+test('legacy Google Ads routes migrate to canonical pages while preserving language and URL suffixes', () => {
+  const opts = { pageUrl: '/portofoliu/' };
+  assert.equal(normalizePageLinks(link('/pay-per-click/'), opts), link('/agentie-google-ads/'));
+  assert.equal(normalizePageLinks(link('/en/ppc-advertising/'), opts), link('/en/google-ads-agency/'));
+  assert.equal(normalizePageLinks(link('../pay-per-click/index.html?plan=start&amp;source=menu#costuri'), opts), link('/agentie-google-ads/?plan=start&amp;source=menu#costuri'));
+  assert.equal(normalizePageLinks(link('https://www.echipadetocilari.ro/en/ppc-advertising/index.html#plans'), opts), link('/en/google-ads-agency/#plans'));
+
+  for (const href of ['/pay-per-click/', '/en/ppc-advertising/']) {
+    assert.equal(normalizePageLinks(link(href), { ...opts, language: 'en' }), link('/en/google-ads-agency/'));
+    assert.equal(normalizePageLinks(link(href), { ...opts, language: 'ro' }), link('/agentie-google-ads/'));
+  }
+  assert.equal(normalizePageLinks('<a href="/pay-per-click/?source=switch#plans" hreflang="en">EN</a>', { ...opts, language: 'ro' }), '<a href="/en/google-ads-agency/?source=switch#plans" hreflang="en">EN</a>');
+  assert.equal(normalizePageLinks('<a href="/en/ppc-advertising/" hreflang="ro">RO</a>', { ...opts, language: 'en' }), '<a href="/agentie-google-ads/" hreflang="ro">RO</a>');
+  assert.equal(normalizePageLinks(link('index.html'), { pageUrl: '/pay-per-click' }), link('/agentie-google-ads/'));
+  assert.equal(normalizePageLinks(link('index.html'), { pageUrl: '/en/ppc-advertising' }), link('/en/google-ads-agency/'));
+  assert.equal(normalizePageLinks(link('https://example.com/pay-per-click/'), opts), link('https://example.com/pay-per-click/'));
+});

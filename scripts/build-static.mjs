@@ -34,6 +34,7 @@ import {
   upsertTitle,
 } from './lib/html.mjs';
 import { faqPage, organization, service, webPage, website } from './lib/schema.mjs';
+import { extractGoogleAdsFaqs } from './lib/google-ads-faq.mjs';
 import { junkRedirects, vercelRedirects } from './lib/junk-redirects.mjs';
 import { validateBuild } from './lib/validate.mjs';
 import { enhanceContactForms } from './lib/contact-forms.mjs';
@@ -108,7 +109,7 @@ function assertVercelRedirects() {
   }
 }
 
-function schemasFor(urlPath, meta) {
+function schemasFor(urlPath, meta, html) {
   const route = routeByRo(urlPath);
   const list = [
     organization({ site: SITE, lang: 'ro', ...roOrg }),
@@ -117,6 +118,7 @@ function schemasFor(urlPath, meta) {
   ];
 
   if (urlPath === '/') list.push(faqPage(roFaqs));
+  if (urlPath === '/agentie-google-ads/') list.push(faqPage(extractGoogleAdsFaqs(html)));
   if (route?.service) {
     list.push(
       service({
@@ -196,7 +198,7 @@ function enhanceHtml(file) {
     html = upsertMeta(html, 'property="og:url"', `${SITE}${urlPath}`);
     html = upsertMeta(html, 'name="twitter:title"', meta.title);
     html = upsertMeta(html, 'name="twitter:description"', meta.description);
-    html = appendToHead(html, renderJsonLd(schemasFor(urlPath, meta)));
+    html = appendToHead(html, renderJsonLd(schemasFor(urlPath, meta, html)));
   }
 
   html = applyIndexPolicy(html, {

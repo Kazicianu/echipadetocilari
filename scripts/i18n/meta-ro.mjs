@@ -54,9 +54,9 @@ export const roPageMeta = {
       'Logo design și identitate vizuală: mărci clare, ușor de folosit pe web, print și social media. Brief, iterații și livrabile gata de produs.',
   },
   '/agentie-google-ads/': {
-    title: "Agenție Google Ads | Administrare campanii",
-    description: "Servicii Google Ads pentru afaceri: planificăm campanii Search, verificăm costurile și explicăm separat bugetul de publicitate și onorariul de administrare.",
-  },
+  "title": "Agenție Google Ads: servicii și campanii | Echipa de Tocilari",
+  "description": "Agenție Google Ads din București, pentru firme din România. Campanii Search, optimizare și raportare. Administrare de la 99 € / lună, buget publicitar separat."
+},
 };
 
 export const roOrg = {

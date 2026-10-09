@@ -19,6 +19,7 @@ import {
   upsertTitle,
 } from '../lib/html.mjs';
 import { faqPage, organization, service, webPage, website } from '../lib/schema.mjs';
+import { extractGoogleAdsFaqs } from '../lib/google-ads-faq.mjs';
 
 /**
  * Longest phrase first, so "Servicii SEO" wins over "Servicii".
@@ -71,7 +72,7 @@ function absolutizeAssets(html) {
   return out;
 }
 
-function schemasFor(route, meta, site) {
+function schemasFor(route, meta, site, html) {
   const list = [
     organization({ site, lang: 'en', ...enOrg }),
     website({ site, lang: 'en' }),
@@ -85,6 +86,7 @@ function schemasFor(route, meta, site) {
   ];
 
   if (route.en === '/en/') list.push(faqPage(enFaqs));
+  if (route.en === '/en/google-ads-agency/') list.push(faqPage(extractGoogleAdsFaqs(html)));
   if (route.service) {
     list.push(
       service({
@@ -138,7 +140,7 @@ export function generateEnglishPages({ outDir, site, indexable }) {
     html = injectHreflang(html, { site, roPath: route.ro, enPath: route.en });
     html = injectLangSwitcher(html, 'en', route.ro === '/' ? '/' : route.ro, route.en);
     html = applyIndexPolicy(html, { indexable, canonical: `${site}${route.en}` });
-    html = appendToHead(html, renderJsonLd(schemasFor(route, meta, site)));
+    html = appendToHead(html, renderJsonLd(schemasFor(route, meta, site, html)));
 
     const dest = path.join(outDir, route.enFile);
     mkdirSync(path.dirname(dest), { recursive: true });
