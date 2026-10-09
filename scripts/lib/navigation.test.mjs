@@ -83,3 +83,27 @@ test('legacy Google Ads routes migrate to canonical pages while preserving langu
   assert.equal(normalizePageLinks(link('index.html'), { pageUrl: '/en/ppc-advertising' }), link('/en/google-ads-agency/'));
   assert.equal(normalizePageLinks(link('https://example.com/pay-per-click/'), opts), link('https://example.com/pay-per-click/'));
 });
+
+test('desktop and mobile menus expose current service pages on every page', () => {
+  const servicePaths = [
+    '/creare-site-web/',
+    '/servicii-seo/',
+    '/agentie-google-ads/',
+    '/administrare-site/',
+  ];
+
+  for (const route of routes) {
+    const original = readFileSync(path.join(source, route.roFile), 'utf8');
+    const header = original.match(/<header\b[\s\S]*?<\/header>/i)?.[0];
+    assert.ok(header, `${route.ro}: header missing`);
+    for (const menuClass of ['elementor-nav-menu--main', 'elementor-nav-menu--dropdown']) {
+      const menu = [...header.matchAll(/<nav\b[^>]*>[\s\S]*?<\/nav>/gi)]
+        .map(match => match[0])
+        .find(nav => nav.includes(menuClass));
+      assert.ok(menu, `${route.ro}: ${menuClass} missing`);
+      for (const servicePath of servicePaths) {
+        assert.ok(menu.includes(`href="${servicePath}"`), `${route.ro}: ${menuClass} missing ${servicePath}`);
+      }
+    }
+  }
+});

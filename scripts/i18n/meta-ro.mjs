@@ -1,5 +1,5 @@
 /**
- * Romanian page copy for SEO/AEO — descriptions answer the query directly
+ * Romanian page copy for SEO/AEO, descriptions answer the query directly
  * so they survive as answer snippets. Mirror of `enPageMeta` in dictionary.mjs.
  */
 export const roPageMeta = {
@@ -19,9 +19,9 @@ export const roPageMeta = {
       'Creare site web în București: site de prezentare, landing page și bază de magazin online. Design, viteză și SEO tehnic de la prima versiune.',
   },
   '/servicii-seo/': {
-    title: 'Servicii SEO București | optimizare site Google',
+    title: 'Servicii SEO și vizibilitate în AI | Echipa de Tocilari',
     description:
-      'Servicii SEO în București: audit, cuvinte cheie, on-page, off-page și monitorizare. Creștem traficul organic pe Google pentru site-uri și magazine.',
+      'Servicii SEO în București: audit, optimizare tehnică și conținut clar pentru Google și răspunsurile AI. Vezi cum lucrăm și ce includ abonamentele.',
   },
   '/administrare-site/': {
     title: 'Administrare și mentenanță site | WordPress',
@@ -31,7 +31,7 @@ export const roPageMeta = {
   '/contact/': {
     title: 'Contact | consultație marketing București',
     description:
-      'Contactează Echipa de Tocilari pentru creare site, SEO sau Google Ads. Consultație gratuită 30 de minute — lucrăm remote în toată România.',
+      'Contactează Echipa de Tocilari pentru creare site, SEO sau Google Ads. Consultație gratuită 30 de minute, lucrăm remote în toată România.',
   },
   '/portofoliu/': {
     title: 'Modele de site-uri și portofoliu web design | Echipa de Tocilari',
@@ -41,12 +41,12 @@ export const roPageMeta = {
   '/services/': {
     title: 'Servicii marketing digital: site, SEO, Ads',
     description:
-      'Servicii de marketing digital: creare site web, SEO, administrare, Google Ads, logo și copywriting. Un singur partener pentru creșterea online.',
+      'Serviciile Echipei de Tocilari: creare site web și magazin online, aplicații, SEO și vizibilitate în AI, Google Ads, Facebook Ads și mentenanță site.',
   },
   '/clients/': {
     title: 'Clienți | proiecte web design și SEO',
     description:
-      'Clienții Echipei de Tocilari — firme care ne-au ales pentru web design, SEO și marketing digital. Parteneriate reale, nu slide-uri goale.',
+      'Clienții Echipei de Tocilari, firme care ne-au ales pentru web design, SEO și marketing digital. Parteneriate reale, nu slide-uri goale.',
   },
   '/logo-design/': {
     title: 'Logo design și identitate vizuală | Echipa de Tocilari',

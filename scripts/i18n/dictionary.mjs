@@ -6,6 +6,77 @@ export { googleAdsDictionary };
  * Tuned for how people actually search in EN (digital marketing, web design, SEO…).
  */
 export const dictionary = [
+  ["Configurare cont Google Ads","Google Ads account setup"],
+  ["Monitorizarea campaniilor de două ori pe săptămână","Campaign monitoring twice a week"],
+  ["Adăugarea săptămânală a cuvintelor cheie negative","Weekly negative keyword updates"],
+  ["Verificarea bugetului de două ori pe săptămână","Budget review twice a week"],
+  ["Configurarea urmăririi conversiilor","Conversion tracking setup"],
+  ["Sistem antifraudă PPC","PPC fraud protection system"],
+  ["Rapoarte lunare și recomandări","Monthly reports and recommendations"],
+  // Shared service copy and Google Ads page translations.
+  ['Agenție Google Ads <em>pentru afaceri.</em>', 'Google Ads agency <em>for businesses.</em>'],
+  ["Google Ads","Google Ads"],
+  ["Ofertă adaptată proiectului","A quote tailored to your project"],
+  ["Cere o ofertă","Request a quote"],
+  ["Servicii digitale","Digital services"],
+  ["Hai să vorbim","Let’s talk"],
+  ["Vezi ce include","See what’s included"],
+  ["Consultație gratuită · 30 de minute","Free consultation · 30 minutes"],
+  ["Schiță ilustrativă","Illustrative concept"],
+  ["Ce construim împreună","What we build together"],
+  ["Cum lucrăm","How we work"],
+  ["Pași clari. De la prima discuție.","Clear steps. From the first conversation."],
+  ["Despre buget","About the budget"],
+  ["Răspunsuri simple","Straightforward answers"],
+  ["Probabil te întrebi…","You might be wondering…"],
+  ["Următorul pas","The next step"],
+  ["Spune-ne unde ești și ce vrei să obții. Începem cu o conversație.","Tell us where you are and what you want to achieve. We start with a conversation."],
+  ["Povestește-ne despre proiect","Tell us about your project"],
+  ["/ lună","/ month"],
+  ["Discută pachetul","Discuss this package"],
+  ["Când ei caută,","When they search,"],
+  ["afacerea ta poate fi acolo.","your business can be there."],
+  ["Administrăm campanii Google Ads pentru oamenii care caută ce oferi. Alegem cuvintele potrivite, urmărim bugetul și optimizăm pentru cereri și vânzări măsurabile.","We manage Google Ads campaigns for people searching for what you offer. We choose relevant keywords, monitor budgets and optimise for measurable enquiries and sales."],
+  ["O căutare. O oportunitate.","A search. An opportunity."],
+  ["serviciul de care am nevoie","the service I need"],
+  ["Sponsorizat · Afacerea ta","Sponsored · Your business"],
+  ["Soluția potrivită începe aici","The right solution starts here"],
+  ["Descoperă serviciile și cere o ofertă.","Explore the services and request a quote."],
+  ["Căutări relevante","Relevant searches"],
+  ["Buget sub control","Budget control"],
+  ["Rezultate măsurabile","Measurable results"],
+  ["O campanie bună începe cu întrebările potrivite.","A good campaign starts with the right questions."],
+  ["Analiza căutărilor","Search analysis"],
+  ["Identificăm ce caută potențialii clienți și ce expresii nu au legătură cu oferta ta.","We identify what potential customers search for and which terms are unrelated to your offer."],
+  ["Structura campaniilor","Campaign structure"],
+  ["Organizăm serviciile și cuvintele cheie în campanii și grupuri de anunțuri relevante.","We organise services and keywords into relevant campaigns and ad groups."],
+  ["Anunțuri clare","Clear ads"],
+  ["Scriem mesaje care explică oferta și trimit vizitatorul spre pagina potrivită.","We write messages that explain the offer and direct visitors to the right page."],
+  ["Verificarea conversiilor","Conversion review"],
+  ["Verificăm ce acțiuni pot fi măsurate. Implementarea urmăririi se stabilește în pachetul ales.","We review which actions can be measured. Tracking implementation is agreed in your package."],
+  ["Buget și optimizare","Budget and optimisation"],
+  ["Urmărim cheltuielile, căutările și performanța anunțurilor pentru a ajusta campaniile.","We monitor spend, searches and ad performance to adjust campaigns."],
+  ["Decizii pe înțeles","Understandable decisions"],
+  ["Discutăm costurile și rezultatele relevante. Formatul raportării se stabilește în ofertă.","We discuss costs and relevant results. Reporting format is agreed in the quote."],
+  ["Analizăm punctul de plecare","Review the starting point"],
+  ["Oferta, site-ul, zona deservită și contul existent, dacă ai deja campanii.","Your offer, website, service area and existing account if you already run campaigns."],
+  ["Stabilim planul","Set the plan"],
+  ["Alegem căutările, paginile și bugetul, apoi pregătim anunțurile.","We choose searches, pages and budget, then prepare the ads."],
+  ["Lansăm campaniile","Launch campaigns"],
+  ["Verificăm setările și pornim campaniile aprobate de tine.","We review settings and launch the campaigns you approve."],
+  ["Optimizăm în timp","Optimise over time"],
+  ["Analizăm datele și ajustăm pentru obiectivele agreate.","We analyse data and adjust towards the agreed objectives."],
+  ["Pachete de administrare Google Ads","Google Ads management packages"],
+  ["Alegi pachetul după complexitatea campaniilor. Onorariul de administrare este separat de bugetul cheltuit pe reclame în Google.","Choose a package based on campaign complexity. The management fee is separate from the advertising budget spent on Google."],
+  ["Bugetul media și condițiile aplicabile se confirmă în oferta personalizată. Rezultatele nu sunt garantate.","The media budget and applicable terms are confirmed in your personalised quote. Results are not guaranteed."],
+  ["Construiește și vizibilitatea organică. Vezi SEO","Build organic visibility too. Explore SEO"],
+  ["Onorariul include și bugetul de reclame?","Does the fee include ad spend?"],
+  ["Nu. Onorariul plătește administrarea campaniilor. Bugetul de publicitate este separat și se cheltuiește în contul Google Ads.","No. The fee covers campaign management. Advertising spend is separate and is spent in the Google Ads account."],
+  ["Google Ads înlocuiește SEO?","Does Google Ads replace SEO?"],
+  ["Sunt două canale diferite: reclamele folosesc un buget publicitar, iar SEO dezvoltă vizibilitatea organică. Le putem planifica împreună, în funcție de obiective.","They are different channels: ads use an advertising budget, while SEO develops organic visibility. We can plan them together around your goals."],
+  ["Puteți prelua un cont existent?","Can you take over an existing account?"],
+  ["Da. Începem cu analiza campaniilor, a accesului și a măsurării. Îți explicăm ce propunem înainte de modificări.","Yes. We start by reviewing campaigns, access and measurement. We explain proposed changes before making them."],
+  ["Hai să vedem ce caută viitorii tăi clienți.","Let’s see what your future customers search for."],
   // Static portfolio catalogue: demos, not claims about completed client work.
   ['Modele demonstrative de site-uri web, pe care le putem adapta afacerii tale. Previzualizările se deschid într-o filă nouă.', 'Website template demos that we can adapt to your business. Previews open in a new tab.'],
   ['Nu am găsit modele pentru această căutare. Încearcă alt termen sau altă categorie.', 'No templates match this search. Try another term or category.'],
@@ -34,7 +105,7 @@ export const dictionary = [
   ['Clinica Dentara', 'Dental Clinic'],
   ['Servicii de Curatenie', 'Cleaning Services'],
   ['Hotel si Pensiune', 'Hotel and Guesthouse'],
-  // Brand / legal — never translate the company name
+  // Brand / legal, never translate the company name
   ['ECHIPA DE TOCIALRI SRL', 'ECHIPA DE TOCILARI SRL'],
   ['ECHIPA DE TOCILARI SRL', 'ECHIPA DE TOCILARI SRL'],
   ['ECHIPA DE TOCILARI', 'ECHIPA DE TOCILARI'],
@@ -47,13 +118,13 @@ export const dictionary = [
   ['Participă la o consultație', 'Book a free consultation'],
   ['consultație GRATUITĂ de 30 minute', 'FREE 30-minute consultation'],
   ['consultatie GRATUITA de 30 minute', 'FREE 30-minute consultation'],
-  ['GRATUITA de 30 minute', 'FREE — 30 minutes'],
-  ['GRATUITĂ de 30 minute', 'FREE — 30 minutes'],
-  ['<b>GRATUITA</b> de 30 minute', '<b>FREE</b> — 30 minutes'],
-  ['<b>GRATUITĂ</b> de 30 minute', '<b>FREE</b> — 30 minutes'],
+  ['GRATUITA de 30 minute', 'FREE, 30 minutes'],
+  ['GRATUITĂ de 30 minute', 'FREE, 30 minutes'],
+  ['<b>GRATUITA</b> de 30 minute', '<b>FREE</b>, 30 minutes'],
+  ['<b>GRATUITĂ</b> de 30 minute', '<b>FREE</b>, 30 minutes'],
   ['GRATUITA', 'FREE'],
   ['GRATUITĂ', 'FREE'],
-  ['de 30 minute', '— 30 minutes'],
+  ['de 30 minute', ', 30 minutes'],
   ['Consultație gratuită', 'Free consultation'],
   ['Consultatie gratuita', 'Free consultation'],
   ['Skip to content', 'Skip to content'],
@@ -84,6 +155,7 @@ export const dictionary = [
   ['Agentie de marketing online in Bucuresti', 'Digital marketing agency in Bucharest'],
   ['Creare site web de prezentare în București', 'Business website design in Bucharest'],
   ['Creare site web de prezentare in Bucuresti', 'Business website design in Bucharest'],
+  ['Servicii SEO pentru Google și căutările AI', 'SEO services for Google and AI-assisted search'],
   ['Servicii de optimizare SEO pentru Google', 'SEO optimization services for Google'],
   ['Administrare și mentenanță site web', 'Website management and maintenance'],
   ['Administrare si mentenanta site web', 'Website management and maintenance'],
@@ -103,12 +175,12 @@ export const dictionary = [
   ['Marketing online facut de tocilari', 'Online marketing done by nerds'],
   ['Marketing online făcut de tocilari', 'Online marketing done by nerds'],
   [
-    'Suntem nerdy și suntem pricepuți. O agenție de marketing digital din București, pentru promovarea online de care chiar ai nevoie — nu pentru cea din broșuri.',
-    'We are nerdy and we are skilled. A digital marketing agency in Bucharest, for the online promotion you actually need — not the brochure version.',
+    'Suntem nerdy și suntem pricepuți. O agenție de marketing digital din București, pentru promovarea online de care chiar ai nevoie, nu pentru cea din broșuri.',
+    'We are nerdy and we are skilled. A digital marketing agency in Bucharest, for the online promotion you actually need, not the brochure version.',
   ],
   [
-    'Suntem nerdy si suntem priceputi. O agentie de marketing digital din Bucuresti, pentru promovarea online de care chiar ai nevoie — nu pentru cea din brosuri.',
-    'We are nerdy and we are skilled. A digital marketing agency in Bucharest, for the online promotion you actually need — not the brochure version.',
+    'Suntem nerdy si suntem priceputi. O agentie de marketing digital din Bucuresti, pentru promovarea online de care chiar ai nevoie, nu pentru cea din brosuri.',
+    'We are nerdy and we are skilled. A digital marketing agency in Bucharest, for the online promotion you actually need, not the brochure version.',
   ],
   [
     'Suntem nerdy, suntem priceputi: o agentie de marketing digital din Bucuresti, gata sa-ti ofere promovarea online de care afacerea ta are nevoie.',
@@ -157,14 +229,14 @@ export const dictionary = [
   ['Noi avem răspunsurile', 'We have the answers'],
   ['Intrebari adresate frecvent (FAQ)', 'Frequently asked questions (FAQ)'],
   ['Întrebări adresate frecvent (FAQ)', 'Frequently asked questions (FAQ)'],
-  // Contact band — real HTML includes <b> tags that break plain-text phrases
+  // Contact band, real HTML includes <b> tags that break plain-text phrases
   [
     '<b>Te putem ajuta</b>, indiferent de <b>orașul</b> din care ne scrii.',
     '<b>We can help you</b>, no matter which <b>city</b> you write from.',
   ],
   [
-    'Ne-ar face <b>mare plăcere</b> să vorbim despre <b>proiectul</b> tău — fără slides.',
-    'We would <b>love</b> to talk about your <b>project</b> — no slide deck.',
+    'Ne-ar face <b>mare plăcere</b> să vorbim despre <b>proiectul</b> tău, fără slides.',
+    'We would <b>love</b> to talk about your <b>project</b>, no slide deck.',
   ],
   [
     '<b>Noi te putem ajuta</b>, indferent de <b>orasul</b> in care te afli.',
@@ -228,7 +300,7 @@ export const dictionary = [
   ['proiectului tău', 'your project'],
   ['proiectului tau', 'your project'],
 
-  // About page — complete copy and accessible labels from the Romanian source.
+  // About page, complete copy and accessible labels from the Romanian source.
   ['Despre noi · Echipa de Tocilari', 'About us · Echipa de Tocilari'],
   ['Tocilari din fire.', 'Nerds by nature.'],
   ['Parteneri de echipă.', 'Teammates by choice.'],
@@ -340,20 +412,20 @@ export const dictionary = [
     'We are a group of nerds who care about marketing and technology. We work as a digital marketing agency in Bucharest: we take the heavy lifting so people who already search for you can find you.',
   ],
   [
-    'Ne ocupăm de promovare online — Google, social, conținut. Și, dacă îți lipsește locul unde ajung clienții, lucrăm și ca agenție de web design în București: site de prezentare, landing page sau baza pentru un magazin online, după ce ai nevoie tu.',
-    'We handle online promotion — Google, social, content. And if you are missing the place clients land, we also work as a web design agency in Bucharest: a business site, a landing page, or the base for an online store, based on what you actually need.',
+    'Ne ocupăm de promovare online, Google, social, conținut. Și, dacă îți lipsește locul unde ajung clienții, lucrăm și ca agenție de web design în București: site de prezentare, landing page sau baza pentru un magazin online, după ce ai nevoie tu.',
+    'We handle online promotion, Google, social, content. And if you are missing the place clients land, we also work as a web design agency in Bucharest: a business site, a landing page, or the base for an online store, based on what you actually need.',
   ],
   [
     'Când nu ai timp sau oameni pe marketing digital, preluăm noi. Îți spunem ce merită, ce e zgomot și ce se potrivește unei firme mici sau în creștere. Apoi punem mâna și facem.',
     'When you do not have time or people for digital marketing, we take it on. We tell you what is worth it, what is noise, and what fits a small or growing business. Then we get to work.',
   ],
   [
-    'Suntem un grup de tocilari pasionati de marketing si tehnologie — o agentie de marketing digital din Bucuresti. Punem la dispozitia ta abilitatile noastre nerdy, ca sa ajungi la publicul tinta si sa te faci remarcat pe piata online.',
-    'We are a team of nerds passionate about marketing and technology — a digital marketing agency in Bucharest. We put our nerdy skills to work so you can reach your target audience and stand out online.',
+    'Suntem un grup de tocilari pasionati de marketing si tehnologie, o agentie de marketing digital din Bucuresti. Punem la dispozitia ta abilitatile noastre nerdy, ca sa ajungi la publicul tinta si sa te faci remarcat pe piata online.',
+    'We are a team of nerds passionate about marketing and technology, a digital marketing agency in Bucharest. We put our nerdy skills to work so you can reach your target audience and stand out online.',
   ],
   [
-    'Suntem un grup de tocilari pasionați de marketing și tehnologie — o agenție de marketing digital din București. Punem la dispoziția ta abilitățile noastre nerdy, ca să ajungi la publicul țintă și să te faci remarcat pe piața online.',
-    'We are a team of nerds passionate about marketing and technology — a digital marketing agency in Bucharest. We put our nerdy skills to work so you can reach your target audience and stand out online.',
+    'Suntem un grup de tocilari pasionați de marketing și tehnologie, o agenție de marketing digital din București. Punem la dispoziția ta abilitățile noastre nerdy, ca să ajungi la publicul țintă și să te faci remarcat pe piața online.',
+    'We are a team of nerds passionate about marketing and technology, a digital marketing agency in Bucharest. We put our nerdy skills to work so you can reach your target audience and stand out online.',
   ],
   [
     'Suntem un grup de tocilari pasionati de marketing si tehnologie. Punem la dispozitia ta abilitatile noastre nerdy, pentru a te ajuta sa ajungi la publicul tinta si sa te faci remarcat pe piata online.',
@@ -373,11 +445,11 @@ export const dictionary = [
   ],
   [
     'Cum te putem ajuta? Ei bine, ne pricepem la tot felul de tactici si strategii de marketing online – de la optimizarea motoarelor de cautare, la crearea site-ului web si social media marketing.',
-    'How can we help? We specialize in online marketing tactics and strategies — from search engine optimization to website design and social media marketing.',
+    'How can we help? We specialize in online marketing tactics and strategies, from search engine optimization to website design and social media marketing.',
   ],
   [
     'Cum te putem ajuta? Ei bine, ne pricepem la tot felul de tactici și strategii de marketing online – de la optimizarea motoarelor de căutare, la crearea site-ului web și social media marketing.',
-    'How can we help? We specialize in online marketing tactics and strategies — from search engine optimization to website design and social media marketing.',
+    'How can we help? We specialize in online marketing tactics and strategies, from search engine optimization to website design and social media marketing.',
   ],
   [
     'Practic, preluam tot ce tine de marketing digital cand nu ai timp sau resurse sa le faci singur. Te ghidam prin marketingul online si iti propunem solutiile potrivite pentru o firma mica sau in crestere.',
@@ -402,7 +474,7 @@ export const dictionary = [
     'As a web design agency in Bucharest, we make clear, fast sites that are easy to use. Not templates with your logo stuck on.',
   ],
   [
-    'Ca agenție de web design din București, facem site-uri clare, rapide și ușor de folosit — nu template-uri cu logo-ul lipit.',
+    'Ca agenție de web design din București, facem site-uri clare, rapide și ușor de folosit, nu template-uri cu logo-ul lipit.',
     'As a web design agency in Bucharest, we make clear, fast sites that are easy to use. Not templates with your logo stuck on.',
   ],
   [
@@ -417,6 +489,7 @@ export const dictionary = [
     'Te scoatem în Google pe ce caută clienții tăi, nu pe cuvinte care arată bine doar în raport.',
     'We get you found on Google for what your clients actually search, not vanity keywords that only look good in a report.',
   ],
+  ['SEO și vizibilitate în AI', 'SEO and AI visibility'],
   [
     'Campanii Google Ads puse pe căutări care aduc clienți, nu pe afișări de vanitate.',
     'Google Ads campaigns aimed at searches that bring clients, not vanity impressions.',
@@ -430,7 +503,7 @@ export const dictionary = [
     'Updates, backups, security. You run the business, we run the site, so you do not wake up to it down on a Monday morning.',
   ],
   [
-    'Actualizări, backup, securitate. Tu te ocupi de firmă, noi de site — ca să nu te trezești cu el picat într-o luni dimineața.',
+    'Actualizări, backup, securitate. Tu te ocupi de firmă, noi de site, ca să nu te trezești cu el picat într-o luni dimineața.',
     'Updates, backups, security. You run the business, we run the site, so you do not wake up to it down on a Monday morning.',
   ],
   [
@@ -577,11 +650,11 @@ export const dictionary = [
   ],
   [
     'Grijile legate de site-ul tău le preluăm noi! De la actualizări la securitate, ne asigurăm că totul funcționează lin, ca tu să te poți concentra pe ceea ce faci tu cel mai bine.',
-    'We take care of your website worries — from updates to security — so everything runs smoothly and you can focus on what you do best.',
+    'We take care of your website worries, from updates to security, so everything runs smoothly and you can focus on what you do best.',
   ],
   [
     'Grijile legate de site-ul tau le preluam noi! De la actualizari la securitate, ne asiguram ca totul functioneaza lin, ca tu sa te poti concentra pe ceea ce faci tu cel mai bine.',
-    'We take care of your website worries — from updates to security — so everything runs smoothly and you can focus on what you do best.',
+    'We take care of your website worries, from updates to security, so everything runs smoothly and you can focus on what you do best.',
   ],
   [
     'Povestea brandului tău merită un logo pe măsură. Vom crea împreună un simbol vizual unic, care să-ți reprezinte afacerea și să rămână în mintea clienților.',
@@ -684,12 +757,12 @@ export const dictionary = [
   ],
 
   [
-    'Marketingul online e felul în care te găsesc oamenii care deja caută ce vinzi: Google, ads, conținut, social. Asta face o agenție de marketing digital din București — promovare online cu un plan, nu postări aruncate când îți amintești.',
-    'Online marketing is how people who already search for what you sell find you: Google, ads, content, social. That is what a digital marketing agency in Bucharest does — online promotion with a plan, not leftover posts when you remember.',
+    'Marketingul online e felul în care te găsesc oamenii care deja caută ce vinzi: Google, ads, conținut, social. Asta face o agenție de marketing digital din București, promovare online cu un plan, nu postări aruncate când îți amintești.',
+    'Online marketing is how people who already search for what you sell find you: Google, ads, content, social. That is what a digital marketing agency in Bucharest does, online promotion with a plan, not leftover posts when you remember.',
   ],
   [
     'Dacă nu ești acolo, clientul nu te ocolește din răutate. Pur și simplu nu știe că exiști. De-asta merită o agenție de marketing online, nu un hobby de weekend.',
-    'If you are not there, the client is not snubbing you. They simply do not know you exist. That is why an online marketing agency is worth it — not a weekend hobby.',
+    'If you are not there, the client is not snubbing you. They simply do not know you exist. That is why an online marketing agency is worth it, not a weekend hobby.',
   ],
   [
     'Depinde de canal, nu de magie. SEO se vede de obicei în câteva luni. Google Ads și social pot aduce clienți în zile sau săptămâni, dacă oferta e clară. Marketingul online e treabă lungă: concurența, bugetul și cât de repede poți tu să răspunzi la lead-uri contează la fel de mult ca treaba noastră.',
@@ -700,8 +773,8 @@ export const dictionary = [
     'Not necessarily. First we get more from what you already have: a site that converts, channels that bring clients, cutting what burns money for nothing. Only then does a bigger budget make sense. Otherwise you just pay more for the same problem.',
   ],
   [
-    'Pornim de la ce vrei tu să se întâmple, nu de la un pachet. Vrei să te găsească lumea pe Google în 6–12 luni? SEO. Vrei clienți luna asta? Ads. Îți lipsește site-ul? Îl facem. De obicei e un mix — ți-l spunem pe limba ta, cu un buget realist.',
-    'We start from what you want to happen, not from a package. Want people to find you on Google in 6–12 months? SEO. Want clients this month? Ads. Missing a site? We build it. Usually it is a mix — we say it in plain language, with a realistic budget.',
+    'Pornim de la ce vrei tu să se întâmple, nu de la un pachet. Vrei să te găsească lumea pe Google în 6–12 luni? SEO. Vrei clienți luna asta? Ads. Îți lipsește site-ul? Îl facem. De obicei e un mix, ți-l spunem pe limba ta, cu un buget realist.',
+    'We start from what you want to happen, not from a package. Want people to find you on Google in 6–12 months? SEO. Want clients this month? Ads. Missing a site? We build it. Usually it is a mix, we say it in plain language, with a realistic budget.',
   ],
   [
     'Ne uităm la ce contează: câți oameni ajung pe site, câți cer ofertă, cât costă un client. Nu-ți trimitem un PDF cu grafice ca să pară că s-a lucrat. Dacă ceva nu duce, îl oprim sau îl schimbăm. Date, nu intuiție.',
@@ -709,7 +782,7 @@ export const dictionary = [
   ],
   [
     'Ne scrii din formular, pe mail sau ne suni. Facem o consultație de 30 de minute, îți zicem ce am face și cam cât costă. Dacă ți se pare cinstit, începem. Dacă nu, rămâi cu o opinie utilă, nu cu un pitch de 40 de slide-uri.',
-    'Write via the form, email, or call. We do a 30-minute consult, tell you what we would do and roughly what it costs. If it feels fair, we start. If not, you still leave with a useful opinion — not a 40-slide pitch.',
+    'Write via the form, email, or call. We do a 30-minute consult, tell you what we would do and roughly what it costs. If it feels fair, we start. If not, you still leave with a useful opinion, not a 40-slide pitch.',
   ],
   [
     'Marketingul online este promovarea unei afaceri prin internet: SEO, publicitate plătită, conținut și social media. O agenție de marketing digital din București se ocupă de promovare online ca să fii găsit de clienții care te caută deja.',
@@ -717,7 +790,7 @@ export const dictionary = [
   ],
   [
     'Fără o prezență puternică online, pierzi potențiali clienți gata să cumpere. De aceea merită o agenție de marketing online, nu să încerci totul pe cont propriu.',
-    'Without a strong online presence, you lose potential customers ready to buy. That is why an online marketing agency is worth it — instead of trying to do everything yourself.',
+    'Without a strong online presence, you lose potential customers ready to buy. That is why an online marketing agency is worth it, instead of trying to do everything yourself.',
   ],
   [
     'Marketingul online este procesul de promovare a unei afaceri sau a unui produs prin intermediul internetului. Acesta implică utilizarea diferitelor tactici de marketing online, cum ar fi publicitatea plătită, marketingul de conținut, optimizarea motoarelor de căutare (SEO), marketingul prin e-mail și multe altele.',
@@ -729,7 +802,7 @@ export const dictionary = [
   ],
   [
     'Timpul necesar pentru a vedea rezultatele variază în funcție de serviciul de marketing online pe care îl folosești și de cât de mult efort depui în el. De exemplu, rezultatele SEO pot dura câteva luni până să fie vizibile, în timp ce PPC și campaniile de social media pot aduce rezultate vizibile în câteva zile sau săptămâni. Este important să ai în vedere faptul că marketingul online este o abordare pe termen lung, iar rezultatele pot varia în funcție de mulți factori, cum ar fi concurența din industria ta, bugetul și calitatea serviciilor tale.',
-    'Time to results depends on the channel and how consistently you invest. SEO often takes a few months to show, while PPC and social campaigns can deliver results in days or weeks. Online marketing is a long-term approach — results also depend on competition, budget, and service quality.',
+    'Time to results depends on the channel and how consistently you invest. SEO often takes a few months to show, while PPC and social campaigns can deliver results in days or weeks. Online marketing is a long-term approach, results also depend on competition, budget, and service quality.',
   ],
 
   // Website design page
@@ -749,7 +822,7 @@ export const dictionary = [
   ['Site Web de prezentare', 'Business website'],
   ['Magazin online', 'Online store'],
   ['De ce echipa de tocilari?', 'Why choose Echipa de Tocilari?'],
-  ['E-commerce - magazin online', 'E-commerce — online store'],
+  ['E-commerce - magazin online', 'E-commerce, online store'],
   ['Inovatie si creativitate', 'Innovation and creativity'],
   ['Inovație și creativitate', 'Innovation and creativity'],
   [
@@ -758,6 +831,164 @@ export const dictionary = [
   ],
 
   // SEO page
+  ['Solicita acum un audit <br><b>GRATUIT</b> de optimizare SEO', 'Request a <br><b>FREE</b> SEO audit'],
+  ['Servicii SEO on page:', 'On-page SEO services:'],
+  ['Servicii SEO off page:', 'Off-page SEO services:'],
+  ['1 pagina optimizata', '1 optimised page'],
+  ['2 pagini optimizate', '2 optimised pages'],
+  ['3 pagini optimizate', '3 optimised pages'],
+  ['Meta Titluri', 'Meta titles'],
+  ['Meta Descriere', 'Meta descriptions'],
+  ['Alt Text', 'Image alt text'],
+  ['Site map*', 'Sitemap*'],
+  ['PE LUNA', 'PER MONTH'],
+  ['4 linkuri externe', '4 external links'],
+  ['6 linkuri externe', '6 external links'],
+  ['8 linkuri externe', '8 external links'],
+  ['2 comunicate de presa', '2 press releases'],
+  ['3 comunicate de presa', '3 press releases'],
+  ['4 comunicate de presa', '4 press releases'],
+  ['2 NAP-uri', '2 NAP listings'],
+  ['3 NAP-uri', '3 NAP listings'],
+  ['4 NAP-uri', '4 NAP listings'],
+  ['SEO tehnic*', 'Technical SEO*'],
+  ['FAQ implementare', 'FAQ implementation'],
+  ['Consultanta UX/UI', 'UX/UI consulting'],
+  ['Raport lunar', 'Monthly report'],
+  ['Comanda acum!', 'Order now!'],
+  [
+    '***oferta supusa unor termeni si conditii. Oferta de pret are caracter pur informativ. Pret fara TVA. Preturile sunt pentru pentru website-uri in limba romana si care se adreseaza pietei romanesti*In functie de nevoile clientului si necesitatile tehnice intalnite pe parcursul colaborarii, este posibil sa oferim servicii bonus',
+    '*** Offer subject to terms and conditions. Prices are indicative, non-contractual and exclude VAT. They apply to Romanian-language websites targeting the Romanian market. Depending on project needs and technical findings, bonus services may be included.',
+  ],
+  ['Optimizare pornită de la nevoile site-ului tău', 'SEO shaped around the needs of your website'],
+  ['Ajută-ți afacerea să fie găsită și în răspunsurile AI', 'Help people find your business in AI answers too'],
+  ['Ce lucrăm concret', 'What we work on'],
+  ['Cum verificăm progresul', 'How we track progress'],
+  ['Ce înseamnă AEO și GEO?', 'What do AEO and GEO mean?'],
+  ['Audit și prioritizarea problemelor', 'Audit and prioritisation of issues'],
+  ['Strategie de cuvinte cheie potrivită serviciilor', 'A keyword strategy matched to your services'],
+  ['Optimizarea conținutului și a structurii paginilor', 'Content and page structure optimisation'],
+  ['Monitorizare și explicații în raportul lunar', 'Monitoring and explanations in a monthly report'],
+  ['crearea sau refacerea site-ului', 'building or rebuilding your website'],
+  ['Prețuri SEO: abonamente pentru site-uri', 'SEO pricing: plans for'],
+  ['de prezentare în limba română***', 'Romanian-language business websites***'],
+  [
+    'Oferim servicii de optimizare SEO pentru site-uri și magazine online. Analizăm problemele tehnice, căutările relevante și conținutul, apoi îmbunătățim paginile pentru Google și pentru întrebările pe care oamenii le adresează asistenților AI. Lucrăm din București și colaborăm online în toată România. Rezultatele depind de site, concurență și timp, nu sunt garantate.',
+    'We offer SEO services for websites and online stores. We review technical issues, relevant searches and content, then improve pages for Google and for the questions people ask AI assistants. Based in Bucharest, we work remotely across Romania. Results depend on the website, competition and time, and are not guaranteed.',
+  ],
+  [
+    'Dacă deții o afacere sau administrezi un site, SEO poate ajuta paginile relevante să fie înțelese și găsite mai ușor în căutări. Începem prin a verifica accesul la pagini, structura lor și întrebările la care trebuie să răspundă.',
+    'If you run a business or manage a website, SEO can help relevant pages be understood and found in search. We start by checking access to pages, their structure and the questions they need to answer.',
+  ],
+  [
+    'Căutările organice pot aduce vizitatori interesați de serviciile tale, dar potențialul diferă în funcție de piață și de starea site-ului. Urmărim evoluția în date, fără să promitem poziții sau trafic garantat.',
+    'Organic search can bring visitors interested in your services, but the opportunity depends on the market and the state of your website. We track progress with data without promising rankings or traffic.',
+  ],
+  [
+    'O colaborare SEO are nevoie de priorități clare și de timp pentru implementare. Stabilim ce probleme abordăm întâi, cine poate face modificările pe site și ce date vom urmări.',
+    'SEO work needs clear priorities and time to implement them. We agree which issues to address first, who can change the website and which data to track.',
+  ],
+  [
+    'Primești explicații pe înțelesul tău și un raport lunar pentru activitățile din abonament. Dacă apar lucrări în afara pachetului, le discutăm înainte de implementare.',
+    'You receive clear explanations and a monthly report on the work included in your plan. We discuss work outside the plan before implementing it.',
+  ],
+  [
+    'Pregătim informațiile despre afacerea ta astfel încât oamenii să găsească răspunsuri utile pe site, iar sistemele AI să poată înțelege mai ușor ce oferi. Este o extensie a muncii SEO, nu o metodă separată care garantează citări sau recomandări.',
+    'We make information about your business easier for people to find on your website and for AI systems to understand. This extends SEO work; it is not a separate method that guarantees citations or recommendations.',
+  ],
+  ['Răspundem clar la întrebările reale ale clienților, în paginile relevante.', 'We answer real customer questions clearly on the relevant pages.'],
+  ['Verificăm dacă informațiile despre firmă și servicii sunt consecvente.', 'We check that business and service information is consistent.'],
+  ['Corectăm problemele care pot împiedica accesarea și înțelegerea paginilor.', 'We fix issues that may prevent pages from being accessed and understood.'],
+  ['Organizăm conținutul și folosim date structurate acolo unde descriu fidel pagina.', 'We organise content and use structured data where it accurately describes the page.'],
+  [
+    'Urmărim căutările, paginile accesate și, când datele permit, traficul atribuit asistenților AI. Verificăm și aparițiile observabile, fără să le confundăm cu o măsură completă a vizibilității.',
+    'We track searches, visited pages and, where data allows, traffic attributed to AI assistants. We also check observable appearances without treating them as a complete measure of visibility.',
+  ],
+  [
+    'Raportăm ce s-a schimbat și ce rămâne de îmbunătățit. Nici SEO, nici ajustările pentru AI nu pot asigura o poziție, o citare sau un anumit volum de trafic.',
+    'We report what changed and what still needs improvement. Neither SEO nor AI-focused work can guarantee a ranking, citation or amount of traffic.',
+  ],
+  [
+    'AEO înseamnă să formulezi răspunsuri clare la întrebările oamenilor. GEO se referă la felul în care informațiile pot fi înțelese și folosite în răspunsuri generate de AI. În practică, multe activități se suprapun cu SEO.',
+    'AEO means giving clear answers to people’s questions. GEO concerns how information can be understood and used in AI-generated answers. In practice, much of this work overlaps with SEO.',
+  ],
+  [
+    'Stabilim în ofertă ce lucrări intră în abonament după auditul site-ului. Dacă sunt necesare schimbări mai ample de structură sau design, discutăm separat despre ',
+    'After auditing the website, we specify in the proposal which work is included in the plan. If broader structural or design changes are needed, we discuss ',
+  ],
+  [
+    'Pachetele afișate sunt pentru site-uri de prezentare în limba română, pe o perioadă minimă de 6 luni. Sumele și lucrările se confirmă în oferta personalizată.',
+    'The displayed plans are for Romanian-language business websites, with a minimum term of six months. Prices and deliverables are confirmed in a tailored proposal.',
+  ],
+  [
+    'Audităm paginile, analizăm căutările relevante și prioritizăm lucrările pe care le putem implementa. Explicăm de ce propunem fiecare schimbare și urmărim datele disponibile în raportul lunar. Dacă site-ul are limitări tehnice sau este nevoie de dezvoltare suplimentară, includem aceste condiții în planul de lucru.',
+    'We audit pages, review relevant searches and prioritise work we can implement. We explain each proposed change and track the available data in the monthly report. If the website has technical limits or needs further development, we include those conditions in the work plan.',
+  ],
+  // Updated website design and maintenance service pages.
+  ['Creare site web pentru afacerea ta', 'Website design for your business'],
+  ['Site de prezentare adaptat obiectivelor tale', 'A business website built around your goals'],
+  ['Ce îți oferă un site de prezentare', 'What a business website gives you'],
+  ['Ce informații ne ajută să estimăm proiectul', 'What we need to estimate your project'],
+  ['Ce facem pentru site-ul tău', 'What we do for your website'],
+  [
+    'De la structura paginilor până la publicare, discutăm ce trebuie să prezinte site-ul și ce funcții sunt necesare. Activitățile și livrabilele se stabilesc în oferta pentru proiectul tău.',
+    'From page structure to launch, we discuss what the site needs to present and which features it needs. Activities and deliverables are set out in the proposal for your project.',
+  ],
+  ['Structurăm paginile în jurul serviciilor și informațiilor pe care vrei să le prezinți.', 'We structure the pages around the services and information you want to present.'],
+  ['Construim pachetele afișate pe WordPress și Elementor, cu funcțiile convenite în ofertă.', 'We build the listed packages with WordPress and Elementor, with the features agreed in the proposal.'],
+  ['Pregătim afișarea pentru telefon, tabletă și desktop.', 'We prepare the layout for phones, tablets and desktops.'],
+  ['Configurăm elementele de optimizare SEO incluse în pachetul ales.', 'We configure the SEO elements included in the selected package.'],
+  ['Cât costă un site web WordPress?', 'How much does a WordPress website cost?'],
+  ['Prețuri orientative pentru trei tipuri de proiecte', 'Indicative prices for three types of project'],
+  ['Prețurile afișate sunt orientative. Costul final depinde de pagini, funcții și materialele disponibile.', 'The prices shown are indicative. Final cost depends on the pages, features and materials available.'],
+  ['mentenanța site-ului', 'website maintenance'],
+  ['magazin online', 'online store'],
+  ['</a> sau cu <a href="/servicii-seo/">servicii SEO</a>', '</a> or <a href="/servicii-seo/">SEO services</a>'],
+  [
+    'Creăm site-uri web de prezentare pentru afaceri care vor să își explice clar serviciile și să poată fi contactate ușor. Pentru proiectele din București sau din alte orașe, stabilim structura și conținutul în funcție de obiectivele afacerii.',
+    'We build business websites for companies that want to explain their services clearly and make it easy to get in touch. For projects in Bucharest or elsewhere, we plan the structure and content around your business goals.',
+  ],
+  [
+    'Poți alege o pagină de campanie, un site de prezentare cu mai multe pagini sau un ',
+    'You can choose a campaign page, a multi-page business website or an ',
+  ],
+  [
+    'După lansare, te putem ajuta și cu ',
+    'After launch, we can also help with ',
+  ],
+  [
+    ', în funcție de nevoile tale.',
+    ', depending on your needs.',
+  ],
+  [
+    'Pentru o ofertă de creare site web, spune-ne ce servicii sau produse vrei să prezinți, câte pagini ai în vedere, ce funcții îți trebuie și ce texte și imagini ai deja. Aceste detalii ne ajută să stabilim împreună structura site-ului și costul proiectului.',
+    'For a website quote, tell us which services or products you want to present, how many pages you expect, which features you need and which text and images you already have. These details help us agree on the website structure and project cost.',
+  ],
+  [
+    'Prețurile de creare site web sunt orientative și nu reprezintă o ofertă contractuală. Pentru o estimare personalizată, trimite-ne numărul de pagini, funcționalitățile dorite și materialele disponibile. Îți comunicăm costul și condițiile înainte de începerea proiectului.',
+    'Website prices are indicative, not a contractual offer. For a tailored estimate, send us the expected page count, desired features and available materials. We confirm the cost and terms before work begins.',
+  ],
+  ['Mentenanță site și administrare WordPress', 'Website maintenance and WordPress management'],
+  ['Actualizări tehnice și suport pentru conținut', 'Technical updates and content support'],
+  ['Pachete și prețuri de mentenanță site', 'Website maintenance plans and pricing'],
+  ['Compară serviciile lunare pentru site-uri web și magazine online.', 'Compare monthly services for websites and online stores.'],
+  ['Care este diferența dintre mentenanță și administrare?', 'What is the difference between maintenance and management?'],
+  [
+    'Oferim mentenanță pentru site-uri WordPress și magazine online: actualizări ale platformei și pluginurilor, monitorizare și backup, conform pachetului ales. Serviciul este util când vrei să păstrezi site-ul funcțional și actualizat fără să gestionezi singur aceste operațiuni.',
+    'We maintain WordPress websites and online stores with platform and plugin updates, monitoring and backups according to the selected plan. This helps keep your website working and up to date without handling these tasks yourself.',
+  ],
+  [
+    'Administrarea site-ului înseamnă și modificări de conținut sau design, în limita orelor incluse în pachet. Mai jos poți compara activitățile, timpul lunar alocat și costurile suplimentare.',
+    'Website management also covers content or design changes within the hours included in your plan. Below you can compare the tasks, monthly time allowance and extra costs.',
+  ],
+  [
+    'Mentenanța acoperă operațiunile tehnice enumerate în pachete, precum actualizările, monitorizarea și backup-ul. Administrarea include și modificările de conținut sau design prevăzute în pachet, în limita timpului lunar alocat.',
+    'Maintenance covers the technical tasks listed in the plans, such as updates, monitoring and backups. Management also includes the content or design changes specified in the plan, within the monthly time allowance.',
+  ],
+  [
+    'Pentru modificări de conținut sau funcționalități noi în afara orelor incluse, tariful afișat este de 30 euro/oră. Verifică împreună cu noi pachetul potrivit și condițiile înainte de comandă.',
+    'For content changes or new features beyond the included hours, the listed rate is 30 euros per hour. Check the right plan and terms with us before ordering.',
+  ],
   ['Oferim un boost afacerii tale!', 'We give your business a growth boost!'],
   ['Pentru ce am nevoie de servicii SEO?', 'Why do I need SEO services?'],
   ['Servicii SEO pentru vizibilitate maxima', 'SEO services for maximum visibility'],
@@ -783,7 +1014,7 @@ export const dictionary = [
   ],
   [
     'Alege pachetul dorit pentru site-ul tau de prezentare pentru o perioada de minim 6 luni!',
-    'Choose a package for your business website — minimum recommended period: 6 months.',
+    'Choose a package for your business website, minimum recommended period: 6 months.',
   ],
 
   // Maintenance
@@ -813,7 +1044,7 @@ export const dictionary = [
   ['We Believe In Hard Work And Dedication', 'We believe in hard work and dedication'],
   ['Digital Lovers', 'Digital enthusiasts'],
 
-  // Safe multi-word fragments only (never single short words — they corrupt HTML/brand)
+  // Safe multi-word fragments only (never single short words, they corrupt HTML/brand)
   ['afacerea ta', 'your business'],
   ['afacerea mea', 'my business'],
   ['website-ul tău', 'your website'],
@@ -868,7 +1099,7 @@ export const dictionary = [
   ],
   [
     'Noi monitorizăm performanța campaniilor de marketing online prin intermediul uneltelor specifice de monitorizare și analiză. Acestea ne permit să vedem câți vizitatori au accesat website-ul tău, cum au interacționat cu conținutul și care au fost rezultatele campaniilor de publicitate plătită sau de social media. Folosim aceste informații pentru a identifica zonele în care putem îmbunătăți campaniile tale de marketing online și pentru a aduce ajustări pe baza datelor, nu pe intuiție.',
-    'We track online marketing performance with analytics tools: traffic, on-site behavior, paid and social results. We use that data to improve campaigns and make evidence-based adjustments — not guesswork.',
+    'We track online marketing performance with analytics tools: traffic, on-site behavior, paid and social results. We use that data to improve campaigns and make evidence-based adjustments, not guesswork.',
   ],
   [
     'Noi monitorizăm performanța campaniilor de marketing online prin intermediul uneltelor specifice de monitorizare și analiză. Acestea ne permit să vedem câți vizitatori au accesat website-ul tău, cum au interacționat cu conținutul și care au fost rezultatele campaniilor de publicitate plătită sau de social media. Folosim aceste informații pentru a identifica zonele în care putem îmbunătăți campaniile tale de marketing online și pentru a aduce ajustări în funcție de rezultate.',
@@ -882,11 +1113,11 @@ export const dictionary = [
   // SEO services long-form
   [
     'Echipa de Tocilari dă putere afacerii tale prin servicii de optimizare SEO. Convertim vizitatorii in clienti si maximizam traficul de pe site-ul tau. Un impuls real pentru prezența ta online!',
-    'Echipa de Tocilari powers your business with SEO services. We turn visitors into customers and maximize traffic to your website — a real boost for your online presence.',
+    'Echipa de Tocilari powers your business with SEO services. We turn visitors into customers and maximize traffic to your website, a real boost for your online presence.',
   ],
   [
     'Echipa de Tocilari dă putere afacerii tale prin servicii de optimizare SEO. Convertim vizitatorii în clienți și maximizăm traficul de pe site-ul tău. Un impuls real pentru prezența ta online!',
-    'Echipa de Tocilari powers your business with SEO services. We turn visitors into customers and maximize traffic to your website — a real boost for your online presence.',
+    'Echipa de Tocilari powers your business with SEO services. We turn visitors into customers and maximize traffic to your website, a real boost for your online presence.',
   ],
   ['Atrage-ti audienta cu o prezenta online crescuta', 'Attract your audience with a stronger online presence'],
   ['Atrage-ți audiența cu o prezență online crescută', 'Attract your audience with a stronger online presence'],
@@ -904,7 +1135,7 @@ export const dictionary = [
   ],
   [
     'Optimizăm elementele on-page, inclusiv titluri, metadescrieri și structura de conținut, pentru a îmbunătăți relevanța și accesibilitatea paginilor tale.',
-    'We optimize on-page elements — titles, meta descriptions, and content structure — to improve relevance and accessibility.',
+    'We optimize on-page elements, titles, meta descriptions, and content structure, to improve relevance and accessibility.',
   ],
   [
     'Consolidăm autoritatea site-ului tău prin strategii off-page, cum ar fi construirea de linkuri calitative și strategii de conținut, pentru a crește autoritatea și încrederea.',
@@ -944,7 +1175,7 @@ export const dictionary = [
   ],
   [
     'Landing page - site de prezentare de o pagina',
-    'Landing page — single-page conversion website',
+    'Landing page, single-page conversion website',
   ],
   ['template wordpress / elementor', 'WordPress / Elementor template'],
   ['Site de prezentare clasic', 'Classic multi-page business website'],
@@ -970,9 +1201,9 @@ export const dictionary = [
   ],
   ['Actualizare continut site', 'Website content updates'],
   ['Actualizare conținut site', 'Website content updates'],
-  ['Timp alocat lunar - 2 ore', 'Monthly time allocation — 2 hours'],
-  ['Timp alocat lunar - 4 ore', 'Monthly time allocation — 4 hours'],
-  ['Timp alocat lunar - 6 ore', 'Monthly time allocation — 6 hours'],
+  ['Timp alocat lunar - 2 ore', 'Monthly time allocation, 2 hours'],
+  ['Timp alocat lunar - 4 ore', 'Monthly time allocation, 4 hours'],
+  ['Timp alocat lunar - 6 ore', 'Monthly time allocation, 6 hours'],
   ['sector 2', 'District 2'],
 
   [
@@ -981,7 +1212,7 @@ export const dictionary = [
   ],
   [
     'Înțelegem ce înseamnă să deții și să conduci o afacere, și știm cât de important este să te simți încrezător în alegerea partenerului tău. Avem mulți clienți de lungă durată, cu relații construite pe ani de încredere și comunicare clară.',
-    'We understand what it means to run a business — and how important it is to trust your partner. We have many long-term clients built on years of trust and clear communication.',
+    'We understand what it means to run a business, and how important it is to trust your partner. We have many long-term clients built on years of trust and clear communication.',
   ],
   [
     'Ne place să realizăm lucrurile eficient, iar metodele noastre sistematizate înseamnă că toate sarcinile SEO sunt executate într-un mod rapid și eficace. Îți raportăm rezultatele SEO clar, ca să știi mereu unde stai.',
@@ -995,7 +1226,7 @@ export const dictionary = [
   // ── Complete leftovers pass (full body copy) ──
   [
     'Atunci cand vine vorba de creare site web, designul si experienta utilizatorului (UX) sunt esentiale pentru a face o impresie puternica si de durata asupra vizitatorilor. Designul site-ului web include toate aspectele vizuale, de la aspectul general al site-ului si alegerea culorilor pana la grafica si imagini. Acesta poate influenta modul in care vizitatorii percep si interactioneaza cu site-ul si este vital pentru a transmite cu succes mesajul dorit.',
-    'When it comes to website design, layout and user experience (UX) are essential for a strong, lasting impression. Website design covers every visual aspect — overall look, color choices, graphics, and images. It shapes how visitors perceive and interact with your site and is vital for communicating your message successfully.',
+    'When it comes to website design, layout and user experience (UX) are essential for a strong, lasting impression. Website design covers every visual aspect, overall look, color choices, graphics, and images. It shapes how visitors perceive and interact with your site and is vital for communicating your message successfully.',
   ],
   [
     'La Echipa de Tocilari, excelența SEO începe cu un audit profund, urmat de analiza concurenței și a pieței pentru strategii de cuvinte cheie precisă. Ne dedicăm optimizării SEO on-page și off-page, asigurând că your website strălucește în fața publicului țintă. Monitorizăm îndeaproape campaniile pentru a ne asigura că fiecare pas consolidează prezența ta online. Parteneriatul cu noi înseamnă a avea la dispoziție experți dedicați succesului tău digital.',
@@ -1054,7 +1285,7 @@ export const dictionary = [
     'PPC can efficiently drive qualified traffic to a company website and can be tailored to a specific target audience. Companies can also track and analyze campaign performance to optimize ad spend and improve results.',
   ],
   [
-    '***Offer subject to terms and conditions. Pricing is indicative only. Pret fara TVA. Preturile sunt pentru pentru website-uri in limba romana si care se adreseaza pietei romanesti*In functie de nevoile clientului si necesitatile tehnice intalnite pe parcursul colaborarii , este posibil sa oferim servicii bonus',
+    '***Offer subject to terms and conditions. Pricing is indicative only. Pret fara TVA. Preturile sunt pentru pentru website-uri in limba romana si care se adreseaza pietei romanesti*In functie de nevoile clientului si necesitatile tehnice intalnite pe parcursul colaborarii, este posibil sa oferim servicii bonus',
     '***Offer subject to terms and conditions. Pricing is indicative only, excluding VAT. Prices apply to Romanian-language websites targeting the Romanian market. Depending on client needs and technical requirements during the project, bonus services may be included.',
   ],
   [
@@ -1067,11 +1298,11 @@ export const dictionary = [
   ],
   [
     'Crearea unui site web de tipul e-commerce reprezintă construirea unei platforme online special creată pentru a vinde produse prin intermediul internetului. Folosind acest tip de site, poți să vinzi orice produs îți dorești, de la haine și bijuterii, la electronice și echipamente sportive.',
-    'Building an e-commerce website means creating an online platform purpose-built to sell products on the internet — from clothing and jewelry to electronics and sports equipment.',
+    'Building an e-commerce website means creating an online platform purpose-built to sell products on the internet, from clothing and jewelry to electronics and sports equipment.',
   ],
   [
     'Un site web de tipul landing page este un site simplu, format dintr-o singură pagină, care are scopul de a atrage atenția vizitatorilor și de a-i convinge să ia o acțiune specifică, cum ar fi să completeze un formular, să cumpere un produs sau să se înscrie la un eveniment.',
-    'A landing page is a simple one-page website designed to capture attention and drive a specific action — fill a form, buy a product, or register for an event.',
+    'A landing page is a simple one-page website designed to capture attention and drive a specific action, fill a form, buy a product, or register for an event.',
   ],
   [
     'De obicei, aceste anunțuri sunt afișate în partea de sus sau de jos a paginii de rezultate a căutării sau în alte zone relevante ale site-urilor partenere. Când cineva face clic pe anunț, compania plătește o sumă mică de bani, cunoscută sub numele de cost per click (CPC).',
@@ -1087,19 +1318,19 @@ export const dictionary = [
   ],
   [
     'Noi știm că nu e ușor să îți construiești un site web, dar noi suntem aici să îți luăm acest stres de pe umeri. Cu experiența noastră vastă în crearea site-urilor web, îți garantăm că vei avea un site profesional, optimizat SEO și adaptat pentru toate dispozitivele.',
-    'We know building a website is not easy — we take that stress off your shoulders. With extensive website design experience, we deliver a professional, SEO-optimized site that works on every device.',
+    'We know building a website is not easy, we take that stress off your shoulders. With extensive website design experience, we deliver a professional, SEO-optimized site that works on every device.',
   ],
   [
     'Pentru modificări asupra conținutului sau funcționalități noi în website se percepe un tarif suplimentar de 30 euro / oră (în cazul în care nu ai ales un pachet de administrare care include și un anumit număr de ore alocate lunar sau ai depășit acest număr).',
     'Content changes or new features are billed at an additional rate of €30 / hour (if you did not choose a maintenance package that includes monthly hours, or if you exceed the included hours).',
   ],
   [
-    '** Pentru oferte de creare website personalizate , special gandite in functie de nevoile si bugetul tau – nu ezita sa ne contactezi. Oferta este supusa unor termeni si conditii. Oferta are titlu informativ si nu are un caracter contractual.',
-    '** For custom website design quotes tailored to your needs and budget — contact us anytime. Offer subject to terms and conditions. Pricing is informative and non-contractual.',
+    '** Pentru oferte de creare website personalizate, special gandite in functie de nevoile si bugetul tau – nu ezita sa ne contactezi. Oferta este supusa unor termeni si conditii. Oferta are titlu informativ si nu are un caracter contractual.',
+    '** For custom website design quotes tailored to your needs and budget, contact us anytime. Offer subject to terms and conditions. Pricing is informative and non-contractual.',
   ],
   [
-    '** Pentru oferte SEO personalizate , special gandite in functie de nevoile si bugetul tau – nu ezita sa ne contactezi. Oferta este supusa unor termeni si conditii. Oferta are titlu informativ si nu are un caracter contractual.',
-    '** For custom SEO quotes tailored to your needs and budget — contact us anytime. Offer subject to terms and conditions. Pricing is informative and non-contractual.',
+    '** Pentru oferte SEO personalizate, special gandite in functie de nevoile si bugetul tau – nu ezita sa ne contactezi. Oferta este supusa unor termeni si conditii. Oferta are titlu informativ si nu are un caracter contractual.',
+    '** For custom SEO quotes tailored to your needs and budget, contact us anytime. Offer subject to terms and conditions. Pricing is informative and non-contractual.',
   ],
   [
     'Reclama Pay-per-click (PPC) este o metodă de publicitate online în care companiile plătesc pentru fiecare clic pe anunțurile lor afișate în rezultatele căutării sau în alte zone ale site-urilor web.',
@@ -1127,15 +1358,15 @@ export const dictionary = [
   ],
   [
     'Setup campanii Google Ads Search – maximum 120 Ad grupuri',
-    'Google Ads Search setup — up to 120 ad groups',
+    'Google Ads Search setup, up to 120 ad groups',
   ],
   [
     'Setup campanii Google Ads Search – maximum 80 Ad grupuri',
-    'Google Ads Search setup — up to 80 ad groups',
+    'Google Ads Search setup, up to 80 ad groups',
   ],
   [
     'Setup campanii Google Ads Search – maximum 40 Ad grupuri',
-    'Google Ads Search setup — up to 40 ad groups',
+    'Google Ads Search setup, up to 40 ad groups',
   ],
   [
     'Beneficiază de serviciile noastre în&nbsp;administrare site și mentenață&nbsp;și crește-ți afacerea online cu succes!',
@@ -1154,7 +1385,7 @@ export const dictionary = [
   ['optimizare SEO', 'SEO optimization'],
   ['Pret fara TVA', 'Price excluding VAT'],
   ['Preturile sunt pentru pentru website-uri in limba romana si care se adreseaza pietei romanesti', 'Prices are for Romanian-language websites targeting the Romanian market'],
-  ['In functie de nevoile clientului si necesitatile tehnice intalnite pe parcursul colaborarii , este posibil sa oferim servicii bonus', 'Depending on client needs and technical requirements during the project, bonus services may be included'],
+  ['In functie de nevoile clientului si necesitatile tehnice intalnite pe parcursul colaborarii, este posibil sa oferim servicii bonus', 'Depending on client needs and technical requirements during the project, bonus services may be included'],
   ['numar conversii', 'number of conversions'],
   ['rata de conversie', 'conversion rate'],
   ['cost per conversie', 'cost per conversion'],
@@ -1184,7 +1415,7 @@ export const enPageMeta = {
   '/en/': {
     title: 'Digital Marketing Agency Bucharest | Echipa de Tocilari',
     description:
-      'Bucharest digital marketing agency. We do online promotion, web design, SEO, and Google Ads. Free 30-minute consult — we work remotely across Romania.',
+      'Bucharest digital marketing agency. We do online promotion, web design, SEO, and Google Ads. Free 30-minute consult, we work remotely across Romania.',
   },
   '/en/about/': {
     title: 'About Us | Meet Echipa de Tocilari',
@@ -1197,9 +1428,9 @@ export const enPageMeta = {
       'Website design in Bucharest: business sites, landing pages, and a solid base for online stores. Fast, mobile-first, with technical SEO from day one.',
   },
   '/en/seo-services/': {
-    title: 'SEO Services Bucharest | Google Rankings & Organic Traffic',
+    title: 'SEO Services and AI Visibility | Echipa de Tocilari',
     description:
-      'SEO services in Bucharest: audit, keywords, on-page, off-page, and monitoring. We grow organic Google traffic for sites and online stores.',
+      'SEO services from Bucharest: audits, technical improvements and clear content for Google and AI-assisted search. See how we work and what plans include.',
   },
   '/en/website-maintenance/': {
     title: 'Website Management & Maintenance | WordPress Support',
@@ -1209,7 +1440,7 @@ export const enPageMeta = {
   '/en/contact/': {
     title: 'Contact | Free Digital Marketing Consultation',
     description:
-      'Contact Echipa de Tocilari for website design, SEO, or Google Ads. Free 30-minute consult — remote across Romania.',
+      'Contact Echipa de Tocilari for website design, SEO, or Google Ads. Free 30-minute consult, remote across Romania.',
   },
   '/en/portfolio/': {
     title: 'Website Templates & Web Design Portfolio | Echipa de Tocilari',
@@ -1219,7 +1450,7 @@ export const enPageMeta = {
   '/en/services/': {
     title: 'Digital Marketing Services: Web, SEO, Google Ads',
     description:
-      'Digital marketing services: website design, SEO, maintenance, Google Ads, logo, and copywriting. One partner for online growth.',
+      'Echipa de Tocilari services: websites and online stores, app development, SEO and AI visibility, Google Ads, Facebook Ads and website maintenance.',
   },
   '/en/clients/': {
     title: 'Our Clients | Web Design and SEO Projects',
@@ -1262,7 +1493,7 @@ export const enOrg = {
 export const enFaqs = [
   {
     q: 'What is online marketing and why should I use it?',
-    a: 'Online marketing is how people who already search for what you sell find you. A digital marketing agency in Bucharest does online promotion with a plan — not leftover posts when you remember.',
+    a: 'Online marketing is how people who already search for what you sell find you. A digital marketing agency in Bucharest does online promotion with a plan, not leftover posts when you remember.',
   },
   {
     q: 'How long until I see results from online marketing services?',

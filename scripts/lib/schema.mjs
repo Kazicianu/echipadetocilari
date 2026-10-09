@@ -33,7 +33,6 @@ export function organization({ site, lang, description, knowsAbout, address, tel
     description,
     email: 'contact@echipadetocilari.ro',
     areaServed: lang === 'en' ? 'Romania' : 'România',
-    openingHours: ['Mo-Su 09:00-17:00'],
     logo: `${site}${LOGO}`,
     image: `${site}${LOGO}`,
     knowsAbout,

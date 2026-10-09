@@ -48,7 +48,16 @@ export function validateBuild({ outDir, files, urlPathOf, indexable }) {
     if (html.includes('/en/en/')) errors.push(`${rel(file)}: doubled /en/en/ path`);
 
     if (owned) {
-      if (!/data-ect-contact=["'](?:ro|en)["']/.test(html)) errors.push(`${rel(file)}: contact form missing`);
+      const pageCopy = html.replace(/<!--[\s\S]*?-->|<script\b[^>]*>[\s\S]*?<\/script>|<style\b[^>]*>[\s\S]*?<\/style>/gi, '');
+      const h1Count = (pageCopy.match(/<h1\b/gi) || []).length;
+      if (h1Count !== 1) errors.push(`${rel(file)}: expected one H1, found ${h1Count}`);
+      const contact = pageCopy.search(/<form\b[^>]*data-ect-contact=["'](?:ro|en)["']/i);
+      const footer = pageCopy.search(/<footer\b/i);
+      if (contact < 0) errors.push(`${rel(file)}: contact form missing`);
+      else if (footer < contact) errors.push(`${rel(file)}: contact form must precede the footer`);
+      if (/[\u2014\u2196-\u2199]|&mdash;|&#8212;|&#x2014;|&#(?:8598|8599|8600|8601);|&#x219[6-9];/i.test(pageCopy)) {
+        errors.push(`${rel(file)}: prohibited punctuation or diagonal arrow`);
+      }
       const desc = html.match(/<meta\s+name=["']description["'][^>]*content=["']([^"']*)["']/i);
       if (!desc || desc[1].trim().length < 50) {
         errors.push(`${rel(file)}: missing or too-short description`);
