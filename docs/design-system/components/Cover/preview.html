@@ -1,0 +1,84 @@
+<!-- @dsCard height=288 -->
+<!doctype html>
+<html lang="ro" data-theme="light">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../tokens.css">
+<link rel="stylesheet" href="../bundle.css">
+<title>Echipa de Tocilari</title>
+<style>
+  html, body { margin: 0; height: 100%; }
+  body { background: var(--white); color: var(--ink); font-family: var(--font-sans); overflow: hidden; }
+  .cover { position: relative; width: 960px; height: 288px; overflow: hidden; background: var(--white); }
+  .art { position: absolute; top: 0; left: 480px; width: 480px; height: 288px; overflow: hidden; }
+  .art svg { display: block; width: 480px; height: 288px; }
+  .brand { fill: var(--orange); }
+  .tint { fill: var(--blob-turquoise); }
+  .deep { fill: var(--ink); }
+  .logo { fill: var(--orange-logo); }
+  .cut { fill: var(--white); }
+  .r-card { rx: var(--radius-card); }
+  .r-leaf { rx: var(--radius-leaf); }
+  .r-leaf-sm { rx: var(--radius-leaf-sm); }
+  .r-button { rx: var(--radius-button); }
+  .r-status { rx: var(--radius-status); }
+  .r-none { rx: 0; }
+  .words { position: absolute; left: var(--space-24); bottom: var(--space-24); max-width: 440px; }
+  .name { margin: 0; font-size: 80px; line-height: 0.95; font-weight: 900; letter-spacing: -0.01em; color: var(--ink); }
+  .tag { margin: var(--space-10) 0 0 2px; font-size: 14px; line-height: 20px; font-weight: 400; color: var(--ink-muted); }
+</style>
+</head>
+<body>
+<div class="cover">
+  <div class="art" aria-hidden="true">
+    <svg viewBox="0 0 480 288" width="480" height="288">
+<!--
+  blocks      orange 192x216 leaf slab (the largest: the colour the brand is known by) · blob-turquoise 216x144 tint bleeding off the top and right with its radius-leaf corner showing · ink 144x96 small leaf card · orange-logo 60px disc (the logo blob); about 33% of 960x288
+  arrangement one tall slab with satellites, every bottom on one line space-24 above the edge, space-24 gutters
+  pattern     pills, from "Buttons are pills; chips, fields and phase labels use radius-card" and the checklist rows on the homepage's orange panel: twelve white pills cut into the slab, six task bars each with its round handle
+  scales      sides and pitch in space-24 steps; pills 12 tall with rx radius-status; corners radius-card + radius-leaf (slab), radius-card + radius-leaf-sm (ink card), radius-leaf (tint), radius-button (disc)
+-->
+      <!-- tint: blob-turquoise, bleeding off the top and right -->
+      <rect class="tint r-leaf" x="264" y="-96" width="240" height="240" rx="70"/>
+      <!-- slab: orange leaf card = two radius-card rects, one radius-leaf disc and two square fillers -->
+      <g class="brand">
+        <rect class="r-card" x="24" y="48" width="192" height="146" rx="15"/>
+        <rect class="r-card" x="94" y="48" width="122" height="216" rx="15"/>
+        <rect class="r-leaf" x="24" y="124" width="140" height="140" rx="70"/>
+        <rect class="r-none" x="24" y="179" width="15" height="15"/>
+        <rect class="r-none" x="94" y="249" width="15" height="15"/>
+      </g>
+      <!-- pattern: task bars and handles cut into the slab -->
+      <g class="cut">
+        <rect class="r-status" x="48" y="72" width="96" height="12" rx="6"/>
+        <rect class="r-status" x="180" y="72" width="12" height="12" rx="6"/>
+        <rect class="r-status" x="48" y="96" width="72" height="12" rx="6"/>
+        <rect class="r-status" x="180" y="96" width="12" height="12" rx="6"/>
+        <rect class="r-status" x="48" y="120" width="104" height="12" rx="6"/>
+        <rect class="r-status" x="180" y="120" width="12" height="12" rx="6"/>
+        <rect class="r-status" x="48" y="144" width="56" height="12" rx="6"/>
+        <rect class="r-status" x="180" y="144" width="12" height="12" rx="6"/>
+        <rect class="r-status" x="48" y="168" width="88" height="12" rx="6"/>
+        <rect class="r-status" x="180" y="168" width="12" height="12" rx="6"/>
+        <rect class="r-status" x="48" y="192" width="64" height="12" rx="6"/>
+        <rect class="r-status" x="180" y="192" width="12" height="12" rx="6"/>
+      </g>
+      <!-- ink leaf card (radius-leaf-sm) -->
+      <g class="deep">
+        <rect class="r-card" x="240" y="168" width="144" height="56" rx="15"/>
+        <rect class="r-card" x="280" y="168" width="104" height="96" rx="15"/>
+        <rect class="r-leaf-sm" x="240" y="184" width="80" height="80" rx="40"/>
+        <rect class="r-none" x="240" y="209" width="15" height="15"/>
+        <rect class="r-none" x="280" y="249" width="15" height="15"/>
+      </g>
+      <!-- orange-logo disc -->
+      <rect class="logo r-button" x="408" y="204" width="60" height="60" rx="30"/>
+    </svg>
+  </div>
+  <div class="words">
+    <h1 class="name">Echipa de Tocilari</h1>
+    <p class="tag">Marketing online făcut de tocilari.</p>
+  </div>
+</div>
+</body>
+</html>

@@ -20,6 +20,8 @@ Oglindă statică 1:1 a echipadetocilari.ro (scrape WordPress/Elementor) cu inje
 
 - Înainte de planificarea sau modificarea paginilor, citește `SEO-STRATEGY.md`. Acesta păstrează structura SEO stabilită cu utilizatorul, distribuția keywords și ordinea de lucru. Folosește `keyword-research-2026-09-18.md` ca sursă pentru cercetarea Semrush, ținând cont că include și termeni istorici pentru servicii retrase.
 
+- Înainte de a construi sau modifica pagini, citește `docs/design-system/README.md`: sistemul de design al site-ului (culori, tipografie, spațiere, componentele `ect-` și regulile de conținut). Folosește valorile și componentele de acolo în loc să inventezi altele noi; detaliile sunt în `docs/design-system/tokens.json` și `docs/design-system/components/`. Folderul `docs/` nu se publică, așa că nu lega fișierele lui din pagini: copiază stilurile necesare în CSS-ul paginii din `legacy-mirror/wp-content/ect-pages/`.
+
 - Indexarea e controlată exclusiv de env-ul `PUBLIC_INDEXABLE` (nesetat = `noindex` peste tot)
 - Nu edita niciodată `dist/` direct — editează `legacy-mirror/` sau pipeline-ul
 - Paginile EN sunt generate, nu scrise de mână — actualizează `scripts/i18n/dictionary.mjs`

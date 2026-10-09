@@ -1,0 +1,33 @@
+<!-- @dsCard group="Actions" height=360 width=1100 -->
+<!doctype html>
+<html lang="ro" data-theme="light">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../tokens.css">
+<link rel="stylesheet" href="../bundle.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Button</title>
+<style>
+  html, body { margin: 0; }
+  body { padding: 24px; background: var(--white); color: var(--ink); font-family: var(--font-sans); }
+  .row { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 20px; margin-bottom: 20px; }
+  .band { display: inline-flex; padding: 16px; border-radius: var(--radius-button); background: var(--orange); }
+</style>
+</head>
+<body>
+<div class="row">
+  <a class="ect-btn ect-btn--primary" href="#">Despre noi <svg viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"/></svg></a>
+  <a class="ect-btn ect-btn--outline" href="#">Hai să ne cunoaștem</a>
+  <a class="ect-btn ect-btn--ink" href="#">Solicită o discuție</a>
+  <a class="ect-btn ect-btn--text" href="#">Vezi ce include ↓</a>
+</div>
+<div class="row">
+  <button class="ect-btn ect-btn--submit" type="button">Trimite</button>
+  <a class="ect-btn ect-btn--header" href="#">Ai o idee?</a>
+  <div class="band"><a class="ect-btn ect-btn--on-brand" href="#">Hai să vorbim despre proiectul tău</a></div>
+</div>
+<div class="row">
+  <a class="ect-btn ect-btn--outline ect-btn--lg" href="#"><span>Participă la o consultație<br><b>GRATUITĂ</b> de 30 minute</span></a>
+</div>
+</body>
+</html>

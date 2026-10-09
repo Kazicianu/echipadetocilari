@@ -1,0 +1,40 @@
+<!-- @dsCard group="Sections" height=810 width=1100 -->
+<!doctype html>
+<html lang="ro" data-theme="light">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../tokens.css">
+<link rel="stylesheet" href="../bundle.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ContactSection</title>
+<style>
+  html, body { margin: 0; }
+  body { padding: 24px; background: var(--white); color: var(--ink); font-family: var(--font-sans); }
+  body { padding: 0; }
+</style>
+</head>
+<body>
+<section class="ect-contact" id="formular_contact_bottom" aria-labelledby="contact-title">
+  <div class="ect-contact__wave ect-contact__wave--top"><svg viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M790.5,93.1c-59.3-5.3-116.8-18-192.6-50c-29.6-12.7-76.9-31-100.5-35.9c-23.6-4.9-52.6-7.8-75.5-5.3 c-10.2,1.1-22.6,1.4-50.1,7.4c-27.2,6.3-58.2,16.6-79.4,24.7c-41.3,15.9-94.9,21.9-134,22.6C72,58.2,0,25.8,0,25.8V100h1000V65.3 c0,0-51.5,19.4-106.2,25.7C839.5,97,814.1,95.2,790.5,93.1z"/></svg></div>
+  <div class="ect-contact__inner">
+    <div class="ect-contact__copy">
+      <h2 class="ect-contact__title" id="contact-title"><b>Te putem ajuta</b>, indiferent de <b>orașul</b> din care ne scrii.</h2>
+      <p class="ect-contact__text">Ne-ar face <b>mare plăcere</b> să vorbim despre <b>proiectul</b> tău, fără slides.</p>
+    </div>
+    <div class="ect-contact__card">
+      <h3 class="ect-contact__card-title">Scrie-ne un mesaj astăzi</h3>
+      <form action="#" method="post" onsubmit="return false">
+        <div class="ect-field"><input type="text" name="name" placeholder="Nume" aria-label="Nume" autocomplete="name" maxlength="120" required></div>
+        <div class="ect-field"><input type="text" name="company" placeholder="Nume Companie" aria-label="Nume companie (opțional)" autocomplete="organization" maxlength="160"></div>
+        <div class="ect-field"><input type="email" name="email" placeholder="Email" aria-label="Email" autocomplete="email" maxlength="254" required></div>
+        <div class="ect-field"><input type="tel" name="phone" placeholder="Telefon" aria-label="Telefon" autocomplete="tel" maxlength="40" required></div>
+        <div class="ect-field"><textarea name="message" rows="3" placeholder="Mesaj" aria-label="Mesaj" maxlength="5000" required></textarea></div>
+        <button class="ect-btn ect-btn--submit" type="submit">Trimite</button>
+        <p class="ect-contact-status" data-state="success" role="status">Mulțumim! Mesajul a fost trimis.</p>
+      </form>
+    </div>
+  </div>
+  <div class="ect-contact__wave ect-contact__wave--bottom"><svg viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M790.5,93.1c-59.3-5.3-116.8-18-192.6-50c-29.6-12.7-76.9-31-100.5-35.9c-23.6-4.9-52.6-7.8-75.5-5.3 c-10.2,1.1-22.6,1.4-50.1,7.4c-27.2,6.3-58.2,16.6-79.4,24.7c-41.3,15.9-94.9,21.9-134,22.6C72,58.2,0,25.8,0,25.8V100h1000V65.3 c0,0-51.5,19.4-106.2,25.7C839.5,97,814.1,95.2,790.5,93.1z"/></svg></div>
+</section>
+</body>
+</html>
