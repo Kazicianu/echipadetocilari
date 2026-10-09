@@ -6,7 +6,7 @@ import { mkdirSync, readFileSync, writeFileSync, existsSync } from 'fs';
 import path from 'path';
 import { routes } from './routes.mjs';
 import { normalizePageLinks } from '../lib/navigation.mjs';
-import { dictionary, enPageMeta, enOrg, enFaqs } from './dictionary.mjs';
+import { dictionary, googleAdsDictionary, enPageMeta, enOrg, enFaqs } from './dictionary.mjs';
 import { injectLangSwitcher } from './lang-switcher.mjs';
 import {
   appendToHead,
@@ -28,8 +28,8 @@ import { faqPage, organization, service, webPage, website } from '../lib/schema.
  * careless short entry can corrupt inline JS — `npm run build` syntax-checks
  * every inline block afterwards to catch exactly that.
  */
-function applyDictionary(html) {
-  const pairs = [...dictionary]
+function applyDictionary(html, pageDictionary = []) {
+  const pairs = [...pageDictionary, ...dictionary]
     .filter(([from, to]) => from && from !== to)
     .sort((a, b) => b[0].length - a[0].length);
 
@@ -119,7 +119,7 @@ export function generateEnglishPages({ outDir, site, indexable }) {
     const meta = enPageMeta[route.en];
 
     html = stripJsonLd(html);
-    html = applyDictionary(html);
+    html = applyDictionary(html, route.ro === '/agentie-google-ads/' ? googleAdsDictionary : []);
     html = absolutizeAssets(html);
     html = normalizePageLinks(html, { pageUrl: route.ro, language: 'en' });
     html = setLang(html, 'en');

@@ -10,6 +10,8 @@
   "redirects": [
     { "source": "/ex-servicii-seo", "destination": "/servicii-seo/", "permanent": true },
     { "source": "/ex-creare-site-web", "destination": "/creare-site-web/", "permanent": true },
+    { "source": "/pay-per-click", "destination": "/agentie-google-ads/", "permanent": true },
+    { "source": "/en/ppc-advertising", "destination": "/en/google-ads-agency/", "permanent": true },
     { "source": "/coming-soon", "destination": "/", "permanent": true },
     { "source": "/home", "destination": "/", "permanent": true },
     { "source": "/do-ppc-ninjas-really-exist", "destination": "/", "permanent": true },

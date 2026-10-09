@@ -1,3 +1,6 @@
+import { googleAdsDictionary } from './google-ads.mjs';
+export { googleAdsDictionary };
+
 /**
  * Romanian → natural English replacements (longest-first applied).
  * Tuned for how people actually search in EN (digital marketing, web design, SEO…).
@@ -1228,10 +1231,9 @@ export const enPageMeta = {
     description:
       'Logo design and visual identity: distinctive marks ready for web, print, and social. Brief, iterations, and production-ready files.',
   },
-  '/en/ppc-advertising/': {
-    title: 'Google Ads Campaigns Bucharest | PPC Management',
-    description:
-      'Google Ads management in Bucharest: keywords, budget, and reporting. Reach people already searching for what you sell.',
+  '/en/google-ads-agency/': {
+    title: "Google Ads Agency and Campaign Management | Echipa de Tocilari",
+    description: "We manage Google Ads campaigns for businesses. Search terms, ads, budget oversight and measurement are planned around clear goals and the data available.",
   },
 };
 

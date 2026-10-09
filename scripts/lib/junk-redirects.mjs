@@ -11,6 +11,8 @@
 export const junkRedirects = [
   { from: '/ex-servicii-seo/', to: '/servicii-seo/' },
   { from: '/ex-creare-site-web/', to: '/creare-site-web/' },
+  { from: '/pay-per-click/', to: '/agentie-google-ads/' },
+  { from: '/en/ppc-advertising/', to: '/en/google-ads-agency/' },
   { from: '/coming-soon/', to: '/' },
   { from: '/home/', to: '/' },
   { from: '/do-ppc-ninjas-really-exist/', to: '/' },

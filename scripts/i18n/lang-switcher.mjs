@@ -36,7 +36,7 @@ const STYLES = `
 }
 #ect-lang-switch a{
   display:inline-flex;align-items:center;justify-content:center;
-  min-width:40px;min-height:36px;padding:0 .65rem;
+  min-width:44px;min-height:44px;padding:0 .65rem;
   font-size:12px;font-weight:700;letter-spacing:.04em;
   text-decoration:none;color:#fd8649;background:transparent;
   transition:background .15s,color .15s;
@@ -100,7 +100,7 @@ const STYLES = `
     margin-left:0 !important;
     margin-right:0 !important;
   }
-  #ect-lang-switch a{min-width:36px;min-height:34px;padding:0 .5rem;font-size:11px}
+  #ect-lang-switch a{min-width:44px;min-height:44px;padding:0 .5rem;font-size:11px}
 }
 </style>
 `;

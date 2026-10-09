@@ -1,0 +1,62 @@
+.elementor-3359 .elementor-nav-menu--main .menu-item-has-children {
+  position: relative;
+}
+
+.elementor-3359 .elementor-nav-menu--main .menu-item-has-children > .elementor-item,
+.elementor-3359 .elementor-nav-menu--main .sub-menu .elementor-item {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.elementor-3359 .elementor-nav-menu--main .menu-item-has-children > .sub-menu {
+  /* SmartMenus sets an inline 10em minimum when it opens the submenu. */
+  min-width: 290px !important;
+  padding: 8px 0;
+  background: #fff;
+  border: 1px solid #f2d1c3;
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgb(34 42 55 / 12%);
+  z-index: 30;
+}
+
+.elementor-3359 .elementor-nav-menu--main .sub-menu .elementor-item {
+  padding: 10px 16px;
+  color: #5b6575;
+  line-height: 1.35;
+  white-space: normal;
+}
+
+.elementor-3359 .elementor-nav-menu--main .sub-menu .elementor-item:hover,
+.elementor-3359 .elementor-nav-menu--main .sub-menu .elementor-item:focus-visible {
+  color: #ad420f;
+  background: #fff2eb;
+}
+
+.elementor-3359 .elementor-nav-menu a:focus-visible,
+.elementor-3359 .elementor-menu-toggle:focus-visible {
+  outline: 2px solid #ad420f;
+  outline-offset: 3px;
+}
+
+@media (max-width: 767px) {
+  .elementor-3359 .elementor-element.elementor-element-6c9dcdd8 {
+    width: 44px;
+    max-width: 44px;
+    --container-widget-width: 44px;
+  }
+
+  .elementor-3359 .elementor-element.elementor-element-6c9dcdd8 .elementor-menu-toggle {
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .elementor-3359 .elementor-nav-menu--dropdown .elementor-item {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+}

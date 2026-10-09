@@ -95,13 +95,13 @@ export const routes = [
     service: { ro: 'Logo design', en: 'Logo design' },
   },
   {
-    ro: '/pay-per-click/',
-    en: '/en/ppc-advertising/',
-    roFile: 'pay-per-click/index.html',
-    enFile: 'en/ppc-advertising/index.html',
-    labelRo: 'Pay Per Click',
-    labelEn: 'PPC advertising',
-    service: { ro: 'Campanii Pay Per Click', en: 'PPC advertising management' },
+    ro: '/agentie-google-ads/',
+    en: '/en/google-ads-agency/',
+    roFile: 'agentie-google-ads/index.html',
+    enFile: 'en/google-ads-agency/index.html',
+    labelRo: 'Agenție Google Ads',
+    labelEn: 'Google Ads agency',
+    service: { ro: 'Administrare campanii Google Ads', en: 'Google Ads campaign management' },
   },
 ];
 
