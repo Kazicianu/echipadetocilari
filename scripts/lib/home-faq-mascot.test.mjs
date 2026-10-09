@@ -4,7 +4,7 @@ import test from 'node:test';
 import vm from 'node:vm';
 
 const source = readFileSync(new URL('../../legacy-mirror/wp-content/ect-pages/home/faq-mascot.js', import.meta.url), 'utf8');
-const moduleUrl = '/wp-content/ect-pages/home/faq-mascot-3d.js';
+const moduleUrl = '/wp-content/ect-pages/home/faq-mascot-3d-v2.js';
 // Mock only the module import boundary; execute the actual loader lifecycle.
 // Node's VM dynamic import hook otherwise needs an experimental module flag.
 const executable = source.replace("import('" + moduleUrl + "')", "importMascotModule('" + moduleUrl + "')");
@@ -150,6 +150,16 @@ test('failed module loading leaves the static fallback and motion control untouc
   const f = fixture({ importModule: async () => { throw new Error('Unavailable module'); } });
   f.visible(true);
   await flush();
+  assert.equal(f.calls.length, 0);
+  assert.equal(f.button.hidden, true);
+  assert.equal(f.host.dataset.mascotReady, undefined);
+});
+
+test('failed renderer setup preserves the static fallback without exposing a playback control', async () => {
+  const f = fixture({ mount: async () => null });
+  f.visible(true);
+  await flush();
+  assert.deepEqual(f.imports, [moduleUrl]);
   assert.equal(f.calls.length, 0);
   assert.equal(f.button.hidden, true);
   assert.equal(f.host.dataset.mascotReady, undefined);

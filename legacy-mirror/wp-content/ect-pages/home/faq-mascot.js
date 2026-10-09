@@ -1,4 +1,4 @@
-/* The decorative 3D companion loads only near the FAQ. The HTML stays useful without it. */
+/* The 3D companion loads only near the FAQ. The HTML stays useful without it. */
 (() => {
   const host = document.querySelector('.ect-home-faq__mascot');
   if (!host) return;
@@ -26,13 +26,13 @@
     if (loading || controller || disposed || reduce.matches) return;
     loading = true;
     try {
-      const { mountMascot } = await import('/wp-content/ect-pages/home/faq-mascot-3d.js');
+      const { mountMascot } = await import('/wp-content/ect-pages/home/faq-mascot-3d-v2.js');
       if (disposed) return;
       controller = await mountMascot(host);
       if (disposed) controller?.dispose();
       else syncPlayback();
     } catch {
-      // A static render covers browsers without WebGL and unavailable modules.
+      // The static render covers unavailable modules and browsers without WebGL.
     } finally {
       loading = false;
     }

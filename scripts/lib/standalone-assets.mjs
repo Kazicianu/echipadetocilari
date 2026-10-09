@@ -86,7 +86,7 @@ export function makeStandaloneAssets(html) {
 // Lazy-loaded assets aren't discoverable from <script src> alone. Keep this
 // small list tied to the actual widgets in the eleven source pages.
 export const standaloneRuntimeAssets = [
-  '/wp-content/ect-pages/home/faq-mascot-3d.js',
+  '/wp-content/ect-pages/home/faq-mascot-3d-v2.js',
   '/wp-content/ect-pages/home/three.module.min.js',
   '/wp-content/ect-pages/vendor/wp-hooks.min.js',
   '/wp-content/ect-pages/vendor/wp-i18n.min.js',

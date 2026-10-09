@@ -974,7 +974,7 @@
 
 .ect-home-faq__eyebrow {
   margin: 0 0 12px;
-  color: var(--orange-deep, #ad420f);
+  color: var(--e-global-color-primary, #fd8649);
   font-size: 16px;
   font-weight: 300;
   line-height: 1.2;
@@ -1009,7 +1009,7 @@
   border: 2px solid var(--e-global-color-primary, #fd8649);
   border-radius: 30px;
   background: var(--e-global-color-b500f0a, #fff);
-  color: var(--orange-deep, #ad420f);
+  color: var(--e-global-color-primary, #fd8649);
   font-size: 16px;
   font-weight: 600;
   line-height: 1.2;
@@ -1019,7 +1019,7 @@
 
 .ect-home-faq .ect-home-faq__contact:hover {
   background: var(--e-global-color-primary, #fd8649);
-  color: var(--e-global-color-text, #27272d);
+  color: var(--e-global-color-f898f31, #fffefe);
 }
 
 .ect-home-faq__contact:focus-visible,
@@ -1231,7 +1231,7 @@
   padding: 21px 22px;
   border-radius: 24px 24px 5px 24px;
   background: var(--e-global-color-primary, #fd8649);
-  color: var(--e-global-color-text, #27272d);
+  color: var(--e-global-color-b500f0a, #fff);
   font-size: 15px;
   font-weight: 400;
   line-height: 1.75;

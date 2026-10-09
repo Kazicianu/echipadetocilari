@@ -8,7 +8,7 @@ export { googleAdsDictionary };
 export const dictionary = [
   ['Tu întrebi. Noi lămurim.', 'You ask. We explain.'],
   ['Despre promovare, bugete și ce merită făcut. Pe înțeles, fără jargon.', 'Marketing, budgets and what is worth doing. Clear answers, without the jargon.'],
-  ['Tocilar 3D cu ochelari și pulover portocaliu, citind o carte', 'A 3D nerd with glasses and an orange sweater, reading a book'],
+  ['Tocilar 3D cu ochelari și pulover portocaliu, care te salută cu un laptop în poală', 'A 3D nerd with glasses and an orange sweater, waving hello with a laptop in his lap'],
   ['Oprește animația', 'Pause animation'],
   ['Pornește animația', 'Play animation'],
   ["Configurare cont Google Ads","Google Ads account setup"],
