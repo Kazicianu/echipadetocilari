@@ -292,7 +292,7 @@ test('mobile width and visual viewport resizes preserve opening and pending link
 
   menu.resize({ width: 360, height: 640 });
   assert.equal(menu.dialog.open, true);
-  assert.equal(menu.dialog.style.width, '312px');
+  assert.equal(menu.dialog.style.width, '320px');
   assert.equal(menu.dialog.style.height, '600px');
   assert.equal(panelAnimation.currentTime, openingTime);
   assert.equal(panelAnimation.playbackRate, 1);
@@ -326,4 +326,32 @@ test('switching to the desktop layout closes the dialog and releases the page', 
   assert.equal(menu.dialog.open, false);
   assert.equal(menu.scrollCalls.length, 1);
   assert.deepEqual(menu.navigation, []);
+});
+
+test('the panel has equal side gutters regardless of the header button position', () => {
+  for (const [viewportWidth, headerGap] of [[360, 32], [390, 45], [667, 60], [900, 80]]) {
+    const menu = createMenu();
+    menu.resize({ width: viewportWidth });
+    menu.slot.rect = { ...menu.slot.rect, left: viewportWidth - headerGap - 48, right: viewportWidth - headerGap };
+    menu.button.emit('click');
+
+    const left = Number.parseFloat(menu.dialog.style.left);
+    const width = Number.parseFloat(menu.dialog.style.width);
+    assert.equal(left, viewportWidth - left - width, 'left and right outer gaps match');
+    assert.ok(left >= 20, 'keeps at least the design-system phone gutter');
+    assert.ok(width <= 460, 'keeps the existing maximum panel width');
+
+    // Its collapsed reveal and button must still originate at the tapped control.
+    const insets = [...menu.animations[0].frames[0].clipPath.matchAll(/(-?[\d.]+)px/g)].map(match => Number(match[1]));
+    assert.equal(left + insets[3], menu.slot.rect.left);
+    assert.equal(left + width - insets[1], menu.slot.rect.right);
+    const translate = [...menu.animations[1].frames[0].transform.matchAll(/(-?[\d.]+)px/g)].map(match => Number(match[1]));
+    assert.equal(left + width - 48 + translate[0], menu.slot.rect.left);
+    assert.equal(Number.parseFloat(menu.dialog.style.top) + translate[1], menu.slot.rect.top);
+
+    menu.advance(menu.animations[0].duration);
+    menu.resize({ width: 390 });
+    assert.equal(menu.dialog.open, true);
+    assert.equal(Number.parseFloat(menu.dialog.style.left), 390 - Number.parseFloat(menu.dialog.style.left) - Number.parseFloat(menu.dialog.style.width));
+  }
 });

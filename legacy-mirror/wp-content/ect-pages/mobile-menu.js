@@ -45,26 +45,37 @@
   function layoutMenu() {
     const rect = slot.getBoundingClientRect();
     const buttonRect = button.getBoundingClientRect();
-    const right = Math.max(16, innerWidth - rect.right);
     const top = Math.max(16, rect.top);
-    const width = Math.max(buttonRect.width, Math.min(460, innerWidth - right - 16));
+    const width = Math.max(buttonRect.width, Math.min(460, innerWidth - 40));
+    const left = (innerWidth - width) / 2; // Equal space-20 design-system gutters on phones.
     const height = Math.max(buttonRect.height, Math.min(800, (window.visualViewport?.height || innerHeight) - top - 16));
-    Object.assign(dialog.style, { top: `${top}px`, left: `${innerWidth - right - width}px`, width: `${width}px`, height: `${height}px` });
-    return { width, height, buttonWidth: buttonRect.width, buttonHeight: buttonRect.height };
+    Object.assign(dialog.style, { top: `${top}px`, left: `${left}px`, width: `${width}px`, height: `${height}px` });
+    return {
+      width, height, buttonWidth: buttonRect.width, buttonHeight: buttonRect.height,
+      buttonLeft: rect.left - left, buttonTop: rect.top - top, buttonRight: left + width - rect.right,
+    };
   }
 
-  function panelValues({ width, height, buttonWidth, buttonHeight }) {
+  function panelValues({ height, buttonHeight, buttonLeft, buttonTop, buttonRight }) {
     return progress => ({
-      clipPath: `inset(0px 0px ${(height - buttonHeight) * (1 - progress)}px ${(width - buttonWidth) * (1 - progress)}px round ${200 - 176 * progress}px)`,
+      clipPath: `inset(${buttonTop * (1 - progress)}px ${buttonRight * (1 - progress)}px ${(height - buttonTop - buttonHeight) * (1 - progress)}px ${buttonLeft * (1 - progress)}px round ${200 - 176 * progress}px)`,
+    });
+  }
+
+  function buttonValues({ width, buttonWidth, buttonLeft, buttonTop }) {
+    const startX = buttonLeft - (width - buttonWidth);
+    return progress => ({
+      transform: `translate(${startX * (1 - progress) - 24 * progress}px, ${buttonTop * (1 - progress) + 24 * progress}px)`,
     });
   }
 
   function buildTimeline() {
     animations.forEach(animation => animation.cancel());
     animations = [];
+    const geometry = layoutMenu();
     // Span the full clock so reversing never waits on an expanded-panel plateau.
-    track(panel, 0, duration, power3InOut, panelValues(layoutMenu()));
-    track(button, 0, duration, power3InOut, progress => ({ transform: `translate(${-24 * progress}px, ${24 * progress}px)` }));
+    track(panel, 0, duration, power3InOut, panelValues(geometry));
+    track(button, 0, duration, power3InOut, buttonValues(geometry));
     lines.forEach((line, index) => track(line, 0, 200, power3InOut, progress => ({
       transform: `translateY(${(index ? 3.45 : -3.45) * (1 - progress)}px) rotate(${(index ? -45 : 45) * progress}deg)`,
     })));
@@ -83,7 +94,9 @@
     if (!dialog.open) return;
     if (!mobile.matches) { setOpen(false, true); return; }
     // Update the reveal geometry without restarting its clock or moving focus.
-    animations[0].effect.setKeyframes(keyframes(0, duration, power3InOut, panelValues(layoutMenu())));
+    const geometry = layoutMenu();
+    animations[0].effect.setKeyframes(keyframes(0, duration, power3InOut, panelValues(geometry)));
+    animations[1].effect.setKeyframes(keyframes(0, duration, power3InOut, buttonValues(geometry)));
   }
 
   function finishClose() {
@@ -108,10 +121,10 @@
     if (next && !dialog.open) {
       scrollPosition = window.scrollY;
       previousBodyStyle = document.body.style.cssText;
+      Object.assign(document.body.style, { position: 'fixed', top: `${-scrollPosition}px`, width: '100%', overflow: 'hidden' });
       buildTimeline();
       dialog.append(button);
       dialog.showModal();
-      Object.assign(document.body.style, { position: 'fixed', top: `${-scrollPosition}px`, width: '100%', overflow: 'hidden' });
       button.focus({ preventScroll: true });
     }
     if (!dialog.open) return;

@@ -120,8 +120,9 @@
 }
 #ect-mobile-menu .ect-mobile-menu-link:visited { color: #27272d; }
 #ect-mobile-menu .ect-mobile-menu-link[aria-current="page"],
-#ect-mobile-menu .ect-mobile-menu-link[aria-current="page"]:visited {
-  color: #ad420f;
+#ect-mobile-menu .ect-mobile-menu-link[aria-current="page"]:visited,
+#ect-mobile-menu .ect-mobile-menu-link[aria-current="page"]:hover {
+  color: #ff5600; /* orange-hot token, for the menu's 27px+ labels. */
   font-weight: 600;
   text-decoration: underline;
   text-decoration-thickness: 2px;
