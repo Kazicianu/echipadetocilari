@@ -119,6 +119,14 @@
   transition: color 160ms;
 }
 #ect-mobile-menu .ect-mobile-menu-link:visited { color: #27272d; }
+#ect-mobile-menu .ect-mobile-menu-link[aria-current="page"],
+#ect-mobile-menu .ect-mobile-menu-link[aria-current="page"]:visited {
+  color: #ad420f;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: .16em;
+}
 .ect-mobile-menu-footer { display: flex; flex-wrap: wrap; flex: none; gap: 0; width: 100%; }
 #ect-mobile-menu .ect-mobile-menu-footer-link {
   display: flex;

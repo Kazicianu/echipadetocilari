@@ -37,6 +37,7 @@ function createMenu({ reducedMotion = false } = {}) {
       this.playbackRate = 1;
       this.playState = 'running';
       this.onfinish = null;
+      this.effect = { setKeyframes: frames => { this.frames = frames; } };
     }
     pause() { this.playState = 'paused'; }
     play() {
@@ -121,14 +122,24 @@ function createMenu({ reducedMotion = false } = {}) {
   mobile.matches = true;
   const window = new Element();
   window.scrollY = 157;
-  window.visualViewport = { height: 844 };
+  window.visualViewport = new Element();
+  window.visualViewport.height = 844;
   window.scrollTo = (x, y) => { scrollCalls.push([x, y]); window.scrollY = y; };
   window.location = { assign: href => navigation.push(href) };
 
-  vm.runInNewContext(runtime, {
+  const context = {
     document, window, innerWidth: 390, innerHeight: 844,
     matchMedia: query => query.includes('prefers-reduced-motion') ? reduced : mobile,
-  }, { filename: 'mobile-menu.js' });
+  };
+  vm.runInNewContext(runtime, context, { filename: 'mobile-menu.js' });
+
+  function resize({ width = context.innerWidth, height = context.innerHeight, visualHeight = height, visualOnly = false } = {}) {
+    context.innerWidth = width;
+    context.innerHeight = height;
+    window.visualViewport.height = visualHeight;
+    slot.rect = { ...slot.rect, right: width - 32, left: width - 80 };
+    (visualOnly ? window.visualViewport : window).emit('resize');
+  }
 
   function advance(milliseconds) {
     const finished = [];
@@ -144,7 +155,7 @@ function createMenu({ reducedMotion = false } = {}) {
     finished.forEach(callback => callback());
   }
 
-  return { dialog, panel, nav, button, slot, links, footer, body, document, animations, navigation, scrollCalls, originalBodyStyle, advance };
+  return { dialog, panel, nav, button, slot, links, footer, body, document, animations, navigation, scrollCalls, originalBodyStyle, advance, resize, mobile, window };
 }
 
 function assertRestored(menu) {
@@ -241,5 +252,78 @@ test('reduced motion opens at the final frame and closes immediately', () => {
 
   menu.button.emit('click');
   assertRestored(menu);
+  assert.deepEqual(menu.navigation, []);
+});
+
+test('height-only resize keeps the open menu, keyboard focus and its scroll position', () => {
+  for (const reducedMotion of [false, true]) {
+    const menu = createMenu({ reducedMotion });
+    menu.button.emit('click');
+    const panelAnimation = menu.animations[0];
+    menu.advance(panelAnimation.duration);
+    menu.links[2].focus();
+    menu.nav.scrollTop = 80;
+
+    menu.resize({ height: 600 });
+
+    assert.equal(menu.dialog.open, true);
+    assert.equal(menu.dialog.style.height, '560px');
+    assert.equal(menu.button.getAttribute('aria-expanded'), 'true');
+    assert.equal(menu.nav.inert, false);
+    assert.equal(menu.body.style.position, 'fixed');
+    assert.equal(menu.document.activeElement, menu.links[2]);
+    assert.equal(menu.nav.scrollTop, 80);
+    assert.deepEqual(menu.scrollCalls, []);
+    assert.equal(menu.animations[0], panelAnimation);
+    assert.equal(panelAnimation.currentTime, panelAnimation.duration);
+
+    menu.button.emit('click');
+    menu.advance(panelAnimation.duration);
+    assertRestored(menu);
+  }
+});
+
+test('mobile width and visual viewport resizes preserve opening and pending link navigation', () => {
+  const menu = createMenu();
+  menu.button.emit('click');
+  const panelAnimation = menu.animations[0];
+  menu.advance(panelAnimation.duration * .4);
+  const openingTime = panelAnimation.currentTime;
+
+  menu.resize({ width: 360, height: 640 });
+  assert.equal(menu.dialog.open, true);
+  assert.equal(menu.dialog.style.width, '312px');
+  assert.equal(menu.dialog.style.height, '600px');
+  assert.equal(panelAnimation.currentTime, openingTime);
+  assert.equal(panelAnimation.playbackRate, 1);
+  menu.advance(panelAnimation.duration);
+
+  menu.nav.emit('click', { target: menu.links[1] });
+  menu.advance(100);
+  const closingTime = panelAnimation.currentTime;
+  menu.resize({ visualHeight: 520, visualOnly: true });
+  assert.equal(menu.dialog.open, true);
+  assert.equal(menu.dialog.style.height, '480px');
+  assert.equal(menu.nav.inert, true);
+  assert.equal(panelAnimation.currentTime, closingTime);
+  assert.ok(panelAnimation.playbackRate < 0);
+  assert.deepEqual(menu.navigation, []);
+
+  menu.advance(closingTime / Math.abs(panelAnimation.playbackRate) + 1);
+  assertRestored(menu);
+  assert.deepEqual(menu.navigation, [menu.links[1].href]);
+});
+
+test('switching to the desktop layout closes the dialog and releases the page', () => {
+  const menu = createMenu();
+  menu.button.emit('click');
+  menu.advance(menu.animations[0].duration);
+  menu.mobile.matches = false;
+  menu.mobile.emit('change');
+  assertRestored(menu);
+
+  menu.resize({ width: 1280 });
+  assert.equal(menu.dialog.open, false);
+  assert.equal(menu.scrollCalls.length, 1);
   assert.deepEqual(menu.navigation, []);
 });

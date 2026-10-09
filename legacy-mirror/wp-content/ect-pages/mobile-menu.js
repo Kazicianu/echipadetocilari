@@ -24,23 +24,25 @@
   const duration = Math.max(500, 325 + Math.max(0, links.length - 1) * 35, 450 + Math.max(0, footer.length - 1) * 35);
   const closeDuration = 300;
 
-  function track(element, start, length, ease, values) {
+  function keyframes(start, length, ease, values) {
     const frames = [];
     if (start > 0) frames.push({ ...values(0), offset: 0 });
     for (let step = 0; step <= 120; step++) {
       frames.push({ ...values(ease(step / 120)), offset: (start + length * step / 120) / duration });
     }
     if (start + length < duration) frames.push({ ...values(1), offset: 1 });
-    const animation = element.animate(frames, { duration, easing: 'linear', fill: 'both' });
+    return frames;
+  }
+
+  function track(element, start, length, ease, values) {
+    const animation = element.animate(keyframes(start, length, ease, values), { duration, easing: 'linear', fill: 'both' });
     animation.pause();
     animation.currentTime = 0;
     animations.push(animation);
     return animation;
   }
 
-  function buildTimeline() {
-    animations.forEach(animation => animation.cancel());
-    animations = [];
+  function layoutMenu() {
     const rect = slot.getBoundingClientRect();
     const buttonRect = button.getBoundingClientRect();
     const right = Math.max(16, innerWidth - rect.right);
@@ -48,10 +50,20 @@
     const width = Math.max(buttonRect.width, Math.min(460, innerWidth - right - 16));
     const height = Math.max(buttonRect.height, Math.min(800, (window.visualViewport?.height || innerHeight) - top - 16));
     Object.assign(dialog.style, { top: `${top}px`, left: `${innerWidth - right - width}px`, width: `${width}px`, height: `${height}px` });
+    return { width, height, buttonWidth: buttonRect.width, buttonHeight: buttonRect.height };
+  }
+
+  function panelValues({ width, height, buttonWidth, buttonHeight }) {
+    return progress => ({
+      clipPath: `inset(0px 0px ${(height - buttonHeight) * (1 - progress)}px ${(width - buttonWidth) * (1 - progress)}px round ${200 - 176 * progress}px)`,
+    });
+  }
+
+  function buildTimeline() {
+    animations.forEach(animation => animation.cancel());
+    animations = [];
     // Span the full clock so reversing never waits on an expanded-panel plateau.
-    track(panel, 0, duration, power3InOut, progress => ({
-      clipPath: `inset(0px 0px ${(height - buttonRect.height) * (1 - progress)}px ${(width - buttonRect.width) * (1 - progress)}px round ${200 - 176 * progress}px)`,
-    }));
+    track(panel, 0, duration, power3InOut, panelValues(layoutMenu()));
     track(button, 0, duration, power3InOut, progress => ({ transform: `translate(${-24 * progress}px, ${24 * progress}px)` }));
     lines.forEach((line, index) => track(line, 0, 200, power3InOut, progress => ({
       transform: `translateY(${(index ? 3.45 : -3.45) * (1 - progress)}px) rotate(${(index ? -45 : 45) * progress}deg)`,
@@ -65,6 +77,13 @@
       transform: `translateY(${20 * (1 - progress)}px)`, opacity: progress,
     })));
     animations[0].onfinish = () => { if (!opened) finishClose(); };
+  }
+
+  function resizeMenu() {
+    if (!dialog.open) return;
+    if (!mobile.matches) { setOpen(false, true); return; }
+    // Update the reveal geometry without restarting its clock or moving focus.
+    animations[0].effect.setKeyframes(keyframes(0, duration, power3InOut, panelValues(layoutMenu())));
   }
 
   function finishClose() {
@@ -138,9 +157,10 @@
     navigation = link.href;
     setOpen(false);
   });
-  mobile.addEventListener('change', () => { if (dialog.open) setOpen(false, true); });
+  mobile.addEventListener('change', resizeMenu);
   reduced.addEventListener('change', () => { if (dialog.open) setOpen(opened, true); });
-  window.addEventListener('resize', () => { if (dialog.open) setOpen(false, true); });
+  window.addEventListener('resize', resizeMenu);
+  window.visualViewport?.addEventListener('resize', resizeMenu);
   document.querySelectorAll('.elementor-3359 nav.elementor-nav-menu--dropdown').forEach(fallback => {
     fallback.inert = true;
     fallback.setAttribute('aria-hidden', 'true');
