@@ -1,0 +1,316 @@
+/*
+ * Desktop header (redesign A), loaded by scripts/lib/desktop-header.mjs.
+ * Scoped to the shared Elementor header container (#top). Mobile keeps its
+ * own menu (mobile-menu.css); tablets only get the new Services submenu.
+ * Colours from docs/design-system: slate #5b6575, ink #27272d, orange #fd8649,
+ * orange-logo #ff6c2a, orange-deep #ad420f, peach-menu #fff2eb, line-menu #f2d1c3.
+ */
+
+/* Services submenu: icon, name and a one-line description (main menu shows from 768px). */
+@media (min-width: 768px) {
+  #top .elementor-nav-menu--main .menu-item-has-children > .sub-menu {
+    width: 400px;
+    min-width: 400px !important;
+    max-width: calc(100vw - 40px) !important;
+    box-sizing: border-box;
+    padding: 10px;
+    background: #fff;
+    border: 1px solid #f2d1c3;
+    border-radius: 12px;
+    box-shadow: 0 12px 32px 0 rgba(34, 42, 55, 0.12);
+  }
+
+  /* Elementor draws orange dividers between dropdown items; the card uses spacing instead. */
+  #top .elementor-nav-menu--main .sub-menu > li {
+    border: 0 !important;
+  }
+
+  #top .elementor-nav-menu--main .sub-menu > li + li { margin-top: 2px; }
+
+  #top .elementor-nav-menu--main .sub-menu .ect-svc-link {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    min-height: 44px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    color: #27272d;
+    fill: #27272d;
+    background: transparent;
+    text-transform: none;
+    white-space: normal;
+    line-height: 1.35;
+    transition: background-color 0.15s ease;
+  }
+
+  /* No Elementor underline pointer inside the card. */
+  #top .elementor-nav-menu--main .sub-menu .ect-svc-link::before,
+  #top .elementor-nav-menu--main .sub-menu .ect-svc-link::after { display: none; }
+
+  #top .ect-svc-icon {
+    flex: 0 0 40px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: #fff2eb;
+    color: #fd8649;
+    transition: background-color 0.15s ease;
+  }
+
+  #top .ect-svc-icon svg {
+    display: block;
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: currentColor;
+  }
+
+  #top .ect-svc-text {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+  }
+
+  #top .ect-svc-title {
+    font-size: 15px;
+    line-height: 20px;
+    font-weight: 600;
+    color: #27272d;
+    transition: color 0.15s ease;
+  }
+
+  #top .ect-svc-desc {
+    font-size: 13px;
+    line-height: 18px;
+    font-weight: 400;
+    letter-spacing: 0;
+    color: #55555e;
+  }
+
+  #top .elementor-nav-menu--main .sub-menu .ect-svc-link:hover,
+  #top .elementor-nav-menu--main .sub-menu .ect-svc-link:focus-visible,
+  #top .elementor-nav-menu--main .sub-menu .ect-svc-link.elementor-item-active {
+    background: #fff2eb;
+    color: #27272d;
+  }
+
+  #top .ect-svc-link:hover .ect-svc-icon,
+  #top .ect-svc-link:focus-visible .ect-svc-icon,
+  #top .ect-svc-link.elementor-item-active .ect-svc-icon { background: #fff; }
+
+  #top .ect-svc-link:hover .ect-svc-title,
+  #top .ect-svc-link:focus-visible .ect-svc-title,
+  #top .ect-svc-link.elementor-item-active .ect-svc-title { color: #ad420f; }
+
+  #top .elementor-nav-menu--main .sub-menu .ect-svc-link:focus-visible {
+    outline: 2px solid #ad420f;
+    outline-offset: 3px;
+  }
+}
+
+@media (min-width: 1025px) {
+  /* Logo, menu centred in the free space, then language and button together. */
+  #top > .e-con-inner {
+    align-items: center;
+    column-gap: 20px;
+  }
+
+  #top .elementor-widget-nav-menu,
+  #top .elementor-widget-nav-menu > .elementor-widget-container { display: contents !important; }
+
+  #top .elementor-nav-menu--main {
+    order: 1 !important;
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: center;
+    min-width: 0;
+    --e-nav-menu-horizontal-menu-item-margin: 22px;
+  }
+
+  #top .ect-lang-wrap {
+    order: 2 !important;
+    margin: 0 !important;
+  }
+
+  #top .elementor-element-682f9a60 {
+    order: 3;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  #top .elementor-element-682f9a60::before {
+    content: "";
+    display: block;
+    flex: 0 0 1px;
+    width: 1px;
+    height: 28px;
+    background: #e9e9e9;
+  }
+
+  /* Top-level links: slate, orange-deep on hover or open, ink for the current page. */
+  #top .elementor-nav-menu--main > .elementor-nav-menu > li > .elementor-item {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  #top .elementor-nav-menu--main > .elementor-nav-menu > li > .elementor-item,
+  #top .elementor-nav-menu--main > .elementor-nav-menu > li > .elementor-item:focus { color: #5b6575; fill: #5b6575; }
+
+  #top .elementor-nav-menu--main > .elementor-nav-menu > li > .elementor-item.elementor-item-active { color: #27272d; fill: #27272d; }
+
+  #top .elementor-nav-menu--main > .elementor-nav-menu > li > .elementor-item:hover,
+  #top .elementor-nav-menu--main > .elementor-nav-menu > li > .elementor-item:focus-visible,
+  #top .elementor-nav-menu--main > .elementor-nav-menu > li > .elementor-item.highlighted { color: #ad420f; fill: #ad420f; }
+
+  #top .elementor-nav-menu--main > .elementor-nav-menu > li > .elementor-item::after {
+    bottom: 2px;
+    height: 3px;
+    border-radius: 3px;
+    background-color: #fd8649;
+  }
+
+  #top .elementor-nav-menu--main > .elementor-nav-menu > li > .elementor-item:focus-visible {
+    outline: 2px solid #ad420f;
+    outline-offset: 3px;
+  }
+
+  /* Chevron instead of the solid caret; it turns when the submenu is open. */
+  #top .elementor-nav-menu--main .has-submenu .sub-arrow svg,
+  #top .elementor-nav-menu--main .has-submenu .sub-arrow i { display: none; }
+
+  #top .elementor-nav-menu--main .has-submenu .sub-arrow::before {
+    content: "";
+    display: block;
+    width: 7px;
+    height: 7px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    border-radius: 1px;
+    transform: translateY(-2px) rotate(45deg);
+    transition: transform 0.2s ease;
+  }
+
+  #top .elementor-nav-menu--main .has-submenu.highlighted .sub-arrow::before {
+    transform: translateY(2px) rotate(225deg);
+  }
+
+  /* The card sits centred under "Servicii", with a notch and a hover bridge. */
+  #top .elementor-nav-menu--main .menu-item-has-children > .sub-menu {
+    top: calc(100% + 14px) !important;
+    left: 50% !important;
+    right: auto !important;
+    margin-left: -200px !important;
+    margin-top: 0 !important;
+  }
+
+  #top .elementor-nav-menu--main .menu-item-has-children > .sub-menu::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -16px;
+    height: 16px;
+  }
+
+  #top .elementor-nav-menu--main .menu-item-has-children > .sub-menu::after {
+    content: "";
+    position: absolute;
+    top: -7px;
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    margin-left: -6px;
+    background: #fff;
+    border-left: 1px solid #f2d1c3;
+    border-top: 1px solid #f2d1c3;
+    transform: rotate(45deg);
+  }
+
+  /* RO | EN: two round 44px halves; the current language is ink on orange. */
+  #top #ect-lang-switch {
+    overflow: visible;
+    background: #fff;
+    border: 1px solid #f2d1c3;
+    box-shadow: none;
+  }
+
+  #top #ect-lang-switch a {
+    width: 44px;
+    min-width: 44px;
+    height: 44px;
+    min-height: 44px;
+    padding: 0;
+    border-radius: 999px;
+    color: #5b6575;
+    background: transparent;
+  }
+
+  #top #ect-lang-switch a + a { border-left: 0; }
+
+  #top #ect-lang-switch a[aria-current="true"],
+  #top #ect-lang-switch a[aria-current="true"]:hover {
+    background: #fd8649;
+    color: #27272d;
+  }
+
+  #top #ect-lang-switch a:not([aria-current="true"]):hover {
+    background: #fff2eb;
+    color: #ad420f;
+  }
+
+  #top #ect-lang-switch a:focus-visible {
+    outline: 2px solid #ad420f;
+    outline-offset: 3px;
+  }
+
+  /* "Ai o idee?": ink label on orange (5.3:1); white with an orange-deep label on hover. */
+  #top .elementor-element-682f9a60 .elementor-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 52px;
+    padding: 0 30px;
+    box-sizing: border-box;
+    border: 2px solid #ff6c2a;
+    border-radius: 30px;
+    background-color: #ff6c2a;
+    color: #27272d;
+    fill: #27272d;
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+
+  #top .elementor-element-682f9a60 .elementor-button:focus:not(:focus-visible):not(:hover) {
+    background-color: #ff6c2a;
+    border-color: #ff6c2a;
+    color: #27272d;
+  }
+
+  #top .elementor-element-682f9a60 .elementor-button:hover,
+  #top .elementor-element-682f9a60 .elementor-button:focus-visible {
+    background-color: #fff;
+    border-color: #ad420f;
+    color: #ad420f;
+    fill: #ad420f;
+  }
+
+  #top .elementor-element-682f9a60 .elementor-button:focus-visible {
+    outline: 2px solid #ad420f;
+    outline-offset: 3px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #top .ect-svc-link,
+  #top .ect-svc-icon,
+  #top .ect-svc-title,
+  #top .elementor-nav-menu--main .has-submenu .sub-arrow::before,
+  #top .elementor-element-682f9a60 .elementor-button { transition: none; }
+}

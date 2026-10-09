@@ -34,3 +34,9 @@ scripts/content-extract.txt
 .tmp/npm-cache/
 .tmp/vercel-cli-cache/
 .tmp/vercel-auth/
+
+# Local QA artifacts and private client documents
+.tmp/
+tmp/
+output/
+docs/clienti/

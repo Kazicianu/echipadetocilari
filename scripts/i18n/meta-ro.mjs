@@ -78,19 +78,3 @@ export const roOrg = {
     addressCountry: 'RO',
   },
 };
-
-/** Home-page FAQ, mirrored from the visible Elementor accordion (AEO). */
-export const roFaqs = [
-  {
-    q: 'Ce este marketingul online și de ce ar trebui să îl folosesc?',
-    a: 'Marketingul online e felul în care te găsesc oamenii care deja caută ce vinzi. O agenție de marketing digital din București face promovare online cu un plan, nu postări aruncate când îți amintești.',
-  },
-  {
-    q: 'Cât timp durează până când voi vedea rezultate din serviciile de marketing online?',
-    a: 'SEO se vede de obicei în câteva luni. Google Ads și social pot aduce clienți în zile sau săptămâni. Marketingul online e treabă lungă: concurența, bugetul și cât de repede răspunzi la lead-uri contează la fel de mult.',
-  },
-  {
-    q: 'Cum pot să încep să lucrez cu agenția voastră de marketing digital?',
-    a: 'Ne scrii din formular sau pe mail. Facem o consultație de 30 de minute, îți zicem ce am face și cam cât costă. Dacă ți se pare cinstit, începem.',
-  },
-];

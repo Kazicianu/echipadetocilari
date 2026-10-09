@@ -6,7 +6,7 @@ import { mkdirSync, readFileSync, writeFileSync, existsSync } from 'fs';
 import path from 'path';
 import { routes } from './routes.mjs';
 import { normalizePageLinks } from '../lib/navigation.mjs';
-import { dictionary, googleAdsDictionary, enPageMeta, enOrg, enFaqs } from './dictionary.mjs';
+import { dictionary, googleAdsDictionary, enPageMeta, enOrg } from './dictionary.mjs';
 import { injectLangSwitcher } from './lang-switcher.mjs';
 import {
   appendToHead,
@@ -19,7 +19,7 @@ import {
   upsertTitle,
 } from '../lib/html.mjs';
 import { faqPage, organization, service, webPage, website } from '../lib/schema.mjs';
-import { extractGoogleAdsFaqs } from '../lib/google-ads-faq.mjs';
+import { extractGoogleAdsFaqs, extractHomeFaqs } from '../lib/faq.mjs';
 
 /**
  * Longest phrase first, so "Servicii SEO" wins over "Servicii".
@@ -85,7 +85,7 @@ function schemasFor(route, meta, site, html) {
     }),
   ];
 
-  if (route.en === '/en/') list.push(faqPage(enFaqs));
+  if (route.en === '/en/') list.push(faqPage(extractHomeFaqs(html)));
   if (route.en === '/en/google-ads-agency/') list.push(faqPage(extractGoogleAdsFaqs(html)));
   if (route.service) {
     list.push(

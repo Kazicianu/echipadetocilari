@@ -6,6 +6,11 @@ export { googleAdsDictionary };
  * Tuned for how people actually search in EN (digital marketing, web design, SEO…).
  */
 export const dictionary = [
+  ['Tu întrebi. Noi lămurim.', 'You ask. We explain.'],
+  ['Despre promovare, bugete și ce merită făcut. Pe înțeles, fără jargon.', 'Marketing, budgets and what is worth doing. Clear answers, without the jargon.'],
+  ['Tocilar 3D cu ochelari și pulover portocaliu, citind o carte', 'A 3D nerd with glasses and an orange sweater, reading a book'],
+  ['Oprește animația', 'Pause animation'],
+  ['Pornește animația', 'Play animation'],
   ["Configurare cont Google Ads","Google Ads account setup"],
   ["Monitorizarea campaniilor de două ori pe săptămână","Campaign monitoring twice a week"],
   ["Adăugarea săptămânală a cuvintelor cheie negative","Weekly negative keyword updates"],
@@ -1488,19 +1493,3 @@ export const enOrg = {
     addressCountry: 'RO',
   },
 };
-
-/** Home-page FAQ (AEO). Mirror of `roFaqs` in meta-ro.mjs. */
-export const enFaqs = [
-  {
-    q: 'What is online marketing and why should I use it?',
-    a: 'Online marketing is how people who already search for what you sell find you. A digital marketing agency in Bucharest does online promotion with a plan, not leftover posts when you remember.',
-  },
-  {
-    q: 'How long until I see results from online marketing services?',
-    a: 'SEO usually shows in a few months. Google Ads and social can bring clients in days or weeks. Online marketing is long work: competition, budget, and how fast you answer leads matter as much as what we do.',
-  },
-  {
-    q: 'How can I start working with your digital marketing agency?',
-    a: 'Write via the form or email. We do a 30-minute consult, tell you what we would do and roughly what it costs. If it feels fair, we start.',
-  },
-];

@@ -1,16 +1,13 @@
 /**
  * RO|EN switcher, injected into the Elementor header on both languages.
  *
- * It lives in the header's normal flow, never `position:fixed` — fixed overlays
- * fought the logo, the CTA and the mobile scroll-to-top button. On mobile the
- * chip must sit immediately left of the burger, which is why the nav widget's
- * container is forced to a flex row with explicit `order` (Elementor sets
- * `margin-left:auto` on the toggle, which would otherwise split the pair).
+ * The desktop chip lives in the header's normal flow. In the mobile layout,
+ * language links are available inside the expanding menu instead of the chip.
  */
 
 const STYLES = `
 <style id="ect-lang-css">
-/* RO|EN chip — always immediately LEFT of the burger on mobile */
+/* RO|EN chip in the desktop header */
 .ect-lang-wrap{
   display:inline-flex !important;
   align-items:center;
@@ -77,7 +74,7 @@ const STYLES = `
 }
 
 @media (max-width:767px){
-  /* Logo left — chip+burger tight group on the right */
+  /* Logo on the left, burger on the right. */
   .elementor-location-header .e-con-inner > .elementor-widget-nav-menu{
     margin-left:auto !important;
     flex:0 0 auto !important;
@@ -92,15 +89,20 @@ const STYLES = `
     display:none !important;
   }
   .elementor-location-header .ect-lang-wrap{
-    order:1 !important;
-    margin:0 .3rem 0 0 !important;
+    display:none !important;
   }
   .elementor-location-header .elementor-menu-toggle{
     order:2 !important;
     margin-left:0 !important;
     margin-right:0 !important;
   }
-  #ect-lang-switch a{min-width:44px;min-height:44px;padding:0 .5rem;font-size:11px}
+}
+
+/* About uses the same mobile header layout on tablets. */
+@media (min-width:768px) and (max-width:1024px){
+  body.elementor-page-3410 .elementor-location-header .ect-lang-wrap{
+    display:none !important;
+  }
 }
 </style>
 `;

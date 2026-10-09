@@ -21,7 +21,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 import { routes, isOwnedPage, routeByRo } from './i18n/routes.mjs';
-import { roPageMeta, roOrg, roFaqs } from './i18n/meta-ro.mjs';
+import { roPageMeta, roOrg } from './i18n/meta-ro.mjs';
 import { generateEnglishPages, patchRomanianPages } from './i18n/generate-en.mjs';
 import {
   appendToBody,
@@ -34,13 +34,15 @@ import {
   upsertTitle,
 } from './lib/html.mjs';
 import { faqPage, organization, service, webPage, website } from './lib/schema.mjs';
-import { extractGoogleAdsFaqs } from './lib/google-ads-faq.mjs';
+import { extractGoogleAdsFaqs, extractHomeFaqs } from './lib/faq.mjs';
 import { junkRedirects, vercelRedirects } from './lib/junk-redirects.mjs';
 import { validateBuild } from './lib/validate.mjs';
 import { enhanceContactForms } from './lib/contact-forms.mjs';
 import { makeStandaloneAssets, validateStandaloneAssets } from './lib/standalone-assets.mjs';
 import { normalizePageLinks } from './lib/navigation.mjs';
 import { ensureSharedContact } from './lib/shared-contact.mjs';
+import { enhanceMobileMenu } from './lib/mobile-menu.mjs';
+import { enhanceDesktopHeader } from './lib/desktop-header.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
@@ -117,7 +119,7 @@ function schemasFor(urlPath, meta, html) {
     webPage({ site: SITE, lang: 'ro', url: urlPath, name: meta.title, description: meta.description }),
   ];
 
-  if (urlPath === '/') list.push(faqPage(roFaqs));
+  if (urlPath === '/') list.push(faqPage(extractHomeFaqs(html)));
   if (urlPath === '/agentie-google-ads/') list.push(faqPage(extractGoogleAdsFaqs(html)));
   if (route?.service) {
     list.push(
@@ -245,7 +247,7 @@ console.log('  EN pages:', enPages.join(', '));
 console.log('→ Preparing standalone forms and local presentation assets…');
 for (const file of walkHtml(outDir)) {
   const html = readFileSync(file, 'utf8');
-  writeFileSync(file, makeStandaloneAssets(enhanceContactForms(html)), 'utf8');
+  writeFileSync(file, makeStandaloneAssets(enhanceMobileMenu(enhanceDesktopHeader(enhanceContactForms(html)))), 'utf8');
 }
 
 // ─── site-level files ───────────────────────────────────────────────────────
