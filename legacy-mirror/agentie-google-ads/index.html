@@ -325,46 +325,55 @@ window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(argumen
   <button id="gads-tab-silver" type="button" role="tab" aria-controls="gads-plan-silver" aria-selected="false" tabindex="-1" data-plan="silver">Silver<br><span>350 €</span></button>
   <button id="gads-tab-gold" type="button" role="tab" aria-controls="gads-plan-gold" aria-selected="false" tabindex="-1" data-plan="gold">Gold<br><span>500 €</span></button>
 </div>
-    <div class="gads-plans" style="display:grid;grid-template-columns:var(--gads-priceCols);gap:20px;align-items:stretch">
-      <article id="gads-plan-start" class="gads-plan gads-plan--start" style="display:flex;flex-direction:column;gap:22px;padding:clamp(24px,3cqi,32px) clamp(22px,3cqi,36px) clamp(32px,3.6cqi,40px);border-radius:15px 15px 15px 70px;background:#fff;box-shadow:0 0 20px rgba(0,0,0,.05)">
-        <div><h3 style="margin:0 0 6px;font-size:20px;font-weight:500;text-transform:capitalize">Start</h3><div style="display:flex;align-items:baseline;gap:6px"><span style="font-size:45px;font-weight:900;line-height:1;color:#FD8649">260 €</span><span>/ lună</span></div></div>
-        <div><div aria-hidden="true" style="height:10px;border-radius:5px;background:#FFF1E7;overflow:hidden;margin-bottom:10px"><span style="display:block;width:33.3%;height:100%;border-radius:5px;background:#FD8649"></span></div><p style="margin:0;font-size:15px;font-weight:500">Pentru lansare și măsurare corectă</p><p style="margin:8px 0 0;font-size:13px">Până la 40 de grupuri de anunțuri Search</p></div>
-        <ul style="list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px;font-size:14px">
-          <li style="display:flex;align-items:center;gap:8px;padding:var(--gads-chPad);border-radius:15px;background:var(--gads-chBg)"><span style="flex:0 0 6px;align-self:flex-start;margin-top:6px;width:6px;height:6px;border-radius:50%;background:#FD8649"></span>Audit inițial și configurare Search</li>
-          <li style="display:flex;align-items:center;gap:8px;padding:var(--gads-chPad);border-radius:15px;background:var(--gads-chBg)"><span style="flex:0 0 6px;align-self:flex-start;margin-top:6px;width:6px;height:6px;border-radius:50%;background:#FD8649"></span>Cuvinte cheie, anunțuri și elemente asociate</li>
-          <li style="display:flex;align-items:center;gap:8px;padding:var(--gads-chPad);border-radius:15px;background:var(--gads-chBg)"><span style="flex:0 0 6px;align-self:flex-start;margin-top:6px;width:6px;height:6px;border-radius:50%;background:#FD8649"></span>Conversii de bază prin GA4 și GTM</li>
-          <li style="display:flex;align-items:center;gap:8px;padding:var(--gads-chPad);border-radius:15px;background:var(--gads-chBg)"><span style="flex:0 0 6px;align-self:flex-start;margin-top:6px;width:6px;height:6px;border-radius:50%;background:#FD8649"></span>Formulare și clickuri pe telefon</li>
-          <li style="display:flex;align-items:center;gap:8px;padding:var(--gads-chPad);border-radius:15px;background:var(--gads-chBg)"><span style="flex:0 0 6px;align-self:flex-start;margin-top:6px;width:6px;height:6px;border-radius:50%;background:#FD8649"></span>Monitorizare și buget de două ori pe săptămână</li>
-          <li style="display:flex;align-items:center;gap:8px;padding:var(--gads-chPad);border-radius:15px;background:var(--gads-chBg)"><span style="flex:0 0 6px;align-self:flex-start;margin-top:6px;width:6px;height:6px;border-radius:50%;background:#FD8649"></span>Cuvinte cheie negative săptămânal</li>
-          <li style="display:flex;align-items:center;gap:8px;padding:var(--gads-chPad);border-radius:15px;background:var(--gads-chBg)"><span style="flex:0 0 6px;align-self:flex-start;margin-top:6px;width:6px;height:6px;border-radius:50%;background:#FD8649"></span>Optimizarea anunțurilor și a licitațiilor</li>
-          <li style="display:flex;align-items:center;gap:8px;padding:var(--gads-chPad);border-radius:15px;background:var(--gads-chBg)"><span style="flex:0 0 6px;align-self:flex-start;margin-top:6px;width:6px;height:6px;border-radius:50%;background:#FD8649"></span>Raport lunar cu conversii și costuri</li>
+    <div class="gads-plans">
+      <article id="gads-plan-start" class="gads-plan gads-plan--start">
+        <header class="gads-plan__header">
+          <h3 class="gads-plan__name">Start</h3>
+          <p class="gads-plan__price"><span>260 €</span><small>/ lună</small></p>
+        </header>
+        <div class="gads-plan__intro"><p>Pentru lansare și măsurare corectă</p><p class="gads-plan__limit">Până la 40 de grupuri de anunțuri Search</p></div>
+        <ul class="gads-plan__list">
+          <li>Audit inițial și configurare Search</li>
+          <li>Cuvinte cheie, anunțuri și elemente asociate</li>
+          <li>Conversii de bază prin GA4 și GTM</li>
+          <li>Formulare și clickuri pe telefon</li>
+          <li>Monitorizare și buget de două ori pe săptămână</li>
+          <li>Cuvinte cheie negative săptămânal</li>
+          <li>Optimizarea anunțurilor și a licitațiilor</li>
+          <li>Raport lunar cu conversii și costuri</li>
         </ul>
-        <a class="gads-v3-hover-7" href="#formular_contact_bottom" style="margin-top:auto;display:flex;align-items:center;justify-content:center;min-height:52px;padding:0 26px;border:2px solid #FD8649;border-radius:30px;background:#fff;color:#FD8649;font-size:16px;font-weight:600;text-decoration:none;white-space:nowrap;transition:background .2s,color .2s">Discută pachetul Start</a>
+        <a class="gads-plan__cta" href="#formular_contact_bottom">Discută pachetul Start</a>
       </article>
-      <article id="gads-plan-silver" class="gads-plan gads-plan--silver" style="display:flex;flex-direction:column;gap:22px;padding:clamp(24px,3cqi,32px) clamp(22px,3cqi,36px) clamp(32px,3.6cqi,40px);border-radius:15px 15px 15px 70px;background:linear-gradient(270deg,#FF6C2A 0%,#FD8649 100%);box-shadow:0 0 10px #FD8649;color:#fff">
-        <div><div style="display:flex;align-items:center;gap:10px;margin-bottom:6px"><h3 style="margin:0;font-size:20px;font-weight:500;text-transform:capitalize;color:#fff">Silver</h3><span style="padding:3px 10px;border-radius:15px;background:#fff;color:#FD8649;font-size:13px;font-weight:600">Include teste de mesaje</span></div><div style="display:flex;align-items:baseline;gap:6px"><span style="font-size:45px;font-weight:900;line-height:1;color:#fff">350 €</span><span style="color:#fff">/ lună</span></div></div>
-        <div><div aria-hidden="true" style="height:10px;border-radius:5px;background:rgba(255,255,255,.35);overflow:hidden;margin-bottom:10px"><span style="display:block;width:66.6%;height:100%;border-radius:5px;background:#fff"></span></div><p style="margin:0;font-size:15px;font-weight:500;color:#fff">Pentru testare și îmbunătățire</p><p style="margin:8px 0 0;font-size:13px">Până la 80 de grupuri de anunțuri Search</p></div>
-        <div><p style="margin:0 0 8px;font-size:14px;font-weight:600;color:#fff">Tot ce include Start, plus:</p><ul style="list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px;font-size:14px;font-weight:400">
-          <li style="display:flex;align-items:center;gap:8px;padding:var(--gads-chPad);border-radius:15px;background:var(--gads-chBgS);color:var(--gads-chFgS)"><span style="flex:0 0 6px;align-self:flex-start;margin-top:6px;width:6px;height:6px;border-radius:50%;background:var(--gads-chDotS)"></span>Monitorizare și buget de trei ori pe săptămână</li>
-          <li style="display:flex;align-items:center;gap:8px;padding:var(--gads-chPad);border-radius:15px;background:var(--gads-chBgS);color:var(--gads-chFgS)"><span style="flex:0 0 6px;align-self:flex-start;margin-top:6px;width:6px;height:6px;border-radius:50%;background:var(--gads-chDotS)"></span>Sistem antifraudă PPC</li>
-          <li style="display:flex;align-items:center;gap:8px;padding:var(--gads-chPad);border-radius:15px;background:var(--gads-chBgS);color:var(--gads-chFgS)"><span style="flex:0 0 6px;align-self:flex-start;margin-top:6px;width:6px;height:6px;border-radius:50%;background:var(--gads-chDotS)"></span>Teste lunare de mesaje în anunțuri</li>
-          <li style="display:flex;align-items:center;gap:8px;padding:var(--gads-chPad);border-radius:15px;background:var(--gads-chBgS);color:var(--gads-chFgS)"><span style="flex:0 0 6px;align-self:flex-start;margin-top:6px;width:6px;height:6px;border-radius:50%;background:var(--gads-chDotS)"></span>Analiza căutărilor, zonelor și dispozitivelor</li>
-          <li style="display:flex;align-items:center;gap:8px;padding:var(--gads-chPad);border-radius:15px;background:var(--gads-chBgS);color:var(--gads-chFgS)"><span style="flex:0 0 6px;align-self:flex-start;margin-top:6px;width:6px;height:6px;border-radius:50%;background:var(--gads-chDotS)"></span>Recomandări lunare pentru pagina de destinație</li>
-          <li style="display:flex;align-items:center;gap:8px;padding:var(--gads-chPad);border-radius:15px;background:var(--gads-chBgS);color:var(--gads-chFgS)"><span style="flex:0 0 6px;align-self:flex-start;margin-top:6px;width:6px;height:6px;border-radius:50%;background:var(--gads-chDotS)"></span>Raport detaliat și discuție lunară de 30 minute</li>
+      <article id="gads-plan-silver" class="gads-plan gads-plan--silver">
+        <header class="gads-plan__header">
+          <h3 class="gads-plan__name">Silver</h3>
+          <p class="gads-plan__price"><span>350 €</span><small>/ lună</small></p>
+        </header>
+        <div class="gads-plan__intro"><p>Pentru testare și îmbunătățire</p><p class="gads-plan__limit">Până la 80 de grupuri de anunțuri Search</p><p class="gads-plan__note">Include teste de mesaje</p></div>
+        <div class="gads-plan__features"><p class="gads-plan__includes">Tot ce include Start, plus:</p><ul class="gads-plan__list">
+          <li>Monitorizare și buget de trei ori pe săptămână</li>
+          <li>Sistem antifraudă PPC</li>
+          <li>Teste lunare de mesaje în anunțuri</li>
+          <li>Analiza căutărilor, zonelor și dispozitivelor</li>
+          <li>Recomandări lunare pentru pagina de destinație</li>
+          <li>Raport detaliat și discuție lunară de 30 minute</li>
         </ul></div>
-        <a class="gads-v3-hover-8" href="#formular_contact_bottom" style="margin-top:auto;display:flex;align-items:center;justify-content:center;min-height:52px;padding:0 26px;border:2px solid #fff;border-radius:30px;background:#fff;color:#FD8649;font-size:16px;font-weight:600;text-decoration:none;white-space:nowrap;transition:background .2s,color .2s">Discută pachetul Silver</a>
+        <a class="gads-plan__cta" href="#formular_contact_bottom">Discută pachetul Silver</a>
       </article>
-      <article id="gads-plan-gold" class="gads-plan gads-plan--gold" style="display:flex;flex-direction:column;gap:22px;padding:clamp(24px,3cqi,32px) clamp(22px,3cqi,36px) clamp(32px,3.6cqi,40px);border-radius:15px 15px 15px 70px;background:#fff;box-shadow:0 0 20px rgba(0,0,0,.05)">
-        <div><h3 style="margin:0 0 6px;font-size:20px;font-weight:500;text-transform:capitalize">Gold</h3><div style="display:flex;align-items:baseline;gap:6px"><span style="font-size:45px;font-weight:900;line-height:1;color:#FD8649">500 €</span><span>/ lună</span></div></div>
-        <div><div aria-hidden="true" style="height:10px;border-radius:5px;background:#FFF1E7;overflow:hidden;margin-bottom:10px"><span style="display:block;width:100%;height:100%;border-radius:5px;background:#FD8649"></span></div><p style="margin:0;font-size:15px;font-weight:500">Pentru conturi cu mai multe campanii</p><p style="margin:8px 0 0;font-size:13px">Până la 120 de grupuri de anunțuri Search</p></div>
-        <div><p style="margin:0 0 8px;font-size:14px;font-weight:600">Tot ce include Silver, plus:</p><ul style="list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px;font-size:14px">
-          <li style="display:flex;align-items:center;gap:8px;padding:var(--gads-chPad);border-radius:15px;background:var(--gads-chBg)"><span style="flex:0 0 6px;align-self:flex-start;margin-top:6px;width:6px;height:6px;border-radius:50%;background:#FD8649"></span>Monitorizare și verificarea bugetului în fiecare zi lucrătoare</li>
-          <li style="display:flex;align-items:center;gap:8px;padding:var(--gads-chPad);border-radius:15px;background:var(--gads-chBg)"><span style="flex:0 0 6px;align-self:flex-start;margin-top:6px;width:6px;height:6px;border-radius:50%;background:#FD8649"></span>Dashboard de performanță în Looker Studio</li>
-          <li style="display:flex;align-items:center;gap:8px;padding:var(--gads-chPad);border-radius:15px;background:var(--gads-chBg)"><span style="flex:0 0 6px;align-self:flex-start;margin-top:6px;width:6px;height:6px;border-radius:50%;background:#FD8649"></span>Plan lunar de optimizare și extindere</li>
-          <li style="display:flex;align-items:center;gap:8px;padding:var(--gads-chPad);border-radius:15px;background:var(--gads-chBg)"><span style="flex:0 0 6px;align-self:flex-start;margin-top:6px;width:6px;height:6px;border-radius:50%;background:#FD8649"></span>Discuția lunară de strategie extinsă la 60 minute</li>
-          <li style="display:flex;align-items:center;gap:8px;padding:var(--gads-chPad);border-radius:15px;background:var(--gads-chBg)"><span style="flex:0 0 6px;align-self:flex-start;margin-top:6px;width:6px;height:6px;border-radius:50%;background:#FD8649"></span>Suport prioritar prin email</li>
+      <article id="gads-plan-gold" class="gads-plan gads-plan--gold">
+        <header class="gads-plan__header">
+          <h3 class="gads-plan__name">Gold</h3>
+          <p class="gads-plan__price"><span>500 €</span><small>/ lună</small></p>
+        </header>
+        <div class="gads-plan__intro"><p>Pentru conturi cu mai multe campanii</p><p class="gads-plan__limit">Până la 120 de grupuri de anunțuri Search</p></div>
+        <div class="gads-plan__features"><p class="gads-plan__includes">Tot ce include Silver, plus:</p><ul class="gads-plan__list">
+          <li>Monitorizare și verificarea bugetului în fiecare zi lucrătoare</li>
+          <li>Dashboard de performanță în Looker Studio</li>
+          <li>Plan lunar de optimizare și extindere</li>
+          <li>Discuția lunară de strategie extinsă la 60 minute</li>
+          <li>Suport prioritar prin email</li>
         </ul></div>
-        <a class="gads-v3-hover-7" href="#formular_contact_bottom" style="margin-top:auto;display:flex;align-items:center;justify-content:center;min-height:52px;padding:0 26px;border:2px solid #FD8649;border-radius:30px;background:#fff;color:#FD8649;font-size:16px;font-weight:600;text-decoration:none;white-space:nowrap;transition:background .2s,color .2s">Discută pachetul Gold</a>
+        <a class="gads-plan__cta" href="#formular_contact_bottom">Discută pachetul Gold</a>
       </article>
     </div>
     <details class="gads-comparison"><summary><span class="gads-comparison-label--closed">Compară pachetele</span><span class="gads-comparison-label--open">Ascunde comparația</span><svg viewBox="0 0 448 512" width="12" height="12" aria-hidden="true" style="fill:#FD8649;transition:transform .2s;transform:none"><path d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"></path></svg></summary><div style="margin-top:24px;background:#fff;border-radius:15px;box-shadow:0 0 20px rgba(0,0,0,.05);overflow-x:auto">

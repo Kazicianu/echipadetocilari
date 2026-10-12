@@ -60,11 +60,6 @@
   --gads-cSz: 44px;
   --gads-cFs: 18px;
   --gads-priceCols: minmax(0,1fr);
-  --gads-chPad: 2px 0;
-  --gads-chBg: transparent;
-  --gads-chBgS: transparent;
-  --gads-chFgS: #fff;
-  --gads-chDotS: #fff;
   container-type: inline-size;
   font-family: Montserrat,sans-serif;
   font-size: 16px;
@@ -95,7 +90,71 @@
 .gads-services > article { min-width: 0; }
 .gads-process-steps::before { content: ''; position: absolute; top: 22px; bottom: 22px; left: 21px; border-left: 2px dashed #fd8649; }
 .gads-process-steps li > div { min-width: 0; }
-.gads-plan { min-width: 0; }
+/* Pricing uses the same white leaf cards as /creare-site-web/. */
+.gads-plans {
+  display: grid;
+  grid-template-columns: var(--gads-priceCols);
+  align-items: stretch;
+  gap: 30px;
+  max-width: 1150px;
+  margin-inline: auto;
+}
+.gads-page .gads-plan {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+  padding: 40px 24px;
+  border: 3px solid var(--gads-orange);
+  border-radius: 15px 15px 15px 70px;
+  background: #fff;
+  box-shadow: 0 0 20px rgba(0,0,0,.05);
+  color: #27272d;
+}
+.gads-page .gads-plan--silver { box-shadow: 0 0 20px var(--gads-orange); }
+.gads-plan__header { text-align: center; }
+.gads-page .gads-plan__name { margin: 0 0 16px; color: var(--gads-orange); font-size: 20px; font-weight: 500; line-height: 1.2; }
+.gads-page .gads-plan__price { display: flex; flex-direction: column; align-items: center; gap: 8px; margin: 0; font-size: 35px; font-weight: 600; }
+.gads-plan__price small { color: #55555e; font-size: 15px; font-weight: 300; }
+.gads-plan__intro { text-align: center; }
+.gads-plan__intro p { margin: 0; font-size: 15px; font-weight: 500; }
+.gads-plan__intro .gads-plan__limit { margin-top: 8px; font-size: 13px; font-weight: 300; color: #55555e; }
+.gads-plan__intro .gads-plan__note { margin-top: 8px; font-size: 13px; }
+.gads-plan__features { min-width: 0; }
+.gads-page .gads-plan__includes { margin: 0 0 12px; font-size: 15px; font-weight: 600; }
+.gads-page .gads-plan__list { display: flex; flex-direction: column; gap: 12px; margin: 0; padding: 0; list-style: none; font-size: 15px; font-weight: 500; line-height: 1.4; }
+.gads-plan__list li { display: flex; align-items: flex-start; gap: 12px; min-width: 0; }
+.gads-plan__list li::before {
+  content: '';
+  flex: 0 0 15px;
+  width: 15px;
+  height: 15px;
+  margin-top: 3px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%2334b233' d='M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.gads-page .gads-plan__cta {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  max-width: 100%;
+  min-height: 52px;
+  margin-top: auto;
+  padding: 12px 24px;
+  border: 3px solid #fff;
+  border-radius: 30px;
+  background: var(--gads-orange);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: center;
+  text-decoration: none;
+  transition: background 160ms ease, color 160ms ease, border-color 160ms ease, transform 160ms ease-out;
+}
+.gads-page .gads-plan__cta:active { transform: scale(.98); }
 .gads-plan-picker { position: relative; isolation: isolate; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 6px; padding: 6px; margin-bottom: 16px; border-radius: 30px; background: #fff; box-shadow: 0 0 20px rgba(0,0,0,.06); }
 .gads-page .gads-plan-picker button { box-sizing: border-box; min-height: 56px; padding: 1px 6px; border: 0; border-radius: 24px; cursor: pointer; font: 600 14px/1.25 Montserrat,sans-serif; white-space: normal; background: transparent; color: #27272d; }
 .gads-page .gads-plan-picker button[aria-selected=true] { background: linear-gradient(270deg,#ff6c2a,#fd8649); color: #fff; }
@@ -133,7 +192,14 @@
 .gads-plan :is(a,li), .gads-page a[href='#formular_contact_bottom'] { white-space: normal; overflow-wrap: anywhere; }
 @container (width > 760px) {
   .gads-plans { --gads-priceCols: repeat(3,minmax(0,1fr)); }
+  .gads-page .gads-plan { padding-block: 50px; }
+  .gads-page .gads-plan__name { font-size: 25px; }
+  .gads-page .gads-plan__price { font-size: 46px; }
+  .gads-page .gads-plan__list { font-size: 16px; }
   .gads-plan-picker { display: none; }
+}
+@container (width > 1100px) {
+  .gads-page .gads-plan { padding: 60px 40px; }
 }
 @container (width > 900px) {
   .gads-page > * {
@@ -163,11 +229,6 @@
     --gads-stepAlign: center;
     --gads-cSz: 64px;
     --gads-cFs: 24px;
-    --gads-chPad: 7px 14px;
-    --gads-chBg: #fff1e7;
-    --gads-chBgS: #fff;
-    --gads-chFgS: #27272d;
-    --gads-chDotS: #fd8649;
   }
   .gads-wide-only { display: block; }
   .gads-narrow-only { display: none !important; }
@@ -176,12 +237,13 @@
 }
 @media (hover:hover) and (pointer:fine) {
   .gads-comparison > summary:hover { background: #ffe3d0; }
+  .gads-page .gads-plan__cta:hover { border-color: var(--gads-orange); background: #fff; color: var(--gads-orange); }
 }
 @media (prefers-reduced-motion:reduce) {
   .gads-page *, .gads-page *::before, .gads-page *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
 }
 @media (prefers-contrast:more) {
-  .gads-services > article, .gads-plan, .gads-faq-item { outline: 1px solid #27272d; box-shadow: none; }
+  .gads-services > article, .gads-page .gads-plan, .gads-faq-item { outline: 1px solid #27272d; box-shadow: none; }
 }
 /* Controls respond on press. Informational cards stay still. */
 .gads-page a[class*='gads-v3-hover-'] { transition: background 160ms, color 160ms, transform 160ms, box-shadow 160ms !important; }
@@ -195,7 +257,7 @@
   .gads-page :is(.gads-v3-hover-10,.gads-v3-hover-11):hover { transform:translateY(-10px); box-shadow:0 0 20px rgba(253,134,73,.69) !important; }
 }
 @media (prefers-reduced-motion:reduce) {
-  .gads-page [class*='gads-v3-hover-']:hover { transform: none !important; }
+  .gads-page [class*='gads-v3-hover-']:hover, .gads-page .gads-plan__cta:active { transform: none !important; }
 }
 
 
