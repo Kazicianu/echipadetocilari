@@ -121,8 +121,9 @@ export function applyIndexPolicy(html, { indexable, canonical }) {
 /** ro / en / x-default alternates; x-default points at Romanian (primary market). */
 export function injectHreflang(html, { site, roPath, enPath }) {
   const ro = `${site}${roPath === '/' ? '/' : roPath}`;
-  const en = `${site}${enPath}`;
   html = html.replace(/<link\s+rel=["']alternate["'][^>]*hreflang[^>]*>\s*/gi, '');
+  if (!enPath) return html;
+  const en = `${site}${enPath}`;
   return appendToHead(
     html,
     [

@@ -7,7 +7,7 @@ import { dictionary, googleAdsDictionary } from '../i18n/dictionary.mjs';
 import { injectLangSwitcher } from '../i18n/lang-switcher.mjs';
 import { routes } from '../i18n/routes.mjs';
 import { enhanceMobileMenu } from './mobile-menu.mjs';
-import { normalizePageLinks } from './navigation.mjs';
+import { normalizePageLinks, removeUnavailableMenuLinks } from './navigation.mjs';
 
 const source = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../legacy-mirror');
 
@@ -42,6 +42,7 @@ function links(html, className) {
 function preparedPage(route, language) {
   let html = readFileSync(path.join(source, route.roFile), 'utf8');
   if (language === 'en') {
+    html = removeUnavailableMenuLinks(html, 'en');
     const pairs = [...(route.ro === '/agentie-google-ads/' ? googleAdsDictionary : []), ...dictionary]
       .filter(([from, to]) => from && from !== to)
       .sort((a, b) => b[0].length - a[0].length);
@@ -51,17 +52,17 @@ function preparedPage(route, language) {
   return injectLangSwitcher(html, language, route.ro, route.en);
 }
 
-test('the expanding mobile menu preserves all six translated links on every RO and EN page', () => {
+test('the expanding mobile menu preserves every available translated link on each RO and EN page', () => {
   let checkedCurrentLinks = 0;
   for (const route of routes) {
-    for (const language of ['ro', 'en']) {
+    for (const language of route.en ? ['ro', 'en'] : ['ro']) {
       const original = preparedPage(route, language);
       const expected = links(menu(original, 'elementor-nav-menu--dropdown'));
       const enhanced = enhanceMobileMenu(original);
       const actual = links(enhanced, 'ect-mobile-menu-link');
       const label = `${route[language]} (${language})`;
 
-      assert.equal(expected.length, 6, `${label}: source has six mobile links`);
+      assert.equal(expected.length, language === 'ro' ? 7 : 6, `${label}: source has only available mobile links`);
       assert.deepEqual(actual, expected, `${label}: copied links retain routes, labels and current page`);
       checkedCurrentLinks += actual.filter(link => link.current === 'page').length;
       assert.equal(menu(enhanced, 'elementor-nav-menu--main'), menu(original, 'elementor-nav-menu--main'), `${label}: desktop markup remains intact`);

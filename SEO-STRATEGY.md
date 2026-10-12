@@ -4,7 +4,7 @@ Salvat la cererea utilizatorului la 18 septembrie 2026. Acest document păstreaz
 
 ## Oferta și arhitectura
 
-Homepage-ul este punctul central pentru șapte grupuri tematice. Oferta este limitată la creare site web, creare magazin online, dezvoltare aplicații web și mobile, SEO și vizibilitate în AI, Google Ads, Facebook Ads cu Instagram și mentenanță site. Nu promova logo design sau copywriting ca servicii separate. Paginile dedicate pentru magazin online, dezvoltare aplicații și Facebook Ads au fost retrase din implementarea locală la cererea utilizatorului; rândurile lor de mai jos rămân cercetare pentru o eventuală etapă viitoare.
+Homepage-ul este punctul central pentru șapte grupuri tematice. Oferta este limitată la creare site web, creare magazin online, dezvoltare aplicații web și mobile, SEO și vizibilitate în AI, Google Ads, Facebook Ads cu Instagram și mentenanță site. Nu promova logo design sau copywriting ca servicii separate. Pagina dedicată pentru magazin online a fost readusă în implementare (design aprobat pe 12.10.2026, pachet în `docs/ui/creare-magazin-online/`). Paginile pentru dezvoltare aplicații și Facebook Ads rămân retrase; rândurile lor de mai jos rămân cercetare pentru o eventuală etapă viitoare.
 
 Păstrează URL-urile existente, cu excepția migrării explicite a paginii Google Ads descrise mai jos, fără a introduce obligatoriu un director /servicii/. Nu crea pagini separate pentru sinonime precum creare site, realizare site și creare website. Delimitează intenția homepage-ului de cea a paginilor de servicii.
 

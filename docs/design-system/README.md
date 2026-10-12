@@ -29,9 +29,10 @@ The live, editable version is the "Echipa de Tocilari" design system in your Cla
 
 ## Color
 
+- User instruction: preserve the exact orange supplied in the design, screenshots or colour values. Never darken, lighten or replace it with `orange-deep`, brown or another shade to meet contrast targets, including through `prefers-contrast`. The current base orange is `#fd8649`; a new value supplied by the user takes precedence. Preserve explicitly approved colour combinations too. This applies to existing and future RO and EN pages and takes precedence over general contrast guidance. Use the other orange tokens only where the approved design calls for them.
 - Orange and white carry the brand; `ink` carries the words. Use `white` for the page and cards and `ink` for text.
 - Use `orange` for fills (filled buttons, process steps, the highlight chip, the checklist panel, the active language, back-to-top), for icons, and for display headings, eyebrows and card titles on `white`.
-- Contrast: `orange` against `white` is 2.4:1 in both directions, under WCAG AA even for large text. The current pages set orange headings and labels on white and white labels on orange anyway. The passing pairs that already exist are `ink` on `orange` (6.1:1, the Google Ads button hover) and `orange-deep` on `white` (5.9:1, the header submenu).
+- Contrast notes are informational and do not authorise recolouring the user's orange or changing approved combinations. `orange` against `white` is 2.4:1 in both directions, under WCAG AA even for large text. The current pages set orange headings and labels on white and white labels on orange. The passing pairs that already exist are `ink` on `orange` (6.1:1, the Google Ads button hover) and `orange-deep` on `white` (5.9:1, the header submenu).
 - `orange-logo` is the logo's own orange. On the site it is the header button fill, the menu hover text and the first stop of the CTA gradients.
 - Orange gradients mark conversion moments: the contact section runs 135deg from `orange-light` to `orange-hot`; CTA bands run from `orange-logo` through `orange` to `orange-light`; the About CTA runs 270deg from `orange-logo` to `orange`.
 - Warm tints stay quiet: `peach` for number circles, pressed buttons and open toggles, `cream` for speech bubbles, `surface-soft` for an alternate section. Hairlines are `line`.
@@ -91,7 +92,7 @@ The live, editable version is the "Echipa de Tocilari" design system in your Cla
 
 - Labels: every form field has an accessible name (the contact form adds `aria-label` at build time) and the right input type and autocomplete.
 - Targets: 44 × 44px minimum.
-- Text contrast: see Color. The failing pairs live in the token notes for `orange`, `orange-logo`, `orange-light`, `orange-hot`, `field` and `line-faq`.
+- Text contrast: see Color and preserve the user's supplied orange and approved combinations. The failing pairs live in the token notes for `orange`, `orange-logo`, `orange-light`, `orange-hot`, `field` and `line-faq`; these notes do not authorise colour substitutions.
 
 ## Components
 

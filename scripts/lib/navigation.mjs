@@ -1,7 +1,10 @@
 import { routes } from '../i18n/routes.mjs';
 
 const productionOrigin = 'https://www.echipadetocilari.ro';
-const pageRoutes = new Map(routes.flatMap(route => [[route.ro, route], [route.en, route]]));
+const pageRoutes = new Map(routes.flatMap(route => [
+  [route.ro, route],
+  ...(route.en ? [[route.en, route]] : []),
+]));
 const routeAliases = new Map([
   ['/pay-per-click/', '/agentie-google-ads/'],
   ['/en/ppc-advertising/', '/en/google-ads-agency/'],
@@ -50,10 +53,26 @@ export function normalizePageLinks(html, { pageUrl, language } = {}) {
 
       const hreflang = attribute(tag, 'hreflang')?.toLowerCase();
       const targetLanguage = ['ro', 'en'].includes(hreflang) ? hreflang : language;
-      const target = targetLanguage ? route[targetLanguage] : canonicalPathname;
+      const target = targetLanguage ? (route[targetLanguage] || route.ro) : canonicalPathname;
       // Preserve the source query/fragment exactly, including HTML entities.
       const suffix = href.match(/[?#][\s\S]*$/)?.[0] || '';
       return `${prefix}${quote}${target}${suffix}${quote}`;
     });
   });
+}
+
+/** Keep service menu items only when that page exists in the requested language. */
+export function removeUnavailableMenuLinks(html, language) {
+  if (!['ro', 'en'].includes(language)) throw new TypeError('menu language must be ro or en');
+  return html.replace(/<header\b[\s\S]*?<\/header>/gi, header =>
+    header.replace(/<li\b[^>]*>\s*<a\b([^>]*)>(?:(?!<\/a>)[\s\S])*<\/a>\s*<\/li>\s*/gi, (item, attrs) => {
+      const href = attribute(` ${attrs}`, 'href');
+      let url;
+      try { url = new URL(href, productionOrigin); }
+      catch { return item; }
+      if (!ownHosts.has(url.hostname)) return item;
+      const pathname = url.pathname.replace(/\/?$/, '/');
+      const route = pageRoutes.get(pathname);
+      return route && !route[language] ? '' : item;
+    }));
 }

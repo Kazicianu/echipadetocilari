@@ -48,6 +48,7 @@ export function validateBuild({ outDir, files, urlPathOf, indexable }) {
     if (html.includes('/en/en/')) errors.push(`${rel(file)}: doubled /en/en/ path`);
 
     if (owned) {
+      const route = routes.find(route => route.ro === urlPath || route.en === urlPath);
       const pageCopy = html.replace(/<!--[\s\S]*?-->|<script\b[^>]*>[\s\S]*?<\/script>|<style\b[^>]*>[\s\S]*?<\/style>/gi, '');
       const h1Count = (pageCopy.match(/<h1\b/gi) || []).length;
       if (h1Count !== 1) errors.push(`${rel(file)}: expected one H1, found ${h1Count}`);
@@ -62,19 +63,23 @@ export function validateBuild({ outDir, files, urlPathOf, indexable }) {
       if (!desc || desc[1].trim().length < 50) {
         errors.push(`${rel(file)}: missing or too-short description`);
       }
-      if (!html.includes('id="ect-lang-switch"')) {
+      if (route?.en && !html.includes('id="ect-lang-switch"')) {
         errors.push(`${rel(file)}: language switcher missing`);
       }
+      if (!route?.en && html.includes('id="ect-lang-switch"')) {
+        errors.push(`${rel(file)}: language switcher has no English page`);
+      }
       const alt = (html.match(/rel=["']alternate["'][^>]*hreflang/gi) || []).length;
-      if (alt !== 3) errors.push(`${rel(file)}: expected 3 hreflang links, found ${alt}`);
+      const expectedAlt = route?.en ? 3 : 0;
+      if (alt !== expectedAlt) errors.push(`${rel(file)}: expected ${expectedAlt} hreflang links, found ${alt}`);
     }
   }
 
-  // Every declared route must have produced both language variants.
+  // Every declared route must produce RO, plus EN only when one is approved.
   const built = new Set(files.map((f) => urlPathOf(f)));
   for (const route of routes) {
     if (!built.has(route.ro)) errors.push(`missing RO page ${route.ro}`);
-    if (!built.has(route.en)) errors.push(`missing EN page ${route.en}`);
+    if (route.en && !built.has(route.en)) errors.push(`missing EN page ${route.en}`);
   }
 
   return errors;

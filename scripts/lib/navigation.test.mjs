@@ -4,7 +4,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import test from 'node:test';
 import { routes } from '../i18n/routes.mjs';
-import { normalizePageLinks } from './navigation.mjs';
+import { normalizePageLinks, removeUnavailableMenuLinks } from './navigation.mjs';
 
 const source = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../legacy-mirror');
 const link = href => `<a href="${href}">link</a>`;
@@ -29,6 +29,14 @@ test('English copies translate resolved routes without confusing the current pag
   assert.equal(normalizePageLinks(link('index.html'), { pageUrl: '/en/portfolio/' }), link('/en/portfolio/'));
   assert.equal(normalizePageLinks(link('../contact/index.html'), { pageUrl: '/en/portfolio/' }), link('/en/contact/'));
   assert.equal(normalizePageLinks(link('/en/portfolio/'), opts), link('/en/portfolio/'));
+});
+
+test('a cloned template keeps its footer destinations instead of retargeting them to the new page', () => {
+  const template = readFileSync(path.join(source, 'creare-site-web/index.html'), 'utf8');
+  const prepared = normalizePageLinks(template, { pageUrl: '/creare-site-web/' });
+  const cloned = normalizePageLinks(prepared, { pageUrl: '/creare-magazin-online/' });
+  const footer = cloned.match(/<footer\b[\s\S]*?<\/footer>/i)?.[0];
+  assert.match(footer, /href="\/creare-site-web\/"[^>]*>\s*Creare Site Web\s*<\/a>/);
 });
 
 test('query strings and fragments survive without being double-escaped', () => {
@@ -56,12 +64,14 @@ test('actual current-page menu links resolve correctly for every RO page and EN 
     for (const tag of currentLinks) {
       checkedCurrentLinks++;
       assert.match(normalizePageLinks(tag, { pageUrl: route.ro }), new RegExp(`href="${route.ro}"`));
-      assert.match(normalizePageLinks(tag, { pageUrl: route.ro, language: 'en' }), new RegExp(`href="${route.en}"`));
+      if (route.en) assert.match(normalizePageLinks(tag, { pageUrl: route.ro, language: 'en' }), new RegExp(`href="${route.en}"`));
     }
     const ro = normalizePageLinks(original, { pageUrl: route.ro });
     assert.equal(normalizePageLinks(ro, { pageUrl: route.ro }), ro);
-    const en = normalizePageLinks(ro, { pageUrl: route.ro, language: 'en' });
-    assert.equal(normalizePageLinks(en, { pageUrl: route.en, language: 'en' }), en);
+    if (route.en) {
+      const en = normalizePageLinks(ro, { pageUrl: route.ro, language: 'en' });
+      assert.equal(normalizePageLinks(en, { pageUrl: route.en, language: 'en' }), en);
+    }
   }
   assert.ok(checkedCurrentLinks >= 12, 'checks the actual desktop and mobile current-page menus');
 });
@@ -87,6 +97,7 @@ test('legacy Google Ads routes migrate to canonical pages while preserving langu
 test('desktop and mobile menus expose current service pages on every page', () => {
   const servicePaths = [
     '/creare-site-web/',
+    '/creare-magazin-online/',
     '/servicii-seo/',
     '/agentie-google-ads/',
     '/administrare-site/',
@@ -106,4 +117,21 @@ test('desktop and mobile menus expose current service pages on every page', () =
       }
     }
   }
+});
+
+test('Romanian-only service links never acquire an undefined English URL', () => {
+  assert.equal(normalizePageLinks(link('/creare-magazin-online/'), { pageUrl: '/', language: 'en' }), link('/creare-magazin-online/'));
+  assert.equal(normalizePageLinks(link('index.html'), { pageUrl: '/creare-magazin-online/', language: 'en' }), link('/creare-magazin-online/'));
+});
+
+test('English menus omit untranslated pages while Romanian menus and contextual links remain intact', () => {
+  const sourceHtml = '<header><nav><ul><li><a href="/services/">Servicii</a><ul><li><a href="/creare-site-web/">Creare site web</a></li><li class="menu-item"><a href="/creare-magazin-online/" aria-current="page">Creare magazin online</a></li></ul></li><li><a href="https://example.com/creare-magazin-online/">External</a></li></ul></nav></header><main><a href="/creare-magazin-online/">Contextual</a></main>';
+  const english = removeUnavailableMenuLinks(sourceHtml, 'en');
+  const englishHeader = english.match(/<header>[\s\S]*?<\/header>/)[0];
+  assert.doesNotMatch(englishHeader, /href="\/creare-magazin-online\/"/);
+  assert.match(englishHeader, /href="\/creare-site-web\/"/);
+  assert.match(englishHeader, /https:\/\/example\.com\/creare-magazin-online\//);
+  assert.match(english, /<main><a href="\/creare-magazin-online\/">Contextual<\/a><\/main>/);
+  assert.equal(removeUnavailableMenuLinks(sourceHtml, 'ro'), sourceHtml);
+  assert.equal(removeUnavailableMenuLinks(english, 'en'), english);
 });

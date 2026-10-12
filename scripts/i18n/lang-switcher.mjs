@@ -74,20 +74,7 @@ const STYLES = `
 }
 
 @media (max-width:767px){
-  /* Logo on the left, burger on the right. */
-  .elementor-location-header .e-con-inner > .elementor-widget-nav-menu{
-    margin-left:auto !important;
-    flex:0 0 auto !important;
-    width:auto !important;
-    max-width:none !important;
-  }
-  .elementor-location-header .elementor-widget-nav-menu .elementor-widget-container{
-    justify-content:flex-end;
-    gap:0;
-  }
-  .elementor-location-header .elementor-nav-menu--main{
-    display:none !important;
-  }
+  /* Shared mobile header alignment is owned by mobile-menu.css. */
   .elementor-location-header .ect-lang-wrap{
     display:none !important;
   }
@@ -112,12 +99,12 @@ function stripPrevious(html) {
   return html
     .replace(/<!-- language switcher[\s\S]*?<\/nav>\s*/gi, '')
     .replace(/<style id="ect-lang-css">[\s\S]*?<\/style>\s*/gi, '')
-    .replace(/<nav id="ect-lang-switch"[\s\S]*?<\/nav>\s*/gi, '')
-    .replace(/<div id="ect-lang-switch"[\s\S]*?<\/div>\s*/gi, '')
     .replace(
       /<(?:div|span) class="(?:elementor-element )?ect-lang-wrap[^"]*"[\s\S]*?<\/nav>\s*<\/(?:div|span)>\s*/gi,
       ''
     )
+    .replace(/<nav id="ect-lang-switch"[\s\S]*?<\/nav>\s*/gi, '')
+    .replace(/<div id="ect-lang-switch"[\s\S]*?<\/div>\s*/gi, '')
     .replace(/<li class="menu-item[^"]*ect-lang-menu[^"]*"[\s\S]*?<\/li>\s*/gi, '')
     .replace(
       /<li class="menu-item[^"]*"[\s\S]*?<a[^>]*>\s*(Română|Romana|English)\s*<\/a>\s*<\/li>\s*/gi,
@@ -129,9 +116,10 @@ function stripPrevious(html) {
  * @param {string} html
  * @param {'ro'|'en'} currentLang
  * @param {string} roHref
- * @param {string} enHref
+ * @param {string} [enHref] Omitted for a Romanian-only page.
  */
 export function injectLangSwitcher(html, currentLang, roHref, enHref) {
+  if (!enHref) return stripPrevious(html);
   const wrap = `
 <span class="ect-lang-wrap">
 <nav id="ect-lang-switch" aria-label="Language">

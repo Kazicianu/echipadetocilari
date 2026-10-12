@@ -3,7 +3,8 @@
  * (natural search slugs).
  *
  * This list is the single source of truth for: which mirror pages we treat as
- * ours, which get EN twins, hreflang pairs, the sitemap, and llms.txt. Theme
+ * ours, which get EN twins when en/enFile are set, hreflang pairs, the sitemap,
+ * and llms.txt. Romanian-only pages omit their English fields until approved. Theme
  * demo posts and attachment HTML are deleted from the mirror and 301'd — see
  * `scripts/lib/junk-redirects.mjs`. `isOwnedPage` still gates schema/index.
  *
@@ -34,6 +35,12 @@ export const routes = [
     labelRo: 'Creare site web',
     labelEn: 'Website design',
     service: { ro: 'Creare site web', en: 'Website design and development' },
+  },
+  {
+    ro: '/creare-magazin-online/',
+    roFile: 'creare-magazin-online/index.html',
+    labelRo: 'Creare magazin online',
+    service: { ro: 'Creare magazin online' },
   },
   {
     ro: '/servicii-seo/',
@@ -105,11 +112,12 @@ export const routes = [
   },
 ];
 
-export const roToEn = Object.fromEntries(routes.map((r) => [r.ro, r.en]));
-export const enToRo = Object.fromEntries(routes.map((r) => [r.en, r.ro]));
+export const pairedRoutes = routes.filter((route) => route.en && route.enFile);
+export const roToEn = Object.fromEntries(pairedRoutes.map((r) => [r.ro, r.en]));
+export const enToRo = Object.fromEntries(pairedRoutes.map((r) => [r.en, r.ro]));
 
 const roPaths = new Set(routes.map((r) => r.ro));
-const enPaths = new Set(routes.map((r) => r.en));
+const enPaths = new Set(pairedRoutes.map((r) => r.en));
 
 /**
  * Is this URL path one of our real pages?

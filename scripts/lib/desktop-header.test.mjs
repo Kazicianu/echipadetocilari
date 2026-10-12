@@ -8,7 +8,7 @@ import { injectLangSwitcher } from '../i18n/lang-switcher.mjs';
 import { routes } from '../i18n/routes.mjs';
 import { enhanceDesktopHeader, serviceMenuCopy } from './desktop-header.mjs';
 import { enhanceMobileMenu } from './mobile-menu.mjs';
-import { normalizePageLinks } from './navigation.mjs';
+import { normalizePageLinks, removeUnavailableMenuLinks } from './navigation.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const source = path.join(root, 'legacy-mirror');
@@ -17,6 +17,7 @@ const stylesheet = '/wp-content/ect-pages/desktop-header.css';
 function preparedPage(route, language) {
   let html = readFileSync(path.join(source, route.roFile), 'utf8');
   if (language === 'en') {
+    html = removeUnavailableMenuLinks(html, 'en');
     html = html.replace(/<html\b([^>]*)\blang="[^"]*"/i, '<html$1lang="en"');
     const pairs = [...(route.ro === '/agentie-google-ads/' ? googleAdsDictionary : []), ...dictionary]
       .filter(([from, to]) => from && from !== to)
@@ -46,18 +47,18 @@ function submenuLinks(html) {
 }
 
 const copyByHref = new Map(routes.filter(route => serviceMenuCopy[route.ro])
-  .flatMap(route => [[route.ro, serviceMenuCopy[route.ro].ro], [route.en, serviceMenuCopy[route.ro].en]]));
+  .flatMap(route => [[route.ro, serviceMenuCopy[route.ro].ro], ...(route.en ? [[route.en, serviceMenuCopy[route.ro].en]] : [])]));
 
-test('every RO and EN page gets the four described service links in its own language', () => {
+test('every RO and EN page gets all available described service links in its own language', () => {
   for (const route of routes) {
-    for (const language of ['ro', 'en']) {
+    for (const language of route.en ? ['ro', 'en'] : ['ro']) {
       const label = `${route[language]} (${language})`;
       const original = preparedPage(route, language);
       const enhanced = enhanceDesktopHeader(original);
       const before = submenuLinks(original);
       const after = submenuLinks(enhanced);
 
-      assert.equal(after.length, 4, `${label}: four service links`);
+      assert.equal(after.length, language === 'ro' ? 5 : 4, `${label}: only available service links`);
       assert.ok(after.every(link => link.enhanced), `${label}: every service link is enhanced`);
       assert.deepEqual(after.map(({ href, current, title }) => ({ href, current, title })),
         before.map(({ href, current, title }) => ({ href, current, title })), `${label}: routes, labels and current page kept`);

@@ -156,6 +156,21 @@
 }
 
 @media (max-width: 767px) {
+  /* Header layout also applies to pages without an English language switch. */
+  .elementor-location-header .e-con-inner > .elementor-widget-nav-menu {
+    margin-left: auto !important;
+    flex: 0 0 auto !important;
+    width: auto !important;
+    max-width: none !important;
+  }
+  .elementor-location-header .elementor-widget-nav-menu > .elementor-widget-container {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0;
+  }
+  .elementor-location-header .elementor-nav-menu--main { display: none !important; }
   .ect-mobile-menu-slot { display: inline-flex; flex: 0 0 var(--ect-mobile-menu-button-size); width: var(--ect-mobile-menu-button-size); height: var(--ect-mobile-menu-button-size); order: 2; }
   .ect-mobile-menu-ready .ect-mobile-menu-toggle { display: flex; }
   .elementor-3359 .elementor-element.elementor-element-6c9dcdd8 > .elementor-widget-container { flex-wrap: nowrap; }

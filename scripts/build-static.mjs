@@ -20,7 +20,7 @@ import {
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-import { routes, isOwnedPage, routeByRo } from './i18n/routes.mjs';
+import { routes, pairedRoutes, isOwnedPage, routeByRo } from './i18n/routes.mjs';
 import { roPageMeta, roOrg } from './i18n/meta-ro.mjs';
 import { generateEnglishPages, patchRomanianPages } from './i18n/generate-en.mjs';
 import {
@@ -120,6 +120,7 @@ function schemasFor(urlPath, meta, html) {
   ];
 
   if (urlPath === '/') list.push(faqPage(extractHomeFaqs(html)));
+  if (urlPath === '/creare-magazin-online/') list.push(faqPage(extractHomeFaqs(html)));
   if (urlPath === '/agentie-google-ads/') list.push(faqPage(extractGoogleAdsFaqs(html)));
   if (route?.service) {
     list.push(
@@ -264,8 +265,8 @@ writeFileSync(
 
 const llmsPages = routes
   .flatMap((r) => [
-    `- ${SITE}${r.ro === '/' ? '/' : r.ro} (ro) — ${r.labelRo}`,
-    `- ${SITE}${r.en} (en) — ${r.labelEn}`,
+    `- ${SITE}${r.ro === '/' ? '/' : r.ro} (ro) · ${r.labelRo}`,
+    ...(r.en ? [`- ${SITE}${r.en} (en) · ${r.labelEn}`] : []),
   ])
   .join('\n');
 writeFileSync(
@@ -277,13 +278,13 @@ writeFileSync(
 if (INDEXABLE) {
   const entry = (loc, alternates) =>
     `  <url><loc>${SITE}${loc}</loc><changefreq>weekly</changefreq>${alternates}</url>`;
-  const alternatesFor = (r) =>
+  const alternatesFor = (r) => !r.en ? '' :
     `<xhtml:link rel="alternate" hreflang="ro" href="${SITE}${r.ro}"/>` +
     `<xhtml:link rel="alternate" hreflang="en" href="${SITE}${r.en}"/>` +
     `<xhtml:link rel="alternate" hreflang="x-default" href="${SITE}${r.ro}"/>`;
 
   const urls = routes
-    .flatMap((r) => [entry(r.ro, alternatesFor(r)), entry(r.en, alternatesFor(r))])
+    .flatMap((r) => [entry(r.ro, alternatesFor(r)), ...(r.en ? [entry(r.en, alternatesFor(r))] : [])])
     .join('\n');
 
   writeFileSync(
@@ -311,4 +312,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(`✓ Build complete → dist/ (RO + EN, ${routes.length * 2} own pages, indexable=${INDEXABLE})`);
+console.log(`✓ Build complete → dist/ (${routes.length} RO + ${pairedRoutes.length} EN own pages, indexable=${INDEXABLE})`);

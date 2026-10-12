@@ -25,6 +25,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { ensureSharedContact } from './lib/shared-contact.mjs';
+import { normalizePageLinks } from './lib/navigation.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
@@ -58,7 +59,8 @@ if (!existsSync(templateFile)) {
   process.exit(1);
 }
 
-const html = readFileSync(templateFile, 'utf8');
+// Preserve the template's page-link destinations before moving its shell to a new URL.
+const html = normalizePageLinks(readFileSync(templateFile, 'utf8'), { pageUrl: `/${template}/` });
 
 // ─── split the shell ────────────────────────────────────────────────────────
 

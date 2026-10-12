@@ -4,8 +4,8 @@
  */
 import { mkdirSync, readFileSync, writeFileSync, existsSync } from 'fs';
 import path from 'path';
-import { routes } from './routes.mjs';
-import { normalizePageLinks } from '../lib/navigation.mjs';
+import { routes, pairedRoutes } from './routes.mjs';
+import { normalizePageLinks, removeUnavailableMenuLinks } from '../lib/navigation.mjs';
 import { dictionary, googleAdsDictionary, enPageMeta, enOrg } from './dictionary.mjs';
 import { injectLangSwitcher } from './lang-switcher.mjs';
 import {
@@ -110,7 +110,7 @@ function schemasFor(route, meta, site, html) {
 export function generateEnglishPages({ outDir, site, indexable }) {
   const results = [];
 
-  for (const route of routes) {
+  for (const route of pairedRoutes) {
     const srcPath = path.join(outDir, route.roFile);
     if (!existsSync(srcPath)) {
       console.warn('  skip missing', route.roFile);
@@ -121,6 +121,7 @@ export function generateEnglishPages({ outDir, site, indexable }) {
     const meta = enPageMeta[route.en];
 
     html = stripJsonLd(html);
+    html = removeUnavailableMenuLinks(html, 'en');
     html = applyDictionary(html, route.ro === '/agentie-google-ads/' ? googleAdsDictionary : []);
     html = absolutizeAssets(html);
     html = normalizePageLinks(html, { pageUrl: route.ro, language: 'en' });

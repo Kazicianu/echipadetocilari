@@ -1,0 +1,606 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Creare magazin online | Echipa de Tocilari</title>
+<!-- Static copy of the final design, for implementation only. Read README.md first. -->
+<link rel="stylesheet" href="../../design-system/tokens.css">
+<link rel="stylesheet" href="../../design-system/components/bundle.css">
+<link rel="stylesheet" href="pagina.css">
+</head>
+<body>
+<div style="background: var(--white); color: var(--ink); font-family: var(--font-sans); overflow-x: hidden; min-width: 0">
+
+<header class="ect-header" style="position: relative; z-index: 20; max-width: 1280px; margin: 0 auto">
+<a class="ect-header__logo" href="/"><img src="../../../legacy-mirror/wp-content/uploads/2024/02/Logo_Echipa_de_Tocilari-e1708028624694.webp" width="836" height="870" alt="Logo Echipa de Tocilari"></a>
+<div class="ect-header__nav" style="margin-left: auto; margin-right: 24px">
+<nav aria-label="Meniu principal">
+<ul class="ect-header__menu">
+<li class="ect-header__item">
+<button class="ect-header__link" type="button" aria-expanded="false" aria-controls="submeniu-servicii" data-js="services-toggle">Servicii <svg class="ect-header__caret" viewBox="0 0 320 512" aria-hidden="true" focusable="false"><path d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"></path></svg></button>
+
+<ul id="submeniu-servicii" hidden class="ect-submenu">
+<li><a href="/creare-site-web/">Creare site web</a></li>
+<li><a href="/creare-magazin-online/" aria-current="page" style="color: var(--orange-deep); background: var(--peach-menu)">Creare magazin online</a></li>
+<li><a href="/servicii-seo/">SEO și vizibilitate în AI</a></li>
+<li><a href="/agentie-google-ads/">Google Ads</a></li>
+<li><a href="/administrare-site/">Mentenanță site</a></li>
+</ul>
+
+</li>
+<li class="ect-header__item"><a class="ect-header__link" href="/portofoliu/">Portofoliu</a></li>
+<li class="ect-header__item"><a class="ect-header__link" href="/contact/">Contact</a></li>
+</ul>
+</nav>
+<nav class="ect-lang" aria-label="Limba"><a href="/creare-magazin-online/" hreflang="ro" lang="ro" aria-current="true">RO</a><a href="/en/" hreflang="en" lang="en">EN</a></nav>
+<button class="ect-header__burger" type="button" aria-label="Meniu" aria-expanded="false" aria-controls="meniu-mobil" data-js="menu-toggle"><svg viewBox="0 0 1000 1000" aria-hidden="true" focusable="false"><path d="M104 333H896C929 333 958 304 958 271S929 208 896 208H104C71 208 42 237 42 271S71 333 104 333ZM104 583H896C929 583 958 554 958 521S929 458 896 458H104C71 458 42 487 42 521S71 583 104 583ZM104 833H896C929 833 958 804 958 771S929 708 896 708H104C71 708 42 737 42 771S71 833 104 833Z"></path></svg></button>
+</div>
+<a class="ect-btn ect-btn--header" href="#formular_contact_bottom">Ai o idee?</a>
+</header>
+
+
+<nav id="meniu-mobil" hidden aria-label="Meniu mobil" style="position: relative; z-index: 19; margin: 0 20px 10px; padding: 6px 0; border-radius: 15px; background: var(--white); box-shadow: var(--shadow-menu)">
+<ul style="margin: 0; padding: 0; list-style: none">
+<li style="border-bottom: 1px solid var(--orange-logo)"><a href="/creare-site-web/" style="display: flex; align-items: center; min-height: 48px; padding: 0 18px; color: var(--slate); font-size: 16px; font-weight: 600; text-decoration: none">Creare site web</a></li>
+<li style="border-bottom: 1px solid var(--orange-logo)"><a href="/creare-magazin-online/" aria-current="page" style="display: flex; align-items: center; min-height: 48px; padding: 0 18px; color: var(--orange-deep); background: var(--peach-menu); font-size: 16px; font-weight: 600; text-decoration: none">Creare magazin online</a></li>
+<li style="border-bottom: 1px solid var(--orange-logo)"><a href="/servicii-seo/" style="display: flex; align-items: center; min-height: 48px; padding: 0 18px; color: var(--slate); font-size: 16px; font-weight: 600; text-decoration: none">SEO și vizibilitate în AI</a></li>
+<li style="border-bottom: 1px solid var(--orange-logo)"><a href="/agentie-google-ads/" style="display: flex; align-items: center; min-height: 48px; padding: 0 18px; color: var(--slate); font-size: 16px; font-weight: 600; text-decoration: none">Google Ads</a></li>
+<li style="border-bottom: 1px solid var(--orange-logo)"><a href="/administrare-site/" style="display: flex; align-items: center; min-height: 48px; padding: 0 18px; color: var(--slate); font-size: 16px; font-weight: 600; text-decoration: none">Mentenanță site</a></li>
+<li style="border-bottom: 1px solid var(--orange-logo)"><a href="/portofoliu/" style="display: flex; align-items: center; min-height: 48px; padding: 0 18px; color: var(--slate); font-size: 16px; font-weight: 600; text-decoration: none">Portofoliu</a></li>
+<li><a href="/contact/" style="display: flex; align-items: center; min-height: 48px; padding: 0 18px; color: var(--slate); font-size: 16px; font-weight: 600; text-decoration: none">Contact</a></li>
+</ul>
+</nav>
+
+
+<main>
+
+<section aria-labelledby="hero-title" style="position: relative; padding: 24px 20px clamp(40px, 6vw, 70px)">
+<div style="max-width: 1150px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; gap: 36px 48px">
+<div style="flex: 1 1 460px; min-width: 0">
+<p style="margin: 0 0 14px; font-size: 21px; line-height: 1.2; font-weight: 400; color: var(--ink)">Magazin online pentru afacerea ta</p>
+<h1 id="hero-title" style="margin: 0 0 22px; font-size: clamp(30px, 7.5vw, 45px); line-height: 1.2; font-weight: 900; text-transform: uppercase; color: var(--orange)">Creare magazin online</h1>
+<p style="margin: 0 0 16px; max-width: 560px; font-size: 18px; line-height: 1.45; font-weight: 500">Magazin online din care chiar se cumpără. Nu un catalog frumos care cade la checkout.</p>
+<p style="margin: 0 0 24px; max-width: 560px; font-size: 16px; line-height: 1.55; font-weight: 300">Construim magazinul de la catalog până la confirmarea comenzii: pagini de produs clare, coș, plată, livrare și emailuri către clienți, gândite întâi pentru telefon.</p>
+<ul style="margin: 0 0 30px; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 10px 22px; font-size: 15px; line-height: 1.4; font-weight: 500">
+<li style="display: flex; align-items: center; gap: 8px"><span aria-hidden="true" style="color: var(--orange-check); font-weight: 700">✓</span>Catalog clar</li>
+<li style="display: flex; align-items: center; gap: 8px"><span aria-hidden="true" style="color: var(--orange-check); font-weight: 700">✓</span>Comenzi de pe mobil</li>
+<li style="display: flex; align-items: center; gap: 8px"><span aria-hidden="true" style="color: var(--orange-check); font-weight: 700">✓</span>Plăți și livrare</li>
+</ul>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px">
+<a class="ect-btn ect-btn--ink" href="#formular_contact_bottom">Solicită o ofertă</a>
+<a class="ect-btn ect-btn--text" href="#ce-include">Vezi ce include ↓</a>
+</div>
+<p style="margin: 18px 0 0; font-size: 14px; line-height: 1.5; font-weight: 400; color: var(--ink-muted)">Consultație gratuită · 30 de minute · Fără obligații</p>
+</div>
+
+<div style="flex: 1 1 420px; min-width: 0">
+<div class="mg-hero-visual">
+<div class="mg-hero-ring" aria-hidden="true"></div>
+<div class="mg-hero-blob" aria-hidden="true"></div>
+<div class="mg-hero-sun" aria-hidden="true"></div>
+
+<div class="mg-phone" role="img" aria-label="Schiță ilustrativă: magazinul online al unui brand inventat, pe telefon. Ecranele trec de la prima pagină la produs, la finalizarea comenzii și la confirmare.">
+<span class="mg-phone__btn mg-phone__btn--action"></span>
+<span class="mg-phone__btn mg-phone__btn--vol1"></span>
+<span class="mg-phone__btn mg-phone__btn--vol2"></span>
+<span class="mg-phone__btn mg-phone__btn--power"></span>
+<div class="mg-phone__screen" aria-hidden="true">
+<div class="mg-island"></div>
+<div class="mg-status"><span>9:41</span><span class="mg-status__icons"><svg viewBox="0 0 18 12" style="width: 17px; height: 11px; fill: currentColor"><rect x="0" y="8" width="3" height="4" rx="1"></rect><rect x="5" y="5.5" width="3" height="6.5" rx="1"></rect><rect x="10" y="3" width="3" height="9" rx="1"></rect><rect x="15" y="0" width="3" height="12" rx="1"></rect></svg><svg viewBox="0 0 16 12" style="width: 15px; height: 11px; fill: currentColor"><path d="M8 2.2c2.3 0 4.4.9 6 2.4l1.2-1.3C13.3 1.5 10.8.4 8 .4S2.7 1.5.8 3.3L2 4.6c1.6-1.5 3.7-2.4 6-2.4z"></path><path d="M8 5.6c1.4 0 2.6.5 3.6 1.4l1.2-1.3C11.5 4.5 9.8 3.8 8 3.8S4.5 4.5 3.2 5.7L4.4 7c1-.9 2.2-1.4 3.6-1.4z"></path><path d="M8 9.2c.6 0 1.2.2 1.6.6L8 11.6 6.4 9.8c.4-.4 1-.6 1.6-.6z"></path></svg><span style="position: relative; display: inline-flex; width: 25px; height: 12px; box-sizing: border-box; padding: 1.5px; border: 1.2px solid rgba(39, 39, 45, 0.45); border-radius: 4px"><span style="display: block; width: 78%; height: 100%; border-radius: 2px; background: var(--ink)"></span><span style="position: absolute; right: -4px; top: 3px; width: 2px; height: 4px; border-radius: 0 1px 1px 0; background: rgba(39, 39, 45, 0.45)"></span></span></span></div>
+
+
+<div data-screen="0" class="mg-scr">
+<div style="padding: 52px 16px 0">
+<div style="display: flex; align-items: center; justify-content: space-between">
+<div>
+<div style="font-size: 10px; font-weight: 500; color: #8a8580">Bună dimineața, Ana</div>
+<div style="margin-top: 2px; font-family: Georgia, 'Times New Roman', serif; font-size: 19px; font-weight: 700; letter-spacing: -0.01em">Atelier Lut</div>
+</div>
+<div style="display: flex; gap: 8px">
+<span style="position: relative; width: 34px; height: 34px; border-radius: 50%; background: #ffffff; box-shadow: 0 2px 8px rgba(39, 39, 45, 0.08); display: grid; place-items: center"><svg viewBox="0 0 24 24" class="mg-ico" style="width: 17px; height: 17px"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"></path><path d="M10 20a2 2 0 0 0 4 0"></path></svg><span style="position: absolute; top: 7px; right: 8px; width: 7px; height: 7px; border-radius: 50%; background: var(--orange); box-shadow: 0 0 0 2px #ffffff"></span></span>
+<span style="width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(145deg, #f5ddce, #e7b79b); color: #7a3b1c; font-size: 12px; font-weight: 700; display: grid; place-items: center">A</span>
+</div>
+</div>
+<div style="display: flex; gap: 8px; margin-top: 14px">
+<div style="flex: 1; height: 38px; display: flex; align-items: center; gap: 8px; padding: 0 12px; border-radius: 12px; background: #ffffff; box-shadow: 0 2px 10px rgba(39, 39, 45, 0.06); color: #9b958f; font-size: 10.5px"><svg viewBox="0 0 24 24" class="mg-ico" style="width: 15px; height: 15px; color: #6f6a65"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg>Caută căni, vaze, boluri</div>
+<div style="flex: none; width: 38px; height: 38px; border-radius: 12px; background: var(--ink); color: #ffffff; display: grid; place-items: center"><svg viewBox="0 0 24 24" class="mg-ico" style="width: 16px; height: 16px"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"></path><circle cx="16" cy="7" r="2"></circle><circle cx="10" cy="17" r="2"></circle></svg></div>
+</div>
+<div style="position: relative; height: 104px; margin-top: 14px; overflow: hidden; border-radius: 18px; background: linear-gradient(120deg, #ad420f 0%, #d9693a 55%, #f0925f 100%); color: #ffffff">
+<div style="position: absolute; right: 44px; top: -34px; width: 96px; height: 96px; border-radius: 50%; background: rgba(255, 255, 255, 0.12)"></div>
+<div style="position: absolute; left: 14px; top: 14px; width: 132px">
+<div style="font-size: 8.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.9">Colecția de toamnă</div>
+<div style="margin-top: 4px; font-family: Georgia, 'Times New Roman', serif; font-size: 17px; line-height: 1.15; font-weight: 700">Lut cald,<br>căni noi</div>
+<div style="display: inline-flex; margin-top: 8px; padding: 5px 10px; border-radius: 10px; background: #ffffff; color: var(--ink); font-size: 9.5px; font-weight: 700">−20% la seturi</div>
+</div>
+<div style="position: absolute; right: -8px; bottom: -14px"><svg viewBox="0 0 120 120" style="width: 124px; height: 124px"><defs><linearGradient id="hbmB" x1="0" x2="1" y1="0" y2="0"><stop offset="0" style="stop-color:#9c4a2a"></stop><stop offset="0.3" style="stop-color:#d77a52"></stop><stop offset="0.46" style="stop-color:#e8956b"></stop><stop offset="1" style="stop-color:#8a3d22"></stop></linearGradient><linearGradient id="hbmH" x1="0" x2="1" y1="0" y2="0"><stop offset="0" style="stop-color:#c0653f"></stop><stop offset="1" style="stop-color:#7f391f"></stop></linearGradient><radialGradient id="hbmS" cx="0.5" cy="0.5" r="0.5"><stop offset="0" style="stop-color:#4a2c1c;stop-opacity:0.35"></stop><stop offset="1" style="stop-color:#4a2c1c;stop-opacity:0"></stop></radialGradient></defs><ellipse cx="60" cy="99" rx="42" ry="7" fill="url(#hbmS)"></ellipse><path d="M84 50c13-1 19 6 18 15s-7 16-18 15" style="fill:none;stroke:url(#hbmH);stroke-width:7;stroke-linecap:round"></path><path d="M31 42h54v40c0 9.4-7.6 17-17 17H48c-9.4 0-17-7.6-17-17z" fill="url(#hbmB)"></path><path d="M31 42h54v8c-3 0-4.5 3.5-8 3.5s-4.5-4.5-8-4.5-4.5 5.5-8 5.5-4.5-4-8-4-4.5 3-8 3-4.5-3.5-8-3.5-3 2-6 2z" fill="#f1e2cf"></path><ellipse cx="58" cy="42" rx="27" ry="5.5" fill="#f7ecdf"></ellipse><ellipse cx="58" cy="42.6" rx="23.5" ry="3.9" fill="#d8c1a6"></ellipse><path d="M41 57c-2 9-2 21 1 30" style="fill:none;stroke:#ffffff;stroke-opacity:0.32;stroke-width:3;stroke-linecap:round"></path></svg></div>
+</div>
+<div style="display: flex; gap: 6px; margin: 14px -16px 0 0; overflow: hidden">
+<span class="mg-chip-s mg-chip-s--on">Toate</span><span class="mg-chip-s">Căni</span><span class="mg-chip-s">Vaze</span><span class="mg-chip-s">Boluri</span><span class="mg-chip-s">Farfurii</span>
+</div>
+<div style="display: flex; align-items: baseline; justify-content: space-between; margin-top: 14px"><span style="font-size: 13.5px; font-weight: 700">Populare acum</span><span style="font-size: 10px; font-weight: 600; color: var(--orange-deep)">Vezi tot</span></div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 10px; margin-top: 10px">
+<div>
+<div class="mg-tile mg-tile--mug" style="height: 118px"><svg viewBox="0 0 120 120" style="width: 100px; height: 100px"><defs><linearGradient id="h1mB" x1="0" x2="1" y1="0" y2="0"><stop offset="0" style="stop-color:#9c4a2a"></stop><stop offset="0.3" style="stop-color:#d77a52"></stop><stop offset="0.46" style="stop-color:#e8956b"></stop><stop offset="1" style="stop-color:#8a3d22"></stop></linearGradient><linearGradient id="h1mH" x1="0" x2="1" y1="0" y2="0"><stop offset="0" style="stop-color:#c0653f"></stop><stop offset="1" style="stop-color:#7f391f"></stop></linearGradient><radialGradient id="h1mS" cx="0.5" cy="0.5" r="0.5"><stop offset="0" style="stop-color:#4a2c1c;stop-opacity:0.35"></stop><stop offset="1" style="stop-color:#4a2c1c;stop-opacity:0"></stop></radialGradient></defs><ellipse cx="60" cy="99" rx="42" ry="7" fill="url(#h1mS)"></ellipse><path d="M84 50c13-1 19 6 18 15s-7 16-18 15" style="fill:none;stroke:url(#h1mH);stroke-width:7;stroke-linecap:round"></path><path d="M31 42h54v40c0 9.4-7.6 17-17 17H48c-9.4 0-17-7.6-17-17z" fill="url(#h1mB)"></path><path d="M31 42h54v8c-3 0-4.5 3.5-8 3.5s-4.5-4.5-8-4.5-4.5 5.5-8 5.5-4.5-4-8-4-4.5 3-8 3-4.5-3.5-8-3.5-3 2-6 2z" fill="#f1e2cf"></path><ellipse cx="58" cy="42" rx="27" ry="5.5" fill="#f7ecdf"></ellipse><ellipse cx="58" cy="42.6" rx="23.5" ry="3.9" fill="#d8c1a6"></ellipse><path d="M41 57c-2 9-2 21 1 30" style="fill:none;stroke:#ffffff;stroke-opacity:0.32;stroke-width:3;stroke-linecap:round"></path><g fill="#5a2a17" opacity="0.28"><circle cx="66" cy="64" r="0.9"></circle><circle cx="52" cy="74" r="0.8"></circle><circle cx="72" cy="80" r="0.9"></circle><circle cx="47" cy="88" r="0.7"></circle><circle cx="61" cy="91" r="0.8"></circle><circle cx="76" cy="66" r="0.7"></circle></g></svg><span class="mg-fav"><svg viewBox="0 0 24 24" style="width: 12px; height: 12px; fill: var(--orange-deep)"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"></path></svg></span></div>
+<div style="margin-top: 7px; font-size: 11px; font-weight: 600">Cana Dimineață</div>
+<div style="display: flex; align-items: center; justify-content: space-between; margin-top: 2px"><span style="font-size: 11.5px; font-weight: 700; color: var(--orange-deep)">69 lei</span><span style="width: 22px; height: 22px; border-radius: 50%; background: var(--ink); color: #ffffff; display: grid; place-items: center"><svg viewBox="0 0 24 24" class="mg-ico" style="width: 11px; height: 11px; stroke-width: 2.6"><path d="M12 5v14M5 12h14"></path></svg></span></div>
+</div>
+<div>
+<div class="mg-tile mg-tile--vase" style="height: 118px"><svg viewBox="0 0 120 120" style="width: 100px; height: 100px"><defs><linearGradient id="h2vB" x1="0" x2="1" y1="0" y2="0"><stop offset="0" style="stop-color:#5f7f78"></stop><stop offset="0.32" style="stop-color:#9fc2b8"></stop><stop offset="0.46" style="stop-color:#b9d8cf"></stop><stop offset="1" style="stop-color:#4f6d66"></stop></linearGradient><radialGradient id="h2vS" cx="0.5" cy="0.5" r="0.5"><stop offset="0" style="stop-color:#2f4440;stop-opacity:0.32"></stop><stop offset="1" style="stop-color:#2f4440;stop-opacity:0"></stop></radialGradient></defs><ellipse cx="60" cy="100" rx="32" ry="6" fill="url(#h2vS)"></ellipse><path d="M50 16h20v6c0 6 10 10 14 22 5 15 2 34-6 46-3 5-6 9-9 9H51c-3 0-6-4-9-9-8-12-11-31-6-46 4-12 14-16 14-22z" fill="url(#h2vB)"></path><ellipse cx="60" cy="16" rx="10" ry="2.6" fill="#d9ebe5"></ellipse><ellipse cx="60" cy="16.4" rx="7.4" ry="1.7" fill="#3f5a54"></ellipse><path d="M37 60c15 3 31 3 46 0M36 72c16 3 32 3 48 0M38 84c14 3 30 3 44 0" style="fill:none;stroke:#ffffff;stroke-opacity:0.14;stroke-width:1.2"></path><path d="M45 44c-4 10-5 28 0 42" style="fill:none;stroke:#ffffff;stroke-opacity:0.3;stroke-width:3;stroke-linecap:round"></path><g fill="#22332f" opacity="0.25"><circle cx="66" cy="58" r="0.8"></circle><circle cx="54" cy="70" r="0.7"></circle><circle cx="71" cy="78" r="0.8"></circle><circle cx="58" cy="88" r="0.7"></circle></g></svg><span class="mg-fav"><svg viewBox="0 0 24 24" class="mg-ico" style="width: 12px; height: 12px; stroke-width: 2"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"></path></svg></span></div>
+<div style="margin-top: 7px; font-size: 11px; font-weight: 600">Vaza Dună</div>
+<div style="display: flex; align-items: center; justify-content: space-between; margin-top: 2px"><span style="font-size: 11.5px; font-weight: 700; color: var(--orange-deep)">149 lei</span><span style="width: 22px; height: 22px; border-radius: 50%; background: var(--ink); color: #ffffff; display: grid; place-items: center"><svg viewBox="0 0 24 24" class="mg-ico" style="width: 11px; height: 11px; stroke-width: 2.6"><path d="M12 5v14M5 12h14"></path></svg></span></div>
+</div>
+<div>
+<div class="mg-tile mg-tile--bowl" style="height: 118px"><svg viewBox="0 0 120 120" style="width: 100px; height: 100px"><defs><linearGradient id="h3bO" x1="0" x2="1" y1="0" y2="0"><stop offset="0" style="stop-color:#a8896a"></stop><stop offset="0.38" style="stop-color:#e8d6bf"></stop><stop offset="1" style="stop-color:#977858"></stop></linearGradient><radialGradient id="h3bI" cx="0.45" cy="0.35" r="0.65"><stop offset="0" style="stop-color:#fbf4ea"></stop><stop offset="1" style="stop-color:#d6c1a6"></stop></radialGradient><radialGradient id="h3bS" cx="0.5" cy="0.5" r="0.5"><stop offset="0" style="stop-color:#4a3a2a;stop-opacity:0.32"></stop><stop offset="1" style="stop-color:#4a3a2a;stop-opacity:0"></stop></radialGradient></defs><ellipse cx="60" cy="98" rx="38" ry="6" fill="url(#h3bS)"></ellipse><path d="M50 90h20l-2 7H52z" fill="#8e7052"></path><ellipse cx="60" cy="58" rx="42" ry="11" fill="url(#h3bI)"></ellipse><ellipse cx="68" cy="55" rx="10" ry="7" fill="#f3c24f"></ellipse><ellipse cx="51" cy="57" rx="8.5" ry="6" fill="#e9b13a"></ellipse><ellipse cx="66" cy="52.5" rx="3.6" ry="1.9" fill="#ffffff" opacity="0.4"></ellipse><path d="M74 48c6-5 13-4 15 0-5 3-10 3-15 0z" fill="#6f9a8d"></path><path d="M18 58c2 21 19 34 42 34s40-13 42-34A42 11 0 0 1 18 58z" fill="url(#h3bO)"></path><ellipse cx="60" cy="58" rx="42" ry="11" style="fill:none;stroke:#c7ae8e;stroke-width:1.4"></ellipse></svg><span class="mg-fav"><svg viewBox="0 0 24 24" class="mg-ico" style="width: 12px; height: 12px; stroke-width: 2"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"></path></svg></span></div>
+<div style="margin-top: 7px; font-size: 11px; font-weight: 600">Bolul Miez</div>
+</div>
+<div>
+<div class="mg-tile mg-tile--plates" style="height: 118px"><svg viewBox="0 0 120 120" style="width: 100px; height: 100px"><defs><linearGradient id="h4pT" x1="0" x2="1" y1="0" y2="1"><stop offset="0" style="stop-color:#5a5a63"></stop><stop offset="1" style="stop-color:#2a2a30"></stop></linearGradient><radialGradient id="h4pS" cx="0.5" cy="0.5" r="0.5"><stop offset="0" style="stop-color:#1c1c20;stop-opacity:0.35"></stop><stop offset="1" style="stop-color:#1c1c20;stop-opacity:0"></stop></radialGradient></defs><ellipse cx="60" cy="96" rx="50" ry="7" fill="url(#h4pS)"></ellipse><ellipse cx="60" cy="85" rx="46" ry="12" fill="#232328"></ellipse><ellipse cx="60" cy="82" rx="46" ry="12" fill="#3a3a41"></ellipse><ellipse cx="60" cy="75" rx="46" ry="12" fill="#232328"></ellipse><ellipse cx="60" cy="72" rx="46" ry="12" fill="#3a3a41"></ellipse><ellipse cx="60" cy="65" rx="46" ry="12" fill="#232328"></ellipse><ellipse cx="60" cy="62" rx="46" ry="12" fill="url(#h4pT)"></ellipse><ellipse cx="60" cy="62" rx="46" ry="12" style="fill:none;stroke:#c8643b;stroke-opacity:0.7;stroke-width:1.2"></ellipse><ellipse cx="60" cy="62" rx="29" ry="7.5" style="fill:none;stroke:#f1e2cf;stroke-opacity:0.45;stroke-width:1.2"></ellipse><path d="M21 59c9-7 24-10 39-10" style="fill:none;stroke:#ffffff;stroke-opacity:0.22;stroke-width:2;stroke-linecap:round"></path></svg><span class="mg-fav"><svg viewBox="0 0 24 24" class="mg-ico" style="width: 12px; height: 12px; stroke-width: 2"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"></path></svg></span></div>
+<div style="margin-top: 7px; font-size: 11px; font-weight: 600">Set Masa lungă</div>
+</div>
+</div>
+</div>
+<div class="mg-tabbar">
+<span class="mg-tab mg-tab--on"><svg viewBox="0 0 24 24" class="mg-ico"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6h-6v6H5a1 1 0 0 1-1-1z"></path></svg>Acasă</span>
+<span class="mg-tab"><svg viewBox="0 0 24 24" class="mg-ico"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg>Caută</span>
+<span class="mg-tab"><svg viewBox="0 0 24 24" class="mg-ico"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"></path></svg>Favorite</span>
+<span class="mg-tab"><svg viewBox="0 0 24 24" class="mg-ico"><path d="M5 8h14l-1 12H6z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg><span class="mg-badge">1</span>Coș</span>
+<span class="mg-tab"><svg viewBox="0 0 24 24" class="mg-ico"><circle cx="12" cy="8" r="4"></circle><path d="M4 20c1.5-4 4.5-6 8-6s6.5 2 8 6"></path></svg>Cont</span>
+</div>
+<span class="mg-tap" style="left: 75px; top: 406px"></span>
+</div>
+
+
+
+<div data-screen="1" hidden class="mg-scr" style="background: #ffffff">
+<div class="mg-tile mg-tile--mug" style="position: absolute; left: 0; right: 0; top: 0; height: 318px; border-radius: 0">
+<svg viewBox="0 0 120 120" style="width: 210px; height: 210px; margin-top: 26px"><defs><linearGradient id="p1mB" x1="0" x2="1" y1="0" y2="0"><stop offset="0" style="stop-color:#9c4a2a"></stop><stop offset="0.3" style="stop-color:#d77a52"></stop><stop offset="0.46" style="stop-color:#e8956b"></stop><stop offset="1" style="stop-color:#8a3d22"></stop></linearGradient><linearGradient id="p1mH" x1="0" x2="1" y1="0" y2="0"><stop offset="0" style="stop-color:#c0653f"></stop><stop offset="1" style="stop-color:#7f391f"></stop></linearGradient><radialGradient id="p1mS" cx="0.5" cy="0.5" r="0.5"><stop offset="0" style="stop-color:#4a2c1c;stop-opacity:0.35"></stop><stop offset="1" style="stop-color:#4a2c1c;stop-opacity:0"></stop></radialGradient></defs><ellipse cx="60" cy="99" rx="42" ry="7" fill="url(#p1mS)"></ellipse><path d="M84 50c13-1 19 6 18 15s-7 16-18 15" style="fill:none;stroke:url(#p1mH);stroke-width:7;stroke-linecap:round"></path><path d="M31 42h54v40c0 9.4-7.6 17-17 17H48c-9.4 0-17-7.6-17-17z" fill="url(#p1mB)"></path><path d="M31 42h54v8c-3 0-4.5 3.5-8 3.5s-4.5-4.5-8-4.5-4.5 5.5-8 5.5-4.5-4-8-4-4.5 3-8 3-4.5-3.5-8-3.5-3 2-6 2z" fill="#f1e2cf"></path><ellipse cx="58" cy="42" rx="27" ry="5.5" fill="#f7ecdf"></ellipse><ellipse cx="58" cy="42.6" rx="23.5" ry="3.9" fill="#d8c1a6"></ellipse><path d="M41 57c-2 9-2 21 1 30" style="fill:none;stroke:#ffffff;stroke-opacity:0.32;stroke-width:3;stroke-linecap:round"></path><g fill="#5a2a17" opacity="0.28"><circle cx="66" cy="64" r="0.9"></circle><circle cx="52" cy="74" r="0.8"></circle><circle cx="72" cy="80" r="0.9"></circle><circle cx="47" cy="88" r="0.7"></circle><circle cx="61" cy="91" r="0.8"></circle><circle cx="76" cy="66" r="0.7"></circle></g></svg>
+<div style="position: absolute; left: 50%; bottom: 36px; transform: translateX(-50%); display: flex; gap: 5px"><span style="width: 16px; height: 5px; border-radius: 3px; background: var(--ink)"></span><span style="width: 5px; height: 5px; border-radius: 50%; background: rgba(39, 39, 45, 0.25)"></span><span style="width: 5px; height: 5px; border-radius: 50%; background: rgba(39, 39, 45, 0.25)"></span></div>
+</div>
+<div style="position: absolute; left: 16px; right: 16px; top: 50px; z-index: 3; display: flex; justify-content: space-between">
+<span style="width: 34px; height: 34px; border-radius: 50%; background: rgba(255, 255, 255, 0.92); box-shadow: 0 2px 8px rgba(39, 39, 45, 0.08); display: grid; place-items: center"><svg viewBox="0 0 24 24" class="mg-ico" style="width: 16px; height: 16px; stroke-width: 2"><path d="M15 5l-7 7 7 7"></path></svg></span>
+<span style="display: flex; gap: 8px"><span style="width: 34px; height: 34px; border-radius: 50%; background: rgba(255, 255, 255, 0.92); box-shadow: 0 2px 8px rgba(39, 39, 45, 0.08); display: grid; place-items: center"><svg viewBox="0 0 24 24" class="mg-ico" style="width: 15px; height: 15px"><path d="M12 4v11M8 8l4-4 4 4"></path><path d="M6 12v7h12v-7"></path></svg></span><span style="width: 34px; height: 34px; border-radius: 50%; background: rgba(255, 255, 255, 0.92); box-shadow: 0 2px 8px rgba(39, 39, 45, 0.08); display: grid; place-items: center"><svg viewBox="0 0 24 24" style="width: 15px; height: 15px; fill: var(--orange-deep)"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"></path></svg></span></span>
+</div>
+<div style="position: absolute; left: 0; right: 0; top: 296px; bottom: 0; padding: 18px 16px 0; border-radius: 24px 24px 0 0; background: #ffffff; box-shadow: 0 -8px 24px rgba(39, 39, 45, 0.06)">
+<div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 10px">
+<div>
+<div style="font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9b958f">Atelier Lut · Căni</div>
+<div style="margin-top: 3px; font-size: 16px; font-weight: 700; letter-spacing: -0.01em">Cana Dimineață</div>
+</div>
+<div style="text-align: right">
+<div style="font-size: 16px; font-weight: 800; color: var(--orange-deep)">69 lei</div>
+<div style="font-size: 9.5px; color: #9b958f; text-decoration: line-through">85 lei</div>
+</div>
+</div>
+<div style="margin-top: 4px; font-size: 10px; color: #8a8580">Gresie emailată, lucrată manual · 350 ml</div>
+<div style="margin-top: 12px; font-size: 10.5px; color: #6f6a65">Culoare: <b style="color: var(--ink)">Teracotă</b></div>
+<div style="display: flex; gap: 9px; margin-top: 7px">
+<span style="width: 22px; height: 22px; border-radius: 50%; background: #c8643b; box-shadow: 0 0 0 2px #ffffff, 0 0 0 3.5px var(--ink)"></span>
+<span style="width: 22px; height: 22px; border-radius: 50%; background: #9fc2b8"></span>
+<span style="width: 22px; height: 22px; border-radius: 50%; background: #e3d3bd"></span>
+<span style="width: 22px; height: 22px; border-radius: 50%; background: #3b3b42"></span>
+</div>
+<div style="margin-top: 12px; font-size: 10.5px; color: #6f6a65">Capacitate</div>
+<div style="display: flex; gap: 6px; margin-top: 7px"><span class="mg-chip-s">250 ml</span><span class="mg-chip-s mg-chip-s--on">350 ml</span><span class="mg-chip-s">450 ml</span></div>
+<div style="display: flex; gap: 14px; margin-top: 12px; padding: 9px 10px; border-radius: 12px; background: #fbf8f5; font-size: 9.5px; color: #6f6a65">
+<span style="display: flex; align-items: center; gap: 5px"><svg viewBox="0 0 24 24" class="mg-ico" style="width: 13px; height: 13px"><path d="M3 6h11v10H3z"></path><path d="M14 10h4l3 3v3h-7"></path><circle cx="7" cy="17.5" r="1.8"></circle><circle cx="17.5" cy="17.5" r="1.8"></circle></svg>Livrare în 1-3 zile</span>
+<span style="display: flex; align-items: center; gap: 5px"><svg viewBox="0 0 24 24" class="mg-ico" style="width: 13px; height: 13px"><path d="M4 8l8-4 8 4v8l-8 4-8-4z"></path><path d="M4 8l8 4 8-4M12 12v8"></path></svg>Retur în 14 zile</span>
+</div>
+</div>
+<div style="position: absolute; left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 10px; padding: 10px 16px 24px; border-top: 1px solid #f1ebe5; background: #ffffff">
+<div style="display: flex; align-items: center; gap: 12px; height: 42px; padding: 0 12px; border: 1px solid #ece4dc; border-radius: 14px; font-size: 13px; font-weight: 600"><span>−</span><span>1</span><span>+</span></div>
+<div class="mg-btn-app" style="flex: 1"><svg viewBox="0 0 24 24" class="mg-ico" style="width: 15px; height: 15px"><path d="M5 8h14l-1 12H6z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg>Adaugă în coș</div>
+</div>
+<span class="mg-tap" style="left: 186px; top: 555px"></span>
+</div>
+
+
+
+<div data-screen="2" hidden class="mg-scr" style="background: #fbf8f5">
+<div style="padding: 52px 16px 0">
+<div style="display: flex; align-items: center">
+<span style="flex: none; width: 32px; height: 32px; border-radius: 50%; background: #ffffff; box-shadow: 0 2px 8px rgba(39, 39, 45, 0.06); display: grid; place-items: center"><svg viewBox="0 0 24 24" class="mg-ico" style="width: 15px; height: 15px; stroke-width: 2"><path d="M15 5l-7 7 7 7"></path></svg></span>
+<span style="flex: 1; margin-right: 32px; text-align: center; font-size: 14px; font-weight: 700">Finalizare comandă</span>
+</div>
+<div style="display: flex; align-items: center; gap: 6px; margin: 13px 2px 0; font-size: 9.5px">
+<span style="display: flex; align-items: center; gap: 5px; font-weight: 600"><span style="width: 18px; height: 18px; border-radius: 50%; background: var(--orange-deep); color: #ffffff; display: grid; place-items: center"><svg viewBox="0 0 24 24" class="mg-ico" style="width: 10px; height: 10px; stroke-width: 3"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>Coș</span>
+<span style="flex: 1; height: 2px; border-radius: 1px; background: var(--orange-deep)"></span>
+<span style="display: flex; align-items: center; gap: 5px; font-weight: 700"><span style="width: 18px; height: 18px; box-sizing: border-box; border: 2px solid var(--ink); border-radius: 50%; display: grid; place-items: center"><span style="width: 6px; height: 6px; border-radius: 50%; background: var(--ink)"></span></span>Livrare</span>
+<span style="flex: 1; height: 2px; border-radius: 1px; background: #e3dbd3"></span>
+<span style="display: flex; align-items: center; gap: 5px; color: #9b958f"><span style="width: 18px; height: 18px; box-sizing: border-box; border: 2px solid #cfc6bd; border-radius: 50%"></span>Plată</span>
+</div>
+<div style="display: grid; gap: 8px; margin-top: 13px; padding: 10px; border-radius: 16px; background: #ffffff; box-shadow: 0 2px 10px rgba(39, 39, 45, 0.05)">
+<div style="display: flex; align-items: center; gap: 10px">
+<div class="mg-tile mg-tile--mug" style="flex: none; width: 42px; height: 42px; border-radius: 12px"><svg viewBox="0 0 120 120" style="width: 38px; height: 38px"><defs><linearGradient id="c1mB" x1="0" x2="1" y1="0" y2="0"><stop offset="0" style="stop-color:#9c4a2a"></stop><stop offset="0.3" style="stop-color:#d77a52"></stop><stop offset="0.46" style="stop-color:#e8956b"></stop><stop offset="1" style="stop-color:#8a3d22"></stop></linearGradient><linearGradient id="c1mH" x1="0" x2="1" y1="0" y2="0"><stop offset="0" style="stop-color:#c0653f"></stop><stop offset="1" style="stop-color:#7f391f"></stop></linearGradient></defs><path d="M84 50c13-1 19 6 18 15s-7 16-18 15" style="fill:none;stroke:url(#c1mH);stroke-width:7;stroke-linecap:round"></path><path d="M31 42h54v40c0 9.4-7.6 17-17 17H48c-9.4 0-17-7.6-17-17z" fill="url(#c1mB)"></path><path d="M31 42h54v8c-3 0-4.5 3.5-8 3.5s-4.5-4.5-8-4.5-4.5 5.5-8 5.5-4.5-4-8-4-4.5 3-8 3-4.5-3.5-8-3.5-3 2-6 2z" fill="#f1e2cf"></path><ellipse cx="58" cy="42" rx="27" ry="5.5" fill="#f7ecdf"></ellipse><ellipse cx="58" cy="42.6" rx="23.5" ry="3.9" fill="#d8c1a6"></ellipse></svg></div>
+<div style="flex: 1; min-width: 0"><div style="font-size: 11px; font-weight: 700">Cana Dimineață</div><div style="margin-top: 2px; font-size: 9.5px; color: #8a8580">Teracotă · 350 ml · × 1</div></div>
+<div style="font-size: 11.5px; font-weight: 700">69 lei</div>
+</div>
+<div style="display: flex; align-items: center; gap: 10px">
+<div class="mg-tile mg-tile--bowl" style="flex: none; width: 42px; height: 42px; border-radius: 12px"><svg viewBox="0 0 120 120" style="width: 40px; height: 40px"><defs><linearGradient id="c2bO" x1="0" x2="1" y1="0" y2="0"><stop offset="0" style="stop-color:#a8896a"></stop><stop offset="0.38" style="stop-color:#e8d6bf"></stop><stop offset="1" style="stop-color:#977858"></stop></linearGradient><radialGradient id="c2bI" cx="0.45" cy="0.35" r="0.65"><stop offset="0" style="stop-color:#fbf4ea"></stop><stop offset="1" style="stop-color:#d6c1a6"></stop></radialGradient></defs><path d="M50 90h20l-2 7H52z" fill="#8e7052"></path><ellipse cx="60" cy="58" rx="42" ry="11" fill="url(#c2bI)"></ellipse><ellipse cx="68" cy="55" rx="10" ry="7" fill="#f3c24f"></ellipse><ellipse cx="51" cy="57" rx="8.5" ry="6" fill="#e9b13a"></ellipse><path d="M18 58c2 21 19 34 42 34s40-13 42-34A42 11 0 0 1 18 58z" fill="url(#c2bO)"></path></svg></div>
+<div style="flex: 1; min-width: 0"><div style="font-size: 11px; font-weight: 700">Bolul Miez</div><div style="margin-top: 2px; font-size: 9.5px; color: #8a8580">Nisip · × 1</div></div>
+<div style="font-size: 11.5px; font-weight: 700">59 lei</div>
+</div>
+</div>
+<div style="margin-top: 13px; font-size: 11px; font-weight: 700">Livrare</div>
+<div style="display: grid; gap: 7px; margin-top: 7px">
+<div class="mg-opt mg-opt--on"><span class="mg-radio"></span><span style="flex: 1; line-height: 1.35"><b style="font-size: 11px">Curier la adresă</b><br><span style="color: #8a8580; font-size: 9.5px">1-2 zile lucrătoare</span></span><b style="font-size: 11px">19 lei</b></div>
+<div class="mg-opt"><span class="mg-radio"></span><span style="flex: 1; line-height: 1.35"><b style="font-size: 11px">Ridicare din locker</b><br><span style="color: #8a8580; font-size: 9.5px">2-3 zile lucrătoare</span></span><b style="font-size: 11px">12 lei</b></div>
+</div>
+<div style="margin-top: 12px; font-size: 11px; font-weight: 700">Plată</div>
+<div style="display: flex; gap: 7px; margin-top: 7px">
+<div class="mg-opt mg-opt--on" style="flex: 1"><span class="mg-radio"></span><span><b>Card</b> •••• 4242</span></div>
+<div class="mg-opt" style="flex: 1"><span class="mg-radio"></span><span>Ramburs</span></div>
+</div>
+</div>
+<div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 11px 16px 24px; border-top: 1px solid #f1ebe5; background: #ffffff">
+<div style="display: flex; justify-content: space-between; font-size: 10px; color: #8a8580"><span>Subtotal</span><span>128 lei</span></div>
+<div style="display: flex; justify-content: space-between; margin-top: 3px; font-size: 10px; color: #8a8580"><span>Livrare</span><span>19 lei</span></div>
+<div style="display: flex; justify-content: space-between; margin-top: 5px; font-size: 13px; font-weight: 800"><span>Total</span><span>147 lei</span></div>
+<div class="mg-btn-app" style="margin-top: 9px"><svg viewBox="0 0 24 24" class="mg-ico" style="width: 14px; height: 14px"><rect x="5" y="10" width="14" height="10" rx="2"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3"></path></svg>Plătește 147 lei</div>
+</div>
+<span class="mg-tap" style="left: 140px; top: 555px"></span>
+</div>
+
+
+
+<div data-screen="3" hidden class="mg-scr" style="background: linear-gradient(180deg, #fff5ed 0%, #fbf8f5 46%)">
+<span class="mg-confetti" style="left: 40px; top: 70px; background: var(--orange)"></span>
+<span class="mg-confetti" style="left: 82px; top: 52px; background: var(--blob-turquoise-deep); animation-delay: 0.4s"></span>
+<span class="mg-confetti" style="left: 196px; top: 60px; background: var(--ink); animation-delay: 0.25s"></span>
+<span class="mg-confetti" style="left: 230px; top: 92px; background: var(--orange-deep); animation-delay: 0.6s"></span>
+<span class="mg-confetti" style="left: 150px; top: 44px; background: #f3c24f; animation-delay: 0.1s"></span>
+<span class="mg-confetti" style="left: 60px; top: 120px; background: #9fc2b8; animation-delay: 0.7s"></span>
+<div style="display: flex; flex-direction: column; align-items: center; padding: 74px 18px 0; text-align: center">
+<div class="mg-success"><svg viewBox="0 0 24 24" style="width: 34px; height: 34px; fill: none; stroke: #ffffff; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></div>
+<div style="margin-top: 18px; font-size: 17px; font-weight: 800; letter-spacing: -0.01em">Comanda e confirmată!</div>
+<div style="margin-top: 5px; font-size: 10.5px; line-height: 1.45; color: #8a8580">Mulțumim, Ana. Comanda #1042 a fost plasată<br>și ți-am trimis detaliile pe email.</div>
+</div>
+<div style="margin: 18px 16px 0; padding: 14px; border-radius: 18px; background: #ffffff; box-shadow: 0 6px 20px rgba(39, 39, 45, 0.07)">
+<div style="display: flex; align-items: center; justify-content: space-between">
+<div><div style="font-size: 9.5px; color: #8a8580">Livrare estimată</div><div style="margin-top: 2px; font-size: 12.5px; font-weight: 800">Joi, între 10:00 și 18:00</div></div>
+<div style="width: 36px; height: 36px; border-radius: 12px; background: var(--peach); color: var(--orange-deep); display: grid; place-items: center"><svg viewBox="0 0 24 24" class="mg-ico" style="width: 17px; height: 17px"><path d="M3 6h11v10H3z"></path><path d="M14 10h4l3 3v3h-7"></path><circle cx="7" cy="17.5" r="1.8"></circle><circle cx="17.5" cy="17.5" r="1.8"></circle></svg></div>
+</div>
+<div style="display: grid; gap: 9px; margin-top: 12px; font-size: 10.5px">
+<div style="display: flex; align-items: center; gap: 9px"><span style="width: 14px; height: 14px; border-radius: 50%; background: var(--orange-deep); color: #ffffff; display: grid; place-items: center"><svg viewBox="0 0 24 24" class="mg-ico" style="width: 8px; height: 8px; stroke-width: 4"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span><b>Comandă confirmată</b><span style="margin-left: auto; font-size: 9.5px; color: #8a8580">10:42</span></div>
+<div style="display: flex; align-items: center; gap: 9px"><span class="mg-now" style="width: 14px; height: 14px; box-sizing: border-box; border: 3px solid var(--orange); border-radius: 50%; background: #ffffff"></span><span style="font-weight: 600">În pregătire</span></div>
+<div style="display: flex; align-items: center; gap: 9px; color: #9b958f"><span style="width: 14px; height: 14px; box-sizing: border-box; border: 2px solid #ddd5cd; border-radius: 50%"></span>Predată curierului</div>
+<div style="display: flex; align-items: center; gap: 9px; color: #9b958f"><span style="width: 14px; height: 14px; box-sizing: border-box; border: 2px solid #ddd5cd; border-radius: 50%"></span>Livrată</div>
+</div>
+</div>
+<div style="display: flex; justify-content: space-between; margin: 10px 16px 0; padding: 10px 14px; border-radius: 14px; background: #ffffff; font-size: 11px"><span style="color: #8a8580">Total plătit cu cardul</span><b>147 lei</b></div>
+<div style="position: absolute; left: 16px; right: 16px; bottom: 26px; display: grid; gap: 6px">
+<div class="mg-btn-app">Urmărește comanda</div>
+<div style="height: 34px; display: grid; place-items: center; font-size: 11.5px; font-weight: 600">Înapoi la magazin</div>
+</div>
+</div>
+
+
+<div class="mg-homebar"></div>
+</div>
+<div class="mg-phone__gloss"></div>
+</div>
+
+<div class="mg-banner mg-notif" aria-hidden="true" style="left: 0; top: 96px"><span class="mg-banner__icon">AL</span><div style="min-width: 0"><p class="mg-banner__head">Atelier Lut<span>acum</span></p><p class="mg-banner__text">Comandă nouă #1042 · 147 lei</p></div></div>
+<div class="mg-banner mg-notif mg-notif--2" aria-hidden="true" style="right: 0; top: 268px"><span class="mg-banner__icon">AL</span><div style="min-width: 0"><p class="mg-banner__head">Atelier Lut<span>acum</span></p><p class="mg-banner__text">Plata cu cardul a fost confirmată.</p></div></div>
+<div class="mg-banner mg-notif mg-notif--3" aria-hidden="true" style="left: 0; top: 448px"><span class="mg-banner__icon">AL</span><div style="min-width: 0"><p class="mg-banner__head">Atelier Lut<span>acum</span></p><p class="mg-banner__text">Coletul #1042 a plecat spre client.</p></div></div>
+
+<div style="position: absolute; left: 0; right: 0; bottom: 30px; z-index: 4; display: flex; align-items: center; justify-content: center; gap: 2px">
+<button class="mg-ctrl" type="button" aria-label="Ecranul 1: prima pagină a magazinului" aria-pressed="true" data-js="dot" data-index="0" style="width: 44px; height: 44px; padding: 0; border: 0; border-radius: 22px; background: transparent; cursor: pointer; display: grid; place-items: center"><span style="display: block; width: 26px; height: 10px; border-radius: 5px; background: var(--orange-deep); transition: width 0.3s ease"></span></button>
+<button class="mg-ctrl" type="button" aria-label="Ecranul 2: pagina produsului" aria-pressed="false" data-js="dot" data-index="1" style="width: 44px; height: 44px; padding: 0; border: 0; border-radius: 22px; background: transparent; cursor: pointer; display: grid; place-items: center"><span style="display: block; width: 10px; height: 10px; border-radius: 5px; background: var(--line-step); transition: width 0.3s ease"></span></button>
+<button class="mg-ctrl" type="button" aria-label="Ecranul 3: finalizarea comenzii" aria-pressed="false" data-js="dot" data-index="2" style="width: 44px; height: 44px; padding: 0; border: 0; border-radius: 22px; background: transparent; cursor: pointer; display: grid; place-items: center"><span style="display: block; width: 10px; height: 10px; border-radius: 5px; background: var(--line-step); transition: width 0.3s ease"></span></button>
+<button class="mg-ctrl" type="button" aria-label="Ecranul 4: comanda confirmată" aria-pressed="false" data-js="dot" data-index="3" style="width: 44px; height: 44px; padding: 0; border: 0; border-radius: 22px; background: transparent; cursor: pointer; display: grid; place-items: center"><span style="display: block; width: 10px; height: 10px; border-radius: 5px; background: var(--line-step); transition: width 0.3s ease"></span></button>
+<button class="mg-ctrl" type="button" aria-label="Oprește schimbarea ecranelor" data-js="phone-pause" style="width: 44px; height: 44px; margin-left: 6px; padding: 0; border: 1px solid var(--line-faq); border-radius: 50%; background: var(--white); color: var(--ink); cursor: pointer; display: grid; place-items: center">
+<svg data-icon="play" hidden viewBox="0 0 24 24" aria-hidden="true" focusable="false" style="width: 14px; height: 14px; fill: currentColor"><path d="M7 4l13 8-13 8z"></path></svg>
+<svg data-icon="pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false" style="width: 14px; height: 14px; fill: currentColor"><rect x="6" y="4" width="4" height="16" rx="1"></rect><rect x="14" y="4" width="4" height="16" rx="1"></rect></svg>
+</button>
+</div>
+
+</div>
+</div>
+</div>
+</section>
+
+<section class="mg-who-wrap" aria-labelledby="who-title">
+<div class="mg-who">
+<figure class="mg-who__char" aria-hidden="true"><img src="../../../legacy-mirror/wp-content/ect-pages/home/faq-tocilar-3d-v2.webp" width="640" height="640" alt=""></figure>
+<div class="mg-who__head">
+<p class="mg-who__eyebrow" style="color: var(--white)">Pentru cine e</p>
+<h2 id="who-title" class="mg-who__title" style="color: var(--white)">Te regăsești într-una dintre situațiile astea?</h2>
+<p class="mg-who__lead" style="color: var(--white)">Fiecare situație vine cu grija ei. Noi o tăiem și punem în loc un magazin care rezolvă problema.</p>
+</div>
+<ul class="mg-tk-grid">
+<li class="mg-t3">
+<div class="mg-t3__top">
+<div class="mg-t3__head"><span class="mg-t3__icon" aria-hidden="true"><svg viewBox="0 0 24 24" class="mg-ico"><path d="M4 9h16l-1.5-5h-13z"></path><path d="M5 9v11h14V9"></path><path d="M10 20v-6h4v6"></path></svg></span><h3 class="mg-t3__title">Ai un magazin fizic</h3></div>
+<p class="mg-t3__worry"><span class="mg-sr">Grija ta: </span>„Clienții mă sună să afle dacă mai am pe stoc.”</p>
+</div>
+<div class="mg-t3__cut" aria-hidden="true"><svg viewBox="0 0 24 24" class="mg-ico mg-t3__sc" style="stroke-width: 2"><circle cx="6" cy="6" r="3"></circle><path d="M8.12 8.12L12 12"></path><path d="M20 4L8.12 15.88"></path><circle cx="6" cy="18" r="3"></circle><path d="M14.8 14.8L20 20"></path></svg></div>
+<div class="mg-t3__bottom"><span class="mg-tk-check" aria-hidden="true" style="background-color: var(--orange)"><svg viewBox="0 0 24 24" class="mg-ico" style="stroke-width: 3"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span><p class="mg-tk-fix"><span class="mg-sr">Ce facem noi: </span>Un catalog online cu prețuri și stocuri, din care clienții comandă și când magazinul e închis.</p></div>
+</li>
+<li class="mg-t3">
+<div class="mg-t3__top">
+<div class="mg-t3__head"><span class="mg-t3__icon" aria-hidden="true" style="color: var(--orange-deep)"><svg viewBox="0 0 24 24" class="mg-ico"><path d="M4 5h16v11H9l-5 4z"></path><path d="M8 9h8M8 12h5"></path></svg></span><h3 class="mg-t3__title">Vinzi pe rețele sociale</h3></div>
+<p class="mg-t3__worry"><span class="mg-sr">Grija ta: </span>„Primesc comenzi în mesaje și le notez pe hârtie.”</p>
+</div>
+<div class="mg-t3__cut" aria-hidden="true"><svg viewBox="0 0 24 24" class="mg-ico mg-t3__sc" style="stroke-width: 2"><circle cx="6" cy="6" r="3"></circle><path d="M8.12 8.12L12 12"></path><path d="M20 4L8.12 15.88"></path><circle cx="6" cy="18" r="3"></circle><path d="M14.8 14.8L20 20"></path></svg></div>
+<div class="mg-t3__bottom"><span class="mg-tk-check" aria-hidden="true" style="background-color: var(--orange)"><svg viewBox="0 0 24 24" class="mg-ico" style="stroke-width: 3"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span><p class="mg-tk-fix"><span class="mg-sr">Ce facem noi: </span>Comenzile ajung într-un singur loc, cu plata și livrarea alese de client.</p></div>
+</li>
+<li class="mg-t3">
+<div class="mg-t3__top">
+<div class="mg-t3__head"><span class="mg-t3__icon" aria-hidden="true" style="color: var(--orange-deep)"><svg viewBox="0 0 24 24" class="mg-ico"><path d="M3 4h2.5l2.2 10.2h10.6L20.5 7H7"></path><circle cx="10" cy="18.5" r="1.4"></circle><circle cx="17" cy="18.5" r="1.4"></circle></svg></span><h3 class="mg-t3__title">Ai deja un magazin online</h3></div>
+<p class="mg-t3__worry"><span class="mg-sr">Grija ta: </span>„E greu de administrat și pe telefon arată ciudat.”</p>
+</div>
+<div class="mg-t3__cut" aria-hidden="true"><svg viewBox="0 0 24 24" class="mg-ico mg-t3__sc" style="stroke-width: 2"><circle cx="6" cy="6" r="3"></circle><path d="M8.12 8.12L12 12"></path><path d="M20 4L8.12 15.88"></path><circle cx="6" cy="18" r="3"></circle><path d="M14.8 14.8L20 20"></path></svg></div>
+<div class="mg-t3__bottom"><span class="mg-tk-check" aria-hidden="true" style="background-color: var(--orange)"><svg viewBox="0 0 24 24" class="mg-ico" style="stroke-width: 3"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span><p class="mg-tk-fix"><span class="mg-sr">Ce facem noi: </span>Îl refacem pe o structură clară, gândită întâi pentru telefon, și planificăm mutarea produselor.</p></div>
+</li>
+</ul>
+</div>
+</section>
+
+<section id="ce-include" class="mg-metro mg-metro--play" aria-labelledby="drum-title">
+<span class="mg-cloud" aria-hidden="true" style="left: 5%; top: 70px"></span>
+<span class="mg-cloud" aria-hidden="true" style="right: 9%; top: 130px; animation-delay: -6s"></span>
+<span class="mg-cloud" aria-hidden="true" style="left: 46%; top: 36px; animation-delay: -11s"></span>
+<div aria-hidden="true" style="position: absolute; right: -90px; top: -90px; width: 260px; height: 260px; border-radius: 50%; background: radial-gradient(circle at 40% 40%, #ffd8c2 0%, var(--peach) 60%, rgba(255, 240, 231, 0) 72%)"></div>
+<div class="mg-metro__inner">
+<div class="mg-metro__head">
+<div class="mg-metro__intro" style="display: flex; align-items: center; gap: 18px">
+<svg viewBox="0 0 100 100" class="mg-buddy" aria-hidden="true" style="flex: none"><ellipse cx="50" cy="93" rx="26" ry="5" fill="#27272d" opacity="0.12"></ellipse><path d="M38 80v9M62 80v9" style="stroke: #27272d; stroke-width: 4; stroke-linecap: round"></path><path d="M18 34l32 12v40l-32-12z" fill="#e8b886"></path><path d="M50 46l32-12v40l-32 12z" fill="#cf9560"></path><path d="M18 34l32-12 32 12-32 12z" fill="#f4d3ad"></path><path d="M34 28l32 12" style="stroke: #fd8649; stroke-width: 6"></path><circle cx="28" cy="55" r="2.8" fill="#27272d"></circle><circle cx="41" cy="60" r="2.8" fill="#27272d"></circle><circle cx="29" cy="54" r="0.9" fill="#ffffff"></circle><circle cx="42" cy="59" r="0.9" fill="#ffffff"></circle><path d="M28 66c4 4 9 5 13 2" style="fill: none; stroke: #27272d; stroke-width: 2.5; stroke-linecap: round"></path><ellipse cx="24" cy="63" rx="3.5" ry="2.2" fill="#f7a37a" opacity="0.7"></ellipse><ellipse cx="45" cy="70" rx="3.5" ry="2.2" fill="#f7a37a" opacity="0.7"></ellipse><path d="M18 50c-8-3-11-11-7-18" style="fill: none; stroke: #27272d; stroke-width: 3.5; stroke-linecap: round"></path><circle cx="11" cy="31" r="4" fill="#f4d3ad" style="stroke: #27272d; stroke-width: 2"></circle></svg>
+<div style="min-width: 0">
+<p class="ect-eyebrow" style="color: var(--orange-deep)">Ce include</p>
+<h2 id="drum-title" class="ect-h2 ect-h2--sentence" style="margin-bottom: 0">Ce construim pe drumul unei comenzi</h2>
+</div>
+</div>
+<div class="mg-metro__aside">
+<p>Creăm magazine online pentru afaceri care vând produse și vor comenzi direct pe site, nu doar prin mesaje sau pe marketplace-uri. Realizarea unui magazin online începe cu produsele și clienții tăi, nu cu tema grafică.</p>
+<p style="margin: 0"><a class="ect-link" href="#cost">Vezi cât costă ↓</a></p>
+</div>
+</div>
+<div class="mg-metro__map">
+<div class="mg-metro__legend"><span class="mg-metro__badge" aria-hidden="true" style="background: var(--orange); color: var(--ink)">M</span><span class="mg-metro__name">Linia Comenzii</span><span class="mg-metro__meta">6 opriri, un colet fericit</span></div>
+<div class="mg-metro__rail">
+<span class="mg-tree" aria-hidden="true" style="left: 32%; top: -52px"></span>
+<span class="mg-tree" aria-hidden="true" style="left: 64%; top: -52px"></span>
+<span class="mg-tree" aria-hidden="true" style="right: -40px; top: 128px"></span>
+<div class="mg-track mg-track--v" aria-hidden="true"></div>
+<div class="mg-track mg-track--top" aria-hidden="true"></div>
+<div class="mg-track mg-track--curve" aria-hidden="true"></div>
+<div class="mg-track mg-track--bottom" aria-hidden="true"></div>
+<div class="mg-train" aria-hidden="true"><svg viewBox="0 0 58 40" class="mg-van"><rect x="2" y="9" width="34" height="20" rx="4" fill="#fd8649"></rect><path d="M36 15h9.5c1.4 0 2.6.7 3.3 1.9L54 25v4H36z" fill="#ff9762"></path><path d="M39 18h6.6l3.6 6H39z" fill="#e3f8f9"></path><rect x="8" y="14" width="12" height="9" rx="1.5" fill="#fff5ed"></rect><path d="M14 14v9" style="stroke: #ad420f; stroke-width: 1.5"></path><circle cx="13" cy="31" r="5" fill="#27272d"></circle><circle cx="13" cy="31" r="2" fill="#e9e9e9"></circle><circle cx="44" cy="31" r="5" fill="#27272d"></circle><circle cx="44" cy="31" r="2" fill="#e9e9e9"></circle><circle cx="53" cy="22.5" r="1.4" fill="#fff5ed"></circle></svg></div>
+<div class="mg-train mg-train--2" aria-hidden="true"><svg viewBox="0 0 58 40" class="mg-van"><rect x="2" y="9" width="34" height="20" rx="4" fill="#fd8649"></rect><path d="M36 15h9.5c1.4 0 2.6.7 3.3 1.9L54 25v4H36z" fill="#ff9762"></path><path d="M39 18h6.6l3.6 6H39z" fill="#e3f8f9"></path><rect x="8" y="14" width="12" height="9" rx="1.5" fill="#fff5ed"></rect><path d="M14 14v9" style="stroke: #ad420f; stroke-width: 1.5"></path><circle cx="13" cy="31" r="5" fill="#27272d"></circle><circle cx="13" cy="31" r="2" fill="#e9e9e9"></circle><circle cx="44" cy="31" r="5" fill="#27272d"></circle><circle cx="44" cy="31" r="2" fill="#e9e9e9"></circle><circle cx="53" cy="22.5" r="1.4" fill="#fff5ed"></circle></svg></div>
+<ol class="mg-metro__line">
+<li class="mg-st"><span class="mg-st__dot" aria-hidden="true"><svg viewBox="0 0 24 24" class="mg-ico"><path d="M4 9h16l-1.5-5h-13z"></path><path d="M5 9v11h14V9"></path><path d="M10 20v-6h4v6"></path></svg></span><div class="mg-st__card"><span class="mg-st__num">Oprirea 1</span><h3 class="mg-st__title">Vitrina</h3><p class="mg-st__text">Design pe brandul tău, cu pagini de categorie și de produs clare, gândite întâi pentru telefon.</p></div></li>
+<li class="mg-st"><span class="mg-st__dot" aria-hidden="true"><svg viewBox="0 0 24 24" class="mg-ico"><rect x="4" y="4" width="7" height="7" rx="1.5"></rect><rect x="13" y="4" width="7" height="7" rx="1.5"></rect><rect x="4" y="13" width="7" height="7" rx="1.5"></rect><rect x="13" y="13" width="7" height="7" rx="1.5"></rect></svg></span><div class="mg-st__card"><span class="mg-st__num">Oprirea 2</span><h3 class="mg-st__title">Catalogul</h3><p class="mg-st__text">Categorii, variante (mărime, culoare), prețuri și stocuri. Stabilim de la început câte produse introducem noi.</p></div></li>
+<li class="mg-st"><span class="mg-st__dot" aria-hidden="true"><svg viewBox="0 0 24 24" class="mg-ico"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="m15.5 15.5 5 5"></path></svg></span><div class="mg-st__card"><span class="mg-st__num">Oprirea 3</span><h3 class="mg-st__title">Căutarea în Google</h3><p class="mg-st__text">Structură de categorii, titluri și adrese de pagini gândite ca bază pentru SEO.</p></div></li>
+<li class="mg-st"><span class="mg-st__dot" aria-hidden="true"><svg viewBox="0 0 24 24" class="mg-ico"><rect x="2.5" y="5.5" width="19" height="13" rx="2"></rect><path d="M2.5 10h19M6 15h4"></path></svg></span><div class="mg-st__card"><span class="mg-st__num">Oprirea 4</span><h3 class="mg-st__title">Coșul și plata</h3><p class="mg-st__text">Un coș simplu și metodele de plată alese de tine, conectate la magazin.</p></div></li>
+<li class="mg-st"><span class="mg-st__dot" aria-hidden="true"><svg viewBox="0 0 24 24" class="mg-ico"><path d="M3 6h11v10H3z"></path><path d="M14 10h4l3 3v3h-7"></path><circle cx="7" cy="17.5" r="1.8"></circle><circle cx="17.5" cy="17.5" r="1.8"></circle></svg></span><div class="mg-st__card"><span class="mg-st__num">Oprirea 5</span><h3 class="mg-st__title">Livrarea</h3><p class="mg-st__text">Curierii aleși de tine și emailurile de confirmare care ajung la client după fiecare comandă.</p></div></li>
+<li class="mg-st mg-st--end"><span class="mg-st__dot" aria-hidden="true"><svg viewBox="0 0 24 24" class="mg-ico"><rect x="5" y="4" width="14" height="17" rx="2"></rect><path d="M9 4V3h6v1M9 12.5l2 2 4-4"></path></svg></span><div class="mg-st__card"><span class="mg-st__num">Destinația</span><h3 class="mg-st__title">Panoul tău</h3><p class="mg-st__text">Testăm comenzile împreună înainte de lansare, apoi îți arătăm cum adaugi produse și urmărești comenzile.</p></div></li>
+</ol>
+</div>
+</div>
+<p style="margin: 26px 0 0"><a class="ect-link" href="/creare-site-web/">Ai nevoie doar de un site de prezentare? Vezi creare site web</a></p>
+</div>
+</section>
+
+<section class="mg-proc" aria-labelledby="proc-title">
+<div class="mg-proc__blob" aria-hidden="true"></div>
+<div class="mg-proc__inner">
+<div class="mg-proc__left">
+<p class="ect-eyebrow" style="color: var(--orange)">Cum lucrăm</p>
+<h2 id="proc-title" class="ect-h2 ect-h2--sentence" style="margin-bottom: 0">Pași clari, de la prima discuție <span class="ect-hl">la prima comandă</span></h2>
+<div class="mg-bento">
+<div class="mg-bento__tile mg-bento__tile--orange mg-bento__tile--tall"><span class="mg-bento__ring" aria-hidden="true"></span><span class="mg-bento__ring mg-bento__ring--2" aria-hidden="true"></span><span class="mg-bento__big" style="color: var(--field)">30</span><span class="mg-bento__unit" style="color: var(--field)">de minute</span><p class="mg-bento__text" style="color: var(--field)">Prima discuție e gratuită. Îți spunem ce am face și cam cât costă.</p></div>
+<div class="mg-bento__tile mg-bento__tile--ink"><span class="mg-bento__big">4</span><span class="mg-bento__unit">pași</span><p class="mg-bento__text">De la primul apel până la magazinul live.</p></div>
+<div class="mg-bento__tile mg-bento__tile--peach"><span class="mg-bento__big">1</span><span class="mg-bento__unit">om de contact</span><p class="mg-bento__text">Vorbești cu un singur om, nu cu un grup.</p></div>
+<div class="mg-bento__tile mg-bento__tile--ink"><span class="mg-bento__big mg-bento__big--scris">În scris</span><span class="mg-bento__unit">prețul și termenul</span><p class="mg-bento__text">Le primești în ofertă, înainte să începem.</p></div>
+<a class="mg-bento__tile mg-bento__cta" href="#formular_contact_bottom"><span class="mg-bento__kicker">Următorul pas</span><span class="mg-bento__action">Hai să ne cunoaștem</span><span class="mg-bento__foot"><span class="mg-bento__note">Fără obligații</span><span class="mg-bento__arrow" aria-hidden="true">→</span></span></a>
+</div>
+</div>
+<div class="mg-proc__right">
+<div class="mg-receipt">
+<div class="mg-receipt__paper">
+<div class="mg-receipt__head"><img src="../../../legacy-mirror/wp-content/uploads/2024/02/Logo_Echipa_de_Tocilari-e1708028624694.webp" width="836" height="870" alt=""><div><p class="mg-receipt__brand">Echipa de Tocilari</p><p class="mg-receipt__kind">Bon de proiect · Magazin online</p></div></div>
+<ol class="mg-receipt__list">
+<li><div class="mg-receipt__row"><span class="mg-receipt__no" style="color: var(--orange-check)">01</span><h3>Ne cunoaștem</h3><span class="mg-receipt__dots" aria-hidden="true"></span><span class="mg-receipt__val">Gratuit</span></div><p class="mg-receipt__desc">Apel de 30 de minute despre produse, clienți, livrare și sistemele pe care le folosești deja.</p></li>
+<li><div class="mg-receipt__row"><span class="mg-receipt__no" style="color: var(--orange-check)">02</span><h3>Primești planul</h3><span class="mg-receipt__dots" aria-hidden="true"></span><span class="mg-receipt__val">În scris</span></div><p class="mg-receipt__desc">Paginile, funcțiile, termenul și prețul, pe înțeles, într-o ofertă scrisă.</p></li>
+<li><div class="mg-receipt__row"><span class="mg-receipt__no" style="color: var(--orange-deep)">03</span><h3>Construim și testăm</h3><span class="mg-receipt__dots" aria-hidden="true"></span><span class="mg-receipt__val">Cu tine</span></div><p class="mg-receipt__desc">Configurăm magazinul, introducem produsele convenite și testăm comenzile împreună.</p></li>
+<li><div class="mg-receipt__row"><span class="mg-receipt__no" style="color: var(--orange-deep)">04</span><h3>Lansăm și predăm</h3><span class="mg-receipt__dots" aria-hidden="true"></span><span class="mg-receipt__val">Live</span></div><p class="mg-receipt__desc">Publicăm magazinul și îți arătăm cum îl administrezi de la o zi la alta.</p></li>
+</ol>
+<div class="mg-receipt__total"><span>Total</span><span>Un magazin care primește comenzi</span></div>
+<div class="mg-barcode" aria-hidden="true"></div>
+<p class="mg-barcode-code" aria-hidden="true">EDT · MAGAZIN · ONLINE</p>
+</div>
+<div class="mg-receipt__edge" aria-hidden="true"></div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="cost" class="mg-prices" aria-labelledby="cost-title">
+<div class="mg-prices__blob1" aria-hidden="true"></div>
+<div class="mg-prices__blob2" aria-hidden="true"></div>
+<div class="mg-prices__inner">
+<h2 id="cost-title" class="mg-prices__title">Cât costă un magazin online?</h2>
+<p class="mg-prices__sub">Prețuri orientative pentru trei pachete</p>
+<div class="mg-prices__row">
+<article class="mg-pcard">
+<h3 class="mg-pcard__title">Start</h3>
+<p class="mg-pcard__for">Pentru un catalog mic, într-o singură limbă</p>
+<p class="mg-pcard__from">de la</p>
+<p class="mg-pcard__price">1.250 €</p>
+<ul class="mg-pcard__list">
+<li><svg viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"></path></svg>Până la 6 pagini</li>
+<li><svg viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"></path></svg>10 produse incluse</li>
+<li><svg viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"></path></svg>Optimizare SEO</li>
+<li><svg viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"></path></svg>Consultanță</li>
+<li><svg viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"></path></svg>Tematică generală</li>
+<li><svg viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"></path></svg>Template WordPress / Elementor</li>
+<li><svg viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"></path></svg>O singură limbă</li>
+</ul>
+<a class="ect-btn ect-btn--primary" href="#formular_contact_bottom">Comandă acum!</a>
+</article>
+<article class="mg-pcard mg-pcard--featured">
+<h3 class="mg-pcard__title">Silver</h3>
+<p class="mg-pcard__for">Pentru un catalog în creștere, cu plăți și livrare conectate</p>
+<p class="mg-pcard__from">de la</p>
+<p class="mg-pcard__price">[PREȚ]</p>
+<ul class="mg-pcard__list">
+<li><svg viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"></path></svg>Tot ce include pachetul Start</li>
+<li><svg viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"></path></svg>Până la [N] produse incluse</li>
+<li><svg viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"></path></svg>Plăți online conectate la magazin</li>
+<li><svg viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"></path></svg>Curier și facturare conectate</li>
+<li><svg viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"></path></svg>O singură limbă</li>
+</ul>
+<a class="ect-btn ect-btn--primary" href="#formular_contact_bottom">Comandă acum!</a>
+</article>
+<article class="mg-pcard">
+<h3 class="mg-pcard__title">Gold</h3>
+<p class="mg-pcard__for">Pentru cataloage mari sau vânzări în mai multe țări</p>
+<p class="mg-pcard__from">de la</p>
+<p class="mg-pcard__price">[PREȚ]</p>
+<ul class="mg-pcard__list">
+<li><svg viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"></path></svg>Tot ce include pachetul Silver</li>
+<li><svg viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"></path></svg>Catalog mare, peste [N] produse</li>
+<li><svg viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"></path></svg>Legătură cu ERP sau gestiunea de stocuri</li>
+<li><svg viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"></path></svg>Mai multe limbi și monede</li>
+</ul>
+<a class="ect-btn ect-btn--primary" href="#formular_contact_bottom">Comandă acum!</a>
+</article>
+</div>
+<p class="mg-prices__note">Prețurile sunt orientative și nu reprezintă o ofertă contractuală. Pentru o estimare personalizată, trimite-ne câte produse ai, ce integrări îți trebuie și ce materiale ai deja. Domeniul, găzduirea, licențele și comisioanele furnizorilor de plăți sau de curierat se clarifică separat, în ofertă.</p>
+</div>
+</section>
+
+<section class="ect-home-faq" id="intrebari-frecvente" aria-labelledby="faq-title">
+<div class="ect-home-faq__inner">
+<div class="ect-home-faq__intro">
+<div class="ect-home-faq__copy">
+<p class="ect-home-faq__eyebrow">Întrebări frecvente</p>
+<h2 id="faq-title">Tu întrebi. Noi lămurim.</h2>
+<p class="ect-home-faq__subtitle">Despre costuri, termene și ce se întâmplă după lansare. Pe înțeles, fără jargon.</p>
+<a class="ect-home-faq__contact" href="#formular_contact_bottom">Hai să vorbim</a>
+</div>
+<figure class="ect-home-faq__mascot" data-js="faq-mascot">
+<span class="mg-qmark mg-qmark--1" aria-hidden="true">?</span>
+<span class="mg-qmark mg-qmark--2" aria-hidden="true">?</span>
+<span class="mg-qmark mg-qmark--3" aria-hidden="true">!</span>
+<img src="../../../legacy-mirror/wp-content/ect-pages/home/faq-tocilar-reader.webp" width="640" height="640" alt="Tocilar 3D cu ochelari și papion, care citește o carte">
+<button class="ect-home-faq__motion" type="button" aria-label="Oprește animația" data-js="faq-motion">
+<svg data-icon="play" hidden viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 4l13 8-13 8z"></path></svg>
+<svg data-icon="pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="6" y="4" width="4" height="16" rx="1"></rect><rect x="14" y="4" width="4" height="16" rx="1"></rect></svg>
+</button>
+</figure>
+</div>
+<div class="ect-home-faq__conversation">
+<details class="ect-home-faq__item" name="mg-faq" open>
+<summary class="ect-home-faq__trigger"><span class="ect-home-faq__question">Cât costă crearea unui magazin online?</span><span class="ect-home-faq__indicator" aria-hidden="true"></span></summary>
+<div class="ect-home-faq__answer"><p>Pachetul Start începe de la 1.250 € și include până la 6 pagini și 10 produse. Pentru cataloage mai mari, integrări sau mai multe limbi, prețul crește. Oferta finală o primești în scris, înainte să începem.</p></div>
+</details>
+<details class="ect-home-faq__item" name="mg-faq">
+<summary class="ect-home-faq__trigger"><span class="ect-home-faq__question">Cât durează până se lansează magazinul?</span><span class="ect-home-faq__indicator" aria-hidden="true"></span></summary>
+<div class="ect-home-faq__answer"><p>Depinde de numărul de produse și de integrări. Stabilim termenul după prima discuție și îl trecem în ofertă, împreună cu materialele de care avem nevoie de la tine.</p></div>
+</details>
+<details class="ect-home-faq__item" name="mg-faq">
+<summary class="ect-home-faq__trigger"><span class="ect-home-faq__question">Ce trebuie să pregătesc eu?</span><span class="ect-home-faq__indicator" aria-hidden="true"></span></summary>
+<div class="ect-home-faq__answer"><p>Lista de produse cu variante și prețuri, fotografiile și textele pe care le ai, datele firmei, condițiile de livrare și retur și conturile la procesatorul de plăți și la curieri, dacă le ai deja. După prima discuție îți spunem exact ce lipsește.</p></div>
+</details>
+<details class="ect-home-faq__item" name="mg-faq">
+<summary class="ect-home-faq__trigger"><span class="ect-home-faq__question">Pot adăuga singur produse și urmări comenzile?</span><span class="ect-home-faq__indicator" aria-hidden="true"></span></summary>
+<div class="ect-home-faq__answer"><p>Da. La predare îți arătăm cum adaugi produse, schimbi prețuri și stocuri și urmărești comenzile. Pentru actualizări tehnice și backup poți alege separat <a href="/administrare-site/">mentenanța site-ului</a>.</p></div>
+</details>
+<details class="ect-home-faq__item" name="mg-faq">
+<summary class="ect-home-faq__trigger"><span class="ect-home-faq__question">Puteți muta un magazin existent?</span><span class="ect-home-faq__indicator" aria-hidden="true"></span></summary>
+<div class="ect-home-faq__answer"><p>Analizăm întâi platforma și datele actuale. Mutarea produselor, a comenzilor și a adreselor paginilor se planifică în funcție de ce se poate exporta, iar costul apare separat în ofertă.</p></div>
+</details>
+<details class="ect-home-faq__item" name="mg-faq">
+<summary class="ect-home-faq__trigger"><span class="ect-home-faq__question">Magazinul va apărea în Google după lansare?</span><span class="ect-home-faq__indicator" aria-hidden="true"></span></summary>
+<div class="ect-home-faq__answer"><p>Pregătim structura de categorii, titlurile și adresele paginilor ca bază pentru SEO, dar nu putem garanta poziții. Pentru vizibilitate constantă poți continua cu <a href="/servicii-seo/">servicii SEO</a> sau cu <a href="/agentie-google-ads/">campanii Google Ads</a>.</p></div>
+</details>
+</div>
+</div>
+</section>
+
+<section aria-labelledby="dupa-lansare-title" style="padding: clamp(50px, 7vw, 80px) 20px clamp(80px, 10vw, 120px)">
+<div style="max-width: 1150px; margin: 0 auto">
+<div class="ect-section-head">
+<p class="ect-eyebrow" style="color: var(--orange)">După lansare</p>
+<h2 id="dupa-lansare-title" class="ect-h2 ect-h2--sentence">Magazinul e gata. Acum trebuie să ajungă la clienți.</h2>
+<p class="ect-lead">Putem continua împreună cu serviciile care aduc vizitatori și țin magazinul în formă. Le alegi doar dacă au sens pentru tine.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 44px">
+<article class="ect-card ect-card--interactive">
+<div class="ect-card__head"><span aria-hidden="true" style="width: 56px; height: 56px; border-radius: 50%; background: var(--peach); color: var(--orange-deep); display: grid; place-items: center"><svg viewBox="0 0 24 24" focusable="false" style="width: 28px; height: 28px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="m15.5 15.5 5 5M7.5 10.5h6M10.5 7.5v6"></path></svg></span></div>
+<h3 class="ect-card__title">SEO și vizibilitate în AI</h3>
+<p class="ect-card__text">Lucrăm la structură, conținut și partea tehnică, ca produsele să fie mai ușor de găsit în Google și în răspunsurile AI.</p>
+<p class="ect-card__link" style="margin-bottom: 0"><a class="ect-link" href="/servicii-seo/">Vezi serviciile SEO</a></p>
+</article>
+<article class="ect-card ect-card--interactive">
+<div class="ect-card__head"><span aria-hidden="true" style="width: 56px; height: 56px; border-radius: 50%; background: var(--peach); color: var(--orange-deep); display: grid; place-items: center"><svg viewBox="0 0 24 24" focusable="false" style="width: 28px; height: 28px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round"><path d="M3 10v4h3l7 4V6l-7 4z"></path><path d="M17 9.5a3.5 3.5 0 0 1 0 5M7 14l1 5h2.5l-1-4.5"></path></svg></span></div>
+<h3 class="ect-card__title">Google Ads</h3>
+<p class="ect-card__text">Campanii Search pentru produsele tale, cu buget stabilit împreună. Bugetul de publicitate se plătește separat către Google.</p>
+<p class="ect-card__link" style="margin-bottom: 0"><a class="ect-link" href="/agentie-google-ads/">Vezi serviciile Google Ads</a></p>
+</article>
+<article class="ect-card ect-card--interactive">
+<div class="ect-card__head"><span aria-hidden="true" style="width: 56px; height: 56px; border-radius: 50%; background: var(--peach); color: var(--orange-deep); display: grid; place-items: center"><svg viewBox="0 0 24 24" focusable="false" style="width: 28px; height: 28px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"></path><path d="m9 12 2 2 4-4"></path></svg></span></div>
+<h3 class="ect-card__title">Mentenanță site</h3>
+<p class="ect-card__text">Actualizări, backup, securitate. Tu te ocupi de vânzări, noi ne ocupăm de site.</p>
+<p class="ect-card__link" style="margin-bottom: 0"><a class="ect-link" href="/administrare-site/">Vezi ce include mentenanța</a></p>
+</article>
+</div>
+</div>
+</section>
+
+<section class="ect-contact" id="formular_contact_bottom" aria-labelledby="contact-title">
+<div class="ect-contact__wave ect-contact__wave--top"><svg viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M790.5,93.1c-59.3-5.3-116.8-18-192.6-50c-29.6-12.7-76.9-31-100.5-35.9c-23.6-4.9-52.6-7.8-75.5-5.3 c-10.2,1.1-22.6,1.4-50.1,7.4c-27.2,6.3-58.2,16.6-79.4,24.7c-41.3,15.9-94.9,21.9-134,22.6C72,58.2,0,25.8,0,25.8V100h1000V65.3 c0,0-51.5,19.4-106.2,25.7C839.5,97,814.1,95.2,790.5,93.1z"></path></svg></div>
+<div class="ect-contact__inner">
+<div class="ect-contact__copy">
+<h2 class="ect-contact__title" id="contact-title"><b>Te putem ajuta</b>, indiferent de <b>orașul</b> din care ne scrii.</h2>
+<p class="ect-contact__text">Ne-ar face <b>mare plăcere</b> să vorbim despre <b>magazinul</b> tău, fără slides.</p>
+</div>
+<div class="ect-contact__card">
+<h3 class="ect-contact__card-title">Scrie-ne un mesaj astăzi</h3>
+<form action="#" method="post" data-js="contact-form">
+<div class="ect-field"><input type="text" name="name" placeholder="Nume" aria-label="Nume" autocomplete="name" maxlength="120" required></div>
+<div class="ect-field"><input type="text" name="company" placeholder="Nume Companie" aria-label="Nume companie (opțional)" autocomplete="organization" maxlength="160"></div>
+<div class="ect-field"><input type="email" name="email" placeholder="Email" aria-label="Email" autocomplete="email" maxlength="254" required></div>
+<div class="ect-field"><input type="tel" name="phone" placeholder="Telefon" aria-label="Telefon" autocomplete="tel" maxlength="40" required></div>
+<div class="ect-field"><textarea name="message" rows="3" placeholder="Mesaj" aria-label="Mesaj" maxlength="5000" required></textarea></div>
+<button class="ect-btn ect-btn--submit" type="submit">Trimite</button>
+
+<p data-js="form-sent" hidden class="ect-contact-status" data-state="success" role="status">Mulțumim! Mesajul a fost trimis.</p>
+
+</form>
+</div>
+</div>
+<div class="ect-contact__wave ect-contact__wave--bottom"><svg viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M790.5,93.1c-59.3-5.3-116.8-18-192.6-50c-29.6-12.7-76.9-31-100.5-35.9c-23.6-4.9-52.6-7.8-75.5-5.3 c-10.2,1.1-22.6,1.4-50.1,7.4c-27.2,6.3-58.2,16.6-79.4,24.7c-41.3,15.9-94.9,21.9-134,22.6C72,58.2,0,25.8,0,25.8V100h1000V65.3 c0,0-51.5,19.4-106.2,25.7C839.5,97,814.1,95.2,790.5,93.1z"></path></svg></div>
+</section>
+
+</main>
+
+<footer class="ect-footer">
+<div class="ect-footer__top">
+<div class="ect-footer__logo"><img src="../../../legacy-mirror/wp-content/uploads/2024/02/Logo_Echipa_de_Tocilari-e1708028624694.webp" width="836" height="870" alt="Logo Echipa de Tocilari"></div>
+<div class="ect-footer__info">
+<p><strong>ECHIPA DE TOCILARI SRL</strong></p>
+<p>Adresa: Alexandru Zagoritz nr 12, sector 2,<br>București, 021998, România<br>site: <strong><a href="/">echipadetocilari.ro</a></strong><br>email: <strong><a href="mailto:contact@echipadetocilari.ro">contact@echipadetocilari.ro</a></strong><br>CUI: 47591744 | J40/2298/2023</p>
+</div>
+<div class="ect-footer__links">
+<p><strong>PAGINI IMPORTANTE</strong></p>
+<p><a href="/creare-site-web/">Creare site web</a><br><a href="/servicii-seo/">Servicii SEO</a><br><a href="/administrare-site/">Administrare site</a><br><a href="/contact/">Contact</a></p>
+</div>
+</div>
+<div class="ect-footer__bottom">
+<div class="ect-footer__follow">Urmărește-ne pe:
+<ul class="ect-footer__social">
+<li><a href="https://www.facebook.com/" aria-label="Facebook"><svg viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M400 32H48A48 48 0 0 0 0 80v352a48 48 0 0 0 48 48h137.25V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.27c-30.81 0-40.42 19.12-40.42 38.73V256h68.78l-11 71.69h-57.78V480H400a48 48 0 0 0 48-48V80a48 48 0 0 0-48-48z"></path></svg></a></li>
+<li><a href="https://www.linkedin.com/" aria-label="LinkedIn"><svg viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"></path></svg></a></li>
+</ul>
+</div>
+<p class="ect-footer__copy">© 2026 All Rights Reserved</p>
+</div>
+</footer>
+
+</div>
+<script src="pagina.js" defer></script>
+</body>
+</html>

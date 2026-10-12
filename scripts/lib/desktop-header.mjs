@@ -7,6 +7,7 @@ const STYLESHEET = '<link rel="stylesheet" href="/wp-content/ect-pages/desktop-h
 const svg = paths => `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${paths}</svg>`;
 const ICONS = {
   website: svg('<rect x="3" y="4.5" width="18" height="15" rx="2.5"/><path d="M3 9h18"/><path d="M6.5 6.75h.01M9 6.75h.01M11.5 6.75h.01"/><path d="M7 13h7M7 16h4.5"/>'),
+  shop: svg('<path d="M3 4h2.5l2.2 10.2h10.6L20.5 7H7"/><circle cx="10" cy="18.5" r="1.4"/><circle cx="17" cy="18.5" r="1.4"/>'),
   seo: svg('<circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L20 20"/><path d="M10.5 7.5c.35 1.6 1.4 2.65 3 3-1.6.35-2.65 1.4-3 3-.35-1.6-1.4-2.65-3-3 1.6-.35 2.65-1.4 3-3z"/>'),
   ads: svg('<path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1z"/><path d="M15.5 9.5a3.5 3.5 0 0 1 0 5"/><path d="M18 7a7 7 0 0 1 0 10"/>'),
   maintenance: svg('<path d="M12 3.2l7 2.8v5.6c0 4.2-2.9 7.6-7 9.2-4.1-1.6-7-5-7-9.2V6l7-2.8z"/><path d="M9 12.2l2.1 2.1 4-4.1"/>'),
@@ -18,6 +19,10 @@ export const serviceMenuCopy = {
     icon: 'website',
     ro: 'Site de prezentare, landing page și bază de magazin online.',
     en: 'Business websites, landing pages and a solid base for online stores.',
+  },
+  '/creare-magazin-online/': {
+    icon: 'shop',
+    ro: 'Catalog, plăți, livrare și comenzi testate înainte de lansare.',
   },
   '/servicii-seo/': {
     icon: 'seo',
@@ -41,7 +46,7 @@ const serviceByHref = new Map(routes
   .filter(route => serviceMenuCopy[route.ro])
   .flatMap(route => {
     const { icon, ro, en } = serviceMenuCopy[route.ro];
-    return [[route.ro, { icon, text: ro }], [route.en, { icon, text: en }]];
+    return [[route.ro, { icon, text: ro }], ...(route.en ? [[route.en, { icon, text: en }]] : [])];
   }));
 
 function openingTag(html) {
