@@ -8,7 +8,7 @@ Homepage-ul este punctul central pentru șapte grupuri tematice. Oferta este lim
 
 Păstrează URL-urile existente, cu excepția migrării explicite a paginii Google Ads descrise mai jos, fără a introduce obligatoriu un director /servicii/. Nu crea pagini separate pentru sinonime precum creare site, realizare site și creare website. Delimitează intenția homepage-ului de cea a paginilor de servicii.
 
-O pagină Servicii care repetă homepage-ul nu este necesară. Meniul local oferă acces direct la paginile de servicii existente, iar cele trei carduri fără pagini dedicate trimit momentan la /services/. Eliminarea efectivă a /services/ și a versiunii EN rămâne o modificare de implementat separat, cu redirecționări, actualizarea linkurilor și a rutelor. Salvarea acestei strategii nu înseamnă că pagina a fost eliminată.
+O pagină Servicii care repetă homepage-ul nu este necesară. Meniul și cardul de magazin online de pe homepage oferă acces direct la pagina /creare-magazin-online/. Cele două carduri fără pagini dedicate, dezvoltare aplicații și Facebook Ads, trimit momentan la /services/. Eliminarea efectivă a /services/ și a versiunii EN rămâne o modificare de implementat separat, cu redirecționări, actualizarea linkurilor și a rutelor. Salvarea acestei strategii nu înseamnă că pagina a fost eliminată.
 
 ## Keywords pe pagini
 
