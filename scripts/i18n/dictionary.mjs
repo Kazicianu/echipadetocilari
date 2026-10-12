@@ -6,6 +6,15 @@ export { googleAdsDictionary };
  * Tuned for how people actually search in EN (digital marketing, web design, SEO…).
  */
 export const dictionary = [
+  ['de la', 'from'],
+  ['Design personalizat, o limbă', 'Custom design, one language'],
+  ['SEO tehnic și măsurarea comenzilor', 'Technical SEO and order tracking'],
+  ['Instruire și 30 zile corectare erori', 'Training and 30 days of bug fixes'],
+  ['Plăți, curier și facturare standard', 'Standard payments, shipping and invoicing'],
+  ['WooCommerce sau Shopify', 'WooCommerce or Shopify'],
+  ['Două runde de revizii', 'Two revision rounds'],
+  ['25 produse manual sau 100 din CSV pregătit', '25 products added manually or 100 from a prepared CSV'],
+  ['Vezi pachetele', 'View packages'],
   ['Tu întrebi. Noi lămurim.', 'You ask. We explain.'],
   ['Despre promovare, bugete și ce merită făcut. Pe înțeles, fără jargon.', 'Marketing, budgets and what is worth doing. Clear answers, without the jargon.'],
   ['Tocilar 3D cu ochelari și pulover portocaliu, care te salută cu un laptop în poală', 'A 3D nerd with glasses and an orange sweater, waving hello with a laptop in his lap'],

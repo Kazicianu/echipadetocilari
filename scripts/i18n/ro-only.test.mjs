@@ -113,11 +113,11 @@ test('build validation requires only approved language variants and rejects stal
   } finally { scratch.cleanup(); }
 });
 
-test('store FAQ schema can be extracted directly from all six visible questions', () => {
+test('store FAQ schema can be extracted directly from all seven visible questions', () => {
   const html = readFileSync(path.join(source, shop.roFile), 'utf8');
   const questions = extractHomeFaqs(html);
-  assert.equal(questions.length, 6);
+  assert.equal(questions.length, 7);
   assert.equal(questions[0].q, 'Cât costă crearea unui magazin online?');
-  assert.match(questions[0].a, /1\.250 €/);
+  assert.match(questions[0].a, /1\.490 €/);
   assert.ok(questions.every(({ q, a }) => q.length > 15 && a.length > 30));
 });

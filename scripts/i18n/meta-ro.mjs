@@ -19,9 +19,9 @@ export const roPageMeta = {
       'Creare site web în București: site de prezentare, landing page și bază de magazin online. Design, viteză și SEO tehnic de la prima versiune.',
   },
   '/creare-magazin-online/': {
-    title: 'Creare magazin online | Echipa de Tocilari',
+    title: 'Creare magazin online de la 1.490 € | Echipa de Tocilari',
     description:
-      'Creăm magazine online: catalog, plăți, livrare și comenzi testate înainte de lansare. Pachet de pornire de la 1.250 €. Consultație gratuită.',
+      'Creare magazin online pe WooCommerce sau Shopify, de la 1.490 €. Design personalizat, plăți, curier și facturare. Vezi pachetele și cere o ofertă.',
   },
   '/servicii-seo/': {
     title: 'Servicii SEO și vizibilitate în AI | Echipa de Tocilari',

@@ -35,6 +35,7 @@ import {
 } from './lib/html.mjs';
 import { faqPage, organization, service, webPage, website } from './lib/schema.mjs';
 import { extractGoogleAdsFaqs, extractHomeFaqs } from './lib/faq.mjs';
+import { storeOfferCatalog } from './lib/store-seo.mjs';
 import { junkRedirects, vercelRedirects } from './lib/junk-redirects.mjs';
 import { validateBuild } from './lib/validate.mjs';
 import { enhanceContactForms } from './lib/contact-forms.mjs';
@@ -123,15 +124,19 @@ function schemasFor(urlPath, meta, html) {
   if (urlPath === '/creare-magazin-online/') list.push(faqPage(extractHomeFaqs(html)));
   if (urlPath === '/agentie-google-ads/') list.push(faqPage(extractGoogleAdsFaqs(html)));
   if (route?.service) {
-    list.push(
-      service({
-        site: SITE,
-        lang: 'ro',
-        name: route.service.ro,
-        description: meta.description,
-        url: urlPath,
-      })
-    );
+    const serviceSchema = service({
+      site: SITE,
+      lang: 'ro',
+      name: route.service.ro,
+      description: meta.description,
+      url: urlPath,
+    });
+    if (urlPath === '/creare-magazin-online/') {
+      serviceSchema.hasOfferCatalog = storeOfferCatalog({
+        html, site: SITE, url: urlPath, serviceName: route.service.ro,
+      });
+    }
+    list.push(serviceSchema);
   }
   return list;
 }

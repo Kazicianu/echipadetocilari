@@ -29,6 +29,22 @@ Folosește variantele natural, cu diacritice în textele publicate. Nu forța po
 
 Pagina Google Ads folosește acum ruta /agentie-google-ads/. Rutele anterioare /pay-per-click/ și /en/ppc-advertising/ redirecționează permanent către versiunile noi, ca fiecare limbă să aibă o singură pagină comercială Google Ads.
 
+## Oferta magazin online aprobată (12.10.2026)
+
+Pagina `/creare-magazin-online/` folosește trei pachete: Start 1.490 €, Business 2.490 € și Avansat de la 4.490 €. Business este recomandarea comercială de pe pagină, iar oferta de intrare pentru viitoarele reclame Google Ads este de la 1.490 €. Aceste prețuri înlocuiesc Start 1.250 € și variantele provizorii Silver/Gold din prototip.
+
+Platforma se stabilește după proiect: WooCommerce sau Shopify, cu cod personalizat și limitele de implementare precizate în ofertă. Start include 25 produse încărcate manual sau 100 importate dintr-un CSV pregătit, o limbă și 30 zile de corectare a erorilor. Business include 50 produse manual sau 500 din CSV, personalizarea paginilor de homepage, categorie și produs, filtre, produse recomandate, recuperare coș abandonat, feed Merchant Center și 60 zile de corectare a erorilor.
+
+Toate pachetele includ un procesator de plată, un curier cu AWB și un serviciu de facturare prin conectori standard compatibili, SEO tehnic, măsurarea comenzilor, instruire și două runde de revizii. Pentru Avansat, catalogul, limbile și automatizările se stabilesc în oferta scrisă. ERP, aplicațiile custom și migrările complexe se estimează separat. Clientul furnizează materialele și datele produselor; curățarea datelor, variantele complexe și redactarea se ofertează separat.
+
+Domeniul, hostingul, abonamentul Shopify, aplicațiile, licențele și mentenanța ulterioară au costuri separate, comunicate înainte de contract. Regimul TVA se precizează explicit în ofertă. Pagina magazinului rămâne exclusiv RO în etapa aprobată; versiunea EN și ruta ei necesită o etapă ulterioară.
+
+## Optimizarea paginii magazin online (12.10.2026)
+
+Pagina păstrează „creare magazin online” ca termen principal în title și H1. „Realizarea unui magazin online” apare natural în descrierea livrabilelor, iar căutările despre preț sunt acoperite de secțiunea cu pachete, costuri separate și FAQ. Title-ul include oferta de intrare de la 1.490 €. Introducerea explică serviciul, publicul și gestionarea comenzilor direct pe site; FAQ-ul explică și alegerea WooCommerce sau Shopify.
+
+Datele structurate Service includ catalogul pachetelor extras din HTML-ul vizibil. Start și Business au prețurile afișate, iar Avansat are preț minim, fără a transforma „de la” într-un preț fix. FAQPage este generat din cele șapte întrebări vizibile. Aceste date nu reprezintă o garanție de clasare, rezultate speciale sau citare AI. Pagina rămâne exclusiv RO, iar politica PUBLIC_INDEXABLE rămâne neschimbată.
+
 ## Conținut de suport propus
 
 Acestea sunt idei editoriale, nu keywords cu volume validate separat. Răspunde întâi întrebărilor esențiale în pagina serviciului. Creează articole separate numai când există informație suficientă, distinctă și utilă.
