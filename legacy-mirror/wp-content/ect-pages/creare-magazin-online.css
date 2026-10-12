@@ -332,6 +332,7 @@
 
 .ect-page.ect-page--creare-magazin-online .mg-notif--3 { animation-delay: 4s; }
 
+.ect-page.ect-page--creare-magazin-online .mg-ctrl:focus:not(:focus-visible) { outline: none; }
 .ect-page.ect-page--creare-magazin-online .mg-ctrl:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
 
 @media (max-width: 520px) {

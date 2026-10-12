@@ -16,7 +16,6 @@
   const visual = $('.mg-hero-visual');
   const screens = $$('[data-screen]');
   const dots = $$('[data-js="dot"]');
-  const pauseButton = $('[data-js="phone-pause"]');
   let current = 0;
   let phonePaused = reduceMotion;
   let timer;
@@ -37,17 +36,10 @@
       const marker = dot.firstElementChild;
       if (marker) {
         marker.style.width = active ? '26px' : '10px';
-        marker.style.background = active ? 'var(--orange-deep)' : 'var(--line-step)';
+        marker.style.background = active ? 'var(--orange)' : 'var(--line-step)';
       }
     });
     visual?.classList.toggle('mg-phone-paused', phonePaused || document.hidden);
-    if (pauseButton) {
-      pauseButton.setAttribute('aria-label', phonePaused
-        ? label('Pornește schimbarea ecranelor', 'Start the screen slideshow')
-        : label('Oprește schimbarea ecranelor', 'Pause the screen slideshow'));
-      pauseButton.setAttribute('aria-pressed', String(phonePaused));
-      setIcons(pauseButton, phonePaused);
-    }
   };
 
   const schedulePhone = () => {
@@ -67,11 +59,6 @@
     renderPhone();
     schedulePhone();
   }));
-  pauseButton?.addEventListener('click', () => {
-    phonePaused = !phonePaused;
-    renderPhone();
-    schedulePhone();
-  });
 
   const mascot = $('[data-js="faq-mascot"]');
   const motionButton = $('[data-js="faq-motion"]');
@@ -95,7 +82,7 @@
   const updateMotion = (event) => {
     reduceMotion = event.matches;
     /* A new request to reduce motion stops autoplay immediately. Removing
-       that preference leaves it stopped until the visitor chooses Play. */
+       that preference leaves it stopped; the screens remain manually selectable. */
     if (reduceMotion) {
       phonePaused = true;
       faqPaused = true;
