@@ -108,6 +108,13 @@ Telefonul din hero e desenat integral în HTML și CSS, fără imagini.
 - Stilurile sunt în `creare-magazin-online.css`, cu prefixul `mg-scope`. Secțiunea nu are JavaScript și nici elemente interactive.
 - Comparată cu exportul la 320, 360, 390, 430, 600, 768, 880, 900, 1024, 1100, 1280 și 1440 px: aceleași poziții, fonturi și culori, fără overflow orizontal în secțiune.
 
+## Butoanele din hero (13.10.2026)
+
+- La cererea utilizatorului, lista cu bife de sub descriere („Catalog clar”, „Comenzi de pe mobil”, „Plăți și livrare”) a fost scoasă din hero. Nu o readuce din `pagina.html`.
+- Cele două acțiuni sunt acum `.mg-cta` în `.mg-hero-actions`: „Primește o ofertă” plin, portocaliu `#fd8649` cu text alb, și „Vezi ce include” alb cu contur `line-peach`. Fiecare are un cerc cu săgeată (orizontală, respectiv verticală), ca la CTA-ul din casetele „Cum lucrăm”.
+- Sub 500 px butoanele stau unul sub altul, pe toată lățimea; de la 500 px în sus stau pe un rând, în cel mult 500 px. Înălțimea este 56 px la orice lățime.
+- Variantele `ect-btn--ink` și `ect-btn--text` nu mai sunt folosite pe pagină, iar regulile lor au fost scoase din `creare-magazin-online.css`.
+
 ## SEO
 
 - Title: `Creare magazin online | Echipa de Tocilari`
