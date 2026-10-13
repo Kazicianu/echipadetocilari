@@ -883,7 +883,7 @@
 @media (hover: hover) and (pointer: fine) {
 .ect-page.ect-page--creare-magazin-online .ect-home-faq .ect-home-faq__contact:hover { background: var(--orange); color: var(--white-warm); }
 }
-.ect-page.ect-page--creare-magazin-online .ect-home-faq__contact:focus-visible, .ect-page.ect-page--creare-magazin-online .ect-home-faq__trigger:focus-visible, .ect-page.ect-page--creare-magazin-online .ect-home-faq__motion:focus-visible { outline: 3px solid var(--ink); outline-offset: 5px; }
+.ect-page.ect-page--creare-magazin-online .ect-home-faq__contact:focus-visible, .ect-page.ect-page--creare-magazin-online .ect-home-faq__trigger:focus-visible { outline: 3px solid var(--ink); outline-offset: 5px; }
 
 .ect-page.ect-page--creare-magazin-online .ect-home-faq__mascot { position: relative; justify-self: center; width: 180px; max-width: 100%; aspect-ratio: 1 / 1; margin: 0px 0px 5px; }
 
@@ -894,10 +894,6 @@
   50% { transform: translateY(-7px) rotate(-1.5deg); }
 }
 .ect-page.ect-page--creare-magazin-online .mg-paused img { animation-play-state: paused; }
-
-.ect-page.ect-page--creare-magazin-online .ect-home-faq .ect-home-faq__motion { position: absolute; right: -4px; bottom: -12px; z-index: 3; display: grid; place-items: center; width: 44px; height: 44px; min-width: 44px; padding: 0px; border: 1px solid var(--line); border-radius: 50%; background: var(--white); color: var(--ink); box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 20px 0px; cursor: pointer; }
-
-.ect-page.ect-page--creare-magazin-online .ect-home-faq__motion svg { width: 14px; height: 14px; fill: currentcolor; }
 
 .ect-page.ect-page--creare-magazin-online .ect-home-faq__conversation { display: grid; align-content: start; gap: 18px; min-width: 0px; }
 
@@ -990,8 +986,6 @@
 @media (min-width: 960px) {
 .ect-page.ect-page--creare-magazin-online .mg-train { transform: translateX(-80%); }
 }
-
-.ect-page.ect-page--creare-magazin-online .ect-home-faq__motion { display: none !important; }
 
 }
 /* Accessible controls preserve the approved geometry and palette. */

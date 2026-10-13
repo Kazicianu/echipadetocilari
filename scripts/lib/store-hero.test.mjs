@@ -54,7 +54,7 @@ function block(top, height = 200) {
 }
 
 function fixture({
-  reducedMotion = false, english = false, observer = false, without = [],
+  reducedMotion = false, observer = false, without = [],
   blockTops = [], paperTop = null, lineTops = [], ticketTops = [], cutTops = [], anchors = {},
   hash = null, arrival = null, scrollY = 0,
 } = {}) {
@@ -73,17 +73,12 @@ function fixture({
   const screens = Array.from({ length: 4 }, element);
   const dots = screens.map(() => ({ ...element(), firstElementChild: element() }));
   const mascot = element();
-  const motionButton = element();
-  const play = element();
-  const pause = element();
-  motionButton.querySelector = selector => ({ '[data-icon="play"]': play, '[data-icon="pause"]': pause })[selector] || null;
   const page = {
     querySelector: selector => without.includes(selector) ? null : ({
       '.mg-hero-visual': visual,
       '.mg-metro': observer ? metro : null,
       '.mg-receipt': paper,
       '[data-js="faq-mascot"]': mascot,
-      '[data-js="faq-motion"]': motionButton,
     })[selector] || null,
     querySelectorAll(selector) {
       if (selector === '.mg-rv') return armable.filter(node => node.classList.contains('mg-rv'));
@@ -96,7 +91,6 @@ function fixture({
   };
   const document = {
     ...element(),
-    documentElement: { lang: english ? 'en' : 'ro' },
     hidden: false,
     querySelector: selector => selector === '.ect-page--creare-magazin-online' ? page : null,
     getElementById: id => anchors[id] ?? null,
@@ -155,7 +149,7 @@ function fixture({
   });
 
   return {
-    visual, metro, blocks, paper, lines, tickets, cuts, observers, screens, dots, mascot, motionButton, play, pause, timers, window, advance,
+    visual, metro, blocks, paper, lines, tickets, cuts, observers, screens, dots, mascot, timers, window, advance,
     select(index) { dots[index].emit('click'); },
     /* Delivers one batch through the first observer that watches the first target. Each entry is [target, isIntersecting, top, ratio]. */
     intersect(...entries) {
@@ -261,34 +255,24 @@ test('hidden tabs suspend hero motion and returning schedules one fresh autoplay
   assertScreen(f, 1);
 });
 
-test('the FAQ pause control remains independent and preserves explicit pauses across visibility changes', () => {
-  for (const english of [false, true]) {
-    const f = fixture({ english });
-    assert.equal(f.mascot.classList.contains('mg-paused'), false);
-    assert.equal(f.play.hidden, true);
-    assert.equal(f.pause.hidden, false);
-    f.motionButton.emit('click');
-    assert.equal(f.mascot.classList.contains('mg-paused'), true);
-    assert.equal(f.motionButton.attributes.get('aria-pressed'), 'true');
-    assert.equal(f.motionButton.attributes.get('aria-label'), english ? 'Start the animation' : 'Pornește animația');
-    assert.equal(f.play.hidden, false);
-    assert.equal(f.pause.hidden, true);
+test('the FAQ character keeps moving and rests only for a hidden tab or reduced motion', () => {
+  const f = fixture();
+  assert.equal(f.mascot.classList.contains('mg-paused'), false);
+  f.select(2);
+  f.advance(3800);
+  assert.equal(f.mascot.classList.contains('mg-paused'), false);
 
-    f.select(2);
-    f.setHidden(true);
-    f.setHidden(false);
-    f.setReducedMotion(true);
-    f.setReducedMotion(false);
-    assert.equal(f.mascot.classList.contains('mg-paused'), true);
-    f.advance(3800);
-    assertScreen(f, 3);
-    assert.equal(f.visual.classList.contains('mg-phone-paused'), false);
+  f.setHidden(true);
+  assert.equal(f.mascot.classList.contains('mg-paused'), true);
+  f.setHidden(false);
+  assert.equal(f.mascot.classList.contains('mg-paused'), false);
 
-    f.motionButton.emit('click');
-    assert.equal(f.mascot.classList.contains('mg-paused'), false);
-    assert.equal(f.motionButton.attributes.get('aria-pressed'), 'false');
-    assert.equal(f.motionButton.attributes.get('aria-label'), english ? 'Pause the animation' : 'Oprește animația');
-  }
+  f.setReducedMotion(true);
+  assert.equal(f.mascot.classList.contains('mg-paused'), true);
+  f.setReducedMotion(false);
+  assert.equal(f.mascot.classList.contains('mg-paused'), false);
+
+  assert.equal(fixture({ reducedMotion: true }).mascot.classList.contains('mg-paused'), true);
 });
 
 test('off screen the hero freezes without the poster state and returns with the time it had left', () => {
@@ -333,14 +317,12 @@ test('a screen picked or a tab hidden while the hero is off screen restarts a fu
   }
 });
 
-test('the delivery line and the FAQ character wait off screen without touching the hero or the visitor pause', () => {
+test('the delivery line and the FAQ character wait off screen without touching the hero', () => {
   const f = fixture({ observer: true });
   f.advance(1000);
   f.intersect([f.metro, false], [f.mascot, false]);
   assert.equal(f.metro.classList.contains('mg-offscreen'), true);
   assert.equal(f.mascot.classList.contains('mg-paused'), true);
-  assert.equal(f.motionButton.attributes.get('aria-pressed'), 'false');
-  assert.equal(f.motionButton.attributes.get('aria-label'), 'Oprește animația');
   assert.equal(f.visual.classList.contains('mg-offscreen'), false);
 
   f.intersect([f.metro, true], [f.mascot, true]);
@@ -350,12 +332,6 @@ test('the delivery line and the FAQ character wait off screen without touching t
   assertScreen(f, 0);
   f.advance(1);
   assertScreen(f, 1);
-
-  f.motionButton.emit('click');
-  f.intersect([f.mascot, false]);
-  f.intersect([f.mascot, true]);
-  assert.equal(f.mascot.classList.contains('mg-paused'), true);
-  assert.equal(f.motionButton.attributes.get('aria-pressed'), 'true');
 });
 
 test('entrances hide only blocks below the fold and reveal each batch as a cascade', () => {
@@ -431,7 +407,7 @@ test('keyboard focus shows a waiting block at once, with the blocks around it, a
   const [inView, focused, far] = f.blocks;
   const [watcher] = f.watchers(focused);
   f.focus(inView);
-  f.focus(f.motionButton);
+  f.focus(f.dots[0]);
   f.focus(null);
   assert.deepEqual(f.blocks.map(node => node.classList.contains('mg-in')), [false, false, false]);
 

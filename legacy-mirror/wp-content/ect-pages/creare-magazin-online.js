@@ -7,8 +7,6 @@
 
   const $ = (selector, root = page) => root.querySelector(selector);
   const $$ = (selector, root = page) => [...root.querySelectorAll(selector)];
-  const english = document.documentElement.lang.toLowerCase().startsWith('en');
-  const label = (ro, en) => english ? en : ro;
   const motionQuery = typeof window.matchMedia === 'function'
     ? window.matchMedia('(prefers-reduced-motion: reduce)')
     : null;
@@ -31,14 +29,6 @@
   let dueAt = 0;
   let held = 0;
   const now = () => window.performance?.now?.() ?? Date.now();
-
-  const setIcons = (button, paused) => {
-    if (!button) return;
-    const play = $('[data-icon="play"]', button);
-    const pause = $('[data-icon="pause"]', button);
-    if (play) play.toggleAttribute('hidden', !paused);
-    if (pause) pause.toggleAttribute('hidden', paused);
-  };
 
   const renderPhone = () => {
     screens.forEach((screen, index) => { screen.hidden = index !== current; });
@@ -91,23 +81,9 @@
   };
 
   const mascot = $('[data-js="faq-mascot"]');
-  const motionButton = $('[data-js="faq-motion"]');
-  let faqPaused = reduceMotion;
   const renderFaq = () => {
-    mascot?.classList.toggle('mg-paused', faqPaused || document.hidden || offscreen.has(mascot));
-    if (motionButton) {
-      motionButton.hidden = reduceMotion;
-      motionButton.setAttribute('aria-label', faqPaused
-        ? label('Pornește animația', 'Start the animation')
-        : label('Oprește animația', 'Pause the animation'));
-      motionButton.setAttribute('aria-pressed', String(faqPaused));
-      setIcons(motionButton, faqPaused);
-    }
+    mascot?.classList.toggle('mg-paused', reduceMotion || document.hidden || offscreen.has(mascot));
   };
-  motionButton?.addEventListener('click', () => {
-    faqPaused = !faqPaused;
-    renderFaq();
-  });
 
   /* Loops run only while their block is near the viewport. */
   const loops = new Map([
@@ -266,12 +242,8 @@
 
   const updateMotion = (event) => {
     reduceMotion = event.matches;
-    /* The phone follows the system motion preference. The FAQ preserves
-       its explicit pause until the visitor uses its own motion control. */
-    if (reduceMotion) {
-      faqPaused = true;
-      dropEntrances();
-    }
+    /* The phone and the FAQ character follow the system motion preference. */
+    if (reduceMotion) dropEntrances();
     renderPhone();
     renderFaq();
     schedulePhone();

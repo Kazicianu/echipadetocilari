@@ -2,24 +2,16 @@
 (() => {
   const host = document.querySelector('.ect-home-faq__mascot');
   if (!host) return;
-  const button = host.querySelector('.ect-home-faq__motion');
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
   let controller;
   let loading = false;
   let visible = false;
-  let userPaused = false;
   let disposed = false;
 
   function syncPlayback() {
-    const paused = userPaused || reduce.matches || !visible || document.hidden;
+    const paused = reduce.matches || !visible || document.hidden;
     host.dataset.paused = String(paused);
     controller?.setPaused(paused);
-    if (!button) return;
-    button.hidden = !controller || reduce.matches;
-    const label = userPaused ? button.dataset.playLabel : button.dataset.pauseLabel;
-    button.setAttribute('aria-label', label);
-    button.title = label;
-    button.dataset.paused = String(userPaused);
   }
 
   async function load() {
@@ -38,10 +30,6 @@
     }
   }
 
-  button?.addEventListener('click', () => {
-    userPaused = !userPaused;
-    syncPlayback();
-  });
   const visibilityObserver = 'IntersectionObserver' in window
     ? new IntersectionObserver(([entry]) => {
       visible = entry.isIntersecting;

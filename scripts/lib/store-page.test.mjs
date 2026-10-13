@@ -53,6 +53,13 @@ test('the FAQ brand line is styled by class, so the label heading cannot inherit
   assert.doesNotMatch(css, /\.ect-home-faq h2\b/);
 });
 
+test('the FAQ character has no play or pause control', () => {
+  const figure = main.match(/<figure\b[^>]*\bclass="ect-home-faq__mascot"[\s\S]*?<\/figure>/)?.[0] ?? '';
+  assert.match(figure, /<img\b/);
+  assert.doesNotMatch(figure, /<button\b/);
+  assert.doesNotMatch(css, /ect-home-faq__motion/);
+});
+
 test('the illustrative phone is excluded from snippets and holds all the invented shop text', () => {
   const opening = main.match(/<div\b(?=[^>]*\bclass="[^"]*\bmg-hero-visual\b)(?=[^>]*\bdata-nosnippet\b)[^>]*>/);
   assert.ok(opening, 'mg-hero-visual is missing data-nosnippet');

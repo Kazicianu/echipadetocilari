@@ -116,6 +116,12 @@ Telefonul din hero e desenat integral în HTML și CSS, fără imagini.
 - Sub 500 px butoanele stau unul sub altul, pe toată lățimea; de la 500 px în sus stau pe un rând, în cel mult 500 px. Înălțimea este 56 px la orice lățime.
 - Variantele `ect-btn--ink` și `ect-btn--text` nu mai sunt folosite pe pagină, iar regulile lor au fost scoase din `creare-magazin-online.css`.
 
+## Personajul din FAQ, fără buton de pauză (13.10.2026)
+
+- La cererea utilizatorului, butonul rotund de redare și pauză de lângă personajul din FAQ a fost scos, aici și pe homepage. Nu îl readuce din `pagina.html`.
+- Personajul se mișcă în continuare. Animația se oprește doar automat: când personajul nu e pe ecran, când tabul e ascuns și la `prefers-reduced-motion`.
+- Au fost scoase regulile `.ect-home-faq__motion` din `creare-magazin-online.css` și `home.css`, logica butonului din `creare-magazin-online.js` și `home/faq-mascot.js` și cele două etichete din `scripts/i18n/dictionary.mjs`.
+
 ## Corecturi după auditul SEO, AEO și GEO (13.10.2026)
 
 - Etichetele „Pentru cine e”, „Cum lucrăm”, „Întrebări frecvente” și „După lansare” sunt acum `h2` și poartă `id`-ul folosit de `aria-labelledby`. Replicile de sub ele („Te regăsești...”, „Pași clari...”, „Tu întrebi. Noi lămurim.”, „Magazinul e gata...”) sunt paragrafe cu aceleași clase. Aspectul nu s-a schimbat: stilurile calculate și dimensiunile sunt identice la 360, 390 și 1440 px. Nu readuce structura de titluri din `pagina.html`.

@@ -18,8 +18,6 @@ export const dictionary = [
   ['Tu întrebi. Noi lămurim.', 'You ask. We explain.'],
   ['Despre promovare, bugete și ce merită făcut. Pe înțeles, fără jargon.', 'Marketing, budgets and what is worth doing. Clear answers, without the jargon.'],
   ['Client 3D cu barbă și șorț negru, care ține un colet sub braț și ridică degetul lângă o bulă cu semnul întrebării', 'A 3D client with a beard and a black apron, holding a parcel under one arm and raising a finger beside a speech bubble with a question mark'],
-  ['Oprește animația', 'Pause animation'],
-  ['Pornește animația', 'Play animation'],
   ["Configurare cont Google Ads","Google Ads account setup"],
   ["Monitorizarea campaniilor de două ori pe săptămână","Campaign monitoring twice a week"],
   ["Adăugarea săptămânală a cuvintelor cheie negative","Weekly negative keyword updates"],

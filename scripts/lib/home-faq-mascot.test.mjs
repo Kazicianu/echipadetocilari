@@ -22,17 +22,9 @@ function fixture({ reduced = false, importModule, mount } = {}) {
   const events = new Map();
   const docEvents = new Map();
   const preferenceEvents = new Map();
-  const buttonEvents = new Map();
   const observers = [];
   const imports = [];
-  const attributes = {};
-  const button = {
-    hidden: true,
-    dataset: { pauseLabel: 'Pause animation', playLabel: 'Play animation' },
-    setAttribute(name, value) { attributes[name] = value; },
-    addEventListener(name, listener) { buttonEvents.set(name, listener); },
-  };
-  const host = { dataset: {}, querySelector: () => button };
+  const host = { dataset: {} };
   const reduce = {
     matches: reduced,
     addEventListener(name, listener) { preferenceEvents.set(name, listener); },
@@ -67,12 +59,11 @@ function fixture({ reduced = false, importModule, mount } = {}) {
     },
   });
   return {
-    calls, host, button, reduce, document, attributes, imports, controller,
+    calls, host, reduce, document, imports, controller,
     near: value => observers[1].listener([{ isIntersecting: value }]),
     visible: value => observers[0].listener([{ isIntersecting: value }]),
     preference: value => { reduce.matches = value; preferenceEvents.get('change')?.(); },
     tabHidden: value => { document.hidden = value; docEvents.get('visibilitychange')?.(); },
-    click: () => buttonEvents.get('click')(),
     pagehide: persisted => events.get('pagehide')({ persisted }),
     observers, docEvents, preferenceEvents,
   };
@@ -81,27 +72,20 @@ function fixture({ reduced = false, importModule, mount } = {}) {
 test('mascot imports near the viewport once and starts playback only when visible', async () => {
   const f = fixture();
   assert.equal(f.imports.length, 0);
-  assert.equal(f.button.hidden, true);
   assert.equal(f.observers[1].options.rootMargin, '160px');
   f.near(true);
   f.near(true);
   await flush();
   assert.deepEqual(f.imports, [moduleUrl]);
   assert.deepEqual(f.calls.at(-1), ['paused', true]);
+  assert.equal(f.host.dataset.paused, 'true');
   assert.equal(f.observers[1].disconnected, true);
   f.visible(true);
   assert.deepEqual(f.calls.at(-1), ['paused', false]);
-  assert.equal(f.button.hidden, false);
-  assert.equal(f.attributes['aria-label'], 'Pause animation');
-  f.click();
-  assert.deepEqual(f.calls.at(-1), ['paused', true]);
-  assert.equal(f.attributes['aria-label'], 'Play animation');
-  assert.equal(f.button.title, 'Play animation');
-  f.click();
-  assert.deepEqual(f.calls.at(-1), ['paused', false]);
+  assert.equal(f.host.dataset.paused, 'false');
 });
 
-test('offscreen and hidden-tab suspension preserve an explicit user pause and BFCache state', async () => {
+test('offscreen and hidden-tab suspension always resume on return, and BFCache keeps the mascot', async () => {
   const f = fixture();
   f.visible(true);
   await flush();
@@ -113,17 +97,11 @@ test('offscreen and hidden-tab suspension preserve an explicit user pause and BF
   assert.deepEqual(f.calls.at(-1), ['paused', true]);
   f.tabHidden(false);
   assert.deepEqual(f.calls.at(-1), ['paused', false]);
-  f.click();
-  f.visible(false);
-  f.visible(true);
-  f.tabHidden(true);
-  f.tabHidden(false);
-  assert.deepEqual(f.calls.at(-1), ['paused', true]);
-  assert.equal(f.button.dataset.paused, 'true');
   f.pagehide(true);
   assert.ok(!f.calls.some(([kind]) => kind === 'dispose'));
   assert.equal(f.docEvents.has('visibilitychange'), true);
-  f.click();
+  f.tabHidden(true);
+  f.tabHidden(false);
   assert.deepEqual(f.calls.at(-1), ['paused', false]);
 });
 
@@ -133,35 +111,30 @@ test('reduced motion skips initial loading and preference changes suspend an exi
   f.visible(true);
   await flush();
   assert.equal(f.imports.length, 0);
-  assert.equal(f.button.hidden, true);
   f.preference(false);
   await flush();
   assert.deepEqual(f.imports, [moduleUrl]);
   assert.deepEqual(f.calls.at(-1), ['paused', false]);
   f.preference(true);
   assert.deepEqual(f.calls.at(-1), ['paused', true]);
-  assert.equal(f.button.hidden, true);
   f.preference(false);
   assert.deepEqual(f.calls.at(-1), ['paused', false]);
-  assert.equal(f.button.hidden, false);
 });
 
-test('failed module loading leaves the static fallback and motion control untouched', async () => {
+test('failed module loading leaves the static fallback untouched', async () => {
   const f = fixture({ importModule: async () => { throw new Error('Unavailable module'); } });
   f.visible(true);
   await flush();
   assert.equal(f.calls.length, 0);
-  assert.equal(f.button.hidden, true);
   assert.equal(f.host.dataset.mascotReady, undefined);
 });
 
-test('failed renderer setup preserves the static fallback without exposing a playback control', async () => {
+test('failed renderer setup preserves the static fallback', async () => {
   const f = fixture({ mount: async () => null });
   f.visible(true);
   await flush();
   assert.deepEqual(f.imports, [moduleUrl]);
   assert.equal(f.calls.length, 0);
-  assert.equal(f.button.hidden, true);
   assert.equal(f.host.dataset.mascotReady, undefined);
 });
 
@@ -187,5 +160,4 @@ test('navigation during an asynchronous mount disposes its eventual controller e
   pending.resolve(f.controller);
   await flush();
   assert.deepEqual(f.calls, [['dispose']]);
-  assert.equal(f.button.hidden, true);
 });
