@@ -874,7 +874,7 @@
 
 .ect-page.ect-page--creare-magazin-online .ect-home-faq__eyebrow { margin: 0px 0px 12px; color: var(--orange); font-size: 16px; font-weight: 300; line-height: 1.2; }
 
-.ect-page.ect-page--creare-magazin-online .ect-home-faq h2 { margin: 0px; color: var(--ink); font-size: 7.5vw; font-weight: 500; line-height: 1.2; text-wrap: balance; }
+.ect-page.ect-page--creare-magazin-online .ect-home-faq .ect-home-faq__title { margin: 0px; color: var(--ink); font-size: 7.5vw; font-weight: 500; line-height: 1.2; text-wrap: balance; }
 
 .ect-page.ect-page--creare-magazin-online .ect-home-faq__subtitle { margin: 18px 0px 22px; font-size: 16px; font-weight: 300; line-height: 1.5; }
 
@@ -951,7 +951,7 @@
 @media (min-width: 768px) {
 .ect-page.ect-page--creare-magazin-online .ect-home-faq__eyebrow { font-size: 18px; }
 
-.ect-page.ect-page--creare-magazin-online .ect-home-faq h2 { font-size: 32px; }
+.ect-page.ect-page--creare-magazin-online .ect-home-faq .ect-home-faq__title { font-size: 32px; }
 
 .ect-page.ect-page--creare-magazin-online .ect-home-faq__subtitle { font-size: 18px; line-height: 1.4; }
 
@@ -963,7 +963,7 @@
 
 .ect-page.ect-page--creare-magazin-online .ect-home-faq__intro { display: flex; flex-direction: column; align-items: flex-start; justify-content: space-between; gap: 48px; }
 
-.ect-page.ect-page--creare-magazin-online .ect-home-faq h2 { max-width: 380px; font-size: 45px; }
+.ect-page.ect-page--creare-magazin-online .ect-home-faq .ect-home-faq__title { max-width: 380px; font-size: 45px; }
 
 .ect-page.ect-page--creare-magazin-online .ect-home-faq__subtitle { max-width: 320px; }
 

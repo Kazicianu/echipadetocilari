@@ -276,7 +276,7 @@ const llmsPages = routes
   .join('\n');
 writeFileSync(
   path.join(outDir, 'llms.txt'),
-  `# Echipa de Tocilari\n\n> Digital marketing agency Romania: website design, SEO, maintenance, PPC. Multilingual RO/EN.\n\n## Pages\n${llmsPages}\n`,
+  `# Echipa de Tocilari\n\n> Digital marketing agency Romania: website design, online stores (Shopify or Medusa), SEO, Google Ads, maintenance. Multilingual RO/EN.\n\n## Pages\n${llmsPages}\n`,
   'utf8'
 );
 

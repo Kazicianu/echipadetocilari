@@ -2,7 +2,7 @@
 
 The opening of a section: a short line above, the H2, and an optional lead paragraph.
 
-Markup: `div.ect-section-head` (add `ect-section-head--center` to centre it) with `p.ect-eyebrow` or `p.ect-kicker`, `h2.ect-h2` and `p.ect-lead`.
+Markup: `div.ect-section-head` (add `ect-section-head--center` to centre it) with `p.ect-eyebrow` or `p.ect-kicker`, `h2.ect-h2` and `p.ect-lead`. When the large line is a brand-voice line rather than a descriptive title, the label can be the heading instead: `h2.ect-eyebrow` followed by `p.ect-h2`, as on `/creare-magazin-online/`. The styles sit on the classes, so the look does not depend on the tag.
 
 - Eyebrow: 18px/300 in `orange` (16px on mobile). Kicker: the Google Ads variant, 16px/300 in `ink-muted`.
 - H2: 45/54, weight 500, capitalised on screen; 32px on tablet, 7.5vw on mobile. `ect-h2--brand` makes it `orange` (Google Ads, Logo design); `ect-h2--sentence` keeps sentence case.

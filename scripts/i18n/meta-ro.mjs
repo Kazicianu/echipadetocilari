@@ -21,7 +21,7 @@ export const roPageMeta = {
   '/creare-magazin-online/': {
     title: 'Creare magazin online de la 1.490 € | Echipa de Tocilari',
     description:
-      'Creare magazin online pe WooCommerce sau Shopify, de la 1.490 €. Design personalizat, plăți, curier și facturare. Vezi pachetele și cere o ofertă.',
+      'Creare magazin online pe Shopify, de la 1.490 €. Design personalizat, plăți, curier și facturare. Vezi pachetele și cere o ofertă.',
   },
   '/servicii-seo/': {
     title: 'Servicii SEO și vizibilitate în AI | Echipa de Tocilari',

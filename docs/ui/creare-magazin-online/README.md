@@ -22,7 +22,7 @@ Capturile sunt făcute cu `prefers-reduced-motion`, deci cu telefonul oprit pe p
 - Utilizatorul a cerut implementarea paginii doar în română în această etapă.
 - **De făcut ulterior:** pagina EN, cu traducerea completă, ruta confirmată cu utilizatorul, metadata, hreflang și linkurile din meniul EN. Nu genera acum o versiune EN și nu adăuga hreflang către o pagină inexistentă.
 - Oferta aprobată ulterior în aceeași zi înlocuiește variantele provizorii din canvas: Start 1.490 €, Business 2.490 € și Avansat de la 4.490 €. Business este pachetul recomandat. Fișierele `pagina.html`, `pagina.css` și capturile rămân documentarea designului inițial, nu sursa prețurilor curente.
-- Platformele aprobate sunt WooCommerce și Shopify, cu cod personalizat în limitele proiectului. Platforma se stabilește după cerințe, în oferta scrisă.
+- Platformele aprobate sunt Shopify și Medusa, cu cod personalizat în limitele proiectului. Start și Business se construiesc pe Shopify; Avansat, pe Shopify sau Medusa. WooCommerce a fost scos complet din ofertă de utilizator pe 13.10.2026 (vezi secțiunea „Platforme: Shopify și Medusa”).
 - Headerul, formularul și footerul vin din shell-ul comun, inclusiv linkurile sociale existente. Switcherul de limbă al paginii va fi adăugat odată cu versiunea EN.
 - La revizia vizuală, utilizatorul a confirmat explicit păstrarea exactă a culorilor din `pagina.html` și capturi, inclusiv combinațiile cu contrast redus. Nu înlocui portocaliul cu `orange-deep` și nu schimba textele albe de pe panourile portocalii în negru.
 
@@ -116,10 +116,36 @@ Telefonul din hero e desenat integral în HTML și CSS, fără imagini.
 - Sub 500 px butoanele stau unul sub altul, pe toată lățimea; de la 500 px în sus stau pe un rând, în cel mult 500 px. Înălțimea este 56 px la orice lățime.
 - Variantele `ect-btn--ink` și `ect-btn--text` nu mai sunt folosite pe pagină, iar regulile lor au fost scoase din `creare-magazin-online.css`.
 
+## Corecturi după auditul SEO, AEO și GEO (13.10.2026)
+
+- Etichetele „Pentru cine e”, „Cum lucrăm”, „Întrebări frecvente” și „După lansare” sunt acum `h2` și poartă `id`-ul folosit de `aria-labelledby`. Replicile de sub ele („Te regăsești...”, „Pași clari...”, „Tu întrebi. Noi lămurim.”, „Magazinul e gata...”) sunt paragrafe cu aceleași clase. Aspectul nu s-a schimbat: stilurile calculate și dimensiunile sunt identice la 360, 390 și 1440 px. Nu readuce structura de titluri din `pagina.html`.
+- Titlul din FAQ are clasa `ect-home-faq__title`; regulile care foloseau `.ect-home-faq h2` în `creare-magazin-online.css` țintesc acum această clasă.
+- Macheta telefonului are `data-nosnippet` pe `.mg-hero-visual`, ca textul brandului inventat să nu ajungă în fragmentele din rezultatele Google. Textul rămâne în HTML și poate fi indexat, iar alți roboți pot ignora atributul. O etichetă vizibilă de tip „exemplu ilustrativ” ar fi singura măsură independentă de robot și cere acordul utilizatorului.
+- Lista „În preț” are și rândul „SEO tehnic, măsurarea comenzilor și instruire pentru administrare”, conform ofertei aprobate.
+- Furnizorul este numit în textul de la „Ce include”, în introducerea prețurilor și în primul răspuns din FAQ. Zona deservită folosește aceeași propoziție ca `/servicii-seo/`: „Lucrăm din București și colaborăm online în toată România.”
+- FAQ: răspunsul despre pregătire explică ce este un fișier CSV.
+- Insigna „Recomandat” vine în HTML după titlul „Business”, ca să rămână legată de pachet la extragerea textului. Poziția vizuală este aceeași.
+- `og:image` și `twitter:image` au URL absolut.
+- Pe `/creare-site-web/`, pasul despre platformă separă site-urile (WordPress și Elementor) de magazine (Shopify sau Medusa), iar titlul de preț este „Cât costă un site web?”. Dicționarul EN a fost actualizat.
+- Rezumatul din `llms.txt`, generat de `scripts/build-static.mjs`, menționează acum magazinele online și Google Ads.
+- Verificarea este automată în `scripts/lib/store-page.test.mjs`: lista de H2, țintele `aria-labelledby`, `data-nosnippet` pe machetă, URL-urile absolute pentru imaginea de partajare și platformele.
+- Rămân la proprietar, fără text nou până la răspuns, printre altele: regimul TVA, durata orientativă, furnizorii de plată, curierat și facturare, exemple reale de magazine, mentenanța pentru magazinele Shopify și Medusa, ce înseamnă „pagini esențiale” și paginile legale, condițiile de plată, soarta paginilor `/services/` și `/clients/` și extinderea etichetelor „Pentru cine e” și „După lansare” cu subiectul lor.
+
+## Platforme: Shopify și Medusa (13.10.2026)
+
+- La cererea utilizatorului, WooCommerce a fost scos complet. Platformele sunt Shopify și Medusa. Nu readuce WooCommerce sau WordPress pe pagina de magazin.
+- Regula stabilită de utilizator: **Start și Business se construiesc pe Shopify; Avansat se construiește pe Shopify sau pe Medusa.** Medusa este deci disponibilă doar în pachetul Avansat, iar prețul de intrare de 1.490 € nu se asociază niciodată cu ea.
+- Unde apare regula: subtitlul pachetelor („Start și Business pe Shopify, Avansat pe Shopify sau Medusa”, care este și numele catalogului din datele structurate), primul rând din fiecare card de preț, primele două răspunsuri din FAQ și rândul „Plătești separat”. La Avansat, platforma se alege după criteriile deja aprobate: catalog, variantele produselor, integrări și felul de administrare. Meta description și paragraful din hero numesc doar Shopify, fiindcă stau lângă prețul de intrare. Pasul despre platformă de pe `/creare-site-web/` spune general „Shopify sau Medusa”; cardul E-commerce de acolo, care reflectă pachetul Start, spune „Magazin construit pe Shopify”.
+- Răspunsul din FAQ descrie platformele doar prin fapte generale, verificate pe 13.10.2026 în paginile oficiale. Shopify se vinde ca abonament, cu găzduirea inclusă în plan (https://www.shopify.com/pricing). Medusa are nucleul open source, sub licență MIT (https://github.com/medusajs/medusa), se construiește în cod și trebuie găzduită: pe un furnizor care rulează Node.js și PostgreSQL sau în Medusa Cloud, serviciul administrat al Medusa (https://docs.medusajs.com/learn/installation și https://docs.medusajs.com/learn/deployment). De aceea pagina spune doar că la Medusa „găzduirea nu este inclusă”.
+- Prețurile, limitele de produse și livrabilele pachetelor nu s-au schimbat.
+- Întrebarea despre pachetele pe Medusa s-a închis prin regula de mai sus: pachetele cu preț fix sunt pe Shopify, iar la Avansat funcțiile și prețul final se stabilesc în oferta scrisă. Pentru integrări, utilizatorul a stabilit pe 13.10.2026: **la Medusa, integrările se estimează separat.** Regula apare în rândul despre conectori din „În preț”, ca rând propriu la „Estimăm separat”, în ultimul rând al cardului Avansat și în primele două răspunsuri din FAQ. Opririle din „Ce include” descriu livrabilele în general și nu au fost schimbate. Context: lista oficială de integrări Medusa (https://docs.medusajs.com/resources/integrations), citită pe 13.10.2026, are la plăți Stripe și PayPal, la livrare doar ShipStation și nu conține niciun curier, procesator de plată sau serviciu de facturare din România; alte integrări vin din pachete ale comunității sau se scriu în cod.
+- Cardul „SEO și vizibilitate în AI” și ultimul răspuns din FAQ trimit la `/servicii-seo/`, unde nota de subsol condiționează unele elemente tehnice de WordPress. De clarificat cu utilizatorul ce se implementează pe magazinele Shopify și Medusa.
+- Pagina `/administrare-site/`, spre care trimite FAQ-ul pentru mentenanță, este centrată pe WordPress. De clarificat cu utilizatorul ce mentenanță se oferă pentru Shopify și Medusa.
+
 ## SEO
 
-- Title: `Creare magazin online | Echipa de Tocilari`
-- Meta description: `Creăm magazine online WooCommerce sau Shopify, cu design personalizat, plăți, livrare și facturare. De la 1.490 €. Solicită o ofertă.`
+- Title: `Creare magazin online de la 1.490 € | Echipa de Tocilari`
+- Meta description: `Creare magazin online pe Shopify, de la 1.490 €. Design personalizat, plăți, curier și facturare. Vezi pachetele și cere o ofertă.` Sursa este `scripts/i18n/meta-ro.mjs`.
 - Keyword principal: creare magazin online (1.300/lună, Semrush RO, 18.09.2026). Secundare: realizare magazin online (260) în „Ce include”; creare magazin online preț (170) la prețuri și în FAQ.
 - Date structurate: Service și FAQPage, doar cu textul vizibil pe pagină, prin pipeline. Indexarea rămâne controlată de `PUBLIC_INDEXABLE`.
 - Linkuri interne: `/creare-site-web/`, `/servicii-seo/`, `/agentie-google-ads/`, `/administrare-site/`.
