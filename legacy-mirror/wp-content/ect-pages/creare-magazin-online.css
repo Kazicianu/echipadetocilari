@@ -543,7 +543,7 @@
 
 .ect-page.ect-page--creare-magazin-online .mg-metro--play .mg-st:nth-child(5) .mg-st__dot { background: var(--line-peach); }
 
-.ect-page.ect-page--creare-magazin-online .mg-metro--play .mg-st:nth-child(6) .mg-st__dot { background: var(--orange); }
+.ect-page.ect-page--creare-magazin-online .mg-metro--play .mg-st:nth-child(6) .mg-st__dot { background: var(--orange); color: var(--white); }
 
 .ect-page.ect-page--creare-magazin-online .mg-metro--play .mg-st__card { padding: 14px 16px 16px; border-radius: 22px; background: rgba(255, 255, 255, 0.9); box-shadow: rgba(39, 39, 45, 0.3) 0px 10px 24px -14px; }
 
@@ -705,7 +705,7 @@
 
 .ect-page.ect-page--creare-magazin-online .mg-pcard--featured { box-shadow: 0 0 20px 0 var(--orange); }
 
-.ect-page.ect-page--creare-magazin-online .mg-pcard__badge { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); margin: 0; padding: 7px 16px; border-radius: 999px; background: var(--orange); color: var(--ink); font-size: 13px; line-height: 20px; font-weight: 600; white-space: nowrap; }
+.ect-page.ect-page--creare-magazin-online .mg-pcard__badge { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); margin: 0; padding: 7px 16px; border-radius: 999px; background: var(--orange); color: var(--white); font-size: 13px; line-height: 20px; font-weight: 600; white-space: nowrap; }
 
 .ect-page.ect-page--creare-magazin-online .mg-pcard__title { margin: 0px; text-align: center; color: var(--orange); font-size: 25px; line-height: 30px; font-weight: 500; text-transform: capitalize; }
 
@@ -783,6 +783,22 @@
 .ect-page.ect-page--creare-magazin-online .mg-scope__chips li { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: var(--radius-card); background: var(--white); color: var(--ink); font-size: 15px; line-height: 20px; font-weight: 500; }
 
 .ect-page.ect-page--creare-magazin-online .mg-scope__chips li::before { content: ""; flex: 0 0 auto; width: 8px; height: 8px; border-radius: 50%; background: var(--orange); }
+
+/* Phones: the four chips share one row. The text and its em spacing scale with the list width (100cqw); the vw line is the fallback, the viewport less 88px of section and panel padding. */
+@media (max-width: 520px) {
+.ect-page.ect-page--creare-magazin-online .mg-scope__you { container-type: inline-size; }
+
+.ect-page.ect-page--creare-magazin-online .mg-scope__chips { flex-wrap: nowrap; gap: 0.28em; font-size: clamp(11px, calc((100vw - 88px) / 23), 15px); font-size: clamp(11px, calc(100cqw / 23), 15px); }
+
+.ect-page.ect-page--creare-magazin-online .mg-scope__chips li { flex: 1 1 auto; justify-content: center; gap: 0.3em; padding: 0.55em 0.42em; font-size: inherit; line-height: 1.35; white-space: nowrap; }
+
+.ect-page.ect-page--creare-magazin-online .mg-scope__chips li::before { width: 0.42em; height: 0.42em; }
+}
+
+/* Under 340px the row only fits without the dots. */
+@media (max-width: 339px) {
+.ect-page.ect-page--creare-magazin-online .mg-scope__chips li::before { display: none; }
+}
 
 .ect-page.ect-page--creare-magazin-online .mg-scope__you-note { margin: 0; font-size: 15px; line-height: 1.5; font-weight: 400; text-wrap: pretty; }
 

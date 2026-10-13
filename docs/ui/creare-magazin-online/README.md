@@ -107,6 +107,7 @@ Telefonul din hero e desenat integral în HTML și CSS, fără imagini.
 - Culorile sunt cele din export: text `#fcfcfc` pe panoul portocaliu `#fd8649`, iar evidențierea din titlu rămâne text închis pe portocaliu. Nu se înlocuiesc pentru contrast.
 - Stilurile sunt în `creare-magazin-online.css`, cu prefixul `mg-scope`. Secțiunea nu are JavaScript și nici elemente interactive.
 - Comparată cu exportul la 320, 360, 390, 430, 600, 768, 880, 900, 1024, 1100, 1280 și 1440 px: aceleași poziții, fonturi și culori, fără overflow orizontal în secțiune.
+- La cererea utilizatorului (13.10.2026), până la 520 px cele patru etichete „Ne dai tu” stau pe un singur rând, nu pe două ca în export. Textul și spațierea lor se micșorează odată cu lățimea listei (circa 12 px la 360, 13 px la 390, 15 px de la 433 px), iar sub 340 px dispar punctele portocalii. Peste 520 px etichetele rămân ca în export.
 
 ## Butoanele din hero (13.10.2026)
 
