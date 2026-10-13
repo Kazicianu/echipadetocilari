@@ -1,6 +1,8 @@
 # Homepage FAQ: new 3D mascot
 
-The current mascot is a new procedural clay character, seated with a laptop and greeting the visitor. It replaces the illustrated 2D version and the earlier 3D reader. Its character geometry and pose are built separately from the reader: a rounded face, large round glasses, bright eyes, cheeks, a smile with teeth, swept brown hair, an orange sweater, dark trousers and white sneakers.
+This describes the previous laptop-and-greeting model. The FAQ now shows the client who asks the questions, documented in [home-faq-mascot-client.md](home-faq-mascot-client.md). The poster of this model, `faq-tocilar-3d-v2.webp`, is still used on the store page.
+
+The mascot is a procedural clay character, seated with a laptop and greeting the visitor. It replaces the illustrated 2D version and the earlier 3D reader. Its character geometry and pose are built separately from the reader: a rounded face, large round glasses, bright eyes, cheeks, a smile with teeth, swept brown hair, an orange sweater, dark trousers and white sneakers.
 
 ## Source and integration
 

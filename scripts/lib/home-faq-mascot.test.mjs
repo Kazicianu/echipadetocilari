@@ -4,7 +4,7 @@ import test from 'node:test';
 import vm from 'node:vm';
 
 const source = readFileSync(new URL('../../legacy-mirror/wp-content/ect-pages/home/faq-mascot.js', import.meta.url), 'utf8');
-const moduleUrl = '/wp-content/ect-pages/home/faq-mascot-3d-v2.js';
+const moduleUrl = '/wp-content/ect-pages/home/faq-mascot-client-3d.js';
 // Mock only the module import boundary; execute the actual loader lifecycle.
 // Node's VM dynamic import hook otherwise needs an experimental module flag.
 const executable = source.replace("import('" + moduleUrl + "')", "importMascotModule('" + moduleUrl + "')");

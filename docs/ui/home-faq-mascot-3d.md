@@ -1,6 +1,6 @@
 # Homepage FAQ mascot
 
-This describes the previous reader model. The current homepage uses the new laptop-and-greeting model documented in [home-faq-mascot-3d-v2.md](home-faq-mascot-3d-v2.md).
+This describes the first reader model. It was followed by the laptop-and-greeting model in [home-faq-mascot-3d-v2.md](home-faq-mascot-3d-v2.md); the FAQ now shows the client who asks the questions, documented in [home-faq-mascot-client.md](home-faq-mascot-client.md).
 
 The FAQ uses an original procedural 3D illustration of a friendly adult nerd reading a book. He has natural peach skin, a smaller oval human face, short side-parted brown hair, normal ears, a soft nose and eyebrows, small relaxed eyes, charcoal round glasses and a closed smile. An orange sweater, white collar, small orange bow tie and orange trousers connect him to the site's palette. He sits cross-legged with natural hands holding a white book with orange covers, with his head and gaze directed down toward the pages. The original logo assets are unchanged.
 

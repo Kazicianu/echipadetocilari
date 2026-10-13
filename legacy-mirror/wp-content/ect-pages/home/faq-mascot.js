@@ -26,7 +26,7 @@
     if (loading || controller || disposed || reduce.matches) return;
     loading = true;
     try {
-      const { mountMascot } = await import('/wp-content/ect-pages/home/faq-mascot-3d-v2.js');
+      const { mountMascot } = await import('/wp-content/ect-pages/home/faq-mascot-client-3d.js');
       if (disposed) return;
       controller = await mountMascot(host);
       if (disposed) controller?.dispose();

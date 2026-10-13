@@ -48,7 +48,7 @@ Pornește un server static din rădăcina repo-ului (de exemplu `npx serve .` sa
 - **Se implementează:** tot ce e între header și formularul de contact: hero, „Pentru cine e”, „Ce include” (Linia Comenzii), „Cum lucrăm”, prețuri, FAQ, „După lansare”.
 - **Nu se copiază din prototip:** headerul, formularul de contact și footerul. În `pagina.html` sunt doar aproximări după design system, ca pagina să arate completă. Pe site vin din shell-ul comun (`npm run new-page`) și din formularul comun (`scripts/lib/shared-contact.mjs`), ca pe celelalte pagini.
 - **Meniu:** designul arată „Creare magazin online” în submeniul „Servicii”, pe desktop și pe mobil. Pe site trebuie adăugat în meniul comun, în RO și EN.
-- **Valori fixate din canvas:** culoarea de accent e `--orange` (#fd8649), personajul din panoul portocaliu e `faq-tocilar-3d-v2.webp`, iar cel din FAQ e `faq-tocilar-reader.webp`.
+- **Valori fixate din canvas:** culoarea de accent e `--orange` (#fd8649), personajul din panoul portocaliu e `faq-tocilar-3d-v2.webp`, iar cel din FAQ era în canvas `faq-tocilar-reader.webp`. Din 13.10.2026, la cererea utilizatorului, personajul din FAQ este clientul care pune întrebările (`faq-client-3d.webp`, vezi `docs/ui/home-faq-mascot-client.md`); semnele de întrebare plutitoare din CSS au fost scoase, pentru că întrebarea e deja în bula personajului. Prototipul `pagina.html` arată în continuare varianta veche.
 
 ## Pași (după AGENTS.md)
 
@@ -67,7 +67,7 @@ Pornește un server static din rădăcina repo-ului (de exemplu `npx serve .` sa
 | --- | --- |
 | Logo (header, bon, footer) | `legacy-mirror/wp-content/uploads/2024/02/Logo_Echipa_de_Tocilari-e1708028624694.webp` |
 | Personajul de deasupra panoului „Pentru cine e” | `legacy-mirror/wp-content/ect-pages/home/faq-tocilar-3d-v2.webp` |
-| Personajul din FAQ | `legacy-mirror/wp-content/ect-pages/home/faq-tocilar-reader.webp` |
+| Personajul din FAQ (clientul care întreabă) | `legacy-mirror/wp-content/ect-pages/home/faq-client-3d.webp` |
 
 Telefonul din hero e desenat integral în HTML și CSS, fără imagini.
 
@@ -86,7 +86,7 @@ Telefonul din hero e desenat integral în HTML și CSS, fără imagini.
 ## Comportamente
 
 - **Telefonul:** ecranele se schimbă la 3,8 s. Un punct alege ecranul și oprește schimbarea; butonul rotund oprește sau repornește. Cu `prefers-reduced-motion`, pornește oprit și animațiile se opresc. Ilustrația are `role="img"` și o descriere, iar ecranele sunt `aria-hidden`.
-- **FAQ:** semnele de întrebare de lângă personaj sunt animate din CSS și au un buton de pauză (44 x 44 px). Cu `prefers-reduced-motion`, animația nu pornește și butonul nu se afișează.
+- **FAQ:** personajul (clientul care întreabă) se leagănă ușor din CSS (`mg-bob`) și are un buton de pauză (44 x 44 px). Cu `prefers-reduced-motion`, animația nu pornește și butonul nu se afișează.
 - **Header:** „Servicii” și burgerul se închid unul pe altul. Pe site rămâne logica meniului comun.
 - **Formular:** în prototip doar afișează confirmarea. Pe site folosește handlerul existent.
 
