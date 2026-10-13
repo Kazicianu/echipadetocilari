@@ -705,16 +705,91 @@
 
 .ect-page.ect-page--creare-magazin-online .mg-pcard .ect-btn { align-self: center; margin-top: 14px; }
 
-.ect-page.ect-page--creare-magazin-online .mg-prices__note { max-width: 1340px; margin: 40px auto 0px; text-align: center; color: var(--ink-muted); font-size: 15px; line-height: 1.5; }
-
-.ect-page.ect-page--creare-magazin-online .mg-prices__terms { display: grid; gap: 24px; max-width: 1150px; margin: 32px auto 0; }
-.ect-page.ect-page--creare-magazin-online .mg-prices__terms > div { min-width: 0; }
-.ect-page.ect-page--creare-magazin-online .mg-prices__terms h3 { margin: 0 0 12px; color: var(--ink); font-size: 20px; line-height: 1.3; font-weight: 500; }
-.ect-page.ect-page--creare-magazin-online .mg-prices__terms p { margin: 0; font-size: 16px; line-height: 1.6; font-weight: 300; overflow-wrap: anywhere; }
 @media (min-width: 960px) {
   .ect-page.ect-page--creare-magazin-online .mg-pcard__for { min-height: 2.8em; }
-  .ect-page.ect-page--creare-magazin-online .mg-prices__terms { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
 }
+
+/* What the package price covers and what is paid or estimated separately. */
+.ect-page.ect-page--creare-magazin-online .mg-scope { position: relative; overflow: hidden; box-sizing: border-box; padding: clamp(32px, 3.4vw, 48px) 20px clamp(60px, 8vw, 100px); background: var(--white); color: var(--ink); }
+
+.ect-page.ect-page--creare-magazin-online .mg-scope__blob1 { position: absolute; left: -130px; top: 38%; width: 300px; height: 340px; border-radius: 50%; background: var(--blob-turquoise); }
+
+.ect-page.ect-page--creare-magazin-online .mg-scope__blob2 { position: absolute; right: -200px; bottom: -220px; width: 560px; height: 560px; border-radius: 50%; background: var(--blob-lavender); }
+
+.ect-page.ect-page--creare-magazin-online .mg-scope__inner { position: relative; display: flex; flex-direction: column; gap: 24px; max-width: 1150px; margin: 0 auto; }
+
+.ect-page.ect-page--creare-magazin-online .mg-scope__title { margin: 0 0 clamp(4px, 1.2vw, 16px); text-align: center; color: var(--ink); font-size: clamp(32px, 4.2vw, 58px); line-height: 1.12; font-weight: 800; letter-spacing: -0.035em; text-wrap: balance; }
+
+.ect-page.ect-page--creare-magazin-online .mg-scope__hl { display: inline-block; padding: 0 0.22em 0.06em; border-radius: var(--radius-card); background: var(--orange); }
+
+.ect-page.ect-page--creare-magazin-online .mg-scope__row { display: flex; flex-wrap: wrap; align-items: stretch; gap: 20px; }
+
+.ect-page.ect-page--creare-magazin-online .mg-scope__panel { position: relative; flex: 1 1 420px; min-width: 0; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px; padding: clamp(28px, 3.4vw, 48px) clamp(24px, 3.4vw, 48px); border-radius: var(--radius-card) var(--radius-card) var(--radius-card) clamp(40px, 5vw, 70px); }
+
+/* The approved design sets the copy on the orange panel in #fcfcfc. */
+.ect-page.ect-page--creare-magazin-online .mg-scope__panel--in { background: var(--orange); color: #fcfcfc; }
+
+.ect-page.ect-page--creare-magazin-online .mg-scope__panel--out { border: 2px dashed var(--orange); background: var(--white); }
+
+.ect-page.ect-page--creare-magazin-online .mg-scope__head { display: flex; flex-direction: column; gap: 8px; }
+
+.ect-page.ect-page--creare-magazin-online .mg-scope__name { margin: 0; font-size: clamp(30px, 3.2vw, 45px); line-height: 1.05; font-weight: 900; letter-spacing: -0.01em; text-transform: uppercase; }
+
+.ect-page.ect-page--creare-magazin-online .mg-scope__panel--out .mg-scope__name { color: var(--orange); }
+
+.ect-page.ect-page--creare-magazin-online .mg-scope__for { margin: 0; font-size: 15px; line-height: 22px; font-weight: 500; }
+
+.ect-page.ect-page--creare-magazin-online .mg-scope__list { display: flex; flex-direction: column; gap: 16px; margin: 0; padding: 0; list-style: none; font-size: clamp(15px, 14px + 0.25vw, 16px); line-height: 1.5; font-weight: 400; }
+
+.ect-page.ect-page--creare-magazin-online .mg-scope__list li { display: flex; align-items: flex-start; gap: 12px; }
+
+.ect-page.ect-page--creare-magazin-online .mg-scope__list span { min-width: 0; text-wrap: pretty; }
+
+.ect-page.ect-page--creare-magazin-online .mg-scope__list strong { font-weight: 700; }
+
+/* The icon and its 24px badge are one element: the padding draws the circle. */
+.ect-page.ect-page--creare-magazin-online .mg-scope__list svg { flex: 0 0 auto; box-sizing: content-box; width: 14px; height: 14px; margin-top: calc(0.75em - 12px); padding: 5px; border-radius: 50%; background: var(--white); fill: none; stroke: var(--ink); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+
+.ect-page.ect-page--creare-magazin-online .mg-scope__list--plus { gap: 12px; }
+
+.ect-page.ect-page--creare-magazin-online .mg-scope__list--plus svg { width: 12px; height: 12px; padding: 6px; background: var(--orange); stroke: #fcfcfc; stroke-width: 3.2; }
+
+.ect-page.ect-page--creare-magazin-online .mg-scope__you { display: flex; flex-direction: column; gap: 12px; margin-top: auto; padding-top: 22px; border-top: 1px solid rgba(39, 39, 45, 0.18); }
+
+.ect-page.ect-page--creare-magazin-online .mg-scope__label { margin: 0; font-size: 12px; line-height: 16px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+
+.ect-page.ect-page--creare-magazin-online .mg-scope__panel--out .mg-scope__label { color: var(--ink-muted); }
+
+.ect-page.ect-page--creare-magazin-online .mg-scope__chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+
+.ect-page.ect-page--creare-magazin-online .mg-scope__chips li { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: var(--radius-card); background: var(--white); color: var(--ink); font-size: 15px; line-height: 20px; font-weight: 500; }
+
+.ect-page.ect-page--creare-magazin-online .mg-scope__chips li::before { content: ""; flex: 0 0 auto; width: 8px; height: 8px; border-radius: 50%; background: var(--orange); }
+
+.ect-page.ect-page--creare-magazin-online .mg-scope__you-note { margin: 0; font-size: 15px; line-height: 1.5; font-weight: 400; text-wrap: pretty; }
+
+.ect-page.ect-page--creare-magazin-online .mg-scope__group { display: flex; flex-direction: column; gap: 12px; }
+
+.ect-page.ect-page--creare-magazin-online .mg-scope__promise { display: flex; align-items: flex-start; gap: 10px; margin: auto 0 0; padding: 14px 16px; border-radius: var(--radius-card); background: var(--orange); color: #fcfcfc; font-size: 15px; line-height: 1.45; font-weight: 600; }
+
+.ect-page.ect-page--creare-magazin-online .mg-scope__promise svg { flex: 0 0 auto; width: 16px; height: 16px; margin-top: calc(0.725em - 8px); fill: none; stroke: currentcolor; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
+
+.ect-page.ect-page--creare-magazin-online .mg-scope__promise span { min-width: 0; text-wrap: pretty; }
+
+/* The handwritten aside sits on the dashed border; the white band hides the dashes behind it. */
+.ect-page.ect-page--creare-magazin-online .mg-scope__scribble { position: absolute; right: clamp(20px, 3vw, 40px); bottom: -19px; margin: 0; padding: 0 12px; white-space: nowrap; background: linear-gradient(to bottom, var(--white) 0, var(--white) 14.5px, transparent 14.5px); color: var(--ink); font-family: var(--font-hand); font-size: 27px; line-height: 1.15; font-weight: 600; }
+
+.ect-page.ect-page--creare-magazin-online .mg-scope__scribble span { display: block; transform: rotate(-5deg); }
+
+.ect-page.ect-page--creare-magazin-online .mg-scope__notes { display: flex; flex-wrap: wrap; gap: 20px; padding-top: 24px; border-top: 1px solid var(--line); }
+
+.ect-page.ect-page--creare-magazin-online .mg-scope__facts { flex: 1 1 420px; min-width: 0; box-sizing: border-box; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(190px, 100%), 1fr)); gap: 20px 28px; margin: 0; padding: 0 clamp(24px, 3.4vw, 48px); }
+
+.ect-page.ect-page--creare-magazin-online .mg-scope__facts > div { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+
+.ect-page.ect-page--creare-magazin-online .mg-scope__facts dt { color: var(--ink); font-size: 12px; line-height: 16px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+
+.ect-page.ect-page--creare-magazin-online .mg-scope__facts dd { margin: 0; font-size: clamp(14px, 13px + 0.15vw, 15px); line-height: 1.5; font-weight: 400; text-wrap: pretty; }
 
 .ect-page.ect-page--creare-magazin-online .ect-home-faq { position: relative; z-index: 1; width: 100%; box-sizing: border-box; padding: 64px 20px 72px; background: var(--white); color: var(--ink); font-family: var(--font-sans); }
 

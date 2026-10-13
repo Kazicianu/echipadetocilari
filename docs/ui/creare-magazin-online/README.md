@@ -21,8 +21,8 @@ Capturile sunt făcute cu `prefers-reduced-motion`, deci cu telefonul oprit pe p
 
 - Utilizatorul a cerut implementarea paginii doar în română în această etapă.
 - **De făcut ulterior:** pagina EN, cu traducerea completă, ruta confirmată cu utilizatorul, metadata, hreflang și linkurile din meniul EN. Nu genera acum o versiune EN și nu adăuga hreflang către o pagină inexistentă.
-- Silver și Gold păstrează temporar propunerile din design, inclusiv `[PREȚ]` și `[N]`, la cererea utilizatorului. Prețurile, numărul de produse și integrările rămân de clarificat ulterior, înainte de publicare.
-- Pagina și metadata nu numesc o platformă. În pachetul Start se afișează „Platformă stabilită în ofertă”.
+- Oferta aprobată ulterior în aceeași zi înlocuiește variantele provizorii din canvas: Start 1.490 €, Business 2.490 € și Avansat de la 4.490 €. Business este pachetul recomandat. Fișierele `pagina.html`, `pagina.css` și capturile rămân documentarea designului inițial, nu sursa prețurilor curente.
+- Platformele aprobate sunt WooCommerce și Shopify, cu cod personalizat în limitele proiectului. Platforma se stabilește după cerințe, în oferta scrisă.
 - Headerul, formularul și footerul vin din shell-ul comun, inclusiv linkurile sociale existente. Switcherul de limbă al paginii va fi adăugat odată cu versiunea EN.
 - La revizia vizuală, utilizatorul a confirmat explicit păstrarea exactă a culorilor din `pagina.html` și capturi, inclusiv combinațiile cu contrast redus. Nu înlocui portocaliul cu `orange-deep` și nu schimba textele albe de pe panourile portocalii în negru.
 
@@ -77,10 +77,11 @@ Telefonul din hero e desenat integral în HTML și CSS, fără imagini.
 2. **Pentru cine e:** panou portocaliu cu trei cupoane. Sus e situația și grija clientului, jos ce facem noi, despărțite de o linie de tăiere cu foarfecă. Pe telefon panoul ocupă toată lățimea, ca banda de pe homepage.
 3. **Ce include** (`#ce-include`): „Linia Comenzii”, un traseu de metrou cu 6 opriri, plus link către `/creare-site-web/` și link „Vezi cât costă” către `#cost`.
 4. **Cum lucrăm:** casete cu cifre (30 de minute, 4 pași, 1 om de contact, „În scris”, CTA) și bonul de proiect cu cei 4 pași.
-5. **Prețuri** (`#cost`): Start, Silver, Gold, plus nota că prețurile sunt orientative.
-6. **FAQ** (`#intrebari-frecvente`): portat de pe homepage (`.ect-home-faq`), `<details name="mg-faq">`, prima întrebare deschisă.
-7. **După lansare:** carduri către `/servicii-seo/`, `/agentie-google-ads/`, `/administrare-site/`.
-8. **Formularul de contact** (`#formular_contact_bottom`), imediat deasupra footerului, apoi footerul.
+5. **Prețuri** (`#cost`): Start 1.490 €, Business 2.490 € și Avansat de la 4.490 €, cu livrabilele aprobate în revizia comercială.
+6. **Ce intră în preț și ce nu** (`.mg-scope`): panoul portocaliu „În preț” (ce include fiecare pachet și ce ne dă clientul), panoul cu contur punctat „Pe lângă preț” (ce se plătește și ce se estimează separat) și patru note: Start și Business, Avansat, TVA, preț și termen.
+7. **FAQ** (`#intrebari-frecvente`): portat de pe homepage (`.ect-home-faq`), `<details name="mg-faq">`, prima întrebare deschisă.
+8. **După lansare:** carduri către `/servicii-seo/`, `/agentie-google-ads/`, `/administrare-site/`.
+9. **Formularul de contact** (`#formular_contact_bottom`), imediat deasupra footerului, apoi footerul.
 
 ## Comportamente
 
@@ -89,17 +90,28 @@ Telefonul din hero e desenat integral în HTML și CSS, fără imagini.
 - **Header:** „Servicii” și burgerul se închid unul pe altul. Pe site rămâne logica meniului comun.
 - **Formular:** în prototip doar afișează confirmarea. Pe site folosește handlerul existent.
 
-## De confirmat înainte de publicare
+## Revizia comercială aprobată (12.10.2026)
 
-- Silver și Gold: prețurile `[PREȚ]`, numărul de produse `[N]` și integrările din liste sunt propuneri. Start (1.250 € și lista lui) e preluat din cardul E-commerce de pe `/creare-site-web/`.
-- Platforma: cardul Start pomenește „Template WordPress / Elementor”, iar meta description-ul propus spune „pe WordPress”. Restul paginii nu numește platforma (WooCommerce sau alta).
-- Ruta și textele EN.
-- Linkul EN din header (`/en/`) și linkurile sociale din footerul prototipului sunt provizorii.
+- Start: design personalizat pe o structură simplă, o limbă, 25 produse manual sau 100 din CSV pregătit, instruire și 30 zile corectare erori.
+- Business: personalizare dedicată pentru homepage, categorie și produs, 50 produse manual sau 500 din CSV, filtre pe atribute, produse recomandate, recuperare coș abandonat, feed Merchant Center și 60 zile corectare erori.
+- Avansat: design și funcții pentru cerințe complexe, cu catalogul, limbile și automatizările stabilite în oferta scrisă. ERP, aplicațiile custom și migrările complexe se estimează separat.
+- În toate: un procesator de plată, un curier cu AWB și un serviciu de facturare prin conectori standard compatibili, SEO tehnic, măsurarea comenzilor, instruire și două runde de revizii. Materialele și datele produselor vin de la client.
+- Domeniul, hostingul, abonamentul Shopify, aplicațiile, licențele și mentenanța ulterioară sunt separate. Costurile și regimul TVA se comunică înainte de contract.
+- Cardul E-commerce de pe `/creare-site-web/` reflectă aceeași ofertă Start și trimite către pachetele detaliate.
+- Ruta și textele EN rămân de stabilit într-o etapă ulterioară. Linkul EN din headerul prototipului (`/en/`) nu aprobă o versiune EN a acestei pagini.
 
-## SEO (propus în canvas)
+## Secțiunea „Ce intră în preț și ce nu” (13.10.2026)
+
+- Sursa este exportul de design „Creare magazin online · secțiunea de sub prețuri”. Utilizatorul a ales varianta B („În preț” și „Pe lângă preț”); varianta A („Sumarul comenzii”) nu se implementează.
+- Secțiunea vine imediat după pachetele de preț, ca secțiune separată cu H2 propriu, și înlocuiește cele trei coloane de condiții („Produsele și materialele”, „Integrările și reviziile”, „Costurile separate”) și nota de sub ele. Informațiile sunt aceleași, reorganizate; prețurile și pachetele nu se schimbă.
+- Culorile sunt cele din export: text `#fcfcfc` pe panoul portocaliu `#fd8649`, iar evidențierea din titlu rămâne text închis pe portocaliu. Nu se înlocuiesc pentru contrast.
+- Stilurile sunt în `creare-magazin-online.css`, cu prefixul `mg-scope`. Secțiunea nu are JavaScript și nici elemente interactive.
+- Comparată cu exportul la 320, 360, 390, 430, 600, 768, 880, 900, 1024, 1100, 1280 și 1440 px: aceleași poziții, fonturi și culori, fără overflow orizontal în secțiune.
+
+## SEO
 
 - Title: `Creare magazin online | Echipa de Tocilari`
-- Meta description: `Creăm magazine online pe WordPress: catalog, plăți, livrare și comenzi testate înainte de lansare. Pachet de pornire de la 1.250 €. Consultație gratuită.` (de revăzut după confirmarea platformei)
+- Meta description: `Creăm magazine online WooCommerce sau Shopify, cu design personalizat, plăți, livrare și facturare. De la 1.490 €. Solicită o ofertă.`
 - Keyword principal: creare magazin online (1.300/lună, Semrush RO, 18.09.2026). Secundare: realizare magazin online (260) în „Ce include”; creare magazin online preț (170) la prețuri și în FAQ.
 - Date structurate: Service și FAQPage, doar cu textul vizibil pe pagină, prin pipeline. Indexarea rămâne controlată de `PUBLIC_INDEXABLE`.
 - Linkuri interne: `/creare-site-web/`, `/servicii-seo/`, `/agentie-google-ads/`, `/administrare-site/`.
