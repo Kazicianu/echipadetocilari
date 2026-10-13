@@ -471,25 +471,26 @@
 
 .ect-page.ect-page--creare-magazin-online .mg-track--top, .ect-page.ect-page--creare-magazin-online .mg-track--bottom, .ect-page.ect-page--creare-magazin-online .mg-track--curve, .ect-page.ect-page--creare-magazin-online .mg-train--2 { display: none; }
 
-.ect-page.ect-page--creare-magazin-online .mg-train { position: absolute; left: 20px; top: 20px; z-index: 3; transform: translate(-50%, -50%); animation: 9s linear 0s infinite normal none running mg-train-v; }
+/* Each van rides at the far end of a lane exactly as long as its trip. Pulling the lane back by 100% of itself covers the trip with transform alone, and the lane only ever reaches up or left, so it adds no scrollable overflow. */
+.ect-page.ect-page--creare-magazin-online .mg-train { position: absolute; left: 20px; top: 20px; bottom: 60px; z-index: 3; width: 0px; pointer-events: none; animation: 9s linear 0s infinite normal none running mg-train-v; }
 
 @keyframes mg-train-v {
-  0% { top: 20px; opacity: 0; }
+  0% { transform: translateY(-100%); opacity: 0; }
   8% { opacity: 1; }
   86% { opacity: 1; }
-  100% { top: calc(100% - 60px); opacity: 0; }
+  100% { transform: translateY(0%); opacity: 0; }
 }
 @keyframes mg-train-h {
-  0% { left: 16.667%; opacity: 0; }
+  0% { transform: translateX(-100%); opacity: 0; }
   8% { opacity: 1; }
   88% { opacity: 1; }
-  100% { left: 100%; opacity: 0; }
+  100% { transform: translateX(0%); opacity: 0; }
 }
 @keyframes mg-train-back {
-  0% { left: 100%; opacity: 0; }
+  0% { transform: translateX(0%); opacity: 0; }
   8% { opacity: 1; }
   88% { opacity: 1; }
-  100% { left: 16.667%; opacity: 0; }
+  100% { transform: translateX(-100%); opacity: 0; }
 }
 @media (min-width: 960px) {
 .ect-page.ect-page--creare-magazin-online .mg-metro__rail { margin-right: 60px; }
@@ -516,9 +517,9 @@
 
 .ect-page.ect-page--creare-magazin-online .mg-track--curve { display: block; left: 100%; top: calc(20px - var(--tw) / 2); width: 54px; height: calc(270px + var(--tw)); border: var(--tw) var(--ts) var(--tc); border-left: 0; border-radius: 0 999px 999px 0; }
 
-.ect-page.ect-page--creare-magazin-online .mg-train { top: 20px; animation-name: mg-train-h; }
+.ect-page.ect-page--creare-magazin-online .mg-train { left: 16.667%; right: 0px; bottom: auto; width: auto; height: 0px; animation-name: mg-train-h; }
 
-.ect-page.ect-page--creare-magazin-online .mg-train--2 { display: block; top: 290px; animation: 9s linear 4.5s infinite normal none running mg-train-back; }
+.ect-page.ect-page--creare-magazin-online .mg-train--2 { display: block; top: 290px; animation: 9s linear -4.5s infinite normal none running mg-train-back; }
 
 }
 .ect-page.ect-page--creare-magazin-online .mg-metro--play { --tw: 22px; --tc: #3d3d45; --ts: solid; background: linear-gradient(rgb(233, 249, 250) 0%, rgb(255, 255, 255) 72%); }
@@ -567,9 +568,14 @@
 
 .ect-page.ect-page--creare-magazin-online .mg-tree::after { content: ""; position: absolute; left: 11px; top: 22px; width: 4px; height: 22px; border-radius: 2px; background: rgb(201, 184, 166); }
 
-.ect-page.ect-page--creare-magazin-online .mg-van { width: 58px; height: 40px; }
+.ect-page.ect-page--creare-magazin-online .mg-van { position: absolute; left: 0px; top: calc(100% - 2px); width: 58px; height: 40px; transform: translate(-50%, -50%); }
 
-.ect-page.ect-page--creare-magazin-online .mg-train--2 .mg-van { transform: scaleX(-1); }
+.ect-page.ect-page--creare-magazin-online .mg-train--2 .mg-van { transform: translate(-50%, -50%) scaleX(-1); }
+
+@media (min-width: 960px) {
+.ect-page.ect-page--creare-magazin-online .mg-van { left: 100%; top: -2px; }
+
+}
 
 .ect-page.ect-page--creare-magazin-online .mg-buddy { width: 92px; height: 92px; animation: 2.8s ease-in-out 0s infinite normal none running mg-hop; }
 
@@ -705,6 +711,36 @@
 
 .ect-page.ect-page--creare-magazin-online .mg-pcard--featured { box-shadow: 0 0 20px 0 var(--orange); }
 
+/* Price cards lift like the other interactive cards. The recommended card keeps its own orange glow. */
+.ect-page.ect-page--creare-magazin-online .mg-pcard { transition: box-shadow 0.3s, transform 0.3s; }
+
+.ect-page.ect-page--creare-magazin-online .mg-pcard:focus-within { transform: translateY(-10px); box-shadow: var(--shadow-card-hover); }
+
+.ect-page.ect-page--creare-magazin-online .mg-pcard--featured:focus-within { box-shadow: var(--shadow-glow-strong); }
+@media (hover: hover) and (pointer: fine) {
+.ect-page.ect-page--creare-magazin-online .mg-pcard:hover { transform: translateY(-10px); box-shadow: var(--shadow-card-hover); }
+
+.ect-page.ect-page--creare-magazin-online .mg-pcard--featured:hover { box-shadow: var(--shadow-glow-strong); }
+
+/* The strip a lifted card leaves behind still counts as the card, so it does not bob under a pointer near its bottom edge. */
+.ect-page.ect-page--creare-magazin-online .mg-pcard:hover::after { content: ""; position: absolute; left: 0px; right: 0px; top: 100%; height: 13px; }
+}
+/* Stacked, the recommended card lifts less, so its badge stays clear of the card above. */
+@media (max-width: 699px) {
+.ect-page.ect-page--creare-magazin-online .mg-pcard--featured:focus-within { transform: translateY(-4px); }
+}
+@media (max-width: 699px) and (hover: hover) and (pointer: fine) {
+.ect-page.ect-page--creare-magazin-online .mg-pcard--featured:hover { transform: translateY(-4px); }
+}
+@media (prefers-reduced-motion: reduce) {
+.ect-page.ect-page--creare-magazin-online .mg-pcard { transition: none; }
+
+.ect-page.ect-page--creare-magazin-online .mg-pcard:focus-within { transform: none; }
+@media (hover: hover) and (pointer: fine) {
+.ect-page.ect-page--creare-magazin-online .mg-pcard:hover { transform: none; }
+}
+}
+
 .ect-page.ect-page--creare-magazin-online .mg-pcard__badge { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); margin: 0; padding: 7px 16px; border-radius: 999px; background: var(--orange); color: var(--white); font-size: 13px; line-height: 20px; font-weight: 600; white-space: nowrap; }
 
 .ect-page.ect-page--creare-magazin-online .mg-pcard__title { margin: 0px; text-align: center; color: var(--orange); font-size: 25px; line-height: 30px; font-weight: 500; text-transform: capitalize; }
@@ -721,7 +757,10 @@
 
 .ect-page.ect-page--creare-magazin-online .mg-pcard__list svg { flex: 0 0 auto; width: 15px; height: 15px; margin-top: 4px; fill: rgb(52, 178, 51); }
 
-.ect-page.ect-page--creare-magazin-online .mg-pcard .ect-btn { align-self: center; margin-top: 14px; }
+.ect-page.ect-page--creare-magazin-online .mg-pcard .ect-btn { position: relative; align-self: center; margin-top: 14px; }
+
+/* The button stays clickable over its whole height while the card lifts under the pointer. */
+.ect-page.ect-page--creare-magazin-online .mg-pcard .ect-btn::after { content: ""; position: absolute; inset: 0px 0px -13px; }
 
 @media (min-width: 960px) {
   .ect-page.ect-page--creare-magazin-online .mg-pcard__for { min-height: 2.8em; }
@@ -959,6 +998,12 @@
 
 .ect-page.ect-page--creare-magazin-online .mg-tap, .ect-page.ect-page--creare-magazin-online .mg-confetti, .ect-page.ect-page--creare-magazin-online .mg-qmark, .ect-page.ect-page--creare-magazin-online .mg-train--2 { display: none; }
 
+/* With the loop off, the van parks on the line between the first two stops. */
+.ect-page.ect-page--creare-magazin-online .mg-train { transform: translateY(calc(70px - 100%)); }
+@media (min-width: 960px) {
+.ect-page.ect-page--creare-magazin-online .mg-train { transform: translateX(-80%); }
+}
+
 .ect-page.ect-page--creare-magazin-online .ect-home-faq__motion { display: none !important; }
 
 }
@@ -969,5 +1014,73 @@
 .ect-page.ect-page--creare-magazin-online .mg-hero-visual.mg-phone-paused *, .ect-page.ect-page--creare-magazin-online .mg-hero-visual.mg-phone-paused *::before, .ect-page.ect-page--creare-magazin-online .mg-hero-visual.mg-phone-paused *::after { animation-play-state: paused !important; }
 .ect-page.ect-page--creare-magazin-online .mg-hero-visual.mg-phone-paused :is(.mg-scr,.mg-success) { animation: none; opacity: 1; transform: none; }
 .ect-page.ect-page--creare-magazin-online .mg-hero-visual.mg-phone-paused .mg-notif { opacity: 1; animation: none; transform: none; }
-.ect-page.ect-page--creare-magazin-online .mg-hero-visual.mg-phone-paused :is(.mg-tap,.mg-confetti) { opacity: 0; }
+.ect-page.ect-page--creare-magazin-online .mg-hero-visual.mg-phone-paused :is(.mg-tap,.mg-confetti) { animation: none; opacity: 0; }
 @media (prefers-reduced-motion: reduce) { .ect-page.ect-page--creare-magazin-online .mg-ctrl span { transition: none !important; } }
+
+/* Loops away from the viewport wait where they stopped. The script sets the class on the phone and on the delivery line. */
+.ect-page.ect-page--creare-magazin-online .mg-hero-visual.mg-offscreen *, .ect-page.ect-page--creare-magazin-online .mg-hero-visual.mg-offscreen *::before, .ect-page.ect-page--creare-magazin-online .mg-hero-visual.mg-offscreen *::after { animation-play-state: paused !important; }
+.ect-page.ect-page--creare-magazin-online .mg-metro.mg-offscreen :is(.mg-cloud,.mg-buddy,.mg-train) { animation-play-state: paused; }
+
+/* One-shot entrances. The script adds .mg-rv only to blocks still below the viewport and .mg-in once they scroll into view, so nothing is hidden without the script or with reduced motion. The keyframes move translate, which leaves each block's own transform and hover lift alone. They also keep a moving block out of scroll anchoring, because Firefox follows translate with the scroll position. At rest a block anchors as usual, which the FAQ needs when an open answer above closes. */
+@media screen and (prefers-reduced-motion: no-preference) {
+.ect-page.ect-page--creare-magazin-online .mg-rv:not(.mg-in) { opacity: 0; pointer-events: none; }
+}
+.ect-page.ect-page--creare-magazin-online .mg-rv.mg-in { animation: 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) var(--mg-delay, 0s) 1 normal backwards running mg-enter; }
+
+@keyframes mg-enter {
+  0% { opacity: 0; translate: 0px 16px; overflow-anchor: none; }
+  100% { opacity: 1; translate: 0px 0px; overflow-anchor: none; }
+}
+/* Tickets: the cut row has its own entrance, so on a phone the cut is seen. The line is cut, the scissors snip, then the worry stub tilts from straight into its place. Without :has() the stub simply rests tilted. */
+@media screen and (prefers-reduced-motion: no-preference) {
+.ect-page.ect-page--creare-magazin-online .mg-t3:has(> .mg-t3__cut.mg-rv:not(.mg-in)) .mg-t3__top { transform: none; }
+}
+.ect-page.ect-page--creare-magazin-online .mg-t3__cut.mg-rv.mg-in { animation: none; }
+
+.ect-page.ect-page--creare-magazin-online .mg-t3__cut.mg-in::after { animation: 0.45s ease-out calc(var(--mg-delay, 0s) + 0.2s) 1 normal backwards running mg-cut-line; }
+
+.ect-page.ect-page--creare-magazin-online .mg-t3__cut.mg-in .mg-t3__sc { transform-origin: 25% 50%; animation: 0.45s ease-in-out calc(var(--mg-delay, 0s) + 0.2s) 1 normal backwards running mg-cut-snip; }
+
+.ect-page.ect-page--creare-magazin-online .mg-t3:has(> .mg-t3__cut.mg-in) .mg-t3__top { animation: 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) calc(var(--mg-delay, 0s) + 0.5s) 1 normal backwards running mg-cut-tilt; }
+
+@keyframes mg-cut-line {
+  0% { clip-path: inset(0px 100% 0px 0px); }
+  100% { clip-path: inset(0px 0px 0px 0px); }
+}
+@keyframes mg-cut-snip {
+  0%, 100% { transform: rotate(0deg); }
+  30% { transform: rotate(-14deg); }
+  65% { transform: rotate(10deg); }
+}
+@keyframes mg-cut-tilt {
+  0% { transform: rotate(0deg); }
+}
+/* Receipt: each line prints once it is on screen itself, because on a phone the receipt is taller than the screen. The script queues the lines that arrive together. */
+.ect-page.ect-page--creare-magazin-online .mg-receipt :is(.mg-receipt__list > li,.mg-receipt__total,.mg-barcode,.mg-barcode-code).mg-rv.mg-in { animation: 0.35s ease-out var(--mg-delay, 0s) 1 normal backwards running mg-print; }
+
+@keyframes mg-print {
+  0% { opacity: 0; clip-path: inset(0px 100% 0px 0px); }
+  100% { opacity: 1; clip-path: inset(0px 0px 0px 0px); }
+}
+/* FAQ: the answer grows out of the question it replies to, like a chat message. */
+.ect-page.ect-page--creare-magazin-online .ect-home-faq__item[open] > .ect-home-faq__answer { transform-origin: 0px 0px; animation: 0.22s cubic-bezier(0.2, 0.8, 0.2, 1) 0s 1 normal backwards running mg-bubble; }
+
+/* Where a closed answer is kept as skipped content its own animation would run only once, so there the content slot carries it and restarts on every open. */
+@supports selector(::details-content) {
+.ect-page.ect-page--creare-magazin-online .ect-home-faq__item[open]::details-content { transform-origin: 0px 0px; animation: 0.22s cubic-bezier(0.2, 0.8, 0.2, 1) 0s 1 normal backwards running mg-bubble; }
+
+.ect-page.ect-page--creare-magazin-online .ect-home-faq__item[open] > .ect-home-faq__answer { animation: none; }
+}
+@keyframes mg-bubble {
+  0% { opacity: 0; transform: translateY(-6px) scale(0.94); }
+  100% { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+.ect-page.ect-page--creare-magazin-online .mg-rv.mg-in, .ect-page.ect-page--creare-magazin-online .mg-t3__cut.mg-in::after, .ect-page.ect-page--creare-magazin-online .mg-t3__cut.mg-in .mg-t3__sc, .ect-page.ect-page--creare-magazin-online .mg-t3 .mg-t3__top { animation: none !important; }
+
+/* The answer shows its final frame at once. The animation stays attached, so nothing replays if the preference changes while the page is open. */
+.ect-page.ect-page--creare-magazin-online .ect-home-faq__item[open] > .ect-home-faq__answer { animation-timing-function: step-start !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+.ect-page.ect-page--creare-magazin-online .ect-home-faq__item[open]::details-content { animation-timing-function: step-start !important; }
+}
