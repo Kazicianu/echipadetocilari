@@ -17,7 +17,6 @@
   const screens = $$('[data-screen]');
   const dots = $$('[data-js="dot"]');
   let current = 0;
-  let phonePaused = reduceMotion;
   let timer;
 
   const setIcons = (button, paused) => {
@@ -39,12 +38,12 @@
         marker.style.background = active ? 'var(--orange)' : 'var(--line-step)';
       }
     });
-    visual?.classList.toggle('mg-phone-paused', phonePaused || document.hidden);
+    visual?.classList.toggle('mg-phone-paused', reduceMotion || document.hidden);
   };
 
   const schedulePhone = () => {
     window.clearTimeout(timer);
-    if (phonePaused || document.hidden || screens.length < 2) return;
+    if (reduceMotion || document.hidden || screens.length < 2) return;
     timer = window.setTimeout(() => {
       current = (current + 1) % screens.length;
       renderPhone();
@@ -55,7 +54,6 @@
   dots.forEach((dot, index) => dot.addEventListener('click', () => {
     if (index >= screens.length) return;
     current = index;
-    phonePaused = true;
     renderPhone();
     schedulePhone();
   }));
@@ -81,10 +79,9 @@
 
   const updateMotion = (event) => {
     reduceMotion = event.matches;
-    /* A new request to reduce motion stops autoplay immediately. Removing
-       that preference leaves it stopped; the screens remain manually selectable. */
+    /* The phone follows the system motion preference. The FAQ preserves
+       its explicit pause until the visitor uses its own motion control. */
     if (reduceMotion) {
-      phonePaused = true;
       faqPaused = true;
     }
     renderPhone();
