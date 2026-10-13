@@ -423,7 +423,7 @@
 
 .ect-page.ect-page--creare-magazin-online .mg-metro__legend { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin: 0px 0px 28px; }
 
-.ect-page.ect-page--creare-magazin-online .mg-metro__badge { width: 34px; height: 34px; border-radius: 50%; background: var(--ink); color: rgb(255, 255, 255); font-size: 15px; font-weight: 800; display: grid; place-items: center; }
+.ect-page.ect-page--creare-magazin-online .mg-metro__badge { flex: 0 0 auto; width: 40px; height: 40px; object-fit: contain; }
 
 .ect-page.ect-page--creare-magazin-online .mg-metro__name { font-size: 15px; font-weight: 700; }
 
