@@ -260,7 +260,7 @@ console.log('  EN pages:', enPages.join(', '));
 console.log('→ Preparing standalone forms and local presentation assets…');
 for (const file of walkHtml(outDir)) {
   const html = readFileSync(file, 'utf8');
-  writeFileSync(file, makeStandaloneAssets(enhanceMobileMenu(enhanceDesktopHeader(enhanceContactForms(html)))), 'utf8');
+  writeFileSync(file, makeStandaloneAssets(enhanceMobileMenu(enhanceDesktopHeader(enhanceContactForms(html)), { pageUrl: urlPathOf(file) })), 'utf8');
 }
 
 // ─── site-level files ───────────────────────────────────────────────────────

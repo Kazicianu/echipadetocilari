@@ -87,30 +87,32 @@
   justify-content: space-between;
   gap: 24px;
   padding: 24px;
+  overflow: hidden;
+}
+.ect-mobile-menu-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  min-height: 0;
+  list-style: none;
+  margin: calc(var(--ect-mobile-menu-button-size) + 24px) 0 0;
+  padding: 0;
+  flex: 1;
   overflow-y: auto;
   overscroll-behavior: contain;
   scrollbar-width: thin;
   scrollbar-color: #55555e transparent;
 }
-.ect-mobile-menu-links {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 100%;
-  list-style: none;
-  margin: calc(var(--ect-mobile-menu-button-size) + 24px) 0 0;
-  padding: 0;
-  flex: none;
-}
-.ect-mobile-menu-link-wrap { width: 100%; overflow: hidden; perspective: 300px; margin: 0; padding: 0; }
+.ect-mobile-menu-link-wrap { flex: none; width: 100%; overflow: hidden; perspective: 300px; margin: 0; padding: 0; }
 #ect-mobile-menu .ect-mobile-menu-link {
   display: block;
   width: 100%;
-  min-height: 45px;
+  min-height: 44px;
   padding: 0;
   color: #27272d;
   text-decoration: none;
-  font-size: clamp(27px, 7.7vw, 36px);
+  font-size: 20px;
   line-height: 1.25;
   font-weight: 500;
   letter-spacing: -.3px;
@@ -122,17 +124,18 @@
 #ect-mobile-menu .ect-mobile-menu-link[aria-current="page"],
 #ect-mobile-menu .ect-mobile-menu-link[aria-current="page"]:visited,
 #ect-mobile-menu .ect-mobile-menu-link[aria-current="page"]:hover {
-  color: #ff5600; /* orange-hot token, for the menu's 27px+ labels. */
+  color: #ff5600;
   font-weight: 600;
   text-decoration: underline;
   text-decoration-thickness: 2px;
   text-underline-offset: .16em;
 }
-.ect-mobile-menu-footer { display: flex; flex-wrap: wrap; flex: none; gap: 0; width: 100%; }
+.ect-mobile-menu-footer { display: flex; flex: none; gap: 8px; width: 100%; }
 #ect-mobile-menu .ect-mobile-menu-footer-link {
   display: flex;
   align-items: center;
-  width: 50%;
+  justify-content: center;
+  min-width: 44px;
   min-height: 44px;
   padding: 0;
   font-size: 16px;
@@ -143,7 +146,12 @@
   transition: color 160ms;
 }
 #ect-mobile-menu .ect-mobile-menu-footer-link:visited { color: #55555e; }
-#ect-mobile-menu .ect-mobile-menu-footer-link[aria-current="true"] { color: #ad420f; }
+#ect-mobile-menu .ect-mobile-menu-footer-link[aria-current="true"] {
+  color: #fd8649;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: .2em;
+}
 .elementor-3359 .ect-mobile-menu-toggle:focus-visible,
 #ect-mobile-menu .ect-mobile-menu-toggle:focus-visible,
 #ect-mobile-menu .ect-mobile-menu-link:focus-visible,
