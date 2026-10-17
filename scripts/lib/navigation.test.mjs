@@ -108,12 +108,6 @@ test('desktop and mobile menus expose current service pages on every page', () =
     const original = readFileSync(path.join(source, route.roFile), 'utf8');
     const header = original.match(/<header\b[\s\S]*?<\/header>/i)?.[0];
     assert.ok(header, `${route.ro}: header missing`);
-    if (route.landing) {
-      assert.match(header, /class="lp-header"/);
-      assert.match(header, /href="#formular_contact_bottom"/);
-      assert.doesNotMatch(header, /<nav\b|elementor-menu-toggle/);
-      continue;
-    }
     for (const menuClass of ['elementor-nav-menu--main', 'elementor-nav-menu--dropdown']) {
       const menu = [...header.matchAll(/<nav\b[^>]*>[\s\S]*?<\/nav>/gi)]
         .map(match => match[0])

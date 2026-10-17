@@ -9,8 +9,6 @@
  * `scripts/lib/junk-redirects.mjs`. `isOwnedPage` still gates schema/index.
  *
  * `service` marks pages that describe a purchasable service (Service JSON-LD).
- * `landing` marks pages with the approved compact landing header instead of the
- * shared desktop and mobile menus.
  */
 export const routes = [
   {
@@ -49,7 +47,6 @@ export const routes = [
     roFile: 'dezvoltare-aplicatii/index.html',
     labelRo: 'Dezvoltare aplicații',
     service: { ro: 'Dezvoltare aplicații mobile și web' },
-    landing: true,
   },
   {
     ro: '/servicii-seo/',

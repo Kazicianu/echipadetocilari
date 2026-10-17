@@ -57,11 +57,6 @@ test('the expanding mobile menu preserves every available translated link on eac
   for (const route of routes) {
     for (const language of route.en ? ['ro', 'en'] : ['ro']) {
       const original = preparedPage(route, language);
-      if (route.landing) {
-        assert.equal(enhanceMobileMenu(original), original, `${route[language]}: landing header stays compact`);
-        assert.doesNotMatch(original, /elementor-menu-toggle|elementor-nav-menu--dropdown/);
-        continue;
-      }
       const expected = links(menu(original, 'elementor-nav-menu--dropdown'));
       const enhanced = enhanceMobileMenu(original);
       const actual = links(enhanced, 'ect-mobile-menu-link');
@@ -79,21 +74,24 @@ test('the expanding mobile menu preserves every available translated link on eac
 });
 
 test('the mobile control is a native button and shared assets are injected exactly once', () => {
-  const original = preparedPage(routes[0], 'ro');
-  const enhanced = enhanceMobileMenu(original);
-  const toggle = [...header(enhanced).matchAll(/<button\b[^>]*>/gi)]
-    .map(match => match[0])
-    .find(tag => hasClass(tag, 'ect-mobile-menu-toggle'));
+  for (const route of [routes.find(item => item.ro === '/'), routes.find(item => item.ro === '/dezvoltare-aplicatii/')]) {
+    const original = preparedPage(route, 'ro');
+    const enhanced = enhanceMobileMenu(original);
+    const toggle = [...header(enhanced).matchAll(/<button\b[^>]*>/gi)]
+      .map(match => match[0])
+      .find(tag => hasClass(tag, 'ect-mobile-menu-toggle'));
 
-  assert.ok(toggle, 'native mobile toggle exists');
-  assert.equal(attribute(toggle, 'type'), 'button');
-  assert.equal(attribute(toggle, 'aria-expanded'), 'false');
-  assert.equal(attribute(toggle, 'aria-controls'), 'ect-mobile-menu');
-  assert.ok(!hasClass(toggle, 'elementor-menu-toggle'), 'Elementor cannot register its own toggle handler');
-  assert.equal((enhanced.match(/\bid=["']ect-mobile-menu["']/g) || []).length, 1);
-  assert.equal((enhanced.match(/\bhref=["']\/wp-content\/ect-pages\/mobile-menu\.css["']/g) || []).length, 1);
-  assert.equal((enhanced.match(/\bsrc=["']\/wp-content\/ect-pages\/mobile-menu\.js["']/g) || []).length, 1);
-  assert.equal(enhanceMobileMenu(enhanced), enhanced, 'repeated enhancement preserves the document byte for byte');
+    assert.ok(toggle, `${route.ro}: native mobile toggle exists`);
+    assert.equal(attribute(toggle, 'type'), 'button');
+    assert.equal(attribute(toggle, 'aria-expanded'), 'false');
+    assert.equal(attribute(toggle, 'aria-controls'), 'ect-mobile-menu');
+    assert.ok(!hasClass(toggle, 'elementor-menu-toggle'), 'Elementor cannot register its own toggle handler');
+    assert.equal((enhanced.match(/\bid=["']ect-mobile-menu["']/g) || []).length, 1);
+    assert.equal((enhanced.match(/\bhref=["']\/wp-content\/ect-pages\/mobile-menu\.css["']/g) || []).length, 1);
+    assert.equal((enhanced.match(/\bsrc=["']\/wp-content\/ect-pages\/mobile-menu\.js["']/g) || []).length, 1);
+    assert.equal(enhanceMobileMenu(enhanced), enhanced, 'repeated enhancement preserves the document byte for byte');
+    if (!route.en) assert.doesNotMatch(enhanced, /id="ect-lang-switch"|class="ect-mobile-menu-footer-link"/, 'the Romanian-only page has no unapproved English link');
+  }
 });
 
 test('pages without a header are unchanged', () => {

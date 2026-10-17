@@ -55,11 +55,6 @@ test('every RO and EN page gets all available described service links in its own
       const label = `${route[language]} (${language})`;
       const original = preparedPage(route, language);
       const enhanced = enhanceDesktopHeader(original);
-      if (route.landing) {
-        assert.equal(enhanced, original, `${label}: the landing keeps its compact header`);
-        assert.doesNotMatch(original, /elementor-nav-menu--main|elementor-nav-menu--dropdown/);
-        continue;
-      }
       const before = submenuLinks(original);
       const after = submenuLinks(enhanced);
 
@@ -75,6 +70,21 @@ test('every RO and EN page gets all available described service links in its own
       assert.equal(enhanced.split(stylesheet).length - 1, 1, `${label}: stylesheet linked once`);
     }
   }
+});
+
+test('the applications page uses the homepage header outside the landing content', () => {
+  const route = routes.find(item => item.ro === '/dezvoltare-aplicatii/');
+  const html = preparedPage(route, 'ro');
+  const header = html.match(/<header\b[\s\S]*?<\/header>/i)?.[0];
+  const homepage = preparedPage(routes.find(item => item.ro === '/'), 'ro');
+
+  assert.match(header ?? '', /\belementor-location-header\b/, 'the shared header owns the navigation styles');
+  assert.equal((html.match(/<header\b/gi) || []).length, 1, 'only one page header');
+  assert.equal((html.match(/\bid="top"/g) || []).length, 1, 'back-to-top has a unique target');
+  assert.ok(html.indexOf('</header>') < html.indexOf('<div class="ap-page"'), 'landing styles do not wrap the shared header');
+  assert.match(header ?? '', /<a\b[^>]*href="\/"[^>]*>\s*<img\b/, 'the logo links to the homepage from this nested URL');
+  assert.deepEqual(submenuLinks(html).map(({ href, title }) => ({ href, title })),
+    submenuLinks(homepage).map(({ href, title }) => ({ href, title })), 'homepage service destinations and labels are reused');
 });
 
 test('the transform is idempotent and composes with the mobile menu', () => {

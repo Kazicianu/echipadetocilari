@@ -47,7 +47,6 @@ test('online-store route is owned in Romanian without an unapproved English twin
 test('applications landing is owned in Romanian without an unapproved English twin', () => {
   assert.equal(apps.roFile, 'dezvoltare-aplicatii/index.html');
   assert.equal(apps.service.ro, 'Dezvoltare aplicații mobile și web');
-  assert.equal(apps.landing, true);
   assert.equal(apps.en, undefined);
   assert.equal(apps.enFile, undefined);
   assert.equal(isOwnedPage(apps.ro), true);
