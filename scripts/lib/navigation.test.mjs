@@ -98,6 +98,7 @@ test('desktop and mobile menus expose current service pages on every page', () =
   const servicePaths = [
     '/creare-site-web/',
     '/creare-magazin-online/',
+    '/dezvoltare-aplicatii/',
     '/servicii-seo/',
     '/agentie-google-ads/',
     '/administrare-site/',
@@ -107,6 +108,12 @@ test('desktop and mobile menus expose current service pages on every page', () =
     const original = readFileSync(path.join(source, route.roFile), 'utf8');
     const header = original.match(/<header\b[\s\S]*?<\/header>/i)?.[0];
     assert.ok(header, `${route.ro}: header missing`);
+    if (route.landing) {
+      assert.match(header, /class="lp-header"/);
+      assert.match(header, /href="#formular_contact_bottom"/);
+      assert.doesNotMatch(header, /<nav\b|elementor-menu-toggle/);
+      continue;
+    }
     for (const menuClass of ['elementor-nav-menu--main', 'elementor-nav-menu--dropdown']) {
       const menu = [...header.matchAll(/<nav\b[^>]*>[\s\S]*?<\/nav>/gi)]
         .map(match => match[0])
@@ -122,6 +129,13 @@ test('desktop and mobile menus expose current service pages on every page', () =
 test('Romanian-only service links never acquire an undefined English URL', () => {
   assert.equal(normalizePageLinks(link('/creare-magazin-online/'), { pageUrl: '/', language: 'en' }), link('/creare-magazin-online/'));
   assert.equal(normalizePageLinks(link('index.html'), { pageUrl: '/creare-magazin-online/', language: 'en' }), link('/creare-magazin-online/'));
+  assert.equal(normalizePageLinks(link('/dezvoltare-aplicatii/?tip=web#lp-story'), { pageUrl: '/', language: 'en' }), link('/dezvoltare-aplicatii/?tip=web#lp-story'));
+});
+
+test('the homepage applications card opens the approved Romanian landing', () => {
+  const html = readFileSync(path.join(source, 'index.html'), 'utf8');
+  const card = html.match(/<a\b[^>]*data-id="7c0fd02d"[^>]*>/)?.[0];
+  assert.match(card ?? '', /href="\/dezvoltare-aplicatii\/"/);
 });
 
 test('English menus omit untranslated pages while Romanian menus and contextual links remain intact', () => {

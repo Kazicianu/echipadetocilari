@@ -55,10 +55,16 @@ test('every RO and EN page gets all available described service links in its own
       const label = `${route[language]} (${language})`;
       const original = preparedPage(route, language);
       const enhanced = enhanceDesktopHeader(original);
+      if (route.landing) {
+        assert.equal(enhanced, original, `${label}: the landing keeps its compact header`);
+        assert.doesNotMatch(original, /elementor-nav-menu--main|elementor-nav-menu--dropdown/);
+        continue;
+      }
       const before = submenuLinks(original);
       const after = submenuLinks(enhanced);
 
-      assert.equal(after.length, language === 'ro' ? 5 : 4, `${label}: only available service links`);
+      const available = routes.filter(item => item[language] && serviceMenuCopy[item.ro]);
+      assert.equal(after.length, available.length, `${label}: only available service links`);
       assert.ok(after.every(link => link.enhanced), `${label}: every service link is enhanced`);
       assert.deepEqual(after.map(({ href, current, title }) => ({ href, current, title })),
         before.map(({ href, current, title }) => ({ href, current, title })), `${label}: routes, labels and current page kept`);

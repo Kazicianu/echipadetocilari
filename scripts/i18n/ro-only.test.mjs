@@ -13,6 +13,7 @@ import { validateBuild } from '../lib/validate.mjs';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const source = path.join(root, 'legacy-mirror');
 const shop = routeByRo('/creare-magazin-online/');
+const apps = routeByRo('/dezvoltare-aplicatii/');
 const site = 'https://www.echipadetocilari.ro';
 
 function scratchDirectory(prefix) {
@@ -39,7 +40,19 @@ test('online-store route is owned in Romanian without an unapproved English twin
   assert.equal(isOwnedPage('/en/online-store-development/'), false);
   assert.equal(roToEn[shop.ro], undefined);
   assert.equal(enToRo.undefined, undefined);
-  assert.equal(pairedRoutes.length, routes.length - 1);
+  const romanianOnly = routes.filter(route => !route.en && !route.enFile);
+  assert.equal(pairedRoutes.length + romanianOnly.length, routes.length);
+});
+
+test('applications landing is owned in Romanian without an unapproved English twin', () => {
+  assert.equal(apps.roFile, 'dezvoltare-aplicatii/index.html');
+  assert.equal(apps.service.ro, 'Dezvoltare aplicații mobile și web');
+  assert.equal(apps.landing, true);
+  assert.equal(apps.en, undefined);
+  assert.equal(apps.enFile, undefined);
+  assert.equal(isOwnedPage(apps.ro), true);
+  assert.equal(isOwnedPage('/en/app-development/'), false);
+  assert.equal(roToEn[apps.ro], undefined);
 });
 
 test('Romanian-only pages remove old language controls and hreflang without emitting replacement URLs', () => {
@@ -64,6 +77,10 @@ test('English generation skips the store, preserves all existing pairs and omits
     assert.deepEqual(generated, pairedRoutes.map(route => route.en));
     assert.equal(existsSync(path.join(scratch.directory, 'en/creare-magazin-online/index.html')), false);
     assert.equal(existsSync(path.join(scratch.directory, 'en/online-store-development/index.html')), false);
+    assert.equal(existsSync(path.join(scratch.directory, 'en/app-development/index.html')), false);
+    assert.equal(existsSync(path.join(scratch.directory, 'en/dezvoltare-aplicatii/index.html')), false);
+    const applications = readFileSync(path.join(scratch.directory, apps.roFile), 'utf8');
+    assert.doesNotMatch(applications, /id="ect-lang-switch"|<link\b[^>]*hreflang=|href="[^"]*undefined/);
     const romanian = readFileSync(path.join(scratch.directory, shop.roFile), 'utf8');
     assert.doesNotMatch(romanian, /id="ect-lang-switch"|<link\b[^>]*hreflang=|href="[^"]*undefined/);
     const shopHeader = romanian.match(/<header\b[\s\S]*?<\/header>/)[0];
@@ -74,6 +91,7 @@ test('English generation skips the store, preserves all existing pairs and omits
       const english = readFileSync(path.join(scratch.directory, route.enFile), 'utf8');
       const header = english.match(/<header\b[\s\S]*?<\/header>/)[0];
       assert.doesNotMatch(header, /href="\/creare-magazin-online\/"|Creare magazin online/);
+      assert.doesNotMatch(header, /href="\/dezvoltare-aplicatii\/"|Dezvoltare aplicații/);
       assert.equal((english.match(/<link\b[^>]*hreflang=/g) || []).length, 3, route.en);
       assert.match(english, /id="ect-lang-switch"/);
       assert.doesNotMatch(english, /(?:href|content)="[^"]*undefined/);

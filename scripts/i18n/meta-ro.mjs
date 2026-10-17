@@ -23,6 +23,11 @@ export const roPageMeta = {
     description:
       'Creare magazin online pe Shopify, de la 1.490 €. Design personalizat, plăți, curier și facturare. Vezi pachetele și cere o ofertă.',
   },
+  '/dezvoltare-aplicatii/': {
+    title: 'Dezvoltare aplicații mobile și web | Echipa de Tocilari',
+    description:
+      'Dezvoltare aplicații mobile pentru iOS și Android și aplicații web pentru firma ta. Consultație gratuită de 30 de minute și prețul în scris.',
+  },
   '/servicii-seo/': {
     title: 'Servicii SEO și vizibilitate în AI | Echipa de Tocilari',
     description:

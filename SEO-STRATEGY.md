@@ -4,11 +4,11 @@ Salvat la cererea utilizatorului la 18 septembrie 2026. Acest document păstreaz
 
 ## Oferta și arhitectura
 
-Homepage-ul este punctul central pentru șapte grupuri tematice. Oferta este limitată la creare site web, creare magazin online, dezvoltare aplicații web și mobile, SEO și vizibilitate în AI, Google Ads, Facebook Ads cu Instagram și mentenanță site. Nu promova logo design sau copywriting ca servicii separate. Pagina dedicată pentru magazin online a fost readusă în implementare (design aprobat pe 12.10.2026, pachet în `docs/ui/creare-magazin-online/`). Paginile pentru dezvoltare aplicații și Facebook Ads rămân retrase; rândurile lor de mai jos rămân cercetare pentru o eventuală etapă viitoare.
+Homepage-ul este punctul central pentru șapte grupuri tematice. Oferta este limitată la creare site web, creare magazin online, dezvoltare aplicații web și mobile, SEO și vizibilitate în AI, Google Ads, Facebook Ads cu Instagram și mentenanță site. Nu promova logo design sau copywriting ca servicii separate. Pagina dedicată pentru magazin online a fost readusă în implementare (design aprobat pe 12.10.2026, pachet în `docs/ui/creare-magazin-online/`). Pagina pentru dezvoltare aplicații a fost readusă în implementare la cererea utilizatorului din 17.10.2026, exact după pachetul `docs/ui/dezvoltare-aplicatii/`. Pagina Facebook Ads rămâne retrasă; rândul ei de mai jos rămâne cercetare pentru o eventuală etapă viitoare.
 
 Păstrează URL-urile existente, cu excepția migrării explicite a paginii Google Ads descrise mai jos, fără a introduce obligatoriu un director /servicii/. Nu crea pagini separate pentru sinonime precum creare site, realizare site și creare website. Delimitează intenția homepage-ului de cea a paginilor de servicii.
 
-O pagină Servicii care repetă homepage-ul nu este necesară. Meniul și cardul de magazin online de pe homepage oferă acces direct la pagina /creare-magazin-online/. Cele două carduri fără pagini dedicate, dezvoltare aplicații și Facebook Ads, trimit momentan la /services/. Eliminarea efectivă a /services/ și a versiunii EN rămâne o modificare de implementat separat, cu redirecționări, actualizarea linkurilor și a rutelor. Salvarea acestei strategii nu înseamnă că pagina a fost eliminată.
+O pagină Servicii care repetă homepage-ul nu este necesară. Meniul și cardurile de magazin online și dezvoltare aplicații de pe homepage oferă acces direct la /creare-magazin-online/ și /dezvoltare-aplicatii/. Cardul Facebook Ads trimite momentan la /services/. Eliminarea efectivă a /services/ și a versiunii EN rămâne o modificare de implementat separat, cu redirecționări, actualizarea linkurilor și a rutelor. Salvarea acestei strategii nu înseamnă că pagina a fost eliminată.
 
 ## Keywords pe pagini
 
@@ -44,6 +44,12 @@ Domeniul, hostingul, abonamentul Shopify, aplicațiile, licențele și mentenan�
 Pagina păstrează „creare magazin online” ca termen principal în title și H1. „Realizarea unui magazin online” apare natural în descrierea livrabilelor, iar căutările despre preț sunt acoperite de secțiunea cu pachete, costuri separate și FAQ. Title-ul include oferta de intrare de la 1.490 €. Introducerea explică serviciul, publicul și gestionarea comenzilor direct pe site; FAQ-ul explică și pe ce platformă se construiește fiecare pachet.
 
 Datele structurate Service includ catalogul pachetelor extras din HTML-ul vizibil. Start și Business au prețurile afișate, iar Avansat are preț minim, fără a transforma „de la” într-un preț fix. FAQPage este generat din cele șapte întrebări vizibile. Aceste date nu reprezintă o garanție de clasare, rezultate speciale sau citare AI. Pagina rămâne exclusiv RO, iar politica PUBLIC_INDEXABLE rămâne neschimbată.
+
+## Pagina dezvoltare aplicații (17.10.2026)
+
+Implementarea reproduce landingul aprobat din `docs/ui/dezvoltare-aplicatii/`, cu headerul fără meniu, variantele de titlu și tip de aplicație prin `?tip=mobil|web|portal|ai`, poveștile pe telefon, taburile pe desktop și formularul și footerul comune. Pagina este exclusiv RO; o versiune EN necesită texte și rută aprobate separat. Meniurile RO și cardul de pe homepage trimit la pagina nouă. Canonical rămâne `/dezvoltare-aplicatii/`, fără parametri. Indexarea rămâne controlată exclusiv de `PUBLIC_INDEXABLE`, implicit dezactivată; nu a fost introdusă o excepție permanentă de indexare pentru landing.
+
+Prețurile și limitele `[PREȚ]` și `[N]` se păstrează exact ca în design până când proprietarul furnizează valorile. Nu se inventează prețuri și nu se copiază oferta magazinului. Schema Service descrie serviciul fără oferte; FAQPage și datele structurate despre prețuri se adaugă după definitivarea informațiilor comerciale. Formularul folosește handlerul existent, fără confirmarea simulată din prototip sau măsurare nouă a conversiilor. Nu se inventează o adresă pentru politica de confidențialitate.
 
 ## Conținut de suport propus
 

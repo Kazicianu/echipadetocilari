@@ -122,6 +122,8 @@ function schemasFor(urlPath, meta, html) {
 
   if (urlPath === '/') list.push(faqPage(extractHomeFaqs(html)));
   if (urlPath === '/creare-magazin-online/') list.push(faqPage(extractHomeFaqs(html)));
+  // The apps landing still contains owner-supplied price placeholders. Its
+  // Service schema is valid without offers; add FAQPage when the copy is final.
   if (urlPath === '/agentie-google-ads/') list.push(faqPage(extractGoogleAdsFaqs(html)));
   if (route?.service) {
     const serviceSchema = service({
