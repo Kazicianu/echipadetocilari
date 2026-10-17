@@ -18,6 +18,8 @@
   background: transparent;
   color: #27272d;
   font-family: Montserrat, system-ui, sans-serif;
+  /* Keep the browser's touch highlight from covering the closing menu. */
+  -webkit-tap-highlight-color: transparent;
 }
 
 #ect-mobile-menu::backdrop { background: transparent; }
@@ -152,6 +154,8 @@
   text-decoration: underline;
   text-underline-offset: .2em;
 }
+#ect-mobile-menu .ect-mobile-menu-link:active,
+#ect-mobile-menu .ect-mobile-menu-footer-link:active { color: #fd8649; }
 .elementor-3359 .ect-mobile-menu-toggle:focus-visible,
 #ect-mobile-menu .ect-mobile-menu-toggle:focus-visible,
 #ect-mobile-menu .ect-mobile-menu-link:focus-visible,
