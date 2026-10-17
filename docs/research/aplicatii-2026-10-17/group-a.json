@@ -1,0 +1,120 @@
+{
+  "researchDate": "2026-10-17",
+  "scope": "7 competitori români, surse comerciale proprii; EUR nominali, fără conversie TVA și fără medie între web și mobil.",
+  "competitors": [
+    {
+      "name": "CODELAB",
+      "domain": "codelab.ro",
+      "urls": ["https://www.codelab.ro/services/aplicatii-web"],
+      "prices": [
+        {"segment": "web_start", "package": "MVP", "amountEUR": 1999, "type": "punct de pornire"},
+        {"segment": "web_business", "package": "Product", "amountEUR": 5500, "type": "punct de pornire"},
+        {"segment": "web_complex", "package": "Scale", "amountEUR": 12000, "type": "de la"}
+      ],
+      "features": {
+        "MVP": ["maximum 5 funcții", "autentificare și bază de date", "admin simplu", "hosting și deploy", "remedieri 2 săptămâni"],
+        "Product": ["maximum 15 funcții", "permisiuni", "Stripe", "realtime și abonamente", "analytics", "suport 30 zile"],
+        "Scale": ["funcții nelimitate", "organizații multiple", "billing avansat", "monitorizare SLA", "staging și CI/CD", "suport 90 zile"]
+      },
+      "notes": ["TVA neprecizat.", "Termen general 4-10 săptămâni, fără defalcare pe pachet.", "Repository client din prima zi.", "Open a eșuat repetat; datele provin din rezultatul web indexat al paginii comerciale proprii, crawled luna trecută."],
+      "evidence": [{"url": "https://www.codelab.ro/services/aplicatii-web", "excerpt": "MVP €1.999; Product €5.500; Scale de la €12.000", "access": "primary_site_search_index"}],
+      "checkedAt": "2026-10-17"
+    },
+    {
+      "name": "The Web Design Company",
+      "domain": "thewebdesigncompany.ro",
+      "urls": ["https://thewebdesigncompany.ro/aplicatii-web"],
+      "prices": [
+        {"segment": "web_start", "package": "MVP", "amountEUR": 3000, "type": "de la", "timeline": "4-8 săptămâni"},
+        {"segment": "web_business", "package": "Standard", "amountEUR": 5000, "type": "de la", "timeline": "8-16 săptămâni"},
+        {"segment": "web_complex", "package": "Enterprise", "amountEUR": null, "type": "ofertă personalizată"},
+        {"segment": "maintenance", "package": "Standard", "amountEUR": 200, "type": "de la/lună"}
+      ],
+      "features": {
+        "MVP": ["maximum 5 funcționalități", "roluri de bază", "admin", "configurare cloud", "cod predat", "suport 30 zile"],
+        "Standard": ["10-15 funcționalități", "2FA și SSO", "API documentat", "integrări", "rapoarte", "audit", "monitorizare", "suport 90 zile"],
+        "Enterprise": ["multi-tenant", "ERP/CRM", "DevOps", "SLA", "mentenanță 3 luni", "mobil opțional"]
+      },
+      "notes": ["TVA neprecizat.", "Enterprise are neconcordanță internă: cardul menționează mentenanță 3 luni, tabelul suport 12 luni.", "Prețul final depinde de cerințe."],
+      "evidence": [{"url": "https://thewebdesigncompany.ro/aplicatii-web", "excerpt": "MVP: De la 3.000 €; Standard: De la 5.000 €", "access": "opened_primary_site"}],
+      "checkedAt": "2026-10-17"
+    },
+    {
+      "name": "NOERROR",
+      "domain": "noerror.ro",
+      "urls": ["https://www.noerror.ro/pret", "https://www.noerror.ro/servicii/platforme-custom", "https://www.noerror.ro/dezvoltare-aplicatii-web"],
+      "prices": [
+        {"segment": "web_platform_base", "package": "Platformă digitală custom", "amountEUR": 10000, "type": "bază fără module opționale", "vat": "TVA conform legii; facturarea internațională depinde de contract"},
+        {"segment": "maintenance", "package": "catalog general", "minEUR": 150, "maxEUR": 650, "type": "interval lunar, dependent de tipul proiectului"}
+      ],
+      "features": ["conturi și roluri", "zone și fluxuri esențiale", "date și API", "staging și producție", "loguri și backup", "discovery", "UX în Figma", "QA", "deployment controlat"],
+      "notes": ["Suma de 10.000 EUR este baza catalogului, nu preț final sau pachet MVP comparabil direct.", "Modulele, integrările și mobilul se adaugă separat.", "Mentenanța este opțională.", "Durată: luni, în etape.", "Nu există trei praguri publice de complexitate."],
+      "evidence": [
+        {"url": "https://www.noerror.ro/pret", "excerpt": "Platformă digitală custom | 10.000 EUR", "access": "opened_primary_site"},
+        {"url": "https://www.noerror.ro/servicii/platforme-custom", "excerpt": "Autentificare și roluri, model de date, API-uri interne, medii (staging/prod), logging și backup", "access": "opened_primary_site"}
+      ],
+      "checkedAt": "2026-10-17"
+    },
+    {
+      "name": "Docodex",
+      "domain": "docodex.com",
+      "urls": ["https://docodex.com/servicii/aplicatii-web/"],
+      "prices": [
+        {"segment": "web_start", "package": "Web App MVP", "amountEUR": 2990, "type": "de la, orientativ", "vat": "plus TVA"},
+        {"segment": "web_business", "package": "Web App Growth", "amountEUR": 5990, "type": "de la, orientativ", "vat": "plus TVA"},
+        {"segment": "discovery", "package": "mic/extins", "amountEUR": 490, "extendedAmountEUR": 990, "type": "de la", "vat": "plus TVA"}
+      ],
+      "features": {
+        "MVP": ["un flux principal", "1-2 module și roluri", "autentificare", "bază de date", "admin", "email", "responsive", "SSL și backup inițial", "teste", "documentație", "stabilizare 30 zile"],
+        "Growth": ["mai multe module", "permisiuni custom", "spații de lucru simple", "documente", "rapoarte și export", "API", "staging și loguri", "teste automate", "stabilizare 45 zile"]
+      },
+      "notes": ["Proiect mic: aproximativ 30-50 zile lucrătoare.", "Infrastructura, licențele și consumul serviciilor externe sunt separate.", "Funcțiile se stabilesc în specificații.", "Open a eșuat; rezultat indexat propriu complet, crawled acum 2 săptămâni."],
+      "evidence": [{"url": "https://docodex.com/servicii/aplicatii-web/", "excerpt": "Web App MVP: De la 2.990 € + TVA; Web App Growth: De la 5.990 € + TVA", "access": "primary_site_search_index"}],
+      "checkedAt": "2026-10-17"
+    },
+    {
+      "name": "Casîr",
+      "domain": "casir.agency",
+      "urls": ["https://casir.agency/aplicatii-mobile"],
+      "prices": [
+        {"segment": "mobile_start", "package": "Prima versiune MVP", "amountEUR": 3999, "type": "de la, orientativ", "vat": "inclus", "timeline": "3-4 luni"},
+        {"segment": "mobile_integrated", "package": "Legată de sistem existent", "amountEUR": 5999, "type": "de la, orientativ", "vat": "inclus", "timeline": "3-5 luni"},
+        {"segment": "discovery", "package": "Atelier", "amountEUR": 299, "type": "fix, dedus dacă se continuă", "vat": "inclus", "timeline": "1-2 săptămâni"},
+        {"segment": "maintenance", "amountEUR": 149, "type": "de la/lună", "vat": "inclus"}
+      ],
+      "features": ["Flutter iOS și Android", "prototip UX/UI", "backend Laravel", "admin", "notificări", "plăți după cerințe", "analytics", "publicare în magazine", "cod complet", "garanție erori 12 luni"],
+      "notes": ["Plată 50%/50%; taxele conturilor Apple și Google sunt separate.", "Scope și preț fix după atelier.", "Open a eșuat; rezultat indexat propriu complet, crawled acum 5 zile.", "TVA inclus: nu se amestecă brut cu tarifele nete."],
+      "evidence": [{"url": "https://casir.agency/aplicatii-mobile", "excerpt": "Prețuri orientative, în euro, TVA inclus. Prima versiune (MVP) de la 3.999 €", "access": "primary_site_search_index"}],
+      "checkedAt": "2026-10-17"
+    },
+    {
+      "name": "DevLogic",
+      "domain": "devlogic.ro",
+      "urls": ["https://devlogic.ro/preturi", "https://devlogic.ro/servicii/aplicatii-mobile"],
+      "prices": [
+        {"segment": "web_start", "package": "Aplicații Web & Platforme SaaS", "amountEUR": 3500, "type": "de la"},
+        {"segment": "mobile_start", "package": "Aplicații Mobile", "amountEUR": 4000, "type": "de la"},
+        {"segment": "web_crm_erp", "package": "CRM și ERP", "amountEUR": 4000, "type": "de la"}
+      ],
+      "features": ["web: portaluri B2B, SaaS, API propriu, arhitectură scalabilă", "mobil: Capacitor iOS și Android, cod comun unde se potrivește, publicare în magazine", "acces cameră, notificări, plăți și hardware la nevoie", "cod sursă cedat", "garanție erori și mentenanță opțională"],
+      "notes": ["TVA neprecizat.", "Nu publică pachete pe trei niveluri sau termen ferm.", "Costul exact după analiză tehnică.", "Plată în etape 40%/30%/30%.", "Mobilul exclude scenarii hardware extreme și idei fără flux validat."],
+      "evidence": [
+        {"url": "https://devlogic.ro/preturi", "excerpt": "Aplicații Web & Platforme SaaS ... de la 3500€", "access": "opened_primary_site"},
+        {"url": "https://devlogic.ro/servicii/aplicatii-mobile", "excerpt": "de la 4000€ ... Publicare în App Store & Google Play inclusă", "access": "opened_primary_site"}
+      ],
+      "checkedAt": "2026-10-17"
+    },
+    {
+      "name": "Beyond Development",
+      "domain": "beyond-development.ro",
+      "urls": ["https://www.beyond-development.ro/"],
+      "prices": [
+        {"segment": "web_complex", "package": "Aplicații web complexe", "minEUR": 10000, "maxEUR": 30000, "openUpperBound": true, "type": "interval orientativ în FAQ comercial, ofertă personalizată"}
+      ],
+      "features": ["aplicații custom React/Next.js/Angular/Vue", "backend și baze de date", "deployment", "cod și design transferate după plata finală", "documentație", "NDA", "mentenanță opțională cu erori, securitate și extensii"],
+      "notes": ["TVA neprecizat.", "Aplicațiile complexe sau extensiile: 2-6 luni.", "Nicio ofertă numerică distinctă pentru MVP și business pe homepage.", "Articolele de blog cu estimări generale de piață sunt excluse; intervalul păstrat apare în FAQ-ul comercial propriu.", "Capătul superior are plus și nu este plafon."],
+      "evidence": [{"url": "https://www.beyond-development.ro/", "excerpt": "aplicații web complexe pot ajunge la 10.000-30.000€+", "access": "opened_primary_site"}],
+      "checkedAt": "2026-10-17"
+    }
+  ]
+}

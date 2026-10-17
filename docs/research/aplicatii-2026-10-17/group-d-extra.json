@@ -1,0 +1,22 @@
+{
+  "researchDate": "2026-10-17",
+  "scope": "Competitor suplimentar cu prag comercial propriu de proiect în EUR, verificat pe paginile comerciale.",
+  "competitors": [
+    {
+      "name": "Soluții Web Companii",
+      "domain": "solutiiwebcompanii.ro",
+      "urls": ["https://solutiiwebcompanii.ro/aplicatii-web", "https://solutiiwebcompanii.ro/preturi"],
+      "prices": [
+        {"segment": "web_start", "package": "Aplicație web custom", "amountEUR": 4900, "type": "de la, ofertă proprie", "vat": "fără TVA", "timeline": "de la 6 săptămâni; flux simplu 6-8 săptămâni"},
+        {"segment": "web_business", "package": "Mai multe module, integrări și migrare", "minEUR": 8000, "maxEUR": 20000, "type": "interval uzual propriu, estimare după discovery", "vat": "fără TVA"}
+      ],
+      "features": ["discovery și arhitectură", "estimare pe module", "UX/UI și dezvoltare full-stack", "date și autentificare", "roluri și permisiuni", "raportare de bază", "integrări agreate", "deployment, monitorizare și backup", "documentație și cod", "90 zile corecții"],
+      "notes": ["Pragul acoperă un flux principal bine definit.", "Portal/CRM: 10-14 săptămâni; platformă cu integrări: 4-6 luni; SaaS MVP: 3-5 luni.", "Infrastructura și serviciile externe sunt separate; mentenanța opțională.", "Oferta de lansare expirată la 30.09.2026 exclude explicit aplicațiile web; pragul de 4.900 EUR rămâne cel comercial publicat.", "Estimarea finală se stabilește pe module; nu este tarif fix pentru orice aplicație."],
+      "evidence": [
+        {"url": "https://solutiiwebcompanii.ro/aplicatii-web", "excerpt": "O aplicație web custom pornește la mine de la 4.900 €", "access": "opened_primary_site"},
+        {"url": "https://solutiiwebcompanii.ro/preturi", "excerpt": "de la 4.900€; Preț fără TVA", "access": "opened_primary_site"}
+      ],
+      "checkedAt": "2026-10-17"
+    }
+  ]
+}

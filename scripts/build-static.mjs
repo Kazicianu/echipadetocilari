@@ -36,6 +36,7 @@ import {
 import { faqPage, organization, service, webPage, website } from './lib/schema.mjs';
 import { extractGoogleAdsFaqs, extractHomeFaqs } from './lib/faq.mjs';
 import { storeOfferCatalog } from './lib/store-seo.mjs';
+import { appsOfferCatalog } from './lib/apps-seo.mjs';
 import { junkRedirects, vercelRedirects } from './lib/junk-redirects.mjs';
 import { validateBuild } from './lib/validate.mjs';
 import { enhanceContactForms } from './lib/contact-forms.mjs';
@@ -122,8 +123,7 @@ function schemasFor(urlPath, meta, html) {
 
   if (urlPath === '/') list.push(faqPage(extractHomeFaqs(html)));
   if (urlPath === '/creare-magazin-online/') list.push(faqPage(extractHomeFaqs(html)));
-  // The apps landing still contains owner-supplied price placeholders. Its
-  // Service schema is valid without offers; add FAQPage when the copy is final.
+  if (urlPath === '/dezvoltare-aplicatii/') list.push(faqPage(extractHomeFaqs(html)));
   if (urlPath === '/agentie-google-ads/') list.push(faqPage(extractGoogleAdsFaqs(html)));
   if (route?.service) {
     const serviceSchema = service({
@@ -135,6 +135,11 @@ function schemasFor(urlPath, meta, html) {
     });
     if (urlPath === '/creare-magazin-online/') {
       serviceSchema.hasOfferCatalog = storeOfferCatalog({
+        html, site: SITE, url: urlPath, serviceName: route.service.ro,
+      });
+    }
+    if (urlPath === '/dezvoltare-aplicatii/') {
+      serviceSchema.hasOfferCatalog = appsOfferCatalog({
         html, site: SITE, url: urlPath, serviceName: route.service.ro,
       });
     }

@@ -1,0 +1,44 @@
+{
+  "checkedAt": "2026-10-17",
+  "competitors": [
+    {
+      "name": "Sergiu Marcu",
+      "domain": "sergiumarcu.ro",
+      "urls": ["https://sergiumarcu.ro/servicii/aplicatii-web"],
+      "prices": [
+        {"package": "Aplicație web simplă", "amountEUR": 1500, "type": "de la"}
+      ],
+      "features": ["analiză și prototip", "backend și baze de date", "autentificare și admin", "teste", "lansare, monitorizare și documentație", "cod predat", "30 zile corecții"],
+      "notes": ["TVA neprecizat. Furnizor individual, PFA.", "3-4 săptămâni pentru simplu, ofertă după cerințe.", "SaaS și marketplace 5.000-10.000 EUR sau mai mult în FAQ: interval deschis, nu pachet business fix."],
+      "evidence": [{"url": "https://sergiumarcu.ro/servicii/aplicatii-web", "excerpt": "O aplicație web simplă cu autentificare și operațiuni CRUD pornește de la 1.500 EUR.", "access": "opened_primary_site"}],
+      "checkedAt": "2026-10-17"
+    },
+    {
+      "name": "Faintech Solutions",
+      "domain": "faintechsolutions.com",
+      "urls": ["https://faintechsolutions.com/preturi/"],
+      "prices": [
+        {"package": "MVP Startup", "minEUR": 5000, "maxEUR": 15000, "type": "interval orientativ", "timeline": "8-10 săptămâni"},
+        {"package": "Aplicație Web Standard", "minEUR": 10000, "maxEUR": 30000, "type": "interval orientativ", "timeline": "3-5 luni"},
+        {"package": "Enterprise", "amountEUR": 50000, "type": "de la", "timeline": "5-12 luni"}
+      ],
+      "features": ["MVP: o platformă web sau mobil, autentificare, 2-3 fluxuri, plăți, email, admin, lansare, documentație, 30 zile corecții", "Standard: 5+ fluxuri, roluri, abonamente, 1-3 API, rapoarte, teste, monitorizare, 60 zile suport", "Enterprise: web și mobil, multi-tenant, AI, integrări complexe, audit și SLA"],
+      "notes": ["TVA neprecizat în oferta de aplicații verificată.", "Discovery 500-2.000 EUR deductibil. Infrastructura și licențele sunt separate.", "Pragul de 5.000 EUR apare și explicit în tabelul comercial. Mentenanța aplicațiilor de la 500 EUR/lună este separată.", "Enterprise spune mentenanță inclusă fără durată; nu presupune o perioadă nelimitată."],
+      "evidence": [{"url": "https://faintechsolutions.com/preturi/", "excerpt": "MVP / aplicație web: de la €5.000", "access": "opened_primary_site"}],
+      "checkedAt": "2026-10-17"
+    },
+    {
+      "name": "Sevak Design",
+      "domain": "sevakdesign.ro",
+      "urls": ["https://sevakdesign.ro/servicii/solutii-custom/"],
+      "prices": [
+        {"package": "MVP", "amountEUR": 900, "type": "de la"},
+        {"package": "Soluție Custom", "amountEUR": null, "type": "ofertă personalizată"}
+      ],
+      "features": ["MVP: discovery scurt, funcții esențiale, logică proprie, UI simplu, lansare și feedback", "Custom: arhitectură, CRM/ERP/API, roluri, scalare și mentenanță evolutivă"],
+      "notes": ["TVA, numărul ecranelor, backend-ul și durata corecțiilor nu sunt precizate pentru pragul minim.", "Prag pentru MVP foarte simplu sau automatizare; nu este echivalentul unei aplicații iOS și Android complete.", "Prețul soluției complete se oferă individual."],
+      "evidence": [{"url": "https://sevakdesign.ro/servicii/solutii-custom/", "excerpt": "MVP ... Prima versiune functionala ... de la 900 EUR", "access": "opened_primary_site"}],
+      "checkedAt": "2026-10-17"
+    }
+  ]
+}

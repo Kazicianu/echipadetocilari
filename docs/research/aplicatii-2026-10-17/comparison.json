@@ -1,0 +1,886 @@
+{
+  "checkedAt": "2026-10-17",
+  "question": "Prețuri și servicii pentru pachetele /dezvoltare-aplicatii/",
+  "rows": [
+    {
+      "name": "CODELAB",
+      "domain": "codelab.ro",
+      "entryEUR": 1999,
+      "category": "web",
+      "offer": "MVP",
+      "vat": "neprecizat",
+      "priceKind": "punct de pornire",
+      "url": "https://www.codelab.ro/services/aplicatii-web",
+      "evidenceFile": "group-a.json",
+      "features": {
+        "MVP": [
+          "maximum 5 funcții",
+          "autentificare și bază de date",
+          "admin simplu",
+          "hosting și deploy",
+          "remedieri 2 săptămâni"
+        ],
+        "Product": [
+          "maximum 15 funcții",
+          "permisiuni",
+          "Stripe",
+          "realtime și abonamente",
+          "analytics",
+          "suport 30 zile"
+        ],
+        "Scale": [
+          "funcții nelimitate",
+          "organizații multiple",
+          "billing avansat",
+          "monitorizare SLA",
+          "staging și CI/CD",
+          "suport 90 zile"
+        ]
+      },
+      "notes": [
+        "TVA neprecizat.",
+        "Termen general 4-10 săptămâni, fără defalcare pe pachet.",
+        "Repository client din prima zi.",
+        "Open a eșuat repetat; datele provin din rezultatul web indexat al paginii comerciale proprii, crawled luna trecută."
+      ]
+    },
+    {
+      "name": "The Web Design Company",
+      "domain": "thewebdesigncompany.ro",
+      "entryEUR": 3000,
+      "category": "web",
+      "offer": "MVP",
+      "vat": "neprecizat",
+      "priceKind": "de la",
+      "url": "https://thewebdesigncompany.ro/aplicatii-web",
+      "evidenceFile": "group-a.json",
+      "features": {
+        "MVP": [
+          "maximum 5 funcționalități",
+          "roluri de bază",
+          "admin",
+          "configurare cloud",
+          "cod predat",
+          "suport 30 zile"
+        ],
+        "Standard": [
+          "10-15 funcționalități",
+          "2FA și SSO",
+          "API documentat",
+          "integrări",
+          "rapoarte",
+          "audit",
+          "monitorizare",
+          "suport 90 zile"
+        ],
+        "Enterprise": [
+          "multi-tenant",
+          "ERP/CRM",
+          "DevOps",
+          "SLA",
+          "mentenanță 3 luni",
+          "mobil opțional"
+        ]
+      },
+      "notes": [
+        "TVA neprecizat.",
+        "Enterprise are neconcordanță internă: cardul menționează mentenanță 3 luni, tabelul suport 12 luni.",
+        "Prețul final depinde de cerințe."
+      ]
+    },
+    {
+      "name": "NOERROR",
+      "domain": "noerror.ro",
+      "entryEUR": 10000,
+      "category": "web",
+      "offer": "Bază platformă, module separat",
+      "vat": "conform contractului",
+      "priceKind": "bază de catalog",
+      "url": "https://www.noerror.ro/pret",
+      "evidenceFile": "group-a.json",
+      "features": {
+        "Ofertă generală": [
+          "conturi și roluri",
+          "zone și fluxuri esențiale",
+          "date și API",
+          "staging și producție",
+          "loguri și backup",
+          "discovery",
+          "UX în Figma",
+          "QA",
+          "deployment controlat"
+        ]
+      },
+      "notes": [
+        "Suma de 10.000 EUR este baza catalogului, nu preț final sau pachet MVP comparabil direct.",
+        "Modulele, integrările și mobilul se adaugă separat.",
+        "Mentenanța este opțională.",
+        "Durată: luni, în etape.",
+        "Nu există trei praguri publice de complexitate."
+      ]
+    },
+    {
+      "name": "Docodex",
+      "domain": "docodex.com",
+      "entryEUR": 2990,
+      "category": "web",
+      "offer": "Web App MVP",
+      "vat": "plus TVA",
+      "priceKind": "de la, orientativ",
+      "url": "https://docodex.com/servicii/aplicatii-web/",
+      "evidenceFile": "group-a.json",
+      "features": {
+        "MVP": [
+          "un flux principal",
+          "1-2 module și roluri",
+          "autentificare",
+          "bază de date",
+          "admin",
+          "email",
+          "responsive",
+          "SSL și backup inițial",
+          "teste",
+          "documentație",
+          "stabilizare 30 zile"
+        ],
+        "Growth": [
+          "mai multe module",
+          "permisiuni custom",
+          "spații de lucru simple",
+          "documente",
+          "rapoarte și export",
+          "API",
+          "staging și loguri",
+          "teste automate",
+          "stabilizare 45 zile"
+        ]
+      },
+      "notes": [
+        "Proiect mic: aproximativ 30-50 zile lucrătoare.",
+        "Infrastructura, licențele și consumul serviciilor externe sunt separate.",
+        "Funcțiile se stabilesc în specificații.",
+        "Open a eșuat; rezultat indexat propriu complet, crawled acum 2 săptămâni."
+      ]
+    },
+    {
+      "name": "Casîr",
+      "domain": "casir.agency",
+      "entryEUR": 3999,
+      "category": "mobil",
+      "offer": "Prima versiune MVP",
+      "vat": "inclus",
+      "priceKind": "de la, orientativ",
+      "url": "https://casir.agency/aplicatii-mobile",
+      "evidenceFile": "group-a.json",
+      "features": {
+        "Ofertă generală": [
+          "Flutter iOS și Android",
+          "prototip UX/UI",
+          "backend Laravel",
+          "admin",
+          "notificări",
+          "plăți după cerințe",
+          "analytics",
+          "publicare în magazine",
+          "cod complet",
+          "garanție erori 12 luni"
+        ]
+      },
+      "notes": [
+        "Plată 50%/50%; taxele conturilor Apple și Google sunt separate.",
+        "Scope și preț fix după atelier.",
+        "Open a eșuat; rezultat indexat propriu complet, crawled acum 5 zile.",
+        "TVA inclus: nu se amestecă brut cu tarifele nete."
+      ]
+    },
+    {
+      "name": "DevLogic",
+      "domain": "devlogic.ro",
+      "entryEUR": 3500,
+      "category": "web",
+      "offer": "Aplicații web și SaaS",
+      "vat": "neprecizat",
+      "priceKind": "de la",
+      "url": "https://devlogic.ro/preturi",
+      "evidenceFile": "group-a.json",
+      "features": {
+        "Ofertă generală": [
+          "web: portaluri B2B, SaaS, API propriu, arhitectură scalabilă",
+          "mobil: Capacitor iOS și Android, cod comun unde se potrivește, publicare în magazine",
+          "acces cameră, notificări, plăți și hardware la nevoie",
+          "cod sursă cedat",
+          "garanție erori și mentenanță opțională"
+        ]
+      },
+      "notes": [
+        "TVA neprecizat.",
+        "Nu publică pachete pe trei niveluri sau termen ferm.",
+        "Costul exact după analiză tehnică.",
+        "Plată în etape 40%/30%/30%.",
+        "Mobilul exclude scenarii hardware extreme și idei fără flux validat."
+      ]
+    },
+    {
+      "name": "Do Marketing & Apps",
+      "domain": "domarketing.ro",
+      "entryEUR": 4800,
+      "category": "web",
+      "offer": "MVP web/SaaS",
+      "vat": "nu aplică TVA, conform furnizorului",
+      "priceKind": "de la",
+      "url": "https://www.domarketing.ro/servicii/apps-ai-platforms",
+      "evidenceFile": "group-b.json",
+      "features": {
+        "Ofertă generală": [
+          "MVP: autentificare, roluri, dashboard, bază de date, API, admin",
+          "plăți/abonamente, AI util, monitorizare, deploy",
+          "cod și documentație",
+          "SaaS: multi-tenant, permisiuni, rapoarte, integrări, securitate, teste încărcare"
+        ]
+      },
+      "notes": [
+        "Fără TVA; declară societate neplătitoare.",
+        "Preț ferm după Discovery. Infrastructură MVP: 20-60 EUR/lună separat. Mobil opțional. Design/prototip: 1-2 săptămâni."
+      ]
+    },
+    {
+      "name": "dotKoda",
+      "domain": "dotkoda.com",
+      "entryEUR": 8000,
+      "category": "web sau mobil",
+      "offer": "Aplicație custom",
+      "vat": "fără TVA",
+      "priceKind": "de la, orientativ",
+      "url": "https://dotkoda.com/preturi",
+      "evidenceFile": "group-b.json",
+      "features": {
+        "Ofertă generală": [
+          "analiză și specificație",
+          "roluri și permisiuni",
+          "integrări și AI util",
+          "migrare Excel/sistem existent",
+          "infrastructură, monitorizare, backup",
+          "publicare magazine, când este cazul",
+          "cod, conturi și instruire"
+        ]
+      },
+      "notes": [
+        "Fără TVA. Preț fix pe etapă după audit pentru complexitate mare.",
+        "Reperul de 8.000 EUR acoperă aplicație web, mobilă sau ambele, în funcție de scop; nu garantează toate variantele la pragul minim.",
+        "Pagina web adaugă rapoarte, exporturi și istoric."
+      ]
+    },
+    {
+      "name": "AIO Software",
+      "domain": "aiosoftware.ro",
+      "entryEUR": 5000,
+      "category": "mobil",
+      "offer": "Aplicație simplă",
+      "vat": "neprecizat",
+      "priceKind": "de la, orientativ",
+      "url": "https://aiosoftware.ro/dezvoltare-aplicatii-mobile/",
+      "evidenceFile": "group-b.json",
+      "features": {
+        "Ofertă generală": [
+          "simplu: autentificare, REST, publicare",
+          "mediu: backend, DB, plăți, push, admin",
+          "complex: microservicii, ERP/CRM/API, AI, SLA",
+          "UI/UX, testare, cod și documentație",
+          "MVP: prototip, sprinturi"
+        ]
+      },
+      "notes": [
+        "TVA neprecizat. Mentenanță mobilă 15-20% anual.",
+        "Conflict suport: card simplu 6 luni, mesaj general 12 luni.",
+        "Conflict web: card 3.000 EUR, FAQ 3.500 EUR. FAQ web mediu: 9.000-25.000 EUR.",
+        "Web: cloud/deploy și REST/GraphQL; mentenanță de la 100 EUR/lună."
+      ]
+    },
+    {
+      "name": "Webtopocket",
+      "domain": "webtopocket.com",
+      "entryEUR": 4900,
+      "category": "mobil",
+      "offer": "Prima versiune",
+      "vat": "fără TVA",
+      "priceKind": "de la",
+      "url": "https://webtopocket.com/aplicatii-mobile/",
+      "evidenceFile": "group-b.json",
+      "features": {
+        "Ofertă generală": [
+          "analiză, etape contractate",
+          "iOS/Android cross-platform",
+          "testare pe telefoane",
+          "listare și publicare în magazine",
+          "resubmit inclus",
+          "repository și conturi proprii, documentație"
+        ]
+      },
+      "notes": [
+        "Fără TVA; facturare RON la BNR din ziua facturii.",
+        "Prima versiune: 2-3 luni plus review. Taxele Apple/Google sunt separate. AI se estimează separat.",
+        "Mentenanța serverului include backup, monitorizare, 1h modificări, raport. Actualizările mobile se cotează separat pe versiune.",
+        "Declară că încă nu are aplicație mobilă publicată sub numele Webtopocket."
+      ]
+    },
+    {
+      "name": "Design Creator Lab (DCL)",
+      "domain": "designcreatorlab.ro",
+      "entryEUR": 5000,
+      "category": "web",
+      "offer": "MVP custom",
+      "vat": "formulare: finale, fără TVA",
+      "priceKind": "de la",
+      "url": "https://designcreatorlab.ro/aplicatii-web",
+      "evidenceFile": "group-c.json",
+      "features": {
+        "Ofertă generală": [
+          "Predare cod sursă, documentație, server și bază de date",
+          "Hosting și mentenanță incluse, monitorizare 24/7"
+        ],
+        "Aplicație web custom MVP": [
+          "3-4 module critice",
+          "Roluri și permisiuni",
+          "Dashboard live",
+          "Extindere modulară"
+        ],
+        "Platformă B2B completă": [
+          "Facturare, contracte, time tracking, inventar",
+          "CRM/ERP/contabilitate",
+          "Export Excel/PDF",
+          "API și webhook-uri"
+        ],
+        "SaaS multi-tenant": [
+          "Abonamente și facturare automată",
+          "Izolare tenant",
+          "Integrări API",
+          "Hosting monitorizat"
+        ]
+      },
+      "notes": [
+        "TVA: formularea exactă este prețuri finale, fără TVA. Nu presupune scutirea sau adăugarea TVA fără clarificare.",
+        "Cotație fixă după brief gratuit. Durata de dezvoltare și durata hostingului inclus nu sunt publicate.",
+        "Pagina are inconsecvență: brief 30 minute în introducere, o oră la prețuri."
+      ]
+    },
+    {
+      "name": "Matrix IT",
+      "domain": "matrixit.ro",
+      "entryEUR": 2999,
+      "category": "mobil",
+      "offer": "Mobile MVP, iOS sau Android",
+      "vat": "neprecizat",
+      "priceKind": "pachet public",
+      "url": "https://matrixit.ro/packages",
+      "evidenceFile": "group-c.json",
+      "features": {
+        "Ofertă generală": [
+          "Dezvoltare nativă sau React Native/Flutter",
+          "Backend mobil",
+          "Mentenanță și actualizări"
+        ],
+        "Mobile MVP": [
+          "iOS sau Android",
+          "Funcții și UI/UX de bază",
+          "Trimitere în app store",
+          "Analytics de bază",
+          "3 luni suport"
+        ],
+        "Mobile Professional": [
+          "iOS și Android",
+          "Funcții avansate",
+          "UI/UX personalizat",
+          "Backend",
+          "Notificări push",
+          "Analytics avansat",
+          "6 luni suport"
+        ]
+      },
+      "notes": [
+        "Plată unică explicită. Pachetele pot fi personalizate.",
+        "TVA și termenul de livrare nu sunt precizate pe paginile verificate.",
+        "Numărul ecranelor și al funcțiilor nu este cuantificat."
+      ]
+    },
+    {
+      "name": "PowerCart / digitalART",
+      "domain": "powercart.ro",
+      "entryEUR": 1900,
+      "category": "web",
+      "offer": "Aplicație mică",
+      "vat": "fără TVA",
+      "priceKind": "de la",
+      "url": "https://www.powercart.ro/aplicatii-web/",
+      "evidenceFile": "group-c.json",
+      "features": {
+        "Ofertă generală": [
+          "CRM, stocuri, rezervări, portal",
+          "Acces browser și telefon",
+          "Export date",
+          "Integrări API",
+          "Cod și date ale clientului",
+          "Link de test pentru feedback"
+        ],
+        "Aplicație mică": [
+          "1 proces",
+          "2-5 utilizatori"
+        ],
+        "Aplicație medie": [
+          "Mai multe procese",
+          "Roluri",
+          "Rapoarte"
+        ]
+      },
+      "notes": [
+        "Fără TVA. Terții, hostingul și licențele sunt excluse. Retainer opțional.",
+        "Termen tipic 3-8 săptămâni; ofertă fixă după analiză.",
+        "Plată 50/50 sau 3 tranșe pentru proiecte peste 5.000 EUR."
+      ]
+    },
+    {
+      "name": "Avyron",
+      "domain": "avyron.ro",
+      "entryEUR": 1500,
+      "category": "web sau mobil",
+      "offer": "Un flux, valoarea EUR din FAQ",
+      "vat": "neprecizat",
+      "priceKind": "de la, în FAQ",
+      "url": "https://avyron.ro/servicii/aplicatii-si-platforme",
+      "evidenceFile": "group-c.json",
+      "features": {
+        "Ofertă generală": [
+          "Discovery, wireframe și Figma",
+          "UX/UI custom",
+          "React Native sau PWA",
+          "Backend, autentificare, roluri",
+          "Publicare magazine",
+          "Push, analytics, testare",
+          "Cod sursă și infrastructură predate"
+        ],
+        "Prima versiune funcțională": [
+          "Un flux principal definit"
+        ],
+        "Plus": [
+          "5 ore corecturi",
+          "Backup zilnic",
+          "Monitorizare și securitate"
+        ],
+        "Pro": [
+          "15 ore dezvoltare"
+        ],
+        "Pro Activ": [
+          "30 ore dezvoltare",
+          "Intervenții urgente 24/7"
+        ]
+      },
+      "notes": [
+        "Cardul principal spune 7.900 RON; FAQ public spune 1.500 EUR. Sunt două prezentări ale aceleiași oferte, nu două proiecte de numărat.",
+        "7-30 zile. Suport conform ofertei. TVA neprecizat. Roluri multiple, plăți, integrări și backend complex se estimează separat."
+      ]
+    },
+    {
+      "name": "WebForge Innovations",
+      "domain": "webforge.org.ro",
+      "entryEUR": 5000,
+      "category": "web",
+      "offer": "Web custom, interval 5.000-15.000",
+      "vat": "neprecizat",
+      "priceKind": "limita inferioară a intervalului",
+      "url": "https://webforge.org.ro/pricing",
+      "evidenceFile": "group-c.json",
+      "features": {
+        "Ofertă generală": [
+          "Cod și documentație predate",
+          "CI/CD",
+          "Hosting UE",
+          "Discovery, sprinturi, QA și lansare"
+        ],
+        "Business, aplicație web custom": [
+          "Admin",
+          "API",
+          "Design custom",
+          "Performanță",
+          "60 zile suport"
+        ],
+        "Enterprise SaaS / Platformă": [
+          "Arhitectură scalabilă",
+          "AI",
+          "Multi-tenant",
+          "API public",
+          "90 zile suport"
+        ],
+        "MVP SaaS, pagină dedicată": [
+          "Autentificare și organizații",
+          "Plăți recurente",
+          "Un flux complet",
+          "Panou admin"
+        ]
+      },
+      "notes": [
+        "TVA neprecizat. Ofertă finală după Discovery.",
+        "2-4 luni pentru web/MVP SaaS. Sunt oferte diferite pe grila generală și pagina dedicată, nu le contopi.",
+        "Operarea include hosting, backup, monitorizare și securitate; crește cu volumul."
+      ]
+    },
+    {
+      "name": "ZetaTec",
+      "domain": "zetatec.ro",
+      "entryEUR": 2499,
+      "category": "web",
+      "offer": "Aplicații web/SaaS",
+      "vat": "neprecizat",
+      "priceKind": "de la",
+      "url": "https://zetatec.ro/servicii/",
+      "evidenceFile": "group-c.json",
+      "features": {
+        "Ofertă generală": [
+          "Evaluare gratuită, ofertă personalizată"
+        ],
+        "Aplicații Web / SaaS": [
+          "Arhitectură custom",
+          "Integrări API",
+          "Dashboard admin",
+          "Scalabilitate"
+        ],
+        "Mentenanță și suport, serviciu separat": [
+          "Update-uri securitate",
+          "Backup zilnic",
+          "Monitorizare 24/7",
+          "Suport prioritar"
+        ]
+      },
+      "notes": [
+        "Preț în funcție de proiect. TVA, termen, ecrane, roluri și suportul inclus în proiect nu sunt precizate.",
+        "Nu atribui automat mentenanța generală sau hostingul proiectului SaaS fără ofertă."
+      ]
+    },
+    {
+      "name": "Sergiu Marcu",
+      "domain": "sergiumarcu.ro",
+      "entryEUR": 1500,
+      "category": "web",
+      "offer": "Aplicație simplă, CRUD",
+      "vat": "neprecizat",
+      "priceKind": "de la",
+      "url": "https://sergiumarcu.ro/servicii/aplicatii-web",
+      "evidenceFile": "group-root.json",
+      "features": {
+        "Ofertă generală": [
+          "analiză și prototip",
+          "backend și baze de date",
+          "autentificare și admin",
+          "teste",
+          "lansare, monitorizare și documentație",
+          "cod predat",
+          "30 zile corecții"
+        ]
+      },
+      "notes": [
+        "TVA neprecizat. Furnizor individual, PFA.",
+        "3-4 săptămâni pentru simplu, ofertă după cerințe.",
+        "SaaS și marketplace 5.000-10.000 EUR sau mai mult în FAQ: interval deschis, nu pachet business fix."
+      ]
+    },
+    {
+      "name": "Faintech Solutions",
+      "domain": "faintechsolutions.com",
+      "entryEUR": 5000,
+      "category": "web sau mobil",
+      "offer": "MVP, interval 5.000-15.000",
+      "vat": "neprecizat",
+      "priceKind": "prag explicit și limită inferioară",
+      "url": "https://faintechsolutions.com/preturi/",
+      "evidenceFile": "group-root.json",
+      "features": {
+        "Ofertă generală": [
+          "MVP: o platformă web sau mobil, autentificare, 2-3 fluxuri, plăți, email, admin, lansare, documentație, 30 zile corecții",
+          "Standard: 5+ fluxuri, roluri, abonamente, 1-3 API, rapoarte, teste, monitorizare, 60 zile suport",
+          "Enterprise: web și mobil, multi-tenant, AI, integrări complexe, audit și SLA"
+        ]
+      },
+      "notes": [
+        "TVA neprecizat în oferta de aplicații verificată.",
+        "Discovery 500-2.000 EUR deductibil. Infrastructura și licențele sunt separate.",
+        "Pragul de 5.000 EUR apare și explicit în tabelul comercial. Mentenanța aplicațiilor de la 500 EUR/lună este separată.",
+        "Enterprise spune mentenanță inclusă fără durată; nu presupune o perioadă nelimitată."
+      ]
+    },
+    {
+      "name": "Sevak Design",
+      "domain": "sevakdesign.ro",
+      "entryEUR": 900,
+      "category": "web",
+      "offer": "MVP sau automatizare simplă",
+      "vat": "neprecizat",
+      "priceKind": "de la",
+      "url": "https://sevakdesign.ro/servicii/solutii-custom/",
+      "evidenceFile": "group-root.json",
+      "features": {
+        "Ofertă generală": [
+          "MVP: discovery scurt, funcții esențiale, logică proprie, UI simplu, lansare și feedback",
+          "Custom: arhitectură, CRM/ERP/API, roluri, scalare și mentenanță evolutivă"
+        ]
+      },
+      "notes": [
+        "TVA, numărul ecranelor, backend-ul și durata corecțiilor nu sunt precizate pentru pragul minim.",
+        "Prag pentru MVP foarte simplu sau automatizare; nu este echivalentul unei aplicații iOS și Android complete.",
+        "Prețul soluției complete se oferă individual."
+      ]
+    },
+    {
+      "name": "Soluții Web Companii",
+      "domain": "solutiiwebcompanii.ro",
+      "entryEUR": 4900,
+      "category": "web",
+      "offer": "Aplicație, un flux principal",
+      "vat": "fără TVA",
+      "priceKind": "de la",
+      "url": "https://solutiiwebcompanii.ro/aplicatii-web",
+      "evidenceFile": "group-d-extra.json",
+      "features": {
+        "Ofertă generală": [
+          "discovery și arhitectură",
+          "estimare pe module",
+          "UX/UI și dezvoltare full-stack",
+          "date și autentificare",
+          "roluri și permisiuni",
+          "raportare de bază",
+          "integrări agreate",
+          "deployment, monitorizare și backup",
+          "documentație și cod",
+          "90 zile corecții"
+        ]
+      },
+      "notes": [
+        "Pragul acoperă un flux principal bine definit.",
+        "Portal/CRM: 10-14 săptămâni; platformă cu integrări: 4-6 luni; SaaS MVP: 3-5 luni.",
+        "Infrastructura și serviciile externe sunt separate; mentenanța opțională.",
+        "Oferta de lansare expirată la 30.09.2026 exclude explicit aplicațiile web; pragul de 4.900 EUR rămâne cel comercial publicat.",
+        "Estimarea finală se stabilește pe module; nu este tarif fix pentru orice aplicație."
+      ]
+    }
+  ],
+  "cohorts": {
+    "publicEntry20": {
+      "n": 20,
+      "sumEUR": 79386,
+      "meanEUR": 3969.3,
+      "medianEUR": 3749.5,
+      "minEUR": 900,
+      "maxEUR": 10000
+    },
+    "webOnly13": {
+      "n": 13,
+      "sumEUR": 47988,
+      "meanEUR": 3691.3846153846152,
+      "medianEUR": 3000,
+      "minEUR": 900,
+      "maxEUR": 10000
+    },
+    "mobileOnly4": {
+      "n": 4,
+      "sumEUR": 16898,
+      "meanEUR": 4224.5,
+      "medianEUR": 4449.5,
+      "minEUR": 2999,
+      "maxEUR": 5000
+    },
+    "flexiblePlatform3": {
+      "n": 3,
+      "sumEUR": 14500,
+      "meanEUR": 4833.333333333333,
+      "medianEUR": 5000,
+      "minEUR": 1500,
+      "maxEUR": 8000
+    },
+    "webWithoutPlatformBase12": {
+      "n": 12,
+      "sumEUR": 37988,
+      "meanEUR": 3165.6666666666665,
+      "medianEUR": 2995,
+      "minEUR": 900,
+      "maxEUR": 5000
+    },
+    "mobileEntry5WithDevLogic": {
+      "n": 5,
+      "sumEUR": 20898,
+      "meanEUR": 4179.6,
+      "medianEUR": 4000,
+      "minEUR": 2999,
+      "maxEUR": 5000
+    },
+    "webSecondTier5": {
+      "n": 5,
+      "sumEUR": 29390,
+      "meanEUR": 5878,
+      "medianEUR": 5500,
+      "minEUR": 2900,
+      "maxEUR": 10000
+    },
+    "mobileSecondTier3": {
+      "n": 3,
+      "sumEUR": 28998,
+      "meanEUR": 9666,
+      "medianEUR": 7999,
+      "minEUR": 5999,
+      "maxEUR": 15000
+    },
+    "advancedExplicit4": {
+      "n": 4,
+      "sumEUR": 82000,
+      "meanEUR": 20500,
+      "medianEUR": 20000,
+      "minEUR": 12000,
+      "maxEUR": 30000
+    }
+  },
+  "cohortDefinitions": {
+    "webOnly13": "Cele 13 intrări web din eșantion, inclusiv baza NOERROR.",
+    "mobileOnly4": "Cele 4 intrări explicit mobile din eșantionul principal.",
+    "flexiblePlatform3": "dotKoda, Avyron și Faintech, pentru care platforma depinde de ofertă.",
+    "webWithoutPlatformBase12": "Cele 12 intrări web fără baza de platformă NOERROR.",
+    "mobileEntry5WithDevLogic": "Casîr 3999, AIO 5000, Webtopocket 4900, Matrix IT 2999 și pragul mobil separat DevLogic 4000 EUR. Nicio firmă nu apare de două ori în această cohortă.",
+    "webSecondTier5": "CODELAB Product 5500, TWDC Standard 5000, Docodex Growth 5990, PowerCart mediu 2900, Faintech Standard limita inferioară 10000 EUR.",
+    "mobileSecondTier3": "Casîr integrat 5999, Matrix Professional 7999, AIO mediu 15000 EUR. Casîr include TVA.",
+    "advancedExplicit4": "CODELAB Scale 12000, DCL SaaS 25000, WebForge Enterprise 15000, AIO complex 30000 EUR. Serviciile diferă substanțial."
+  },
+  "proposals": [
+    {
+      "name": "Start",
+      "fromEUR": 4900,
+      "audience": "O primă versiune care validează un singur flux.",
+      "screens": 5,
+      "roles": 2,
+      "flows": 1,
+      "integrations": 0,
+      "bugFixDays": 30,
+      "includes": [
+        "O aplicație web responsive sau mobilă cross-platform iOS și Android, stabilită în ofertă.",
+        "Maximum 5 ecrane principale, inventariate înainte de contract.",
+        "Un flux principal, două roluri: utilizator și administrator.",
+        "UX/UI, autentificare, bază de date, backend și panou de administrare simplu.",
+        "Emailuri tranzacționale pentru fluxul inclus; configurare lansare și monitorizare erori.",
+        "Testarea fluxului, predare cod, documentație și instruire."
+      ],
+      "limits": [
+        "O singură interfață principală pentru utilizator, plus administrare simplă. Nu include simultan o aplicație web distinctă și una mobilă.",
+        "Fără plăți, abonamente, API de business extern, offline sau AI la pragul minim.",
+        "Cele 30 zile acoperă erorile față de specificație; funcțiile noi se estimează separat."
+      ]
+    },
+    {
+      "name": "Business",
+      "fromEUR": 9900,
+      "audience": "Un produs folosit zilnic, cu roluri și integrări.",
+      "screens": 12,
+      "roles": 3,
+      "flows": 3,
+      "integrations": 2,
+      "bugFixDays": 60,
+      "includes": [
+        "Aplicație mobilă iOS și Android cu administrare web extinsă sau aplicație web de business.",
+        "Maximum 12 ecrane principale, 3 fluxuri și 3 roluri.",
+        "Design dedicat, drepturi pe roluri, căutare și filtrare.",
+        "Un modul de plăți standard sau programări, plus notificări push și email aferente.",
+        "Până la 2 integrări standard, cu API documentat și acces furnizat de client; procesatorul de plăți consumă una dintre ele.",
+        "Rapoarte de bază, export CSV, staging, teste automate pentru fluxurile critice, monitorizare și backup configurat.",
+        "Cod, documentație, instruire și 60 zile corecții."
+      ],
+      "limits": [
+        "O integrare de business înseamnă un sistem extern și fluxurile scrise în ofertă, de exemplu plăți, CRM sau facturare. Emailul tranzacțional, push, autentificarea, monitorizarea și serviciile de infrastructură nu consumă acest plafon. Taxele terților sunt separate.",
+        "Nu include abonamente recurente complexe, marketplace, ERP fără API sau sincronizare offline.",
+        "Canalele și furnizorii de notificări se aleg înainte de ofertare."
+      ]
+    },
+    {
+      "name": "Avansat",
+      "fromEUR": 19900,
+      "audience": "Portaluri, SaaS și platforme dezvoltate pe etape.",
+      "screens": 20,
+      "roles": 5,
+      "flows": 5,
+      "integrations": 3,
+      "bugFixDays": 90,
+      "includes": [
+        "Tot ce include Business, cu limitele totale și opțiunile extinse de mai jos.",
+        "Până la 20 ecrane principale, 5 fluxuri și 5 roluri, confirmate după analiza cerințelor.",
+        "Portal clienți, platformă SaaS sau aplicație web cu mobil, în configurația agreată.",
+        "Un modul avansat: organizații multiple, abonamente recurente sau automatizare AI delimitată.",
+        "Până la 3 integrări de business standard în total, incluzând cele din Business și API-ul AI dacă este ales.",
+        "Istoric operațiuni, rapoarte și exporturi, mediu de test, lansare pe etape.",
+        "Teste pe fluxuri, verificări de securitate și încărcare potrivite scopului, documentație și instruire.",
+        "90 zile corecții ale erorilor din livrarea agreată."
+      ],
+      "limits": [
+        "Limitele Avansat înlocuiesc plafoanele Business; nu se adună. Avansat include modulul Business de plăți standard sau programări, plus un singur modul avansat ales.",
+        "Varianta AI include un singur flux, o sursă de date agreată și un furnizor API, care consumă una dintre cele 3 integrări; consumul se achită separat.",
+        "Marketplace complet, reconciliere plăți pentru vânzători, offline complex, ERP complex și migrări ample primesc estimare distinctă.",
+        "SLA și intervențiile permanente sunt abonamente separate. Nu se promit funcții nelimitate."
+      ]
+    }
+  ],
+  "caveats": [
+    "Media de 20 descrie valorile publice de intrare afișate, nu facturi, cotații pentru același brief sau costul mediu al proiectelor din România.",
+    "Eșantionul este selectat intenționat dintre furnizori care afișează prețuri; include agenții, studiouri și furnizori individuali. Nu este topul concurenților după trafic sau cotă de piață.",
+    "Sunt numărate 20 firme distincte, cu o singură valoare EUR per firmă în media principală. Nu s-au făcut conversii valutare, medii de intervale ori conversii de TVA.",
+    "TVA nu este uniform: Casîr include TVA, unii publică sume fără TVA, alții nu precizează. Media nominală nu poate fi prezentată drept medie netă sau brută omogenă.",
+    "NOERROR este bază de platformă fără module, Sevak este MVP sau automatizare minimă, Matrix MVP este pentru o singură platformă. Scope-ul lor diferă de aplicațiile iOS și Android cu backend.",
+    "Faintech și WebForge contribuie cu limita inferioară, nu cu mijlocul intervalului. Avyron contribuie cu valoarea EUR din FAQ; cardul principal afișează 7.900 RON.",
+    "Pentru CODELAB, Docodex și Casîr deschiderea directă prin web a eșuat. S-au citit rezultate indexate ale paginilor proprii, datate anterior verificării; prețurile necesită reconfirmare înaintea unei decizii contractuale.",
+    "Reperele pe trepte au eșantioane diferite și scope diferit. Nu există 20 prețuri comparabile pentru fiecare dintre Start, Business și Avansat.",
+    "Pachetele Echipa de Tocilari sunt propuneri comerciale, cu limite recomandate de noi. Nu sunt o ofertă existentă, un calcul al costurilor echipei sau o garanție de marjă. Prețurile propuse sunt fără TVA; tratamentul efectiv se precizează în ofertă."
+  ],
+  "excluded": [
+    {
+      "name": "Beyond Development",
+      "domain": "beyond-development.ro",
+      "urls": [
+        "https://www.beyond-development.ro/"
+      ],
+      "notes": [
+        "TVA neprecizat.",
+        "Aplicațiile complexe sau extensiile: 2-6 luni.",
+        "Nicio ofertă numerică distinctă pentru MVP și business pe homepage.",
+        "Articolele de blog cu estimări generale de piață sunt excluse; intervalul păstrat apare în FAQ-ul comercial propriu.",
+        "Capătul superior are plus și nu este plafon."
+      ]
+    },
+    {
+      "name": "MAST Studio",
+      "domain": "maststudio.ro",
+      "urls": [
+        "https://maststudio.ro/servicii/aplicatii-web"
+      ],
+      "notes": [
+        "Fără preț numeric comercial. Ofertă fixă în 24 ore; termen în ofertă.",
+        "Domeniu, hosting, servicii terțe și mentenanță după garanție se achită separat.",
+        "TVA neprecizat.",
+        "Conținut primar disponibil în rezultatul indexat; deschiderea directă a eșuat repetat (cache miss). Articolul cu reper de piață 1.500 EUR este exclus."
+      ]
+    },
+    {
+      "name": "tiny.studio",
+      "domain": "tinystudio.ro",
+      "urls": [
+        "https://tinystudio.ro/servicii/mobile",
+        "https://tinystudio.ro/preturi"
+      ],
+      "notes": [
+        "Conflict comercial 9.000 RON pe pagina serviciului versus 7.000 RON în catalogul general.",
+        "Catalogul general: fără TVA, plătitor 21%. 50% avans, 50% livrare.",
+        "Conturile Apple/Google separate. Mentenanță cu server: ofertă. Furnizor solo; comparația cu agenții necesită prudență."
+      ]
+    },
+    {
+      "name": "HappyWeb",
+      "domain": "happyweb.ro",
+      "urls": [
+        "https://happyweb.ro/servicii-dezvoltare-web/servicii-dezvoltare-web-aplicatie-custom"
+      ],
+      "notes": [
+        "Niciun preț numeric, termen sau TVA pe pagina comercială verificată.",
+        "Articolul general despre costuri descrie doar ordine de mărime și nu este ofertă proprie; exclus din medie."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "checkedAt": "2026-10-17",
+  "method": "Prețuri publice ale furnizorilor pe site-uri oficiale, verificate cu web. Nu sunt cotații primite. Un preț de pornire per firmă poate intra într-o medie a pragurilor publice, fără a reprezenta costul mediu al proiectelor.",
+  "competitors": [
+    {
+      "name": "Design Creator Lab (DCL)",
+      "domain": "designcreatorlab.ro",
+      "urls": ["https://designcreatorlab.ro/aplicatii-web"],
+      "prices": [
+        {"package": "Aplicație web custom MVP", "amount": 5000, "currency": "EUR", "type": "from", "billing": "project", "features": ["3-4 module critice", "Roluri și permisiuni", "Dashboard live", "Extindere modulară"]},
+        {"package": "Platformă B2B completă", "min": 15000, "max": 40000, "currency": "EUR", "type": "range", "billing": "project", "features": ["Facturare, contracte, time tracking, inventar", "CRM/ERP/contabilitate", "Export Excel/PDF", "API și webhook-uri"]},
+        {"package": "SaaS multi-tenant", "amount": 25000, "currency": "EUR", "type": "from", "billing": "project", "features": ["Abonamente și facturare automată", "Izolare tenant", "Integrări API", "Hosting monitorizat"]}
+      ],
+      "features": ["Predare cod sursă, documentație, server și bază de date", "Hosting și mentenanță incluse, monitorizare 24/7"],
+      "notes": ["TVA: formularea exactă este prețuri finale, fără TVA. Nu presupune scutirea sau adăugarea TVA fără clarificare.", "Cotație fixă după brief gratuit. Durata de dezvoltare și durata hostingului inclus nu sunt publicate.", "Pagina are inconsecvență: brief 30 minute în introducere, o oră la prețuri."],
+      "evidence": "MVP: €5.000+. Platformă B2B: €15.000-€40.000. SaaS: €25.000+.",
+      "checkedAt": "2026-10-17"
+    },
+    {
+      "name": "Matrix IT",
+      "domain": "matrixit.ro",
+      "urls": ["https://matrixit.ro/services/aplicatii-mobile", "https://matrixit.ro/packages"],
+      "prices": [
+        {"package": "Mobile MVP", "amount": 2999, "currency": "EUR", "type": "published_package", "billing": "project", "features": ["iOS sau Android", "Funcții și UI/UX de bază", "Trimitere în app store", "Analytics de bază", "3 luni suport"]},
+        {"package": "Mobile Professional", "amount": 7999, "currency": "EUR", "type": "published_package", "billing": "project", "features": ["iOS și Android", "Funcții avansate", "UI/UX personalizat", "Backend", "Notificări push", "Analytics avansat", "6 luni suport"]}
+      ],
+      "features": ["Dezvoltare nativă sau React Native/Flutter", "Backend mobil", "Mentenanță și actualizări"],
+      "notes": ["Plată unică explicită. Pachetele pot fi personalizate.", "TVA și termenul de livrare nu sunt precizate pe paginile verificate.", "Numărul ecranelor și al funcțiilor nu este cuantificat."],
+      "evidence": "Mobile MVP €2,999; Mobile Professional €7,999; o singură dată.",
+      "checkedAt": "2026-10-17"
+    },
+    {
+      "name": "PowerCart / digitalART",
+      "domain": "powercart.ro",
+      "urls": ["https://www.powercart.ro/aplicatii-web/", "https://www.powercart.ro/preturi/"],
+      "prices": [
+        {"package": "Aplicație mică", "amount": 1900, "currency": "EUR", "type": "from", "billing": "project", "features": ["1 proces", "2-5 utilizatori"]},
+        {"package": "Aplicație medie", "amount": 2900, "currency": "EUR", "type": "from", "billing": "project", "features": ["Mai multe procese", "Roluri", "Rapoarte"]},
+        {"package": "Aplicație mare", "amount": null, "currency": "EUR", "type": "quote_after_analysis", "billing": "project"},
+        {"package": "Retainer dezvoltare", "amount": 199, "currency": "EUR", "type": "from", "billing": "month"}
+      ],
+      "features": ["CRM, stocuri, rezervări, portal", "Acces browser și telefon", "Export date", "Integrări API", "Cod și date ale clientului", "Link de test pentru feedback"],
+      "notes": ["Fără TVA. Terții, hostingul și licențele sunt excluse. Retainer opțional.", "Termen tipic 3-8 săptămâni; ofertă fixă după analiză.", "Plată 50/50 sau 3 tranșe pentru proiecte peste 5.000 EUR."],
+      "evidence": "Aplicație mică: de la 1.900 €. Aplicație medie: de la 2.900 €.",
+      "checkedAt": "2026-10-17"
+    },
+    {
+      "name": "Avyron",
+      "domain": "avyron.ro",
+      "urls": ["https://avyron.ro/servicii/aplicatii-si-platforme"],
+      "prices": [
+        {"package": "Prima versiune funcțională", "amount": 1500, "currency": "EUR", "type": "from_faq", "billing": "project", "features": ["Un flux principal definit"]},
+        {"package": "Investiție afișată în card", "amount": 7900, "currency": "RON", "type": "from", "billing": "project", "sameOfferAs": "Prima versiune funcțională"},
+        {"package": "Plus", "amount": 500, "currency": "RON", "type": "published_package", "billing": "month", "features": ["5 ore corecturi", "Backup zilnic", "Monitorizare și securitate"]},
+        {"package": "Pro", "amount": 1000, "currency": "RON", "type": "published_package", "billing": "month", "features": ["15 ore dezvoltare"]},
+        {"package": "Pro Activ", "amount": 1500, "currency": "RON", "type": "published_package", "billing": "month", "features": ["30 ore dezvoltare", "Intervenții urgente 24/7"]}
+      ],
+      "features": ["Discovery, wireframe și Figma", "UX/UI custom", "React Native sau PWA", "Backend, autentificare, roluri", "Publicare magazine", "Push, analytics, testare", "Cod sursă și infrastructură predate"],
+      "notes": ["Cardul principal spune 7.900 RON; FAQ public spune 1.500 EUR. Sunt două prezentări ale aceleiași oferte, nu două proiecte de numărat.", "7-30 zile. Suport conform ofertei. TVA neprecizat. Roluri multiple, plăți, integrări și backend complex se estimează separat."],
+      "evidence": "De la 1500€ pentru o primă versiune funcțională cu un flux principal bine definit.",
+      "checkedAt": "2026-10-17"
+    },
+    {
+      "name": "WebForge Innovations",
+      "domain": "webforge.org.ro",
+      "urls": ["https://webforge.org.ro/pricing", "https://webforge.org.ro/servicii/dezvoltare-saas", "https://webforge.org.ro/servicii"],
+      "prices": [
+        {"package": "Business, aplicație web custom", "min": 5000, "max": 15000, "currency": "EUR", "type": "indicative_range", "billing": "project", "features": ["Admin", "API", "Design custom", "Performanță", "60 zile suport"]},
+        {"package": "Enterprise SaaS / Platformă", "amount": 15000, "currency": "EUR", "type": "from", "billing": "project", "features": ["Arhitectură scalabilă", "AI", "Multi-tenant", "API public", "90 zile suport"]},
+        {"package": "MVP SaaS, pagină dedicată", "min": 8000, "max": 25000, "currency": "EUR", "type": "indicative_range", "billing": "project", "features": ["Autentificare și organizații", "Plăți recurente", "Un flux complet", "Panou admin"]},
+        {"package": "Platformă matură", "amount": 30000, "currency": "EUR", "type": "from", "billing": "project"},
+        {"package": "Operare lunară", "min": 100, "max": 500, "currency": "EUR", "type": "indicative_range", "billing": "month"}
+      ],
+      "features": ["Cod și documentație predate", "CI/CD", "Hosting UE", "Discovery, sprinturi, QA și lansare"],
+      "notes": ["TVA neprecizat. Ofertă finală după Discovery.", "2-4 luni pentru web/MVP SaaS. Sunt oferte diferite pe grila generală și pagina dedicată, nu le contopi.", "Operarea include hosting, backup, monitorizare și securitate; crește cu volumul."],
+      "evidence": "Aplicație Web Custom 5.000-15.000€. Toate prețurile sunt orientative.",
+      "checkedAt": "2026-10-17"
+    },
+    {
+      "name": "ZetaTec",
+      "domain": "zetatec.ro",
+      "urls": ["https://zetatec.ro/servicii/"],
+      "prices": [
+        {"package": "Aplicații Web / SaaS", "amount": 2499, "currency": "EUR", "type": "from", "billing": "project", "features": ["Arhitectură custom", "Integrări API", "Dashboard admin", "Scalabilitate"]},
+        {"package": "Mentenanță și suport, serviciu separat", "amount": 149, "currency": "EUR", "type": "published_package", "billing": "month", "features": ["Update-uri securitate", "Backup zilnic", "Monitorizare 24/7", "Suport prioritar"]},
+        {"package": "Hosting web, serviciu separat", "amount": 119, "currency": "EUR", "type": "from", "billing": "year"}
+      ],
+      "features": ["Evaluare gratuită, ofertă personalizată"],
+      "notes": ["Preț în funcție de proiect. TVA, termen, ecrane, roluri și suportul inclus în proiect nu sunt precizate.", "Nu atribui automat mentenanța generală sau hostingul proiectului SaaS fără ofertă."],
+      "evidence": "Aplicatii Web / SaaS: de la 2.499 EUR, in functie de proiect.",
+      "checkedAt": "2026-10-17"
+    }
+  ],
+  "backupCandidates": [
+    {"name": "Leo Nicolae", "domain": "leonicolae.ro", "url": "https://leonicolae.ro/preturi", "notes": "Preț public în RON: web MVP de la 9.500, Ops de la 18.000; mobile Lite de la 12.000, Product de la 22.000. Pagina este oficială, dar detaliile serviciilor au dat eroare în web. Nu face parte din cele 6 principale."},
+    {"name": "Graphic Beast", "domain": "graphicbeast.ro", "url": "https://www.graphicbeast.ro/pricing.html", "notes": "Deschiderea paginii oficiale arată numai preț personalizat pentru aplicații web/mobile/CRM. Snippetul de căutare despre un MVP cu preț de pornire este depășit; exclude din media numerică. Programarea web de la 60 EUR/oră nu este preț de proiect."}
+  ]
+}

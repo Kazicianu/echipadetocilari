@@ -1,0 +1,102 @@
+{
+  "checkedAt": "2026-10-17",
+  "method": "Site-uri primare comerciale. Prețurile de pornire nu reprezintă prețuri finale. Articolele generale de piață nu sunt considerate oferte proprii.",
+  "competitors": [
+    {
+      "name": "Do Marketing & Apps",
+      "domain": "domarketing.ro",
+      "urls": ["https://www.domarketing.ro/servicii/apps-ai-platforms"],
+      "prices": [
+        {"tier": "Discovery", "amount": 500, "currency": "EUR", "type": "fix", "scope": "2 săptămâni; obligatoriu; deductibil din proiect"},
+        {"tier": "MVP web/SaaS", "amount": 4800, "currency": "EUR", "type": "de la", "scope": "4-8 săptămâni după Discovery", "primaryBenchmark": true},
+        {"tier": "SaaS complet", "amount": 9800, "currency": "EUR", "type": "de la", "scope": "ofertă pe faze"},
+        {"tier": "Preluare/securizare", "amount": 1800, "currency": "EUR", "type": "de la"},
+        {"tier": "Mentenanță", "amount": 100, "currency": "EUR", "type": "de la/lună"}
+      ],
+      "features": ["MVP: autentificare, roluri, dashboard, bază de date, API, admin", "plăți/abonamente, AI util, monitorizare, deploy", "cod și documentație", "SaaS: multi-tenant, permisiuni, rapoarte, integrări, securitate, teste încărcare"],
+      "notes": ["Fără TVA; declară societate neplătitoare.", "Preț ferm după Discovery. Infrastructură MVP: 20-60 EUR/lună separat. Mobil opțional. Design/prototip: 1-2 săptămâni."],
+      "evidence": [{"url": "https://www.domarketing.ro/servicii/apps-ai-platforms", "quote": "MVP de la 4.800 EUR Platformă de la 9.800 EUR"}],
+      "checkedAt": "2026-10-17"
+    },
+    {
+      "name": "MAST Studio",
+      "domain": "maststudio.ro",
+      "urls": ["https://maststudio.ro/servicii/aplicatii-web"],
+      "prices": [{"tier": "Aplicații web/mobile", "amount": null, "currency": null, "type": "ofertă personalizată", "primaryBenchmark": false}],
+      "features": ["analiză cerințe și fluxuri", "UI personalizat, responsive", "conturi și roluri", "integrări facturare/plăți/API", "administrare", "testare, lansare, instructaj", "accese și documentație"],
+      "notes": ["Fără preț numeric comercial. Ofertă fixă în 24 ore; termen în ofertă.", "Domeniu, hosting, servicii terțe și mentenanță după garanție se achită separat.", "TVA neprecizat.", "Conținut primar disponibil în rezultatul indexat; deschiderea directă a eșuat repetat (cache miss). Articolul cu reper de piață 1.500 EUR este exclus."],
+      "evidence": [{"url": "https://maststudio.ro/servicii/aplicatii-web", "quote": "Aplicațiile web și mobile se estimează individual"}],
+      "checkedAt": "2026-10-17"
+    },
+    {
+      "name": "dotKoda",
+      "domain": "dotkoda.com",
+      "urls": ["https://dotkoda.com/servicii/aplicatii-web", "https://dotkoda.com/preturi"],
+      "prices": [
+        {"tier": "Aplicație web sau mobilă", "amount": 8000, "currency": "EUR", "type": "de la, orientativ", "scope": "fără plafon; de la 4 săptămâni", "primaryBenchmark": true, "source": "https://dotkoda.com/preturi"},
+        {"tier": "Audit proces", "min": 1500, "max": 2500, "currency": "EUR", "type": "interval", "scope": "1-2 săptămâni; deductibil", "source": "https://dotkoda.com/preturi"}
+      ],
+      "features": ["analiză și specificație", "roluri și permisiuni", "integrări și AI util", "migrare Excel/sistem existent", "infrastructură, monitorizare, backup", "publicare magazine, când este cazul", "cod, conturi și instruire"],
+      "notes": ["Fără TVA. Preț fix pe etapă după audit pentru complexitate mare.", "Reperul de 8.000 EUR acoperă aplicație web, mobilă sau ambele, în funcție de scop; nu garantează toate variantele la pragul minim.", "Pagina web adaugă rapoarte, exporturi și istoric."],
+      "evidence": [{"url": "https://dotkoda.com/preturi", "quote": "de la 8.000 EUR"}, {"url": "https://dotkoda.com/servicii/aplicatii-web", "quote": "De la 4 săptămâni, în funcție de complexitate"}],
+      "checkedAt": "2026-10-17"
+    },
+    {
+      "name": "AIO Software",
+      "domain": "aiosoftware.ro",
+      "urls": ["https://aiosoftware.ro/serviciile-noastre/", "https://aiosoftware.ro/dezvoltare-aplicatii-mobile/"],
+      "prices": [
+        {"tier": "Mobil simplu", "amount": 5000, "currency": "EUR", "type": "de la, orientativ", "scope": "5-10 ecrane; 6-10 săptămâni", "primaryBenchmark": true, "source": "https://aiosoftware.ro/dezvoltare-aplicatii-mobile/"},
+        {"tier": "Mobil mediu", "amount": 15000, "currency": "EUR", "type": "orientativ", "scope": "10-25 ecrane; 3-5 luni", "source": "https://aiosoftware.ro/dezvoltare-aplicatii-mobile/"},
+        {"tier": "Mobil complex", "amount": 30000, "currency": "EUR", "type": "de la, orientativ", "scope": "25+ ecrane; 6-12 luni", "source": "https://aiosoftware.ro/dezvoltare-aplicatii-mobile/"},
+        {"tier": "Web", "amount": 3000, "currency": "EUR", "type": "de la; conflict FAQ 3500", "source": "https://aiosoftware.ro/serviciile-noastre/"},
+        {"tier": "MVP", "amount": 3500, "currency": "EUR", "type": "de la", "scope": "6-8 săptămâni", "source": "https://aiosoftware.ro/serviciile-noastre/"}
+      ],
+      "features": ["simplu: autentificare, REST, publicare", "mediu: backend, DB, plăți, push, admin", "complex: microservicii, ERP/CRM/API, AI, SLA", "UI/UX, testare, cod și documentație", "MVP: prototip, sprinturi"],
+      "notes": ["TVA neprecizat. Mentenanță mobilă 15-20% anual.", "Conflict suport: card simplu 6 luni, mesaj general 12 luni.", "Conflict web: card 3.000 EUR, FAQ 3.500 EUR. FAQ web mediu: 9.000-25.000 EUR.", "Web: cloud/deploy și REST/GraphQL; mentenanță de la 100 EUR/lună."],
+      "evidence": [{"url": "https://aiosoftware.ro/dezvoltare-aplicatii-mobile/", "quote": "Aplicatie Simpla €5.000 Pret de pornire"}, {"url": "https://aiosoftware.ro/serviciile-noastre/", "quote": "De la €3.000"}],
+      "checkedAt": "2026-10-17"
+    },
+    {
+      "name": "Webtopocket",
+      "domain": "webtopocket.com",
+      "urls": ["https://webtopocket.com/aplicatii-mobile/"],
+      "prices": [
+        {"tier": "Mobil", "amount": 4900, "currency": "EUR", "type": "de la", "primaryBenchmark": true},
+        {"tier": "Prima versiune", "min": 4900, "max": 8900, "currency": "EUR", "type": "interval orientativ", "scope": "conturi, push, backend simplu"},
+        {"tier": "Mobil avansat", "amount": 11900, "currency": "EUR", "type": "peste", "scope": "plăți, offline, integrări"},
+        {"tier": "Mentenanță server", "amount": 99, "currency": "EUR", "type": "de la/lună"}
+      ],
+      "features": ["analiză, etape contractate", "iOS/Android cross-platform", "testare pe telefoane", "listare și publicare în magazine", "resubmit inclus", "repository și conturi proprii, documentație"],
+      "notes": ["Fără TVA; facturare RON la BNR din ziua facturii.", "Prima versiune: 2-3 luni plus review. Taxele Apple/Google sunt separate. AI se estimează separat.", "Mentenanța serverului include backup, monitorizare, 1h modificări, raport. Actualizările mobile se cotează separat pe versiune.", "Declară că încă nu are aplicație mobilă publicată sub numele Webtopocket."],
+      "evidence": [{"url": "https://webtopocket.com/aplicatii-mobile/", "quote": "Proiectele mobile pornesc de la 4.900 de euro fara TVA."}],
+      "checkedAt": "2026-10-17"
+    },
+    {
+      "name": "tiny.studio",
+      "domain": "tinystudio.ro",
+      "urls": ["https://tinystudio.ro/servicii/mobile", "https://tinystudio.ro/preturi"],
+      "prices": [
+        {"tier": "Mobil standard", "amount": 9000, "currency": "RON", "type": "de la", "scope": "5-10 ecrane, 1-2 roluri; 3-5 săptămâni", "source": "https://tinystudio.ro/servicii/mobile", "primaryBenchmark": false},
+        {"tier": "Mobil în catalog general", "amount": 7000, "currency": "RON", "type": "de la", "source": "https://tinystudio.ro/preturi"},
+        {"tier": "Complex", "amount": null, "currency": "RON", "type": "ofertă", "scope": "15+ ecrane; 6-10 săptămâni"},
+        {"tier": "Ecosistem", "amount": null, "currency": "RON", "type": "ofertă", "scope": "admin+teren+client; 8-16 săptămâni"},
+        {"tier": "Mentenanță fără server", "amount": 280, "currency": "RON", "type": "de la/lună"}
+      ],
+      "features": ["iOS+Android, backend, DB, API, autentificare, push", "publicare magazine și resubmit", "cod/documentație, 30 zile suport", "complex: integrări, GPS, scanare, plăți"],
+      "notes": ["Conflict comercial 9.000 RON pe pagina serviciului versus 7.000 RON în catalogul general.", "Catalogul general: fără TVA, plătitor 21%. 50% avans, 50% livrare.", "Conturile Apple/Google separate. Mentenanță cu server: ofertă. Furnizor solo; comparația cu agenții necesită prudență."],
+      "evidence": [{"url": "https://tinystudio.ro/servicii/mobile", "quote": "De la 9.000 RON"}, {"url": "https://tinystudio.ro/preturi", "quote": "de la 7.000 RON"}],
+      "checkedAt": "2026-10-17"
+    },
+    {
+      "name": "HappyWeb",
+      "domain": "happyweb.ro",
+      "urls": ["https://happyweb.ro/servicii-dezvoltare-web/servicii-dezvoltare-web-aplicatie-custom"],
+      "prices": [{"tier": "Aplicație custom", "amount": null, "currency": null, "type": "ofertă personalizată", "primaryBenchmark": false}],
+      "features": ["prototip", "MVP", "versiune beta", "produs final", "soluție custom pentru procese neacoperite de platforme existente"],
+      "notes": ["Niciun preț numeric, termen sau TVA pe pagina comercială verificată.", "Articolul general despre costuri descrie doar ordine de mărime și nu este ofertă proprie; exclus din medie."],
+      "evidence": [{"url": "https://happyweb.ro/servicii-dezvoltare-web/servicii-dezvoltare-web-aplicatie-custom", "quote": "dezvoltand un prototip, un MVP (Minimum viable product), varianta beta si produsul final"}],
+      "checkedAt": "2026-10-17"
+    }
+  ]
+}

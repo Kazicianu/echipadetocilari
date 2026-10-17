@@ -107,7 +107,6 @@ body.ap-landing{margin:0}
 .ap-page .ap-h2,.ap-page .ap-bigline{margin:0;font-size:7.5vw;line-height:1.2;font-weight:500;color:var(--ink);text-wrap:balance}
 .ap-page .ap-lead{margin:14px 0 0;max-width:640px;font-size:16px;line-height:1.45;font-weight:400;text-wrap:pretty}
 .ap-page .ap-scribble{display:inline-block;font-family:var(--font-hand);font-size:23px;line-height:1.15;font-weight:600;color:var(--ink);transform:rotate(-7deg)}
-.ap-page .ap-ph{padding:0 .12em;border-radius:10px;border:2px dashed var(--line-step)}
 .ap-page .ap-kicker{margin:0 0 10px;font-size:18px;line-height:1.2;font-weight:400;color:var(--ink)}
 @media (max-width:599.98px){.ap-page .ap-kicker{display:flex;align-items:center;gap:10px;margin:0 0 14px;font-size:16px;line-height:1.25;font-weight:500}.ap-page .ap-kicker::before{content:"";flex:none;width:28px;height:3px;border-radius:2px;background:var(--orange)}}
 @keyframes ap-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
@@ -557,10 +556,13 @@ body.ap-landing{margin:0}
 .ap-page .ap-pcard__badge{position:absolute;top:-18px;left:50%;margin:0;padding:7px 16px;transform:translateX(-50%);border-radius:999px;background:var(--orange);color:var(--white);font-size:13px;line-height:20px;font-weight:600;white-space:nowrap}
 .ap-page .ap-pcard__for{margin:-12px 0 0;text-align:center;font-size:14px;line-height:1.4;color:var(--ink-muted)}
 .ap-page .ap-pcard__from{margin:0;text-align:center;font-size:16px;line-height:22.4px}
-.ap-page .ap-pcard__price{margin:-8px 0 4px;text-align:center;font-size:46px;line-height:1.1;font-weight:600}
+.ap-page .ap-pcard__price{margin:-8px 0 4px;text-align:center;font-size:clamp(36px,4vw,46px);line-height:1.1;font-weight:600;white-space:nowrap;font-variant-numeric:tabular-nums}
 .ap-page .ap-pcard__list{flex:1 1 0%;display:grid;align-content:start;gap:10px;margin:10px 0 0;padding:0;list-style:none}
 .ap-page .ap-pcard__list li{display:flex;align-items:flex-start;gap:10px;font-size:16px;line-height:22.4px;font-weight:500}
 .ap-page .ap-pcard__list li::before{content:"✓";flex:none;width:15px;font-weight:800;color:var(--orange-check)}
+.ap-page .ap-pcard__limits{border-top:1px solid var(--line);padding-top:var(--space-15);font-size:14px;line-height:1.5;font-weight:300}
+.ap-page .ap-pcard__limits p{margin:0 0 8px;font-weight:600}
+.ap-page .ap-pcard__limits ul{display:grid;gap:8px;margin:0;padding-left:18px}
 .ap-page .ap-pcard .ect-btn{align-self:center;margin-top:14px}
 @media (min-width:960px){.ap-page .ap-prices{padding:100px 20px}.ap-page .ap-prices__sub{margin-top:18px}.ap-page .ap-prices__intro{margin-top:18px;font-size:16px}.ap-page .ap-prices__row{gap:20px;margin:clamp(48px,7vw,90px) 0 0;padding:10px}.ap-page .ap-pcard__for{min-height:2.8em}}
 
@@ -576,6 +578,7 @@ body.ap-landing{margin:0}
 .ap-page .ap-scope__in .ap-scope__list li::before{content:"✓";flex:none;display:grid;place-items:center;width:22px;height:22px;margin-top:1px;border-radius:50%;background:var(--white);color:var(--orange-deep);font-size:12px;font-weight:800}
 .ap-page .ap-scope__out .ap-scope__list li::before{content:"+";flex:none;display:grid;place-items:center;width:22px;height:22px;margin-top:1px;border-radius:50%;background:var(--peach);color:var(--orange-deep);font-size:15px;font-weight:700}
 .ap-page .ap-scope__note{margin:16px 0 0;font-size:14px;line-height:1.5;color:var(--ink-muted)}
+.ap-page .ap-scope__terms{max-width:900px;margin-top:var(--space-24)}
 @media (min-width:768px){.ap-page .ap-scope__grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:28px}.ap-page .ap-scope__in,.ap-page .ap-scope__out{padding:40px 40px 42px}.ap-page .ap-scope__in{border-radius:15px 15px 15px var(--radius-leaf)}.ap-page .ap-scope__h{margin-bottom:16px;font-size:22px}.ap-page .ap-scope__list{gap:12px}.ap-page .ap-scope__list li{font-size:16px}.ap-page .ap-scope__note{margin-top:18px}}
 
 /* ---------- FAQ (ect-home-faq, as on the homepage) ---------- */

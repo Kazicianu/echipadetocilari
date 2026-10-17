@@ -26,7 +26,7 @@ export const roPageMeta = {
   '/dezvoltare-aplicatii/': {
     title: 'Dezvoltare aplicații mobile și web | Echipa de Tocilari',
     description:
-      'Dezvoltare aplicații mobile pentru iOS și Android și aplicații web pentru firma ta. Consultație gratuită de 30 de minute și prețul în scris.',
+      'Dezvoltare aplicații mobile iOS și Android și aplicații web, de la 4.900 € fără TVA. Vezi pachetele, funcțiile incluse și cere o ofertă scrisă.',
   },
   '/servicii-seo/': {
     title: 'Servicii SEO și vizibilitate în AI | Echipa de Tocilari',
