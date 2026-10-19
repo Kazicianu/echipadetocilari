@@ -118,7 +118,7 @@ Indexarea este controlată exclusiv de `PUBLIC_INDEXABLE` la build.
 | --- | --- | --- |
 | Meta robots | `noindex, nofollow` | `index, follow` |
 | `robots.txt` | `Disallow: /` | `Allow: /` și sitemap |
-| `sitemap.xml` | Absent | 22 de URL-uri, 11 RO și 11 EN |
+| `sitemap.xml` | Absent | 18 URL-uri, 10 RO și 8 EN |
 
 Pentru un build de producție în PowerShell:
 
@@ -144,14 +144,13 @@ separat înregistrările necesare site-ului și expeditorului Resend.
 | `/` | `/en/` |
 | `/about-2/` | `/en/about/` |
 | `/creare-site-web/` | `/en/website-design/` |
+| `/creare-magazin-online/` | Exclusiv RO |
+| `/dezvoltare-aplicatii/` | Exclusiv RO |
 | `/servicii-seo/` | `/en/seo-services/` |
 | `/administrare-site/` | `/en/website-maintenance/` |
 | `/contact/` | `/en/contact/` |
 | `/portofoliu/` | `/en/portfolio/` |
-| `/services/` | `/en/services/` |
-| `/clients/` | `/en/clients/` |
-| `/logo-design/` | `/en/logo-design/` |
-| `/pay-per-click/` | `/en/ppc-advertising/` |
+| `/agentie-google-ads/` | `/en/google-ads-agency/` |
 
 Fiecare pereche primește `hreflang` ro/en/x-default și selectorul RO/EN în
 header. Build-ul generează titluri, descrieri, date structurate
@@ -161,6 +160,14 @@ Sunt păstrate adaptările pentru mobil și `prefers-reduced-motion`.
 Paginile demo vechi, duplicatele și paginile de atașament sunt excluse din
 publicare; redirecturile lor sunt menținute împreună în
 `scripts/lib/junk-redirects.mjs` și `vercel.json`.
+
+Paginile `/services/` și `/en/services/` sunt retrase și redirecționează permanent
+către `/#servicii`, respectiv `/en/#servicii`. Paginile demonstrative Clients și
+serviciul retras Logo design, în ambele limbi, nu se mai publică și răspund cu
+404. Nu sunt incluse în sitemap, hreflang, metadata sau schema. Preview-ul local
+aplică aceleași destinații de redirecționare și păstrează parametrii URL-urilor.
+Rutele vechi Google Ads sunt `/pay-per-click/` și `/en/ppc-advertising/`, cu sau
+fără slash final.
 
 `npm run mirror` rămâne un instrument opțional pentru un import separat în
 `.mirror-scrape/`; necesită instalarea explicită a `website-scraper`. Nu face

@@ -3,9 +3,10 @@ import { existsSync, rmSync } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { junkRedirects } from './lib/junk-redirects.mjs';
+import { routes, retiredPagePaths } from './i18n/routes.mjs';
 
 const junkPaths = new Set(
-  junkRedirects.map(({ from }) => from.replace(/\/$/, '') || '/')
+  [...junkRedirects.map(({ from }) => from), ...retiredPagePaths].map(from => from.replace(/\/$/, '') || '/')
 );
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -14,19 +15,7 @@ const root = path.resolve(__dirname, '..');
 // project files. Review the result, then move what you need into legacy-mirror/.
 const outDir = path.join(root, '.mirror-scrape');
 
-const urls = [
-  'https://www.echipadetocilari.ro/',
-  'https://www.echipadetocilari.ro/creare-site-web/',
-  'https://www.echipadetocilari.ro/administrare-site/',
-  'https://www.echipadetocilari.ro/portofoliu/',
-  'https://www.echipadetocilari.ro/about-2/',
-  'https://www.echipadetocilari.ro/contact/',
-  'https://www.echipadetocilari.ro/servicii-seo/',
-  'https://www.echipadetocilari.ro/clients/',
-  'https://www.echipadetocilari.ro/services/',
-  'https://www.echipadetocilari.ro/pay-per-click/',
-  'https://www.echipadetocilari.ro/logo-design/',
-];
+const urls = routes.map(({ ro }) => `https://www.echipadetocilari.ro${ro}`);
 
 if (existsSync(outDir)) {
   console.log('Removing existing .mirror-scrape/ ...');

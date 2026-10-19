@@ -1,7 +1,7 @@
 /**
  * Scaffold a new page directly into the Elementor mirror.
  *
- *   node scripts/new-page.mjs --slug logo-design --title "Logo design" \
+ *   node scripts/new-page.mjs --slug serviciu-nou --title "Serviciu nou" \
  *        --description "..." --template administrare-site
  *
  * How this works

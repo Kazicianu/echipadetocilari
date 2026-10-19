@@ -8,7 +8,9 @@ Homepage-ul este punctul central pentru șapte grupuri tematice. Oferta este lim
 
 Păstrează URL-urile existente, cu excepția migrării explicite a paginii Google Ads descrise mai jos, fără a introduce obligatoriu un director /servicii/. Nu crea pagini separate pentru sinonime precum creare site, realizare site și creare website. Delimitează intenția homepage-ului de cea a paginilor de servicii.
 
-O pagină Servicii care repetă homepage-ul nu este necesară. Meniul și cardurile de magazin online și dezvoltare aplicații de pe homepage oferă acces direct la /creare-magazin-online/ și /dezvoltare-aplicatii/. Cardul Facebook Ads trimite momentan la /services/. Eliminarea efectivă a /services/ și a versiunii EN rămâne o modificare de implementat separat, cu redirecționări, actualizarea linkurilor și a rutelor. Salvarea acestei strategii nu înseamnă că pagina a fost eliminată.
+O pagină Servicii care repetă homepage-ul nu este necesară. Meniul și cardurile de magazin online și dezvoltare aplicații de pe homepage oferă acces direct la /creare-magazin-online/ și /dezvoltare-aplicatii/. Din 19.10.2026, cardul Facebook Ads trimite la formularul existent, iar /services/ și /en/services/ sunt retrase din surse, rute și metadata. URL-urile lor redirecționează permanent către lista de servicii de pe homepage, la /#servicii și /en/#servicii.
+
+Tot la 19.10.2026 au fost retrase paginile demonstrative /clients/ și /en/clients/ și serviciul separat /logo-design/ și /en/logo-design/. Nu au un înlocuitor echivalent și răspund cu 404 după publicarea schimbărilor. Nu se generează pagini HTML, schema, hreflang sau intrări sitemap pentru aceste șase rute. About promovează web design cu link către /creare-site-web/. Build-ul respinge linkurile interne către paginile retrase, iar scraperul le exclude.
 
 ## Keywords pe pagini
 
@@ -27,7 +29,7 @@ Sursa: `keyword-research-2026-09-18.md`, cercetare Semrush pentru România. Volu
 
 Folosește variantele natural, cu diacritice în textele publicate. Nu forța potrivirea exactă și nu crea pagini repetitive pentru fiecare variantă sau pentru fiecare oraș. Termenii de preț se acoperă inițial prin secțiuni utile în pagina serviciului, fără prețuri inventate.
 
-Pagina Google Ads folosește acum ruta /agentie-google-ads/. Rutele anterioare /pay-per-click/ și /en/ppc-advertising/ redirecționează permanent către versiunile noi, ca fiecare limbă să aibă o singură pagină comercială Google Ads.
+Pagina Google Ads folosește acum ruta /agentie-google-ads/. Rutele anterioare /pay-per-click/ și /en/ppc-advertising/ au redirecționări permanente către versiunile noi, ca fiecare limbă să aibă o singură pagină comercială Google Ads. La 19.10.2026, auditul live a confirmat 404 pe URL-urile vechi, deși configurația locală declara redirecționări. Repararea locală acoperă potrivirea cu și fără slash final; funcționarea în producție trebuie reverificată după publicare.
 
 ## Oferta magazin online aprobată (12.10.2026)
 

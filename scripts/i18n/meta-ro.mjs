@@ -48,21 +48,6 @@ export const roPageMeta = {
     description:
       'Explorează 20 de modele demonstrative pentru site-uri de prezentare, magazine și bloguri. Alegem împreună un design pe care îl adaptăm afacerii tale.',
   },
-  '/services/': {
-    title: 'Servicii marketing digital: site, SEO, Ads',
-    description:
-      'Serviciile Echipei de Tocilari: creare site web și magazin online, aplicații, SEO și vizibilitate în AI, Google Ads, Facebook Ads și mentenanță site.',
-  },
-  '/clients/': {
-    title: 'Clienți | proiecte web design și SEO',
-    description:
-      'Clienții Echipei de Tocilari, firme care ne-au ales pentru web design, SEO și marketing digital. Parteneriate reale, nu slide-uri goale.',
-  },
-  '/logo-design/': {
-    title: 'Logo design și identitate vizuală | Echipa de Tocilari',
-    description:
-      'Logo design și identitate vizuală: mărci clare, ușor de folosit pe web, print și social media. Brief, iterații și livrabile gata de produs.',
-  },
   '/agentie-google-ads/': {
   "title": "Agenție Google Ads: servicii și campanii | Echipa de Tocilari",
   "description": "Agenție Google Ads pentru firme din România. Campanii Search cu măsurarea conversiilor, optimizare și raportare. De la 260 €/lună, buget publicitar separat."

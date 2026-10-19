@@ -1,14 +1,16 @@
 /**
- * Theme-demo posts, duplicate URLs and WordPress attachment HTML that used to
- * ship as noindex leftovers. They must 301 (not 200+noindex) and must not
+ * Retired service directories, theme-demo posts, duplicate URLs and WordPress
+ * attachment HTML must redirect permanently and must not
  * remain in `legacy-mirror/` or `dist/`.
  *
  * `vercel.json` is the runtime source Vercel reads. The build asserts it
  * matches this list so the two cannot drift.
  *
- * Do not add owned routes (`/about-2/`, `/clients/`, `/services/`, …).
+ * Do not add active owned routes or retired pages with no equivalent content.
  */
 export const junkRedirects = [
+  { from: '/services/', to: '/#servicii' },
+  { from: '/en/services/', to: '/en/#servicii' },
   { from: '/ex-servicii-seo/', to: '/servicii-seo/' },
   { from: '/ex-creare-site-web/', to: '/creare-site-web/' },
   { from: '/pay-per-click/', to: '/agentie-google-ads/' },
@@ -36,10 +38,15 @@ export const junkRedirects = [
   },
 ];
 
-/** Vercel `source` has no trailing slash (except `/`). */
+/**
+ * Vercel compiles redirect sources with strict path-to-regexp matching.
+ * Its trailingSlash normalization runs first: pages gain a slash, while file
+ * paths lose one. An explicit optional slash therefore covers both forms.
+ * `{/}?` is path-to-regexp syntax, whereas a bare `/?` is invalid here.
+ */
 export function vercelRedirects() {
   return junkRedirects.map(({ from, to }) => ({
-    source: from.replace(/\/$/, '') || '/',
+    source: `${from.replace(/\/$/, '')}{/}?`,
     destination: to,
     permanent: true,
   }));

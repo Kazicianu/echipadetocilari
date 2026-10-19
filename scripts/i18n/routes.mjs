@@ -83,31 +83,6 @@ export const routes = [
     labelEn: 'Portfolio',
   },
   {
-    ro: '/services/',
-    en: '/en/services/',
-    roFile: 'services/index.html',
-    enFile: 'en/services/index.html',
-    labelRo: 'Servicii',
-    labelEn: 'Services',
-  },
-  {
-    ro: '/clients/',
-    en: '/en/clients/',
-    roFile: 'clients/index.html',
-    enFile: 'en/clients/index.html',
-    labelRo: 'Clienți',
-    labelEn: 'Clients',
-  },
-  {
-    ro: '/logo-design/',
-    en: '/en/logo-design/',
-    roFile: 'logo-design/index.html',
-    enFile: 'en/logo-design/index.html',
-    labelRo: 'Logo design',
-    labelEn: 'Logo design',
-    service: { ro: 'Logo design', en: 'Logo design' },
-  },
-  {
     ro: '/agentie-google-ads/',
     en: '/en/google-ads-agency/',
     roFile: 'agentie-google-ads/index.html',
@@ -116,6 +91,15 @@ export const routes = [
     labelEn: 'Google Ads agency',
     service: { ro: 'Administrare campanii Google Ads', en: 'Google Ads campaign management' },
   },
+];
+
+export const retiredPagePaths = [
+  '/services/',
+  '/en/services/',
+  '/clients/',
+  '/en/clients/',
+  '/logo-design/',
+  '/en/logo-design/',
 ];
 
 export const pairedRoutes = routes.filter((route) => route.en && route.enFile);

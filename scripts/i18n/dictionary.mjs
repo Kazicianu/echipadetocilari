@@ -174,8 +174,6 @@ export const dictionary = [
   ['Contactează agenția de marketing online', 'Contact the online marketing agency'],
   ['Contacteaza agentia de marketing online', 'Contact the online marketing agency'],
   ['Servicii de marketing digital', 'Digital marketing services'],
-  ['Logo design și identitate vizuală', 'Logo design and visual identity'],
-  ['Logo design si identitate vizuala', 'Logo design and visual identity'],
   ['Portofoliu de web design', 'Web design portfolio'],
   ['Campanii Google Ads', 'Google Ads campaigns'],
   ['Clienții noștri', 'Our clients'],
@@ -362,10 +360,10 @@ export const dictionary = [
   ],
   ['Ochiul pentru design', 'An eye for design'],
   [
-    'Dă formă ideilor și face loc lucrurilor importante. De la identitatea vizuală la ultimul detaliu de pe mobil.',
-    'Shapes ideas and gives the important things room to breathe. From visual identity to the smallest detail on mobile.',
+    'Dă formă ideilor și face loc lucrurilor importante. De la structura paginilor la ultimul detaliu de pe mobil.',
+    'Shapes ideas and gives the important things room to breathe. From page structure to the smallest detail on mobile.',
   ],
-  ['Identitate vizuală', 'Visual identity'],
+  ['Web design', 'Web design'],
   ['Mintea tehnică', 'A technical mind'],
   [
     'Leagă designul de funcționalitate. Construiește pagini rapide, clare și ușor de folosit, apoi are grijă de ele.',
@@ -519,10 +517,6 @@ export const dictionary = [
     'Updates, backups, security. You run the business, we run the site, so you do not wake up to it down on a Monday morning.',
   ],
   [
-    'Un logo pe care îl recunoști din două linii, nu o ilustrație pe care o uiți imediat.',
-    'A logo you recognize in two lines, not an illustration you forget immediately.',
-  ],
-  [
     'Bani de ads puși pe căutări care aduc clienți, nu pe afișări de vanitate.',
     'Ad spend on searches that bring clients, not vanity impressions.',
   ],
@@ -669,14 +663,6 @@ export const dictionary = [
     'We take care of your website worries, from updates to security, so everything runs smoothly and you can focus on what you do best.',
   ],
   [
-    'Povestea brandului tău merită un logo pe măsură. Vom crea împreună un simbol vizual unic, care să-ți reprezinte afacerea și să rămână în mintea clienților.',
-    'Your brand story deserves a logo to match. Together we create a unique visual mark that represents your business and sticks in customers’ minds.',
-  ],
-  [
-    'Povestea brandului tau merita un logo pe masura. Vom crea impreuna un simbol vizual unic, care sa-ti reprezinte afacerea si sa ramana in mintea clientilor.',
-    'Your brand story deserves a logo to match. Together we create a unique visual mark that represents your business and sticks in customers’ minds.',
-  ],
-  [
     'Maximizăm impactul bugetului tău de publicitate prin campanii PPC targetate.',
     'We maximize your ad budget with targeted PPC campaigns that drive conversions.',
   ],
@@ -695,7 +681,6 @@ export const dictionary = [
   ['Mentenanta', 'Website maintenance'],
   ['Mentenanță', 'Website maintenance'],
   ['Servicii Copywriting', 'Copywriting services'],
-  ['Logo Design', 'Logo design'],
   ['Pay Per Click', 'Pay-per-click advertising'],
 
   // FAQ questions + answers (home)
@@ -1458,21 +1443,6 @@ export const enPageMeta = {
     title: 'Website Templates & Web Design Portfolio | Echipa de Tocilari',
     description:
       'Explore 20 website template demos for businesses, shops, and blogs. Choose a design that Echipa de Tocilari can adapt to your brand.',
-  },
-  '/en/services/': {
-    title: 'Digital Marketing Services: Web, SEO, Google Ads',
-    description:
-      'Echipa de Tocilari services: websites and online stores, app development, SEO and AI visibility, Google Ads, Facebook Ads and website maintenance.',
-  },
-  '/en/clients/': {
-    title: 'Our Clients | Web Design and SEO Projects',
-    description:
-      'Businesses that chose Echipa de Tocilari for web design, SEO, and digital marketing. Real partnerships, not empty slide decks.',
-  },
-  '/en/logo-design/': {
-    title: 'Logo Design and Visual Identity | Echipa de Tocilari',
-    description:
-      'Logo design and visual identity: distinctive marks ready for web, print, and social. Brief, iterations, and production-ready files.',
   },
   '/en/google-ads-agency/': {
   "title": "Google Ads Agency: Services and Campaigns | Echipa de Tocilari",

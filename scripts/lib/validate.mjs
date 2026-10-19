@@ -8,7 +8,10 @@
 import { readFileSync } from 'fs';
 import path from 'path';
 import vm from 'vm';
-import { routes, isOwnedPage } from '../i18n/routes.mjs';
+import { routes, isOwnedPage, retiredPagePaths } from '../i18n/routes.mjs';
+
+const retiredPaths = new Set(retiredPagePaths);
+const ownHosts = new Set(['echipadetocilari.ro', 'www.echipadetocilari.ro']);
 
 /**
  * @param {object} opts
@@ -52,6 +55,14 @@ export function validateBuild({ outDir, files, urlPathOf, indexable }) {
       const pageCopy = html.replace(/<!--[\s\S]*?-->|<script\b[^>]*>[\s\S]*?<\/script>|<style\b[^>]*>[\s\S]*?<\/style>/gi, '');
       const h1Count = (pageCopy.match(/<h1\b/gi) || []).length;
       if (h1Count !== 1) errors.push(`${rel(file)}: expected one H1, found ${h1Count}`);
+      for (const [, href] of pageCopy.matchAll(/<a\b[^>]*\shref=["']([^"']*)["']/gi)) {
+        let target;
+        try { target = new URL(href, `https://www.echipadetocilari.ro${urlPath}`); }
+        catch { continue; }
+        if (!ownHosts.has(target.hostname) || !['http:', 'https:'].includes(target.protocol)) continue;
+        const pathname = target.pathname.replace(/\/index\.html$/, '/').replace(/\/?$/, '/');
+        if (retiredPaths.has(pathname)) errors.push(`${rel(file)}: link to retired page ${pathname}`);
+      }
       const contact = pageCopy.search(/<form\b[^>]*data-ect-contact=["'](?:ro|en)["']/i);
       const footer = pageCopy.search(/<footer\b/i);
       if (contact < 0) errors.push(`${rel(file)}: contact form missing`);
