@@ -9,7 +9,7 @@
   const footer = [...dialog.querySelectorAll('.ect-mobile-menu-footer-link')];
   const lines = [...button.querySelectorAll('.ect-mobile-menu-icon > span')];
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  const mobile = matchMedia(document.body.classList.contains('elementor-page-3410') ? '(max-width: 1024px)' : '(max-width: 767px)');
+  const mobile = matchMedia('(max-width: 767px)');
   let animations = [];
   let opened = false;
   let navigation = null;

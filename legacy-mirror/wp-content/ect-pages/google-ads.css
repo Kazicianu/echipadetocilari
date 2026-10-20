@@ -6,23 +6,8 @@
   font-display: swap;
   src: url('/wp-content/ect-pages/fonts/caveat-600.woff2') format('woff2');
 }
-/* Keep the site's accessible header while matching the supplied header spacing. */
-.gads-v3-page .elementor-location-header { position: relative; z-index: 20; background: transparent; font: 300 16px/1.4 Montserrat,sans-serif; }
-.gads-v3-page .elementor-location-header .elementor-element-62711c56 { padding: 2% 5%; background: transparent; }
-.gads-v3-page .elementor-location-header .elementor-element-62711c56 > .e-con-inner { padding: 0; min-height: 90px; height: auto; }
-.gads-v3-page .elementor-location-header .elementor-element-c11629b a { display: block; line-height: 0; }
-.gads-v3-page .elementor-location-header .elementor-element-c11629b img { display: block; }
-@media (min-width:768px) {
-  .gads-v3-page .elementor-location-header .elementor-element-c11629b img { width: auto; height: 75px; }
-  .gads-v3-page .elementor-location-header .elementor-element-6c9dcdd8 .elementor-nav-menu .elementor-item { font-size: 16px; }
-  .gads-v3-page .elementor-location-header .elementor-element-682f9a60 .elementor-button { font-size: 16px; }
-}
-@media (max-width:767px) {
-  .gads-v3-page .elementor-location-header .elementor-element-62711c56 { padding: 7% 8% 6% 5%; }
-  .gads-v3-page .elementor-location-header .elementor-element-62711c56 > .e-con-inner { min-height: 0; }
-  .gads-v3-page .elementor-location-header .elementor-element-c11629b a { width: 80px; }
-  .gads-v3-page .elementor-location-header .elementor-element-c11629b img { width: 100%; height: 55px; object-fit: contain; }
-}
+/* The shared homepage header keeps its own spacing and stays above the hero surface. */
+.gads-v3-page .elementor-location-header { position: relative; z-index: 20; }
 /* V3 paints one background behind the header and hero. Their HTML landmarks
    stay separate; the measured surface reproduces the same background extent. */
 .gads-v3-page[data-gads-hero=ready] { position: relative; isolation: isolate; }

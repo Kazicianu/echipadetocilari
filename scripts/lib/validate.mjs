@@ -74,10 +74,10 @@ export function validateBuild({ outDir, files, urlPathOf, indexable }) {
       if (!desc || desc[1].trim().length < 50) {
         errors.push(`${rel(file)}: missing or too-short description`);
       }
-      if (route?.en && !html.includes('id="ect-lang-switch"')) {
+      const switcher = html.match(/<nav id="ect-lang-switch"[\s\S]*?<\/nav>/i)?.[0];
+      if (!switcher) {
         errors.push(`${rel(file)}: language switcher missing`);
-      }
-      if (!route?.en && html.includes('id="ect-lang-switch"')) {
+      } else if (!route?.en && !/<a href="\/en\/" hreflang="en"[^>]*aria-label="EN: English homepage"/.test(switcher)) {
         errors.push(`${rel(file)}: language switcher has no English page`);
       }
       const alt = (html.match(/rel=["']alternate["'][^>]*hreflang/gi) || []).length;

@@ -1,8 +1,7 @@
 import { appendToBody, appendToHead } from './html.mjs';
-import { routes } from '../i18n/routes.mjs';
 
 /** Enhance the translated header once, after language and route generation. */
-export function enhanceMobileMenu(html, { pageUrl } = {}) {
+export function enhanceMobileMenu(html) {
   if (html.includes('id="ect-mobile-menu"')) return html;
   const header = html.match(/<header\b[\s\S]*?<\/header>/i)?.[0];
   if (!header) return html;
@@ -20,12 +19,8 @@ export function enhanceMobileMenu(html, { pageUrl } = {}) {
     `<li class="ect-mobile-menu-link-wrap">${link
       .replace(/\sclass="[^"]*"/, ' class="ect-mobile-menu-link"')
       .replace(/\s(?:tabindex|id)="[^"]*"/g, '')}</li>`).join('\n');
-  const roOnlyRoute = routes.find(route => !route.en && pageUrl === route.ro);
-  // RO-only pages still offer the English homepage without implying a translation.
-  const language = header.match(/<nav\b[^>]*id="ect-lang-switch"[^>]*>([\s\S]*?)<\/nav>/i)?.[1] || (roOnlyRoute ? `
-  <a href="${roOnlyRoute.ro}" hreflang="ro" lang="ro" aria-current="true" title="RO">RO</a>
-  <a href="/en/" hreflang="en" lang="en" title="English homepage" aria-label="EN: English homepage">EN</a>
-` : '');
+  // The header switch already names a RO-only page's EN link as the English homepage.
+  const language = header.match(/<nav\b[^>]*id="ect-lang-switch"[^>]*>([\s\S]*?)<\/nav>/i)?.[1] || '';
   const footer = language.replace(/<a\b/g, '<a class="ect-mobile-menu-footer-link"');
   const button = `<span class="ect-mobile-menu-slot"><button type="button" class="ect-mobile-menu-toggle" aria-expanded="false" aria-controls="ect-mobile-menu" aria-label="${open}" data-open-label="${open}" data-close-label="${close}"><span class="ect-mobile-menu-icon" aria-hidden="true"><span></span><span></span></span></button></span>`;
   // Keep the original links available even if JavaScript fails to load.

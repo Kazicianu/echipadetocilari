@@ -197,13 +197,6 @@
   }
 }
 
-/* The About header already uses its mobile layout on tablets. */
-@media (min-width: 768px) and (max-width: 1024px) {
-  body.elementor-page-3410 .ect-mobile-menu-slot { display: inline-flex; flex: 0 0 var(--ect-mobile-menu-button-size); width: var(--ect-mobile-menu-button-size); height: var(--ect-mobile-menu-button-size); order: 2; }
-  body.elementor-page-3410.ect-mobile-menu-ready .ect-mobile-menu-toggle { display: flex; }
-  body.elementor-page-3410.ect-mobile-menu-ready .elementor-3359 nav.elementor-nav-menu--dropdown { display: none !important; }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .ect-mobile-menu-toggle,
   .ect-mobile-menu-icon > span,

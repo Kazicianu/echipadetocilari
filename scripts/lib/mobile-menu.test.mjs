@@ -58,7 +58,7 @@ test('the expanding mobile menu preserves every available translated link on eac
     for (const language of route.en ? ['ro', 'en'] : ['ro']) {
       const original = preparedPage(route, language);
       const expected = links(menu(original, 'elementor-nav-menu--dropdown'));
-      const enhanced = enhanceMobileMenu(original, { pageUrl: route[language] });
+      const enhanced = enhanceMobileMenu(original);
       const actual = links(enhanced, 'ect-mobile-menu-link');
       const label = `${route[language]} (${language})`;
 
@@ -81,7 +81,7 @@ test('the expanding mobile menu preserves every available translated link on eac
 test('the mobile control is a native button and shared assets are injected exactly once', () => {
   for (const route of [routes.find(item => item.ro === '/'), routes.find(item => item.ro === '/dezvoltare-aplicatii/')]) {
     const original = preparedPage(route, 'ro');
-    const enhanced = enhanceMobileMenu(original, { pageUrl: route.ro });
+    const enhanced = enhanceMobileMenu(original);
     const toggle = [...header(enhanced).matchAll(/<button\b[^>]*>/gi)]
       .map(match => match[0])
       .find(tag => hasClass(tag, 'ect-mobile-menu-toggle'));
@@ -95,7 +95,7 @@ test('the mobile control is a native button and shared assets are injected exact
     assert.equal((enhanced.match(/\bhref=["']\/wp-content\/ect-pages\/mobile-menu\.css["']/g) || []).length, 1);
     assert.equal((enhanced.match(/\bsrc=["']\/wp-content\/ect-pages\/mobile-menu\.js["']/g) || []).length, 1);
     assert.equal(enhanceMobileMenu(enhanced), enhanced, 'repeated enhancement preserves the document byte for byte');
-    if (!route.en) assert.doesNotMatch(enhanced, /id="ect-lang-switch"/, 'the Romanian-only page keeps its desktop header without a translation switch');
+    assert.equal((enhanced.match(/id="ect-lang-switch"/g) || []).length, 1, `${route.ro}: the desktop header keeps the homepage RO/EN chip`);
   }
 });
 

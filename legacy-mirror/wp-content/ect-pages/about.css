@@ -87,56 +87,6 @@
 .ect-about .ect-about-button--light:hover { background: transparent; color: #fff; }
 .ect-about .ect-about-cta__note { font-size: 14px; font-weight: 400; margin: 18px auto 0; }
 
-/* This header's original mobile breakpoint leaves its full menu crowded on tablets. */
-@media (min-width: 768px) and (max-width: 1024px) {
-  body.elementor-page-3410 .elementor-3359 .elementor-element-62711c56 > .e-con-inner {
-    flex-wrap: nowrap;
-    gap: 24px;
-  }
-  body.elementor-page-3410 .elementor-3359 .elementor-element-c11629b {
-    flex: 0 0 90px;
-    width: 90px;
-    max-width: 90px;
-  }
-  body.elementor-page-3410 .elementor-3359 .elementor-element-c11629b img {
-    width: 90px;
-    height: 75px;
-    object-fit: contain;
-  }
-  body.elementor-page-3410 .elementor-3359 .elementor-element-6c9dcdd8 {
-    flex: 0 0 auto;
-    width: auto;
-    max-width: none;
-    margin-left: auto;
-  }
-  body.elementor-page-3410 .elementor-3359 .elementor-element-6c9dcdd8 > .elementor-widget-container {
-    flex-wrap: nowrap;
-    justify-content: flex-end;
-  }
-  body.elementor-page-3410 .elementor-3359 .elementor-nav-menu--main,
-  body.elementor-page-3410 .elementor-3359 .elementor-element-682f9a60 {
-    display: none;
-  }
-  body.elementor-page-3410 .elementor-3359 .ect-lang-wrap {
-    margin: 0 10px 0 0 !important;
-  }
-  body.elementor-page-3410 .elementor-3359 .elementor-menu-toggle {
-    display: flex;
-    min-width: 44px;
-    min-height: 44px;
-    margin: 0;
-    --nav-menu-icon-size: 25px;
-  }
-  body.elementor-page-3410 .elementor-3359 nav.elementor-nav-menu--dropdown {
-    display: block;
-    overflow-y: auto;
-    border-width: 0 0 1px;
-  }
-  body.elementor-page-3410 .elementor-3359 .elementor-nav-menu--dropdown a {
-    padding-block: 20px;
-  }
-}
-
 @media (max-width: 1024px) {
   .ect-about-wrap { padding-inline: 20px; }
   .ect-about-hero { padding-block: 64px; }

@@ -1,5 +1,5 @@
 /**
- * RO|EN switcher, injected into the Elementor header on both languages.
+ * RO|EN switcher, injected into the Elementor header on every page.
  *
  * The desktop chip lives in the header's normal flow. In the mobile layout,
  * language links are available inside the expanding menu instead of the chip.
@@ -84,13 +84,6 @@ const STYLES = `
     margin-right:0 !important;
   }
 }
-
-/* About uses the same mobile header layout on tablets. */
-@media (min-width:768px) and (max-width:1024px){
-  body.elementor-page-3410 .elementor-location-header .ect-lang-wrap{
-    display:none !important;
-  }
-}
 </style>
 `;
 
@@ -116,15 +109,18 @@ function stripPrevious(html) {
  * @param {string} html
  * @param {'ro'|'en'} currentLang
  * @param {string} roHref
- * @param {string} [enHref] Omitted for a Romanian-only page.
+ * @param {string} [enHref] Omitted for a Romanian-only page, whose EN link
+ *   names the English homepage instead of implying a translation.
  */
 export function injectLangSwitcher(html, currentLang, roHref, enHref) {
-  if (!enHref) return stripPrevious(html);
+  const english = enHref
+    ? `<a href="${enHref}" hreflang="en" lang="en" ${currentLang === 'en' ? 'aria-current="true"' : ''} title="EN">EN</a>`
+    : '<a href="/en/" hreflang="en" lang="en" title="English homepage" aria-label="EN: English homepage">EN</a>';
   const wrap = `
 <span class="ect-lang-wrap">
 <nav id="ect-lang-switch" aria-label="Language">
   <a href="${roHref}" hreflang="ro" lang="ro" ${currentLang === 'ro' ? 'aria-current="true"' : ''} title="RO">RO</a>
-  <a href="${enHref}" hreflang="en" lang="en" ${currentLang === 'en' ? 'aria-current="true"' : ''} title="EN">EN</a>
+  ${english}
 </nav>
 </span>
 `;

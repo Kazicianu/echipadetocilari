@@ -55,12 +55,15 @@ test('applications landing is owned in Romanian without an unapproved English tw
   assert.equal(roToEn[apps.ro], undefined);
 });
 
-test('Romanian-only pages remove old language controls and hreflang without emitting replacement URLs', () => {
+test('Romanian-only pages replace old translation links with the English homepage and drop hreflang', () => {
   const original = '<html><head></head><body><header><div class="elementor-menu-toggle"></div></header><main>Content</main></body></html>';
   const withPair = injectLangSwitcher(injectHreflang(original, { site, roPath: shop.ro, enPath: '/en/old-shop/' }), 'ro', shop.ro, '/en/old-shop/');
   const unpaired = injectLangSwitcher(injectHreflang(withPair, { site, roPath: shop.ro }), 'ro', shop.ro);
-  assert.doesNotMatch(unpaired, /ect-lang|hreflang|old-shop|undefined/);
-  assert.match(unpaired, /<header>\s*<div class="elementor-menu-toggle">/);
+  assert.doesNotMatch(unpaired, /<link\b[^>]*hreflang|old-shop|undefined/);
+  assert.equal((unpaired.match(/id="ect-lang-switch"/g) || []).length, 1, 'the homepage header chip appears once');
+  assert.match(unpaired, new RegExp(`<a href="${shop.ro}" hreflang="ro" lang="ro" aria-current="true"`));
+  assert.match(unpaired, /<a href="\/en\/" hreflang="en" lang="en" title="English homepage" aria-label="EN: English homepage">EN<\/a>/);
+  assert.match(unpaired, /<\/span>\s*<div class="elementor-menu-toggle">/);
   assert.match(unpaired, /<main>Content<\/main>/);
 });
 
@@ -80,9 +83,12 @@ test('English generation skips the store, preserves all existing pairs and omits
     assert.equal(existsSync(path.join(scratch.directory, 'en/app-development/index.html')), false);
     assert.equal(existsSync(path.join(scratch.directory, 'en/dezvoltare-aplicatii/index.html')), false);
     const applications = readFileSync(path.join(scratch.directory, apps.roFile), 'utf8');
-    assert.doesNotMatch(applications, /id="ect-lang-switch"|<link\b[^>]*hreflang=|href="[^"]*undefined/);
     const romanian = readFileSync(path.join(scratch.directory, shop.roFile), 'utf8');
-    assert.doesNotMatch(romanian, /id="ect-lang-switch"|<link\b[^>]*hreflang=|href="[^"]*undefined/);
+    for (const html of [applications, romanian]) {
+      assert.doesNotMatch(html, /<link\b[^>]*hreflang=|href="[^"]*undefined/);
+      const switcher = html.match(/<nav id="ect-lang-switch"[\s\S]*?<\/nav>/)?.[0] ?? '';
+      assert.deepEqual([...switcher.matchAll(/href="([^"]*)"/g)].map(match => match[1]).slice(1), ['/en/'], 'EN opens the English homepage');
+    }
     const shopHeader = romanian.match(/<header\b[\s\S]*?<\/header>/)[0];
     const activeLinks = [...shopHeader.matchAll(/<a\b[^>]*aria-current="page"[^>]*>/g)].map(match => match[0]);
     assert.equal(activeLinks.length, 2);
