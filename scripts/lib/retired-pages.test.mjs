@@ -9,6 +9,7 @@ import { enPageMeta } from '../i18n/dictionary.mjs';
 import { injectHreflang } from './html.mjs';
 import { injectLangSwitcher } from '../i18n/lang-switcher.mjs';
 import { validateBuild } from './validate.mjs';
+import { fallbackOgImage, normalizeSocialMeta } from './social-meta.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const formerPages = ['/services/', '/en/services/', '/clients/', '/en/clients/', '/logo-design/', '/en/logo-design/'];
@@ -40,10 +41,14 @@ test('build validation rejects retired internal links, including scraped relativ
         let html = `<html><head><title>Page</title><meta name="description" content="A sufficiently long description for the validation of this test page."><meta name="robots" content="noindex, nofollow"></head><body><header></header><h1>Page</h1><form data-ect-contact="${language}"></form><footer></footer></body></html>`;
         html = injectHreflang(html, { site: 'https://www.echipadetocilari.ro', roPath: route.ro, enPath: route.en });
         html = injectLangSwitcher(html, language, route.ro, route.en);
+        html = normalizeSocialMeta(html, { site: 'https://www.echipadetocilari.ro', pageUrl: route[language], locale: language === 'en' ? 'en_US' : 'ro_RO' });
         writeFileSync(file, html);
         files.push(file); publicPaths.set(file, route[language]);
       }
     }
+    const logo = path.join(directory, fallbackOgImage.path);
+    mkdirSync(path.dirname(logo), { recursive: true });
+    writeFileSync(logo, '');
     const options = { outDir: directory, files, urlPathOf: file => publicPaths.get(file), indexable: false };
     assert.deepEqual(validateBuild(options), []);
     const file = path.join(directory, 'about-2/index.html');

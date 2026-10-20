@@ -9,6 +9,7 @@ import { injectLangSwitcher } from './lang-switcher.mjs';
 import { injectHreflang } from '../lib/html.mjs';
 import { extractHomeFaqs } from '../lib/faq.mjs';
 import { validateBuild } from '../lib/validate.mjs';
+import { fallbackOgImage, normalizeSocialMeta } from '../lib/social-meta.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const source = path.join(root, 'legacy-mirror');
@@ -112,11 +113,15 @@ test('build validation requires only approved language variants and rejects stal
         let html = `<html lang="${language}"><head><title>Page</title><meta name="description" content="A sufficiently long description for this page so metadata checks pass."><meta name="robots" content="noindex, nofollow"></head><body><header></header><main><h1>Page</h1></main><form data-ect-contact="${language}"></form><footer></footer></body></html>`;
         html = injectHreflang(html, { site, roPath: route.ro, enPath: route.en });
         html = injectLangSwitcher(html, language, route.ro, route.en);
+        html = normalizeSocialMeta(html, { site, pageUrl: url, locale: language === 'en' ? 'en_US' : 'ro_RO' });
         writeFileSync(file, html);
         files.push(file);
         publicPaths.set(file, url);
       }
     }
+    const logo = path.join(scratch.directory, fallbackOgImage.path);
+    mkdirSync(path.dirname(logo), { recursive: true });
+    writeFileSync(logo, '');
     const options = { outDir: scratch.directory, files, urlPathOf: file => publicPaths.get(file), indexable: false };
     assert.deepEqual(validateBuild(options), []);
     const shopFile = path.join(scratch.directory, shop.roFile);

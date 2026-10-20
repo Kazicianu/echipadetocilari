@@ -45,6 +45,8 @@ import { normalizePageLinks } from './lib/navigation.mjs';
 import { ensureSharedContact } from './lib/shared-contact.mjs';
 import { enhanceMobileMenu } from './lib/mobile-menu.mjs';
 import { enhanceDesktopHeader } from './lib/desktop-header.mjs';
+import { normalizeSocialMeta } from './lib/social-meta.mjs';
+import { pageSources, resolveLastmods } from './lib/lastmod.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
@@ -213,6 +215,7 @@ function enhanceHtml(file) {
     html = upsertMeta(html, 'property="og:url"', `${SITE}${urlPath}`);
     html = upsertMeta(html, 'name="twitter:title"', meta.title);
     html = upsertMeta(html, 'name="twitter:description"', meta.description);
+    html = normalizeSocialMeta(html, { site: SITE, pageUrl: urlPath, locale: 'ro_RO' });
     html = appendToHead(html, renderJsonLd(schemasFor(urlPath, meta, html)));
   }
 
@@ -287,9 +290,21 @@ writeFileSync(
   'utf8'
 );
 
+// Every build refreshes the saved dates when the full git history is present,
+// so the shallow Vercel clone can still publish real modification days.
+const lastmods = resolveLastmods({
+  root,
+  pages: routes.flatMap(pageSources),
+  manifestFile: path.join(root, 'scripts', 'i18n', 'lastmod.json'),
+});
+if (lastmods.updated) console.log('  updated scripts/i18n/lastmod.json, commit it with the page changes');
+const missingLastmod = Object.keys(lastmods.dates).filter((url) => !lastmods.dates[url]);
+
 if (INDEXABLE) {
   const entry = (loc, alternates) =>
-    `  <url><loc>${SITE}${loc}</loc><changefreq>weekly</changefreq>${alternates}</url>`;
+    `  <url><loc>${SITE}${loc}</loc>` +
+    (lastmods.dates[loc] ? `<lastmod>${lastmods.dates[loc]}</lastmod>` : '') +
+    `<changefreq>weekly</changefreq>${alternates}</url>`;
   const alternatesFor = (r) => !r.en ? '' :
     `<xhtml:link rel="alternate" hreflang="ro" href="${SITE}${r.ro}"/>` +
     `<xhtml:link rel="alternate" hreflang="en" href="${SITE}${r.en}"/>` +
@@ -317,6 +332,11 @@ const errors = validateBuild({
   indexable: INDEXABLE,
 });
 errors.push(...validateStandaloneAssets({ outDir, files: walkHtml(outDir), urlPathOf }));
+if (INDEXABLE) {
+  for (const url of missingLastmod) {
+    errors.push(`sitemap.xml: no lastmod for ${url}; run a build with the full git history and commit scripts/i18n/lastmod.json`);
+  }
+}
 
 if (errors.length) {
   console.error(`✗ ${errors.length} problem(s) in dist/:`);

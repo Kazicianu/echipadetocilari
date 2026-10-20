@@ -5,7 +5,7 @@
  * mode is silent: a dictionary entry lands inside inline JS, or a page quietly
  * loses its meta. These assertions turn that into a red build.
  */
-import { readFileSync } from 'fs';
+import { existsSync, readFileSync } from 'fs';
 import path from 'path';
 import vm from 'vm';
 import { routes, isOwnedPage, retiredPagePaths } from '../i18n/routes.mjs';
@@ -83,6 +83,12 @@ export function validateBuild({ outDir, files, urlPathOf, indexable }) {
       const alt = (html.match(/rel=["']alternate["'][^>]*hreflang/gi) || []).length;
       const expectedAlt = route?.en ? 3 : 0;
       if (alt !== expectedAlt) errors.push(`${rel(file)}: expected ${expectedAlt} hreflang links, found ${alt}`);
+      checkSocialMeta(html, urlPath.startsWith('/en/') ? 'en_US' : 'ro_RO', outDir, rel(file), errors);
+      const footerCopy = pageCopy.match(/<footer\b[\s\S]*?<\/footer>/i)?.[0] || '';
+      if (/<h[1-6]\b/i.test(footerCopy)) errors.push(`${rel(file)}: heading inside the footer`);
+      for (const [img] of pageCopy.matchAll(/<img\b[^>]*>/gi)) {
+        if (!/\salt=["']/i.test(img)) errors.push(`${rel(file)}: image without alt attribute ${img.slice(0, 120)}`);
+      }
     }
   }
 
@@ -94,6 +100,31 @@ export function validateBuild({ outDir, files, urlPathOf, indexable }) {
   }
 
   return errors;
+}
+
+/** Share previews: page locale, an absolute image that exists, no WordPress leftovers. */
+function checkSocialMeta(html, locale, outDir, name, errors) {
+  const meta = (attr) =>
+    [...html.matchAll(new RegExp(`<meta\\s+[^>]*${attr}[^>]*>`, 'gi'))].map(([tag]) => tag.match(/\scontent=["']([^"']*)["']/i)?.[1]);
+  const [ogLocale] = meta('property=["\']og:locale["\']');
+  if (ogLocale !== locale) errors.push(`${name}: og:locale is ${ogLocale}, expected ${locale}`);
+  if (/<meta\s+[^>]*(?:property=["'](?:og:updated_time|article:[\w:]+)["']|name=["']twitter:(?:label|data)\d+["'])/i.test(html)) {
+    errors.push(`${name}: stale WordPress share meta (og:updated_time, article:*, twitter:label)`);
+  }
+  for (const [label, attr] of [['og:image', 'property=["\']og:image["\']'], ['twitter:image', 'name=["\']twitter:image["\']']]) {
+    const values = meta(attr);
+    if (values.length !== 1) {
+      errors.push(`${name}: expected one ${label} tag, found ${values.length}`);
+      continue;
+    }
+    let url;
+    try { url = new URL(values[0]); } catch { url = null; }
+    if (!url || !['http:', 'https:'].includes(url.protocol)) {
+      errors.push(`${name}: share image is not an absolute URL (${values[0]})`);
+    } else if (!existsSync(path.join(outDir, decodeURIComponent(url.pathname)))) {
+      errors.push(`${name}: share image missing from dist (${url.pathname})`);
+    }
+  }
 }
 
 /** Syntax-check every inline script: real JS with the parser, data blocks as JSON. */

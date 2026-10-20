@@ -20,6 +20,7 @@ import {
 } from '../lib/html.mjs';
 import { faqPage, organization, service, webPage, website } from '../lib/schema.mjs';
 import { extractGoogleAdsFaqs, extractHomeFaqs } from '../lib/faq.mjs';
+import { normalizeSocialMeta } from '../lib/social-meta.mjs';
 
 /**
  * Longest phrase first, so "Servicii SEO" wins over "Servicii".
@@ -132,11 +133,11 @@ export function generateEnglishPages({ outDir, site, indexable }) {
       html = upsertMeta(html, 'name="description"', meta.description);
       html = upsertMeta(html, 'property="og:title"', meta.title);
       html = upsertMeta(html, 'property="og:description"', meta.description);
-      html = upsertMeta(html, 'property="og:locale"', 'en_US');
       html = upsertMeta(html, 'name="twitter:title"', meta.title);
       html = upsertMeta(html, 'name="twitter:description"', meta.description);
     }
     html = upsertMeta(html, 'property="og:url"', `${site}${route.en}`);
+    html = normalizeSocialMeta(html, { site, pageUrl: route.en, locale: 'en_US' });
 
     html = injectHreflang(html, { site, roPath: route.ro, enPath: route.en });
     html = injectLangSwitcher(html, 'en', route.ro === '/' ? '/' : route.ro, route.en);

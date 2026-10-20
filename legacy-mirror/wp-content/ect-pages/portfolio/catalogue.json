@@ -28,7 +28,7 @@
     {
       "id": 4959,
       "slug": "blog-de-fashion-si-lifestyle",
-      "title": "Blog de Fashion si Lifestyle",
+      "title": "Blog de Fashion și Lifestyle",
       "categories": [
         17
       ],
@@ -83,7 +83,7 @@
     {
       "id": 4971,
       "slug": "agentie",
-      "title": "Agentie",
+      "title": "Agenție",
       "categories": [
         18
       ],
@@ -116,7 +116,7 @@
     {
       "id": 4975,
       "slug": "reparatii-masini",
-      "title": "Reparatii Masini",
+      "title": "Reparații Mașini",
       "categories": [
         18
       ],
@@ -127,7 +127,7 @@
     {
       "id": 4977,
       "slug": "agentie-digitala",
-      "title": "Agentie Digitala",
+      "title": "Agenție Digitală",
       "categories": [
         18
       ],
@@ -138,7 +138,7 @@
     {
       "id": 4979,
       "slug": "firma-gradinarit",
-      "title": "Firma Gradinarit",
+      "title": "Firmă de Grădinărit",
       "categories": [
         18
       ],
@@ -149,7 +149,7 @@
     {
       "id": 4981,
       "slug": "firma-constructii",
-      "title": "Firma Constructii",
+      "title": "Firmă de Construcții",
       "categories": [
         18
       ],
@@ -171,7 +171,7 @@
     {
       "id": 4986,
       "slug": "firma-avocatura",
-      "title": "Firma Avocatura",
+      "title": "Firmă de Avocatură",
       "categories": [
         18
       ],
@@ -182,7 +182,7 @@
     {
       "id": 4985,
       "slug": "invitatie-nunta",
-      "title": "Invitatie Nunta",
+      "title": "Invitație de Nuntă",
       "categories": [
         21
       ],
@@ -204,7 +204,7 @@
     {
       "id": 4994,
       "slug": "clinica-dentara",
-      "title": "Clinica Dentara",
+      "title": "Clinică Dentară",
       "categories": [
         18
       ],
@@ -226,7 +226,7 @@
     {
       "id": 4998,
       "slug": "servicii-de-curatenie",
-      "title": "Servicii de Curatenie",
+      "title": "Servicii de Curățenie",
       "categories": [
         18
       ],
@@ -237,7 +237,7 @@
     {
       "id": 5000,
       "slug": "hotel-si-pensiune",
-      "title": "Hotel si Pensiune",
+      "title": "Hotel și Pensiune",
       "categories": [
         18
       ],

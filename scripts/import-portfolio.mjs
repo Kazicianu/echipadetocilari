@@ -14,6 +14,19 @@ const catalogueFile = path.join(targetDir, 'catalogue.json');
 const pageFile = path.join(root, 'legacy-mirror/portofoliu/index.html');
 const escape = (value) => String(value).replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
 
+/** Intrinsic JPEG size from the SOF segment, so each card reserves its space before the image loads. */
+function jpegSize(buffer, file) {
+  if (buffer[0] !== 0xff || buffer[1] !== 0xd8) throw new Error(`Not a JPEG image: ${file}`);
+  for (let i = 2; i + 9 < buffer.length; i += 2 + buffer.readUInt16BE(i + 2)) {
+    if (buffer[i] !== 0xff) break;
+    const marker = buffer[i + 1];
+    if (marker >= 0xc0 && marker <= 0xcf && ![0xc4, 0xc8, 0xcc].includes(marker)) {
+      return { width: buffer.readUInt16BE(i + 7), height: buffer.readUInt16BE(i + 5) };
+    }
+  }
+  throw new Error(`Cannot read JPEG size: ${file}`);
+}
+
 async function download(url) {
   const response = await fetch(url, { signal: AbortSignal.timeout(30000) });
   if (!response.ok) throw new Error(`HTTP ${response.status}: ${url}`);
@@ -68,9 +81,14 @@ if (process.argv.includes('--refresh')) {
 
 const categories = catalogue.categories.filter((category) => catalogue.items.some((item) => item.categories.includes(category.id)));
 const filters = [{ id: 'all', name: 'Toate' }, ...categories].map((category) => `<button type="button" data-category="${escape(category.id)}" aria-pressed="${category.id === 'all'}">${escape(category.name === 'Other' ? 'Altele' : category.name)}</button>`).join('\n');
+const sizes = await Promise.all(catalogue.items.map(async (item) => {
+  const file = path.join(root, 'legacy-mirror', item.image);
+  return jpegSize(await readFile(file), file);
+}));
+// The link is named by the card title; the alt describes the screenshot itself. EN alts live in dictionary.mjs.
 const cards = catalogue.items.map((item, index) => `<article class="ect-portfolio-card" data-categories="${item.categories.join(' ')}">
   <a class="ect-portfolio-preview" href="${escape(item.demoUrl)}" target="_blank" rel="noopener noreferrer" data-elementor-open-lightbox="no" aria-labelledby="ect-model-${item.id}">
-    <img src="${escape(item.image)}" alt="" loading="${index < 3 ? 'eager' : 'lazy'}" decoding="async">
+    <img src="${escape(item.image)}" alt="${escape(`Captură de ecran a modelului de site ${item.title}`)}" width="${sizes[index].width}" height="${sizes[index].height}" loading="${index < 3 ? 'eager' : 'lazy'}" decoding="async">
     <span class="ect-portfolio-overlay"><span>Vezi modelul</span></span>
   </a>
   <h3 id="ect-model-${item.id}"><a href="${escape(item.demoUrl)}" target="_blank" rel="noopener noreferrer">${escape(item.title)}</a></h3>

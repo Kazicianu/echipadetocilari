@@ -48,6 +48,8 @@ node --env-file=.env.local scripts/build-static.mjs
 | `scripts/lib/navigation.mjs` | Rezolvă linkurile relative folosind pagina sursă și limba țintă |
 | `scripts/lib/standalone-assets.mjs` | Elimină integrările WordPress nefolosite și verifică asset-urile locale |
 | `scripts/lib/contact-forms.mjs` | Adaptează formularele după generarea paginilor EN |
+| `scripts/lib/social-meta.mjs` | Open Graph și Twitter: `og:locale` pe limbă, imagini absolute, logo implicit, fără etichetele vechi WordPress |
+| `scripts/lib/lastmod.mjs`, `scripts/i18n/lastmod.json` | `<lastmod>` din sitemap: ziua ultimului commit al surselor paginii. Build-ul local actualizează fișierul JSON, care se comite împreună cu pagina; pe Vercel (clonă parțială) datele lipsă din istoric se iau din el |
 | `api/contact.js`, `server/contact.mjs` | Intrarea Vercel și implementarea server pentru formulare |
 | `dist/` | Rezultatul generat; nu se editează direct |
 | `vercel.json` | Build, funcția API, redirecturi și headere |
