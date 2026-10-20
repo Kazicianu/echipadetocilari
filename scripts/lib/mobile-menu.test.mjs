@@ -6,6 +6,7 @@ import test from 'node:test';
 import { dictionary, googleAdsDictionary } from '../i18n/dictionary.mjs';
 import { injectLangSwitcher } from '../i18n/lang-switcher.mjs';
 import { routes } from '../i18n/routes.mjs';
+import { setLang } from './html.mjs';
 import { enhanceMobileMenu } from './mobile-menu.mjs';
 import { normalizePageLinks, removeUnavailableMenuLinks } from './navigation.mjs';
 
@@ -49,7 +50,7 @@ function preparedPage(route, language) {
     for (const [from, to] of pairs) html = html.split(from).join(to);
   }
   html = normalizePageLinks(html, { pageUrl: route.ro, language });
-  return injectLangSwitcher(html, language, route.ro, route.en);
+  return setLang(injectLangSwitcher(html, language, route.ro, route.en), language);
 }
 
 test('the expanding mobile menu preserves every available translated link on each RO and EN page', () => {
@@ -57,16 +58,22 @@ test('the expanding mobile menu preserves every available translated link on eac
   for (const route of routes) {
     for (const language of route.en ? ['ro', 'en'] : ['ro']) {
       const original = preparedPage(route, language);
-      const expected = links(menu(original, 'elementor-nav-menu--dropdown'));
-      const enhanced = enhanceMobileMenu(original);
+      const source = links(menu(original, 'elementor-nav-menu--dropdown'));
+      const home = {
+        href: language === 'en' ? '/en/' : '/',
+        current: route.ro === '/' ? 'page' : undefined,
+        label: language === 'en' ? 'Home' : 'Acasă',
+      };
+      const expected = [home, ...source];
+      const enhanced = enhanceMobileMenu(original, { pageUrl: route[language] });
       const actual = links(enhanced, 'ect-mobile-menu-link');
       const label = `${route[language]} (${language})`;
 
-      assert.equal(expected.length, language === 'ro' ? 8 : 6, `${label}: source has only available mobile links`);
-      assert.deepEqual(actual, expected, `${label}: copied links retain routes, labels and current page`);
+      assert.equal(source.length, language === 'ro' ? 8 : 6, `${label}: source has only available mobile links`);
+      assert.deepEqual(actual, expected, `${label}: the homepage leads the copied links, which retain routes, labels and current page`);
       checkedCurrentLinks += actual.filter(link => link.current === 'page').length;
       assert.equal(menu(enhanced, 'elementor-nav-menu--main'), menu(original, 'elementor-nav-menu--main'), `${label}: desktop markup remains intact`);
-      assert.deepEqual(links(menu(enhanced, 'elementor-nav-menu--dropdown')), expected, `${label}: original mobile fallback links remain intact`);
+      assert.deepEqual(links(menu(enhanced, 'elementor-nav-menu--dropdown')), expected, `${label}: the no-script fallback lists the same links`);
       assert.equal(enhanced.match(/<nav\b[^>]*id="ect-lang-switch"[\s\S]*?<\/nav>/i)?.[0], original.match(/<nav\b[^>]*id="ect-lang-switch"[\s\S]*?<\/nav>/i)?.[0], `${label}: language switch retains its routes and state`);
       assert.deepEqual(links(enhanced, 'ect-mobile-menu-footer-link'), [
         { href: route.ro, current: language === 'ro' ? 'true' : undefined, label: 'RO' },

@@ -1,7 +1,21 @@
 import { appendToBody, appendToHead } from './html.mjs';
+import { routes } from '../i18n/routes.mjs';
+
+const home = routes.find(route => route.ro === '/');
+
+/** Lead the mobile list with the homepage; on desktop the logo links there. */
+function withHomeLink(dropdown, english, pageUrl) {
+  const href = english ? home.en : home.ro;
+  if (dropdown.includes(`href="${href}"`)) return dropdown;
+  const current = pageUrl === href;
+  const item = `<li class="menu-item menu-item-type-post_type menu-item-object-page${current ? ' current-menu-item' : ''}">` +
+    `<a href="${href}" class="elementor-item${current ? ' elementor-item-active' : ''}" tabindex="-1"${current ? ' aria-current="page"' : ''}>` +
+    `${english ? home.labelEn : home.labelRo}</a></li>\n`;
+  return dropdown.replace(/(<ul\b[^>]*>)/i, `$1${item}`);
+}
 
 /** Enhance the translated header once, after language and route generation. */
-export function enhanceMobileMenu(html) {
+export function enhanceMobileMenu(html, { pageUrl } = {}) {
   if (html.includes('id="ect-mobile-menu"')) return html;
   const header = html.match(/<header\b[\s\S]*?<\/header>/i)?.[0];
   if (!header) return html;
@@ -15,7 +29,8 @@ export function enhanceMobileMenu(html) {
   const label = english ? 'Main menu' : 'Meniu principal';
   const open = english ? 'Open menu' : 'Deschide meniul';
   const close = english ? 'Close menu' : 'Închide meniul';
-  const links = [...dropdown.matchAll(/<a\b[^>]*>[\s\S]*?<\/a>/gi)].map(([link]) =>
+  const menu = withHomeLink(dropdown, english, pageUrl);
+  const links = [...menu.matchAll(/<a\b[^>]*>[\s\S]*?<\/a>/gi)].map(([link]) =>
     `<li class="ect-mobile-menu-link-wrap">${link
       .replace(/\sclass="[^"]*"/, ' class="ect-mobile-menu-link"')
       .replace(/\s(?:tabindex|id)="[^"]*"/g, '')}</li>`).join('\n');
@@ -24,7 +39,7 @@ export function enhanceMobileMenu(html) {
   const footer = language.replace(/<a\b/g, '<a class="ect-mobile-menu-footer-link"');
   const button = `<span class="ect-mobile-menu-slot"><button type="button" class="ect-mobile-menu-toggle" aria-expanded="false" aria-controls="ect-mobile-menu" aria-label="${open}" data-open-label="${open}" data-close-label="${close}"><span class="ect-mobile-menu-icon" aria-hidden="true"><span></span><span></span></span></button></span>`;
   // Keep the original links available even if JavaScript fails to load.
-  const fallback = dropdown.replace('aria-hidden="true"', 'aria-hidden="false"')
+  const fallback = menu.replace('aria-hidden="true"', 'aria-hidden="false"')
     .replace(/\stabindex="-1"/g, '');
   html = html.replace(header, header.replace(toggle, button).replace(dropdown, fallback));
   html = appendToHead(html, '<link rel="stylesheet" href="/wp-content/ect-pages/mobile-menu.css">');

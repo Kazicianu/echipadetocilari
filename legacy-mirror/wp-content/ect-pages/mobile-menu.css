@@ -106,6 +106,8 @@
   scrollbar-width: thin;
   scrollbar-color: #55555e transparent;
 }
+/* Short phones keep every link in view; each link stays a 44px target. */
+@media (max-height: 690px) { .ect-mobile-menu-links { gap: 0; } }
 .ect-mobile-menu-link-wrap { flex: none; width: 100%; overflow: hidden; perspective: 300px; margin: 0; padding: 0; }
 #ect-mobile-menu .ect-mobile-menu-link {
   display: block;
