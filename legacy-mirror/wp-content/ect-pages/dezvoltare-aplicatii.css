@@ -548,7 +548,7 @@ body.ap-landing{margin:0}
 .ap-page .ap-pcard__price{margin:-8px 0 4px;text-align:center;font-size:clamp(36px,4vw,46px);line-height:1.1;font-weight:600;white-space:nowrap;font-variant-numeric:tabular-nums}
 .ap-page .ap-pcard__list{flex:1 1 0%;display:grid;align-content:start;gap:10px;margin:10px 0 0;padding:0;list-style:none}
 .ap-page .ap-pcard__list li{display:flex;align-items:flex-start;gap:10px;font-size:16px;line-height:22.4px;font-weight:500}
-.ap-page .ap-pcard__list li::before{content:"✓";flex:none;width:15px;font-weight:800;color:var(--orange-check)}
+.ap-page .ap-pcard__list svg{flex:0 0 auto;width:15px;height:15px;margin-top:4px;fill:rgb(52,178,51)}
 .ap-page .ap-pcard__limits{border-top:1px solid var(--line);padding-top:var(--space-15);font-size:14px;line-height:1.5;font-weight:300}
 .ap-page .ap-pcard__limits p{margin:0 0 8px;font-weight:600}
 .ap-page .ap-pcard__limits ul{display:grid;gap:8px;margin:0;padding-left:18px}
@@ -558,14 +558,16 @@ body.ap-landing{margin:0}
 /* ---------- Included in the price / paid separately ---------- */
 .ap-page .ap-scope{padding-top:6px}
 .ap-page .ap-scope__grid{display:grid;gap:16px;margin-top:22px}
-.ap-page .ap-scope__in{padding:26px 20px 28px;border-radius:15px 15px 15px var(--radius-leaf-sm);background:var(--orange);color:var(--white)}
-.ap-page .ap-scope__out{padding:26px 20px 28px;border:2px dashed var(--line-step);border-radius:15px 15px 15px var(--radius-leaf-sm);background:var(--white)}
+.ap-page .ap-scope__in{padding:26px 20px 28px;border-radius:15px 15px 15px var(--radius-leaf-sm);background:var(--orange);color:#fcfcfc}
+.ap-page .ap-scope__out{padding:26px 20px 28px;border:2px dashed var(--orange);border-radius:15px 15px 15px var(--radius-leaf-sm);background:var(--white)}
 .ap-page .ap-scope__h{margin:0 0 14px;font-size:20px;line-height:1.25;font-weight:600}
-.ap-page .ap-scope__in .ap-scope__h{color:var(--white)}
+.ap-page .ap-scope__in .ap-scope__h{color:#fcfcfc}
+.ap-page .ap-scope__out .ap-scope__h{color:var(--orange)}
 .ap-page .ap-scope__list{display:grid;gap:11px;margin:0;padding:0;list-style:none}
 .ap-page .ap-scope__list li{display:flex;align-items:flex-start;gap:12px;font-size:15px;line-height:1.45;font-weight:500}
-.ap-page .ap-scope__in .ap-scope__list li::before{content:"✓";flex:none;display:grid;place-items:center;width:22px;height:22px;margin-top:1px;border-radius:50%;background:var(--white);color:var(--orange-deep);font-size:12px;font-weight:800}
-.ap-page .ap-scope__out .ap-scope__list li::before{content:"+";flex:none;display:grid;place-items:center;width:22px;height:22px;margin-top:1px;border-radius:50%;background:var(--peach);color:var(--orange-deep);font-size:15px;font-weight:700}
+/* Same marks as the store page: an ink check on white, a light plus on orange. The 24px circle sits centred on the first line. */
+.ap-page .ap-scope__list svg{flex:0 0 auto;box-sizing:content-box;width:14px;height:14px;margin-top:calc(.725em - 12px);padding:5px;border-radius:50%;background:var(--white);fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.ap-page .ap-scope__out .ap-scope__list svg{width:12px;height:12px;padding:6px;background:var(--orange);stroke:#fcfcfc;stroke-width:3.2}
 .ap-page .ap-scope__note{margin:16px 0 0;font-size:14px;line-height:1.5;color:var(--ink-muted)}
 .ap-page .ap-scope__terms{max-width:900px;margin-top:var(--space-24)}
 @media (min-width:768px){.ap-page .ap-scope__grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:28px}.ap-page .ap-scope__in,.ap-page .ap-scope__out{padding:40px 40px 42px}.ap-page .ap-scope__in{border-radius:15px 15px 15px var(--radius-leaf)}.ap-page .ap-scope__h{margin-bottom:16px;font-size:22px}.ap-page .ap-scope__list{gap:12px}.ap-page .ap-scope__list li{font-size:16px}.ap-page .ap-scope__note{margin-top:18px}}
