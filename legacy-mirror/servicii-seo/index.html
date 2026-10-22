@@ -147,6 +147,21 @@ window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(argumen
     .ect-seo-ai details p{margin:0 0 20px}
     .ect-seo-ai__note{max-width:850px;margin:24px 0 0}
     @media(min-width:768px){.ect-seo-ai__grid{grid-template-columns:1fr 1fr}.ect-seo-ai__card{padding:32px}}
+    /* Background blobs: each sheet must fit its painting box, so no drawn shape
+       ends in a straight line at a section edge. */
+    @media (min-width:768px) and (max-width:1024px){
+      .elementor-4105 .elementor-element.elementor-element-e220ae4::before{background-size:auto 75%;background-position:-261px 100%}
+    }
+    @media (min-width:768px){
+      .elementor-4105 .elementor-element.elementor-element-98b2ced::before{background-position:right 0 top 56px}
+    }
+    @media (min-width:1025px){
+      .elementor-4105 .elementor-element.elementor-element-e220ae4::before{top:auto;bottom:0;height:max(100%,40.32vw)}
+      .elementor-4105 .elementor-element.elementor-element-8f0334e::before{height:max(100%,1067px);top:min(0px,calc((100% - 1067px) / 2))}
+    }
+    @media (min-width:1922px){
+      .elementor-4105 .elementor-element.elementor-element-8f0334e::before{background-size:100% auto;height:max(100%,calc(54.72vw + 16px));top:min(0px,calc((100% - 54.72vw - 16px) / 2))}
+    }
   </style>
 </head>
 <body class="wp-singular page-template page-template-elementor_header_footer page page-id-4105 wp-custom-logo wp-theme-hello-elementor elementor-default elementor-template-full-width elementor-kit-3353 elementor-page elementor-page-4105">

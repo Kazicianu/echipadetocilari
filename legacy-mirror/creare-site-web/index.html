@@ -149,6 +149,23 @@ window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(argumen
         overflow-wrap: anywhere;
       }
     }
+    /* Background blobs: keep every drawn shape whole instead of ending in a
+       straight line. The hero sheet is cut at its own top row, so its painting
+       box must start above the page, as it does on desktop; past 1920px the
+       header keeps growing, so the lift tracks the width. */
+    @media (min-width: 768px) and (max-width: 1024px) {
+      .elementor-3471 .elementor-element.elementor-element-4249b16::before { top: -200px; height: calc(100% + 200px); background-position: 100% 0; }
+      .elementor-3471 .elementor-element.elementor-element-1ff9b9c2::before { background-size: auto 60%; background-position: -160px 100%; }
+    }
+    @media (min-width: 1518px) {
+      .elementor-3471 .elementor-element.elementor-element-6d9d3ab2::before { background-size: 100% 100%; }
+    }
+    @media (min-width: 1821px) {
+      .elementor-3471 .elementor-element.elementor-element-1ff9b9c2::before { background-size: 100% 100%; }
+    }
+    @media (min-width: 1921px) {
+      .elementor-3471 .elementor-element.elementor-element-4249b16::before { top: calc(70px - 3.7vw); height: calc(100% - 70px + 3.7vw); }
+    }
   </style>
 </head>
 <body class="wp-singular page-template page-template-elementor_header_footer page page-id-3471 wp-custom-logo wp-theme-hello-elementor elementor-default elementor-template-full-width elementor-kit-3353 elementor-page elementor-page-3471">

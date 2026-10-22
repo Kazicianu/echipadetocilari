@@ -22,3 +22,8 @@
 @media (max-width: 1024px) { .ect-portfolio-controls { flex-direction: column; } .ect-portfolio-grid { gap: 32px 24px; } }
 @media (max-width: 767px) { .ect-portfolio-grid { grid-template-columns: 1fr; gap: 32px; } }
 @media (prefers-reduced-motion: reduce) { .ect-portfolio-preview img, .ect-portfolio-overlay { transition: none; } }
+
+/* Bg-Services: size the drawing by the section height. Same as cover in the
+   full list; when a filter or search leaves one row or none, the section turns
+   short and wide, and cover would crop the blobs at the contact section. */
+.elementor-4988 .elementor-element.elementor-element-499e085::before { background-size: auto 100%; }

@@ -693,7 +693,12 @@
 
 .ect-page.ect-page--creare-magazin-online .mg-prices { position: relative; overflow: hidden; padding: clamp(60px, 8vw, 100px) 20px; }
 
-.ect-page.ect-page--creare-magazin-online .mg-prices__blob1 { position: absolute; right: -260px; top: -140px; width: 900px; height: 900px; border-radius: 50%; background: var(--blob-lavender); }
+.ect-page.ect-page--creare-magazin-online .mg-prices__blob1 { position: absolute; right: -260px; top: 24px; width: 900px; height: 900px; border-radius: 50%; background: var(--blob-lavender); }
+/* The whole circle sits inside the section, so its round top shows instead of a
+   straight edge. On phones a 900px circle would read as a band across the screen. */
+@media (max-width: 767px) {
+  .ect-page.ect-page--creare-magazin-online .mg-prices__blob1 { right: -220px; width: 560px; height: 560px; }
+}
 
 .ect-page.ect-page--creare-magazin-online .mg-prices__blob2 { position: absolute; left: -120px; top: 55%; width: 220px; height: 260px; border-radius: 50%; background: var(--blob-turquoise); }
 
@@ -766,8 +771,10 @@
   .ect-page.ect-page--creare-magazin-online .mg-pcard__for { min-height: 2.8em; }
 }
 
-/* What the package price covers and what is paid or estimated separately. */
-.ect-page.ect-page--creare-magazin-online .mg-scope { position: relative; overflow: hidden; box-sizing: border-box; padding: clamp(32px, 3.4vw, 48px) 20px clamp(60px, 8vw, 100px); background: var(--white); color: var(--ink); }
+/* What the package price covers and what is paid or estimated separately.
+   The section clips only sideways, so the lavender circle at its bottom right
+   carries on under the (transparent) FAQ and ends in its own curve. */
+.ect-page.ect-page--creare-magazin-online .mg-scope { position: relative; overflow: hidden; overflow: clip visible; box-sizing: border-box; padding: clamp(32px, 3.4vw, 48px) 20px clamp(60px, 8vw, 100px); background: var(--white); color: var(--ink); }
 
 .ect-page.ect-page--creare-magazin-online .mg-scope__blob1 { position: absolute; left: -130px; top: 38%; width: 300px; height: 340px; border-radius: 50%; background: var(--blob-turquoise); }
 
@@ -864,7 +871,7 @@
 
 .ect-page.ect-page--creare-magazin-online .mg-scope__facts dd { margin: 0; font-size: clamp(14px, 13px + 0.15vw, 15px); line-height: 1.5; font-weight: 400; text-wrap: pretty; }
 
-.ect-page.ect-page--creare-magazin-online .ect-home-faq { position: relative; z-index: 1; width: 100%; box-sizing: border-box; padding: 64px 20px 72px; background: var(--white); color: var(--ink); font-family: var(--font-sans); }
+.ect-page.ect-page--creare-magazin-online .ect-home-faq { position: relative; z-index: 1; width: 100%; box-sizing: border-box; padding: 64px 20px 72px; background: transparent; color: var(--ink); font-family: var(--font-sans); }
 
 .ect-page.ect-page--creare-magazin-online .ect-home-faq *, .ect-page.ect-page--creare-magazin-online .ect-home-faq ::before, .ect-page.ect-page--creare-magazin-online .ect-home-faq ::after { box-sizing: border-box; }
 

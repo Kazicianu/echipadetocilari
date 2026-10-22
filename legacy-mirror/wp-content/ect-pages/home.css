@@ -130,7 +130,9 @@
    section is 1270px tall against a sheet cut for an 800px band, so cover would
    blow the blobs up to twice the size they are drawn at everywhere else. The
    width here keeps the turquoise at ~525px, same as it renders further up the
-   page. Already loaded up there too, so it costs no request. */
+   page. Already loaded up there too, so it costs no request. Past 1690px the
+   sheet grows with the page, so the lavender on its right edge keeps bleeding
+   off the screen instead of ending in a vertical line. */
 .ect-process::before {
   content: '';
   position: absolute;
@@ -138,7 +140,7 @@
   z-index: 0;
   background-image: url('../uploads/2024/02/BG-home-new4.png');
   background-position: left -60px center;
-  background-size: 1750px auto;
+  background-size: max(1750px, calc(100% + 60px)) auto;
   background-repeat: no-repeat;
   pointer-events: none;
 }
@@ -1276,5 +1278,51 @@
   .ect-home-faq__answer {
     width: calc(100% - 62px);
     padding: 23px 27px;
+  }
+}
+
+/* Background blobs that would otherwise end in a straight line on wide screens.
+   Each Elementor sheet is drawn to fit a fixed band; once cover scales one by
+   width it crops the drawn shape, and the FAQ's white used to paint over the
+   last 150px of the testimonials box (its margin-bottom is -150px). */
+@media (min-width: 1025px) {
+  /* Hero: anchor the teal sheet at the bottom, so any crop falls above the page top. */
+  .elementor-3381 .elementor-element.elementor-element-7019e30c:not(.elementor-motion-effects-element-type-background),
+  .elementor-3381 .elementor-element.elementor-element-7019e30c > .elementor-motion-effects-container > .elementor-motion-effects-layer {
+    background-position: left bottom;
+  }
+
+  /* Testimonials: fit the sheet to the box height so the lavender blob keeps its
+     round top and bottom, and let it show through the top of the FAQ. The FAQ
+     keeps z-index 1, so its text and bubbles stay above the blob. */
+  .elementor-3381 .elementor-element.elementor-element-56f8a085::before {
+    background-size: auto 100%;
+  }
+
+  .ect-home-faq {
+    background-color: transparent;
+  }
+}
+
+/* About: the 780px box is 20px shorter than the 800px sheet, so above 1872px
+   cover crops the lavender blobs that touch its top and bottom. Grow the
+   overlay upward (the checklist's white would hide a downward extension). */
+@media (min-width: 1873px) {
+  .elementor-3381 .elementor-element.elementor-element-6afe7427::before {
+    top: -20px;
+    height: calc(100% + 20px);
+    pointer-events: none;
+  }
+}
+
+/* Tablet: the testimonials keep their desktop margins (-50px top, -150px
+   bottom) but lose the padding that made room for them, so the CTA band and
+   the FAQ covered the heading and the quote. Give the section its own space. */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .elementor-3381 .elementor-element.elementor-element-56f8a085 {
+    --margin-top: 0px;
+    --margin-bottom: 0px;
+    --padding-top: 80px;
+    --padding-bottom: 0px;
   }
 }

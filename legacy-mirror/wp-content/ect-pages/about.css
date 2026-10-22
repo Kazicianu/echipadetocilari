@@ -143,3 +143,26 @@
   .ect-about a, .ect-about-specialty { transition: none; }
   .ect-about-specialty:hover, .ect-about-specialty:focus-within { transform: none; }
 }
+
+/* Background blobs, tablet and desktop. The sheets are drawn to bleed off the
+   page edges, so none of them may end in a straight line inside the page:
+   - Hero: the turquoise sheet is cut at its top row, like on the homepage. main
+     moves up behind the transparent header and the hero padding grows by the
+     same amount, so the cut row sits above the page and no content moves.
+   - Story and values: on wide, short boxes cover crops the sheets top and
+     bottom. The boxes reach into the next section (margins and paddings cancel,
+     so nothing moves) and the sheets keep at least the width-fit height, which
+     keeps their cut side edges off-screen. Team turns transparent so the story
+     overflow shows under its cards and its own sheet. */
+@media (min-width: 768px) {
+  .ect-about { margin-top: -200px; }
+  .ect-about-hero { padding-top: calc(85px + 200px); background-position: center bottom; }
+  .ect-about-story { background-color: transparent; margin-bottom: -720px; padding-bottom: calc(80px + 720px); background-size: auto max(46.3vw, calc(100% - 720px)); background-position: center 16px; }
+  .ect-about-team { background-color: transparent; }
+  .ect-about-values { background-color: transparent; margin-top: -90px; margin-bottom: -450px; padding-top: calc(80px + 90px); padding-bottom: calc(80px + 450px); background-size: auto max(54.8vw, calc(100% - 560px)); background-position: center 16.67%; }
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+  .ect-about-hero { padding-top: calc(64px + 200px); }
+  .ect-about-story { padding-bottom: calc(60px + 720px); }
+  .ect-about-values { padding-top: calc(60px + 90px); padding-bottom: calc(60px + 450px); }
+}
