@@ -25,7 +25,7 @@ Conectarea nu a înlocuit deploymentul live: acesta rămâne `dpl_2z44QAM9usHdNd
 - Resend: domeniu verificat, DKIM la `resend._domainkey`, CNAME `rsend` către `rsend-euw1.forge.rmta.net` și CNAME `send` către `send.forge.rmta.net`. Primirea mesajelor în Resend este dezactivată.
 - Cheia `echipadetocilari-vercel` are doar Sending access pentru `echipadetocilari.ro`. Valoarea este stocată ca Secret `RESEND_API_KEY` în Vercel Production și Preview; nu în sursele site-ului.
 - `CONTACT_FROM=contact@echipadetocilari.ro`.
-- `CONTACT_TO=contact@echipadetocilari.ro,andrei.cazimirovici@gmail.com`.
+- `CONTACT_TO=contact@echipadetocilari.ro` plus o căsuță Gmail personală a echipei (adresa nu se publică în repository; valoarea exactă e în setările Vercel).
 - `CONTACT_SPAM_PROTECTION=vercel-waf`; regula WAF limitează POST pe `/api/contact` și `/api/contact/` la 5 cereri/IP/60 secunde.
 
 ## Verificări
