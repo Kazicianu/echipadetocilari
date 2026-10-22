@@ -12,6 +12,9 @@ import { routes, isOwnedPage, retiredPagePaths } from '../i18n/routes.mjs';
 
 const retiredPaths = new Set(retiredPagePaths);
 const ownHosts = new Set(['echipadetocilari.ro', 'www.echipadetocilari.ro']);
+// Letters that only Romanian uses here; the cedilla forms of ș/ț (U+015E, U+015F,
+// U+0162, U+0163) are escaped so this file never contains them.
+const ROMANIAN_LETTER = /[ăâîșțĂÂÎȘȚŞşŢţ]/;
 
 /**
  * @param {object} opts
@@ -31,6 +34,11 @@ export function validateBuild({ outDir, files, urlPathOf, indexable }) {
     const owned = isOwnedPage(urlPath);
 
     checkInlineBlocks(html, rel(file), errors);
+
+    // GA4 may load only through consent.js, after the visitor accepts analytics cookies.
+    if (/googletagmanager\.com\/gtag\/js|gtag\(\s*['"]config['"]/i.test(html)) {
+      errors.push(`${rel(file)}: Google tag in the static HTML; GA4 must load only through consent.js after consent`);
+    }
 
     const titles = html.match(/<title[^>]*>/gi) || [];
     if (titles.length > 1) errors.push(`${rel(file)}: ${titles.length} <title> tags`);
@@ -69,6 +77,16 @@ export function validateBuild({ outDir, files, urlPathOf, indexable }) {
       else if (footer < contact) errors.push(`${rel(file)}: contact form must precede the footer`);
       if (/[\u2014\u2196-\u2199]|&mdash;|&#8212;|&#x2014;|&#(?:8598|8599|8600|8601);|&#x219[6-9];/i.test(pageCopy)) {
         errors.push(`${rel(file)}: prohibited punctuation or diagonal arrow`);
+      }
+      // A Romanian block that missed its dictionary key (for example after a build
+      // step rewrote it) would otherwise ship in Romanian on the English page.
+      if (urlPath === '/en/' || urlPath.startsWith('/en/')) {
+        const leftover = pageCopy.match(ROMANIAN_LETTER);
+        if (leftover) {
+          const at = leftover.index;
+          const excerpt = pageCopy.slice(Math.max(0, at - 40), at + 40).replace(/\s+/g, ' ').trim();
+          errors.push(`${rel(file)}: Romanian text left on an English page ("${excerpt}"); translate it in scripts/i18n/`);
+        }
       }
       const desc = html.match(/<meta\s+name=["']description["'][^>]*content=["']([^"']*)["']/i);
       if (!desc || desc[1].trim().length < 50) {

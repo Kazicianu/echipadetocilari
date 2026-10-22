@@ -66,7 +66,7 @@ export function website({ site, lang }) {
   };
 }
 
-export function webPage({ site, lang, url, name, description }) {
+export function webPage({ site, lang, url, name, description, dateModified }) {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
@@ -77,7 +77,17 @@ export function webPage({ site, lang, url, name, description }) {
     inLanguage: lang === 'en' ? 'en-US' : 'ro-RO',
     isPartOf: { '@id': websiteId(site, lang) },
     about: { '@id': orgId(site) },
+    ...(dateModified ? { dateModified } : {}),
   };
+}
+
+/**
+ * The date a page shows as last updated, so WebPage.dateModified matches what
+ * visitors read: the <time datetime="YYYY-MM-DD"> inside `.ect-policy__updated`
+ * (the privacy policy). Undefined for pages without that line.
+ */
+export function visibleDateModified(html) {
+  return html.match(/<p\b[^>]*\bclass="[^"]*\bect-policy__updated\b[^"]*"[^>]*>(?:(?!<\/p>)[\s\S])*?<time\b[^>]*\bdatetime="(\d{4}-\d{2}-\d{2})"/i)?.[1];
 }
 
 export function service({ site, lang, name, description, url }) {

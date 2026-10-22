@@ -1,6 +1,6 @@
 # Echipa de Tocilari
 
-Site cu **22 de pagini: 11 în română și 11 în engleză**, publicabile pe Vercel.
+Site cu **20 de pagini: 11 în română și 9 în engleză**, publicabile pe Vercel.
 Paginile, imaginile, fonturile și componentele de prezentare sunt statice.
 Formularele folosesc o funcție Node.js separată, `/api/contact`, care trimite
 emailuri prin Resend.
@@ -44,10 +44,13 @@ node --env-file=.env.local scripts/build-static.mjs
 | `legacy-mirror/` | Sursa HTML și asset-uri; aici se fac modificările vizuale |
 | `scripts/build-static.mjs` | Copiază sursele, aplică metadatele, generează EN și validează rezultatul |
 | `scripts/i18n/routes.mjs` | Lista unică a paginilor RO/EN |
-| `scripts/i18n/dictionary.mjs` | Traduceri și metadate în engleză |
+| `scripts/i18n/dictionary.mjs` | Traduceri și metadate în engleză; `pageDictionaries` leagă dicționarele de pagină de rutele lor |
+| `scripts/i18n/google-ads.mjs`, `scripts/i18n/privacy-policy.mjs` | Traducerile EN ale paginilor Google Ads și Politica de confidențialitate, câte un bloc întreg pe intrare |
 | `scripts/lib/navigation.mjs` | Rezolvă linkurile relative folosind pagina sursă și limba țintă |
 | `scripts/lib/standalone-assets.mjs` | Elimină integrările WordPress nefolosite și verifică asset-urile locale |
-| `scripts/lib/contact-forms.mjs` | Adaptează formularele după generarea paginilor EN |
+| `scripts/lib/contact-forms.mjs` | Adaptează formularele după generarea paginilor EN și adaugă rândul despre confidențialitate |
+| `scripts/lib/privacy.mjs` | Adaugă în footer linkul spre politica de confidențialitate și butonul „Setări cookie-uri”, plus `consent.css`/`consent.js` în `<head>` |
+| `legacy-mirror/wp-content/ect-pages/consent.js`, `consent.css` | Bannerul de cookie-uri și încărcarea Google Analytics după acord; obiectul `COPY` conține toate textele lui |
 | `scripts/lib/social-meta.mjs` | Open Graph și Twitter: `og:locale` pe limbă, imagini absolute, logo implicit, fără etichetele vechi WordPress |
 | `scripts/lib/lastmod.mjs`, `scripts/i18n/lastmod.json` | `<lastmod>` din sitemap: ziua ultimului commit al surselor paginii. Build-ul local actualizează fișierul JSON, care se comite împreună cu pagina; pe Vercel (clonă parțială) datele lipsă din istoric se iau din el |
 | `api/contact.js`, `server/contact.mjs` | Intrarea Vercel și implementarea server pentru formulare |
@@ -57,8 +60,11 @@ node --env-file=.env.local scripts/build-static.mjs
 Build-ul verifică sintaxa scripturilor inline și JSON-LD, paginile declarate,
 metadatele, `hreflang`, indexarea și existența asset-urilor, inclusiv imaginile
 responsive, fișierele CSS și dependențele încărcate dinamic. Iese cu eroare dacă
-găsește probleme. `npm test` verifică formularele, navigarea și transformarea
-asset-urilor; testele folosesc răspunsuri simulate și nu trimit emailuri.
+găsește probleme, inclusiv dacă o pagină încarcă tagul Google direct din HTML.
+`npm test` verifică formularele, navigarea, transformarea asset-urilor,
+bannerul de cookie-uri și pagina de politică (inclusiv traducerea ei completă
+în engleză); testele folosesc răspunsuri simulate și nu trimit emailuri sau
+date către Google.
 
 Nu scrie manual paginile EN: modifică sursele RO și dicționarul, apoi reconstruiește.
 `npm run new-page` oferă un punct de pornire pentru o nouă pagină în surse;
@@ -112,6 +118,84 @@ Turnstile/WAF și testarea locală sunt descrise în
 [docs/contact-forms.md](docs/contact-forms.md). Cheile și valorile secrete se
 introduc în setările Vercel; nu se pun în HTML, în catalog sau în repository.
 
+## Cookie-uri, Google Analytics și confidențialitate
+
+Google Analytics 4 (`G-PGM4B3VM9Z`, cookie-urile `_ga` și `_ga_PGM4B3VM9Z`) nu
+este în HTML-ul static. Build-ul elimină tagul moștenit din WordPress, iar
+`scripts/lib/privacy.mjs` adaugă pe fiecare pagină RO și EN, după generarea
+paginilor EN, `consent.css` și `consent.js` (cu `defer`). Validarea build-ului
+eșuează dacă o pagină încarcă `gtag/js` sau `gtag('config')` direct.
+
+- **Bannerul** apare la prima vizită în colțul din stânga jos, după modelul
+  strawberrybrowser.com: „Setări”, „Refuz toate” și „Accept toate” (EN:
+  Customize, Reject all, Accept all). Refuzul și acceptul arată la fel. Peste
+  480px cele trei butoane stau pe un rând, cu lățimi egale; pe telefoanele
+  unde etichetele nu încap, „Refuz toate” și „Accept toate” sunt pe primul
+  rând, iar „Setări” pe al doilea. Etichetele nu sunt tăiate niciodată.
+- **„Setări”** deschide în același card categoriile Necesare (mereu active) și
+  Analiză (oprită implicit), apoi „Refuz toate” și „Accept toate” pe primul
+  rând, cu lățimi egale, și „Salvează preferințele” pe al doilea. Timp de o
+  jumătate de secundă după deschidere, clicurile din această vedere nu
+  contează, iar al doilea clic al unui dublu-clic nu face niciodată o alegere,
+  ca un dublu-clic sau o dublă atingere pe „Setări” să nu înregistreze acordul.
+  Bannerul nu are buton de închidere: fără o alegere, Escape revine doar la
+  rezumat. Dacă alegerea se schimbă în alt tab, setările deschise arată noua
+  alegere.
+- **Alegerea** se păstrează în `localStorage`, cheia `ect-consent`
+  (`{v, analytics, ts}`), timp de 183 de zile (aproximativ 6 luni). Nu se
+  trimite la server. Bannerul reapare după expirare sau când crește `VERSION`
+  din `consent.js`, pentru o schimbare de politică ce cere o nouă alegere.
+- **Google Analytics** se încarcă numai după acord și numai pe
+  `echipadetocilari.ro` și `www.echipadetocilari.ro` (atributul
+  `data-ga-hosts`). Pe localhost, pe adresele Preview Vercel și pe orice alt
+  host alegerea se salvează, dar nu pleacă nicio cerere către Google,
+  indiferent de `PUBLIC_INDEXABLE`. Consent Mode (basic): `ad_storage`,
+  `ad_user_data` și `ad_personalization` rămân mereu `denied`; Google Signals
+  și personalizarea reclamelor sunt oprite în configurare. Refuzul sau
+  retragerea acordului dezactivează tagul și șterg cookie-urile `_ga*`.
+- **Footer:** lista „PAGINI IMPORTANTE” / „IMPORTANT PAGES” primește linkul
+  „Politica de confidențialitate” (`/politica-de-confidentialitate/`, EN
+  `/en/privacy-policy/`) și butonul „Setări cookie-uri”, ascuns fără
+  JavaScript. Lista primește clasa `ect-footer-links`: toate linkurile ei și
+  butonul stau pe rânduri egale de 44px. Butonul redeschide preferințele și
+  readuce focusul pe el la închidere. Elementele cu `data-ect-consent-open` sau
+  `data-ect-consent-state` de pe alte pagini (de exemplu politica) primesc
+  același comportament, respectiv starea curentă a alegerii.
+- **Formular:** sub butonul de trimitere apare rândul „Folosim datele din
+  formular ca să-ți răspundem. Politica de confidențialitate.” (EN: „We use
+  the details in this form to reply to you. Privacy policy.”), cu link spre
+  politică. Destinatarii (inclusiv căsuța Gmail din `CONTACT_TO`) și colectarea
+  datelor furnizate de utilizatori din GA4 sunt descriși în politică; dacă se
+  schimbă, actualizează politica.
+- **Pagina de politică** (`/politica-de-confidentialitate/`, EN generat
+  `/en/privacy-policy/`) are rezumatul „Pe scurt”, un cuprins (lipit în
+  stânga de la 1100px), secțiunile cu id-uri neutre (`#summary`,
+  `#controller`, `#data`, `#purpose`, `#retention`, `#recipients`,
+  `#transfers`, `#cookies`, `#rights`, `#complaints`, `#children`,
+  `#security`, `#changes`), apoi formularul comun și footerul. În `#cookies`,
+  butonul „Schimbă setările cookie-urilor” (`data-ect-consent-open`, ascuns
+  fără JavaScript) deschide preferințele, iar rândul `data-ect-consent-state`
+  arată alegerea curentă. Linkul „Află mai multe” din banner duce la
+  `#cookies`. Data din „Ultima actualizare” (`<time datetime>`) ajunge și în
+  `dateModified` din schema WebPage, în ambele limbi.
+
+Textele bannerului și etichetele din footer, în română și engleză, se
+modifică numai în obiectul `COPY` din
+`legacy-mirror/wp-content/ect-pages/consent.js`; build-ul citește etichetele
+footerului de acolo, deci acestea nu trec prin dicționarul EN. Rândul din
+formular este în `scripts/lib/contact-forms.mjs`, iar adresele politicii în
+`PRIVACY_PATHS` din `scripts/lib/privacy.mjs`. Textul politicii este în
+`legacy-mirror/politica-de-confidentialitate/index.html` (un bloc pe rând),
+stilul în `legacy-mirror/wp-content/ect-pages/politica-de-confidentialitate.css`,
+iar traducerea EN în `scripts/i18n/privacy-policy.mjs`: câte o intrare pentru
+fiecare bloc, cu cheia identică cu HTML-ul românesc al blocului. Când schimbi
+un bloc în română, schimbă cheia și traducerea în același commit; dacă
+schimbarea privește cookie-urile sau datele trimise către Google, actualizează
+și data afișată și, după publicare, crește `VERSION` din `consent.js`.
+Folosește ș și ț cu virgulă, fără linie lungă (em dash) și fără săgeți
+diagonale. Testele sunt în `scripts/lib/privacy.test.mjs`,
+`scripts/lib/privacy-page.test.mjs` și `scripts/lib/consent-runtime.test.mjs`.
+
 ## Indexare și domeniu
 
 Indexarea este controlată exclusiv de `PUBLIC_INDEXABLE` la build.
@@ -120,7 +204,7 @@ Indexarea este controlată exclusiv de `PUBLIC_INDEXABLE` la build.
 | --- | --- | --- |
 | Meta robots | `noindex, nofollow` | `index, follow` |
 | `robots.txt` | `Disallow: /` | `Allow: /` și sitemap |
-| `sitemap.xml` | Absent | 18 URL-uri, 10 RO și 8 EN |
+| `sitemap.xml` | Absent | 20 de URL-uri, 11 RO și 9 EN |
 
 Pentru un build de producție în PowerShell:
 
@@ -153,6 +237,7 @@ separat înregistrările necesare site-ului și expeditorului Resend.
 | `/contact/` | `/en/contact/` |
 | `/portofoliu/` | `/en/portfolio/` |
 | `/agentie-google-ads/` | `/en/google-ads-agency/` |
+| `/politica-de-confidentialitate/` | `/en/privacy-policy/` |
 
 Fiecare pereche primește `hreflang` ro/en/x-default și selectorul RO/EN în
 header. Build-ul generează titluri, descrieri, date structurate

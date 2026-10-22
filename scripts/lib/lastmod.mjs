@@ -10,6 +10,7 @@
  */
 import { execFileSync } from 'child_process';
 import { existsSync, readFileSync, writeFileSync } from 'fs';
+import { pageDictionaryFiles } from '../i18n/dictionary.mjs';
 
 /** Files whose content makes up each public page. EN copy comes from the dictionaries. */
 export function pageSources(route) {
@@ -17,7 +18,7 @@ export function pageSources(route) {
   const pages = [{ url: route.ro, files: [html] }];
   if (route.en) {
     const en = [html, 'scripts/i18n/dictionary.mjs'];
-    if (route.ro === '/agentie-google-ads/') en.push('scripts/i18n/google-ads.mjs');
+    if (pageDictionaryFiles[route.ro]) en.push(pageDictionaryFiles[route.ro]);
     pages.push({ url: route.en, files: en });
   }
   return pages;

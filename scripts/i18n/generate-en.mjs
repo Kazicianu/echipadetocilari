@@ -6,7 +6,7 @@ import { mkdirSync, readFileSync, writeFileSync, existsSync } from 'fs';
 import path from 'path';
 import { routes, pairedRoutes } from './routes.mjs';
 import { normalizePageLinks, removeUnavailableMenuLinks } from '../lib/navigation.mjs';
-import { dictionary, googleAdsDictionary, enPageMeta, enOrg } from './dictionary.mjs';
+import { dictionary, pageDictionaries, enPageMeta, enOrg } from './dictionary.mjs';
 import { injectLangSwitcher } from './lang-switcher.mjs';
 import {
   appendToHead,
@@ -18,7 +18,7 @@ import {
   upsertMeta,
   upsertTitle,
 } from '../lib/html.mjs';
-import { faqPage, organization, service, webPage, website } from '../lib/schema.mjs';
+import { faqPage, organization, service, visibleDateModified, webPage, website } from '../lib/schema.mjs';
 import { extractGoogleAdsFaqs, extractHomeFaqs } from '../lib/faq.mjs';
 import { normalizeSocialMeta } from '../lib/social-meta.mjs';
 
@@ -83,6 +83,7 @@ function schemasFor(route, meta, site, html) {
       url: route.en,
       name: meta?.title,
       description: meta?.description,
+      dateModified: visibleDateModified(html),
     }),
   ];
 
@@ -123,7 +124,7 @@ export function generateEnglishPages({ outDir, site, indexable }) {
 
     html = stripJsonLd(html);
     html = removeUnavailableMenuLinks(html, 'en');
-    html = applyDictionary(html, route.ro === '/agentie-google-ads/' ? googleAdsDictionary : []);
+    html = applyDictionary(html, pageDictionaries[route.ro] || []);
     html = absolutizeAssets(html);
     html = normalizePageLinks(html, { pageUrl: route.ro, language: 'en' });
     html = setLang(html, 'en');

@@ -251,7 +251,24 @@ test('actual RO forms and generated EN form shell use the independent controller
       assert.match(form, /role="status" aria-live="polite"/);
       assert.match(form, /name="website" tabindex="-1"/);
       assert.match(form, new RegExp(`aria-label="${locale === 'en' ? 'Message' : 'Mesaj'}"`));
+      // One privacy line per page, after the submit button, linking the policy in the page language.
+      const privacy = result.match(/<p class="ect-contact-privacy">[\s\S]*?<\/p>/g) || [];
+      assert.equal(privacy.length, 1, `${file} (${locale}): one privacy line`);
+      assert.ok(form.includes(privacy[0]), `${file} (${locale}): privacy line inside the form`);
+      // The approved short line states only the purpose; recipients (Gmail included)
+      // and GA user-provided data are described in the policy it links to.
+      assert.match(privacy[0], locale === 'en'
+        ? /^<p class="ect-contact-privacy">We use the details in this form to reply to you\. <a [^>]+>Privacy policy<\/a>\.<\/p>$/
+        : /^<p class="ect-contact-privacy">Folosim datele din formular ca să-ți răspundem\. <a [^>]+>Politica de confidențialitate<\/a>\.<\/p>$/);
+      const links = privacy[0].match(/<a\b[^>]*>/g) || [];
+      assert.deepEqual(links, [`<a href="${locale === 'en' ? '/en/privacy-policy/' : '/politica-de-confidentialitate/'}">`], `${file} (${locale})`);
+      const submitGroup = form.search(/\belementor-field-type-submit\b/);
+      assert.ok(submitGroup > 0, `${file} (${locale}): submit group found`);
+      const submitGroupEnd = form.indexOf('</div>', form.indexOf('</button>', submitGroup));
+      assert.ok(submitGroupEnd > submitGroup && submitGroupEnd < form.indexOf(privacy[0]), `${file} (${locale}): privacy line after the submit group`);
+      assert.ok(form.indexOf(privacy[0]) < form.indexOf('class="ect-contact-status"'), `${file} (${locale}): before the status line`);
       assert.equal(enhanceContactForms(result, { locale }), result);
+      assert.equal((enhanceContactForms(result, { locale }).match(/class="ect-contact-privacy"/g) || []).length, 1, `${file} (${locale}): idempotent`);
     }
   }
 });

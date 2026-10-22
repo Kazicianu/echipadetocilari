@@ -57,6 +57,9 @@ test('every route maps to its HTML source, and EN pages also to the dictionaries
   }
   const ads = all.find((p) => p.url === '/en/google-ads-agency/');
   assert.ok(ads.files.includes('scripts/i18n/google-ads.mjs'));
+  const privacy = all.find((p) => p.url === '/en/privacy-policy/');
+  assert.ok(privacy.files.includes('scripts/i18n/privacy-policy.mjs'));
+  assert.deepEqual(all.find((p) => p.url === '/politica-de-confidentialitate/').files, ['legacy-mirror/politica-de-confidentialitate/index.html']);
 });
 
 test('full history gives each page its last commit day, today for uncommitted edits, and refreshes the manifest', () => {

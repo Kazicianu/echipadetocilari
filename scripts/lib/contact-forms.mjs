@@ -1,4 +1,5 @@
 import { escapeAttr } from './html.mjs';
+import { PRIVACY_PATHS } from './privacy.mjs';
 
 const FIELDS = {
   name: { aliases: ['name', 'name1'], ro: 'Nume', en: 'Name', autocomplete: 'name', min: 2, max: 120 },
@@ -33,7 +34,11 @@ export function enhanceContactForms(html, { locale } = {}) {
     });
     const fallback = english ? 'You can also email us at' : 'Ne poți scrie și la';
     const noscript = english ? 'Enable JavaScript to use the form, or email us directly.' : 'Activează JavaScript pentru a folosi formularul sau scrie-ne direct pe email.';
+    const privacy = english
+      ? `We use the details in this form to reply to you. <a href="${PRIVACY_PATHS.en}">Privacy policy</a>.`
+      : `Folosim datele din formular ca să-ți răspundem. <a href="${PRIVACY_PATHS.ro}">Politica de confidențialitate</a>.`;
     return form.replace(/<\/form>/i, `
+      <p class="ect-contact-privacy">${privacy}</p>
       <div class="ect-contact-trap" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
       <div class="ect-contact-challenge"></div>
       <p class="ect-contact-status" role="status" aria-live="polite" aria-atomic="true" tabindex="-1"></p>

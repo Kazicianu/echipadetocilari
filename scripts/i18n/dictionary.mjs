@@ -1,5 +1,21 @@
 import { googleAdsDictionary } from './google-ads.mjs';
-export { googleAdsDictionary };
+import { privacyPolicyDictionary } from './privacy-policy.mjs';
+export { googleAdsDictionary, privacyPolicyDictionary };
+
+/**
+ * Page-only entries, keyed by the RO route. generate-en.mjs merges them with the
+ * global dictionary for that page alone (longest first, like the global entries).
+ */
+export const pageDictionaries = {
+  '/agentie-google-ads/': googleAdsDictionary,
+  '/politica-de-confidentialitate/': privacyPolicyDictionary,
+};
+
+/** Source files of the page dictionaries, for the sitemap <lastmod> of the EN pages. */
+export const pageDictionaryFiles = {
+  '/agentie-google-ads/': 'scripts/i18n/google-ads.mjs',
+  '/politica-de-confidentialitate/': 'scripts/i18n/privacy-policy.mjs',
+};
 
 /**
  * Romanian → natural English replacements (longest-first applied).
@@ -1501,6 +1517,11 @@ export const enPageMeta = {
   "title": "Google Ads Agency: Services and Campaigns | Echipa de Tocilari",
   "description": "Bucharest Google Ads agency serving Romania. Search campaigns, conversion tracking and reporting from €260 / month. Advertising budget paid separately."
 },
+  '/en/privacy-policy/': {
+    title: 'Privacy and Cookie Policy | Echipa de Tocilari',
+    description:
+      'What we do with contact form details, how long we keep them, which cookies Google Analytics sets once you consent, and how to exercise your GDPR rights.',
+  },
 };
 
 export const enOrg = {

@@ -1,0 +1,263 @@
+/* Privacy and cookie policy (/politica-de-confidentialitate/ and the generated /en/privacy-policy/).
+   Mobile first. Values copied from docs/design-system (tokens, Button "ink", TextLink "strong",
+   Card leaf radius). Rules stay inside the page content; the shared header, contact form
+   and footer keep their own CSS. */
+@font-face { font-family: "ECT Policy Montserrat"; src: url("fonts/Montserrat-Variable.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; }
+
+.ect-page.ect-page--politica-de-confidentialitate {
+  --orange: #fd8649;
+  --ink: #27272d;
+  --ink-muted: #55555e;
+  --white: #ffffff;
+  --surface-soft: #f9f9f9;
+  --line: #e9e9e9;
+  --shadow-card: 0 0 20px 0 rgba(0, 0, 0, 0.05);
+  --radius-card: 15px;
+  --radius-leaf-sm: 40px;
+  --radius-button: 30px;
+  --content-max: 1150px;
+  --prose-max: 46rem;
+  --target-min: 44px;
+  --font-sans: "ECT Policy Montserrat", Montserrat, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  display: block;
+  min-width: 0;
+  background: var(--white);
+  color: var(--ink);
+  font: 400 16px/1.6 var(--font-sans);
+}
+
+.ect-page .ect-policy,
+.ect-page .ect-policy *,
+.ect-page .ect-policy *::before,
+.ect-page .ect-policy *::after { box-sizing: border-box; }
+.ect-page .ect-policy [hidden] { display: none !important; }
+.ect-page .ect-policy [id] { scroll-margin-top: 24px; }
+
+/* ── Layout: one centred reading column; from 1100px a sticky contents list on the left ── */
+.ect-page .ect-policy {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 40px 20px 72px;
+}
+.ect-page .ect-policy > * { max-width: var(--prose-max); margin-inline: auto; }
+
+@media (min-width: 768px) {
+  .ect-page .ect-policy { padding: 64px 32px 96px; }
+}
+@media (min-width: 1100px) {
+  .ect-page .ect-policy {
+    display: grid;
+    grid-template-columns: 15rem minmax(0, var(--prose-max));
+    column-gap: 64px;
+    align-items: start;
+    padding: 72px 20px 112px;
+  }
+  .ect-page .ect-policy > * { grid-column: 2; margin-inline: 0; }
+  .ect-page .ect-policy > .ect-policy__intro { grid-column: 1 / -1; max-width: none; }
+  .ect-page .ect-policy > .ect-policy__toc {
+    grid-column: 1;
+    grid-row: 2 / span 40;
+    position: sticky;
+    top: 24px;
+    max-height: calc(100vh - 48px);
+    overflow-y: auto;
+  }
+}
+
+/* ── Type ── */
+.ect-page .ect-policy :is(h1, h2, h3, h4) {
+  font-family: inherit;
+  font-style: normal;
+  letter-spacing: normal;
+  color: var(--ink);
+  text-transform: none;
+}
+.ect-page .ect-policy h1 {
+  margin: 0 0 10px;
+  font-size: clamp(22px, 6.6vw, 45px);
+  line-height: 1.2;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--orange);
+  overflow-wrap: break-word;
+  text-wrap: balance;
+}
+.ect-page .ect-policy .ect-policy__updated { margin: 0; font-size: 14px; line-height: 1.5; color: var(--ink-muted); }
+.ect-page .ect-policy h2 {
+  margin: 0 0 16px;
+  font-size: clamp(24px, 6vw, 30px);
+  line-height: 1.2;
+  font-weight: 500;
+  text-wrap: balance;
+}
+.ect-page .ect-policy h3 { margin: 32px 0 10px; font-size: 20px; line-height: 1.3; font-weight: 600; }
+.ect-page .ect-policy p { margin: 0 0 14px; }
+.ect-page .ect-policy strong { font-weight: 600; }
+.ect-page .ect-policy ul { margin: 0 0 16px; padding-left: 1.25em; }
+.ect-page .ect-policy li + li { margin-top: 8px; }
+.ect-page .ect-policy li::marker { color: var(--orange); }
+.ect-page .ect-policy code {
+  padding: 0.1em 0.35em;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: var(--surface-soft);
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  overflow-wrap: anywhere;
+}
+
+/* TextLink "strong": ink text, solid orange underline. */
+.ect-page .ect-policy a {
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--orange);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  overflow-wrap: anywhere;
+}
+.ect-page .ect-policy a:hover { color: var(--ink); text-decoration-thickness: 3px; }
+.ect-page .ect-policy :is(a, button):focus-visible { outline: 3px solid var(--ink); outline-offset: 5px; }
+
+/* ── Sections ── */
+.ect-page .ect-policy > section:not(.ect-policy__summary) {
+  margin-top: 40px;
+  padding-top: 40px;
+  border-top: 1px solid var(--line);
+}
+.ect-page .ect-policy > section > :last-child { margin-bottom: 0; }
+
+/* Summary: white leaf panel with an orange outline, the treatment the owner chose
+   over the peach tint on /agentie-google-ads/ (no peach surfaces). */
+.ect-page .ect-policy .ect-policy__summary {
+  margin-top: 28px;
+  padding: 24px 20px 28px;
+  border: 2px solid var(--orange);
+  border-radius: var(--radius-card) var(--radius-card) var(--radius-card) var(--radius-leaf-sm);
+  background: var(--white);
+}
+.ect-page .ect-policy .ect-policy__summary li + li { margin-top: 12px; }
+@media (min-width: 768px) {
+  .ect-page .ect-policy .ect-policy__summary { padding: 32px 36px 36px; }
+}
+
+/* Contents. */
+.ect-page .ect-policy .ect-policy__toc {
+  margin-top: 28px;
+  padding: 18px 20px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card) var(--radius-card) var(--radius-card) var(--radius-leaf-sm);
+}
+.ect-page .ect-policy .ect-policy__toc-title {
+  margin: 0 0 4px;
+  font-size: 13px;
+  line-height: 1.4;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.ect-page .ect-policy .ect-policy__toc ol { margin: 0; padding-left: 1.75em; }
+.ect-page .ect-policy .ect-policy__toc li { margin: 0; break-inside: avoid; }
+.ect-page .ect-policy .ect-policy__toc li::marker { color: var(--ink-muted); font-size: 14px; font-weight: 600; }
+.ect-page .ect-policy .ect-policy__toc a {
+  display: block;
+  min-height: var(--target-min);
+  padding: 10px 0;
+  font-size: 15px;
+  line-height: 1.6;
+  font-weight: 500;
+  text-decoration-line: none;
+}
+.ect-page .ect-policy .ect-policy__toc a:hover { text-decoration-line: underline; }
+.ect-page .ect-policy .ect-policy__toc a:focus-visible { outline-offset: 2px; }
+@media (min-width: 768px) and (max-width: 1099px) {
+  .ect-page .ect-policy .ect-policy__toc ol { columns: 2; column-gap: 40px; }
+}
+@media (min-width: 1100px) {
+  .ect-page .ect-policy .ect-policy__toc { padding: 0 6px 0 0; border: 0; border-radius: 0; }
+  .ect-page .ect-policy .ect-policy__toc a { padding: 8px 0; font-size: 14px; line-height: 1.45; }
+  .ect-page .ect-policy .ect-policy__toc a:focus-visible { outline-offset: 0; }
+}
+
+/* Company and authority details. */
+.ect-page .ect-policy .ect-policy__facts {
+  margin: 0 0 16px;
+  padding: 16px 20px 20px 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card) var(--radius-card) var(--radius-card) var(--radius-leaf-sm);
+  list-style: none;
+}
+.ect-page .ect-policy .ect-policy__facts li + li { margin-top: 6px; }
+
+/* ── Consent control: the site's ink pill button, Hello theme button styles reset ── */
+.ect-page .ect-policy p:has(> .ect-policy__consent-btn[hidden]) { display: none; }
+.ect-page .ect-policy .ect-policy__consent-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  min-height: 52px;
+  margin: 4px 0 0;
+  padding: 15px 28px;
+  border: 2px solid var(--orange);
+  border-radius: var(--radius-button);
+  background: var(--white);
+  color: var(--ink);
+  font: 600 16px/1.3 var(--font-sans);
+  letter-spacing: normal;
+  text-align: center;
+  text-transform: none;
+  white-space: normal;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: #fd864933;
+  transition: background-color 180ms ease, color 180ms ease, transform 100ms ease-out;
+}
+.ect-page .ect-policy .ect-policy__consent-btn:is(:hover, :focus) { background: var(--white); color: var(--ink); }
+@media (hover: hover) and (pointer: fine) {
+  .ect-page .ect-policy .ect-policy__consent-btn:hover { background: var(--orange); color: var(--ink); }
+}
+.ect-page .ect-policy .ect-policy__consent-btn:active { background: var(--orange); color: var(--ink); transform: scale(0.98); }
+.ect-page .ect-policy .ect-policy__consent-state { margin: 4px 0 16px; font-size: 15px; line-height: 1.5; color: var(--ink-muted); }
+.ect-page .ect-policy .ect-policy__consent-state:empty { display: none; }
+
+/* ── Storage cards: white leaf cards, one per cookie or storage key ── */
+.ect-page .ect-policy .ect-policy__cookies { display: grid; gap: 16px; margin: 0 0 8px; }
+.ect-page .ect-policy .ect-policy__cookie {
+  min-width: 0;
+  padding: 20px 20px 24px;
+  border-radius: var(--radius-card) var(--radius-card) var(--radius-card) var(--radius-leaf-sm);
+  background: var(--white);
+  box-shadow: var(--shadow-card);
+}
+.ect-page .ect-policy .ect-policy__cookie-name { margin: 0 0 14px; font-size: 18px; line-height: 1.3; font-weight: 600; }
+.ect-page .ect-policy .ect-policy__cookie-name code { border-color: var(--line); background: var(--white); font-size: 0.9em; }
+.ect-page .ect-policy .ect-policy__cookie dl { margin: 0; }
+.ect-page .ect-policy .ect-policy__cookie dt {
+  margin: 14px 0 2px;
+  font-size: 13px;
+  line-height: 1.4;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.ect-page .ect-policy .ect-policy__cookie dt:first-child { margin-top: 0; }
+.ect-page .ect-policy .ect-policy__cookie dd { margin: 0; font-size: 15px; line-height: 1.55; }
+@media (min-width: 600px) {
+  .ect-page .ect-policy .ect-policy__cookie { padding: 24px 28px 28px; }
+  .ect-page .ect-policy .ect-policy__cookie dl { display: grid; grid-template-columns: 10.5rem minmax(0, 1fr); gap: 12px 20px; }
+  .ect-page .ect-policy .ect-policy__cookie dt { margin: 0; padding-top: 2px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ect-page .ect-policy .ect-policy__consent-btn { transition: background-color 100ms, color 100ms; }
+  .ect-page .ect-policy .ect-policy__consent-btn:active { transform: none; }
+}
+
+@media print {
+  .ect-page .ect-policy .ect-policy__toc,
+  .ect-page .ect-policy p:has(> .ect-policy__consent-btn) { display: none; }
+}

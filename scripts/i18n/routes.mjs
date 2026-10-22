@@ -91,6 +91,15 @@ export const routes = [
     labelEn: 'Google Ads agency',
     service: { ro: 'Administrare campanii Google Ads', en: 'Google Ads campaign management' },
   },
+  {
+    // Privacy and cookie policy (decided 22.10.2026). Not a service: no Service schema.
+    ro: '/politica-de-confidentialitate/',
+    en: '/en/privacy-policy/',
+    roFile: 'politica-de-confidentialitate/index.html',
+    enFile: 'en/privacy-policy/index.html',
+    labelRo: 'Politica de confidențialitate',
+    labelEn: 'Privacy policy',
+  },
 ];
 
 export const retiredPagePaths = [

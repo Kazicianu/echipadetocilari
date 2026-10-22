@@ -52,6 +52,11 @@ export const roPageMeta = {
   "title": "Agenție Google Ads: servicii și campanii | Echipa de Tocilari",
   "description": "Agenție Google Ads pentru firme din România. Campanii Search cu măsurarea conversiilor, optimizare și raportare. De la 260 €/lună, buget publicitar separat."
 },
+  '/politica-de-confidentialitate/': {
+    title: 'Politica de confidențialitate și cookie-uri | Echipa de Tocilari',
+    description:
+      'Ce date folosim din formularul de contact, cât timp le păstrăm, ce cookie-uri setează Google Analytics după acordul tău și cum îți exerciți drepturile GDPR.',
+  },
 };
 
 export const roOrg = {

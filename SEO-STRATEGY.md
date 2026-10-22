@@ -63,7 +63,11 @@ Inventarul ecranelor include autentificarea și administrarea când au interfeț
 
 Conturile Apple și Google, hostingul, găzduirea bazei de date, stocarea, domeniul, licențele, comisioanele și consumul serviciilor externe și AI se plătesc separat. Corecțiile de 30/60/90 de zile se raportează la specificația livrată. Funcțiile noi, mentenanța, actualizările de sistem, SLA și intervențiile permanente se ofertează separat. Aprobarea publicării în magazine aparține Apple și Google. Regimul TVA și toate costurile sunt precizate înainte de contract.
 
-Schema Service include catalogul extras din pachetele vizibile, cu `minPrice` pentru toate cele trei oferte, deoarece prețurile sunt «de la», și precizarea TVA exclus. FAQPage este extras din întrebările și răspunsurile vizibile. Formularul folosește handlerul existent, fără confirmarea simulată din prototip sau măsurare nouă a conversiilor. Nu se inventează o adresă pentru politica de confidențialitate. Indexarea și regula exclusiv RO rămân neschimbate.
+Schema Service include catalogul extras din pachetele vizibile, cu `minPrice` pentru toate cele trei oferte, deoarece prețurile sunt «de la», și precizarea TVA exclus. FAQPage este extras din întrebările și răspunsurile vizibile. Formularul folosește handlerul existent, fără confirmarea simulată din prototip sau măsurare nouă a conversiilor. Decizie din 22.10.2026: politica de confidențialitate are pagina `/politica-de-confidentialitate/` (EN `/en/privacy-policy/`), iar rândul de sub formular trimite la ea, pe această pagină și pe toate celelalte. Indexarea și regula exclusiv RO rămân neschimbate.
+
+## Politica de confidențialitate și cookie-uri (22.10.2026)
+
+Pagina `/politica-de-confidentialitate/` și varianta generată `/en/privacy-policy/` au fost decise de utilizator la 22.10.2026, odată cu bannerul de cookie-uri. Nu este pagină de serviciu și nu țintește keywords: răspunde direct la întrebările despre date (cine le folosește, care, de ce, cât timp, cine le mai primește, drepturile și plângerea la ANSPDCP), cu rezumatul „Pe scurt” la început și formularul comun deasupra footerului. Datele structurate sunt doar Organization, WebSite și WebPage, cu `dateModified` egal cu data afișată; fără FAQPage și fără Service. Pagina intră în sitemap, hreflang și `llms.txt` ca celelalte perechi RO/EN, iar indexarea rămâne controlată exclusiv de `PUBLIC_INDEXABLE`. Footerul fiecărei pagini trimite la ea, alături de butonul „Setări cookie-uri”.
 
 ## Conținut de suport propus
 

@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import test from 'node:test';
-import { dictionary, googleAdsDictionary } from '../i18n/dictionary.mjs';
+import { dictionary, pageDictionaries } from '../i18n/dictionary.mjs';
 import { injectLangSwitcher } from '../i18n/lang-switcher.mjs';
 import { routes } from '../i18n/routes.mjs';
 import { enhanceDesktopHeader, serviceMenuCopy } from './desktop-header.mjs';
@@ -19,7 +19,7 @@ function preparedPage(route, language) {
   if (language === 'en') {
     html = removeUnavailableMenuLinks(html, 'en');
     html = html.replace(/<html\b([^>]*)\blang="[^"]*"/i, '<html$1lang="en"');
-    const pairs = [...(route.ro === '/agentie-google-ads/' ? googleAdsDictionary : []), ...dictionary]
+    const pairs = [...(pageDictionaries[route.ro] || []), ...dictionary]
       .filter(([from, to]) => from && from !== to)
       .sort((a, b) => b[0].length - a[0].length);
     for (const [from, to] of pairs) html = html.split(from).join(to);

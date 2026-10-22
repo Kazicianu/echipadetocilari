@@ -33,7 +33,7 @@ import {
   upsertMeta,
   upsertTitle,
 } from './lib/html.mjs';
-import { faqPage, organization, service, webPage, website } from './lib/schema.mjs';
+import { faqPage, organization, service, visibleDateModified, webPage, website } from './lib/schema.mjs';
 import { extractGoogleAdsFaqs, extractHomeFaqs } from './lib/faq.mjs';
 import { storeOfferCatalog } from './lib/store-seo.mjs';
 import { appsOfferCatalog } from './lib/apps-seo.mjs';
@@ -47,6 +47,7 @@ import { enhanceMobileMenu } from './lib/mobile-menu.mjs';
 import { enhanceDesktopHeader } from './lib/desktop-header.mjs';
 import { normalizeSocialMeta } from './lib/social-meta.mjs';
 import { pageSources, resolveLastmods } from './lib/lastmod.mjs';
+import { addConsentManager, addFooterPrivacyLinks } from './lib/privacy.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
@@ -55,6 +56,9 @@ const outDir = path.join(root, 'dist');
 
 const INDEXABLE = process.env.PUBLIC_INDEXABLE === 'true';
 const SITE = (process.env.PUBLIC_SITE_URL || 'https://www.echipadetocilari.ro').replace(/\/$/, '');
+// GA4 property (cookies _ga, _ga_PGM4B3VM9Z). consent.js loads it only after
+// consent and only on echipadetocilari.ro / www.echipadetocilari.ro.
+const GA4_MEASUREMENT_ID = 'G-PGM4B3VM9Z';
 
 if (!existsSync(path.join(srcDir, 'index.html'))) {
   console.error('Missing legacy-mirror/index.html — run `npm run mirror` first.');
@@ -120,7 +124,10 @@ function schemasFor(urlPath, meta, html) {
   const list = [
     organization({ site: SITE, lang: 'ro', ...roOrg }),
     website({ site: SITE, lang: 'ro' }),
-    webPage({ site: SITE, lang: 'ro', url: urlPath, name: meta.title, description: meta.description }),
+    webPage({
+      site: SITE, lang: 'ro', url: urlPath, name: meta.title, description: meta.description,
+      dateModified: visibleDateModified(html),
+    }),
   ];
 
   if (urlPath === '/') list.push(faqPage(extractHomeFaqs(html)));
@@ -174,22 +181,11 @@ function enhanceHtml(file) {
 
   html = setLang(html, 'ro');
 
-  // Replace the GA4 tag inherited from the WordPress mirror before EN pages are generated.
+  // Drop the GA4 tag inherited from the WordPress mirror. Analytics loads only
+  // through consent.js after the visitor accepts (see scripts/lib/privacy.mjs).
   html = html.replace(
     /<script\b[^>]*\bid=["']google_gtagjs(?:-inline)?["'][^>]*>[\s\S]*?<\/script>\s*/gi,
     ''
-  );
-  html = appendToHead(
-    html,
-    `<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PGM4B3VM9Z"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-PGM4B3VM9Z');
-</script>`
   );
 
   if (!/name=["']viewport["']/i.test(html)) {
@@ -260,10 +256,12 @@ patchRomanianPages({ outDir, site: SITE });
 console.log('  EN pages:', enPages.join(', '));
 
 // Run after translation so form field names and runtime settings stay intact.
-console.log('→ Preparing standalone forms and local presentation assets…');
+console.log('→ Preparing standalone forms, privacy links, cookie consent and local presentation assets…');
 for (const file of walkHtml(outDir)) {
-  const html = readFileSync(file, 'utf8');
-  writeFileSync(file, makeStandaloneAssets(enhanceMobileMenu(enhanceDesktopHeader(enhanceContactForms(html)), { pageUrl: urlPathOf(file) })), 'utf8');
+  let html = readFileSync(file, 'utf8');
+  html = enhanceMobileMenu(enhanceDesktopHeader(enhanceContactForms(html)), { pageUrl: urlPathOf(file) });
+  html = addConsentManager(addFooterPrivacyLinks(html), { gaId: GA4_MEASUREMENT_ID });
+  writeFileSync(file, makeStandaloneAssets(html), 'utf8');
 }
 
 // ─── site-level files ───────────────────────────────────────────────────────
