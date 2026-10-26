@@ -18,6 +18,14 @@
 .ect-consent-open[hidden],
 [data-ect-consent-open][hidden] { display: none !important; }
 
+/* While the card is open, consent.js sets --ect-consent-space to its height from
+   the bottom edge: a field reached with Tab scrolls clear of the card, and the
+   last footer links can scroll above it (WCAG 2.4.11). */
+html.ect-consent-open { scroll-padding-bottom: var(--ect-consent-space, 0px); }
+html.ect-consent-open body { padding-bottom: var(--ect-consent-space, 0px); }
+/* The footer's fixed "back to top" button sits in the corner the phone card covers. */
+html.ect-consent-open .elementor-widget-button:has(a[href="#top"]) { bottom: var(--ect-consent-space, 0px); }
+
 /* Phone first: a full-width card above the bottom edge (and the home indicator). */
 .ect-consent {
   position: fixed;

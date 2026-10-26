@@ -43,6 +43,12 @@ class FakeElement extends FakeNode {
     this.tagName = tag.toUpperCase();
     this.attributes = new Map();
     this.listeners = new Map();
+    const styles = new Map();
+    this.style = {
+      setProperty: (name, value) => { styles.set(name, String(value)); },
+      removeProperty: name => { styles.delete(name); },
+      getPropertyValue: name => styles.get(name) || '',
+    };
     const element = this;
     this.classList = {
       contains: name => element.className.split(/\s+/).includes(name),
@@ -317,6 +323,34 @@ test('consent.css: phone styles are the base, refuse and accept are equal in the
   assert.match(css, /footer \.ect-footer-links > br \{ display: none; \}/);
   assert.match(css, /footer \.ect-footer-links > a,\nfooter \.ect-footer-links > \.ect-consent-open \{[^}]*min-height: 44px;/);
   assert.doesNotMatch(css, /\.ect-consent-open\.ect-consent-open \{[^}]*line-height:/, 'the button keeps the line height of the footer links');
+  assert.match(css, /html\.ect-consent-open \{ scroll-padding-bottom: var\(--ect-consent-space, 0px\); \}/);
+  assert.match(css, /html\.ect-consent-open body \{ padding-bottom: var\(--ect-consent-space, 0px\); \}/);
+  assert.match(css, /html\.ect-consent-open \.elementor-widget-button:has\(a\[href="#top"\]\) \{ bottom: var\(--ect-consent-space, 0px\); \}/);
+});
+
+test('while the card is open the page keeps its height free at the bottom, so focus never ends up under it', () => {
+  const view = page();
+  const root = view.document.documentElement;
+  const space = () => root.style.getPropertyValue('--ect-consent-space');
+  assert.ok(root.classList.contains('ect-consent-open'), 'first visit: space reserved');
+  assert.equal(space(), '44px', 'the card height (the fake layout has no viewport)');
+
+  view.button(view.summary, ro.acceptAll).click();
+  assert.equal(root.classList.contains('ect-consent-open'), false, 'a choice frees the space');
+  assert.equal(space(), '');
+
+  view.opener.click();
+  assert.ok(root.classList.contains('ect-consent-open'), 'reopened settings reserve it again');
+  view.banner.dispatch('keydown', { key: 'Escape' });
+  assert.equal(root.classList.contains('ect-consent-open'), false, 'Escape frees it');
+  assert.equal(space(), '');
+
+  // On a real page the space runs from the top of the card to the bottom edge.
+  const sized = page();
+  sized.context.innerHeight = 800;
+  sized.banner.getBoundingClientRect = () => ({ width: 360, height: 221.2, top: 566.8 });
+  sized.emitWindow('resize');
+  assert.equal(sized.document.documentElement.style.getPropertyValue('--ect-consent-space'), '234px');
 });
 
 test('accept on the production host loads GA4 once with consent mode and stores the choice', () => {

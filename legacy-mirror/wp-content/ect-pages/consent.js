@@ -288,10 +288,34 @@
     }
   }
 
+  /** While the card is open, the page keeps its height free at the bottom: a field
+   *  reached with Tab scrolls clear of the card, and the last footer links can too
+   *  (WCAG 2.4.11). consent.css reads --ect-consent-space. */
+  function reserveSpace() {
+    const root = document.documentElement;
+    if (!root.style || typeof root.style.setProperty !== 'function') return;
+    if (banner.hidden) {
+      root.classList.remove('ect-consent-open');
+      root.style.removeProperty('--ect-consent-space');
+      return;
+    }
+    const box = banner.getBoundingClientRect();
+    const space = typeof window.innerHeight === 'number' && typeof box.top === 'number'
+      ? window.innerHeight - box.top
+      : box.height;
+    root.style.setProperty('--ect-consent-space', `${Math.max(0, Math.ceil(space))}px`);
+    root.classList.add('ect-consent-open');
+  }
+
+  function refit() {
+    fitSummary();
+    reserveSpace();
+  }
+
   function scheduleFit() {
     if (fitFrame) return;
-    if (typeof window.requestAnimationFrame === 'function') fitFrame = window.requestAnimationFrame(fitSummary);
-    else fitSummary();
+    if (typeof window.requestAnimationFrame === 'function') fitFrame = window.requestAnimationFrame(refit);
+    else refit();
   }
 
   function show(view, from) {
@@ -302,6 +326,7 @@
     banner.hidden = false;
     if (view === 'summary') fitSummary();
     else openedAt = now();
+    reserveSpace();
   }
 
   function openSettings(from) {
@@ -311,6 +336,7 @@
 
   function close() {
     banner.hidden = true;
+    reserveSpace();
     const target = opener;
     opener = null;
     if (target && typeof target.focus === 'function') target.focus();
@@ -379,14 +405,17 @@
     const focusInside = banner.contains(document.activeElement);
     const target = opener;
     banner.hidden = true;
+    reserveSpace();
     opener = null;
     if (focusInside && target && typeof target.focus === 'function') target.focus();
   });
 
-  // Re-check the summary row when the viewport changes or a web font swaps in.
+  // Re-check the summary row and the reserved space when the viewport changes,
+  // the card changes height or a web font swaps in.
   window.addEventListener('resize', scheduleFit);
   if (typeof window.ResizeObserver === 'function') {
     const observer = new window.ResizeObserver(scheduleFit);
+    observer.observe(banner);
     observer.observe(summaryActions);
     for (const button of Object.values(summaryButtons)) observer.observe(button.firstChild);
   }
