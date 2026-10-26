@@ -1243,6 +1243,11 @@ export const dictionary = [
     'Landing page, single-page conversion website',
   ],
   ['template wordpress / elementor', 'WordPress / Elementor template'],
+  ['o singură pagină', 'single page'],
+  ['până la 6 pagini', 'up to 6 pages'],
+  ['consultanță', 'consultation'],
+  ['tematică generală', 'general-purpose theme'],
+  ['o singură limbă', 'one language'],
   ['Site de prezentare clasic', 'Classic multi-page business website'],
   ['10 produse / servicii incluse', '10 products / services included'],
   [
