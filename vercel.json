@@ -50,12 +50,31 @@
       ]
     },
     {
-      "source": "/wp-content/(.*)",
+      "source": "/wp-(content|includes)/(.*)",
+      "has": [{ "type": "query", "key": "v" }],
       "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=0, must-revalidate"
-        }
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/wp-(content|includes)/(.*)\\.(woff2|woff|ttf|eot|otf)",
+      "missing": [{ "type": "query", "key": "v" }],
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/wp-(content|includes)/(.*)\\.(png|jpe?g|webp|avif|gif|svg|ico)",
+      "missing": [{ "type": "query", "key": "v" }],
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=604800" }
+      ]
+    },
+    {
+      "source": "/wp-(content|includes)/((?!.*[.](?:woff2|woff|ttf|eot|otf|png|jpe?g|webp|avif|gif|svg|ico)$).*)",
+      "missing": [{ "type": "query", "key": "v" }],
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
       ]
     }
   ]

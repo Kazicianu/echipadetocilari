@@ -20,7 +20,7 @@ import {
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-import { routes, pairedRoutes, isOwnedPage, routeByRo } from './i18n/routes.mjs';
+import { routes, pairedRoutes, isOwnedPage, routeByPath, routeByRo } from './i18n/routes.mjs';
 import { roPageMeta, roOrg } from './i18n/meta-ro.mjs';
 import { generateEnglishPages, patchRomanianPages } from './i18n/generate-en.mjs';
 import {
@@ -48,6 +48,9 @@ import { enhanceDesktopHeader } from './lib/desktop-header.mjs';
 import { normalizeSocialMeta } from './lib/social-meta.mjs';
 import { pageSources, resolveLastmods } from './lib/lastmod.mjs';
 import { addConsentManager, addFooterPrivacyLinks } from './lib/privacy.mjs';
+import { fixSkipLink, validateSkipLink } from './lib/skip-link.mjs';
+import { addPreloadHints } from './lib/preload-hints.mjs';
+import { versionAssets } from './lib/asset-versions.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
@@ -167,6 +170,11 @@ pruneJunkFromDist();
 
 // ─── per-page enhancement ───────────────────────────────────────────────────
 
+const A11Y_STYLE =
+  '<style>/* ect-mobile-a11y */' +
+  'input:not([type=checkbox]):not([type=radio]):not([type=hidden]):not([type=submit]):not([type=button]):not([type=range]),textarea,select{font-size:16px!important}' +
+  '@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}</style>';
+
 function enhanceHtml(file) {
   const urlPath = urlPathOf(file);
   const owned = isOwnedPage(urlPath);
@@ -220,13 +228,13 @@ function enhanceHtml(file) {
     canonical: `${SITE}${urlPath}`,
   });
 
-  // Additive, layout-neutral: 16px inputs stop iOS from zooming on focus.
-  if (!html.includes('/* ect-mobile-a11y */')) {
-    html = appendToHead(
-      html,
-      '<style>/* ect-mobile-a11y */input,textarea,select{font-size:16px}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}</style>'
-    );
-  }
+  // Additive, layout-neutral: 16px text fields stop iOS from zooming on focus.
+  // !important because Elementor's .elementor-field-textual (15px) and the page
+  // post CSS would otherwise win. Replace any older copy so the rule ships once.
+  html = html.replace(/<style>\/\* ect-mobile-a11y \*\/[\s\S]*?<\/style>\s*/g, '');
+  html = appendToHead(html, A11Y_STYLE);
+
+  if (owned) html = fixSkipLink(html);
 
   // Elementor's entrance animations need its editor runtime; on a static host we
   // reveal `.elementor-invisible` ourselves or the content stays at opacity 0.
@@ -257,11 +265,18 @@ console.log('  EN pages:', enPages.join(', '));
 
 // Run after translation so form field names and runtime settings stay intact.
 console.log('→ Preparing standalone forms, privacy links, cookie consent and local presentation assets…');
+const assetHashes = new Map();
 for (const file of walkHtml(outDir)) {
+  const urlPath = urlPathOf(file);
   let html = readFileSync(file, 'utf8');
-  html = enhanceMobileMenu(enhanceDesktopHeader(enhanceContactForms(html)), { pageUrl: urlPathOf(file) });
+  html = enhanceMobileMenu(enhanceDesktopHeader(enhanceContactForms(html)), { pageUrl: urlPath });
   html = addConsentManager(addFooterPrivacyLinks(html), { gaId: GA4_MEASUREMENT_ID });
-  writeFileSync(file, makeStandaloneAssets(html), 'utf8');
+  html = makeStandaloneAssets(html);
+  // Preloads keep the unversioned URL; only stylesheets and scripts get ?v=.
+  const route = routeByPath(urlPath);
+  html = addPreloadHints(html, { lcpImages: route?.lcpImages, fonts: route?.preloadFonts });
+  html = versionAssets(html, { outDir, cache: assetHashes });
+  writeFileSync(file, html, 'utf8');
 }
 
 // ─── site-level files ───────────────────────────────────────────────────────
@@ -330,6 +345,9 @@ const errors = validateBuild({
   indexable: INDEXABLE,
 });
 errors.push(...validateStandaloneAssets({ outDir, files: walkHtml(outDir), urlPathOf }));
+for (const file of walkHtml(outDir)) {
+  errors.push(...validateSkipLink(readFileSync(file, 'utf8'), urlPathOf(file)));
+}
 if (INDEXABLE) {
   for (const url of missingLastmod) {
     errors.push(`sitemap.xml: no lastmod for ${url}; run a build with the full git history and commit scripts/i18n/lastmod.json`);

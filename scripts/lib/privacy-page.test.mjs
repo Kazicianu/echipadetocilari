@@ -36,6 +36,7 @@ test('the policy is a paired route with RO and EN metadata and no Service schema
     enFile: 'en/privacy-policy/index.html',
     labelRo: 'Politica de confidențialitate',
     labelEn: 'Privacy policy',
+    preloadFonts: true,
   });
   assert.deepEqual([route.ro, route.en], [PRIVACY_PATHS.ro, PRIVACY_PATHS.en], 'the footer, form and banner links point here');
   assert.equal(routes.at(-1), route);

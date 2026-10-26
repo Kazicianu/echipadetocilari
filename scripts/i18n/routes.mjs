@@ -9,6 +9,11 @@
  * `scripts/lib/junk-redirects.mjs`. `isOwnedPage` still gates schema/index.
  *
  * `service` marks pages that describe a purchasable service (Service JSON-LD).
+ * `lcpImages` lists the largest-contentful-paint images as root-relative URLs
+ * exactly as the CSS resolves them, with an optional `media` condition; the
+ * build preloads them on the RO page and its EN twin (scripts/lib/preload-hints.mjs).
+ * `preloadFonts` also preloads the Montserrat files, only where the late font
+ * swap shifted the layout (measured live; elsewhere the hint only costs LCP).
  */
 export const routes = [
   {
@@ -18,6 +23,10 @@ export const routes = [
     enFile: 'en/index.html',
     labelRo: 'Acasă',
     labelEn: 'Home',
+    lcpImages: [
+      { href: '/wp-content/uploads/2024/02/BG-HomePage-High.png' },
+      { href: '/wp-content/uploads/2022/04/daycare-hero-bg.png', media: '(min-width: 1025px)' },
+    ],
   },
   {
     ro: '/about-2/',
@@ -26,6 +35,7 @@ export const routes = [
     enFile: 'en/about/index.html',
     labelRo: 'Despre noi',
     labelEn: 'About us',
+    lcpImages: [{ href: '/wp-content/uploads/2022/04/daycare-hero-bg.png', media: '(max-width: 1024px)' }],
   },
   {
     ro: '/creare-site-web/',
@@ -34,6 +44,7 @@ export const routes = [
     enFile: 'en/website-design/index.html',
     labelRo: 'Creare site web',
     labelEn: 'Website design',
+    lcpImages: [{ href: '/wp-content/uploads/2022/04/day-care-about-hero-bg.png' }],
     service: { ro: 'Creare site web', en: 'Website design and development' },
   },
   {
@@ -55,6 +66,7 @@ export const routes = [
     enFile: 'en/seo-services/index.html',
     labelRo: 'Servicii SEO',
     labelEn: 'SEO services',
+    lcpImages: [{ href: '/wp-content/uploads/2022/04/daycare-hero-bg.png' }],
     service: { ro: 'Servicii SEO', en: 'SEO services' },
   },
   {
@@ -64,6 +76,8 @@ export const routes = [
     enFile: 'en/website-maintenance/index.html',
     labelRo: 'Administrare site',
     labelEn: 'Website maintenance',
+    lcpImages: [{ href: '/wp-content/uploads/2022/04/daycare-hero-bg.png' }],
+    preloadFonts: true,
     service: { ro: 'Administrare site', en: 'Website maintenance' },
   },
   {
@@ -73,6 +87,7 @@ export const routes = [
     enFile: 'en/contact/index.html',
     labelRo: 'Contact',
     labelEn: 'Contact',
+    preloadFonts: true,
   },
   {
     ro: '/portofoliu/',
@@ -81,6 +96,8 @@ export const routes = [
     enFile: 'en/portfolio/index.html',
     labelRo: 'Portofoliu',
     labelEn: 'Portfolio',
+    lcpImages: [{ href: '/wp-content/uploads/2024/02/Bg-Services.png' }],
+    preloadFonts: true,
   },
   {
     ro: '/agentie-google-ads/',
@@ -89,6 +106,7 @@ export const routes = [
     enFile: 'en/google-ads-agency/index.html',
     labelRo: 'Agenție Google Ads',
     labelEn: 'Google Ads agency',
+    lcpImages: [{ href: '/wp-content/ect-pages/google-ads/hero-blobs-mobile.svg', media: '(max-width: 900px)' }],
     service: { ro: 'Administrare campanii Google Ads', en: 'Google Ads campaign management' },
   },
   {
@@ -99,6 +117,7 @@ export const routes = [
     enFile: 'en/privacy-policy/index.html',
     labelRo: 'Politica de confidențialitate',
     labelEn: 'Privacy policy',
+    preloadFonts: true,
   },
 ];
 
@@ -131,4 +150,9 @@ export function isOwnedPage(urlPath) {
 
 export function routeByRo(urlPath) {
   return routes.find((r) => r.ro === urlPath);
+}
+
+/** The route for an RO or EN public path (the EN twin shares its RO route). */
+export function routeByPath(urlPath) {
+  return routes.find((r) => r.ro === urlPath || r.en === urlPath);
 }

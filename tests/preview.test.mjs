@@ -15,6 +15,8 @@ async function preview(t) {
   writeFileSync(path.join(directory, 'index.html'), '<main id="servicii">Servicii</main>');
   mkdirSync(path.join(directory, 'agentie-google-ads'));
   writeFileSync(path.join(directory, 'agentie-google-ads/index.html'), '<h1>Google Ads</h1>');
+  mkdirSync(path.join(directory, 'wp-content'));
+  writeFileSync(path.join(directory, 'wp-content/app.js'), 'window.ok = true;');
   const server = createPreviewServer({ outDir: directory, port: 0, env: {} });
   await new Promise((resolve, reject) => {
     server.once('error', reject);
@@ -57,4 +59,13 @@ test('preview redirects old Ads to a real page and does not revive withdrawn pag
   assert.equal(services.status, 308);
   assert.equal(services.headers.get('location'), '/en/#servicii');
   assert.equal(await services.text(), '');
+});
+
+test('preview serves cache-busted asset URLs from the file path, ignoring the ?v= query', async t => {
+  const origin = await preview(t);
+  const versioned = await fetch(origin + '/wp-content/app.js?v=0123456789');
+  assert.equal(versioned.status, 200);
+  assert.match(versioned.headers.get('content-type'), /^text\/javascript/);
+  assert.equal(await versioned.text(), 'window.ok = true;');
+  assert.equal((await fetch(origin + '/wp-content/app.js')).status, 200);
 });
