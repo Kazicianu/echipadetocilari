@@ -40,7 +40,6 @@
     text-transform: none;
     white-space: normal;
     line-height: 1.35;
-    transition: background-color 0.15s ease, box-shadow 0.15s ease;
   }
 
   /* No Elementor underline pointer inside the card. */
@@ -54,7 +53,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 12px;
+    border-radius: 50%;
     background: #fff2eb;
     color: #fd8649;
     transition: background-color 0.15s ease, color 0.15s ease;
@@ -91,13 +90,12 @@
     color: #55555e;
   }
 
-  /* Hover, focus and the current service: an orange outline and a filled icon. */
+  /* Hover, focus and the current service: the icon fills orange and the title turns orange, as on the homepage cards. */
   #top .elementor-nav-menu--main .sub-menu .ect-svc-link:hover,
   #top .elementor-nav-menu--main .sub-menu .ect-svc-link:focus-visible,
   #top .elementor-nav-menu--main .sub-menu .ect-svc-link.elementor-item-active {
-    background: #fff;
+    background: transparent;
     color: #27272d;
-    box-shadow: inset 0 0 0 1px #fd8649;
   }
 
   #top .ect-svc-link:hover .ect-svc-icon,
@@ -109,7 +107,7 @@
 
   #top .ect-svc-link:hover .ect-svc-title,
   #top .ect-svc-link:focus-visible .ect-svc-title,
-  #top .ect-svc-link.elementor-item-active .ect-svc-title { color: #ad420f; }
+  #top .ect-svc-link.elementor-item-active .ect-svc-title { color: #fd8649; }
 
   #top .elementor-nav-menu--main .sub-menu .ect-svc-link:focus-visible {
     outline: 2px solid #ad420f;
@@ -158,9 +156,10 @@
   }
 
   /*
-   * Top-level links sit in a white pill with the language switch's hairline,
-   * at its 46px height. An orange-outlined pill (desktop-header.js sets
-   * --ect-pill-x/-w) slides under the hovered or focused link.
+   * Top-level links sit in a white pill with the soft shadow of the homepage
+   * chips. An orange highlight with ink text, like "Cu tine" in the homepage
+   * headings, slides under the hovered or focused link (desktop-header.js
+   * sets --ect-pill-x/-w).
    */
   #top .elementor-nav-menu--main { --e-nav-menu-horizontal-menu-item-margin: 0px; }
 
@@ -170,23 +169,20 @@
     gap: 2px;
     padding: 0 4px;
     background: #fff;
-    border: 1px solid #f2d1c3;
     border-radius: 999px;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.05);
   }
 
   #top .elementor-nav-menu--main > .elementor-nav-menu::before {
     content: "";
     position: absolute;
-    top: 4px;
-    bottom: 4px;
+    top: 5px;
+    bottom: 5px;
     left: 0;
     width: var(--ect-pill-w, 0px);
     transform: translateX(var(--ect-pill-x, 0px));
-    box-sizing: border-box;
-    border: 1px solid #fd8649;
-    border-radius: 999px;
-    background: #fff;
-    box-shadow: 0 0 24px 0 #fd864933;
+    border-radius: 15px;
+    background: #fd8649;
     opacity: 0;
     pointer-events: none;
     transition: transform 0.4s cubic-bezier(0.32, 1.25, 0.5, 1), width 0.4s cubic-bezier(0.32, 1.25, 0.5, 1), opacity 0.2s ease;
@@ -207,37 +203,19 @@
     transition: color 0.2s ease;
   }
 
-  /* Slate at rest, ink for the current page, orange-deep on hover, focus or open. */
+  /* Slate at rest, orange for the current page, ink on the highlight. */
   #top .elementor-nav-menu--main > .elementor-nav-menu > li > .elementor-item,
   #top .elementor-nav-menu--main > .elementor-nav-menu > li > .elementor-item:focus { color: #5b6575; fill: #5b6575; }
 
-  #top .elementor-nav-menu--main > .elementor-nav-menu > li > .elementor-item.elementor-item-active { color: #27272d; fill: #27272d; }
+  #top .elementor-nav-menu--main > .elementor-nav-menu > li > .elementor-item.elementor-item-active { color: #fd8649; fill: #fd8649; }
 
   #top .elementor-nav-menu--main > .elementor-nav-menu > li > .elementor-item:hover,
   #top .elementor-nav-menu--main > .elementor-nav-menu > li > .elementor-item:focus-visible,
-  #top .elementor-nav-menu--main > .elementor-nav-menu > li > .elementor-item.highlighted { color: #ad420f; fill: #ad420f; }
+  #top .elementor-nav-menu--main > .elementor-nav-menu > li > .elementor-item.highlighted { color: #27272d; fill: #27272d; }
 
-  /* Elementor's underline pointer gives way to the pill. */
+  /* Elementor's underline pointer gives way to the highlight. */
   #top .elementor-nav-menu--main > .elementor-nav-menu > li > .elementor-item::before,
   #top .elementor-nav-menu--main > .elementor-nav-menu > li > .elementor-item::after { display: none; }
-
-  /* The current page gets an orange dot before its label, like the site's chips. */
-  #top .elementor-nav-menu--main > .elementor-nav-menu > li > .elementor-item.elementor-item-active::before {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 50%;
-    right: auto;
-    bottom: auto;
-    left: 6px;
-    width: 6px;
-    height: 6px;
-    margin-top: -3px;
-    border-radius: 50%;
-    background: #fd8649;
-    opacity: 1;
-    transform: none;
-  }
 
   #top .elementor-nav-menu--main > .elementor-nav-menu > li > .elementor-item:focus-visible {
     outline: 2px solid #ad420f;
@@ -265,18 +243,21 @@
   }
 
   /*
-   * The submenu card lines up with the menu pill's left edge, takes the leaf
-   * corner of the site's cards and grows down from the menu; a transparent
-   * bridge keeps hover alive across the gap.
+   * The submenu is a homepage card: white, a soft glow instead of a border,
+   * the leaf corner of the process steps. It lines up with the menu pill's
+   * left edge and grows down from it; a transparent bridge keeps hover alive
+   * across the gap.
    */
   #top .elementor-nav-menu--main .menu-item-has-children > .sub-menu {
     top: calc(100% + 12px) !important;
-    left: -5px !important;
+    left: -4px !important;
     right: auto !important;
     margin-left: 0 !important;
     margin-top: 0 !important;
     padding: 8px;
+    border: 0;
     border-radius: 15px 15px 15px 40px;
+    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.08);
     transform-origin: 40px 0;
     animation: ect-menu-open 0.32s cubic-bezier(0.2, 0.9, 0.3, 1.1) both;
   }
@@ -299,8 +280,6 @@
   #top .elementor-nav-menu--main .sub-menu > li:nth-child(4) { animation-delay: 0.09s; }
   #top .elementor-nav-menu--main .sub-menu > li:nth-child(5) { animation-delay: 0.12s; }
   #top .elementor-nav-menu--main .sub-menu > li:nth-child(6) { animation-delay: 0.15s; }
-
-  #top .elementor-nav-menu--main .sub-menu > li:last-child .ect-svc-link { border-bottom-left-radius: 32px; }
 
   @keyframes ect-menu-open {
     from { opacity: 0; transform: translateY(-8px) scale(0.96); }

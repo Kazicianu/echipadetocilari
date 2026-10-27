@@ -1,4 +1,4 @@
-// Desktop menu: an orange-outlined pill slides under the hovered or focused
+// Desktop menu: an orange highlight slides under the hovered or focused
 // top-level link and stays on "Servicii" while its submenu is open.
 (() => {
   const list = document.querySelector('#top .elementor-nav-menu--main > .elementor-nav-menu');
