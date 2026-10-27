@@ -2,6 +2,7 @@ import { appendToHead } from './html.mjs';
 import { routes } from '../i18n/routes.mjs';
 
 const STYLESHEET = '<link rel="stylesheet" href="/wp-content/ect-pages/desktop-header.css">';
+const SCRIPT = '<script src="/wp-content/ect-pages/desktop-header.js" defer></script>';
 
 // Decorative 24px stroke icons; the visible service name carries the meaning.
 const svg = paths => `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${paths}</svg>`;
@@ -60,9 +61,9 @@ function openingTag(html) {
 
 /**
  * Desktop header: give each Services submenu link an icon and a one-line
- * description, and load the desktop header stylesheet. Run after language
- * generation, so link targets and labels are already final. The mobile menu
- * (the dropdown nav) is left untouched.
+ * description, and load the desktop header stylesheet and the script that
+ * slides the hover pill. Run after language generation, so link targets and
+ * labels are already final. The mobile menu (the dropdown nav) is left untouched.
  */
 export function enhanceDesktopHeader(html) {
   if (html.includes('ect-svc-link')) return html;
@@ -89,5 +90,6 @@ export function enhanceDesktopHeader(html) {
   if (!enhancedLinks) return html;
 
   html = html.replace(header, header.replace(main, enhancedMain));
-  return html.includes(STYLESHEET) ? html : appendToHead(html, STYLESHEET);
+  if (!html.includes(STYLESHEET)) html = appendToHead(html, STYLESHEET);
+  return html.includes(SCRIPT) ? html : appendToHead(html, SCRIPT);
 }
