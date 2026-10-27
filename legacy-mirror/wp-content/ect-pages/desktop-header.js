@@ -6,9 +6,15 @@
   const desktop = window.matchMedia('(min-width: 1025px)');
   let current = null;
 
+  // The item under the highlight gets white text (see desktop-header.css).
+  const mark = item => {
+    for (const li of list.children) li.classList.toggle('ect-pill-at', li === item);
+  };
+
   const hide = () => {
     current = null;
     list.removeAttribute('data-pill');
+    mark(null);
   };
 
   const place = item => {
@@ -23,6 +29,7 @@
     if (!current) requestAnimationFrame(() => requestAnimationFrame(() => {
       if (list.hasAttribute('data-pill')) list.setAttribute('data-pill', 'on');
     }));
+    mark(item);
     current = item;
   };
 
@@ -42,6 +49,9 @@
   list.addEventListener('focusout', event => {
     if (!list.contains(event.relatedTarget)) settle();
   });
-  new MutationObserver(settle).observe(list, { subtree: true, attributeFilter: ['class'] });
+  // React to SmartMenus opening or closing a submenu, not to our own marks.
+  new MutationObserver(records => {
+    if (records.some(record => record.target.tagName === 'A')) settle();
+  }).observe(list, { subtree: true, attributeFilter: ['class'] });
   window.addEventListener('resize', () => (current ? place(current) : hide()));
 })();

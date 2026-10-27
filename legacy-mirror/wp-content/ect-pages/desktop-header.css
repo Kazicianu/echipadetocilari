@@ -157,9 +157,9 @@
 
   /*
    * Top-level links sit in a white pill with the soft shadow of the homepage
-   * chips. An orange highlight with ink text, like "Cu tine" in the homepage
-   * headings, slides under the hovered or focused link (desktop-header.js
-   * sets --ect-pill-x/-w).
+   * chips. An orange highlight with white text slides under the hovered or
+   * focused link (desktop-header.js sets --ect-pill-x/-w and marks the item
+   * under it with .ect-pill-at).
    */
   #top .elementor-nav-menu--main { --e-nav-menu-horizontal-menu-item-margin: 0px; }
 
@@ -203,7 +203,11 @@
     transition: color 0.2s ease;
   }
 
-  /* Slate at rest, orange for the current page, ink on the highlight. */
+  /*
+   * Slate at rest, orange for the current page, white on the highlight. The
+   * white waits a beat so it lands with the sliding highlight instead of
+   * flashing on the white pill. Without the script, hover turns ink.
+   */
   #top .elementor-nav-menu--main > .elementor-nav-menu > li > .elementor-item,
   #top .elementor-nav-menu--main > .elementor-nav-menu > li > .elementor-item:focus { color: #5b6575; fill: #5b6575; }
 
@@ -212,6 +216,12 @@
   #top .elementor-nav-menu--main > .elementor-nav-menu > li > .elementor-item:hover,
   #top .elementor-nav-menu--main > .elementor-nav-menu > li > .elementor-item:focus-visible,
   #top .elementor-nav-menu--main > .elementor-nav-menu > li > .elementor-item.highlighted { color: #27272d; fill: #27272d; }
+
+  #top .elementor-nav-menu--main > .elementor-nav-menu[data-pill] > li.ect-pill-at > .elementor-item {
+    color: #fff;
+    fill: #fff;
+    transition: color 0.15s ease 0.1s;
+  }
 
   /* Elementor's underline pointer gives way to the highlight. */
   #top .elementor-nav-menu--main > .elementor-nav-menu > li > .elementor-item::before,
@@ -342,6 +352,7 @@
   #top .elementor-nav-menu--main .has-submenu .sub-arrow::before,
   #top .elementor-nav-menu--main > .elementor-nav-menu::before,
   #top .elementor-nav-menu--main > .elementor-nav-menu > li > .elementor-item,
+  #top .elementor-nav-menu--main > .elementor-nav-menu[data-pill] > li.ect-pill-at > .elementor-item,
   #top .elementor-element-682f9a60 .elementor-button { transition: none; }
 
   #top .elementor-nav-menu--main .sub-menu,
