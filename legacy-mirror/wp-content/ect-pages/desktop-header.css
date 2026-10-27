@@ -189,7 +189,9 @@
   }
 
   #top .elementor-nav-menu--main > .elementor-nav-menu[data-pill]::before { opacity: 1; }
-  #top .elementor-nav-menu--main > .elementor-nav-menu[data-pill="jump"]::before { transition: opacity 0.2s ease; }
+
+  /* Appearing from nothing, the highlight shows at once, together with its white text. */
+  #top .elementor-nav-menu--main > .elementor-nav-menu[data-pill="jump"]::before { transition: none; }
 
   #top .elementor-nav-menu--main > .elementor-nav-menu > li > .elementor-item {
     position: relative;
@@ -204,9 +206,8 @@
   }
 
   /*
-   * Slate at rest, orange for the current page, white on the highlight. The
-   * white waits a beat so it lands with the sliding highlight instead of
-   * flashing on the white pill. Without the script, hover turns ink.
+   * Slate at rest, orange for the current page, white at once on the
+   * highlight. Without the script, hover turns ink.
    */
   #top .elementor-nav-menu--main > .elementor-nav-menu > li > .elementor-item,
   #top .elementor-nav-menu--main > .elementor-nav-menu > li > .elementor-item:focus { color: #5b6575; fill: #5b6575; }
@@ -220,7 +221,7 @@
   #top .elementor-nav-menu--main > .elementor-nav-menu[data-pill] > li.ect-pill-at > .elementor-item {
     color: #fff;
     fill: #fff;
-    transition: color 0.15s ease 0.1s;
+    transition: none;
   }
 
   /* Elementor's underline pointer gives way to the highlight. */
@@ -352,7 +353,6 @@
   #top .elementor-nav-menu--main .has-submenu .sub-arrow::before,
   #top .elementor-nav-menu--main > .elementor-nav-menu::before,
   #top .elementor-nav-menu--main > .elementor-nav-menu > li > .elementor-item,
-  #top .elementor-nav-menu--main > .elementor-nav-menu[data-pill] > li.ect-pill-at > .elementor-item,
   #top .elementor-element-682f9a60 .elementor-button { transition: none; }
 
   #top .elementor-nav-menu--main .sub-menu,
