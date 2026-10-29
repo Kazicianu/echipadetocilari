@@ -293,7 +293,7 @@ footer .ect-footer-links > .ect-consent-open {
   min-height: 44px;
 }
 
-.ect-consent-open.ect-consent-open {
+button.ect-consent-open.ect-consent-open {
   -webkit-appearance: none;
   appearance: none;
   display: flex;
@@ -318,18 +318,18 @@ footer .ect-footer-links > .ect-consent-open {
   transition: none;
 }
 
-.ect-consent-open.ect-consent-open:focus {
+button.ect-consent-open.ect-consent-open:focus {
   color: #27272d;
   background: none;
   outline: none;
 }
 
-.ect-consent-open.ect-consent-open:hover {
+button.ect-consent-open.ect-consent-open:hover {
   color: #fd8649;
   background: none;
 }
 
-.ect-consent-open.ect-consent-open:focus-visible {
+button.ect-consent-open.ect-consent-open:focus-visible {
   outline: 3px solid #27272d;
   outline-offset: 3px;
 }
