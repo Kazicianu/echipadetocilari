@@ -40,3 +40,5 @@ scripts/content-extract.txt
 tmp/
 output/
 docs/clienti/
+# Competitor pricing research stays local: the repository is public
+docs/research/facebook-ads-preturi-2026-10-29/
