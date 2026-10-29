@@ -4,11 +4,11 @@ Salvat la cererea utilizatorului la 18 septembrie 2026. Acest document păstreaz
 
 ## Oferta și arhitectura
 
-Homepage-ul este punctul central pentru șapte grupuri tematice. Oferta este limitată la creare site web, creare magazin online, dezvoltare aplicații web și mobile, SEO și vizibilitate în AI, Google Ads, Facebook Ads cu Instagram și mentenanță site. Nu promova logo design sau copywriting ca servicii separate. Pagina dedicată pentru magazin online a fost readusă în implementare (design aprobat pe 12.10.2026, pachet în `docs/ui/creare-magazin-online/`). Pagina pentru dezvoltare aplicații a fost readusă în implementare la cererea utilizatorului din 17.10.2026, exact după pachetul `docs/ui/dezvoltare-aplicatii/`. Pagina Facebook Ads rămâne retrasă; rândul ei de mai jos rămâne cercetare pentru o eventuală etapă viitoare.
+Homepage-ul este punctul central pentru șapte grupuri tematice. Oferta este limitată la creare site web, creare magazin online, dezvoltare aplicații web și mobile, SEO și vizibilitate în AI, Google Ads, Facebook Ads cu Instagram și mentenanță site. Nu promova logo design sau copywriting ca servicii separate. Pagina dedicată pentru magazin online a fost readusă în implementare (design aprobat pe 12.10.2026, pachet în `docs/ui/creare-magazin-online/`). Pagina pentru dezvoltare aplicații a fost readusă în implementare la cererea utilizatorului din 17.10.2026, exact după pachetul `docs/ui/dezvoltare-aplicatii/`. Pentru viitoarea pagină Facebook Ads, ruta aprobată de utilizator la 26.10.2026 este `/agentie-facebook-ads/`. Pagina a fost implementată pe 29.10.2026, doar în română, după designul „Inițială · Desktop · 1440 px”; prețurile pachetelor sunt încă de completat.
 
 Păstrează URL-urile existente, cu excepția migrării explicite a paginii Google Ads descrise mai jos, fără a introduce obligatoriu un director /servicii/. Nu crea pagini separate pentru sinonime precum creare site, realizare site și creare website. Delimitează intenția homepage-ului de cea a paginilor de servicii.
 
-O pagină Servicii care repetă homepage-ul nu este necesară. Meniul și cardurile de magazin online și dezvoltare aplicații de pe homepage oferă acces direct la /creare-magazin-online/ și /dezvoltare-aplicatii/. Din 19.10.2026, cardul Facebook Ads trimite la formularul existent, iar /services/ și /en/services/ sunt retrase din surse, rute și metadata. URL-urile lor redirecționează permanent către lista de servicii de pe homepage, la /#servicii și /en/#servicii.
+O pagină Servicii care repetă homepage-ul nu este necesară. Meniul și cardurile de magazin online și dezvoltare aplicații de pe homepage oferă acces direct la /creare-magazin-online/ și /dezvoltare-aplicatii/. Din 29.10.2026, cardul Facebook Ads și meniul Servicii trimit la /agentie-facebook-ads/, iar /services/ și /en/services/ sunt retrase din surse, rute și metadata. URL-urile lor redirecționează permanent către lista de servicii de pe homepage, la /#servicii și /en/#servicii.
 
 Tot la 19.10.2026 au fost retrase paginile demonstrative /clients/ și /en/clients/ și serviciul separat /logo-design/ și /en/logo-design/. Nu au un înlocuitor echivalent și răspund cu 404 după publicarea schimbărilor. Nu se generează pagini HTML, schema, hreflang sau intrări sitemap pentru aceste șase rute. About promovează web design cu link către /creare-site-web/. Build-ul respinge linkurile interne către paginile retrase, iar scraperul le exclude.
 
@@ -24,7 +24,7 @@ Sursa: `keyword-research-2026-09-18.md`, cercetare Semrush pentru România. Volu
 | /dezvoltare-aplicatii/ | dezvoltare aplicatii mobile, 170 | dezvoltare aplicatii web; creare aplicatii mobile |
 | /servicii-seo/ | servicii seo, 2900 | optimizare seo; servicii seo bucuresti; consultanta seo; audit seo; optimizare seo pret |
 | /agentie-google-ads/ | agentie google ads, 260 | servicii google ads; campanii google ads; promovare google ads |
-| /facebook-ads/ | agentie facebook ads, 140 | servicii facebook ads; promovare facebook |
+| /agentie-facebook-ads/ | agentie facebook ads, 140 | servicii facebook ads; promovare facebook |
 | /administrare-site/ | mentenanta site, 260 | administrare site; mentenanta site wordpress; administrare website; mentenanta website |
 
 Folosește variantele natural, cu diacritice în textele publicate. Nu forța potrivirea exactă și nu crea pagini repetitive pentru fiecare variantă sau pentru fiecare oraș. Termenii de preț se acoperă inițial prin secțiuni utile în pagina serviciului, fără prețuri inventate.

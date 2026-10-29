@@ -69,7 +69,7 @@ test('the expanding mobile menu preserves every available translated link on eac
       const actual = links(enhanced, 'ect-mobile-menu-link');
       const label = `${route[language]} (${language})`;
 
-      assert.equal(source.length, language === 'ro' ? 8 : 6, `${label}: source has only available mobile links`);
+      assert.equal(source.length, language === 'ro' ? 9 : 6, `${label}: source has only available mobile links`);
       assert.deepEqual(actual, expected, `${label}: the homepage leads the copied links, which retain routes, labels and current page`);
       checkedCurrentLinks += actual.filter(link => link.current === 'page').length;
       assert.equal(menu(enhanced, 'elementor-nav-menu--main'), menu(original, 'elementor-nav-menu--main'), `${label}: desktop markup remains intact`);

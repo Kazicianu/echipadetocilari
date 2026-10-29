@@ -110,6 +110,13 @@ export const routes = [
     service: { ro: 'Administrare campanii Google Ads', en: 'Google Ads campaign management' },
   },
   {
+    // Route approved 26.10.2026, design implemented 29.10.2026. Romanian only until an EN version is approved.
+    ro: '/agentie-facebook-ads/',
+    roFile: 'agentie-facebook-ads/index.html',
+    labelRo: 'Agenție Facebook Ads',
+    service: { ro: 'Administrare campanii Facebook Ads și Instagram' },
+  },
+  {
     // Privacy and cookie policy (decided 22.10.2026). Not a service: no Service schema.
     ro: '/politica-de-confidentialitate/',
     en: '/en/privacy-policy/',

@@ -29,16 +29,22 @@ function plainText(markup) {
     .trim();
 }
 
-function extractVisibleFaqs(html, { itemClass, answerClass, label, numbered = false }) {
+function extractVisibleFaqs(html, { itemClass, answerClass, questionClass, label, numbered = false }) {
   const faqs = [];
   for (const [, attributes, content] of html.matchAll(/<details\b([^>]*)>([\s\S]*?)<\/details>/gi)) {
     if (!hasClass(attributes, itemClass)) continue;
     const summary = content.match(/<summary\b[^>]*>([\s\S]*?)<\/summary>/i)?.[1];
-    const answer = [...content.matchAll(/<div\b([^>]*)>([\s\S]*?)<\/div>/gi)]
-      .find(([, attrs]) => hasClass(attrs, answerClass))?.[2];
-    const question = numbered && summary
-      ? summary.replace(/^\s*<span\b[^>]*>\s*\d+\s*<\/span>\s*/i, '')
-      : summary;
+    // Opening tags only, so the answer may sit inside wrapper divs; it must not contain a div itself.
+    const opening = [...content.matchAll(/<div\b([^>]*)>/gi)].find(([, attrs]) => hasClass(attrs, answerClass));
+    const answer = opening && content.slice(opening.index + opening[0].length).match(/^([\s\S]*?)<\/div>/i)?.[1];
+    // With questionClass the summary also carries decorations; only that element is the question.
+    const questionTag = questionClass && summary &&
+      [...summary.matchAll(/<(\w+)\b([^>]*)>/gi)].find(([, , attrs]) => hasClass(attrs, questionClass));
+    const question = questionClass
+      ? questionTag && summary.slice(questionTag.index + questionTag[0].length).split(new RegExp(`</${questionTag[1]}>`, 'i'))[0]
+      : numbered && summary
+        ? summary.replace(/^\s*<span\b[^>]*>\s*\d+\s*<\/span>\s*/i, '')
+        : summary;
     const q = question && plainText(question);
     const a = answer && plainText(answer);
     if (!q || !a) throw new Error(`${label} FAQ item is missing its visible question or answer.`);
@@ -59,5 +65,12 @@ export function extractGoogleAdsFaqs(html) {
 export function extractHomeFaqs(html) {
   return extractVisibleFaqs(html, {
     itemClass: 'ect-home-faq__item', answerClass: 'ect-home-faq__answer', label: 'Homepage',
+  });
+}
+
+/** @returns {Array<{q: string, a: string}>} */
+export function extractFacebookAdsFaqs(html) {
+  return extractVisibleFaqs(html, {
+    itemClass: 'fb-faq', answerClass: 'fb-faq-a', questionClass: 'fb-faq-q', label: 'Facebook Ads',
   });
 }

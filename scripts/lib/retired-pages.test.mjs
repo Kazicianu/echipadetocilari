@@ -25,7 +25,7 @@ test('withdrawn demo and logo pages have no route, metadata, or source HTML', ()
   const home = readFileSync(path.join(root, 'legacy-mirror/index.html'), 'utf8');
   assert.equal((home.match(/\bid="servicii"/g) || []).length, 1);
   const facebookCard = home.match(/<a\b[^>]*data-id="77240360"[^>]*>/)?.[0];
-  assert.match(facebookCard || '', /href="#formular_contact_bottom"/);
+  assert.match(facebookCard || '', /href="\/agentie-facebook-ads\/"/);
 });
 
 test('build validation rejects retired internal links, including scraped relative and index.html forms', () => {

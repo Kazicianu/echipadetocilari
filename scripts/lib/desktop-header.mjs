@@ -12,6 +12,7 @@ const ICONS = {
   apps: svg('<rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M10 5h4M10.5 18.5h3"/><path d="M10 10l-1.5 2 1.5 2M14 10l1.5 2-1.5 2"/>'),
   seo: svg('<circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L20 20"/><path d="M10.5 7.5c.35 1.6 1.4 2.65 3 3-1.6.35-2.65 1.4-3 3-.35-1.6-1.4-2.65-3-3 1.6-.35 2.65-1.4 3-3z"/>'),
   ads: svg('<path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1z"/><path d="M15.5 9.5a3.5 3.5 0 0 1 0 5"/><path d="M18 7a7 7 0 0 1 0 10"/>'),
+  social: svg('<path d="M7.5 10.5v9H4.5a1 1 0 0 1-1-1v-7a1 1 0 0 1 1-1h3z"/><path d="M7.5 10.5l3.6-6.3a1.9 1.9 0 0 1 3.5 1.3l-.7 3.5h5a2 2 0 0 1 2 2.3l-1.1 6.5a2 2 0 0 1-2 1.7H7.5"/>'),
   maintenance: svg('<path d="M12 3.2l7 2.8v5.6c0 4.2-2.9 7.6-7 9.2-4.1-1.6-7-5-7-9.2V6l7-2.8z"/><path d="M9 12.2l2.1 2.1 4-4.1"/>'),
 };
 
@@ -39,6 +40,10 @@ export const serviceMenuCopy = {
     icon: 'ads',
     ro: 'Campanii Search, optimizare și raportare, pentru firme din România.',
     en: 'Search campaigns, optimisation and reporting for businesses in Romania.',
+  },
+  '/agentie-facebook-ads/': {
+    icon: 'social',
+    ro: 'Reclame pe Facebook și Instagram, cu public, mesaje și măsurare.',
   },
   '/administrare-site/': {
     icon: 'maintenance',

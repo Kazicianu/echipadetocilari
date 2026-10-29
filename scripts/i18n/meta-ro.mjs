@@ -52,6 +52,11 @@ export const roPageMeta = {
   "title": "Agenție Google Ads: servicii și campanii | Echipa de Tocilari",
   "description": "Agenție Google Ads pentru firme din România. Campanii Search cu măsurarea conversiilor, optimizare și raportare. De la 260 €/lună, buget publicitar separat."
 },
+  '/agentie-facebook-ads/': {
+    title: 'Agenție Facebook Ads pentru firme | Echipa de Tocilari',
+    description:
+      'Agenție Facebook Ads din București. Administrăm reclame pe Facebook și Instagram pentru firme din România: public, mesaje, buget și măsurarea cererilor.',
+  },
   '/politica-de-confidentialitate/': {
     title: 'Politica de confidențialitate și cookie-uri | Echipa de Tocilari',
     description:
