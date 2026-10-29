@@ -55,7 +55,7 @@ export const roPageMeta = {
   '/agentie-facebook-ads/': {
     title: 'Agenție Facebook Ads pentru firme | Echipa de Tocilari',
     description:
-      'Agenție Facebook Ads din București. Administrăm reclame pe Facebook și Instagram pentru firme din România: public, mesaje, buget și măsurarea cererilor.',
+      'Agenție Facebook Ads din București pentru firme din România. Reclame pe Facebook și Instagram, cu public, mesaje și măsurare. De la 290 €/lună, buget separat.',
   },
   '/politica-de-confidentialitate/': {
     title: 'Politica de confidențialitate și cookie-uri | Echipa de Tocilari',

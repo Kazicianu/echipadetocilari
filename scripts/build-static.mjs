@@ -37,6 +37,7 @@ import { faqPage, organization, service, visibleDateModified, webPage, website }
 import { extractFacebookAdsFaqs, extractGoogleAdsFaqs, extractHomeFaqs } from './lib/faq.mjs';
 import { storeOfferCatalog } from './lib/store-seo.mjs';
 import { appsOfferCatalog } from './lib/apps-seo.mjs';
+import { facebookAdsOfferCatalog } from './lib/facebook-ads-seo.mjs';
 import { junkRedirects, vercelRedirects } from './lib/junk-redirects.mjs';
 import { validateBuild } from './lib/validate.mjs';
 import { enhanceContactForms } from './lib/contact-forms.mjs';
@@ -153,6 +154,11 @@ function schemasFor(urlPath, meta, html) {
     }
     if (urlPath === '/dezvoltare-aplicatii/') {
       serviceSchema.hasOfferCatalog = appsOfferCatalog({
+        html, site: SITE, url: urlPath, serviceName: route.service.ro,
+      });
+    }
+    if (urlPath === '/agentie-facebook-ads/') {
+      serviceSchema.hasOfferCatalog = facebookAdsOfferCatalog({
         html, site: SITE, url: urlPath, serviceName: route.service.ro,
       });
     }
