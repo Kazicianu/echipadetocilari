@@ -51,6 +51,7 @@ import { pageSources, resolveLastmods } from './lib/lastmod.mjs';
 import { addConsentManager, addFooterPrivacyLinks } from './lib/privacy.mjs';
 import { fixSkipLink, validateSkipLink } from './lib/skip-link.mjs';
 import { addPreloadHints } from './lib/preload-hints.mjs';
+import { optimizeRenderPath, validateRenderPath } from './lib/render-path.mjs';
 import { versionAssets } from './lib/asset-versions.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -279,6 +280,7 @@ for (const file of walkHtml(outDir)) {
   html = enhanceMobileMenu(enhanceDesktopHeader(enhanceContactForms(html)), { pageUrl: urlPath });
   html = addConsentManager(addFooterPrivacyLinks(html), { gaId: GA4_MEASUREMENT_ID });
   html = makeStandaloneAssets(html);
+  html = optimizeRenderPath(html);
   // Preloads keep the unversioned URL; only stylesheets and scripts get ?v=.
   const route = routeByPath(urlPath);
   html = addPreloadHints(html, { lcpImages: route?.lcpImages, fonts: route?.preloadFonts });
@@ -354,6 +356,7 @@ const errors = validateBuild({
 errors.push(...validateStandaloneAssets({ outDir, files: walkHtml(outDir), urlPathOf }));
 for (const file of walkHtml(outDir)) {
   errors.push(...validateSkipLink(readFileSync(file, 'utf8'), urlPathOf(file)));
+  errors.push(...validateRenderPath(readFileSync(file, 'utf8'), urlPathOf(file)));
 }
 if (INDEXABLE) {
   for (const url of missingLastmod) {
