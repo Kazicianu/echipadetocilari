@@ -1,0 +1,48 @@
+<!-- @dsCard group="Navigation" height=460 width=960 -->
+<!doctype html>
+<html lang="ro">
+<head>
+<link rel="stylesheet" href="../../tokens.css">
+<link rel="stylesheet" href="../bundle.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CookieConsent</title>
+<style>
+  html, body { margin: 0; }
+  body { padding: 24px; background: var(--white); color: var(--ink); font-family: var(--font-sans); }
+  body { background: var(--blob-turquoise); }
+  .row { display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start; }
+</style>
+</head>
+<body>
+<div class="row">
+  <section class="ect-consent" role="region" aria-label="Preferințe cookie-uri">
+    <div class="ect-consent__view">
+      <p class="ect-consent__copy">Folosim cookie-uri Google Analytics doar cu acordul tău. Dacă accepți, Google poate primi și numele, emailul și telefonul din formular, sub formă de cod hash. <a class="ect-consent__link" href="/politica-de-confidentialitate/">Află mai multe</a>.</p>
+      <div class="ect-consent__actions ect-consent__actions--summary">
+        <button class="ect-consent__pill ect-consent__pill--ghost" type="button">Setări</button>
+        <button class="ect-consent__pill ect-consent__pill--solid" type="button">Refuz toate</button>
+        <button class="ect-consent__pill ect-consent__pill--solid" type="button">Accept toate</button>
+      </div>
+    </div>
+  </section>
+  <section class="ect-consent" role="region" aria-label="Preferințe cookie-uri">
+    <div class="ect-consent__view">
+      <div class="ect-consent__head">
+        <p class="ect-consent__title">Preferințe cookie-uri</p>
+        <p class="ect-consent__copy">Alege ce cookie-uri permiți. Stocarea necesară păstrează alegerea ta și nu poate fi oprită.</p>
+      </div>
+      <div class="ect-consent__categories">
+        <label class="ect-consent__category ect-consent__category--locked"><input class="ect-consent__check" type="checkbox" checked disabled><span class="ect-consent__label"><span class="ect-consent__name">Necesare</span><span class="ect-consent__desc">Păstrează în browserul tău alegerea făcută aici, timp de 6 luni.</span></span></label>
+        <label class="ect-consent__category"><input class="ect-consent__check" type="checkbox"><span class="ect-consent__label"><span class="ect-consent__name">Analiză</span><span class="ect-consent__desc">Google Analytics: ce pagini sunt vizitate, de unde vin vizitatorii și cum e folosit site-ul. Poate trimite către Google, sub formă de cod hash, numele, emailul și telefonul pe care le scrii în formular.</span></span></label>
+      </div>
+      <div class="ect-consent__actions">
+        <button class="ect-consent__pill ect-consent__pill--solid" type="button">Refuz toate</button>
+        <button class="ect-consent__pill ect-consent__pill--solid" type="button">Accept toate</button>
+        <button class="ect-consent__pill ect-consent__pill--solid ect-consent__pill--wide" type="button">Salvează preferințele</button>
+      </div>
+    </div>
+  </section>
+</div>
+</body>
+</html>

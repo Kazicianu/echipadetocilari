@@ -1,0 +1,41 @@
+<!-- @dsCard group="Cards" height=780 width=1200 -->
+<!doctype html>
+<html lang="ro">
+<head>
+<link rel="stylesheet" href="../../tokens.css">
+<link rel="stylesheet" href="../bundle.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FeatureCard</title>
+<style>
+  html, body { margin: 0; }
+  body { padding: 24px; background: var(--white); color: var(--ink); font-family: var(--font-sans); }
+  .bento { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 20px; }
+  .bento > :nth-child(1) { grid-column: 1 / span 5; grid-row: 1 / span 2; }
+  .bento > :nth-child(2) { grid-column: 6 / span 7; }
+  .bento > :nth-child(3) { grid-column: 6 / span 3; }
+  .bento > :nth-child(4) { grid-column: 9 / span 4; }
+</style>
+</head>
+<body>
+<div class="bento">
+  <article class="ect-feature ect-feature--lead">
+    <div><span class="ect-feature__num">01</span><h3 class="ect-feature__title">Cuvinte cheie și căutări relevante</h3><p class="ect-feature__text">Alegem cuvinte cheie după oferta ta și intenția de cumpărare. Folosim cuvinte cheie negative pentru a limita căutările fără legătură cu serviciul sau produsul promovat.</p></div>
+    <div class="ect-terms">
+      <p class="ect-terms__label">Exemplu de termeni</p>
+      <ul>
+        <li><span class="ect-terms__mark"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span class="ect-terms__term">service centrale termice</span><span class="ect-terms__state">păstrat</span></li>
+        <li><span class="ect-terms__mark"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span class="ect-terms__term">revizie centrală termică</span><span class="ect-terms__state">păstrat</span></li>
+        <li class="is-excluded"><span class="ect-terms__mark"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg></span><span class="ect-terms__term">manual centrală pdf</span><span class="ect-terms__state">exclus</span></li>
+        <li class="is-excluded"><span class="ect-terms__mark"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg></span><span class="ect-terms__term">centrală termică second hand</span><span class="ect-terms__state">exclus</span></li>
+      </ul>
+    </div>
+  </article>
+  <article class="ect-feature"><span class="ect-feature__num">02</span><h3 class="ect-feature__title">Campanii Google Ads Search</h3><p class="ect-feature__text">Organizăm campaniile Google Ads pe servicii sau produse, cu grupuri de anunțuri relevante. Stabilim zona vizată și bugetul conform planului aprobat.</p>
+    <div class="ect-structure" aria-hidden="true"><span class="ect-tag ect-tag--solid">Campanie: service centrale</span><span class="ect-structure__groups"><span class="ect-tag">Grup: revizie</span><span class="ect-tag">Grup: reparații</span></span></div>
+  </article>
+  <article class="ect-feature"><span class="ect-feature__num">04</span><h3 class="ect-feature__title">Măsurarea conversiilor</h3><p class="ect-feature__text">Configurăm GA4 și Google Tag Manager pentru formulare și clickuri pe telefon în toate pachetele. Verificăm evenimentele înainte de lansare.</p><span class="ect-feature__note">Conversii configurate în toate pachetele</span></article>
+  <article class="ect-feature"><div class="ect-feature__head"><span class="ect-feature__num">05</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 7a8 8 0 0 0-14 1M5 17a8 8 0 0 0 14-1M19 3v4h-4M5 21v-4h4"></path></svg></div><h3 class="ect-feature__title">Optimizarea campaniilor</h3><p class="ect-feature__text">Revizuim căutările, anunțurile, sumele licitate și cheltuielile. Ajustăm campaniile pe baza datelor disponibile și a obiectivului stabilit.</p></article>
+</div>
+</body>
+</html>

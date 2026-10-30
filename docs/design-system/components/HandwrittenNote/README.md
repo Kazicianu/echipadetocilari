@@ -1,11 +1,12 @@
 # HandwrittenNote
 
-A short handwritten aside in Caveat, tilted, that adds a wink next to a heading or an illustration.
+A short handwritten aside in Caveat, tilted, that adds the human voice next to a section title.
 
-Markup: `p.ect-note` (add `ect-note--lg` for the 28px size), optionally followed by the hand-drawn arrow (`swipe-arrow.svg`, class `ect-note__arrow`). Set `--r` to change the tilt.
+Markup: `p.ect-note` (add `aria-hidden="true"` when it repeats nearby text). Sizes: default `scribble` (23px), `--md` 24px, `--lg` `scribble-lg` (27px); `--hint` is the small "Glisează și vezi mai mult" with the drawn arrow (`svg.ect-note__arrow`). Tilt with `--r` (default -7deg; -5deg for the larger ones).
 
-- One per section at most, three to six words, never information people need: "Și fără ședințe inutile!", "Da, numele ni se potrivește.", "Ideile bune cresc împreună."
-- 23px at -7deg next to a section header (homepage), 28px at -3deg in a story block (About). The font is subset to ASCII and Romanian, so keep to those characters.
-- On mobile the homepage uses it at 14px for the "Glisează și vezi mai mult" hint above the scrollable chart.
+- One per section at most, in `ink`, beside the heading or at the edge of a card, never inside running text.
+- Write it as a quick aside with an exclamation or a full stop: "Și fără ședințe inutile!", "Nimic nu pornește fără aprobarea ta!", "Noi ne ocupăm de toți pașii.", "Fără asteriscuri."
+- The font is `hand` (Caveat ECT, 600, subset to ASCII and Romanian). Never set a heading or a button in it.
+- The swipe hint shows only on phones, under a chart or a row that scrolls sideways.
 
-Hand-written from `ect-pages/home.css` (`.ect-process__scribble`, `.ect-process__swipe`) and `about.css` (`.ect-about-handwritten`).
+Hand-written from `home.css` (`.ect-process__scribble`, `.ect-process__swipe`), `creare-magazin-online.css` (`.mg-scope__scribble`) and the Google Ads inline styles.

@@ -1,11 +1,11 @@
 # Highlight
 
-An orange chip behind one or two words of a heading, like a marker stroke.
+An orange chip behind the key words of a heading.
 
-Wrap the words in `span.ect-hl` inside an H2. The text keeps the heading colour, so it is `ink` on `orange` (6.1:1).
+Markup: wrap the words in `span.ect-hl` inside the heading. `ect-hl--wide` gives the store's scope title its slightly wider chip.
 
-- One highlight per heading, on the words that carry the point ("Cum lucrăm <span class="ect-hl">cu tine</span>").
-- The chip follows the text: padding 0.02em 0.16em 0.08em, `radius-card` corners, and it repeats on each line when the words wrap.
-- Never put `white` text on it.
+- The chip is `orange` with `radius-card` corners and padding in em, so it scales with the heading; the words stay `ink` (6.1:1 on `orange`).
+- One highlight per heading, on two or three words that carry the promise ("cu tine", "la prima comandă", "cerere", "ce nu").
+- Long highlights wrap with each line keeping its own chip (`box-decoration-break: clone`). On the homepage process title, phones move the chip to its own centred line.
 
-Hand-written from `ect-pages/home.css` (`.ect-process__hl`) and `about.css` (`h2 > span`).
+Hand-written from `home.css` (`.ect-process__hl`), `creare-magazin-online.css` (`.ect-hl`, `.mg-scope__hl`) and the Google Ads measurement heading.

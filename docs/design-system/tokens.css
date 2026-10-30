@@ -11,12 +11,15 @@
   --ink-muted: #55555e;
   --ink-75: #27272dbf;
   --ink-10: #27272d1a;
+  --ink-theme: #333333;
   --slate: #5b6575;
   --accent: #637372;
+  --ink-blue: #3d4459;
+  --ink-soft: #77777f;
   --warm-gray: #776b64;
+  --mute: #c9c9cf;
   --white: #ffffff;
   --white-warm: #fffefe;
-  --surface-soft: #f9f9f9;
   --field: #fcfcfc;
   --peach: #fff0e7;
   --peach-phase: #fff1e7;
@@ -27,25 +30,49 @@
   --line-menu: #f2d1c3;
   --line-faq: #efd9ce;
   --line-step: #ebc6b2;
-  --turquoise: #6bf2e9;
   --blob-turquoise: #e3f8f9;
   --blob-turquoise-deep: #cef3f5;
   --blob-lavender: #f6f5fd;
+  --blob-lavender-deep: #e8e4fb;
+  --wash-turquoise: #e9f9fa;
+  --tint-turquoise: #e6f9fe;
+  --rail: #3d3d45;
+  --check-green: #34b233;
   --success: #166534;
   --success-soft: #f0fdf4;
   --danger: #9b1c1c;
   --danger-soft: #fff1f1;
   --info: #334155;
   --info-soft: #f8fafc;
+  --consent-surface: #fffcfa;
+  --consent-ink: #252522;
+  --consent-ink-soft: #252522b8;
+  --consent-line: #efe6dc;
+  --consent-pill-line: #e6dbd1;
+  --consent-solid: #1a1a1a;
+  --consent-solid-hover: #2a2a2a;
+  --consent-on-solid: #fffdfb;
   --shadow-card: 0 0 20px 0 rgba(0, 0, 0, 0.05);
   --shadow-card-hover: 0 0 20px 0 rgba(253, 134, 73, 0.69);
-  --shadow-toggle: 0 0 30px 0 rgba(0, 0, 0, 0.05);
+  --shadow-soft: 0 0 20px 0 rgba(0, 0, 0, 0.06);
   --shadow-glow: 0 0 10px 0 #fd8649;
+  --shadow-recommended: 0 0 20px 0 #fd8649;
   --shadow-glow-strong: 0 0 25px 0 #fd8649;
   --shadow-featured: 0 0 24px 0 #fd864933;
+  --shadow-cta: 0 14px 28px -14px rgba(253, 134, 73, 0.7);
+  --shadow-cta-hot: 0 14px 30px -14px rgba(255, 86, 0, 0.55);
+  --shadow-ticket: 0 10px 18px -12px rgba(110, 40, 5, 0.45);
+  --shadow-ticket-deep: 0 16px 34px -18px rgba(110, 40, 5, 0.55);
+  --shadow-station: 0 10px 24px -14px rgba(39, 39, 45, 0.3);
+  --shadow-station-dot: 0 6px 14px 0 rgba(39, 39, 45, 0.18);
+  --shadow-receipt: 0 12px 26px rgba(39, 39, 45, 0.12);
   --shadow-menu: 0 12px 32px 0 rgba(34, 42, 55, 0.12);
+  --shadow-dropdown: 0 0 30px 0 rgba(0, 0, 0, 0.08);
   --shadow-switch: 0 2px 10px 0 rgba(0, 0, 0, 0.08);
-  --shadow-bubble: 0 3px 6px 0 rgba(100, 48, 25, 0.16);
+  --shadow-bubble: 0 3px 6px rgba(100, 48, 25, 0.16);
+  --shadow-bubble-soft: 0 3px 6px rgba(100, 48, 25, 0.12);
+  --shadow-character: 0 18px 16px rgba(110, 40, 5, 0.28);
+  --shadow-consent: 0 1px 2px 0 rgba(0, 0, 0, 0.04), 0 12px 32px 0 rgba(0, 0, 0, 0.08);
 }
 :root {
   --space-10: 10px;
@@ -68,7 +95,8 @@
   --radius-pill: 999px;
   --content-max: 1150px;
   --contact-max: 1200px;
-  --ads-max: 1280px;
+  --ads-max: 1240px;
+  --header-max: 1300px;
   --section-max: 1400px;
   --header-height: 90px;
   --target-min: 44px;
@@ -77,34 +105,68 @@
   --font-sans: Montserrat, system-ui, sans-serif;
   --font-hand: "Caveat ECT", "Segoe Script", cursive;
   --font-cta: "Noto Sans", sans-serif;
+  --font-round: "Varela Round", sans-serif;
 }
+.display { font-family: var(--font-sans); font-size: 45px; line-height: 54px; font-weight: 900; }
+.display-ads { font-family: var(--font-sans); font-size: 54px; line-height: 60.48px; font-weight: 900; letter-spacing: -1.35px; }
+.display-site { font-family: var(--font-sans); font-size: 64px; line-height: 73.6px; font-weight: 900; }
+.kicker { font-family: var(--font-sans); font-size: 21px; line-height: 25.2px; font-weight: 400; }
+.kicker-lg { font-family: var(--font-sans); font-size: 41px; line-height: 49.2px; font-weight: 400; }
+.h2 { font-family: var(--font-sans); font-size: 45px; line-height: 54px; font-weight: 500; }
+.h2-light { font-family: var(--font-sans); font-size: 45px; line-height: 54px; font-weight: 400; }
+.h2-heavy { font-family: var(--font-sans); font-size: 44px; line-height: 51.92px; font-weight: 800; letter-spacing: -1.54px; }
+.h2-heavy-lg { font-family: var(--font-sans); font-size: 58px; line-height: 64.96px; font-weight: 800; letter-spacing: -2.03px; }
+.panel-title { font-family: var(--font-sans); font-size: 45px; line-height: 47.25px; font-weight: 900; letter-spacing: -0.45px; }
+.contact-title { font-family: var(--font-sans); font-size: 42px; line-height: 50.4px; font-weight: 400; }
+.h2-sm { font-family: var(--font-sans); font-size: 36px; line-height: 43.2px; font-weight: 500; }
+.cta-title { font-family: var(--font-sans); font-size: 35px; line-height: 42px; font-weight: 500; }
+.subtitle { font-family: var(--font-sans); font-size: 30px; line-height: 36px; font-weight: 400; }
+.h3-lg { font-family: var(--font-sans); font-size: 30px; line-height: 36px; font-weight: 500; }
+.h3-xl { font-family: var(--font-sans); font-size: 28px; line-height: 33.6px; font-weight: 500; letter-spacing: -0.336px; }
+.card-name { font-family: var(--font-sans); font-size: 25px; line-height: 30px; font-weight: 500; }
+.price { font-family: var(--font-sans); font-size: 46px; line-height: 50.6px; font-weight: 600; }
+.stat { font-family: var(--font-sans); font-size: 88px; line-height: 79.2px; font-weight: 900; letter-spacing: -3.52px; }
+.stat-word { font-family: var(--font-sans); font-size: 40px; line-height: 40px; font-weight: 900; letter-spacing: -1.6px; }
+.bento-action { font-family: var(--font-sans); font-size: 24px; line-height: 27.6px; font-weight: 800; }
+.h3 { font-family: var(--font-sans); font-size: 22px; line-height: 28.6px; font-weight: 500; }
+.form-title { font-family: var(--font-sans); font-size: 22px; line-height: 26.4px; font-weight: 600; }
+.h3-sm { font-family: var(--font-sans); font-size: 20px; line-height: 24px; font-weight: 500; }
+.station-title { font-family: var(--font-sans); font-size: 19px; line-height: 23.75px; font-weight: 600; }
+.step-title { font-family: var(--font-sans); font-size: 18px; line-height: 22px; font-weight: 500; }
+.ticket-title { font-family: var(--font-sans); font-size: 18px; line-height: 22.5px; font-weight: 700; }
+.lead { font-family: var(--font-sans); font-size: 18px; line-height: 24px; font-weight: 400; }
+.lead-light { font-family: var(--font-sans); font-size: 18px; line-height: 27px; font-weight: 300; }
+.lead-strong { font-family: var(--font-sans); font-size: 18px; line-height: 26.1px; font-weight: 500; }
+.eyebrow { font-family: var(--font-sans); font-size: 18px; line-height: 21.6px; font-weight: 300; }
+.body { font-family: var(--font-sans); font-size: 16px; line-height: 22.4px; font-weight: 300; }
+.body-regular { font-family: var(--font-sans); font-size: 16px; line-height: 24px; font-weight: 400; }
+.list { font-family: var(--font-sans); font-size: 16px; line-height: 22.4px; font-weight: 500; }
+.faq-question { font-family: var(--font-sans); font-size: 16px; line-height: 25.6px; font-weight: 500; }
+.faq-answer { font-family: var(--font-sans); font-size: 16px; line-height: 28px; font-weight: 400; }
+.quote { font-family: var(--font-sans); font-size: 18px; line-height: 24px; font-weight: 300; font-style: italic; }
+.body-sm { font-family: var(--font-sans); font-size: 15px; line-height: 21px; font-weight: 300; }
+.link { font-family: var(--font-sans); font-size: 15px; line-height: 21px; font-weight: 500; }
+.small { font-family: var(--font-sans); font-size: 14px; line-height: 21.7px; font-weight: 300; }
+.caption { font-family: var(--font-sans); font-size: 13px; line-height: 19.5px; font-weight: 300; }
+.bubble { font-family: var(--font-sans); font-size: 13px; line-height: 18.2px; font-weight: 600; }
+.row { font-family: var(--font-sans); font-size: 13px; line-height: 20px; font-weight: 400; }
+.label-caps { font-family: var(--font-sans); font-size: 12px; line-height: 16px; font-weight: 700; letter-spacing: 0.96px; }
+.micro-caps { font-family: var(--font-sans); font-size: 11px; line-height: 15.4px; font-weight: 700; letter-spacing: 0.88px; }
+.button { font-family: var(--font-sans); font-size: 16px; line-height: 19.2px; font-weight: 500; }
+.button-strong { font-family: var(--font-sans); font-size: 16px; line-height: 20.8px; font-weight: 600; }
+.button-hero { font-family: var(--font-sans); font-size: 18px; line-height: 21.6px; font-weight: 600; }
+.nav { font-family: var(--font-sans); font-size: 16px; line-height: 16px; font-weight: 600; }
+.nav-mobile { font-family: var(--font-sans); font-size: 20px; line-height: 25px; font-weight: 500; letter-spacing: -0.3px; }
+.menu-title { font-family: var(--font-sans); font-size: 15px; line-height: 20px; font-weight: 600; }
+.menu-desc { font-family: var(--font-sans); font-size: 13px; line-height: 18px; font-weight: 400; }
+.footer-link { font-family: var(--font-sans); font-size: 16px; line-height: 32px; font-weight: 400; }
+.lang { font-family: var(--font-sans); font-size: 12px; line-height: 12px; font-weight: 700; letter-spacing: 0.48px; }
+.pill { font-family: var(--font-sans); font-size: 14px; line-height: 16.1px; font-weight: 500; }
+.scribble { font-family: var(--font-hand); font-size: 23px; line-height: 26.45px; font-weight: 600; }
+.scribble-lg { font-family: var(--font-hand); font-size: 27px; line-height: 31.05px; font-weight: 600; }
+.button-cta { font-family: var(--font-cta); font-size: 16px; line-height: 16px; font-weight: 500; letter-spacing: -0.2px; }
+.testimonial-name { font-family: var(--font-round); font-size: 16px; line-height: 19.2px; font-weight: 300; }
 @font-face { font-family: "Montserrat"; src: url("fonts/Montserrat-Variable.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; }
 @font-face { font-family: "Caveat ECT"; src: url("fonts/caveat-600.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
 @font-face { font-family: "Noto Sans"; src: url("fonts/NotoSans-Medium.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
-.ds-display { font-family: var(--font-sans); font-size: 45px; line-height: 54px; font-weight: 900; }
-.ds-h2 { font-family: var(--font-sans); font-size: 45px; line-height: 54px; font-weight: 500; }
-.ds-checklist-title { font-family: var(--font-sans); font-size: 44px; line-height: 51.92px; font-weight: 800; letter-spacing: -1.54px; }
-.ds-price { font-family: var(--font-sans); font-size: 45px; line-height: 51.75px; font-weight: 600; }
-.ds-contact-title { font-family: var(--font-sans); font-size: 42px; line-height: 50.4px; font-weight: 400; }
-.ds-cta-title { font-family: var(--font-sans); font-size: 35px; line-height: 42px; font-weight: 500; }
-.ds-h3-lg { font-family: var(--font-sans); font-size: 30px; line-height: 36px; font-weight: 500; }
-.ds-card-name { font-family: var(--font-sans); font-size: 25px; line-height: 30px; font-weight: 500; }
-.ds-form-title { font-family: var(--font-sans); font-size: 22px; line-height: 26.4px; font-weight: 600; }
-.ds-h3 { font-family: var(--font-sans); font-size: 20px; line-height: 24px; font-weight: 500; }
-.ds-step-title { font-family: var(--font-sans); font-size: 18px; line-height: 22px; font-weight: 500; }
-.ds-kicker { font-family: var(--font-sans); font-size: 21px; line-height: 25.2px; font-weight: 400; }
-.ds-eyebrow { font-family: var(--font-sans); font-size: 18px; line-height: 21.6px; font-weight: 300; }
-.ds-lead { font-family: var(--font-sans); font-size: 18px; line-height: 24px; font-weight: 400; }
-.ds-body { font-family: var(--font-sans); font-size: 16px; line-height: 22.4px; font-weight: 300; }
-.ds-body-sm { font-family: var(--font-sans); font-size: 15px; line-height: 21px; font-weight: 300; }
-.ds-button { font-family: var(--font-sans); font-size: 16px; line-height: 19.2px; font-weight: 500; }
-.ds-button-strong { font-family: var(--font-sans); font-size: 16px; line-height: 19.2px; font-weight: 600; }
-.ds-nav { font-family: var(--font-sans); font-size: 16px; line-height: 16px; font-weight: 600; }
-.ds-link { font-family: var(--font-sans); font-size: 15px; line-height: 21px; font-weight: 500; }
-.ds-small { font-family: var(--font-sans); font-size: 14px; line-height: 21px; font-weight: 400; }
-.ds-caption { font-family: var(--font-sans); font-size: 13px; line-height: 19.5px; font-weight: 300; }
-.ds-label { font-family: var(--font-sans); font-size: 12px; line-height: 12px; font-weight: 700; letter-spacing: 0.48px; }
-.ds-micro { font-family: var(--font-sans); font-size: 11px; line-height: 16.5px; font-weight: 400; }
-.ds-scribble { font-family: var(--font-hand); font-size: 23px; line-height: 26.45px; font-weight: 600; }
-.ds-scribble-lg { font-family: var(--font-hand); font-size: 28px; line-height: 32.2px; font-weight: 600; }
-.ds-button-cta { font-family: var(--font-cta); font-size: 16px; line-height: 16px; font-weight: 500; letter-spacing: -0.2px; }
+@font-face { font-family: "Varela Round"; src: url("fonts/VarelaRound-latin.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }

@@ -1,11 +1,12 @@
 # BackToTop
 
-The round orange button fixed to the bottom-right corner that scrolls back to the top.
+The round orange button fixed to the bottom-right corner of every page that scrolls back to the header.
 
-Markup: `a.ect-to-top` linking to `#top`, with the Font Awesome arrow-up icon and an accessible name (`aria-label="Înapoi sus"`). The site fixes it to the viewport corner.
+Markup: `a.ect-to-top[href="#top"]` with the up arrow (`ui-arrow-up.svg`, inline, `currentColor`) and an `aria-label` ("Înapoi sus"). Add `ect-to-top--fixed` to pin it 50px from the right and bottom edges.
 
-- 54 × 52px, `orange` with `shadow-glow-strong`; the arrow is `white-warm`. It grows to 110% on hover, focus and press (0.3s).
-- It covers the bottom-right corner: keep content and CTAs clear of it (the homepage band adds 90px of right padding between 768 and 1200px for this).
-- Contrast: the `white-warm` arrow on `orange` is 2.4:1.
+- 54 × 52, `orange` with `shadow-glow-strong`; the arrow is `white-warm` with a soft dark text shadow.
+- It grows to 110% on hover, focus and press (none with reduced motion).
+- Keep it clear of the cookie banner, which sits in the bottom-left corner.
+- Contrast: the arrow is `white-warm` on `orange` (2.4:1), below the 3:1 a meaningful icon needs; kept as the site has it.
 
-Hand-written from the Elementor footer template (button 78c37fa2, Elementor "grow" animation).
+Hand-written from the Elementor footer (post 3355, the fixed button widget).

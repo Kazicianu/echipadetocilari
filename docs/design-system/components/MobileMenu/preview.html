@@ -1,0 +1,48 @@
+<!-- @dsCard group="Navigation" height=760 width=860 -->
+<!doctype html>
+<html lang="ro">
+<head>
+<link rel="stylesheet" href="../../tokens.css">
+<link rel="stylesheet" href="../bundle.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MobileMenu</title>
+<style>
+  html, body { margin: 0; }
+  body { padding: 24px; background: var(--white); color: var(--ink); font-family: var(--font-sans); }
+  body { background: var(--blob-turquoise); }
+  .phones { display: flex; gap: 40px; align-items: flex-start; }
+  .phone { width: 360px; }
+  .bar { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; }
+  .bar img { width: 53px; height: 55px; object-fit: contain; }
+  .label { margin: 12px 0 0; font-size: 13px; line-height: 19.5px; color: var(--ink-muted); }
+  .phone--open .ect-mobile-menu { height: 712px; }
+</style>
+</head>
+<body>
+<div class="phones">
+  <div class="phone">
+    <div class="bar"><img src="../../assets/Logos/Logo_Echipa_de_Tocilari-e1708028624694.webp" width="53" height="55" alt="Logo Echipa de Tocilari"><button class="ect-menu-toggle" type="button" aria-expanded="false" aria-controls="m" aria-label="Deschide meniul"><span class="ect-menu-toggle__icon" aria-hidden="true"><span></span><span></span></span></button></div>
+    <p class="label">Closed: the header on a phone, over the hero background</p>
+  </div>
+  <div class="phone phone--open">
+    <nav class="ect-mobile-menu" id="m" aria-label="Meniu">
+      <button class="ect-menu-toggle" type="button" aria-expanded="true" aria-controls="m" aria-label="Închide meniul"><span class="ect-menu-toggle__icon" aria-hidden="true"><span></span><span></span></span></button>
+      <ul class="ect-mobile-menu__links">
+      <li><a class="ect-mobile-menu__link" href="/">Acasă</a></li>
+      <li><a class="ect-mobile-menu__link" href="/creare-site-web/">Creare site web</a></li>
+      <li><a class="ect-mobile-menu__link" href="/creare-magazin-online/" aria-current="page">Creare magazin online</a></li>
+      <li><a class="ect-mobile-menu__link" href="/dezvoltare-aplicatii/">Dezvoltare aplicații</a></li>
+      <li><a class="ect-mobile-menu__link" href="/servicii-seo/">SEO și vizibilitate în AI</a></li>
+      <li><a class="ect-mobile-menu__link" href="/agentie-google-ads/">Google Ads</a></li>
+      <li><a class="ect-mobile-menu__link" href="/agentie-facebook-ads/">Facebook Ads</a></li>
+      <li><a class="ect-mobile-menu__link" href="/administrare-site/">Mentenanță site</a></li>
+      <li><a class="ect-mobile-menu__link" href="/portofoliu/">Portofoliu</a></li>
+      <li><a class="ect-mobile-menu__link" href="/contact/">Contact</a></li>
+      </ul>
+      <div class="ect-mobile-menu__footer"><a class="ect-mobile-menu__lang" href="/creare-magazin-online/" lang="ro" aria-current="true">RO</a><a class="ect-mobile-menu__lang" href="/en/" lang="en">EN</a></div>
+    </nav>
+  </div>
+</div>
+</body>
+</html>

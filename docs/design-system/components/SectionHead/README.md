@@ -1,12 +1,14 @@
 # SectionHead
 
-The opening of a section: a short line above, the H2, and an optional lead paragraph.
+The eyebrow, heading and lead that open a section.
 
-Markup: `div.ect-section-head` (add `ect-section-head--center` to centre it) with `p.ect-eyebrow` or `p.ect-kicker`, `h2.ect-h2` and `p.ect-lead`. When the large line is a brand-voice line rather than a descriptive title, the label can be the heading instead: `h2.ect-eyebrow` followed by `p.ect-h2`, as on `/creare-magazin-online/`. The styles sit on the classes, so the look does not depend on the tag.
+Markup: `.ect-section-head` (add `ect-section-head--center` to centre it) holding `p.ect-eyebrow`, `h2.ect-h2` and `p.ect-lead`.
 
-- Eyebrow: 18px/300 in `orange` (16px on mobile). Kicker: the Google Ads variant, 16px/300 in `ink-muted`.
-- H2: 45/54, weight 500, capitalised on screen; 32px on tablet, 7.5vw on mobile. `ect-h2--brand` makes it `orange` (Google Ads, Logo design); `ect-h2--sentence` keeps sentence case.
-- Lead: 18/24 at most 640px wide; 16px on mobile.
-- Write the H2 as a real question or promise ("Cum te putem ajuta, concret?") and the eyebrow as the topic ("Rezolvăm probleme reale"). One H1 per page; sections use H2 and H3 in order.
+- Eyebrow: `eyebrow` (18/21.6, 300) in `orange`, a short topic in a few words ("Rezolvăm probleme reale", "Ce include", "Procesul nostru"). Variants: `--caps` capitalises it (Elementor sections); `--deep` uses `orange-deep` on the store's tinted sections; `--blue` is the Google Ads FAQ (`ink-blue`, 20px); `--sm` is 16px (/creare-site-web/, testimonials); `--ink` and `--accent` colour it `ink` or `accent` (the homepage "ECHIPA DE TOCILARI", the site's "Inovatie si creativitate").
+- Heading: `h2` (45/54, 500, `ink`). Elementor sections capitalise every word; the store and Google Ads write sentence case (`ect-h2--sentence`, Google Ads adds `--tight`, -0.02em). `--brand` turns it `orange` (homepage about, site prices, Google Ads FAQ); `--light` sets 400 (/creare-site-web/).
+- A heading may carry one `Highlight` on its key words ("Cum lucrăm <span class=ect-hl>cu tine</span>").
+- Lead: `lead` (18/24, 400) or `lead-light` (18/27, 300), at most 640px wide.
+- Sizes: 45px from 1025px, 32px down to 768px, 7.5vw on phones.
+- Contrast: `orange` eyebrows and brand headings are 2.4:1 on `white` (AA fails, kept); `orange-deep` 5.9:1, `ink-blue` 9.7:1 and `accent` 5.0:1 pass.
 
-Hand-written from the homepage heading widgets, `ect-pages/about.css`, `logo-design.css` and `google-ads.css`.
+Hand-written from the Elementor heading widgets (homepage, /creare-site-web/), `creare-magazin-online.css` (`.ect-eyebrow`, `.ect-h2`, `.ect-lead`) and the Google Ads inline styles.
