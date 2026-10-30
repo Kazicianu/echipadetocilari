@@ -105,4 +105,36 @@
       }
     });
   }
+
+  /* ---- "Ce include": on phones the cards swipe and the pin of the card in view lights up ---- */
+  var incCalls = root.querySelector('.fb-inc-calls');
+  if (incCalls) {
+    var incCards = Array.prototype.slice.call(incCalls.querySelectorAll('.fb-call'));
+    var incPins = [1, 2, 3, 4, 5].map(function (n) { return root.querySelector('.fb-inc-pin--' + n); });
+    incPins.push(root.querySelector('.fb-inc-pin6'));
+    var incFrame = 0;
+    var syncPins = function () {
+      incFrame = 0;
+      var active = -1;
+      if (incCalls.scrollWidth > incCalls.clientWidth + 1) {
+        var box = incCalls.getBoundingClientRect();
+        var mid = box.left + box.width / 2;
+        var best = Infinity;
+        incCards.forEach(function (card, i) {
+          var r = card.getBoundingClientRect();
+          var d = Math.abs(r.left + r.width / 2 - mid);
+          if (d < best) { best = d; active = i; }
+        });
+      }
+      incPins.forEach(function (pin, i) {
+        if (pin) { pin.classList.toggle('is-active', i === active); }
+      });
+    };
+    var queueSync = function () {
+      if (!incFrame) { incFrame = window.requestAnimationFrame(syncPins); }
+    };
+    incCalls.addEventListener('scroll', queueSync, { passive: true });
+    window.addEventListener('resize', queueSync);
+    syncPins();
+  }
 }());
