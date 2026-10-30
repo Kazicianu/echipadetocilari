@@ -21,7 +21,7 @@ test('opted-in pages that load the Montserrat stylesheet preload its latin and l
   const html = addPreloadHints(head('/wp-includes/css/dashicons.min_ver=7.0.2.css', montserrat), { fonts: true });
   assert.deepEqual(preloads(html), [
     `<link rel="preload" href="${GOOGLE_FONTS}montserrat-jtusjig1_i6t8kchkm459wlhyw.woff2" as="font" type="font/woff2" crossorigin>`,
-    `<link rel="preload" href="${GOOGLE_FONTS}montserrat-jtusjig1_i6t8kchkm459wdhyzbi.woff2" as="font" type="font/woff2" crossorigin>`,
+    `<link rel="preload" href="${GOOGLE_FONTS}montserrat-latin-ext-ro.woff2" as="font" type="font/woff2" crossorigin>`,
   ]);
 });
 

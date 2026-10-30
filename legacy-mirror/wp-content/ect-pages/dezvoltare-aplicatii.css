@@ -78,7 +78,7 @@
   --font-hand: "Caveat ECT", "Segoe Script", cursive;
   --font-cta: "Noto Sans", sans-serif;
 }
-@font-face { font-family: "ECT Apps Montserrat"; src: url("fonts/Montserrat-Variable.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; }
+@font-face { font-family: "ECT Apps Montserrat"; src: url("fonts/Montserrat-Variable-latin-ro.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; }
 @font-face { font-family: "Caveat ECT"; src: url("fonts/caveat-600.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
 @font-face { font-family: "Noto Sans"; src: url("fonts/NotoSans-Medium.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
 

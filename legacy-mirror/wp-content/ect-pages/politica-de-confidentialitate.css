@@ -2,7 +2,7 @@
    Mobile first. Values copied from docs/design-system (tokens, Button "ink", TextLink "strong",
    Card leaf radius). Rules stay inside the page content; the shared header, contact form
    and footer keep their own CSS. */
-@font-face { font-family: "ECT Policy Montserrat"; src: url("fonts/Montserrat-Variable.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; }
+@font-face { font-family: "ECT Policy Montserrat"; src: url("fonts/Montserrat-Variable-latin-ro.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; }
 
 .ect-page.ect-page--politica-de-confidentialitate {
   --orange: #fd8649;

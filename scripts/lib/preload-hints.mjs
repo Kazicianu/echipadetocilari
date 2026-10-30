@@ -16,10 +16,10 @@
 import { escapeAttr } from './html.mjs';
 
 const GOOGLE_FONTS_CSS = /\/google-fonts\/css\/montserrat_ver=/;
-// Montserrat normal, latin-ext and latin: the two files every page downloads.
+// Montserrat normal, latin and latin-ext (Romanian letters only): the two files every page downloads.
 const GOOGLE_FONT_FILES = [
   '/wp-content/uploads/elementor/google-fonts/fonts/montserrat-jtusjig1_i6t8kchkm459wlhyw.woff2',
-  '/wp-content/uploads/elementor/google-fonts/fonts/montserrat-jtusjig1_i6t8kchkm459wdhyzbi.woff2',
+  '/wp-content/uploads/elementor/google-fonts/fonts/montserrat-latin-ext-ro.woff2',
 ];
 
 function attr(attrs, name) {

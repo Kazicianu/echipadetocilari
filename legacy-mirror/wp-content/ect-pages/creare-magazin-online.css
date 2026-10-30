@@ -1,4 +1,4 @@
-@font-face { font-family: "ECT Store Montserrat"; src: url("/wp-content/ect-pages/fonts/Montserrat-Variable.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; }
+@font-face { font-family: "ECT Store Montserrat"; src: url("/wp-content/ect-pages/fonts/Montserrat-Variable-latin-ro.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; }
 /* Store page styles copied from the approved design and the site design system.
    Rules stay inside the page content. The shared header, contact form and footer keep their own CSS. */
 @font-face { font-family: 'Caveat ECT'; font-weight: 600; font-style: normal; font-display: swap; src: url('/wp-content/ect-pages/fonts/caveat-600.woff2') format('woff2'); }

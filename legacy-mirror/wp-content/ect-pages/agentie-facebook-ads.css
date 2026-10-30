@@ -3,7 +3,7 @@
    Everything is scoped to .fb, the page wrapper inside <main>, so the shared header, contact form and footer keep their own styles.
    Every animation stops under prefers-reduced-motion. */
 
-@font-face { font-family: "ECT FB Montserrat"; src: url("fonts/Montserrat-Variable.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; }
+@font-face { font-family: "ECT FB Montserrat"; src: url("fonts/Montserrat-Variable-latin-ro.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; }
 @font-face { font-family: "Caveat ECT"; src: url("fonts/caveat-600.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
 @font-face { font-family: "Noto Sans"; src: url("fonts/NotoSans-Medium.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
 

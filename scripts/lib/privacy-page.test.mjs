@@ -227,5 +227,5 @@ test('page CSS: mobile first, exact orange, visible focus, 44px targets, reduced
   assert.match(css, /\.ect-policy__consent-btn:is\(:hover, :focus\) \{ background: var\(--white\); color: var\(--ink\); \}/, 'the Hello theme #c36 hover and focus are reset');
   assert.match(css, /@media \(prefers-reduced-motion: reduce\) \{[^@]*\.ect-policy__consent-btn:active \{ transform: none; \}/);
   assert.match(css, /border-radius: var\(--radius-card\) var\(--radius-card\) var\(--radius-card\) var\(--radius-leaf-sm\);/);
-  assert.match(css, /src: url\("fonts\/Montserrat-Variable\.woff2"\)/);
+  assert.match(css, /src: url\("fonts\/Montserrat-Variable-latin-ro\.woff2"\)/);
 });
