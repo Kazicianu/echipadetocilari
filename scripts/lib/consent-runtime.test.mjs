@@ -325,7 +325,7 @@ test('consent.css: phone styles are the base, refuse and accept are equal in the
   assert.doesNotMatch(css, /\.ect-consent-open\.ect-consent-open \{[^}]*line-height:/, 'the button keeps the line height of the footer links');
   assert.match(css, /html\.ect-consent-open \{ scroll-padding-bottom: var\(--ect-consent-space, 0px\); \}/);
   assert.match(css, /html\.ect-consent-open body \{ padding-bottom: var\(--ect-consent-space, 0px\); \}/);
-  assert.match(css, /html\.ect-consent-open \.elementor-widget-button:has\(a\[href="#top"\]\) \{ bottom: var\(--ect-consent-space, 0px\); \}/);
+  assert.match(css, /html\.ect-consent-open \.elementor-widget-button:has\(a\[href="#top"\]\) \{ transform: translateY\(calc\(-1 \* var\(--ect-consent-space, 0px\)\)\); \}/);
 });
 
 test('while the card is open the page keeps its height free at the bottom, so focus never ends up under it', () => {

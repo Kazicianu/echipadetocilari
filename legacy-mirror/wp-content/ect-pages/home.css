@@ -1326,3 +1326,12 @@
     --padding-bottom: 0px;
   }
 }
+
+/* Hero mascot still: frame 0 of the Lottie (identical to its last frame), rendered with lottie-web.
+   The img stays in the flow so the widget reserves its height from the first paint; the Lottie SVG
+   is laid over it and the still is hidden once the SVG holds its images. */
+.elementor-element-0d2945c .e-lottie__animation { position: relative; }
+.elementor-element-0d2945c .ect-lottie-poster { display: block; width: 100%; height: auto; }
+.elementor-element-0d2945c .e-lottie__animation > svg { position: absolute; inset: 0; }
+.elementor-element-0d2945c .e-lottie__animation:has(svg image) > .ect-lottie-poster { visibility: hidden; }
+@supports not selector(:has(*)) { .elementor-element-0d2945c .ect-lottie-poster { visibility: hidden; } }

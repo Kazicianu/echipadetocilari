@@ -23,8 +23,9 @@
    last footer links can scroll above it (WCAG 2.4.11). */
 html.ect-consent-open { scroll-padding-bottom: var(--ect-consent-space, 0px); }
 html.ect-consent-open body { padding-bottom: var(--ect-consent-space, 0px); }
-/* The footer's fixed "back to top" button sits in the corner the phone card covers. */
-html.ect-consent-open .elementor-widget-button:has(a[href="#top"]) { bottom: var(--ect-consent-space, 0px); }
+/* The footer's fixed "back to top" button sits in the corner the phone card covers. It is lifted with
+   transform, not bottom, so raising it does not count as a layout shift. */
+html.ect-consent-open .elementor-widget-button:has(a[href="#top"]) { transform: translateY(calc(-1 * var(--ect-consent-space, 0px))); }
 
 /* Phone first: a full-width card above the bottom edge (and the home indicator). */
 .ect-consent {
