@@ -25,11 +25,15 @@ function plainText(markup) {
     .trim();
 }
 
-/** The first element with the class; its content must not repeat the same tag. */
-function field(content, tag, className) {
+/** The text of the first element with the class, or '' without one; its content must not repeat the same tag. */
+function optionalField(content, tag, className) {
   const pattern = new RegExp(`<(${tag})\\b([^>]*)>([\\s\\S]*?)<\\/\\1>`, 'gi');
   const match = [...content.matchAll(pattern)].find(([, , attributes]) => hasClass(attributes, className));
-  const text = match && plainText(match[3]);
+  return match ? plainText(match[3]) : '';
+}
+
+function field(content, tag, className) {
+  const text = optionalField(content, tag, className);
   if (!text) throw new Error(`Facebook Ads pricing is missing its visible ${className} field.`);
   return text;
 }
@@ -80,8 +84,9 @@ export function facebookAdsOfferCatalog({ html, site, url, serviceName }) {
         description: [
           field(content, 'p', 'ect-price__intro'),
           field(content, 'p', 'ect-price__limit'),
+          optionalField(content, 'p', 'ect-price__includes'),
           field(content, 'ul', 'ect-price__list'),
-        ].join(' '),
+        ].filter(Boolean).join(' '),
         provider: { '@id': orgId(site) },
       },
     });

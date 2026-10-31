@@ -86,3 +86,17 @@ test('the offer catalog refuses commercial placeholders', () => {
   const html = page.replace('<span>290 €</span><small>/ lună</small>', '<span data-placeholder="pret">[PREȚ] €</span><small>/ lună</small>');
   assert.throws(() => facebookAdsOfferCatalog({ html, site: 'https://x.ro', url: '/agentie-facebook-ads/', serviceName: 'x' }), /placeholders/);
 });
+
+test('the offer catalog says what each higher package includes', () => {
+  const catalog = facebookAdsOfferCatalog({ html: page, site: 'https://x.ro', url: '/agentie-facebook-ads/', serviceName: 'x' });
+  const description = name => catalog.itemListElement.find(offer => offer.name === name).itemOffered.description;
+  assert.match(description('Silver'), /Tot ce include Start, plus:/);
+  assert.match(description('Gold'), /Tot ce include Silver, plus:/);
+  assert.doesNotMatch(description('Start'), /Tot ce include/);
+});
+
+test('each pricing panel is labelled by its tab', () => {
+  for (const id of ['start', 'silver', 'gold']) {
+    assert.match(page, new RegExp(`id="pachet-${id}" role="tabpanel" aria-labelledby="tab-${id}"`));
+  }
+});

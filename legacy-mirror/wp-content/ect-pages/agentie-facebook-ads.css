@@ -97,7 +97,7 @@
 .fb .fb-faq[open] .fb-more,.fb .fb-faq[open] .fb-plus{display:none}
 .fb .fb-faq>summary:hover .fb-qbub{background:#ffeadc!important}
 @media (max-width:559px){.fb .fb-av{display:none!important}}
-.fb .fb-range{width:100%;height:30px;margin:0;accent-color:#fd8649;cursor:pointer}
+.fb .fb-range{width:100%;height:44px;margin:0;accent-color:#fd8649;cursor:pointer}
 @media (prefers-reduced-motion:reduce){.fb .fb-feedloop,.fb .fb-pulse,.fb .fb-float{animation:none!important}.fb .fb-lift,.fb .fb-cta{transition:none!important}.fb .fb-lift:hover,.fb .fb-cta:hover{transform:none!important}}
 /* Pachete: PriceCard (plan) si PlanPicker din design system, mobile first */
 .fb .ect-picker{position:relative;isolation:isolate;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;max-width:420px;margin:22px auto 0;padding:6px;border-radius:30px;background:#ffffff;box-shadow:0 0 20px 0 rgba(0,0,0,.06)}
@@ -357,7 +357,7 @@
 .fb .fb-aud-lead,.fb .fb-mz-lead,.fb .fb-proc-lead{margin:18px 0 0;font-size:18px;line-height:1.5;font-weight:400;color:#27272d}
 .fb .fb-aud-hand,.fb .fb-proc-hand{flex:0 0 auto;font-family:var(--fb-hand);font-weight:600;line-height:1.1;color:#27272d;transform:rotate(-4deg)}
 .fb .fb-aud-hand{margin:0 40px 6px 0;font-size:27px}
-.fb .fb-proc-hand{margin:0 30px 8px 0;font-size:28px}
+.fb .fb-proc-hand{flex:0 1 auto;margin:0 30px 8px 0;font-size:28px;text-wrap:balance}
 
 /* ---------- Publicul ---------- */
 .fb .fb-aud-blob{position:absolute;pointer-events:none}
@@ -612,3 +612,11 @@
 @media (prefers-reduced-motion:reduce){
   .fb .fb-ask-bub{transition:none}
 }
+
+/* A row that overflows shows a thin scrollbar to mouse users and can take keyboard focus (see the page script). */
+@media (hover:hover) and (pointer:fine){
+  .fb .fb-swipe,.fb .fb-inc-calls,.fb .fb-stories{scrollbar-width:thin;scrollbar-color:#fd8649 transparent}
+  .fb .fb-swipe::-webkit-scrollbar,.fb .fb-inc-calls::-webkit-scrollbar,.fb .fb-stories::-webkit-scrollbar{display:block;height:8px}
+  .fb .fb-swipe::-webkit-scrollbar-thumb,.fb .fb-inc-calls::-webkit-scrollbar-thumb,.fb .fb-stories::-webkit-scrollbar-thumb{border-radius:4px;background:#fd8649}
+}
+.fb .fb-swipe:focus-visible,.fb .fb-inc-calls:focus-visible,.fb .fb-stories:focus-visible{outline-offset:-3px}

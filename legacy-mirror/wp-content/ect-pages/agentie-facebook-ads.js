@@ -84,7 +84,10 @@
       var target = document.getElementById('formular_contact_bottom');
       var area = document.querySelector('#formular_contact_bottom textarea');
       if (area) {
-        area.value = text;
+        var written = area.value.replace(/\s+$/, '');
+        if (written.indexOf(text) === -1) {
+          area.value = written ? written + '\n\n' + text : text;
+        }
         var ev;
         try { ev = new Event('input', { bubbles: true }); } catch (err) {
           ev = document.createEvent('Event');
@@ -92,12 +95,13 @@
         }
         area.dispatchEvent(ev);
       }
-      if (target) {
+      var scrollTarget = area || target;
+      if (scrollTarget) {
         var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         try {
-          target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+          scrollTarget.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: area ? 'center' : 'start' });
         } catch (err2) {
-          target.scrollIntoView();
+          scrollTarget.scrollIntoView();
         }
       }
       if (area) {
@@ -137,4 +141,18 @@
     window.addEventListener('resize', queueSync);
     syncPins();
   }
+
+  /* ---- A row that overflows takes keyboard focus, so the arrow keys can scroll it ---- */
+  var rows = Array.prototype.slice.call(root.querySelectorAll('.fb-swipe, .fb-inc-calls, .fb-stories'));
+  var rowFrame = 0;
+  var syncRows = function () {
+    rowFrame = 0;
+    rows.forEach(function (row) {
+      if (row.scrollWidth > row.clientWidth + 1) { row.setAttribute('tabindex', '0'); } else { row.removeAttribute('tabindex'); }
+    });
+  };
+  window.addEventListener('resize', function () {
+    if (!rowFrame) { rowFrame = window.requestAnimationFrame(syncRows); }
+  });
+  syncRows();
 }());
