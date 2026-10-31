@@ -184,7 +184,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 <ul>
 <li><strong>Cine suntem:</strong> ECHIPA DE TOCILARI SRL, o firmă din București. Noi decidem cum sunt folosite datele pe care le primim prin acest site. Ne găsești la <a href="mailto:contact@echipadetocilari.ro">contact@echipadetocilari.ro</a>.</li>
 <li><strong>Ce date folosim și de ce:</strong> numele, emailul, telefonul, compania (opțional) și mesajul pe care ni le trimiți prin formular sau pe email. Le folosim ca să-ți răspundem și, dacă lucrăm împreună, pentru proiect și facturare. La fiecare vizită, serverul primește și adresa IP și date tehnice despre browser, pe care le folosim pentru securitate.</li>
-<li><strong>Google Analytics și Google Ads:</strong> cookie-urile de analiză și de marketing se setează numai dacă le accepți. Scriptul Google se încarcă la fiecare vizită: până alegi sau dacă refuzi, Google primește doar semnale fără cookie-uri, inclusiv adresa IP, browserul și adresa paginii. Dacă accepți marketingul, Google poate primi și emailul și telefonul din formular, sub formă de cod hash.</li>
+<li><strong>Google Analytics și Google Ads:</strong> cookie-urile de analiză și de marketing se setează numai dacă le accepți. Scriptul Google se încarcă la fiecare vizită: până alegi sau dacă refuzi, Google primește doar semnale fără cookie-uri, inclusiv adresa IP, browserul și adresa paginii. Dacă accepți marketingul, folosim datele pentru măsurarea reclamelor și pentru reclame personalizate, inclusiv remarketing, iar Google poate primi și emailul și telefonul din formular, sub formă de cod hash. Google explică, în <a href="https://business.safety.google/privacy/">pagina despre responsabilitatea datelor</a>, cum folosește datele primite.</li>
 <li><strong>Cât timp păstrăm datele:</strong> mesajele care nu duc la o colaborare le ștergem după 24 de luni de la ultimul schimb de mesaje. Corespondența cu clienții o păstrăm pe durata colaborării și încă 3 ani, iar documentele contabile 5 ani. Datele din Google Analytics se păstrează cel mult 14 luni de la ultima ta vizită.</li>
 <li><strong>Cine mai primește datele:</strong> furnizorii prin care funcționează site-ul și emailul (Vercel, Resend și Hostico) și Google, pentru că mesajele din formular ajung și în căsuța Gmail personală a unui membru al echipei. Google primește și semnalele fără cookie-uri descrise mai sus, iar datele cu cookie-uri doar dacă accepți. Contabilitatea și autoritățile primesc date când legea o cere. Unii furnizori prelucrează datele în SUA. Nu vindem datele.</li>
 <li><strong>Drepturile tale:</strong> poți cere acces la date, corectarea sau ștergerea lor, te poți opune folosirii lor și îți poți retrage oricând acordul pentru cookie-uri. Scrie-ne la <a href="mailto:contact@echipadetocilari.ro">contact@echipadetocilari.ro</a>: cererea e gratuită și îți răspundem în cel mult o lună. Poți face și plângere la ANSPDCP, autoritatea română de protecție a datelor.</li>
@@ -228,6 +228,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 <h3>Formularul de contact</h3>
 <p>Formularul apare la finalul fiecărei pagini. Câmpurile sunt: nume, companie (opțional), email, telefon și mesaj. Odată cu mesajul primim automat adresa paginii de pe care l-ai trimis și limba ei. Adresa ta de email devine adresa la care răspundem.</p>
 <p>Dacă ai ajuns pe pagină dintr-un link de campanie, primim odată cu mesajul și valorile parametrilor <code>utm_source</code> și <code>utm_campaign</code> din adresa paginii, de exemplu numele campaniei. Nu le salvăm în browserul tău.</p>
+<p>Dacă ai acceptat cookie-urile de marketing, primim odată cu mesajul și data și versiunea acordului și, dacă ai venit dintr-o reclamă Google, identificatorul clicului (<code>gclid</code>, <code>gbraid</code> sau <code>wbraid</code>). Le păstrăm cât păstrăm mesajul. Fără acest acord, nu le primim.</p>
 <p>Numele, emailul, telefonul și mesajul sunt obligatorii: fără ele, formularul nu se trimite. Cerem telefonul ca să te putem suna când o ofertă se discută mai ușor la telefon. Dacă nu vrei să ni-l dai, scrie-ne direct la <a href="mailto:contact@echipadetocilari.ro">contact@echipadetocilari.ro</a>. Nicio lege și niciun contract nu te obligă să ne dai aceste date.</p>
 <p>Ca să oprim mesajele trimise automat, serverul verifică și cât timp a trecut între încărcarea paginii și trimiterea formularului. Informația aceasta nu ajunge în email și nu se păstrează.</p>
 <h3>Emailurile și apelurile directe</h3>
@@ -236,7 +237,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 <p>Ca la orice site, serverul primește adresa IP a dispozitivului tău, tipul de browser și pagina cerută. Vercel, firma care găzduiește site-ul, le prelucrează în jurnalele tehnice și în firewall, pentru securitate.</p>
 <p>Când trimiți formularul, folosim adresa IP ca să limităm trimiterile repetate. Firewall-ul Vercel limitează numărul de trimiteri de pe aceeași adresă IP. Codul formularului transformă adresa IP într-un cod hash (SHA-256), pe care îl ține doar în memorie, ca să numere trimiterile timp de 15 minute. Codul site-ului nu salvează adresa IP nicăieri. Codul hash nu face adresa anonimă: rămâne o dată personală, doar mai greu de legat de tine.</p>
 <h3>Google Analytics și Google Ads</h3>
-<p>Scriptul Google se încarcă la fiecare vizită. Dacă accepți cookie-urile de analiză, Google Analytics colectează date despre cum folosești site-ul. Dacă accepți cookie-urile de marketing, Google Ads măsoară ce reclame aduc cereri și ne permite să arătăm reclame personalizate. Până alegi sau dacă refuzi, Google primește doar semnale fără cookie-uri. Detaliile sunt în secțiunea <a href="#cookies">Cookie-uri, Google Analytics și Google Ads</a>.</p>
+<p>Scriptul Google se încarcă la fiecare vizită. Dacă accepți cookie-urile de analiză, Google Analytics colectează date despre cum folosești site-ul. Dacă accepți cookie-urile de marketing, Google Ads măsoară ce reclame aduc cereri, ne ajută să optimizăm campaniile și ne permite să arătăm reclame personalizate, inclusiv remarketing. Până alegi sau dacă refuzi, Google primește doar semnale fără cookie-uri. Detaliile sunt în secțiunea <a href="#cookies">Cookie-uri, Google Analytics și Google Ads</a>.</p>
 <h3>Dacă devii client</h3>
 <p>Folosim datele de contact ale persoanelor cu care lucrăm, primite de la tine sau de la firma ta, corespondența despre proiect, contractul și datele de facturare. Datele necesare pentru contract și facturare sunt obligatorii: fără ele nu putem încheia contractul sau emite factura.</p>
 </section>
@@ -249,14 +250,15 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 <li><strong>Alte mesaje:</strong> răspundem la propuneri de parteneriat, candidaturi sau întrebări generale. Temei: interesul nostru legitim de a comunica cu cei care ne scriu (lit. f).</li>
 <li><strong>Păstrarea mesajelor (24 de luni):</strong> când nu urmează o colaborare, păstrăm mesajele 24 de luni după ultimul schimb, ca să știm ce ne-ai cerut și ce ți-am răspuns dacă revii la noi. Temei: interesul nostru legitim (lit. f).</li>
 <li><strong>Sursa cererilor:</strong> păstrăm odată cu mesajul tău sursa și campania din linkul cu care ai ajuns pe pagină, ca să știm ce campanii aduc cereri. Temei: interesul nostru legitim de a ne măsura campaniile (lit. f).</li>
+<li><strong>Dovada acordului pentru marketing:</strong> păstrăm odată cu mesajul tău data și versiunea acordului, ca să putem demonstra că l-ai dat și să respectăm o eventuală retragere. Temei: obligația noastră legală de a demonstra consimțământul, din art. 7 alin. (1) din GDPR (lit. c).</li>
 <li><strong>Proiectele clienților:</strong> dacă devii client, folosim datele ca să lucrăm la proiectul tău. Temei: executarea contractului (lit. b).</li>
 <li><strong>Păstrarea corespondenței cu clienții:</strong> după încheierea colaborării, ca să putem dovedi ce am convenit și să ne apărăm într-o eventuală dispută, în termenul general de prescripție de 3 ani. Temei: interesul nostru legitim (lit. f).</li>
 <li><strong>Facturare și contabilitate:</strong> emitem facturi și ținem contabilitatea. Temei: obligațiile legale, în special cele din Legea contabilității nr. 82/1991 (lit. c).</li>
 <li><strong>Securitate și depanare:</strong> protejăm site-ul și formularul de abuzuri și de mesaje automate și reparăm erorile. Aici intră jurnalele tehnice ale găzduirii, firewall-ul și limita de trimiteri. Temei: interesul nostru legitim ca site-ul să fie sigur și să funcționeze corect (lit. f).</li>
 <li><strong>Google Analytics:</strong> măsurăm cum este folosit site-ul. Temei: consimțământul tău (lit. a), cerut și de art. 4 alin. (5) din Legea nr. 506/2004 privind protecția vieții private în comunicațiile electronice. Îl poți retrage oricând.</li>
-<li><strong>Google Ads:</strong> măsurăm ce reclame aduc cereri, trimitem către Google emailul și telefonul din formular, sub formă de cod hash, și putem arăta reclame personalizate. Temei: consimțământul tău pentru cookie-urile de marketing (lit. a), cerut și de art. 4 alin. (5) din Legea nr. 506/2004. Îl poți retrage oricând.</li>
+<li><strong>Google Ads:</strong> măsurăm ce reclame aduc cereri și ce cereri devin clienți, optimizăm campaniile și licitațiile automate, arătăm reclame personalizate, inclusiv remarketing către cei care au vizitat site-ul, și creăm sau excludem liste de public. Pentru acestea trimitem către Google emailul și telefonul din formular, sub formă de cod hash. Temei: consimțământul tău pentru categoria „Marketing” (lit. a), cerut și de art. 4 alin. (5) din Legea nr. 506/2004. Îl poți retrage oricând.</li>
 <li><strong>Semnale fără cookie-uri către Google:</strong> când cookie-urile sunt refuzate sau nu ai ales încă, măsurăm traficul și rezultatele reclamelor în mod agregat și permitem estimări statistice. Temei: interesul nostru legitim de a măsura site-ul și reclamele (lit. f). Te poți opune oricând, cum explicăm în secțiunea <a href="#cookies">Cookie-uri, Google Analytics și Google Ads</a>.</li>
-<li><strong>Alegerea din bannerul de cookie-uri:</strong> site-ul ține minte ce ai ales. Este o stocare strict necesară, permisă fără acord de art. 4 alin. (6) lit. b) din Legea nr. 506/2004. Nu primim această informație: alegerea rămâne doar în browserul tău.</li>
+<li><strong>Alegerea din bannerul de cookie-uri:</strong> site-ul ține minte ce ai ales. Este o stocare strict necesară, permisă fără acord de art. 4 alin. (6) lit. b) din Legea nr. 506/2004. Primim această informație doar dacă ai acceptat marketingul și ne trimiți formularul: atunci primim data și versiunea acordului.</li>
 </ul>
 </section>
 
@@ -270,7 +272,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 <li><strong>Jurnalele tehnice ale găzduirii (Vercel):</strong> <a href="https://vercel.com/docs/logs/runtime">perioadele stabilite de Vercel</a>. În contul nostru, jurnalele funcției care trimite formularul se pot consulta cel mult o zi. Le folosim pentru securitate și depanare.</li>
 <li><strong>Codul hash al adresei IP, folosit pentru limita de trimiteri:</strong> doar în memoria serverului. Îl folosim 15 minute; se șterge la prima trimitere de după acest interval sau, cel târziu, când serverul își eliberează memoria. Nu se salvează.</li>
 <li><strong>Datele din Google Analytics:</strong> cel mult 14 luni de la ultima ta vizită pentru datele la nivel de utilizator și de eveniment. Rapoartele agregate, de exemplu totalul vizitelor pe lună, pot rămâne mai mult. Cookie-urile Google Analytics expiră după cel mult 2 ani de la ultima vizită.</li>
-<li><strong>Datele din Google Ads:</strong> perioadele stabilite de Google. Cookie-urile de marketing expiră după cel mult 90 de zile.</li>
+<li><strong>Datele din Google Ads:</strong> perioadele stabilite de Google. Cookie-urile de marketing de pe domeniul nostru expiră după cel mult 90 de zile, iar cele de pe domeniile Google după cel mult 13 luni în Spațiul Economic European. Listele de public, inclusiv cele de remarketing și de clienți, păstrează o persoană cel mult 540 de zile, conform <a href="https://support.google.com/google-ads/answer/2472738?hl=ro">paginii Google despre segmentele de date</a>.</li>
 <li><strong>Semnalele fără cookie-uri:</strong> Google stabilește cât le păstrează. Setarea noastră din Google Analytics este de cel mult 14 luni.</li>
 <li><strong>Alegerea ta despre cookie-uri (<code>ect-consent</code>):</strong> 6 luni în browserul tău, apoi te întrebăm din nou.</li>
 </ul>
@@ -278,13 +280,13 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 
 <section id="recipients">
 <h2>Cine mai primește datele</h2>
-<p>Nu vindem datele tale. Le primesc doar furnizorii de care avem nevoie ca site-ul și emailul să funcționeze și, când legea o cere, contabilitatea și autoritățile:</p>
+<p>Nu vindem datele tale. Le primesc doar terții care prestează servicii în numele nostru, adică furnizorii de care avem nevoie ca site-ul, emailul și reclamele să funcționeze, și, când legea o cere, contabilitatea și autoritățile:</p>
 <ul>
 <li><strong>Vercel Inc. (SUA):</strong> găzduiește site-ul, asigură firewall-ul și rulează, pe servere din SUA, funcția care trimite formularul. Prelucrează adresa IP, datele tehnice ale browserului și conținutul formularului, în timp ce îl transmite.</li>
 <li><strong>Plus Five Five, Inc., care operează Resend (SUA):</strong> trimite către noi emailul cu mesajul tău și păstrează temporar o copie a lui.</li>
 <li><strong>Awesome Projects S.R.L., care operează Hostico (România):</strong> găzduiește căsuța de email contact@echipadetocilari.ro.</li>
 <li><strong>Google Ireland Limited și Google LLC (SUA), prin Gmail:</strong> mesajele din formular ajung și în căsuța Gmail personală a unui membru al echipei, adică într-un cont Google obișnuit, nu într-un serviciu de email pentru firme. Google le prelucrează după propriii termeni și după <a href="https://policies.google.com/privacy?hl=ro">politica sa de confidențialitate</a>, nu în baza unui contract de prelucrare încheiat cu noi. Prelucrarea poate avea loc și în afara Spațiului Economic European (SEE), inclusiv în SUA.</li>
-<li><strong>Google Ireland Limited și Google LLC (SUA), prin Google Analytics și Google Ads:</strong> primesc semnale fără cookie-uri la fiecare vizită, date cu cookie-uri de analiză dacă le accepți și, doar dacă accepți marketingul, date cu cookie-uri de marketing și emailul și telefonul din formular, sub formă de cod hash.</li>
+<li><strong>Google Ireland Limited și Google LLC (SUA), prin Google Analytics și Google Ads:</strong> primesc semnale fără cookie-uri la fiecare vizită, date cu cookie-uri de analiză dacă le accepți și, doar dacă accepți marketingul, date cu cookie-uri de marketing și emailul și telefonul din formular, sub formă de cod hash. Pentru Google Analytics, conversiile îmbunătățite și listele de clienți, Google acționează în numele nostru; pentru restul Google Ads, decide singur cum folosește datele, conform <a href="https://business.safety.google/adsservices/">listei sale de servicii</a>.</li>
 <li><strong>Servicii de contabilitate și autorități publice, de exemplu ANAF:</strong> datele clienților necesare pentru contabilitate și ce ne cere legea să transmitem.</li>
 </ul>
 <h3>Linkuri către alte site-uri</h3>
@@ -300,11 +302,11 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 
 <section id="cookies">
 <h2>Cookie-uri, Google Analytics și Google Ads</h2>
-<p>Cookie-urile sunt fișiere mici pe care un site le salvează în browserul tău. Spațiul de stocare local (localStorage) este o zonă asemănătoare a browserului. Mai jos sunt toate elementele pe care acest site le salvează în browserul tău.</p>
+<p>Cookie-urile sunt fișiere mici pe care un site le salvează în browserul tău. Spațiul de stocare local (localStorage) este o zonă asemănătoare a browserului. Mai jos sunt elementele pe care acest site și, prin el, Google le pot salva în browserul tău. Google explică, în <a href="https://business.safety.google/privacy/">pagina despre responsabilitatea datelor</a>, cum folosește datele primite.</p>
 <p>Cookie-urile de publicitate (Google Ads) se setează doar dacă accepți categoria „Marketing”. Nu folosim pixeli ai rețelelor sociale sau conținut încorporat de pe alte site-uri, cum ar fi clipuri video sau hărți. Fonturile se încarcă de pe site-ul nostru, nu de pe serverele Google.</p>
 <h3>Cum îți dai sau îți retragi acordul</h3>
-<p>La prima vizită, un banner te întreabă dacă accepți cookie-urile de analiză (categoria „Analiză” din „Setări”) și de marketing (categoria „Marketing”). Refuzul este la fel de simplu ca acceptarea și nu îți limitează accesul la site. Până alegi, nu se setează cookie-uri Google, dar scriptul Google se încarcă și trimite semnale fără cookie-uri.</p>
-<p>Îți poți schimba oricând alegerea din „Setări cookie-uri”, în subsolul fiecărei pagini, sau cu butonul de mai jos. Dacă îți retragi acordul, ștergem din browserul tău cookie-urile categoriei respective (<code>_ga</code> și <code>_ga_PGM4B3VM9Z</code> pentru analiză, cele cu prefixul <code>_gcl_</code> sau <code>_gac_</code> pentru marketing), iar Google primește de atunci doar semnale fără cookie-uri pentru acea categorie. Retragerea nu afectează ce s-a prelucrat legal înainte. Dacă JavaScript este oprit, scriptul Google nu se încarcă deloc.</p>
+<p>La prima vizită, un banner apare în primele secunde și te întreabă dacă accepți cookie-urile de analiză (categoria „Analiză” din „Setări”) și de marketing (categoria „Marketing”). Refuzul este la fel de simplu ca acceptarea și nu îți limitează accesul la site. Până alegi, nu se setează cookie-uri Google, dar scriptul Google se încarcă și trimite semnale fără cookie-uri.</p>
+<p>Îți poți schimba oricând alegerea din „Setări cookie-uri”, în subsolul fiecărei pagini, sau cu butonul de mai jos. Dacă îți retragi acordul, ștergem din browserul tău cookie-urile categoriei respective (<code>_ga</code> și <code>_ga_PGM4B3VM9Z</code> pentru analiză, cele cu prefixul <code>_gcl_</code> sau <code>_gac_</code> pentru marketing), iar Google primește de atunci doar semnale fără cookie-uri pentru acea categorie. Cookie-urile de pe domeniile Google nu le putem șterge noi: le poți șterge din browser, iar după retragere Google le mai folosește doar împotriva spamului și a fraudei, cum arată <a href="https://developers.google.com/tag-platform/security/guides/consent?hl=ro">ghidul său despre modul de consimțământ</a>. Retragerea nu afectează ce s-a prelucrat legal înainte. Dacă JavaScript este oprit, scriptul Google nu se încarcă deloc.</p>
 <p><button type="button" class="ect-policy__consent-btn" data-ect-consent-open hidden>Schimbă setările cookie-urilor</button></p>
 <p class="ect-policy__consent-state" data-ect-consent-state aria-live="polite"></p>
 <h3>Ce salvează site-ul în browser</h3>
@@ -321,7 +323,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 <dt>Cât durează</dt>
 <dd>6 luni. După aceea, sau când schimbăm ceva ce privește cookie-urile, te întrebăm din nou.</dd>
 <dt>Necesar sau opțional</dt>
-<dd>Strict necesar. Rămâne în browserul tău și nu este trimis niciunui server.</dd>
+<dd>Strict necesar. Rămâne în browserul tău. Data și versiunea acordului pentru marketing ne ajung doar odată cu formularul.</dd>
 </dl>
 </div>
 <div class="ect-policy__cookie">
@@ -369,6 +371,21 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 <dd>Opțional. Se setează doar după ce accepți cookie-urile de marketing.</dd>
 </dl>
 </div>
+<div class="ect-policy__cookie">
+<h4 class="ect-policy__cookie-name"><code>NID, AID, RUL</code></h4>
+<dl>
+<dt>Unde se salvează</dt>
+<dd>Cookie-uri pe domeniile Google (google.com, doubleclick.net, googleadservices.com).</dd>
+<dt>Cine îl setează</dt>
+<dd>Google Ads (Google Ireland Limited și Google LLC).</dd>
+<dt>La ce folosește</dt>
+<dd>Măsoară reclamele, le limitează frecvența și, când e permis, le personalizează, inclusiv prin remarketing. Lista completă este în <a href="https://business.safety.google/adscookies/">pagina Google despre cookie-urile de publicitate</a>.</dd>
+<dt>Cât durează</dt>
+<dd>Până la 13 luni, în funcție de cookie.</dd>
+<dt>Necesar sau opțional</dt>
+<dd>Opțional. Se setează doar după ce accepți cookie-urile de marketing.</dd>
+</dl>
+</div>
 </div>
 <h3>Ce măsoară Google Analytics</h3>
 <p>Dacă accepți, Google Analytics înregistrează:</p>
@@ -393,9 +410,17 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 </ul>
 <p>Google precizează, în <a href="https://support.google.com/google-ads/answer/10548233?hl=ro">pagina despre modelarea consimțământului</a>, că aceste semnale servesc la măsurare și la estimări statistice și că nu le folosește pentru a urmări persoane între site-uri și aplicații, pentru liste de remarketing sau pentru profiluri de utilizator. Dacă nu vrei să le trimiți, folosește extensia de dezactivare Google Analytics de mai jos sau blochează scriptul din browser.</p>
 <h3>Datele de contact din formular, trimise către Google</h3>
-<p>Dacă accepți cookie-urile de marketing și trimiți formularul, site-ul transmite către Google emailul și telefonul din formular, ca să măsurăm mai exact ce reclame aduc cereri (conversii îmbunătățite). Nu trimitem numele, compania sau mesajul. Detectarea automată a acestor date din pagini este oprită în contul nostru Google Analytics.</p>
+<p>Dacă accepți cookie-urile de marketing și trimiți formularul, site-ul transmite către Google emailul și telefonul din formular, ca să măsurăm mai exact ce reclame aduc cereri (conversii îmbunătățite). Nu trimitem numele, compania sau mesajul. Detectarea automată a acestor date din pagini este oprită în conturile noastre Google Analytics și Google Ads.</p>
 <p>Scriptul le transformă în cod hash (SHA-256), adică într-un cod din care nu se pot citi direct, înainte să le trimită. Codul hash nu face datele anonime: rămân date personale. Google spune, în <a href="https://support.google.com/analytics/answer/14077171?hl=ro">pagina despre colectarea datelor oferite de utilizatori</a>, că le compară cu datele din conturile Google ale utilizatorilor care și-au dat acordul. Scopurile declarate de Google sunt măsurători mai exacte și rapoarte agregate pentru noi despre vârsta, sexul și interesele vizitatorilor.</p>
 <p>Google păstrează aceste date după aceeași setare ca restul datelor, deci cel mult 14 luni de la ultima ta vizită. Tot Google precizează, în <a href="https://support.google.com/analytics/answer/13802165?hl=ro">referința despre modul de consimțământ</a>, că, atunci când <code>ad_user_data</code> este refuzat, folosirea datelor personale pentru publicitate online este dezactivată, inclusiv a acestor date. Dacă nu accepți cookie-urile de marketing, site-ul nu trimite aceste date.</p>
+<h3>Liste de public și cereri care devin clienți</h3>
+<p>Dacă ai acceptat cookie-urile de marketing, putem folosi datele tale și în aceste feluri:</p>
+<ul>
+<li><strong>Remarketing și liste de public:</strong> Google Ads și Google Analytics pot adăuga browserul tău în liste cu persoanele care au vizitat site-ul sau anumite pagini, ca să îți arătăm reclame sau să te excludem din ele. Conectăm cele două conturi Google, ca să folosim în Google Ads conversiile și listele din Google Analytics.</li>
+<li><strong>Cereri care devin clienți:</strong> putem încărca în Google Ads emailul și telefonul tău, sub formă de cod hash, și identificatorul clicului, împreună cu data și rezultatul cererii, ca să măsurăm ce reclame aduc clienți, nu doar mesaje (<a href="https://support.google.com/google-ads/answer/14274408?hl=ro">conversii îmbunătățite pentru clienți potențiali</a>). Nu încărcăm conținutul mesajului.</li>
+<li><strong>Liste de clienți (Customer Match):</strong> putem încărca în Google Ads emailul și telefonul tău, sub formă de cod hash, ca să îți arătăm reclame sau să te excludem din ele, pe Căutare, YouTube, Gmail și în rețeaua Display. Folosim doar date primite direct de la tine, cum cere <a href="https://support.google.com/adspolicy/answer/6299717?hl=ro">politica Google pentru Customer Match</a>.</li>
+</ul>
+<p>Încărcăm date doar pentru cererile trimise după ce ai acceptat marketingul. Alegerea din „Setări cookie-uri” rămâne în browserul tău și nu ne ajunge, așa că, pentru a fi scos din listele de clienți și din datele încărcate, scrie-ne la <a href="mailto:contact@echipadetocilari.ro">contact@echipadetocilari.ro</a> sau răspunde la orice email de la noi. Le scoatem și îți confirmăm în cel mult o lună.</p>
 <h3>Cum ștergi sau blochezi cookie-urile din browser</h3>
 <p>Poți șterge oricând cookie-urile deja salvate și poți bloca cookie-urile din setările browserului. Site-ul nostru funcționează și fără cookie-uri, doar că bannerul te poate întreba din nou la fiecare vizită. Ghidurile oficiale:</p>
 <ul>
@@ -417,7 +442,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 <li>să ceri să limităm folosirea datelor (dreptul la restricționarea prelucrării);</li>
 <li>să primești datele pe care ni le-ai dat într-un format structurat, folosit în mod obișnuit, sau să ceri să le trimitem altei firme (dreptul la portabilitate);</li>
 <li>să te opui oricând, din motive legate de situația ta, folosirii datelor pe baza interesului nostru legitim, de exemplu păstrării mesajelor (dreptul la opoziție);</li>
-<li>să îți retragi oricând acordul pentru Google Analytics și Google Ads, din „Setări cookie-uri” sau cu butonul din secțiunea <a href="#cookies">Cookie-uri, Google Analytics și Google Ads</a>, fără să afecteze prelucrarea făcută legal înainte;</li>
+<li>să îți retragi oricând acordul pentru Google Analytics și Google Ads, din „Setări cookie-uri” sau cu butonul din secțiunea <a href="#cookies">Cookie-uri, Google Analytics și Google Ads</a>, iar pentru listele de clienți și datele încărcate în Google Ads, scriindu-ne, fără să afecteze prelucrarea făcută legal înainte;</li>
 <li>să nu faci obiectul unei decizii bazate exclusiv pe prelucrarea automată, inclusiv crearea de profiluri, care produce efecte juridice asupra ta sau te afectează în mod similar într-o măsură semnificativă (art. 22 din GDPR). Noi nu luăm astfel de decizii.</li>
 </ul>
 <h3>Cum îți exerciți drepturile</h3>

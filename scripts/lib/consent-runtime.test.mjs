@@ -157,7 +157,7 @@ function memoryStorage(initial = {}) {
   return { map, getItem: key => (map.has(key) ? map.get(key) : null), setItem: (key, value) => { map.set(key, String(value)); }, removeItem: key => { map.delete(key); } };
 }
 
-const storedChoice = (analytics, marketing, ageDays = 10, v = 2) => JSON.stringify({ v, analytics, marketing, ts: new Date(Date.now() - ageDays * DAY).toISOString() });
+const storedChoice = (analytics, marketing, ageDays = 10, v = 3) => JSON.stringify({ v, analytics, marketing, ts: new Date(Date.now() - ageDays * DAY).toISOString() });
 
 /**
  * Run consent.js on a page shaped like the built site: skip link, header,
@@ -165,7 +165,7 @@ const storedChoice = (analytics, marketing, ageDays = 10, v = 2) => JSON.stringi
  * The default referrer is an inner page of the site, where the banner asks at once;
  * pass referrer: '' for the page a visitor lands on.
  */
-function page({ hostname = 'www.echipadetocilari.ro', lang = 'ro', storage = memoryStorage(), cookies = [], layout, allowedHosts = 'echipadetocilari.ro www.echipadetocilari.ro', run = 1, policyButton = false, readyState, adsId, adsLeadLabel, referrer = `https://${hostname}/` } = {}) {
+function page({ hostname = 'www.echipadetocilari.ro', lang = 'ro', storage = memoryStorage(), cookies = [], layout, allowedHosts = 'echipadetocilari.ro www.echipadetocilari.ro', run = 1, policyButton = false, readyState, adsId, adsLeadLabel, search = '', referrer = `https://${hostname}/` } = {}) {
   const listeners = new Map();
   const timers = [];
   const document = {
@@ -216,7 +216,8 @@ function page({ hostname = 'www.echipadetocilari.ro', lang = 'ro', storage = mem
   const windowListeners = new Map();
   const context = {
     document,
-    location: { hostname },
+    location: { hostname, search },
+    URLSearchParams,
     performance: { now: () => document.clock.now },
     console,
     setTimeout: (callback, delay) => timers.push({ callback, delay }),
@@ -270,6 +271,8 @@ const DENIED = { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data
 const GRANTED = { analytics_storage: 'granted', ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted' };
 const consentUpdates = view => view.dataLayer().filter(args => args[0] === 'consent' && args[1] === 'update');
 const leadEvents = view => view.dataLayer().filter(args => args[0] === 'event');
+// Everything trackLead sends: the user_data set and the events, in order.
+const leadCalls = view => view.dataLayer().filter(args => args[0] === 'event' || (args[0] === 'set' && args[1] === 'user_data'));
 const ro = consentCopy().ro;
 const en = consentCopy().en;
 
@@ -288,6 +291,9 @@ test('copy has both languages, the same keys, and no em dash, diagonal arrows or
     for (const key of ['stateAccepted', 'stateRefused', 'stateAnalytics', 'stateMarketing']) assert.match(copy[language][key], /\{date\}/);
   }
   assert.match(Object.values(copy.ro).join(' '), /[șț]/, 'Romanian uses comma-below letters');
+  // Google's EU user consent policy: ad personalization is named on the first screen.
+  assert.match(copy.ro.summary, /personalizarea reclamelor/);
+  assert.match(copy.en.summary, /ad personalization/);
   for (const file of [runtime, readFileSync(stylesUrl, 'utf8')]) assert.doesNotMatch(file, prohibited);
 });
 
@@ -478,7 +484,7 @@ test('accept on the production host stores the choice and grants all four signal
   view.button(view.summary, ro.acceptAll).click();
   assert.equal(view.banner.hidden, true);
   const stored = view.stored();
-  assert.equal(stored.v, 2);
+  assert.equal(stored.v, 3);
   assert.equal(stored.analytics, true);
   assert.equal(stored.marketing, true);
   assert.deepEqual(Object.keys(stored).sort(), ['analytics', 'marketing', 'ts', 'v']);
@@ -583,16 +589,17 @@ test('a saved choice reaches Google before the first config: consent update, the
   assert.deepEqual(refused.cookieNames().sort(), ['_gax_keep', 'theme']);
 });
 
-test('an expired, outdated, version 1 or malformed choice asks again and sends no consent update', () => {
+test('an expired, outdated, version 1 or 2 or malformed choice asks again and sends no consent update', () => {
   const ts = new Date(Date.now() - 10 * DAY).toISOString();
   const values = [
     storedChoice(true, true, 200),
     storedChoice(true, true, 10, 1),
+    storedChoice(true, true, 10, 2),
     storedChoice(true, true, -30),
-    JSON.stringify({ v: 2, analytics: true, ts }),
+    JSON.stringify({ v: 3, analytics: true, ts }),
     JSON.stringify({ v: 1, analytics: true, ts }),
-    JSON.stringify({ v: 2, analytics: true, marketing: 'yes', ts }),
-    '{"v":2,"analytics":"yes","marketing":true,"ts":"2026-10-01T00:00:00Z"}',
+    JSON.stringify({ v: 3, analytics: true, marketing: 'yes', ts }),
+    '{"v":3,"analytics":"yes","marketing":true,"ts":"2026-10-01T00:00:00Z"}',
     'not json',
   ];
   for (const value of values) {
@@ -706,29 +713,32 @@ test('the footer control reopens settings with the current state; withdrawing se
   assert.equal(view.gaScripts().length, 1);
 });
 
-test('trackLead: generate_lead without user_data unless Marketing is accepted', () => {
+test('trackLead: no set user_data and no form_submit unless Marketing is accepted', () => {
   for (const setup of [
     { name: 'no choice yet', storage: memoryStorage() },
     { name: 'refused', storage: memoryStorage({ 'ect-consent': storedChoice(false, false) }) },
     { name: 'analytics only', storage: memoryStorage({ 'ect-consent': storedChoice(true, false) }) },
   ]) {
-    const view = page({ storage: setup.storage });
+    const view = page({ storage: setup.storage, adsId: 'AW-123456789' });
     view.context.ectConsent.trackLead({ email: 'ana@example.ro', phone: '0722123456' });
-    assert.deepEqual(leadEvents(view), [['event', 'generate_lead', {}]], setup.name);
+    assert.deepEqual(leadCalls(view), [['event', 'generate_lead', {}]], setup.name);
   }
   const bare = page();
   bare.context.ectConsent.trackLead();
-  assert.deepEqual(leadEvents(bare), [['event', 'generate_lead', {}]], 'called without arguments');
+  assert.deepEqual(leadCalls(bare), [['event', 'generate_lead', {}]], 'called without arguments');
 });
 
 test('trackLead with Marketing: the email is trimmed and lowercased, the phone is E.164, invalid parts are dropped', () => {
   const view = page({ storage: memoryStorage({ 'ect-consent': storedChoice(true, true) }) });
   const send = (email, phone) => {
-    const before = leadEvents(view).length;
+    const before = leadCalls(view).length;
     view.context.ectConsent.trackLead({ email, phone });
-    return leadEvents(view).slice(before);
+    return leadCalls(view).slice(before);
   };
-  assert.deepEqual(send('  Ana.Pop@Example.RO ', '0722 123 456'), [['event', 'generate_lead', { user_data: { email: 'ana.pop@example.ro', phone_number: '+40722123456' } }]]);
+  assert.deepEqual(send('  Ana.Pop@Example.RO ', '0722 123 456'), [
+    ['set', 'user_data', { email: 'ana.pop@example.ro', phone_number: '+40722123456' }],
+    ['event', 'generate_lead', {}],
+  ]);
   const phones = [
     ['+40 722-123-456', '+40722123456'],
     ['0040722123456', '+40722123456'],
@@ -739,44 +749,97 @@ test('trackLead with Marketing: the email is trimmed and lowercased, the phone i
     ['+44 20 7946 0958', '+442079460958'],
   ];
   for (const [raw, expected] of phones) {
-    assert.deepEqual(send('a@b.ro', raw)[0][2].user_data, { email: 'a@b.ro', phone_number: expected }, raw);
+    assert.deepEqual(send('a@b.ro', raw)[0][2], { email: 'a@b.ro', phone_number: expected }, raw);
   }
   for (const raw of ['12345', '0122 123 456', 'abc', '', '+1234', '0040 7221234567890123']) {
-    assert.deepEqual(send('a@b.ro', raw)[0][2].user_data, { email: 'a@b.ro' }, `invalid phone dropped: ${raw}`);
+    assert.deepEqual(send('a@b.ro', raw)[0][2], { email: 'a@b.ro' }, `invalid phone dropped: ${raw}`);
   }
-  assert.deepEqual(send('', '0722123456')[0][2].user_data, { phone_number: '+40722123456' });
-  assert.deepEqual(send('  ', '12')[0][2], {}, 'nothing usable: no user_data key at all');
+  assert.deepEqual(send('', '0722123456')[0][2], { phone_number: '+40722123456' });
+  assert.deepEqual(send('  ', '12'), [['event', 'generate_lead', {}]], 'nothing usable: no set user_data at all');
   assert.equal(consentUpdates(view).length, 1, 'trackLead never changes consent');
 });
 
-test('trackLead with Google Ads: a conversion event with send_to is added only when the ID and the label are both set', () => {
+test('trackLead with Google Ads: set user_data, generate_lead, the conversion only with ID and label, form_submit only with ID and data', () => {
   const storage = () => memoryStorage({ 'ect-consent': storedChoice(true, true) });
   const full = page({ storage: storage(), adsId: 'AW-123456789', adsLeadLabel: 'AbC-d_1' });
   full.context.ectConsent.trackLead({ email: 'ana@example.ro', phone: '0722123456' });
-  const userData = { user_data: { email: 'ana@example.ro', phone_number: '+40722123456' } };
-  assert.deepEqual(leadEvents(full), [
-    ['event', 'generate_lead', userData],
-    ['event', 'conversion', { send_to: 'AW-123456789/AbC-d_1', ...userData }],
+  const setUserData = ['set', 'user_data', { email: 'ana@example.ro', phone_number: '+40722123456' }];
+  assert.deepEqual(leadCalls(full), [
+    setUserData,
+    ['event', 'generate_lead', {}],
+    ['event', 'conversion', { send_to: 'AW-123456789/AbC-d_1' }],
+    ['event', 'form_submit', { send_to: 'AW-123456789' }],
   ]);
 
   const noLabel = page({ storage: storage(), adsId: 'AW-123456789' });
   noLabel.context.ectConsent.trackLead({ email: 'ana@example.ro', phone: '0722123456' });
-  assert.deepEqual(leadEvents(noLabel).map(args => args[1]), ['generate_lead']);
+  assert.deepEqual(leadCalls(noLabel).map(args => args[1]), ['user_data', 'generate_lead', 'form_submit']);
 
   const badLabel = page({ storage: storage(), adsId: 'AW-123456789', adsLeadLabel: 'a b/c' });
   badLabel.context.ectConsent.trackLead({ email: 'ana@example.ro', phone: '0722123456' });
-  assert.deepEqual(leadEvents(badLabel).map(args => args[1]), ['generate_lead']);
+  assert.deepEqual(leadCalls(badLabel).map(args => args[1]), ['user_data', 'generate_lead', 'form_submit']);
 
-  // Without Marketing the conversion still counts, but carries no user data.
+  // Without Marketing the conversion still counts, but carries no user data and no form_submit.
   const refused = page({ storage: memoryStorage({ 'ect-consent': storedChoice(false, false) }), adsId: 'AW-123456789', adsLeadLabel: 'AbC-d_1' });
   refused.context.ectConsent.trackLead({ email: 'ana@example.ro', phone: '0722123456' });
-  assert.deepEqual(leadEvents(refused), [['event', 'generate_lead', {}], ['event', 'conversion', { send_to: 'AW-123456789/AbC-d_1' }]]);
+  assert.deepEqual(leadCalls(refused), [['event', 'generate_lead', {}], ['event', 'conversion', { send_to: 'AW-123456789/AbC-d_1' }]]);
 
   // A choice made on this page is used by the next lead.
   const later = page({ adsId: 'AW-123456789', adsLeadLabel: 'AbC-d_1' });
   later.button(later.summary, ro.acceptAll).click();
   later.context.ectConsent.trackLead({ email: 'ana@example.ro', phone: '0722123456' });
-  assert.deepEqual(leadEvents(later)[0], ['event', 'generate_lead', userData]);
+  assert.deepEqual(leadCalls(later)[0], setUserData);
+});
+
+test('withdrawing Marketing after a lead clears user_data before the consent update; without a lead nothing is cleared', () => {
+  const view = page({ storage: memoryStorage({ 'ect-consent': storedChoice(true, true) }), adsId: 'AW-123456789' });
+  view.context.ectConsent.trackLead({ email: 'ana@example.ro', phone: '0722123456' });
+  view.opener.click();
+  view.button(view.customise, ro.rejectAll).click();
+  const tail = view.dataLayer().slice(-2);
+  assert.deepEqual(tail, [['set', 'user_data', {}], ['consent', 'update', DENIED]]);
+  // A second change does not clear again.
+  view.opener.click();
+  view.button(view.customise, ro.acceptAll).click();
+  view.opener.click();
+  view.button(view.customise, ro.rejectAll).click();
+  assert.equal(view.dataLayer().filter(args => args[0] === 'set' && args[1] === 'user_data').length, 2, 'the lead set it once, the withdrawal cleared it once');
+
+  const noLead = page({ storage: memoryStorage({ 'ect-consent': storedChoice(true, true) }) });
+  noLead.opener.click();
+  noLead.button(noLead.customise, ro.rejectAll).click();
+  assert.deepEqual(noLead.dataLayer().filter(args => args[0] === 'set' && args[1] === 'user_data'), []);
+});
+
+test('leadRecord: null without Marketing, the consent proof and the click ids with it', () => {
+  for (const [name, storage] of [
+    ['no choice', memoryStorage()],
+    ['refused', memoryStorage({ 'ect-consent': storedChoice(false, false) })],
+    ['analytics only', memoryStorage({ 'ect-consent': storedChoice(true, false) })],
+  ]) {
+    const view = page({ storage, search: '?gclid=abc&gbraid=def', cookies: ['_gcl_aw=GCL.1700000000.cookieid; path=/'] });
+    assert.equal(view.context.ectConsent.leadRecord(), null, name);
+  }
+
+  const storage = memoryStorage({ 'ect-consent': storedChoice(true, true) });
+  const view = page({ storage, search: '?gclid=fromUrl&gbraid=GB-1&wbraid=WB_2', cookies: ['_gcl_aw=GCL.1700000000.fromCookie; path=/'] });
+  const stored = JSON.parse(storage.map.get('ect-consent'));
+  assert.deepEqual(plain(view.context.ectConsent.leadRecord()), { marketingConsentAt: stored.ts, consentVersion: 3, gclid: 'fromUrl', gbraid: 'GB-1', wbraid: 'WB_2' }, 'the URL gclid wins over the cookie');
+
+  const cookieOnly = page({ storage: memoryStorage({ 'ect-consent': storedChoice(true, true) }), cookies: ['_gcl_aw=GCL.1700000000.fromCookie; path=/'] });
+  assert.deepEqual(plain(cookieOnly.context.ectConsent.leadRecord()), { marketingConsentAt: cookieOnly.stored().ts, consentVersion: 3, gclid: 'fromCookie', gbraid: '', wbraid: '' });
+
+  const tooLong = page({ storage: memoryStorage({ 'ect-consent': storedChoice(true, true) }), search: `?gclid=${'x'.repeat(301)}&gbraid=${'y'.repeat(300)}&wbraid=${'z'.repeat(301)}` });
+  const record = plain(tooLong.context.ectConsent.leadRecord());
+  assert.equal(record.gclid, '', 'over 300 characters becomes empty');
+  assert.equal(record.gbraid, 'y'.repeat(300), 'exactly 300 is kept');
+  assert.equal(record.wbraid, '');
+
+  // A choice made on this page counts at once.
+  const later = page({ search: '?gclid=abc' });
+  assert.equal(later.context.ectConsent.leadRecord(), null);
+  later.button(later.summary, ro.acceptAll).click();
+  assert.equal(later.context.ectConsent.leadRecord().gclid, 'abc');
 });
 
 test('the state messages read right in both languages for all four choices and for none', () => {
@@ -985,7 +1048,7 @@ test('a choice cleared in another tab stops user_data here, and a +40 (0) number
   const storage = memoryStorage({ 'ect-consent': storedChoice(true, true) });
   const view = page({ storage });
   view.context.ectConsent.trackLead({ email: 'ana@example.ro', phone: '+40 (0)722 123 456' });
-  assert.deepEqual(view.dataLayer().at(-1)[2].user_data, { email: 'ana@example.ro', phone_number: '+40722123456' });
+  assert.deepEqual(leadCalls(view)[0], ['set', 'user_data', { email: 'ana@example.ro', phone_number: '+40722123456' }]);
   storage.map.delete('ect-consent');
   view.emitWindow('storage', { key: 'ect-consent' });
   assert.deepEqual(view.dataLayer().at(-1), ['consent', 'update', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' }]);

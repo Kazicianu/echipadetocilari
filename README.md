@@ -145,8 +145,10 @@ RO și EN, după generarea paginilor EN, `consent.css` și `consent.js` (cu
 - **Alegerea** se păstrează în `localStorage`, cheia `ect-consent`
   (`{v, analytics, marketing, ts}`), timp de 183 de zile (aproximativ 6 luni).
   Nu se trimite la server. Bannerul reapare după expirare sau când crește
-  `VERSION` din `consent.js` (acum 2: alegerile dinainte de categoria Marketing
-  sunt cerute din nou).
+  `VERSION` din `consent.js` (acum 3: scopurile categoriei Marketing s-au
+  extins la personalizarea reclamelor, remarketing, liste de public și conversii
+  îmbunătățite, deci toți vizitatorii sunt întrebați din nou; la 2 se cerea din
+  nou acordul după introducerea categoriei Marketing).
 - **Tagul Google** se injectează la fiecare vizită, după evenimentul `load`, și
   numai pe `echipadetocilari.ro` și `www.echipadetocilari.ro` (atributul
   `data-ga-hosts`). Pe localhost, pe adresele Preview Vercel și pe orice alt
@@ -165,9 +167,18 @@ RO și EN, după generarea paginilor EN, `consent.css` și `consent.js` (cu
 - **Google Ads** se pornește din `GOOGLE_ADS` din `scripts/lib/privacy.mjs`
   (`id`: `AW-…`, `leadLabel`: eticheta conversiei). Fără ID, tagul rămâne ca
   pentru GA4. După trimiterea formularului, `ect-contact.js` apelează
-  `window.ectConsent.trackLead({ email, phone })`: `generate_lead` (și
-  `conversion`, dacă există ID și etichetă), cu `user_data` (email și telefon în
-  format E.164, hash făcut de gtag) doar cu acord Marketing. Când adaugi `AW-…`,
+  `window.ectConsent.trackLead({ email, phone })`, care urmează secvența
+  documentată de Google: cu acord Marketing, `gtag('set', 'user_data', {...})`
+  (email și telefon în format E.164, hash făcut de gtag), apoi `generate_lead`,
+  `conversion` (dacă există ID și etichetă) și, pentru conversiile îmbunătățite
+  pentru clienți potențiali, `form_submit` cu `send_to` pe ID-ul `AW-…` (doar cu
+  ID și cu date). Fără Marketing: doar `generate_lead` și `conversion`, fără
+  `user_data`. Retragerea Marketingului după un lead trimite `set user_data {}`
+  înaintea `consent update`. Tot `ect-contact.js` adaugă la corpul cererii
+  rezultatul `window.ectConsent.leadRecord()`: `null` fără Marketing, altfel data
+  și versiunea acordului plus `gclid` (din adresă sau din cookie-ul `_gcl_aw`),
+  `gbraid` și `wbraid`; serverul le validează și le pune în emailul lead-ului
+  (vezi `docs/contact-forms.md`). Când adaugi `AW-…`,
   extinde și CSP-ul report-only din `vercel.json` cu domeniile Google Ads.
   Detectarea automată a datelor furnizate de utilizatori din GA4 trebuie să
   rămână oprită în contul GA4 (setarea nu e în repository), pentru că politica

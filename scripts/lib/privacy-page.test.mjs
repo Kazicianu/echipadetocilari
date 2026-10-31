@@ -90,7 +90,7 @@ test('the policy content: neutral section ids, contents list, consent control an
   assert.match(main, /<p class="ect-policy__consent-state" data-ect-consent-state aria-live="polite"><\/p>/);
   const cookies = main.slice(main.indexOf('<section id="cookies"'));
   assert.ok(cookies.indexOf('data-ect-consent-open') < cookies.indexOf('ect-policy__cookies'), 'the consent control comes before the cards');
-  assert.deepEqual([...main.matchAll(/<h4 class="ect-policy__cookie-name"><code>([^<]+)<\/code><\/h4>/g)].map(([, name]) => name), ['ect-consent', '_ga', '_ga_PGM4B3VM9Z', '_gcl_*'], 'four storage cards');
+  assert.deepEqual([...main.matchAll(/<h4 class="ect-policy__cookie-name"><code>([^<]+)<\/code><\/h4>/g)].map(([, name]) => name), ['ect-consent', '_ga', '_ga_PGM4B3VM9Z', '_gcl_*', 'NID, AID, RUL'], 'five storage cards');
   assert.equal(visibleDateModified(page), '2026-10-31');
   assert.match(main, /Ultima actualizare: <time datetime="2026-10-31">31 octombrie 2026<\/time>/);
   // Owner decisions that must stay visible.
@@ -100,7 +100,10 @@ test('the policy content: neutral section ids, contents list, consent control an
   // What the policy reports from Google, Resend and Vercel links to their own pages.
   const sources = ['https://support.google.com/analytics/answer/12017362?hl=ro', 'https://support.google.com/analytics/answer/14077171?hl=ro',
     'https://support.google.com/analytics/answer/13802165?hl=ro', 'https://developers.google.com/tag-platform/security/concepts/consent-mode?hl=ro',
-    'https://support.google.com/google-ads/answer/10548233?hl=ro', 'https://resend.com/security/gdpr', 'https://vercel.com/docs/logs/runtime'];
+    'https://support.google.com/google-ads/answer/10548233?hl=ro', 'https://resend.com/security/gdpr', 'https://vercel.com/docs/logs/runtime',
+    'https://support.google.com/google-ads/answer/2472738?hl=ro', 'https://support.google.com/google-ads/answer/14274408?hl=ro',
+    'https://support.google.com/adspolicy/answer/6299717?hl=ro', 'https://business.safety.google/adsservices/',
+    'https://business.safety.google/adscookies/', 'https://developers.google.com/tag-platform/security/guides/consent?hl=ro'];
   for (const href of sources) assert.equal(count(main, `<a href="${href}">`), 1, `source linked: ${href}`);
   for (const claim of ['Google spune, în <a href="https://support.google.com/analytics/answer/12017362', 'Google spune, în <a href="https://support.google.com/analytics/answer/14077171',
     'Tot Google precizează, în <a href="https://support.google.com/analytics/answer/13802165',
@@ -164,6 +167,7 @@ test('every dictionary key is a whole block of the page body, and only of the pa
     '<code>_ga</code>',
     '<code>_ga_PGM4B3VM9Z</code>',
     '<code>_gcl_*</code>',
+    '<code>NID, AID, RUL</code>',
     '<strong>Email:</strong> <a href="mailto:anspdcp@dataprotection.ro">anspdcp@dataprotection.ro</a>',
   ]);
   for (const inner of blocks) {
@@ -259,4 +263,15 @@ test('page CSS: mobile first, exact orange, visible focus, 44px targets, reduced
   assert.match(css, /@media \(prefers-reduced-motion: reduce\) \{[^@]*\.ect-policy__consent-btn:active \{ transform: none; \}/);
   assert.match(css, /border-radius: var\(--radius-card\) var\(--radius-card\) var\(--radius-card\) var\(--radius-leaf-sm\);/);
   assert.match(css, /src: url\("fonts\/Montserrat-Variable-latin-ro\.woff2"\)/);
+});
+
+test('the policy links Google data responsibility page in the summary and states the Customer Match and proof facts', () => {
+  const link = 'https://business.safety.google/privacy/';
+  assert.equal(count(main, link), 2);
+  const first = main.indexOf(link);
+  assert.ok(first > main.indexOf('<section id="summary"') && first < main.indexOf('<section id="controller"'), 'the first link sits in #summary');
+  for (const fact of ['<strong>Liste de clienți (Customer Match):</strong>', '<strong>Dovada acordului pentru marketing:</strong>', 'prestează servicii în numele nostru', '540 de zile']) {
+    assert.ok(main.includes(fact), fact);
+  }
+  assert.doesNotMatch(main, /alegerea rămâne doar în browserul tău/);
 });

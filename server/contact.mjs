@@ -72,6 +72,17 @@ function campaignValue(value) {
   return /^[\p{L}\p{N} ._~+:|\/&(),-]{1,100}$/u.test(trimmed) ? trimmed : '';
 }
 
+/** Marketing consent proof and ad click ids are best-effort too: anything odd is dropped, never an error. */
+function consentDate(value) {
+  return typeof value === 'string' && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,3})?Z$/.test(value) ? value : '';
+}
+
+function clickId(value) {
+  if (typeof value !== 'string') return '';
+  const trimmed = value.trim();
+  return /^[\w.-]{1,300}$/.test(trimmed) ? trimmed : '';
+}
+
 export function validateContact(body, now = Date.now(), { requireChallenge = true } = {}) {
   const fields = {};
   for (const [key, min, max] of [['name', 2, 120], ['company', 0, 160], ['email', 3, 254], ['phone', 5, 40], ['message', 10, 5000]]) {
@@ -89,7 +100,11 @@ export function validateContact(body, now = Date.now(), { requireChallenge = tru
   if (requireChallenge && (typeof body.turnstileToken !== 'string' || !body.turnstileToken || body.turnstileToken.length > 2048)) return { error: 'challenge' };
   if (typeof body.submissionId !== 'string' || !/^[a-f0-9-]{36}$/i.test(body.submissionId)) return { error: 'invalid', field: 'submissionId' };
   if (typeof body.page !== 'string' || !body.page.startsWith('/') || body.page.startsWith('//') || body.page.length > 300 || CONTROL.test(body.page)) return { error: 'invalid', field: 'page' };
-  return { fields: { ...fields, page: body.page, language: body.language === 'en' ? 'en' : 'ro', submissionId: body.submissionId, utmSource: campaignValue(body.utmSource), utmCampaign: campaignValue(body.utmCampaign) } };
+  // Click ids and the consent version mean nothing without the date of the Marketing consent.
+  const marketingConsentAt = consentDate(body.marketingConsentAt);
+  const consentVersion = marketingConsentAt && Number.isInteger(body.consentVersion) && body.consentVersion > 0 ? body.consentVersion : 0;
+  const ids = marketingConsentAt ? { gclid: clickId(body.gclid), gbraid: clickId(body.gbraid), wbraid: clickId(body.wbraid) } : { gclid: '', gbraid: '', wbraid: '' };
+  return { fields: { ...fields, page: body.page, language: body.language === 'en' ? 'en' : 'ro', submissionId: body.submissionId, utmSource: campaignValue(body.utmSource), utmCampaign: campaignValue(body.utmCampaign), marketingConsentAt, consentVersion, ...ids } };
 }
 
 /** Additional best-effort limit per warm function; configured Turnstile/WAF protects across instances. */
@@ -131,6 +146,10 @@ export async function deliverResend(fields, env, config, fetchImpl = globalThis.
       `Telefon: ${fields.phone}`, `Pagina: ${fields.page}`, `Limba: ${fields.language}`,
       ...(fields.utmSource ? [`Sursa: ${fields.utmSource}`] : []),
       ...(fields.utmCampaign ? [`Campanie: ${fields.utmCampaign}`] : []),
+      fields.marketingConsentAt ? `Acord Marketing: da, ${fields.marketingConsentAt}, versiunea ${fields.consentVersion}` : 'Acord Marketing: nu',
+      ...(fields.gclid ? [`gclid: ${fields.gclid}`] : []),
+      ...(fields.gbraid ? [`gbraid: ${fields.gbraid}`] : []),
+      ...(fields.wbraid ? [`wbraid: ${fields.wbraid}`] : []),
       '', 'Mesaj:', fields.message,
     ].join('\n'),
   };

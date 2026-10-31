@@ -272,11 +272,52 @@ test('campaign labels reach delivery and the email only when present', async () 
   await deliverResend(validateContact({ ...valid, utmCampaign: 'primavara-2027' }, NOW).fields, env, config, fetchImpl);
   await deliverResend(validateContact(valid, NOW).fields, env, config, fetchImpl);
   const after = lines => lines.slice(lines.indexOf('Limba: en') + 1, lines.indexOf('Mesaj:'));
-  assert.deepEqual(after(texts[0]), ['Sursa: google', 'Campanie: primavara-2027', '']);
-  assert.deepEqual(after(texts[1]), ['Sursa: google', '']);
-  assert.deepEqual(after(texts[2]), ['Campanie: primavara-2027', '']);
-  assert.deepEqual(after(texts[3]), [''], 'no campaign: no extra lines');
+  assert.deepEqual(after(texts[0]), ['Sursa: google', 'Campanie: primavara-2027', 'Acord Marketing: nu', '']);
+  assert.deepEqual(after(texts[1]), ['Sursa: google', 'Acord Marketing: nu', '']);
+  assert.deepEqual(after(texts[2]), ['Campanie: primavara-2027', 'Acord Marketing: nu', '']);
+  assert.deepEqual(after(texts[3]), ['Acord Marketing: nu', ''], 'no campaign, no consent: only the consent line');
   assert.equal(texts[3].filter(line => /^(?:Sursa|Campanie):/.test(line)).length, 0);
+});
+
+test('marketing consent proof and ad click ids: validated, dropped without the consent date, never an error', async () => {
+  const at = '2026-10-31T12:34:56.789Z';
+  const full = validateContact({ ...valid, marketingConsentAt: at, consentVersion: 3, gclid: ' Cj0KCQ.abc-123_x ', gbraid: 'GB.1-a', wbraid: 'WB_2' }, NOW);
+  assert.equal(full.error, undefined);
+  assert.equal(full.fields.marketingConsentAt, at);
+  assert.equal(full.fields.consentVersion, 3);
+  assert.deepEqual([full.fields.gclid, full.fields.gbraid, full.fields.wbraid], ['Cj0KCQ.abc-123_x', 'GB.1-a', 'WB_2']);
+  assert.equal(validateContact({ ...valid, marketingConsentAt: '2026-10-31T12:34:56Z' }, NOW).fields.marketingConsentAt, '2026-10-31T12:34:56Z', 'a date without milliseconds is valid');
+  assert.equal(validateContact({ ...valid, gclid: 'x'.repeat(300), marketingConsentAt: at }, NOW).fields.gclid, 'x'.repeat(300), 'exactly 300 characters is kept');
+
+  // Without a valid date nothing else travels, and the lead is still accepted.
+  for (const badDate of [undefined, '', '2026-10-31', '2026-10-31T12:34:56+02:00', '2026-10-31 12:34:56Z', 'yesterday', 42, null, {}]) {
+    const result = validateContact({ ...valid, marketingConsentAt: badDate, consentVersion: 3, gclid: 'abc', gbraid: 'def', wbraid: 'ghi' }, NOW);
+    assert.equal(result.error, undefined, `${JSON.stringify(badDate)} never blocks a lead`);
+    assert.equal(result.fields.marketingConsentAt, '');
+    assert.equal(result.fields.consentVersion, 0);
+    assert.deepEqual([result.fields.gclid, result.fields.gbraid, result.fields.wbraid], ['', '', '']);
+  }
+
+  // Odd click ids and versions are dropped one by one.
+  for (const bad of ['a b', 'a;b', 'a<b>', 'a\nb', 'a'.repeat(301), '', '   ', 7, null, true, {}, ['abc']]) {
+    const result = validateContact({ ...valid, marketingConsentAt: at, consentVersion: 3, gclid: bad, gbraid: bad, wbraid: bad }, NOW);
+    assert.equal(result.error, undefined, `${JSON.stringify(bad)} never blocks a lead`);
+    assert.deepEqual([result.fields.gclid, result.fields.gbraid, result.fields.wbraid], ['', '', ''], JSON.stringify(bad));
+    assert.equal(result.fields.marketingConsentAt, at, 'the consent proof stays');
+  }
+  for (const bad of [0, -1, 1.5, '3', null, undefined]) assert.equal(validateContact({ ...valid, marketingConsentAt: at, consentVersion: bad }, NOW).fields.consentVersion, 0, String(bad));
+
+  const texts = [];
+  const fetchImpl = async (_url, init) => { texts.push(JSON.parse(init.body).text.split('\n')); return { ok: true, json: async () => ({ id: 'test-accepted-message-id' }) }; };
+  const config = { from: env.CONTACT_FROM, to: ['contact@echipadetocilari.ro'] };
+  await deliverResend(full.fields, env, config, fetchImpl);
+  await deliverResend(validateContact({ ...valid, marketingConsentAt: at, consentVersion: 3 }, NOW).fields, env, config, fetchImpl);
+  await deliverResend(validateContact({ ...valid, consentVersion: 3, gclid: 'abc' }, NOW).fields, env, config, fetchImpl);
+  const after = lines => lines.slice(lines.indexOf('Limba: en') + 1, lines.indexOf('Mesaj:'));
+  assert.deepEqual(after(texts[0]), [`Acord Marketing: da, ${at}, versiunea 3`, 'gclid: Cj0KCQ.abc-123_x', 'gbraid: GB.1-a', 'wbraid: WB_2', '']);
+  assert.deepEqual(after(texts[1]), [`Acord Marketing: da, ${at}, versiunea 3`, ''], 'no click ids: no click id lines');
+  assert.deepEqual(after(texts[2]), ['Acord Marketing: nu', ''], 'a click id without the consent date is thrown away');
+  assert.equal(texts[2].some(line => /gclid/.test(line)), false);
 });
 
 test('actual RO forms and generated EN form shell use the independent controller accessibly', () => {
@@ -302,8 +343,8 @@ test('actual RO forms and generated EN form shell use the independent controller
       // The approved short line states only the purpose; recipients (Gmail included)
       // and GA user-provided data are described in the policy it links to.
       assert.match(privacy[0], locale === 'en'
-        ? /^<p class="ect-contact-privacy">We use the details in this form to reply to you\. <a [^>]+>Privacy policy<\/a>\.<\/p>$/
-        : /^<p class="ect-contact-privacy">Folosim datele din formular ca să-ți răspundem\. <a [^>]+>Politica de confidențialitate<\/a>\.<\/p>$/);
+        ? /^<p class="ect-contact-privacy">We use the details in this form to reply to you and, if you have accepted marketing, for our Google ads\. <a [^>]+>Privacy policy<\/a>\.<\/p>$/
+        : /^<p class="ect-contact-privacy">Folosim datele din formular ca să-ți răspundem și, dacă ai acceptat marketingul, pentru reclamele noastre Google\. <a [^>]+>Politica de confidențialitate<\/a>\.<\/p>$/);
       const links = privacy[0].match(/<a\b[^>]*>/g) || [];
       assert.deepEqual(links, [`<a href="${locale === 'en' ? '/en/privacy-policy/' : '/politica-de-confidentialitate/'}">`], `${file} (${locale})`);
       const submitGroup = form.search(/\belementor-field-type-submit\b/);
@@ -504,6 +545,22 @@ test('browser form sends the campaign labels cut to 100 characters and reports a
   assert.equal(none.posted[0].utmSource, '');
   assert.equal(none.posted[0].utmCampaign, '');
   assert.match(none.status.textContent, /Thank you/, 'a consent script without trackLead is fine');
+  assert.equal('marketingConsentAt' in none.posted[0], false, 'a consent script without leadRecord adds nothing');
+
+  const record = { marketingConsentAt: '2026-10-31T12:34:56.789Z', consentVersion: 3, gclid: 'abc', gbraid: '', wbraid: '' };
+  const withRecord = await run({ search: '', ectConsent: { leadRecord: () => record } });
+  await withRecord.send(true);
+  for (const [key, value] of Object.entries(record)) assert.equal(withRecord.posted[0][key], value, key);
+
+  const withoutMarketing = await run({ search: '', ectConsent: { leadRecord: () => null } });
+  await withoutMarketing.send(true);
+  assert.equal('marketingConsentAt' in withoutMarketing.posted[0], false, 'no Marketing: nothing added');
+  assert.equal('gclid' in withoutMarketing.posted[0], false);
+
+  const broken = await run({ search: '', ectConsent: { leadRecord: () => { throw new Error('storage blocked'); } } });
+  await broken.send(true);
+  assert.equal(broken.posted.length, 1, 'an exception in leadRecord does not block the send');
+  assert.match(broken.status.textContent, /Thank you/);
 });
 
 test('phone accepts slashes and extensions, still rejects symbol-only values', () => {

@@ -147,6 +147,8 @@
       const params = new URLSearchParams(window.location.search);
       body.utmSource = (params.get('utm_source') || '').slice(0, 100);
       body.utmCampaign = (params.get('utm_campaign') || '').slice(0, 100);
+      // Proof of the Marketing consent and the ad click ids travel only with that consent.
+      try { Object.assign(body, window.ectConsent?.leadRecord?.()); } catch { /* ignored */ }
       status(form, 'sending', 'sending');
       const response = await fetch('/api/contact/', {
         method: 'POST',

@@ -17,8 +17,12 @@
  * site asks at once, so nobody browses on without having been asked. Waiting is safe
  * only because every signal stays `denied` until the visitor chooses.
  *
- * window.ectConsent.trackLead({ email, phone }) reports a sent form: a generate_lead
- * event, with the hashed email and phone (user_data) only if Marketing is accepted.
+ * window.ectConsent.trackLead({ email, phone }) reports a sent form and follows the
+ * sequence Google documents: with Marketing accepted, gtag('set', 'user_data', ...)
+ * first, then generate_lead, the conversion event and the enhanced conversions for
+ * leads event (form_submit). Without Marketing it sends generate_lead and the
+ * conversion event alone, with no user_data. window.ectConsent.leadRecord() gives the
+ * lead email the proof of the Marketing consent and the ad click ids, or null.
  *
  * Markup hooks: [data-ect-consent-open] controls reopen the settings,
  * [data-ect-consent-state] elements receive the current state as text.
@@ -33,7 +37,7 @@
   const COPY = {
     ro: {
       region: 'Preferințe cookie-uri',
-      summary: 'Cu acordul tău, folosim cookie-uri Google de analiză și de marketing, iar dacă accepți marketingul, Google poate primi emailul și telefonul din formular, sub formă de cod hash. Fără acord, Google primește doar semnale fără cookie-uri.',
+      summary: 'Cu acordul tău, folosim cookie-uri Google pentru analiză, măsurarea reclamelor și personalizarea reclamelor. Dacă accepți marketingul, Google poate primi și emailul și telefonul din formular, sub formă de cod hash, pentru aceste reclame. Fără acord, Google primește doar semnale fără cookie-uri.',
       learnMore: 'Află mai multe',
       customise: 'Setări',
       rejectAll: 'Refuz toate',
@@ -45,7 +49,7 @@
       analyticsName: 'Analiză',
       analyticsText: 'Google Analytics: ce pagini sunt vizitate, de unde vin vizitatorii și cum e folosit site-ul.',
       marketingName: 'Marketing',
-      marketingText: 'Google Ads: măsoară ce reclame aduc cereri și permite reclame personalizate. La trimiterea formularului, Google poate primi emailul și telefonul, sub formă de cod hash.',
+      marketingText: 'Google Ads: măsoară ce reclame aduc cereri, optimizează campaniile și permite reclame personalizate, inclusiv remarketing. La trimiterea formularului, emailul și telefonul pot ajunge la Google, sub formă de cod hash, pentru măsurare și pentru liste de public cărora le arătăm reclame sau pe care le excludem.',
       save: 'Salvează preferințele',
       footerPolicy: 'Politica de confidențialitate',
       footerSettings: 'Setări cookie-uri',
@@ -58,7 +62,7 @@
     },
     en: {
       region: 'Cookie preferences',
-      summary: 'With your consent, we use Google analytics and marketing cookies, and if you accept marketing, Google may receive the email and phone number from the form, in hashed form. Without consent, Google receives only cookieless signals.',
+      summary: 'With your consent, we use Google cookies for analytics, ad measurement and ad personalization. If you accept marketing, Google may also receive the email and phone number from the form, in hashed form, for these ads. Without consent, Google receives only cookieless signals.',
       learnMore: 'Learn more',
       customise: 'Customize',
       rejectAll: 'Reject all',
@@ -70,7 +74,7 @@
       analyticsName: 'Analytics',
       analyticsText: 'Google Analytics: which pages are visited, where visitors come from and how the site is used.',
       marketingName: 'Marketing',
-      marketingText: 'Google Ads: measures which ads bring requests and allows personalized ads. When you send the form, Google may receive your email and phone number, in hashed form.',
+      marketingText: 'Google Ads: measures which ads bring requests, optimizes campaigns and allows personalized ads, including remarketing. When you send the form, your email and phone number may reach Google, in hashed form, for measurement and for audience lists we show ads to or exclude from ads.',
       save: 'Save preferences',
       footerPolicy: 'Privacy policy',
       footerSettings: 'Cookie settings',
@@ -85,7 +89,7 @@
   /* ===== end COPY ===== */
 
   const STORAGE_KEY = 'ect-consent';
-  const VERSION = 2; // Raise when a policy change needs a new choice from every visitor.
+  const VERSION = 3; // Raise when a policy change needs a new choice from every visitor.
   const DAY_MS = 24 * 60 * 60 * 1000;
   const MAX_AGE_MS = 183 * DAY_MS;
   const SHARED_COOKIE_DOMAIN = '.echipadetocilari.ro';
@@ -111,6 +115,7 @@
 
   let choice = readChoice();
   let tagStarted = false;
+  let userDataSet = false;
   let opener = null;
   let fitFrame = 0;
   let openedAt = -Infinity;
@@ -194,6 +199,10 @@
 
   function apply(value) {
     clearDeniedCookies(value);
+    if (tagStarted && userDataSet && !value.marketing) {
+      window.gtag('set', 'user_data', {});
+      userDataSet = false;
+    }
     if (tagStarted) window.gtag('consent', 'update', consentState(value));
   }
 
@@ -209,20 +218,36 @@
     return /^[1-9]\d{9,14}$/.test(digits) ? `+${digits}` : '';
   }
 
-  /** A form was sent. The email and phone go to Google only when Marketing is accepted. */
+  /** A form was sent. The email and phone go to Google only when Marketing is accepted,
+   *  in the order Google documents: set user_data, then the events. */
   function trackLead({ email, phone } = {}) {
     if (!tagStarted) return;
-    const params = {};
+    const userData = {};
     if (choice && choice.marketing) {
-      const userData = {};
       const address = String(email || '').trim().toLowerCase();
       const number = e164(phone);
       if (address) userData.email = address;
       if (number) userData.phone_number = number;
-      if (Object.keys(userData).length) params.user_data = userData;
     }
-    window.gtag('event', 'generate_lead', params);
-    if (adsId && adsLeadLabel) window.gtag('event', 'conversion', { send_to: `${adsId}/${adsLeadLabel}`, ...params });
+    const hasUserData = Object.keys(userData).length > 0;
+    if (hasUserData) {
+      window.gtag('set', 'user_data', userData);
+      userDataSet = true;
+    }
+    window.gtag('event', 'generate_lead', {});
+    if (adsId && adsLeadLabel) window.gtag('event', 'conversion', { send_to: `${adsId}/${adsLeadLabel}` });
+    if (adsId && hasUserData) window.gtag('event', 'form_submit', { send_to: adsId });
+  }
+
+  /** For the lead email: proof of the Marketing consent and the ad click ids. Nothing without Marketing. */
+  function leadRecord() {
+    if (!choice || !choice.marketing) return null;
+    const query = new URLSearchParams(window.location.search || '');
+    const clickId = name => { const value = query.get(name) || ''; return value.length <= 300 ? value : ''; };
+    let cookie = '';
+    try { cookie = String(document.cookie || ''); } catch (error) { /* blocked */ }
+    const stored = /(?:^|;\s*)_gcl_aw=GCL\.\d+\.([^;]{1,300})/.exec(cookie);
+    return { marketingConsentAt: choice.ts, consentVersion: choice.v, gclid: clickId('gclid') || (stored ? stored[1] : ''), gbraid: clickId('gbraid'), wbraid: clickId('wbraid') };
   }
 
   // ─── markup ──────────────────────────────────────────────────────────────
@@ -548,6 +573,7 @@
     open: () => openSettings(null),
     get choice() { return choice ? { ...choice } : null; },
     trackLead,
+    leadRecord,
   };
 
   updateStates();
