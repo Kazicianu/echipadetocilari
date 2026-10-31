@@ -450,7 +450,7 @@ test('consent.css: phone styles are the base, refuse and accept are equal in the
   assert.doesNotMatch(css, /\.ect-consent-open\.ect-consent-open \{[^}]*line-height:/, 'the button keeps the line height of the footer links');
   assert.match(css, /html\.ect-consent-open \{ scroll-padding-bottom: var\(--ect-consent-space, 0px\); \}/);
   assert.match(css, /html\.ect-consent-open body \{ padding-bottom: var\(--ect-consent-space, 0px\); \}/);
-  assert.match(css, /html\.ect-consent-open \.elementor-widget-button:has\(a\[href="#top"\]\) \{ transform: translateY\(calc\(-1 \* var\(--ect-consent-space, 0px\)\)\); \}/);
+  assert.doesNotMatch(css, /\.elementor-widget-button:has\(a\[href="#top"\]\)/, 'the back-to-top button stays beside the phone card, not above it');
 });
 
 test('while the card is open the page keeps its height free at the bottom, so focus never ends up under it', () => {
@@ -896,7 +896,7 @@ function summaryRowWidth(viewport) {
   };
   assert.equal(value(phone, 'border'), '1px solid rgb(239, 230, 220)');
   assert.equal(value(phone, 'left'), '.75rem');
-  assert.equal(value(phone, 'right'), '.75rem');
+  assert.equal(value(phone, 'right'), '5rem');
   assert.equal(value(phone, 'width'), 'auto');
   assert.equal(value(phone, 'max-width'), 'none');
   assert.equal(value(phone, 'padding'), '.875rem 1rem');
@@ -909,7 +909,7 @@ function summaryRowWidth(viewport) {
   assert.match(css, /\.ect-consent \.ect-consent__actions--summary \.ect-consent__pill \{\n\s*padding-inline: \.5rem;/);
   assert.match(css, /\.ect-consent \.ect-consent__pill \{[^}]*\bborder: 1px solid transparent;/);
   const maxWidth = parseFloat(value(card, 'max-width')) * rem;
-  const cardWidth = viewport > 480 ? Math.min(viewport - 2 * rem, maxWidth) : viewport - 1.5 * rem;
+  const cardWidth = viewport > 480 ? Math.min(viewport - 2 * rem, maxWidth) : viewport - 5.75 * rem;
   const paddingX = viewport > 480 ? 1.125 * rem : 1 * rem;
   return cardWidth - 2 * paddingX - 2;
 }
@@ -940,19 +940,20 @@ test('summary pills: one row above 480px in both languages; refuse + accept, the
   const card = summaryRowWidth(1440) + 2 * 18 + 2;
   assert.ok(card <= 400, `desktop card stays close to the reference 360px (${card}px)`);
 
-  // Phones: English fits on one row; Romanian falls back to two rows below about 400px.
-  for (const width of [360, 390, 414, 480]) {
+  // Phones keep room for the back-to-top button: only the widest ones fit one row.
+  for (const width of [480]) {
     viewport = width;
     const english = page({ lang: 'en', layout });
     assert.equal(stacked(english), false, `en at ${width}px`);
     assert.deepEqual(order(english), [en.customise, en.rejectAll, en.acceptAll]);
   }
-  for (const [width, twoRows] of [[320, true], [360, true], [390, true], [414, false], [480, false]]) {
+  for (const [width, twoRows] of [[320, true], [360, true], [390, true], [414, true], [480, false]]) {
     viewport = width;
     const romanian = page({ lang: 'ro', layout });
     assert.equal(stacked(romanian), twoRows, `ro at ${width}px`);
     assert.deepEqual(order(romanian), twoRows ? [ro.rejectAll, ro.acceptAll, ro.customise] : [ro.customise, ro.rejectAll, ro.acceptAll], `ro at ${width}px: DOM order follows the visual order`);
-    if (twoRows) {
+    // At 320px the two-row labels may wrap onto a second line inside the pill.
+    if (twoRows && width >= 360) {
       const column = (summaryRowWidth(width) - 8) / 2;
       assert.ok(column - pillFrame >= MONTSERRAT_PILL_WIDTHS[ro.acceptAll], `ro at ${width}px: two-row labels are not cut`);
     }

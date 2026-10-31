@@ -23,15 +23,13 @@
    last footer links can scroll above it (WCAG 2.4.11). */
 html.ect-consent-open { scroll-padding-bottom: var(--ect-consent-space, 0px); }
 html.ect-consent-open body { padding-bottom: var(--ect-consent-space, 0px); }
-/* The footer's fixed "back to top" button sits in the corner the phone card covers. It is lifted with
-   transform, not bottom, so raising it does not count as a layout shift. */
-html.ect-consent-open .elementor-widget-button:has(a[href="#top"]) { transform: translateY(calc(-1 * var(--ect-consent-space, 0px))); }
 
-/* Phone first: a full-width card above the bottom edge (and the home indicator). */
+/* Phone first: a card above the bottom edge (and the home indicator). Its right side
+   stays free for the footer's fixed "back to top" button (about 73px with its offset). */
 .ect-consent {
   position: fixed;
   left: .75rem;
-  right: .75rem;
+  right: 5rem;
   bottom: calc(.75rem + env(safe-area-inset-bottom, 0px));
   z-index: 10000;
   display: block;
@@ -60,6 +58,9 @@ html.ect-consent-open .elementor-widget-button:has(a[href="#top"]) { transform: 
   text-size-adjust: 100%;
 }
 
+/* The settings view has more to read, so it takes the full width for as long as it is open. */
+.ect-consent:has(.ect-consent__view--customise:not([hidden])) { right: .75rem; }
+
 /* From 481px: the floating card in the bottom-left corner. */
 @media (min-width: 481px) {
   .ect-consent {
@@ -86,9 +87,16 @@ html.ect-consent-open .elementor-widget-button:has(a[href="#top"]) { transform: 
 .ect-consent p { margin: 0; }
 
 .ect-consent .ect-consent__copy {
-  font-size: .875rem;
-  line-height: 1.45;
+  font-size: .8125rem;
+  line-height: 1.4;
   color: rgb(37, 37, 34);
+}
+
+@media (min-width: 481px) {
+  .ect-consent .ect-consent__copy {
+    font-size: .875rem;
+    line-height: 1.45;
+  }
 }
 
 .ect-consent .ect-consent__link,
