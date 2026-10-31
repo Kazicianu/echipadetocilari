@@ -11,3 +11,4 @@
 .ect-contact-fallback a { text-decoration: underline; overflow-wrap: anywhere; }
 .ect-contact-challenge { margin-top: 14px; }
 [data-ect-contact][aria-busy="true"] button[type="submit"] { opacity: .65; cursor: wait; }
+[data-ect-contact] .elementor-field-textual { min-height: 44px; }
