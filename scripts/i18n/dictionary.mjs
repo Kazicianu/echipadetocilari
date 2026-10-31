@@ -23,6 +23,7 @@ export const pageDictionaryFiles = {
  */
 export const dictionary = [
   ['Adresa:', 'Address:'],
+  ['telefon:', 'phone:'],
   ['alt="procesul de optimizare servicii seo e1709318900778"', 'alt="The SEO optimization process"'],
   ['alt="echipa de tocilari servicii seo"', 'alt="Echipa de Tocilari SEO services"'],
   ['alt="Tocilar creeaza un site web"', 'alt="A nerd building a website"'],
@@ -1553,4 +1554,5 @@ export const enOrg = {
     postalCode: '021998',
     addressCountry: 'RO',
   },
+  telephone: '+40750203466',
 };

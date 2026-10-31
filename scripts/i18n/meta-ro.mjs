@@ -82,4 +82,5 @@ export const roOrg = {
     postalCode: '021998',
     addressCountry: 'RO',
   },
+  telephone: '+40750203466',
 };
