@@ -108,7 +108,7 @@
     slot.append(button);
     dialog.close();
     document.body.style.cssText = previousBodyStyle;
-    window.scrollTo(0, scrollPosition);
+    window.scrollTo({ top: scrollPosition, left: 0, behavior: 'instant' });
     button.focus({ preventScroll: true });
     if (destination) window.location.assign(destination);
   }

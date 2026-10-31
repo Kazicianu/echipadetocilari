@@ -124,7 +124,7 @@ function createMenu({ reducedMotion = false } = {}) {
   window.scrollY = 157;
   window.visualViewport = new Element();
   window.visualViewport.height = 844;
-  window.scrollTo = (x, y) => { scrollCalls.push([x, y]); window.scrollY = y; };
+  window.scrollTo = options => { scrollCalls.push({ ...options }); window.scrollY = options.top; };
   window.location = { assign: href => navigation.push(href) };
 
   const context = {
@@ -164,7 +164,7 @@ function assertRestored(menu) {
   assert.equal(menu.button.getAttribute('aria-expanded'), 'false');
   assert.equal(menu.body.style.cssText, menu.originalBodyStyle);
   assert.equal(menu.document.activeElement, menu.button);
-  assert.deepEqual(menu.scrollCalls.at(-1), [0, 157]);
+  assert.deepEqual(menu.scrollCalls.at(-1), { top: 157, left: 0, behavior: 'instant' });
   assert.ok(menu.animations.every(animation => animation.playState === 'idle'));
 }
 
