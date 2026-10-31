@@ -77,7 +77,6 @@ export const googleAdsDictionary = [
   ["Explicația Google:","Google explains:"],
   ["reclamele și rezultatele organice","advertising and organic results"],
   ["https://support.google.com/google-ads/answer/1722047?hl=ro","https://support.google.com/google-ads/answer/1722047?hl=en"],
-  ['Adresa:', 'Address:'],
   ['SEO și vizibilitate în AI', 'SEO and AI visibility'],
   ['Ne-ar face <b>mare plăcere</b> să vorbim despre <b>proiectul</b> tău, fără slides.', 'We would <b>love</b> to talk about your <b>project</b>, no slide deck.'],
   ['Agenție Google Ads pentru firme', 'Google Ads agency for businesses'],

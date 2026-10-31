@@ -20,7 +20,7 @@ import {
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-import { routes, pairedRoutes, isOwnedPage, routeByPath, routeByRo } from './i18n/routes.mjs';
+import { routes, pairedRoutes, isOwnedPage, isSystemPage, routeByPath, routeByRo } from './i18n/routes.mjs';
 import { roPageMeta, roOrg } from './i18n/meta-ro.mjs';
 import { generateEnglishPages, patchRomanianPages } from './i18n/generate-en.mjs';
 import {
@@ -30,6 +30,7 @@ import {
   renderJsonLd,
   setLang,
   stripJsonLd,
+  stripWordPressLinks,
   upsertMeta,
   upsertTitle,
 } from './lib/html.mjs';
@@ -53,6 +54,8 @@ import { fixSkipLink, validateSkipLink } from './lib/skip-link.mjs';
 import { addPreloadHints } from './lib/preload-hints.mjs';
 import { optimizeRenderPath, validateRenderPath } from './lib/render-path.mjs';
 import { versionAssets } from './lib/asset-versions.mjs';
+import { nameFooterIconLinks } from './lib/footer-a11y.mjs';
+import { buildNotFoundPage } from './lib/not-found-page.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
@@ -175,6 +178,12 @@ mkdirSync(outDir, { recursive: true });
 console.log('→ Copying 1:1 mirror (HTML/CSS/JS/images/fonts)…');
 cpSync(srcDir, outDir, { recursive: true });
 pruneJunkFromDist();
+writeFileSync(
+  path.join(outDir, '404.html'),
+  buildNotFoundPage(readFileSync(path.join(srcDir, 'politica-de-confidentialitate', 'index.html'), 'utf8')),
+  'utf8'
+);
+console.log('  wrote 404.html (system page, noindex)');
 
 // ─── per-page enhancement ───────────────────────────────────────────────────
 
@@ -218,6 +227,8 @@ function enhanceHtml(file) {
   // Rank Math's scraped graph duplicates entities and describes demo content —
   // drop it wholesale and re-emit only what we mean.
   html = stripJsonLd(html);
+  // The scraped feed and shortlink links go nowhere on this host.
+  html = stripWordPressLinks(html);
 
   if (owned && meta) {
     html = upsertTitle(html, meta.title);
@@ -242,7 +253,7 @@ function enhanceHtml(file) {
   html = html.replace(/<style>\/\* ect-mobile-a11y \*\/[\s\S]*?<\/style>\s*/g, '');
   html = appendToHead(html, A11Y_STYLE);
 
-  if (owned) html = fixSkipLink(html);
+  if (owned || isSystemPage(urlPath)) html = fixSkipLink(html);
 
   // Elementor's entrance animations need its editor runtime; on a static host we
   // reveal `.elementor-invisible` ourselves or the content stays at opacity 0.
@@ -263,8 +274,8 @@ function enhanceHtml(file) {
 const roFiles = walkHtml(outDir);
 console.log(`→ Enhancing ${roFiles.length} HTML pages (SEO/AEO/GEO, keep 1:1 visuals)…`);
 const enhanced = roFiles.map(enhanceHtml);
-const leftoverCount = enhanced.filter((p) => !p.owned).length;
-console.log(`  ${enhanced.filter((p) => p.owned).length} own pages, ${leftoverCount} leftovers`);
+const leftoverCount = enhanced.filter((p) => !p.owned && !isSystemPage(p.urlPath)).length;
+console.log(`  ${enhanced.filter((p) => p.owned).length} own pages, ${enhanced.length - leftoverCount - enhanced.filter((p) => p.owned).length} system page(s), ${leftoverCount} leftovers`);
 
 console.log('→ Generating English pages (/en/…) with natural-language SEO…');
 const enPages = generateEnglishPages({ outDir, site: SITE, indexable: INDEXABLE });
@@ -279,6 +290,7 @@ for (const file of walkHtml(outDir)) {
   let html = readFileSync(file, 'utf8');
   html = enhanceMobileMenu(enhanceDesktopHeader(enhanceContactForms(html)), { pageUrl: urlPath });
   html = addConsentManager(addFooterPrivacyLinks(html), { gaId: GA4_MEASUREMENT_ID });
+  html = nameFooterIconLinks(html);
   html = makeStandaloneAssets(html);
   html = optimizeRenderPath(html);
   // Preloads keep the unversioned URL; only stylesheets and scripts get ?v=.

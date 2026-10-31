@@ -118,6 +118,17 @@ export function applyIndexPolicy(html, { indexable, canonical }) {
   return html;
 }
 
+/**
+ * Drop the WordPress head links that point at nothing on this host: the RSS
+ * feeds (there is no /feed/ route) and the shortlink (it resolves to the home page).
+ */
+export function stripWordPressLinks(html) {
+  return html.replace(
+    /<link\b(?=[^>]*(?:\btype\s*=\s*["']application\/rss\+xml["']|\brel\s*=\s*["']shortlink["']))[^>]*>[ \t]*\r?\n?/gi,
+    ''
+  );
+}
+
 /** ro / en / x-default alternates; x-default points at Romanian (primary market). */
 export function injectHreflang(html, { site, roPath, enPath }) {
   const ro = `${site}${roPath === '/' ? '/' : roPath}`;

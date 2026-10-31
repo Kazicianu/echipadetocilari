@@ -41,7 +41,7 @@ function applyDictionary(html, pageDictionary = []) {
 }
 
 /** EN pages live one level deeper, so every relative asset path has to go root-absolute. */
-function absolutizeAssets(html) {
+export function absolutizeAssets(html) {
   let out = html
     .replace(/(src|href)="(\.\.\/)+wp-content\//gi, '$1="/wp-content/')
     .replace(/(src|href)="(\.\.\/)+wp-includes\//gi, '$1="/wp-includes/')

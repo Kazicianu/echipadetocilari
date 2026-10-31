@@ -45,7 +45,17 @@ export function createPreviewServer({ outDir = root, port = 3000, env = process.
       if (!url.pathname.endsWith('/')) { res.writeHead(308, { Location: url.pathname + '/' + url.search }); res.end(); return; }
       file = path.join(file, 'index.html');
     }
-    if (!existsSync(file) || !statSync(file).isFile()) { res.writeHead(404); res.end('Not found'); return; }
+    if (!existsSync(file) || !statSync(file).isFile()) {
+      // Like the host: a missing path gets the generated 404 page when the build wrote one.
+      const notFound = path.join(staticRoot, '404.html');
+      if (existsSync(notFound) && statSync(notFound).isFile()) {
+        res.writeHead(404, { 'Content-Type': types['.html'], 'Cache-Control': 'no-store' });
+        if (req.method === 'HEAD') res.end();
+        else createReadStream(notFound).pipe(res);
+        return;
+      }
+      res.writeHead(404); res.end('Not found'); return;
+    }
     res.writeHead(200, { 'Content-Type': types[path.extname(file)] || 'application/octet-stream', 'Cache-Control': 'no-store' });
     if (req.method === 'HEAD') res.end();
     else createReadStream(file).pipe(res);

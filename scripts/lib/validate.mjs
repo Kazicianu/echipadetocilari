@@ -8,13 +8,16 @@
 import { existsSync, readFileSync } from 'fs';
 import path from 'path';
 import vm from 'vm';
-import { routes, isOwnedPage, retiredPagePaths } from '../i18n/routes.mjs';
+import { routes, isOwnedPage, isSystemPage, retiredPagePaths } from '../i18n/routes.mjs';
+import { unnamedFooterIconLinks } from './footer-a11y.mjs';
 
 const retiredPaths = new Set(retiredPagePaths);
 const ownHosts = new Set(['echipadetocilari.ro', 'www.echipadetocilari.ro']);
 // Letters that only Romanian uses here; the cedilla forms of ș/ț (U+015E, U+015F,
 // U+0162, U+0163) are escaped so this file never contains them.
 const ROMANIAN_LETTER = /[ăâîșțĂÂÎȘȚŞşŢţ]/;
+// Romanian stems that must not survive in the alt, title or aria-label of an English page.
+const ROMANIAN_ATTRIBUTE_WORD = /\b(?:servicii|creare|procesul|optimizare|ofera|creeaza|tocilar)\b/i;
 
 /**
  * @param {object} opts
@@ -32,6 +35,7 @@ export function validateBuild({ outDir, files, urlPathOf, indexable }) {
     const html = readFileSync(file, 'utf8');
     const urlPath = urlPathOf(file);
     const owned = isOwnedPage(urlPath);
+    const system = isSystemPage(urlPath);
 
     checkInlineBlocks(html, rel(file), errors);
 
@@ -48,13 +52,17 @@ export function validateBuild({ outDir, files, urlPathOf, indexable }) {
       errors.push(`${rel(file)}: no robots meta`);
     } else {
       const noindex = /noindex/i.test(robots[1]);
-      if (!owned) {
+      if (!owned && !system) {
         errors.push(`${rel(file)}: leftover HTML shipped — delete from the mirror; 301 is in vercel.json`);
         continue;
       }
-      if (indexable && noindex) errors.push(`${rel(file)}: own page is noindex`);
-      if (!indexable && !noindex) errors.push(`${rel(file)}: staging page is indexable`);
+      if (system && !noindex) errors.push(`${rel(file)}: system page must always be noindex`);
+      if (owned && indexable && noindex) errors.push(`${rel(file)}: own page is noindex`);
+      if (owned && !indexable && !noindex) errors.push(`${rel(file)}: staging page is indexable`);
     }
+
+    checkWordPressLeftovers(html, rel(file), errors);
+    if (owned || system) checkOwnPage(html, rel(file), urlPath, system, errors);
 
     if (html.includes('/en/en/')) errors.push(`${rel(file)}: doubled /en/en/ path`);
 
@@ -118,6 +126,63 @@ export function validateBuild({ outDir, files, urlPathOf, indexable }) {
   }
 
   return errors;
+}
+
+/**
+ * Head links that point at nothing on this host. The build removes them; this
+ * keeps them from coming back through a new scrape of the mirror.
+ */
+function checkWordPressLeftovers(html, name, errors) {
+  if (/<link\b[^>]*\brel\s*=\s*["']shortlink["']/i.test(html)) {
+    errors.push(`${name}: rel="shortlink" link left in the head; strip it in build-static.mjs`);
+  }
+  if (/<link\b[^>]*\btype\s*=\s*["']application\/rss\+xml["']/i.test(html)) {
+    errors.push(`${name}: RSS feed link (application/rss+xml) left in the head; the site has no feeds`);
+  }
+}
+
+/**
+ * Checks shared by our pages and the generated system page: in-page anchors
+ * resolve, icon-only footer links have a name, English attributes are English.
+ * The system page also gets the rules a route page gets from the checks above.
+ */
+function checkOwnPage(html, name, urlPath, system, errors) {
+  const pageCopy = html.replace(/<!--[\s\S]*?-->|<script\b[^>]*>[\s\S]*?<\/script>|<style\b[^>]*>[\s\S]*?<\/style>/gi, '');
+
+  const ids = new Set([...pageCopy.matchAll(/\sid\s*=\s*["']([^"']+)["']/gi)].map(([, id]) => id));
+  const missing = new Set();
+  for (const [, href] of pageCopy.matchAll(/<a\b[^>]*\shref\s*=\s*["']#([^"']+)["']/gi)) {
+    let id = href;
+    try { id = decodeURIComponent(href); } catch { /* keep the raw value */ }
+    if (!ids.has(href) && !ids.has(id)) missing.add(href);
+  }
+  for (const href of missing) errors.push(`${name}: link to #${href} but no element has id="${href}"`);
+
+  for (const href of new Set(unnamedFooterIconLinks(html))) {
+    errors.push(`${name}: link ${href} has no aria-label (icon-only footer link)`);
+  }
+
+  if (urlPath.startsWith('/en/')) {
+    for (const [, attr, value] of pageCopy.matchAll(/(?<![\w-])(alt|title|aria-label)\s*=\s*"([^"]*)"/gi)) {
+      const word = value.match(ROMANIAN_ATTRIBUTE_WORD)?.[0];
+      if (word) errors.push(`${name}: Romanian "${word}" in ${attr}="${value.slice(0, 80)}" on an English page; translate it in scripts/i18n/`);
+    }
+  }
+
+  if (!system) return;
+  const h1Count = (pageCopy.match(/<h1\b/gi) || []).length;
+  if (h1Count !== 1) errors.push(`${name}: system page needs one H1, found ${h1Count}`);
+  if (/<link\b[^>]*\brel\s*=\s*["']canonical["']/i.test(html)) errors.push(`${name}: system page must not have a canonical link`);
+  const contact = pageCopy.search(/<form\b[^>]*data-ect-contact=["'](?:ro|en)["']/i);
+  const footer = pageCopy.search(/<footer\b/i);
+  if (contact < 0) errors.push(`${name}: system page: contact form missing`);
+  else if (footer < contact) errors.push(`${name}: system page: contact form must precede the footer`);
+  if (/[—↖-↙]|&mdash;|&#8212;|&#x2014;|&#(?:8598|8599|8600|8601);|&#x219[6-9];/i.test(pageCopy)) {
+    errors.push(`${name}: prohibited punctuation or diagonal arrow`);
+  }
+  for (const [, attr, value] of pageCopy.matchAll(/\s(src|href)\s*=\s*["']((?:\.{1,2}\/)*wp-(?:content|includes)\/[^"']*)["']/gi)) {
+    errors.push(`${name}: relative ${attr}="${value.slice(0, 80)}" breaks at any depth; use a root-absolute path`);
+  }
 }
 
 /** Share previews: page locale, an absolute image that exists, no WordPress leftovers. */

@@ -1,0 +1,126 @@
+/* 404 page (generated into dist/404.html by scripts/lib/not-found-page.mjs).
+   Mobile first, white background, no blobs. Button values from docs/design-system
+   (Button: filled orange with a white-warm label and 3px border; outline white with
+   a 2px orange border). Rules stay inside the page content; the shared header,
+   contact form and footer keep their own CSS. */
+@font-face { font-family: "ECT Not Found Montserrat"; src: url("fonts/Montserrat-Variable-latin-ro.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; }
+
+.ect-page.ect-page--not-found {
+  --orange: #fd8649;
+  --ink: #27272d;
+  --ink-muted: #55555e;
+  --white: #ffffff;
+  --white-warm: #fffefe;
+  --radius-button: 30px;
+  --target-min: 44px;
+  --font-sans: "ECT Not Found Montserrat", Montserrat, system-ui, sans-serif;
+  display: block;
+  min-width: 0;
+  background: var(--white);
+  color: var(--ink);
+  font: 400 16px/1.6 var(--font-sans);
+}
+
+.ect-page .ect-not-found,
+.ect-page .ect-not-found *,
+.ect-page .ect-not-found *::before,
+.ect-page .ect-not-found *::after { box-sizing: border-box; }
+
+.ect-page .ect-not-found {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 56px 20px 72px;
+  text-align: center;
+}
+@media (min-width: 768px) {
+  .ect-page .ect-not-found { padding: 96px 32px 112px; }
+}
+
+.ect-page .ect-not-found__eyebrow {
+  margin: 0 0 12px;
+  color: var(--ink-muted);
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.ect-page .ect-not-found h1 {
+  margin: 0 0 16px;
+  color: var(--ink);
+  font-family: inherit;
+  font-style: normal;
+  font-size: clamp(28px, 8vw, 45px);
+  line-height: 1.2;
+  font-weight: 900;
+  letter-spacing: normal;
+  text-transform: none;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+}
+.ect-page .ect-not-found__text { margin: 0 0 28px; font-size: 18px; line-height: 1.6; }
+
+.ect-page .ect-not-found__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+  margin: 0 0 32px;
+}
+@media (min-width: 640px) {
+  .ect-page .ect-not-found__actions { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+}
+
+.ect-page .ect-not-found .ect-nf-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--target-min);
+  min-height: 52px;
+  padding: 13px 28px;
+  border: 2px solid var(--orange);
+  border-radius: var(--radius-button);
+  background: var(--white);
+  color: var(--ink);
+  font: 600 16px/1.3 var(--font-sans);
+  letter-spacing: normal;
+  text-align: center;
+  text-decoration: none;
+  text-transform: none;
+  overflow-wrap: anywhere;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: #fd864933;
+  transition: background-color 180ms ease, color 180ms ease, transform 100ms ease-out;
+}
+.ect-page .ect-not-found .ect-nf-btn--primary {
+  border-width: 3px;
+  background: var(--orange);
+  color: var(--white-warm);
+  font-weight: 500;
+}
+.ect-page .ect-not-found .ect-nf-btn:active { transform: scale(0.98); }
+@media (hover: hover) and (pointer: fine) {
+  .ect-page .ect-not-found .ect-nf-btn--primary:hover { background: var(--white); color: var(--orange); }
+  .ect-page .ect-not-found .ect-nf-btn--outline:hover { background: var(--orange); color: var(--ink); }
+}
+.ect-page .ect-not-found :is(a, button):focus-visible { outline: 3px solid var(--ink); outline-offset: 5px; }
+
+/* English line: TextLink "strong", ink text with a solid orange underline. */
+.ect-page .ect-not-found__en { margin: 0; color: var(--ink-muted); font-size: 15px; line-height: 1.6; }
+.ect-page .ect-not-found__en a {
+  display: inline-block;
+  min-height: var(--target-min);
+  padding-block: 10px;
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--orange);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+.ect-page .ect-not-found__en a:hover { text-decoration-thickness: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ect-page .ect-not-found .ect-nf-btn { transition: none; }
+  .ect-page .ect-not-found .ect-nf-btn:active { transform: none; }
+}

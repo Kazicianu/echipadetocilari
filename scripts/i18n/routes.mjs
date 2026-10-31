@@ -155,6 +155,17 @@ export function isOwnedPage(urlPath) {
   return roPaths.has(urlPath) || enPaths.has(urlPath);
 }
 
+/**
+ * Pages the host serves for errors. They are generated at build time, never
+ * listed in `routes`, the sitemap or llms.txt, and always noindex. One file
+ * serves both languages.
+ */
+export const systemPagePaths = ['/404.html'];
+
+export function isSystemPage(urlPath) {
+  return systemPagePaths.includes(urlPath);
+}
+
 export function routeByRo(urlPath) {
   return routes.find((r) => r.ro === urlPath);
 }

@@ -8,7 +8,7 @@ import { junkRedirects } from '../scripts/lib/junk-redirects.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
-async function preview(t) {
+async function preview(t, { notFound } = {}) {
   const parent = path.join(root, '.tmp');
   mkdirSync(parent, { recursive: true });
   const directory = mkdtempSync(path.join(parent, 'preview-redirects-'));
@@ -17,6 +17,7 @@ async function preview(t) {
   writeFileSync(path.join(directory, 'agentie-google-ads/index.html'), '<h1>Google Ads</h1>');
   mkdirSync(path.join(directory, 'wp-content'));
   writeFileSync(path.join(directory, 'wp-content/app.js'), 'window.ok = true;');
+  if (notFound) writeFileSync(path.join(directory, '404.html'), notFound);
   const server = createPreviewServer({ outDir: directory, port: 0, env: {} });
   await new Promise((resolve, reject) => {
     server.once('error', reject);
@@ -68,4 +69,25 @@ test('preview serves cache-busted asset URLs from the file path, ignoring the ?v
   assert.match(versioned.headers.get('content-type'), /^text\/javascript/);
   assert.equal(await versioned.text(), 'window.ok = true;');
   assert.equal((await fetch(origin + '/wp-content/app.js')).status, 200);
+});
+
+test('preview answers an unknown path with 404.html and status 404 when the build wrote one', async t => {
+  const origin = await preview(t, { notFound: '<h1>Pagina nu există</h1>' });
+  for (const pathname of ['/nu/exista/deloc/', '/nu-exista.html', '/en/nu-exista/']) {
+    const response = await fetch(origin + pathname);
+    assert.equal(response.status, 404, pathname);
+    assert.match(response.headers.get('content-type'), /^text\/html/);
+    assert.equal(await response.text(), '<h1>Pagina nu există</h1>');
+  }
+  const head = await fetch(origin + '/nu/exista/deloc/', { method: 'HEAD' });
+  assert.equal(head.status, 404);
+  assert.equal(await head.text(), '');
+  assert.equal((await fetch(origin + '/')).status, 200);
+});
+
+test('preview keeps the plain 404 when there is no 404.html', async t => {
+  const origin = await preview(t);
+  const response = await fetch(origin + '/nu/exista/deloc/');
+  assert.equal(response.status, 404);
+  assert.equal(await response.text(), 'Not found');
 });

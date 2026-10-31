@@ -22,6 +22,11 @@ export const pageDictionaryFiles = {
  * Tuned for how people actually search in EN (digital marketing, web design, SEO…).
  */
 export const dictionary = [
+  ['Adresa:', 'Address:'],
+  ['alt="procesul de optimizare servicii seo e1709318900778"', 'alt="The SEO optimization process"'],
+  ['alt="echipa de tocilari servicii seo"', 'alt="Echipa de Tocilari SEO services"'],
+  ['alt="Tocilar creeaza un site web"', 'alt="A nerd building a website"'],
+  ['alt="Tocilar care ofera servicii de creare site web"', 'alt="A nerd offering website design services"'],
   ['de la', 'from'],
   ['Design personalizat, o limbă', 'Custom design, one language'],
   ['SEO tehnic și măsurarea comenzilor', 'Technical SEO and order tracking'],
