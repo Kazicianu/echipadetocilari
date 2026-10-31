@@ -7,7 +7,12 @@
     ro: {
       sending: 'Se trimite mesajul…',
       success: 'Mulțumim! Mesajul tău a fost trimis. Te vom contacta în curând.',
-      invalid: 'Verifică datele introduse. Mesajul trebuie să aibă cel puțin 10 caractere.',
+      invalid: 'Verifică datele introduse.',
+      invalid_name: 'Numele trebuie să aibă cel puțin 2 caractere.',
+      invalid_company: 'Numele companiei poate avea cel mult 160 de caractere.',
+      invalid_email: 'Verifică adresa de email.',
+      invalid_phone: 'Verifică numărul de telefon. Folosește cifre, spații și semnele + ( ) - /.',
+      invalid_message: 'Mesajul trebuie să aibă cel puțin 10 caractere.',
       unavailable: 'Formularul nu este disponibil momentan. Scrie-ne la contact@echipadetocilari.ro.',
       delivery: 'Nu am putut confirma trimiterea mesajului. Datele tale sunt păstrate în formular. Încearcă din nou sau scrie-ne pe email.',
       challenge: 'Finalizează verificarea de securitate de lângă formular, apoi apasă din nou Trimite.',
@@ -18,7 +23,12 @@
     en: {
       sending: 'Sending your message…',
       success: 'Thank you! Your message has been sent. We will be in touch soon.',
-      invalid: 'Check the information you entered. Your message must contain at least 10 characters.',
+      invalid: 'Check the information you entered.',
+      invalid_name: 'Your name must contain at least 2 characters.',
+      invalid_company: 'The company name can have at most 160 characters.',
+      invalid_email: 'Check your email address.',
+      invalid_phone: 'Check your phone number. Use digits, spaces and the characters + ( ) - /.',
+      invalid_message: 'Your message must contain at least 10 characters.',
       unavailable: 'The form is temporarily unavailable. Please email contact@echipadetocilari.ro.',
       delivery: 'We could not confirm that your message was sent. Your entries are still in the form. Try again or email us directly.',
       challenge: 'Complete the security check by the form, then press Send again.',
@@ -42,7 +52,7 @@
 
   async function config() {
     if (!configPromise) {
-      configPromise = fetch('/api/contact', { headers: { Accept: 'application/json' }, cache: 'no-store', signal: AbortSignal.timeout(10000) })
+      configPromise = fetch('/api/contact/', { headers: { Accept: 'application/json' }, cache: 'no-store', signal: AbortSignal.timeout(10000) })
         .then(async (response) => {
           const result = await response.json();
           const supportedProtection = ['turnstile', 'vercel-waf'].includes(result.protection);
@@ -134,7 +144,7 @@
       body.page = window.location.pathname;
       body.language = form.dataset.ectContact;
       status(form, 'sending', 'sending');
-      const response = await fetch('/api/contact', {
+      const response = await fetch('/api/contact/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify(body),
@@ -144,7 +154,8 @@
       const result = await response.json().catch(() => ({ ok: false, error: response.status === 429 ? 'rate_limit' : 'unavailable' }));
       if (response.status === 429) result.error = 'rate_limit';
       if (!response.ok || result.ok !== true) {
-        const key = ['invalid', 'challenge', 'rate_limit', 'timing', 'delivery'].includes(result.error) ? result.error : 'unavailable';
+        const fieldKey = result.error === 'invalid' ? 'invalid_' + result.field : '';
+        const key = fieldKey in copy.ro ? fieldKey : ['invalid', 'challenge', 'rate_limit', 'timing', 'delivery'].includes(result.error) ? result.error : 'unavailable';
         status(form, key, 'error', true);
         if (result.error === 'timing') current.startedAt = Date.now();
         if (result.field) form.elements.namedItem(result.field)?.focus();

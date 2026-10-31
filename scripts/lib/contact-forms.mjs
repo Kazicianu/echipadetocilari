@@ -17,7 +17,7 @@ export function enhanceContactForms(html, { locale } = {}) {
   html = html.replace(/<form\b[^>]*>[\s\S]*?<\/form>/gi, (form) => {
     if (!/class=["'][^"']*\belementor-form\b/.test(form) || /\bdata-ect-contact\b/.test(form)) return form;
     count += 1;
-    form = form.replace(/<form\b([^>]*)>/i, (_match, attrs) => `<form${attrs.replace(/\s(?:action|method)=["'][^"']*["']/gi, '')} method="post" action="/api/contact" data-ect-contact="${language}">`);
+    form = form.replace(/<form\b([^>]*)>/i, (_match, attrs) => `<form${attrs.replace(/\s(?:action|method)=["'][^"']*["']/gi, '')} method="post" action="/api/contact/" data-ect-contact="${language}">`);
     form = form.replace(/<input\b[^>]*\btype=["']hidden["'][^>]*>\s*/gi, '');
     form = form.replace(/<(input|textarea)\b([^>]*)>/gi, (tag, element, attrs) => {
       const match = attrs.match(/\bname=["']form_fields\[([^\]]+)\]["']/);

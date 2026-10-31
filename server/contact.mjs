@@ -76,7 +76,7 @@ export function validateContact(body, now = Date.now(), { requireChallenge = tru
         (key === 'message' && /[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/.test(fields[key]))) return { error: 'invalid', field: key };
   }
   if (!EMAIL.test(fields.email)) return { error: 'invalid', field: 'email' };
-  if (!/^[+\d\s().#*=-]+$/.test(fields.phone) || fields.phone.replace(/\D/g, '').length < 5) return { error: 'invalid', field: 'phone' };
+  if (!/^[+\d\s().\/#*=-]+(?:\s*(?:ext|int|interior)\.?\s*\d{1,6})?$/i.test(fields.phone) || fields.phone.replace(/\D/g, '').length < 5) return { error: 'invalid', field: 'phone' };
   if (typeof body.website !== 'string' || body.website.trim()) return { error: 'spam' };
   if (typeof body.startedAt !== 'number' || !Number.isFinite(body.startedAt) || now - body.startedAt < 3000 || now - body.startedAt > 24 * 60 * 60_000) return { error: 'timing' };
   if (requireChallenge && (typeof body.turnstileToken !== 'string' || !body.turnstileToken || body.turnstileToken.length > 2048)) return { error: 'challenge' };
@@ -156,12 +156,12 @@ export function createContactHandler({ env = process.env, now = Date.now, fetchI
     if (!/^application\/json(?:;|$)/i.test(header(req, 'content-type'))) return json(res, 415, { ok: false, error: 'content_type' });
     const parsed = readBody(req);
     if (parsed.error) return json(res, parsed.status, { ok: false, error: parsed.error });
+    const validated = validateContact(parsed.body, now(), { requireChallenge: config.requireChallenge });
+    if (validated.error) return json(res, 400, { ok: false, ...validated });
     if (!rateLimit(req, now())) {
       res.setHeader('Retry-After', '900');
       return json(res, 429, { ok: false, error: 'rate_limit' });
     }
-    const validated = validateContact(parsed.body, now(), { requireChallenge: config.requireChallenge });
-    if (validated.error) return json(res, 400, { ok: false, ...validated });
     try {
       if (config.requireChallenge && !await verifyChallenge(parsed.body.turnstileToken, env, origins, fetchImpl)) return json(res, 400, { ok: false, error: 'challenge' });
     } catch {

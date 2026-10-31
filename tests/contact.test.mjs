@@ -244,7 +244,7 @@ test('actual RO forms and generated EN form shell use the independent controller
       assert.equal((result.match(/src="\/wp-content\/ect-contact.js"/g) || []).length, 1);
       assert.doesNotMatch(result, /data-widget_type="form\.default"/);
       const form = result.match(/<form\b[\s\S]*?<\/form>/)[0];
-      assert.match(form, /action="\/api\/contact"/);
+      assert.match(form, /action="\/api\/contact\/"/);
       assert.doesNotMatch(form, /name="(?:form_fields\[|post_id|form_id|queried_id|referer_title)/);
       assert.match(form, /name="phone"[^>]*autocomplete="tel"/);
       assert.doesNotMatch(form, /\bpattern=/);
@@ -388,4 +388,60 @@ test('browser WAF mode skips the widget only on HTTPS deployed hosts and handles
       assert.match(status.textContent, /temporarily unavailable/);
     }
   }
+});
+
+test('phone accepts slashes and extensions, still rejects symbol-only values', () => {
+  for (const phone of ['0722/123456', '0722 123 456 ext.5']) assert.equal(validateContact({ ...valid, phone }, NOW).error, undefined, phone);
+  assert.deepEqual(validateContact({ ...valid, phone: '#####' }, NOW), { error: 'invalid', field: 'phone' });
+});
+
+test('rate limit runs after validation and before challenge and delivery', async () => {
+  let calls = 0;
+  const invalid = await request({ body: { ...valid, phone: '#####' }, options: { rateLimit: () => { calls++; return true; } } });
+  assert.equal(invalid.statusCode, 400);
+  assert.equal(calls, 0);
+  const ok = await request({ options: { rateLimit: () => { calls++; return true; } } });
+  assert.equal(ok.statusCode, 200);
+  assert.equal(calls, 1);
+  let external = 0;
+  const limited = await request({ options: { rateLimit: () => false, fetchImpl: async () => { external++; return { ok: true, json: async () => challengeOK }; }, deliver: async () => { external++; } } });
+  assert.equal(limited.statusCode, 429);
+  assert.equal(external, 0);
+});
+
+test('browser form uses the trailing-slash endpoint and shows the field-specific error', async () => {
+  const urls = [];
+  const status = { textContent: '', dataset: {}, focus() {} };
+  const button = { disabled: false };
+  let listener;
+  class FakeForm {
+    dataset = { ectContact: 'en' };
+    elements = { namedItem: () => ({ focus() {} }) };
+    matches() { return true; }
+    querySelector(selector) { return selector === '.ect-contact-status' ? status : button; }
+    reportValidity() { return true; }
+    setAttribute() {}
+    removeAttribute() {}
+    addEventListener() {}
+    reset() {}
+  }
+  const form = new FakeForm();
+  const fields = { name: valid.name, company: '', email: valid.email, phone: valid.phone, message: valid.message, website: '' };
+  const context = {
+    document: { addEventListener: (_event, fn) => { listener = fn; }, querySelectorAll: () => [form] },
+    HTMLFormElement: FakeForm,
+    FormData: class { get(key) { return fields[key]; } },
+    window: { location: { pathname: '/en/contact/', hostname: 'echipadetocilari.ro', protocol: 'https:' } },
+    fetch: async (url, options = {}) => {
+      urls.push(url);
+      if (options.method !== 'POST') return { ok: true, json: async () => ({ ok: true, protection: 'vercel-waf' }) };
+      return { ok: false, status: 400, json: async () => ({ ok: false, error: 'invalid', field: 'phone' }) };
+    },
+    crypto: { randomUUID: () => 'a2f32c0e-5e75-453b-806d-ea893c76a977' },
+    AbortSignal, setTimeout, clearTimeout,
+  };
+  vm.runInNewContext(readFileSync(new URL('../legacy-mirror/wp-content/ect-contact.js', import.meta.url), 'utf8'), context);
+  await listener({ target: form, preventDefault() {}, stopImmediatePropagation() {} });
+  assert.deepEqual(urls, ['/api/contact/', '/api/contact/']);
+  assert.match(status.textContent, /Check your phone number/);
 });
