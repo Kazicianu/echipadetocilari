@@ -2,7 +2,7 @@
  * Cookie consent banner (consent.js) and the footer "cookie settings" control.
  * Layout, sizes, radii, shadow, colours and pills follow the strawberrybrowser.com
  * banner. Adapted: Montserrat (so a slightly wider card on desktop), 44px targets,
- * refuse white with a dark outline beside a solid accept, no close button, labels never cut,
+ * refuse outlined like customise beside a solid accept, no close button, labels never cut,
  * description text dark enough for 4.5:1.
  * The Hello Elementor theme styles every <button> (#c36, nowrap), so each rule
  * here resets it with a more specific selector.
@@ -170,9 +170,13 @@ html.ect-consent-open body { padding-bottom: var(--ect-consent-space, 0px); }
 
 .ect-consent .ect-consent__pill-label { min-width: 0; }
 
+/* Refuse (--light) looks like customise (--ghost); only customise takes the full row when stacked. */
 .ect-consent .ect-consent__pill--ghost,
 .ect-consent .ect-consent__pill--ghost:hover,
-.ect-consent .ect-consent__pill--ghost:focus {
+.ect-consent .ect-consent__pill--ghost:focus,
+.ect-consent .ect-consent__pill--light,
+.ect-consent .ect-consent__pill--light:hover,
+.ect-consent .ect-consent__pill--light:focus {
   background: transparent;
   color: rgb(37, 37, 34);
   border-color: rgb(230, 219, 209);
@@ -186,17 +190,9 @@ html.ect-consent-open body { padding-bottom: var(--ect-consent-space, 0px); }
   border-color: transparent;
 }
 
-.ect-consent .ect-consent__pill--light,
-.ect-consent .ect-consent__pill--light:hover,
-.ect-consent .ect-consent__pill--light:focus {
-  background: rgb(255, 255, 255);
-  color: rgb(26, 26, 26);
-  border-color: rgb(26, 26, 26);
-}
-
 @media (hover: hover) {
-  .ect-consent .ect-consent__pill--ghost:hover { background: rgba(0, 0, 0, .04); }
-  .ect-consent .ect-consent__pill--light:hover { background: rgb(242, 242, 242); }
+  .ect-consent .ect-consent__pill--ghost:hover,
+  .ect-consent .ect-consent__pill--light:hover { background: rgba(0, 0, 0, .04); }
   .ect-consent .ect-consent__pill--solid:hover { background: rgb(42, 42, 42); }
 }
 

@@ -280,7 +280,7 @@
     ]);
   }
 
-  // Refuse is white with a dark outline, so it stays as easy to see as the solid accept.
+  // Refuse is outlined like customise; accept is solid.
   const summaryButtons = {
     customise: pill('ghost', text.customise),
     reject: pill('light', text.rejectAll),
