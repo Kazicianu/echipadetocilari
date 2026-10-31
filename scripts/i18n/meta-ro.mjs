@@ -83,4 +83,9 @@ export const roOrg = {
     addressCountry: 'RO',
   },
   telephone: '+40750203466',
+  openingHours: {
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+    opens: '10:00',
+    closes: '20:00',
+  },
 };

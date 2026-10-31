@@ -22,8 +22,9 @@ export const websiteId = (site, lang) => `${site}/#website${lang === 'en' ? '-en
  * @param {string[]} opts.knowsAbout
  * @param {{ streetAddress: string, addressLocality: string, postalCode: string, addressCountry: string }} [opts.address]
  * @param {string} [opts.telephone] omit rather than invent
+ * @param {{ dayOfWeek: string[], opens: string, closes: string }} [opts.openingHours] keep in step with the footer
  */
-export function organization({ site, lang, description, knowsAbout, address, telephone }) {
+export function organization({ site, lang, description, knowsAbout, address, telephone, openingHours }) {
   const org = {
     '@context': 'https://schema.org',
     '@type': ['Organization', 'ProfessionalService', 'LocalBusiness'],
@@ -40,6 +41,10 @@ export function organization({ site, lang, description, knowsAbout, address, tel
   };
 
   if (telephone) org.telephone = telephone;
+
+  if (openingHours) {
+    org.openingHoursSpecification = { '@type': 'OpeningHoursSpecification', ...openingHours };
+  }
 
   if (address) {
     org.address = {

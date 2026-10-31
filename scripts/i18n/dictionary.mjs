@@ -24,6 +24,8 @@ export const pageDictionaryFiles = {
 export const dictionary = [
   ['Adresa:', 'Address:'],
   ['telefon:', 'phone:'],
+  ['program:', 'hours:'],
+  ['Luni-Duminică, 10:00-20:00', 'Monday-Sunday, 10:00-20:00'],
   ['alt="procesul de optimizare servicii seo e1709318900778"', 'alt="The SEO optimization process"'],
   ['alt="echipa de tocilari servicii seo"', 'alt="Echipa de Tocilari SEO services"'],
   ['alt="Tocilar creeaza un site web"', 'alt="A nerd building a website"'],
@@ -1555,4 +1557,9 @@ export const enOrg = {
     addressCountry: 'RO',
   },
   telephone: '+40750203466',
+  openingHours: {
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+    opens: '10:00',
+    closes: '20:00',
+  },
 };
