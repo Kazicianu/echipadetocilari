@@ -175,6 +175,8 @@
     window.gtag = function gtag() { window.dataLayer.push(arguments); };
     window.gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
     window.gtag('set', 'ads_data_redaction', true);
+    // Without ad_storage the ad click id travels in the links between our pages, not in a cookie.
+    window.gtag('set', 'url_passthrough', true);
     if (choice) window.gtag('consent', 'update', consentState(choice));
     window.gtag('js', new Date());
     const marketing = Boolean(choice && choice.marketing);

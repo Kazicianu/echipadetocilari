@@ -382,9 +382,10 @@ test('first visit: the dataLayer has the exact Consent Mode v2 order, and the ta
   const layer = view.dataLayer();
   assert.deepEqual(layer[0], ['consent', 'default', DENIED]);
   assert.deepEqual(layer[1], ['set', 'ads_data_redaction', true]);
-  assert.equal(layer[2][0], 'js');
-  assert.deepEqual(layer[3], ['config', GA_ID, { allow_google_signals: false, allow_ad_personalization_signals: false }]);
-  assert.equal(layer.length, 4);
+  assert.deepEqual(layer[2], ['set', 'url_passthrough', true]);
+  assert.equal(layer[3][0], 'js');
+  assert.deepEqual(layer[4], ['config', GA_ID, { allow_google_signals: false, allow_ad_personalization_signals: false }]);
+  assert.equal(layer.length, 5);
   const scripts = view.gaScripts();
   assert.equal(scripts.length, 1);
   assert.equal(scripts[0].src, GA_SRC);
@@ -393,17 +394,17 @@ test('first visit: the dataLayer has the exact Consent Mode v2 order, and the ta
 
   // Google Ads: its config follows the GA4 one; an invalid ID is ignored.
   const ads = page({ adsId: 'AW-123456789', adsLeadLabel: 'AbC-d_1' }).dataLayer();
-  assert.equal(ads.length, 5);
-  assert.deepEqual(ads[4], ['config', 'AW-123456789']);
-  assert.equal(page({ adsId: 'AW-12x' }).dataLayer().length, 4);
-  assert.equal(page({ adsId: 'G-123' }).dataLayer().length, 4);
+  assert.equal(ads.length, 6);
+  assert.deepEqual(ads[5], ['config', 'AW-123456789']);
+  assert.equal(page({ adsId: 'AW-12x' }).dataLayer().length, 5);
+  assert.equal(page({ adsId: 'G-123' }).dataLayer().length, 5);
 });
 
 test('while the page is still loading the tag waits for load; a choice made before then is queued, not a second script', () => {
   for (const readyState of ['loading', 'interactive']) {
     const view = page({ readyState });
     assert.equal(view.gaScripts().length, 0, `${readyState}: no script until load`);
-    assert.equal(view.dataLayer().length, 4, `${readyState}: the queue is ready for the tag`);
+    assert.equal(view.dataLayer().length, 5, `${readyState}: the queue is ready for the tag`);
     view.button(view.summary, ro.acceptAll).click();
     assert.deepEqual(consentUpdates(view), [['consent', 'update', GRANTED]], `${readyState}: the update is queued`);
     assert.equal(view.gaScripts().length, 0, `${readyState}: still no script`);
@@ -564,20 +565,20 @@ test('a saved choice reaches Google before the first config: consent update, the
   assert.equal(marketing.gaScripts().length, 1);
   assert.equal(marketing.gaScripts()[0].src, GA_SRC);
   const layer = marketing.dataLayer();
-  assert.deepEqual(layer.map(args => args[0]), ['consent', 'set', 'consent', 'js', 'config', 'config']);
-  assert.deepEqual(layer[2], ['consent', 'update', GRANTED]);
-  assert.deepEqual(layer[4], ['config', GA_ID, { allow_google_signals: true, allow_ad_personalization_signals: true }]);
-  assert.deepEqual(layer[5], ['config', 'AW-123456789']);
+  assert.deepEqual(layer.map(args => args[0]), ['consent', 'set', 'set', 'consent', 'js', 'config', 'config']);
+  assert.deepEqual(layer[3], ['consent', 'update', GRANTED]);
+  assert.deepEqual(layer[5], ['config', GA_ID, { allow_google_signals: true, allow_ad_personalization_signals: true }]);
+  assert.deepEqual(layer[6], ['config', 'AW-123456789']);
   assert.match(marketing.state.textContent, /^Ai acceptat cookie-urile de analiză și de marketing/);
 
   const analyticsOnly = page({ storage: memoryStorage({ 'ect-consent': storedChoice(true, false) }) });
-  assert.deepEqual(analyticsOnly.dataLayer()[2], ['consent', 'update', { analytics_storage: 'granted', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' }]);
-  assert.deepEqual(analyticsOnly.dataLayer()[4], ['config', GA_ID, { allow_google_signals: false, allow_ad_personalization_signals: false }]);
+  assert.deepEqual(analyticsOnly.dataLayer()[3], ['consent', 'update', { analytics_storage: 'granted', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' }]);
+  assert.deepEqual(analyticsOnly.dataLayer()[5], ['config', GA_ID, { allow_google_signals: false, allow_ad_personalization_signals: false }]);
 
   const refused = page({ storage: memoryStorage({ 'ect-consent': storedChoice(false, false) }), cookies: allGoogleCookies });
   assert.equal(refused.banner.hidden, true);
   assert.equal(refused.gaScripts().length, 1, 'the tag still runs, with everything denied');
-  assert.deepEqual(refused.dataLayer()[2], ['consent', 'update', DENIED]);
+  assert.deepEqual(refused.dataLayer()[3], ['consent', 'update', DENIED]);
   assert.equal(consentUpdates(refused).length, 1, 'one update at start, not a second one after the cleanup');
   assert.deepEqual(refused.cookieNames().sort(), ['_gax_keep', 'theme']);
 });
