@@ -1,13 +1,19 @@
 /*
  * Cookie consent for echipadetocilari.ro.
  *
- * Google Analytics 4 is not in the page HTML. This script loads it only after the
- * visitor accepts analytics cookies, and only on the hostnames listed in the
- * script tag's data-ga-hosts (production), so previews and localhost send nothing.
+ * The Google tag (GA4 and, when data-ads-id is set, Google Ads) is not in the page
+ * HTML. This script injects it on every visit, after the page `load` event, and
+ * only on the hostnames listed in the script tag's data-ga-hosts (production), so
+ * previews and localhost send nothing. Consent Mode v2 starts with all four signals
+ * `denied`: until the visitor chooses, or after a rejection, Google gets only
+ * cookieless pings. Cookies and the full data come only with the matching category.
  *
- * The choice is kept in localStorage "ect-consent" as {v, analytics, ts}. It is
- * asked again after 183 days (about 6 months) or when VERSION changes. When the
- * browser blocks storage the banner still works for the current page.
+ * The choice is kept in localStorage "ect-consent" as {v, analytics, marketing, ts}.
+ * It is asked again after 183 days (about 6 months) or when VERSION changes. When
+ * the browser blocks storage the banner still works for the current page.
+ *
+ * window.ectConsent.trackLead({ email, phone }) reports a sent form: a generate_lead
+ * event, with the hashed email and phone (user_data) only if Marketing is accepted.
  *
  * Markup hooks: [data-ect-consent-open] controls reopen the settings,
  * [data-ect-consent-state] elements receive the current state as text.
@@ -22,55 +28,64 @@
   const COPY = {
     ro: {
       region: 'Preferințe cookie-uri',
-      summary: 'Folosim cookie-uri Google Analytics doar cu acordul tău. Dacă accepți, Google poate primi și numele, emailul și telefonul din formular, sub formă de cod hash.',
+      summary: 'Cu acordul tău, folosim cookie-uri Google de analiză și de marketing, iar dacă accepți marketingul, Google poate primi emailul și telefonul din formular, sub formă de cod hash. Fără acord, Google primește doar semnale fără cookie-uri.',
       learnMore: 'Află mai multe',
       customise: 'Setări',
       rejectAll: 'Refuz toate',
       acceptAll: 'Accept toate',
       title: 'Preferințe cookie-uri',
-      intro: 'Alege ce cookie-uri permiți. Stocarea necesară păstrează alegerea ta și nu poate fi oprită.',
+      intro: 'Alege ce cookie-uri permiți. Stocarea necesară păstrează alegerea ta și nu poate fi oprită. Indiferent de alegere, Google primește semnale fără cookie-uri.',
       necessaryName: 'Necesare',
       necessaryText: 'Păstrează în browserul tău alegerea făcută aici, timp de 6 luni.',
       analyticsName: 'Analiză',
-      analyticsText: 'Google Analytics: ce pagini sunt vizitate, de unde vin vizitatorii și cum e folosit site-ul. Poate trimite către Google, sub formă de cod hash, numele, emailul și telefonul pe care le scrii în formular.',
+      analyticsText: 'Google Analytics: ce pagini sunt vizitate, de unde vin vizitatorii și cum e folosit site-ul.',
+      marketingName: 'Marketing',
+      marketingText: 'Google Ads: măsoară ce reclame aduc cereri și permite reclame personalizate. La trimiterea formularului, Google poate primi emailul și telefonul, sub formă de cod hash.',
       save: 'Salvează preferințele',
       footerPolicy: 'Politica de confidențialitate',
       footerSettings: 'Setări cookie-uri',
-      stateAccepted: 'Ai acceptat cookie-urile de analiză pe {date}.',
-      stateRefused: 'Ai refuzat cookie-urile de analiză pe {date}.',
-      stateNone: 'Nu ai ales încă dacă accepți cookie-urile de analiză.',
+      stateAccepted: 'Ai acceptat cookie-urile de analiză și de marketing pe {date}.',
+      stateRefused: 'Ai refuzat cookie-urile de analiză și de marketing pe {date}.',
+      stateAnalytics: 'Ai acceptat doar cookie-urile de analiză pe {date}.',
+      stateMarketing: 'Ai acceptat doar cookie-urile de marketing pe {date}.',
+      stateNone: 'Nu ai ales încă dacă accepți cookie-urile de analiză și de marketing.',
       date: 'DD.MM.YYYY',
     },
     en: {
       region: 'Cookie preferences',
-      summary: 'We use Google Analytics cookies only with your consent. If you accept, Google may also receive the name, email and phone number from the form, in hashed form.',
+      summary: 'With your consent, we use Google analytics and marketing cookies, and if you accept marketing, Google may receive the email and phone number from the form, in hashed form. Without consent, Google receives only cookieless signals.',
       learnMore: 'Learn more',
       customise: 'Customize',
       rejectAll: 'Reject all',
       acceptAll: 'Accept all',
       title: 'Cookie preferences',
-      intro: 'Choose which cookies you allow. Necessary storage keeps your choice and cannot be turned off.',
+      intro: 'Choose which cookies you allow. Necessary storage keeps your choice and cannot be turned off. Whatever you choose, Google receives cookieless signals.',
       necessaryName: 'Necessary',
       necessaryText: 'Keeps your choice in your browser for 6 months.',
       analyticsName: 'Analytics',
-      analyticsText: 'Google Analytics: which pages are visited, where visitors come from and how the site is used. It may send the name, email and phone number you type into the form to Google, in hashed form.',
+      analyticsText: 'Google Analytics: which pages are visited, where visitors come from and how the site is used.',
+      marketingName: 'Marketing',
+      marketingText: 'Google Ads: measures which ads bring requests and allows personalized ads. When you send the form, Google may receive your email and phone number, in hashed form.',
       save: 'Save preferences',
       footerPolicy: 'Privacy policy',
       footerSettings: 'Cookie settings',
-      stateAccepted: 'You accepted analytics cookies on {date}.',
-      stateRefused: 'You rejected analytics cookies on {date}.',
-      stateNone: 'You have not yet chosen whether to accept analytics cookies.',
+      stateAccepted: 'You accepted analytics and marketing cookies on {date}.',
+      stateRefused: 'You rejected analytics and marketing cookies on {date}.',
+      stateAnalytics: 'You accepted only analytics cookies on {date}.',
+      stateMarketing: 'You accepted only marketing cookies on {date}.',
+      stateNone: 'You have not yet chosen whether to accept analytics and marketing cookies.',
       date: 'YYYY-MM-DD',
     },
   };
   /* ===== end COPY ===== */
 
   const STORAGE_KEY = 'ect-consent';
-  const VERSION = 1; // Raise when a policy change needs a new choice from every visitor.
+  const VERSION = 2; // Raise when a policy change needs a new choice from every visitor.
   const DAY_MS = 24 * 60 * 60 * 1000;
   const MAX_AGE_MS = 183 * DAY_MS;
   const SHARED_COOKIE_DOMAIN = '.echipadetocilari.ro';
   const GA_COOKIE = /^_ga(_|$)/;
+  const ADS_COOKIE = /^(_gcl_|_gac_)/;
   // Pointer clicks in the settings view are ignored this long after it opens: it
   // replaces the summary under the pointer, so the second click of a double-click
   // or double-tap on "Setări" would otherwise land on a choice.
@@ -82,12 +97,14 @@
   const config = (script && script.dataset) || {};
   const gaId = /^G-[A-Z0-9]+$/.test(config.gaId || '') ? config.gaId : '';
   const gaHosts = (config.gaHosts || '').split(/[\s,]+/).filter(Boolean);
+  const adsId = /^AW-\d+$/.test(config.adsId || '') ? config.adsId : '';
+  const adsLeadLabel = /^[\w-]+$/.test(config.adsLeadLabel || '') ? config.adsLeadLabel : '';
   const language = /^en/i.test(document.documentElement.lang || '') ? 'en' : 'ro';
   const text = COPY[language];
   const policyHref = config.policy || (language === 'en' ? '/en/privacy-policy/#cookies' : '/politica-de-confidentialitate/#cookies');
 
   let choice = readChoice();
-  let gaLoaded = false;
+  let tagStarted = false;
   let opener = null;
   let fitFrame = 0;
   let openedAt = -Infinity;
@@ -105,22 +122,22 @@
     if (!raw) return null;
     let data;
     try { data = JSON.parse(raw); } catch (error) { return null; }
-    if (!data || data.v !== VERSION || typeof data.analytics !== 'boolean' || typeof data.ts !== 'string') return null;
+    if (!data || data.v !== VERSION || typeof data.analytics !== 'boolean' || typeof data.marketing !== 'boolean' || typeof data.ts !== 'string') return null;
     const age = Date.now() - Date.parse(data.ts);
     if (!(age >= -DAY_MS && age <= MAX_AGE_MS)) return null;
-    return { v: VERSION, analytics: data.analytics, ts: data.ts };
+    return { v: VERSION, analytics: data.analytics, marketing: data.marketing, ts: data.ts };
   }
 
   function storeChoice(value) {
     try { window.localStorage.setItem(STORAGE_KEY, JSON.stringify(value)); } catch (error) { /* kept for this page only */ }
   }
 
-  // ─── Google Analytics ────────────────────────────────────────────────────
+  // ─── Google tag ──────────────────────────────────────────────────────────
 
-  function clearGaCookies() {
+  function clearCookies(pattern) {
     let names = [];
     try {
-      names = String(document.cookie || '').split(';').map(part => part.split('=')[0].trim()).filter(name => GA_COOKIE.test(name));
+      names = String(document.cookie || '').split(';').map(part => part.split('=')[0].trim()).filter(name => pattern.test(name));
     } catch (error) { return; }
     const host = window.location.hostname;
     for (const name of new Set(names)) {
@@ -130,35 +147,74 @@
     }
   }
 
-  function grantAnalytics() {
-    if (!gaId || !gaHosts.includes(window.location.hostname)) return;
-    window[`ga-disable-${gaId}`] = false;
-    if (gaLoaded) {
-      window.gtag('consent', 'update', { analytics_storage: 'granted' });
-      return;
-    }
-    gaLoaded = true;
-    window.dataLayer = window.dataLayer || [];
-    window.gtag = function gtag() { window.dataLayer.push(arguments); };
-    window.gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied' });
-    window.gtag('consent', 'update', { analytics_storage: 'granted' });
-    window.gtag('js', new Date());
-    window.gtag('config', gaId, { allow_google_signals: false, allow_ad_personalization_signals: false });
+  function consentState(value) {
+    const analytics = value.analytics ? 'granted' : 'denied';
+    const marketing = value.marketing ? 'granted' : 'denied';
+    return { analytics_storage: analytics, ad_storage: marketing, ad_user_data: marketing, ad_personalization: marketing };
+  }
+
+  function injectTag() {
     const tag = document.createElement('script');
     tag.async = true;
     tag.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(gaId)}`;
     document.head.appendChild(tag);
   }
 
-  function refuseAnalytics() {
-    if (gaId) window[`ga-disable-${gaId}`] = true;
-    if (gaLoaded && typeof window.gtag === 'function') window.gtag('consent', 'update', { analytics_storage: 'denied' });
-    clearGaCookies();
+  /** Starts the Google tag once, with every signal denied (Consent Mode v2, advanced).
+   *  A saved choice is applied before `config`, so the first hit already carries it. */
+  function startTag() {
+    if (tagStarted || !gaId || !gaHosts.includes(window.location.hostname)) return;
+    tagStarted = true;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function gtag() { window.dataLayer.push(arguments); };
+    window.gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+    window.gtag('set', 'ads_data_redaction', true);
+    if (choice) window.gtag('consent', 'update', consentState(choice));
+    window.gtag('js', new Date());
+    const marketing = Boolean(choice && choice.marketing);
+    window.gtag('config', gaId, { allow_google_signals: marketing, allow_ad_personalization_signals: marketing });
+    if (adsId) window.gtag('config', adsId);
+    // After `load`, so the tag never competes with the first paint (LCP) on mobile.
+    if (document.readyState === 'loading' || document.readyState === 'interactive') window.addEventListener('load', injectTag, { once: true });
+    else injectTag();
+  }
+
+  function clearDeniedCookies(value) {
+    if (!value.analytics) clearCookies(GA_COOKIE);
+    if (!value.marketing) clearCookies(ADS_COOKIE);
   }
 
   function apply(value) {
-    if (value.analytics) grantAnalytics();
-    else refuseAnalytics();
+    clearDeniedCookies(value);
+    if (tagStarted) window.gtag('consent', 'update', consentState(value));
+  }
+
+  /** E.164 phone number (+407...) from what a visitor types, or '' when it is not one. */
+  function e164(raw) {
+    const value = String(raw || '').replace(/\s*(?:ext|int|interior)\.?\s*\d{1,6}\s*$/i, '').trim();
+    let digits = value.replace(/\D/g, '');
+    if (!value.startsWith('+')) {
+      if (digits.startsWith('00')) digits = digits.slice(2);
+      else if (/^0[237]\d{8}$/.test(digits)) digits = `40${digits.slice(1)}`;
+    }
+    digits = digits.replace(/^400(\d{9})$/, '40$1'); // +40 (0)722 123 456
+    return /^[1-9]\d{9,14}$/.test(digits) ? `+${digits}` : '';
+  }
+
+  /** A form was sent. The email and phone go to Google only when Marketing is accepted. */
+  function trackLead({ email, phone } = {}) {
+    if (!tagStarted) return;
+    const params = {};
+    if (choice && choice.marketing) {
+      const userData = {};
+      const address = String(email || '').trim().toLowerCase();
+      const number = e164(phone);
+      if (address) userData.email = address;
+      if (number) userData.phone_number = number;
+      if (Object.keys(userData).length) params.user_data = userData;
+    }
+    window.gtag('event', 'generate_lead', params);
+    if (adsId && adsLeadLabel) window.gtag('event', 'conversion', { send_to: `${adsId}/${adsLeadLabel}`, ...params });
   }
 
   // ─── markup ──────────────────────────────────────────────────────────────
@@ -225,6 +281,10 @@
     type: 'checkbox', class: 'ect-consent__check', name: 'ect-consent-analytics',
     'aria-labelledby': 'ect-consent-analytics', 'aria-describedby': 'ect-consent-analytics-desc',
   });
+  const marketingBox = el('input', {
+    type: 'checkbox', class: 'ect-consent__check', name: 'ect-consent-marketing',
+    'aria-labelledby': 'ect-consent-marketing', 'aria-describedby': 'ect-consent-marketing-desc',
+  });
   const customiseView = el('div', { class: 'ect-consent__view ect-consent__view--customise', role: 'group', 'aria-labelledby': 'ect-consent-title', hidden: true }, [
     el('div', { class: 'ect-consent__head' }, [
       title,
@@ -233,6 +293,7 @@
     el('div', { class: 'ect-consent__categories' }, [
       category('ect-consent-necessary', text.necessaryName, text.necessaryText, necessaryBox, true),
       category('ect-consent-analytics', text.analyticsName, text.analyticsText, analyticsBox, false),
+      category('ect-consent-marketing', text.marketingName, text.marketingText, marketingBox, false),
     ]),
     el('div', { class: 'ect-consent__actions ect-consent__actions--customise' }, [customiseButtons.reject, customiseButtons.accept, customiseButtons.save]),
   ]);
@@ -254,7 +315,11 @@
 
   function stateText() {
     if (!choice) return text.stateNone;
-    return (choice.analytics ? text.stateAccepted : text.stateRefused).replace('{date}', formatDate(choice.ts));
+    let key = 'stateRefused';
+    if (choice.analytics && choice.marketing) key = 'stateAccepted';
+    else if (choice.analytics) key = 'stateAnalytics';
+    else if (choice.marketing) key = 'stateMarketing';
+    return text[key].replace('{date}', formatDate(choice.ts));
   }
 
   function updateStates() {
@@ -321,6 +386,7 @@
   function show(view, from) {
     opener = from || null;
     analyticsBox.checked = Boolean(choice && choice.analytics);
+    marketingBox.checked = Boolean(choice && choice.marketing);
     summaryView.hidden = view !== 'summary';
     customiseView.hidden = view !== 'customise';
     banner.hidden = false;
@@ -342,8 +408,8 @@
     if (target && typeof target.focus === 'function') target.focus();
   }
 
-  function decide(analytics) {
-    choice = { v: VERSION, analytics, ts: new Date().toISOString() };
+  function decide(analytics, marketing) {
+    choice = { v: VERSION, analytics, marketing, ts: new Date().toISOString() };
     storeChoice(choice);
     apply(choice);
     updateStates();
@@ -351,11 +417,11 @@
   }
 
   summaryButtons.customise.addEventListener('click', () => openSettings());
-  summaryButtons.reject.addEventListener('click', () => decide(false));
-  summaryButtons.accept.addEventListener('click', () => decide(true));
+  summaryButtons.reject.addEventListener('click', () => decide(false, false));
+  summaryButtons.accept.addEventListener('click', () => decide(true, true));
 
   // A choice in the settings view needs its own click: no pointer click counts
-  // (buttons or the Analiză box) right after the view opens, and a choice never
+  // (buttons or the category boxes) right after the view opens, and a choice never
   // comes from the second click of a double-click. Keyboard activation (detail 0)
   // is never affected: focus moves to the title, not under a pointer.
   customiseView.addEventListener('click', event => {
@@ -367,9 +433,9 @@
     if (event && event.detail > 1) return;
     handler();
   };
-  customiseButtons.reject.addEventListener('click', deliberate(() => decide(false)));
-  customiseButtons.accept.addEventListener('click', deliberate(() => decide(true)));
-  customiseButtons.save.addEventListener('click', deliberate(() => decide(analyticsBox.checked)));
+  customiseButtons.reject.addEventListener('click', deliberate(() => decide(false, false)));
+  customiseButtons.accept.addEventListener('click', deliberate(() => decide(true, true)));
+  customiseButtons.save.addEventListener('click', deliberate(() => decide(analyticsBox.checked, marketingBox.checked)));
 
   // Escape closes a banner reopened after a choice and keeps that choice.
   // Without a choice the banner stays, so closing it never counts as an answer.
@@ -390,7 +456,15 @@
   window.addEventListener('storage', event => {
     if (event.key !== null && event.key !== STORAGE_KEY) return;
     const next = readChoice();
-    if (!next) return;
+    if (!next) {
+      // Cleared or outdated elsewhere: nothing here may keep relying on the old consent.
+      if (choice) {
+        choice = null;
+        apply({ analytics: false, marketing: false });
+        updateStates();
+      }
+      return;
+    }
     const hadChoice = Boolean(choice);
     choice = next;
     apply(next);
@@ -399,6 +473,7 @@
     if (hadChoice) {
       // Settings reopened here: show the new choice, so Save never stores the old one.
       analyticsBox.checked = Boolean(next.analytics);
+      marketingBox.checked = Boolean(next.marketing);
       return;
     }
     // The question was answered in the other tab.
@@ -437,12 +512,15 @@
   window.ectConsent = {
     open: () => openSettings(null),
     get choice() { return choice ? { ...choice } : null; },
+    trackLead,
   };
 
   updateStates();
-  if (choice) apply(choice);
+  startTag();
+  if (choice) clearDeniedCookies(choice);
   else {
-    clearGaCookies();
+    clearCookies(GA_COOKIE);
+    clearCookies(ADS_COOKIE);
     show('summary');
   }
 })();

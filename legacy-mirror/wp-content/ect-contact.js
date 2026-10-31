@@ -143,6 +143,10 @@
       body.turnstileToken = current.token;
       body.page = window.location.pathname;
       body.language = form.dataset.ectContact;
+      // Campaign labels come from the current address only and are never stored in the browser.
+      const params = new URLSearchParams(window.location.search);
+      body.utmSource = (params.get('utm_source') || '').slice(0, 100);
+      body.utmCampaign = (params.get('utm_campaign') || '').slice(0, 100);
       status(form, 'sending', 'sending');
       const response = await fetch('/api/contact/', {
         method: 'POST',
@@ -164,6 +168,8 @@
         current.startedAt = Date.now();
         current.fingerprint = null;
         status(form, 'success', 'success', true);
+        // Measurement must never change the result the visitor sees.
+        try { window.ectConsent?.trackLead?.({ email: body.email, phone: body.phone }); } catch { /* ignored */ }
       }
       resetChallenge(current);
     } catch (error) {

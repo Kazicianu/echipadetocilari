@@ -39,9 +39,9 @@ export function validateBuild({ outDir, files, urlPathOf, indexable }) {
 
     checkInlineBlocks(html, rel(file), errors);
 
-    // GA4 may load only through consent.js, after the visitor accepts analytics cookies.
+    // The Google tag may load only through consent.js, which starts it with all consent signals denied.
     if (/googletagmanager\.com\/gtag\/js|gtag\(\s*['"]config['"]/i.test(html)) {
-      errors.push(`${rel(file)}: Google tag in the static HTML; GA4 must load only through consent.js after consent`);
+      errors.push(`${rel(file)}: Google tag in the static HTML; GA4 must load only through consent.js`);
     }
 
     const titles = html.match(/<title[^>]*>/gi) || [];

@@ -4,8 +4,10 @@
  *
  * - footer: a link to the privacy policy and a "cookie settings" button
  *   (hidden until consent.js runs; without JS nothing is loaded to configure);
- * - head: consent.css and consent.js. Google Analytics is never in the static
- *   HTML; consent.js loads it only after the visitor accepts analytics cookies.
+ * - head: consent.css and consent.js. The Google tag is never in the static HTML;
+ * consent.js injects it on every visit to the production hosts, after the page
+ * `load` event, with all consent signals denied (Consent Mode Advanced). Cookies
+ * are set only for the categories the visitor accepted (analytics, marketing).
  *
  * Visible labels live in the COPY object of consent.js (one place to edit).
  */
@@ -17,6 +19,9 @@ export const PRIVACY_PATHS = { ro: '/politica-de-confidentialitate/', en: '/en/p
 export const GA_HOSTS = ['echipadetocilari.ro', 'www.echipadetocilari.ro'];
 export const CONSENT_SCRIPT = '/wp-content/ect-pages/consent.js';
 export const CONSENT_STYLESHEET = '/wp-content/ect-pages/consent.css';
+// Google Ads: put the AW-... account ID and the conversion label here to turn on
+// the lead conversion. Empty keeps the tag exactly as it is for Google Analytics only.
+export const GOOGLE_ADS = { id: '', leadLabel: '' };
 
 const consentSource = new URL('../../legacy-mirror/wp-content/ect-pages/consent.js', import.meta.url);
 let copyCache;
@@ -54,12 +59,17 @@ export function addFooterPrivacyLinks(html) {
     `<button type="button" class="ect-consent-open" data-ect-consent-open hidden>${escapeHtml(copy.footerSettings)}</button>${close}`);
 }
 
-/** Load consent.css and consent.js (deferred) with the GA4 ID and allowed hosts. */
-export function addConsentManager(html, { gaId, gaHosts = GA_HOSTS } = {}) {
+/** Load consent.css and consent.js (deferred) with the GA4 ID, allowed hosts and, if set, the Google Ads IDs. */
+export function addConsentManager(html, { gaId, gaHosts = GA_HOSTS, ads = GOOGLE_ADS } = {}) {
   if (!/^G-[A-Z0-9]+$/.test(gaId || '')) throw new Error(`invalid GA4 measurement ID: ${gaId}`);
+  if (ads.id && !/^AW-\d+$/.test(ads.id)) throw new Error(`invalid Google Ads ID: ${ads.id}`);
+  if (ads.id && ads.leadLabel && !/^[\w-]+$/.test(ads.leadLabel)) throw new Error(`invalid Google Ads conversion label: ${ads.leadLabel}`);
   if (html.includes(`src="${CONSENT_SCRIPT}"`)) return html;
   const language = pageLanguage(html);
+  const adsAttributes = ads.id
+    ? ` data-ads-id="${escapeAttr(ads.id)}"${ads.leadLabel ? ` data-ads-lead-label="${escapeAttr(ads.leadLabel)}"` : ''}`
+    : '';
   return appendToHead(html,
     `<link rel="stylesheet" href="${CONSENT_STYLESHEET}">\n` +
-    `  <script src="${CONSENT_SCRIPT}" data-ga-id="${escapeAttr(gaId)}" data-ga-hosts="${escapeAttr(gaHosts.join(' '))}" data-policy="${PRIVACY_PATHS[language]}#cookies" defer></script>`);
+    `  <script src="${CONSENT_SCRIPT}" data-ga-id="${escapeAttr(gaId)}" data-ga-hosts="${escapeAttr(gaHosts.join(' '))}"${adsAttributes} data-policy="${PRIVACY_PATHS[language]}#cookies" defer></script>`);
 }

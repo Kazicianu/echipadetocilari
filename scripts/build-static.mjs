@@ -64,8 +64,9 @@ const outDir = path.join(root, 'dist');
 
 const INDEXABLE = process.env.PUBLIC_INDEXABLE === 'true';
 const SITE = (process.env.PUBLIC_SITE_URL || 'https://www.echipadetocilari.ro').replace(/\/$/, '');
-// GA4 property (cookies _ga, _ga_PGM4B3VM9Z). consent.js loads it only after
-// consent and only on echipadetocilari.ro / www.echipadetocilari.ro.
+// GA4 property (cookies _ga, _ga_PGM4B3VM9Z). consent.js injects the Google tag
+// on every visit (consent denied until the visitor chooses), only on
+// echipadetocilari.ro / www.echipadetocilari.ro.
 const GA4_MEASUREMENT_ID = 'G-PGM4B3VM9Z';
 
 if (!existsSync(path.join(srcDir, 'index.html'))) {
@@ -206,8 +207,8 @@ function enhanceHtml(file) {
 
   html = setLang(html, 'ro');
 
-  // Drop the GA4 tag inherited from the WordPress mirror. Analytics loads only
-  // through consent.js after the visitor accepts (see scripts/lib/privacy.mjs).
+  // Drop the GA4 tag inherited from the WordPress mirror. The Google tag loads only
+  // through consent.js, with consent denied by default (see scripts/lib/privacy.mjs).
   html = html.replace(
     /<script\b[^>]*\bid=["']google_gtagjs(?:-inline)?["'][^>]*>[\s\S]*?<\/script>\s*/gi,
     ''

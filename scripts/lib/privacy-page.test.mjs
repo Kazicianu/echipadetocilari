@@ -90,22 +90,48 @@ test('the policy content: neutral section ids, contents list, consent control an
   assert.match(main, /<p class="ect-policy__consent-state" data-ect-consent-state aria-live="polite"><\/p>/);
   const cookies = main.slice(main.indexOf('<section id="cookies"'));
   assert.ok(cookies.indexOf('data-ect-consent-open') < cookies.indexOf('ect-policy__cookies'), 'the consent control comes before the cards');
-  assert.deepEqual([...main.matchAll(/<h4 class="ect-policy__cookie-name"><code>([^<]+)<\/code><\/h4>/g)].map(([, name]) => name), ['ect-consent', '_ga', '_ga_PGM4B3VM9Z']);
-  assert.equal(visibleDateModified(page), '2026-10-23');
-  assert.match(main, /Ultima actualizare: <time datetime="2026-10-23">23 octombrie 2026<\/time>/);
+  assert.deepEqual([...main.matchAll(/<h4 class="ect-policy__cookie-name"><code>([^<]+)<\/code><\/h4>/g)].map(([, name]) => name), ['ect-consent', '_ga', '_ga_PGM4B3VM9Z', '_gcl_*'], 'four storage cards');
+  assert.equal(visibleDateModified(page), '2026-10-31');
+  assert.match(main, /Ultima actualizare: <time datetime="2026-10-31">31 octombrie 2026<\/time>/);
   // Owner decisions that must stay visible.
   for (const fact of ['CUI', '47591744', 'J40/2298/2023', 'Alexandru Zagoritz nr. 12, sector 2, București 021998', '24 de luni', '14 luni', 'Gmail', 'Resend', 'Vercel', 'Hostico', 'ANSPDCP', '_ga_PGM4B3VM9Z']) {
     assert.ok(main.includes(fact), fact);
   }
   // What the policy reports from Google, Resend and Vercel links to their own pages.
   const sources = ['https://support.google.com/analytics/answer/12017362?hl=ro', 'https://support.google.com/analytics/answer/14077171?hl=ro',
-    'https://support.google.com/analytics/answer/13802165?hl=ro', 'https://resend.com/security/gdpr', 'https://vercel.com/docs/logs/runtime'];
+    'https://support.google.com/analytics/answer/13802165?hl=ro', 'https://developers.google.com/tag-platform/security/concepts/consent-mode?hl=ro',
+    'https://support.google.com/google-ads/answer/10548233?hl=ro', 'https://resend.com/security/gdpr', 'https://vercel.com/docs/logs/runtime'];
   for (const href of sources) assert.equal(count(main, `<a href="${href}">`), 1, `source linked: ${href}`);
   for (const claim of ['Google spune, în <a href="https://support.google.com/analytics/answer/12017362', 'Google spune, în <a href="https://support.google.com/analytics/answer/14077171',
-    'Tot Google precizează, în <a href="https://support.google.com/analytics/answer/13802165']) assert.ok(main.includes(claim), claim);
+    'Tot Google precizează, în <a href="https://support.google.com/analytics/answer/13802165',
+    'Google precizează, în <a href="https://support.google.com/google-ads/answer/10548233']) assert.ok(main.includes(claim), claim);
   assert.doesNotMatch(main, /Google (?:spune|precizează) că/, 'every "Google says" names its source');
   assert.doesNotMatch(main, /Cloudflare|Turnstile/, 'production does not use Cloudflare Turnstile');
   assert.doesNotMatch(main, /@gmail\.com/, 'the personal Gmail address is never printed');
+});
+
+test('the policy describes the Marketing category, the cookieless signals and the campaign parameters', () => {
+  const facts = [
+    '<h2>Cookie-uri, Google Analytics și Google Ads</h2>',
+    '<li><a href="#cookies">Cookie-uri, Google Analytics și Google Ads</a></li>',
+    '<h3>Google Analytics și Google Ads</h3>',
+    '<h3>Ce primește Google dacă refuzi sau nu ai ales încă</h3>',
+    'categoria „Marketing”',
+    'Consent Mode Advanced',
+    '<code>utm_source</code> și <code>utm_campaign</code>',
+    '<code>_gcl_</code> sau <code>_gac_</code>',
+    '<strong>Semnale fără cookie-uri către Google:</strong>',
+    '<strong>Sursa cererilor:</strong>',
+    'Detectarea automată a acestor date din pagini este oprită',
+    'Google Ads (Google Ireland Limited și Google LLC).',
+    'Până la 90 de zile.',
+  ];
+  for (const fact of facts) assert.ok(main.includes(fact), fact);
+  assert.doesNotMatch(main, /Google Analytics, doar cu acordul tău|nu încarcă niciun script Google|Google Analytics nu se încarcă|mereu refuzate|cum este mereu la noi/, 'no sentence of the old analytics-only policy is left');
+  const english = privacyPolicyDictionary.map(([, to]) => to).join('\n');
+  for (const fact of ['What Google receives if you reject or have not chosen yet', 'Consent Mode Advanced', 'the “Marketing” category', 'Up to 90 days.', 'Automatic detection of this data on our pages is turned off']) {
+    assert.ok(english.includes(fact), fact);
+  }
 });
 
 test('no em dash, diagonal arrows or cedilla in the page, its CSS and its dictionary', () => {
@@ -137,6 +163,7 @@ test('every dictionary key is a whole block of the page body, and only of the pa
     '<code>ect-consent</code>',
     '<code>_ga</code>',
     '<code>_ga_PGM4B3VM9Z</code>',
+    '<code>_gcl_*</code>',
     '<strong>Email:</strong> <a href="mailto:anspdcp@dataprotection.ro">anspdcp@dataprotection.ro</a>',
   ]);
   for (const inner of blocks) {
@@ -183,8 +210,12 @@ test('the generated English page carries every EN value verbatim and no Romanian
     for (const id of [12017362, 14077171, 13802165]) {
       assert.equal(count(englishMain, `<a href="https://support.google.com/analytics/answer/${id}?hl=en">`), 1, `English Google source ${id}`);
     }
+    for (const href of ['https://support.google.com/google-ads/answer/10548233?hl=en', 'https://developers.google.com/tag-platform/security/concepts/consent-mode?hl=en']) {
+      assert.equal(count(englishMain, `<a href="${href}">`), 1, `English Google source ${href}`);
+    }
     assert.doesNotMatch(englishMain, /\?hl=ro/, 'English page links the English help pages');
-    assert.match(englishMain, /<a href="#cookies">Cookies and Google Analytics<\/a>/);
+    assert.match(englishMain, /<a href="#cookies">Cookies, Google Analytics and Google Ads<\/a>/);
+    assert.match(englishMain, /<h2>Cookies, Google Analytics and Google Ads<\/h2>/);
     assert.match(englishMain, /<button type="button" class="ect-policy__consent-btn" data-ect-consent-open hidden>Change cookie settings<\/button>/);
     assert.equal(english.match(/<title>([^<]*)<\/title>/)[1], enPageMeta[route.en].title);
     assert.equal(metaContent(english, 'name="description"'), enPageMeta[route.en].description);
@@ -196,8 +227,8 @@ test('the generated English page carries every EN value verbatim and no Romanian
       .flatMap(([, json]) => [JSON.parse(json)].flat()).flatMap(item => item['@graph'] || [item])
       .filter(item => item['@type'] === 'WebPage');
     const [enPage] = webPages(english);
-    assert.equal(enPage.dateModified, '2026-10-23');
-    assert.equal(visibleDateModified(english), '2026-10-23');
+    assert.equal(enPage.dateModified, '2026-10-31');
+    assert.equal(visibleDateModified(english), '2026-10-31');
   } finally {
     rmSync(directory, { recursive: true, force: true });
   }

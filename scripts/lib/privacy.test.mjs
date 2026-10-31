@@ -13,6 +13,7 @@ import {
   CONSENT_SCRIPT,
   CONSENT_STYLESHEET,
   GA_HOSTS,
+  GOOGLE_ADS,
   PRIVACY_PATHS,
   addConsentManager,
   addFooterPrivacyLinks,
@@ -90,6 +91,23 @@ test('every page loads consent.css and exactly one deferred consent.js with the 
   }
   assert.throws(() => addConsentManager('<html><head></head></html>', { gaId: 'UA-1' }), /GA4 measurement ID/);
   assert.throws(() => addConsentManager('<html><head></head></html>', {}), /GA4 measurement ID/);
+});
+
+test('the Google Ads IDs reach the script tag only when set, and are validated', () => {
+  const page = '<html lang="ro"><head></head><body></body></html>';
+  const plain = addConsentManager(page, { gaId: GA_ID });
+  assert.doesNotMatch(plain, /data-ads-/, 'no Ads ID: the tag is the GA4-only tag');
+  assert.equal(addConsentManager(page, { gaId: GA_ID, ads: { id: '', leadLabel: '' } }), plain);
+  assert.deepEqual(Object.keys(GOOGLE_ADS), ['id', 'leadLabel']);
+  const full = addConsentManager(page, { gaId: GA_ID, ads: { id: 'AW-123456789', leadLabel: 'AbC-d_1' } });
+  assert.match(full, /<script src="\/wp-content\/ect-pages\/consent\.js" data-ga-id="G-PGM4B3VM9Z" data-ga-hosts="echipadetocilari\.ro www\.echipadetocilari\.ro" data-ads-id="AW-123456789" data-ads-lead-label="AbC-d_1" data-policy="\/politica-de-confidentialitate\/#cookies" defer><\/script>/);
+  const idOnly = addConsentManager(page, { gaId: GA_ID, ads: { id: 'AW-123456789', leadLabel: '' } });
+  assert.match(idOnly, /data-ads-id="AW-123456789"/);
+  assert.doesNotMatch(idOnly, /data-ads-lead-label/);
+  for (const ads of [{ id: 'AW-abc' }, { id: 'G-123' }, { id: 'AW-1"x' }]) {
+    assert.throws(() => addConsentManager(page, { gaId: GA_ID, ads }), /Google Ads ID/, JSON.stringify(ads));
+  }
+  assert.throws(() => addConsentManager(page, { gaId: GA_ID, ads: { id: 'AW-1', leadLabel: 'a b' } }), /conversion label/);
 });
 
 test('the build adds no Google tag of its own and wires the footer and consent transforms', () => {

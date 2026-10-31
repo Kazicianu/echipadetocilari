@@ -50,7 +50,7 @@ node --env-file=.env.local scripts/build-static.mjs
 | `scripts/lib/standalone-assets.mjs` | Elimină integrările WordPress nefolosite și verifică asset-urile locale |
 | `scripts/lib/contact-forms.mjs` | Adaptează formularele după generarea paginilor EN și adaugă rândul despre confidențialitate |
 | `scripts/lib/privacy.mjs` | Adaugă în footer linkul spre politica de confidențialitate și butonul „Setări cookie-uri”, plus `consent.css`/`consent.js` în `<head>` |
-| `legacy-mirror/wp-content/ect-pages/consent.js`, `consent.css` | Bannerul de cookie-uri și încărcarea Google Analytics după acord; obiectul `COPY` conține toate textele lui |
+| `legacy-mirror/wp-content/ect-pages/consent.js`, `consent.css` | Bannerul de cookie-uri (Analiză, Marketing), tagul Google în Consent Mode Advanced și `trackLead`; obiectul `COPY` conține toate textele lui |
 | `scripts/lib/social-meta.mjs` | Open Graph și Twitter: `og:locale` pe limbă, imagini absolute, logo implicit, fără etichetele vechi WordPress |
 | `scripts/lib/lastmod.mjs`, `scripts/i18n/lastmod.json` | `<lastmod>` din sitemap: ziua ultimului commit al surselor paginii. Build-ul local actualizează fișierul JSON, care se comite împreună cu pagina; pe Vercel (clonă parțială) datele lipsă din istoric se iau din el |
 | `api/contact.js`, `server/contact.mjs` | Intrarea Vercel și implementarea server pentru formulare |
@@ -118,13 +118,14 @@ Turnstile/WAF și testarea locală sunt descrise în
 [docs/contact-forms.md](docs/contact-forms.md). Cheile și valorile secrete se
 introduc în setările Vercel; nu se pun în HTML, în catalog sau în repository.
 
-## Cookie-uri, Google Analytics și confidențialitate
+## Cookie-uri, Google Analytics, Google Ads și confidențialitate
 
-Google Analytics 4 (`G-PGM4B3VM9Z`, cookie-urile `_ga` și `_ga_PGM4B3VM9Z`) nu
-este în HTML-ul static. Build-ul elimină tagul moștenit din WordPress, iar
-`scripts/lib/privacy.mjs` adaugă pe fiecare pagină RO și EN, după generarea
-paginilor EN, `consent.css` și `consent.js` (cu `defer`). Validarea build-ului
-eșuează dacă o pagină încarcă `gtag/js` sau `gtag('config')` direct.
+Tagul Google (GA4 `G-PGM4B3VM9Z`, cookie-urile `_ga` și `_ga_PGM4B3VM9Z`, plus
+Google Ads dacă e configurat) nu este în HTML-ul static. Build-ul elimină tagul
+moștenit din WordPress, iar `scripts/lib/privacy.mjs` adaugă pe fiecare pagină
+RO și EN, după generarea paginilor EN, `consent.css` și `consent.js` (cu
+`defer`). Validarea build-ului eșuează dacă o pagină încarcă `gtag/js` sau
+`gtag('config')` direct.
 
 - **Bannerul** apare la prima vizită în colțul din stânga jos, după modelul
   strawberrybrowser.com: „Setări”, „Refuz toate” și „Accept toate” (EN:
@@ -132,8 +133,8 @@ eșuează dacă o pagină încarcă `gtag/js` sau `gtag('config')` direct.
   480px cele trei butoane stau pe un rând, cu lățimi egale; pe telefoanele
   unde etichetele nu încap, „Refuz toate” și „Accept toate” sunt pe primul
   rând, iar „Setări” pe al doilea. Etichetele nu sunt tăiate niciodată.
-- **„Setări”** deschide în același card categoriile Necesare (mereu active) și
-  Analiză (oprită implicit), apoi „Refuz toate” și „Accept toate” pe primul
+- **„Setări”** deschide în același card categoriile Necesare (mereu active),
+  Analiză și Marketing (oprite implicit), apoi „Refuz toate” și „Accept toate” pe primul
   rând, cu lățimi egale, și „Salvează preferințele” pe al doilea. Timp de o
   jumătate de secundă după deschidere, clicurile din această vedere nu
   contează, iar al doilea clic al unui dublu-clic nu face niciodată o alegere,
@@ -142,17 +143,35 @@ eșuează dacă o pagină încarcă `gtag/js` sau `gtag('config')` direct.
   rezumat. Dacă alegerea se schimbă în alt tab, setările deschise arată noua
   alegere.
 - **Alegerea** se păstrează în `localStorage`, cheia `ect-consent`
-  (`{v, analytics, ts}`), timp de 183 de zile (aproximativ 6 luni). Nu se
-  trimite la server. Bannerul reapare după expirare sau când crește `VERSION`
-  din `consent.js`, pentru o schimbare de politică ce cere o nouă alegere.
-- **Google Analytics** se încarcă numai după acord și numai pe
-  `echipadetocilari.ro` și `www.echipadetocilari.ro` (atributul
+  (`{v, analytics, marketing, ts}`), timp de 183 de zile (aproximativ 6 luni).
+  Nu se trimite la server. Bannerul reapare după expirare sau când crește
+  `VERSION` din `consent.js` (acum 2: alegerile dinainte de categoria Marketing
+  sunt cerute din nou).
+- **Tagul Google** se injectează la fiecare vizită, după evenimentul `load`, și
+  numai pe `echipadetocilari.ro` și `www.echipadetocilari.ro` (atributul
   `data-ga-hosts`). Pe localhost, pe adresele Preview Vercel și pe orice alt
   host alegerea se salvează, dar nu pleacă nicio cerere către Google,
-  indiferent de `PUBLIC_INDEXABLE`. Consent Mode (basic): `ad_storage`,
-  `ad_user_data` și `ad_personalization` rămân mereu `denied`; Google Signals
-  și personalizarea reclamelor sunt oprite în configurare. Refuzul sau
-  retragerea acordului dezactivează tagul și șterg cookie-urile `_ga*`.
+  indiferent de `PUBLIC_INDEXABLE`. Consent Mode v2 Advanced: ordinea din
+  `dataLayer` este `consent default` (toate patru `denied`), `ads_data_redaction`,
+  `consent update` cu alegerea salvată, `js`, `config`. Până la o alegere sau
+  după un refuz Google primește doar semnale fără cookie-uri. Analiza acordă
+  `analytics_storage`; Marketingul acordă `ad_storage`, `ad_user_data` și
+  `ad_personalization`. Google Signals și personalizarea reclamelor
+  (`allow_google_signals`, `allow_ad_personalization_signals`) se activează
+  numai cu Marketing, la `config`, deci de la pagina următoare după o
+  acceptare. Nu se folosește `ga-disable`, care ar opri și pingurile fără
+  cookie-uri. Retragerea unei categorii trimite `consent update` și șterge
+  cookie-urile ei: `_ga*` pentru Analiză, `_gcl_*` și `_gac_*` pentru Marketing.
+- **Google Ads** se pornește din `GOOGLE_ADS` din `scripts/lib/privacy.mjs`
+  (`id`: `AW-…`, `leadLabel`: eticheta conversiei). Fără ID, tagul rămâne ca
+  pentru GA4. După trimiterea formularului, `ect-contact.js` apelează
+  `window.ectConsent.trackLead({ email, phone })`: `generate_lead` (și
+  `conversion`, dacă există ID și etichetă), cu `user_data` (email și telefon în
+  format E.164, hash făcut de gtag) doar cu acord Marketing. Când adaugi `AW-…`,
+  extinde și CSP-ul report-only din `vercel.json` cu domeniile Google Ads.
+  Detectarea automată a datelor furnizate de utilizatori din GA4 trebuie să
+  rămână oprită în contul GA4 (setarea nu e în repository), pentru că politica
+  o declară oprită.
 - **Footer:** lista „PAGINI IMPORTANTE” / „IMPORTANT PAGES” primește linkul
   „Politica de confidențialitate” (`/politica-de-confidentialitate/`, EN
   `/en/privacy-policy/`) și butonul „Setări cookie-uri”, ascuns fără
@@ -164,9 +183,9 @@ eșuează dacă o pagină încarcă `gtag/js` sau `gtag('config')` direct.
 - **Formular:** sub butonul de trimitere apare rândul „Folosim datele din
   formular ca să-ți răspundem. Politica de confidențialitate.” (EN: „We use
   the details in this form to reply to you. Privacy policy.”), cu link spre
-  politică. Destinatarii (inclusiv căsuța Gmail din `CONTACT_TO`) și colectarea
-  datelor furnizate de utilizatori din GA4 sunt descriși în politică; dacă se
-  schimbă, actualizează politica.
+  politică. Destinatarii (inclusiv căsuța Gmail din `CONTACT_TO`) și trimiterea
+  emailului și telefonului către Google (doar cu acord Marketing) sunt descriși
+  în politică; dacă se schimbă, actualizează politica.
 - **Pagina de politică** (`/politica-de-confidentialitate/`, EN generat
   `/en/privacy-policy/`) are rezumatul „Pe scurt”, un cuprins (lipit în
   stânga de la 1100px), secțiunile cu id-uri neutre (`#summary`,

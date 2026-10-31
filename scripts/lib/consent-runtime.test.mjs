@@ -156,13 +156,13 @@ function memoryStorage(initial = {}) {
   return { map, getItem: key => (map.has(key) ? map.get(key) : null), setItem: (key, value) => { map.set(key, String(value)); }, removeItem: key => { map.delete(key); } };
 }
 
-const storedChoice = (analytics, ageDays = 10, v = 1) => JSON.stringify({ v, analytics, ts: new Date(Date.now() - ageDays * DAY).toISOString() });
+const storedChoice = (analytics, marketing, ageDays = 10, v = 2) => JSON.stringify({ v, analytics, marketing, ts: new Date(Date.now() - ageDays * DAY).toISOString() });
 
 /**
  * Run consent.js on a page shaped like the built site: skip link, header,
  * footer list with the hidden cookie-settings button, and a state paragraph.
  */
-function page({ hostname = 'www.echipadetocilari.ro', lang = 'ro', storage = memoryStorage(), cookies = [], layout, allowedHosts = 'echipadetocilari.ro www.echipadetocilari.ro', run = 1, policyButton = false } = {}) {
+function page({ hostname = 'www.echipadetocilari.ro', lang = 'ro', storage = memoryStorage(), cookies = [], layout, allowedHosts = 'echipadetocilari.ro www.echipadetocilari.ro', run = 1, policyButton = false, readyState, adsId, adsLeadLabel } = {}) {
   const listeners = new Map();
   const document = {
     listeners,
@@ -192,8 +192,10 @@ function page({ hostname = 'www.echipadetocilari.ro', lang = 'ro', storage = mem
   const script = document.head.appendChild(create('script', {
     src: '/wp-content/ect-pages/consent.js', 'data-ga-id': GA_ID, 'data-ga-hosts': allowedHosts,
     'data-policy': lang === 'en' ? '/en/privacy-policy/#cookies' : '/politica-de-confidentialitate/#cookies', defer: '',
+    ...(adsId ? { 'data-ads-id': adsId } : {}), ...(adsLeadLabel ? { 'data-ads-lead-label': adsLeadLabel } : {}),
   }));
   document.currentScript = script;
+  if (readyState !== undefined) document.readyState = readyState;
   const skip = document.body.appendChild(create('a', { class: 'skip-link screen-reader-text', href: '#content' }, 'Sari la conținut'));
   const header = document.body.appendChild(create('header'));
   const state = document.body.appendChild(create('p', { 'data-ect-consent-state': '', 'aria-live': 'polite' }));
@@ -240,6 +242,7 @@ function page({ hostname = 'www.echipadetocilari.ro', lang = 'ro', storage = mem
     stored: () => (storage && storage.map && storage.map.has('ect-consent') ? JSON.parse(storage.map.get('ect-consent')) : null),
     emitWindow: (type, event) => (windowListeners.get(type) || []).forEach(callback => callback(event)),
     analyticsBox: () => customise.querySelector('input[name="ect-consent-analytics"]'),
+    marketingBox: () => customise.querySelector('input[name="ect-consent-marketing"]'),
   };
 }
 
@@ -247,9 +250,20 @@ const gaCookies = [
   '_ga=GA1.1.123.456; domain=.echipadetocilari.ro; path=/',
   '_ga_PGM4B3VM9Z=GS2.1.s1; domain=.echipadetocilari.ro; path=/',
   '_ga_NM6575781Q=GS1.1.legacy; path=/',
-  '_gac_keep=1; path=/',
+  '_gax_keep=1; path=/', // not a Google Ads cookie: _gac_ is, _gax_ is not
   'theme=light; path=/',
 ];
+// Google Ads cookies (Marketing category).
+const adsCookies = [
+  '_gcl_au=1.1.111; domain=.echipadetocilari.ro; path=/',
+  '_gcl_aw=GCL.222; path=/',
+  '_gac_UA-1=1.333; path=/',
+];
+const allGoogleCookies = [...gaCookies, ...adsCookies];
+const DENIED = { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' };
+const GRANTED = { analytics_storage: 'granted', ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted' };
+const consentUpdates = view => view.dataLayer().filter(args => args[0] === 'consent' && args[1] === 'update');
+const leadEvents = view => view.dataLayer().filter(args => args[0] === 'event');
 const ro = consentCopy().ro;
 const en = consentCopy().en;
 
@@ -265,14 +279,14 @@ test('copy has both languages, the same keys, and no em dash, diagonal arrows or
       assert.ok(value.trim(), `${language}.${key} is not empty`);
       assert.doesNotMatch(value, prohibited, `${language}.${key}`);
     }
-    for (const key of ['stateAccepted', 'stateRefused']) assert.match(copy[language][key], /\{date\}/);
+    for (const key of ['stateAccepted', 'stateRefused', 'stateAnalytics', 'stateMarketing']) assert.match(copy[language][key], /\{date\}/);
   }
   assert.match(Object.values(copy.ro).join(' '), /[șț]/, 'Romanian uses comma-below letters');
   for (const file of [runtime, readFileSync(stylesUrl, 'utf8')]) assert.doesNotMatch(file, prohibited);
 });
 
-test('no stored choice: banner after the skip link, nothing loaded, old _ga cookies deleted, focus untouched', () => {
-  const view = page({ cookies: gaCookies });
+test('no stored choice: banner after the skip link, one Google tag with consent denied, no consent update, Google cookies deleted, focus untouched', () => {
+  const view = page({ cookies: allGoogleCookies });
   assert.ok(view.banner, 'banner injected');
   assert.equal(view.skip.nextSibling, view.banner, 'banner follows the skip link in tab order');
   assert.equal(view.banner.tagName, 'SECTION');
@@ -287,14 +301,54 @@ test('no stored choice: banner after the skip link, nothing loaded, old _ga cook
   assert.equal(link.getAttribute('href'), '/politica-de-confidentialitate/#cookies');
   assert.equal(link.textContent, ro.learnMore);
   assert.equal(view.summary.querySelector('p').textContent, `${ro.summary} ${ro.learnMore}.`);
-  assert.equal(view.gaScripts().length, 0);
-  assert.equal(view.context.dataLayer, undefined);
-  assert.equal(view.context.gtag, undefined);
-  assert.deepEqual(view.cookieNames().sort(), ['_gac_keep', 'theme']);
+  // Replaces "nothing is loaded": before a deliberate choice there is exactly one tag,
+  // it was started with everything denied, and nothing was ever granted.
+  assert.equal(view.gaScripts().length, 1);
+  assert.deepEqual(consentUpdates(view), []);
+  assert.ok(!JSON.stringify(view.dataLayer()).includes('granted'));
+  assert.deepEqual(view.cookieNames().sort(), ['_gax_keep', 'theme']);
   assert.equal(view.document.activeElement, view.document.body, 'first show does not steal focus');
   assert.equal(view.opener.hidden, false, 'footer control is revealed');
   assert.equal(view.state.textContent, ro.stateNone);
   assert.equal(view.stored(), null);
+});
+
+test('first visit: the dataLayer has the exact Consent Mode v2 order, and the tag script is injected once', () => {
+  const view = page();
+  const layer = view.dataLayer();
+  assert.deepEqual(layer[0], ['consent', 'default', DENIED]);
+  assert.deepEqual(layer[1], ['set', 'ads_data_redaction', true]);
+  assert.equal(layer[2][0], 'js');
+  assert.deepEqual(layer[3], ['config', GA_ID, { allow_google_signals: false, allow_ad_personalization_signals: false }]);
+  assert.equal(layer.length, 4);
+  const scripts = view.gaScripts();
+  assert.equal(scripts.length, 1);
+  assert.equal(scripts[0].src, GA_SRC);
+  assert.equal(scripts[0].async, true);
+  assert.deepEqual(Object.keys(view.context).filter(key => key.startsWith('ga-disable')), [], 'ga-disable would also stop the cookieless pings');
+
+  // Google Ads: its config follows the GA4 one; an invalid ID is ignored.
+  const ads = page({ adsId: 'AW-123456789', adsLeadLabel: 'AbC-d_1' }).dataLayer();
+  assert.equal(ads.length, 5);
+  assert.deepEqual(ads[4], ['config', 'AW-123456789']);
+  assert.equal(page({ adsId: 'AW-12x' }).dataLayer().length, 4);
+  assert.equal(page({ adsId: 'G-123' }).dataLayer().length, 4);
+});
+
+test('while the page is still loading the tag waits for load; a choice made before then is queued, not a second script', () => {
+  for (const readyState of ['loading', 'interactive']) {
+    const view = page({ readyState });
+    assert.equal(view.gaScripts().length, 0, `${readyState}: no script until load`);
+    assert.equal(view.dataLayer().length, 4, `${readyState}: the queue is ready for the tag`);
+    view.button(view.summary, ro.acceptAll).click();
+    assert.deepEqual(consentUpdates(view), [['consent', 'update', GRANTED]], `${readyState}: the update is queued`);
+    assert.equal(view.gaScripts().length, 0, `${readyState}: still no script`);
+    view.emitWindow('load', {});
+    assert.equal(view.gaScripts().length, 1, `${readyState}: one script after load`);
+    assert.equal(view.gaScripts()[0].src, GA_SRC);
+    assert.equal(consentUpdates(view).length, 1);
+  }
+  assert.equal(page({ readyState: 'complete' }).gaScripts().length, 1, 'a finished page injects at once');
 });
 
 test('refuse and accept look the same in both views; no close button', () => {
@@ -353,25 +407,21 @@ test('while the card is open the page keeps its height free at the bottom, so fo
   assert.equal(sized.document.documentElement.style.getPropertyValue('--ect-consent-space'), '234px');
 });
 
-test('accept on the production host loads GA4 once with consent mode and stores the choice', () => {
+test('accept on the production host stores the choice and grants all four signals without adding a second tag', () => {
   const view = page({ cookies: ['theme=light; path=/'] });
+  assert.equal(view.gaScripts().length, 1);
   view.button(view.summary, ro.acceptAll).click();
   assert.equal(view.banner.hidden, true);
   const stored = view.stored();
-  assert.equal(stored.v, 1);
+  assert.equal(stored.v, 2);
   assert.equal(stored.analytics, true);
+  assert.equal(stored.marketing, true);
+  assert.deepEqual(Object.keys(stored).sort(), ['analytics', 'marketing', 'ts', 'v']);
   assert.ok(Math.abs(Date.parse(stored.ts) - Date.now()) < 5000);
-  const scripts = view.gaScripts();
-  assert.equal(scripts.length, 1);
-  assert.equal(scripts[0].src, GA_SRC);
-  assert.equal(scripts[0].async, true);
-  const layer = view.dataLayer();
-  assert.deepEqual(layer[0], ['consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied' }]);
-  assert.deepEqual(layer[1], ['consent', 'update', { analytics_storage: 'granted' }]);
-  assert.equal(layer[2][0], 'js');
-  assert.deepEqual(layer[3], ['config', GA_ID, { allow_google_signals: false, allow_ad_personalization_signals: false }]);
-  assert.equal(layer.length, 4);
-  assert.equal(view.context[`ga-disable-${GA_ID}`], false);
+  assert.equal(view.gaScripts().length, 1);
+  assert.deepEqual(view.dataLayer().at(-1), ['consent', 'update', GRANTED]);
+  assert.equal(consentUpdates(view).length, 1);
+  assert.deepEqual(Object.keys(view.context).filter(key => key.startsWith('ga-disable')), []);
   const date = new Date(stored.ts);
   const expected = `${String(date.getDate()).padStart(2, '0')}.${String(date.getMonth() + 1).padStart(2, '0')}.${date.getFullYear()}`;
   assert.equal(view.state.textContent, ro.stateAccepted.replace('{date}', expected));
@@ -382,54 +432,114 @@ test('accept on the production host loads GA4 once with consent mode and stores 
   assert.equal(view.gaScripts().length, 1);
 });
 
-test('GA never loads on preview or local hosts, though the choice is stored', () => {
+test('Google never loads on preview or local hosts: no tag, no dataLayer, no gtag, though the choice is stored', () => {
   for (const hostname of ['localhost', '127.0.0.1', 'echipadetocilari.vercel.app', 'staging.echipadetocilari.ro']) {
-    const view = page({ hostname });
+    const view = page({ hostname, adsId: 'AW-123456789', adsLeadLabel: 'AbC-d_1' });
+    assert.equal(view.gaScripts().length, 0, `${hostname}: nothing before a choice`);
+    assert.equal(view.context.dataLayer, undefined, hostname);
+    assert.equal(view.context.gtag, undefined, hostname);
     view.button(view.summary, ro.acceptAll).click();
     assert.equal(view.stored().analytics, true, hostname);
+    assert.equal(view.stored().marketing, true, hostname);
     assert.equal(view.banner.hidden, true, hostname);
     assert.equal(view.gaScripts().length, 0, hostname);
     assert.equal(view.context.dataLayer, undefined, hostname);
+    view.context.ectConsent.trackLead({ email: 'ana@example.ro', phone: '0722123456' });
+    assert.equal(view.context.dataLayer, undefined, `${hostname}: trackLead does nothing`);
   }
   const bare = page({ hostname: 'echipadetocilari.ro' });
-  bare.button(bare.summary, ro.acceptAll).click();
   assert.equal(bare.gaScripts().length, 1, 'apex host is allowed');
 });
 
-test('refuse stores the choice, loads nothing and deletes _ga cookies on the host and the shared domain', () => {
-  const view = page({ cookies: gaCookies });
-  for (const cookie of gaCookies.slice(0, 3)) view.jar.set(cookie); // set again after the first cleanup
+test('refuse stores the choice, sends nothing granted, sets no ga-disable and deletes Google cookies on the host and the shared domain', () => {
+  const view = page({ cookies: allGoogleCookies });
+  for (const cookie of allGoogleCookies.slice(0, 3)) view.jar.set(cookie); // set again after the first cleanup
   view.button(view.summary, ro.rejectAll).click();
   assert.equal(view.banner.hidden, true);
+  const stored = view.stored();
+  assert.equal(stored.analytics, false);
+  assert.equal(stored.marketing, false);
+  assert.equal(view.gaScripts().length, 1, 'the tag stays: it sends only cookieless pings');
+  assert.deepEqual(Object.keys(view.context).filter(key => key.startsWith('ga-disable')), []);
+  assert.deepEqual(view.dataLayer().at(-1), ['consent', 'update', DENIED]);
+  assert.ok(!JSON.stringify(view.dataLayer()).includes('granted'), 'nothing was ever granted');
+  assert.deepEqual(view.cookieNames().sort(), ['_gax_keep', 'theme']);
+  assert.match(view.state.textContent, /^Ai refuzat cookie-urile de analiză și de marketing pe \d{2}\.\d{2}\.\d{4}\.$/);
+});
+
+test('only Analytics: analytics_storage granted, the three ad signals denied, ad cookies deleted, Analytics cookies kept', () => {
+  const view = page();
+  for (const cookie of allGoogleCookies) view.jar.set(cookie);
+  view.button(view.summary, ro.customise).click();
+  assert.equal(view.marketingBox().checked, false);
+  view.analyticsBox().checked = true;
+  view.button(view.customise, ro.save).click();
+  assert.equal(view.stored().analytics, true);
+  assert.equal(view.stored().marketing, false);
+  assert.deepEqual(view.dataLayer().at(-1), ['consent', 'update', { analytics_storage: 'granted', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' }]);
+  assert.deepEqual(view.cookieNames().sort(), ['_ga', '_ga_NM6575781Q', '_ga_PGM4B3VM9Z', '_gax_keep', 'theme']);
+  assert.match(view.state.textContent, /^Ai acceptat doar cookie-urile de analiză pe /);
+});
+
+test('only Marketing: the ad signals granted, analytics_storage denied, _ga cookies deleted, _gcl_ and _gac_ cookies kept', () => {
+  const view = page();
+  for (const cookie of allGoogleCookies) view.jar.set(cookie);
+  view.button(view.summary, ro.customise).click();
+  view.marketingBox().checked = true;
+  view.button(view.customise, ro.save).click();
   assert.equal(view.stored().analytics, false);
-  assert.equal(view.gaScripts().length, 0);
-  assert.equal(view.context[`ga-disable-${GA_ID}`], true);
-  assert.deepEqual(view.cookieNames().sort(), ['_gac_keep', 'theme']);
-  assert.match(view.state.textContent, /^Ai refuzat cookie-urile de analiză pe \d{2}\.\d{2}\.\d{4}\.$/);
+  assert.equal(view.stored().marketing, true);
+  assert.deepEqual(view.dataLayer().at(-1), ['consent', 'update', { analytics_storage: 'denied', ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted' }]);
+  assert.deepEqual(view.cookieNames().sort(), ['_gac_UA-1', '_gax_keep', '_gcl_au', '_gcl_aw', 'theme']);
+  assert.match(view.state.textContent, /^Ai acceptat doar cookie-urile de marketing pe /);
 });
 
-test('a stored grant loads GA without the banner; a stored refusal keeps it off', () => {
-  const granted = page({ storage: memoryStorage({ 'ect-consent': storedChoice(true) }) });
-  assert.equal(granted.banner.hidden, true);
-  assert.equal(granted.gaScripts().length, 1);
-  assert.equal(granted.gaScripts()[0].src, GA_SRC);
-  assert.match(granted.state.textContent, /^Ai acceptat/);
+test('a saved choice reaches Google before the first config: consent update, then allow_google_signals only with Marketing', () => {
+  const marketing = page({ storage: memoryStorage({ 'ect-consent': storedChoice(true, true) }), adsId: 'AW-123456789' });
+  assert.equal(marketing.banner.hidden, true);
+  assert.equal(marketing.gaScripts().length, 1);
+  assert.equal(marketing.gaScripts()[0].src, GA_SRC);
+  const layer = marketing.dataLayer();
+  assert.deepEqual(layer.map(args => args[0]), ['consent', 'set', 'consent', 'js', 'config', 'config']);
+  assert.deepEqual(layer[2], ['consent', 'update', GRANTED]);
+  assert.deepEqual(layer[4], ['config', GA_ID, { allow_google_signals: true, allow_ad_personalization_signals: true }]);
+  assert.deepEqual(layer[5], ['config', 'AW-123456789']);
+  assert.match(marketing.state.textContent, /^Ai acceptat cookie-urile de analiză și de marketing/);
 
-  const refused = page({ storage: memoryStorage({ 'ect-consent': storedChoice(false) }), cookies: gaCookies });
+  const analyticsOnly = page({ storage: memoryStorage({ 'ect-consent': storedChoice(true, false) }) });
+  assert.deepEqual(analyticsOnly.dataLayer()[2], ['consent', 'update', { analytics_storage: 'granted', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' }]);
+  assert.deepEqual(analyticsOnly.dataLayer()[4], ['config', GA_ID, { allow_google_signals: false, allow_ad_personalization_signals: false }]);
+
+  const refused = page({ storage: memoryStorage({ 'ect-consent': storedChoice(false, false) }), cookies: allGoogleCookies });
   assert.equal(refused.banner.hidden, true);
-  assert.equal(refused.gaScripts().length, 0);
-  assert.deepEqual(refused.cookieNames().sort(), ['_gac_keep', 'theme']);
+  assert.equal(refused.gaScripts().length, 1, 'the tag still runs, with everything denied');
+  assert.deepEqual(refused.dataLayer()[2], ['consent', 'update', DENIED]);
+  assert.equal(consentUpdates(refused).length, 1, 'one update at start, not a second one after the cleanup');
+  assert.deepEqual(refused.cookieNames().sort(), ['_gax_keep', 'theme']);
 });
 
-test('an expired, outdated or malformed choice asks again and loads nothing', () => {
-  for (const value of [storedChoice(true, 200), storedChoice(true, 10, 2), storedChoice(true, -30), '{"v":1,"analytics":"yes","ts":"2026-10-01T00:00:00Z"}', 'not json']) {
-    const view = page({ storage: memoryStorage({ 'ect-consent': value }) });
+test('an expired, outdated, version 1 or malformed choice asks again and sends no consent update', () => {
+  const ts = new Date(Date.now() - 10 * DAY).toISOString();
+  const values = [
+    storedChoice(true, true, 200),
+    storedChoice(true, true, 10, 1),
+    storedChoice(true, true, -30),
+    JSON.stringify({ v: 2, analytics: true, ts }),
+    JSON.stringify({ v: 1, analytics: true, ts }),
+    JSON.stringify({ v: 2, analytics: true, marketing: 'yes', ts }),
+    '{"v":2,"analytics":"yes","marketing":true,"ts":"2026-10-01T00:00:00Z"}',
+    'not json',
+  ];
+  for (const value of values) {
+    const view = page({ storage: memoryStorage({ 'ect-consent': value }), cookies: allGoogleCookies });
     assert.equal(view.banner.hidden, false, value);
     assert.equal(view.summary.hidden, false, value);
-    assert.equal(view.gaScripts().length, 0, value);
+    assert.equal(view.gaScripts().length, 1, value);
+    assert.deepEqual(consentUpdates(view), [], value);
+    assert.deepEqual(view.cookieNames().sort(), ['_gax_keep', 'theme'], value);
     assert.equal(view.state.textContent, ro.stateNone, value);
   }
-  const recent = page({ storage: memoryStorage({ 'ect-consent': storedChoice(true, 182) }) });
+  const recent = page({ storage: memoryStorage({ 'ect-consent': storedChoice(true, true, 182) }) });
   assert.equal(recent.banner.hidden, true, 'a choice inside 6 months is kept');
 });
 
@@ -459,12 +569,17 @@ test('Setări opens the customise view inside the same card and moves focus ther
   assert.equal(title.textContent, ro.title);
   assert.equal(view.document.activeElement, title);
   assert.ok(view.customise.contains(view.document.activeElement));
-  const [necessary, analytics] = view.customise.querySelectorAll('input');
+  const [necessary, analytics, marketing] = view.customise.querySelectorAll('input');
   assert.equal(necessary.checked, true);
   assert.equal(necessary.disabled, true);
   assert.equal(analytics.checked, false, 'analytics is off by default');
-  assert.deepEqual(view.customise.querySelectorAll('.ect-consent__name').map(item => item.textContent), [ro.necessaryName, ro.analyticsName]);
-  assert.deepEqual(view.customise.querySelectorAll('.ect-consent__desc').map(item => item.textContent), [ro.necessaryText, ro.analyticsText]);
+  assert.equal(marketing.checked, false, 'marketing is off by default');
+  assert.equal(analytics.getAttribute('name'), 'ect-consent-analytics');
+  assert.equal(marketing.getAttribute('name'), 'ect-consent-marketing');
+  assert.equal(marketing.getAttribute('aria-labelledby'), 'ect-consent-marketing');
+  assert.equal(marketing.getAttribute('aria-describedby'), 'ect-consent-marketing-desc');
+  assert.deepEqual(view.customise.querySelectorAll('.ect-consent__name').map(item => item.textContent), [ro.necessaryName, ro.analyticsName, ro.marketingName]);
+  assert.deepEqual(view.customise.querySelectorAll('.ect-consent__desc').map(item => item.textContent), [ro.necessaryText, ro.analyticsText, ro.marketingText]);
 
   // Escape without a choice goes back to the summary; the banner stays.
   view.customise.dispatch('keydown', { key: 'Escape' });
@@ -474,50 +589,149 @@ test('Setări opens the customise view inside the same card and moves focus ther
 
   view.button(view.summary, ro.customise).click();
   analytics.checked = true;
+  marketing.checked = true;
   view.button(view.customise, ro.save).click();
   assert.equal(view.stored().analytics, true);
+  assert.equal(view.stored().marketing, true);
+  assert.deepEqual(view.dataLayer().at(-1), ['consent', 'update', GRANTED]);
   assert.equal(view.gaScripts().length, 1);
 });
 
-test('the footer control reopens settings with the current state, withdraws consent and returns focus', () => {
-  const view = page({ storage: memoryStorage({ 'ect-consent': storedChoice(true) }) });
+test('the footer control reopens settings with the current state; withdrawing sends consent update denied, deletes the cookies and keeps the tag', () => {
+  const view = page({ storage: memoryStorage({ 'ect-consent': storedChoice(true, true) }) });
   assert.equal(view.gaScripts().length, 1);
-  for (const cookie of gaCookies.slice(0, 2)) view.jar.set(cookie); // GA wrote its cookies
+  for (const cookie of allGoogleCookies.slice(0, 2).concat(adsCookies)) view.jar.set(cookie); // Google wrote its cookies
 
   view.opener.focus();
   view.opener.click();
   assert.equal(view.banner.hidden, false);
   assert.equal(view.customise.hidden, false);
   assert.equal(view.summary.hidden, true);
-  assert.equal(view.analyticsBox().checked, true, 'shows the stored grant');
+  assert.equal(view.analyticsBox().checked, true, 'shows the stored analytics grant');
+  assert.equal(view.marketingBox().checked, true, 'shows the stored marketing grant');
   assert.equal(view.document.activeElement, view.customise.querySelector('.ect-consent__title'));
 
   view.analyticsBox().checked = false;
+  view.marketingBox().checked = false;
   view.button(view.customise, ro.save).click();
   assert.equal(view.banner.hidden, true);
   assert.equal(view.document.activeElement, view.opener, 'focus returns to the footer control');
   assert.equal(view.stored().analytics, false);
-  assert.equal(view.context[`ga-disable-${GA_ID}`], true);
-  assert.deepEqual(view.dataLayer().at(-1), ['consent', 'update', { analytics_storage: 'denied' }]);
+  assert.equal(view.stored().marketing, false);
+  assert.deepEqual(Object.keys(view.context).filter(key => key.startsWith('ga-disable')), []);
+  assert.deepEqual(view.dataLayer().at(-1), ['consent', 'update', DENIED]);
   assert.deepEqual(view.cookieNames(), []);
   assert.match(view.state.textContent, /^Ai refuzat/);
-  assert.equal(view.gaScripts().length, 1, 'the loaded tag is disabled, not loaded again');
+  assert.equal(view.gaScripts().length, 1, 'the tag stays, it is not loaded again');
 
   // Reopen shows the refusal; Escape closes without changing it.
   const before = view.storage.map.get('ect-consent');
   view.opener.click();
   assert.equal(view.analyticsBox().checked, false);
+  assert.equal(view.marketingBox().checked, false);
   view.customise.dispatch('keydown', { key: 'Escape' });
   assert.equal(view.banner.hidden, true);
   assert.equal(view.storage.map.get('ect-consent'), before);
   assert.equal(view.document.activeElement, view.opener);
 
-  // Granting again re-enables the same tag.
+  // Granting again updates the same tag.
   view.opener.click();
   view.button(view.customise, ro.acceptAll).click();
-  assert.equal(view.context[`ga-disable-${GA_ID}`], false);
-  assert.deepEqual(view.dataLayer().at(-1), ['consent', 'update', { analytics_storage: 'granted' }]);
+  assert.deepEqual(view.dataLayer().at(-1), ['consent', 'update', GRANTED]);
   assert.equal(view.gaScripts().length, 1);
+});
+
+test('trackLead: generate_lead without user_data unless Marketing is accepted', () => {
+  for (const setup of [
+    { name: 'no choice yet', storage: memoryStorage() },
+    { name: 'refused', storage: memoryStorage({ 'ect-consent': storedChoice(false, false) }) },
+    { name: 'analytics only', storage: memoryStorage({ 'ect-consent': storedChoice(true, false) }) },
+  ]) {
+    const view = page({ storage: setup.storage });
+    view.context.ectConsent.trackLead({ email: 'ana@example.ro', phone: '0722123456' });
+    assert.deepEqual(leadEvents(view), [['event', 'generate_lead', {}]], setup.name);
+  }
+  const bare = page();
+  bare.context.ectConsent.trackLead();
+  assert.deepEqual(leadEvents(bare), [['event', 'generate_lead', {}]], 'called without arguments');
+});
+
+test('trackLead with Marketing: the email is trimmed and lowercased, the phone is E.164, invalid parts are dropped', () => {
+  const view = page({ storage: memoryStorage({ 'ect-consent': storedChoice(true, true) }) });
+  const send = (email, phone) => {
+    const before = leadEvents(view).length;
+    view.context.ectConsent.trackLead({ email, phone });
+    return leadEvents(view).slice(before);
+  };
+  assert.deepEqual(send('  Ana.Pop@Example.RO ', '0722 123 456'), [['event', 'generate_lead', { user_data: { email: 'ana.pop@example.ro', phone_number: '+40722123456' } }]]);
+  const phones = [
+    ['+40 722-123-456', '+40722123456'],
+    ['0040722123456', '+40722123456'],
+    ['0722.123.456', '+40722123456'],
+    ['0722 123 456 ext 12', '+40722123456'],
+    ['0722 123 456 interior 3', '+40722123456'],
+    ['021 123 4567', '+40211234567'],
+    ['+44 20 7946 0958', '+442079460958'],
+  ];
+  for (const [raw, expected] of phones) {
+    assert.deepEqual(send('a@b.ro', raw)[0][2].user_data, { email: 'a@b.ro', phone_number: expected }, raw);
+  }
+  for (const raw of ['12345', '0122 123 456', 'abc', '', '+1234', '0040 7221234567890123']) {
+    assert.deepEqual(send('a@b.ro', raw)[0][2].user_data, { email: 'a@b.ro' }, `invalid phone dropped: ${raw}`);
+  }
+  assert.deepEqual(send('', '0722123456')[0][2].user_data, { phone_number: '+40722123456' });
+  assert.deepEqual(send('  ', '12')[0][2], {}, 'nothing usable: no user_data key at all');
+  assert.equal(consentUpdates(view).length, 1, 'trackLead never changes consent');
+});
+
+test('trackLead with Google Ads: a conversion event with send_to is added only when the ID and the label are both set', () => {
+  const storage = () => memoryStorage({ 'ect-consent': storedChoice(true, true) });
+  const full = page({ storage: storage(), adsId: 'AW-123456789', adsLeadLabel: 'AbC-d_1' });
+  full.context.ectConsent.trackLead({ email: 'ana@example.ro', phone: '0722123456' });
+  const userData = { user_data: { email: 'ana@example.ro', phone_number: '+40722123456' } };
+  assert.deepEqual(leadEvents(full), [
+    ['event', 'generate_lead', userData],
+    ['event', 'conversion', { send_to: 'AW-123456789/AbC-d_1', ...userData }],
+  ]);
+
+  const noLabel = page({ storage: storage(), adsId: 'AW-123456789' });
+  noLabel.context.ectConsent.trackLead({ email: 'ana@example.ro', phone: '0722123456' });
+  assert.deepEqual(leadEvents(noLabel).map(args => args[1]), ['generate_lead']);
+
+  const badLabel = page({ storage: storage(), adsId: 'AW-123456789', adsLeadLabel: 'a b/c' });
+  badLabel.context.ectConsent.trackLead({ email: 'ana@example.ro', phone: '0722123456' });
+  assert.deepEqual(leadEvents(badLabel).map(args => args[1]), ['generate_lead']);
+
+  // Without Marketing the conversion still counts, but carries no user data.
+  const refused = page({ storage: memoryStorage({ 'ect-consent': storedChoice(false, false) }), adsId: 'AW-123456789', adsLeadLabel: 'AbC-d_1' });
+  refused.context.ectConsent.trackLead({ email: 'ana@example.ro', phone: '0722123456' });
+  assert.deepEqual(leadEvents(refused), [['event', 'generate_lead', {}], ['event', 'conversion', { send_to: 'AW-123456789/AbC-d_1' }]]);
+
+  // A choice made on this page is used by the next lead.
+  const later = page({ adsId: 'AW-123456789', adsLeadLabel: 'AbC-d_1' });
+  later.button(later.summary, ro.acceptAll).click();
+  later.context.ectConsent.trackLead({ email: 'ana@example.ro', phone: '0722123456' });
+  assert.deepEqual(leadEvents(later)[0], ['event', 'generate_lead', userData]);
+});
+
+test('the state messages read right in both languages for all four choices and for none', () => {
+  const choices = [[true, true, 'stateAccepted'], [false, false, 'stateRefused'], [true, false, 'stateAnalytics'], [false, true, 'stateMarketing']];
+  for (const [lang, copy] of [['ro', ro], ['en', en]]) {
+    assert.equal(page({ lang }).state.textContent, copy.stateNone, `${lang}: none`);
+    for (const [analytics, marketing, key] of choices) {
+      const view = page({ lang, storage: memoryStorage({ 'ect-consent': storedChoice(analytics, marketing) }) });
+      const date = new Date(view.stored().ts);
+      const pad = value => String(value).padStart(2, '0');
+      const shown = lang === 'en' ? `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}` : `${pad(date.getDate())}.${pad(date.getMonth() + 1)}.${date.getFullYear()}`;
+      assert.equal(view.state.textContent, copy[key].replace('{date}', shown), `${lang}: ${key}`);
+    }
+  }
+  assert.equal(ro.stateAnalytics, 'Ai acceptat doar cookie-urile de analiză pe {date}.');
+  assert.equal(ro.stateMarketing, 'Ai acceptat doar cookie-urile de marketing pe {date}.');
+  assert.equal(en.stateAnalytics, 'You accepted only analytics cookies on {date}.');
+  assert.equal(en.stateMarketing, 'You accepted only marketing cookies on {date}.');
+  assert.equal(ro.marketingName, 'Marketing');
+  assert.equal(en.marketingName, 'Marketing');
 });
 
 test('English pages use the English copy and ISO dates', () => {
@@ -633,7 +847,7 @@ test('summary pills: one row above 480px in both languages; refuse + accept, the
 test('another tab deciding hides the banner here; a second copy of the script does nothing', () => {
   const storage = memoryStorage();
   const view = page({ storage });
-  storage.setItem('ect-consent', storedChoice(true, 0));
+  storage.setItem('ect-consent', storedChoice(true, true, 0));
   view.emitWindow('storage', { key: 'ect-consent' });
   assert.equal(view.banner.hidden, true);
   assert.equal(view.gaScripts().length, 1);
@@ -652,15 +866,15 @@ test('a double-click or double-tap on Setări records nothing: the settings view
     assert.equal(mouse.stored(), null, `${lang}: nothing stored`);
     assert.equal(mouse.banner.hidden, false);
     assert.equal(mouse.customise.hidden, false, `${lang}: the settings stay open`);
-    assert.equal(mouse.gaScripts().length, 0);
-    assert.equal(mouse.context.dataLayer, undefined);
+    assert.deepEqual(consentUpdates(mouse), [], `${lang}: nothing was granted`);
     // A slow double-click (system setting) is still a double-click: detail 2 never decides.
     mouse.button(mouse.customise, copy.acceptAll).click({ detail: 2, after: 700 });
     assert.equal(mouse.stored(), null, `${lang}: detail 2 never decides`);
     // A deliberate click does.
     mouse.button(mouse.customise, copy.acceptAll).click();
     assert.equal(mouse.stored().analytics, true);
-    assert.equal(mouse.gaScripts().length, 1);
+    assert.equal(mouse.stored().marketing, true);
+    assert.deepEqual(consentUpdates(mouse), [['consent', 'update', GRANTED]]);
 
     // Touch: two taps (detail 1 each) close together, whatever lands under the second one.
     for (const label of [copy.acceptAll, copy.rejectAll, copy.save]) {
@@ -672,81 +886,103 @@ test('a double-click or double-tap on Setări records nothing: the settings view
     }
   }
 
-  // The Analiză box does not toggle from that second click either.
+  // The Analiză and Marketing boxes do not toggle from that second click either.
   const box = page();
   box.button(box.summary, ro.customise).click();
   const toggle = box.analyticsBox().click({ after: 100 });
   assert.equal(toggle.defaultPrevented, true, 'the browser reverts the checkbox');
+  assert.equal(box.marketingBox().click({ after: 100 }).defaultPrevented, true, 'the Marketing box is guarded too');
   assert.equal(box.analyticsBox().click({ after: 600 }).defaultPrevented, false, 'later it toggles normally');
+  assert.equal(box.marketingBox().click({ after: 600 }).defaultPrevented, false, 'the Marketing box toggles normally later');
+  assert.equal(box.stored(), null, 'toggling boxes records nothing');
 
   // Keyboard activation (detail 0) is never held back: Space on the box and Enter on Save right away.
   const keys = page();
   keys.button(keys.summary, ro.customise).click({ detail: 0 });
   assert.equal(keys.analyticsBox().click({ detail: 0, after: 50 }).defaultPrevented, false);
+  assert.equal(keys.marketingBox().click({ detail: 0, after: 50 }).defaultPrevented, false);
   keys.analyticsBox().checked = true;
+  keys.marketingBox().checked = true;
   keys.button(keys.customise, ro.save).click({ detail: 0, after: 50 });
   assert.equal(keys.stored().analytics, true);
+  assert.equal(keys.stored().marketing, true);
 
   // Reopened from the footer: a double-click there cannot change a stored refusal.
-  const footer = page({ storage: memoryStorage({ 'ect-consent': storedChoice(false) }) });
+  const footer = page({ storage: memoryStorage({ 'ect-consent': storedChoice(false, false) }) });
   const before = footer.storage.map.get('ect-consent');
   footer.opener.click();
   footer.button(footer.customise, ro.acceptAll).click({ detail: 2, after: 100 });
   assert.equal(footer.storage.map.get('ect-consent'), before);
-  assert.equal(footer.gaScripts().length, 0);
+  assert.equal(consentUpdates(footer).length, 1, 'only the update made at start from the stored refusal');
 });
 
-test('another tab withdrawing consent stops GA here: ga-disable, consent update, _ga cookies deleted, state text', () => {
-  const storage = memoryStorage({ 'ect-consent': storedChoice(true) });
+test('a choice cleared in another tab stops user_data here, and a +40 (0) number is repaired', () => {
+  const storage = memoryStorage({ 'ect-consent': storedChoice(true, true) });
+  const view = page({ storage });
+  view.context.ectConsent.trackLead({ email: 'ana@example.ro', phone: '+40 (0)722 123 456' });
+  assert.deepEqual(view.dataLayer().at(-1)[2].user_data, { email: 'ana@example.ro', phone_number: '+40722123456' });
+  storage.map.delete('ect-consent');
+  view.emitWindow('storage', { key: 'ect-consent' });
+  assert.deepEqual(view.dataLayer().at(-1), ['consent', 'update', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' }]);
+  view.context.ectConsent.trackLead({ email: 'ana@example.ro', phone: '0722123456' });
+  assert.deepEqual(view.dataLayer().at(-1), ['event', 'generate_lead', {}]);
+  assert.equal(view.state.textContent, ro.stateNone);
+});
+
+test('another tab withdrawing consent updates Google here: consent update denied, cookies deleted, state text, tag kept', () => {
+  const storage = memoryStorage({ 'ect-consent': storedChoice(true, true) });
   const view = page({ storage });
   assert.equal(view.gaScripts().length, 1);
-  for (const cookie of gaCookies.slice(0, 2)) view.jar.set(cookie); // GA wrote its cookies
-  assert.deepEqual(view.cookieNames().sort(), ['_ga', '_ga_PGM4B3VM9Z']);
+  for (const cookie of allGoogleCookies.slice(0, 2).concat(adsCookies)) view.jar.set(cookie); // Google wrote its cookies
+  assert.deepEqual(view.cookieNames().sort(), ['_ga', '_ga_PGM4B3VM9Z', '_gac_UA-1', '_gcl_au', '_gcl_aw']);
 
-  storage.setItem('ect-consent', storedChoice(false, 0));
+  storage.setItem('ect-consent', storedChoice(false, false, 0));
   view.emitWindow('storage', { key: 'unrelated' });
-  assert.equal(view.context[`ga-disable-${GA_ID}`], false, 'other keys are ignored');
+  assert.deepEqual(consentUpdates(view).length, 1, 'other keys are ignored');
   view.emitWindow('storage', { key: 'ect-consent' });
-  assert.equal(view.context[`ga-disable-${GA_ID}`], true);
-  assert.deepEqual(view.dataLayer().at(-1), ['consent', 'update', { analytics_storage: 'denied' }]);
+  assert.deepEqual(Object.keys(view.context).filter(key => key.startsWith('ga-disable')), []);
+  assert.deepEqual(view.dataLayer().at(-1), ['consent', 'update', DENIED]);
   assert.deepEqual(view.cookieNames(), []);
   assert.match(view.state.textContent, /^Ai refuzat/);
   assert.equal(view.banner.hidden, true, 'nothing to show here');
-  assert.equal(view.gaScripts().length, 1, 'the tag is disabled, not loaded again');
+  assert.equal(view.gaScripts().length, 1, 'the tag stays');
 
-  // A grant from the other tab turns it back on.
-  storage.setItem('ect-consent', storedChoice(true, 0));
+  // A grant from the other tab turns the signals back on.
+  storage.setItem('ect-consent', storedChoice(true, true, 0));
   view.emitWindow('storage', { key: 'ect-consent' });
-  assert.equal(view.context[`ga-disable-${GA_ID}`], false);
-  assert.deepEqual(view.dataLayer().at(-1), ['consent', 'update', { analytics_storage: 'granted' }]);
+  assert.deepEqual(view.dataLayer().at(-1), ['consent', 'update', GRANTED]);
   assert.match(view.state.textContent, /^Ai acceptat/);
   assert.equal(view.gaScripts().length, 1);
 });
 
 test('a choice made in another tab while the settings are open here shows in the open view', () => {
-  const storage = memoryStorage({ 'ect-consent': storedChoice(true) });
+  const storage = memoryStorage({ 'ect-consent': storedChoice(true, true) });
   const view = page({ storage });
   view.opener.focus();
   view.opener.click();
   assert.equal(view.analyticsBox().checked, true);
+  assert.equal(view.marketingBox().checked, true);
 
-  // Withdrawn elsewhere: the open box unticks, so Save cannot grant again from the old state.
-  storage.setItem('ect-consent', storedChoice(false, 0));
+  // Withdrawn elsewhere: the open boxes untick, so Save cannot grant again from the old state.
+  storage.setItem('ect-consent', storedChoice(false, false, 0));
   view.emitWindow('storage', { key: 'ect-consent' });
   assert.equal(view.banner.hidden, false, 'the settings stay open');
   assert.equal(view.customise.hidden, false);
   assert.equal(view.analyticsBox().checked, false, 'the box shows the refusal');
-  assert.equal(view.context[`ga-disable-${GA_ID}`], true);
+  assert.equal(view.marketingBox().checked, false, 'the Marketing box shows the refusal');
+  assert.deepEqual(view.dataLayer().at(-1), ['consent', 'update', DENIED]);
   view.button(view.customise, ro.save).click();
   assert.equal(view.stored().analytics, false, 'Save keeps the refusal');
-  assert.equal(view.context[`ga-disable-${GA_ID}`], true);
+  assert.equal(view.stored().marketing, false, 'Save keeps the Marketing refusal');
+  assert.deepEqual(view.dataLayer().at(-1), ['consent', 'update', DENIED]);
   assert.equal(view.document.activeElement, view.opener);
 
-  // Granted elsewhere: the open box ticks.
+  // Granted elsewhere: the open boxes tick.
   view.opener.click();
-  storage.setItem('ect-consent', storedChoice(true, 0));
+  storage.setItem('ect-consent', storedChoice(true, true, 0));
   view.emitWindow('storage', { key: 'ect-consent' });
   assert.equal(view.analyticsBox().checked, true);
+  assert.equal(view.marketingBox().checked, true);
 
   // No choice yet and the settings open here: the other tab's answer closes the banner
   // and focus goes back to the control that opened it.
@@ -754,7 +990,7 @@ test('a choice made in another tab while the settings are open here shows in the
   fresh.opener.focus();
   fresh.opener.click();
   assert.ok(fresh.customise.contains(fresh.document.activeElement));
-  fresh.storage.setItem('ect-consent', storedChoice(false, 0));
+  fresh.storage.setItem('ect-consent', storedChoice(false, false, 0));
   fresh.emitWindow('storage', { key: 'ect-consent' });
   assert.equal(fresh.banner.hidden, true);
   assert.equal(fresh.document.activeElement, fresh.opener);
@@ -763,14 +999,14 @@ test('a choice made in another tab while the settings are open here shows in the
   // Focus elsewhere on the page stays where it is.
   const reading = page();
   reading.header.focus();
-  reading.storage.setItem('ect-consent', storedChoice(true, 0));
+  reading.storage.setItem('ect-consent', storedChoice(true, true, 0));
   reading.emitWindow('storage', { key: 'ect-consent' });
   assert.equal(reading.banner.hidden, true);
   assert.equal(reading.document.activeElement, reading.header);
 });
 
 test('a page with a second settings control (the policy page): both are revealed and focus returns to the one used', () => {
-  const view = page({ policyButton: true, storage: memoryStorage({ 'ect-consent': storedChoice(true) }) });
+  const view = page({ policyButton: true, storage: memoryStorage({ 'ect-consent': storedChoice(true, true) }) });
   const controls = view.document.querySelectorAll('[data-ect-consent-open]');
   assert.deepEqual(controls, [view.policyButton, view.opener]);
   assert.ok(controls.every(control => control.hidden === false), 'both controls are revealed');
@@ -790,6 +1026,7 @@ test('a page with a second settings control (the policy page): both are revealed
 
   view.policyButton.click();
   view.analyticsBox().checked = false;
+  view.marketingBox().checked = false;
   view.button(view.customise, ro.save).click();
   assert.equal(view.document.activeElement, view.policyButton, 'Save returns to the in-page button');
   assert.equal(view.stored().analytics, false);

@@ -235,6 +235,50 @@ test('Resend uses fixed sender/recipient, reply_to and stable private idempotenc
   }
 });
 
+test('campaign labels: valid values reach the fields, anything odd is dropped without an error', () => {
+  const ok = validateContact({ ...valid, utmSource: ' google ', utmCampaign: 'Primăvara_2027 | site-nou/ads + a.b:c~d' }, NOW);
+  assert.equal(ok.error, undefined);
+  assert.equal(ok.fields.utmSource, 'google');
+  assert.equal(ok.fields.utmCampaign, 'Primăvara_2027 | site-nou/ads + a.b:c~d');
+  assert.equal(validateContact({ ...valid, utmSource: 'a'.repeat(100) }, NOW).fields.utmSource, 'a'.repeat(100), 'exactly 100 characters is kept');
+  assert.equal(validateContact({ ...valid, utmCampaign: 'Brand & Generic (RO), 2026' }, NOW).fields.utmCampaign, 'Brand & Generic (RO), 2026');
+  for (const bad of ['bad\nvalue', 'tab\there', 'bell\u0007', 'a'.repeat(101), '', '   ', 'a<b>', 'a;b', 'a%20b', 'a"b', 'a\u202eb', 42, null, true, {}, ['google']]) {
+    const result = validateContact({ ...valid, utmSource: bad, utmCampaign: bad }, NOW);
+    assert.equal(result.error, undefined, `${JSON.stringify(bad)} never blocks a lead`);
+    assert.equal(result.fields.utmSource, '', `${JSON.stringify(bad)} is dropped`);
+    assert.equal(result.fields.utmCampaign, '');
+  }
+  const absent = validateContact(valid, NOW);
+  assert.equal(absent.fields.utmSource, '');
+  assert.equal(absent.fields.utmCampaign, '');
+});
+
+test('campaign labels reach delivery and the email only when present', async () => {
+  const seen = [];
+  const response = await request({ body: { ...valid, utmSource: 'google', utmCampaign: 'primavara-2027' }, options: { deliver: async fields => { seen.push(fields); } } });
+  assert.equal(response.statusCode, 200);
+  assert.equal(seen[0].utmSource, 'google');
+  assert.equal(seen[0].utmCampaign, 'primavara-2027');
+  const dropped = await request({ body: { ...valid, utmSource: 'x\ny', utmCampaign: 'y'.repeat(500) }, options: { deliver: async fields => { seen.push(fields); } } });
+  assert.equal(dropped.statusCode, 200, 'an odd value never blocks the lead');
+  assert.equal(seen[1].utmSource, '');
+  assert.equal(seen[1].utmCampaign, '');
+
+  const texts = [];
+  const fetchImpl = async (_url, init) => { texts.push(JSON.parse(init.body).text.split('\n')); return { ok: true, json: async () => ({ id: 'test-accepted-message-id' }) }; };
+  const config = { from: env.CONTACT_FROM, to: ['contact@echipadetocilari.ro'] };
+  await deliverResend(validateContact({ ...valid, utmSource: 'google', utmCampaign: 'primavara-2027' }, NOW).fields, env, config, fetchImpl);
+  await deliverResend(validateContact({ ...valid, utmSource: 'google' }, NOW).fields, env, config, fetchImpl);
+  await deliverResend(validateContact({ ...valid, utmCampaign: 'primavara-2027' }, NOW).fields, env, config, fetchImpl);
+  await deliverResend(validateContact(valid, NOW).fields, env, config, fetchImpl);
+  const after = lines => lines.slice(lines.indexOf('Limba: en') + 1, lines.indexOf('Mesaj:'));
+  assert.deepEqual(after(texts[0]), ['Sursa: google', 'Campanie: primavara-2027', '']);
+  assert.deepEqual(after(texts[1]), ['Sursa: google', '']);
+  assert.deepEqual(after(texts[2]), ['Campanie: primavara-2027', '']);
+  assert.deepEqual(after(texts[3]), [''], 'no campaign: no extra lines');
+  assert.equal(texts[3].filter(line => /^(?:Sursa|Campanie):/.test(line)).length, 0);
+});
+
 test('actual RO forms and generated EN form shell use the independent controller accessibly', () => {
   for (const file of ['index.html', 'contact/index.html', 'portofoliu/index.html', 'administrare-site/index.html', 'creare-site-web/index.html', 'servicii-seo/index.html']) {
     const original = readFileSync(new URL(`../legacy-mirror/${file}`, import.meta.url), 'utf8');
@@ -308,7 +352,7 @@ test('browser form blocks legacy submit, preserves errors and deduplicates manua
       return { ok: success, json: async () => success ? { ok: true } : { ok: false, error: 'delivery' } };
     },
     crypto: { randomUUID: () => 'a2f32c0e-5e75-453b-806d-ea893c76a977' },
-    AbortSignal, setTimeout, clearTimeout,
+    AbortSignal, URLSearchParams, setTimeout, clearTimeout,
   };
   vm.runInNewContext(readFileSync(new URL('../legacy-mirror/wp-content/ect-contact.js', import.meta.url), 'utf8'), context);
   assert.equal(listeners.submit.capture, true);
@@ -364,7 +408,7 @@ test('browser WAF mode skips the widget only on HTTPS deployed hosts and handles
       FormData: class { get(key) { return valid[key]; } },
       window: { location: { pathname: '/en/contact/', hostname, protocol } },
       crypto: { randomUUID: () => valid.submissionId },
-      AbortSignal, setTimeout, clearTimeout,
+      AbortSignal, URLSearchParams, setTimeout, clearTimeout,
       fetch: async (_url, options) => {
         if (options.method !== 'POST') return { ok: true, json: async () => ({ ok: true, protection, siteKey: null, developmentBypass: false }) };
         posted.push(JSON.parse(options.body));
@@ -388,6 +432,78 @@ test('browser WAF mode skips the widget only on HTTPS deployed hosts and handles
       assert.match(status.textContent, /temporarily unavailable/);
     }
   }
+});
+
+test('browser form sends the campaign labels cut to 100 characters and reports a lead only after a success', async () => {
+  const run = async ({ search, ectConsent }) => {
+    const posted = [];
+    const status = { textContent: '', dataset: {}, focus() {} };
+    const button = { disabled: false };
+    const fields = { name: valid.name, company: '', email: valid.email, phone: valid.phone, message: valid.message, website: '' };
+    let submit;
+    class FakeForm {
+      dataset = { ectContact: 'en' };
+      elements = { namedItem: () => ({ focus() {} }) };
+      matches() { return true; }
+      querySelector(selector) { return selector === '.ect-contact-status' ? status : button; }
+      reportValidity() { return true; }
+      setAttribute() {}
+      removeAttribute() {}
+      addEventListener() {}
+      reset() {}
+    }
+    const form = new FakeForm();
+    let succeed = false;
+    vm.runInNewContext(readFileSync(new URL('../legacy-mirror/wp-content/ect-contact.js', import.meta.url), 'utf8'), {
+      document: { addEventListener: (_event, listener) => { submit = listener; }, querySelectorAll: () => [form] },
+      HTMLFormElement: FakeForm,
+      FormData: class { get(key) { return fields[key]; } },
+      window: { location: { pathname: '/en/contact/', hostname: 'echipadetocilari.ro', protocol: 'https:', search }, ectConsent },
+      fetch: async (_url, options = {}) => {
+        if (options.method !== 'POST') return { ok: true, json: async () => ({ ok: true, protection: 'vercel-waf' }) };
+        posted.push(JSON.parse(options.body));
+        return succeed ? { ok: true, status: 200, json: async () => ({ ok: true }) } : { ok: false, status: 502, json: async () => ({ ok: false, error: 'delivery' }) };
+      },
+      crypto: { randomUUID: () => valid.submissionId },
+      AbortSignal, URLSearchParams, setTimeout, clearTimeout,
+    });
+    const send = async ok => {
+      succeed = ok;
+      await submit({ target: form, preventDefault() {}, stopImmediatePropagation() {} });
+    };
+    return { posted, status, send };
+  };
+
+  const calls = [];
+  let throwing = false;
+  const ectConsent = { trackLead: payload => { calls.push(payload); if (throwing) throw new Error('measurement failed'); } };
+  const long = 'a'.repeat(150);
+  const view = await run({ search: `?utm_source=${long}&utm_campaign=${'b'.repeat(120)}&other=1`, ectConsent });
+  await view.send(false);
+  assert.match(view.status.textContent, /could not confirm/);
+  assert.deepEqual(calls, [], 'a failed send is not a lead');
+  assert.equal(view.posted[0].utmSource, 'a'.repeat(100), 'cut to 100 characters');
+  assert.equal(view.posted[0].utmCampaign, 'b'.repeat(100));
+  assert.equal(Buffer.byteLength(JSON.stringify(view.posted[0])) < 16_384, true, 'a long link cannot push the body over the server limit');
+  await view.send(true);
+  assert.match(view.status.textContent, /Thank you/);
+  assert.deepEqual(JSON.parse(JSON.stringify(calls)), [{ email: valid.email, phone: valid.phone }], 'one lead, with the email and phone that were sent');
+  throwing = true;
+  await view.send(true);
+  assert.match(view.status.textContent, /Thank you/, 'a measurement error leaves the success message');
+  assert.equal(calls.length, 2);
+
+  const short = await run({ search: '?utm_source=newsletter&utm_campaign=primavara', ectConsent: undefined });
+  await short.send(true);
+  assert.equal(short.posted[0].utmSource, 'newsletter');
+  assert.equal(short.posted[0].utmCampaign, 'primavara');
+  assert.match(short.status.textContent, /Thank you/, 'works without the consent script');
+
+  const none = await run({ search: '', ectConsent: {} });
+  await none.send(true);
+  assert.equal(none.posted[0].utmSource, '');
+  assert.equal(none.posted[0].utmCampaign, '');
+  assert.match(none.status.textContent, /Thank you/, 'a consent script without trackLead is fine');
 });
 
 test('phone accepts slashes and extensions, still rejects symbol-only values', () => {
@@ -438,7 +554,7 @@ test('browser form uses the trailing-slash endpoint and shows the field-specific
       return { ok: false, status: 400, json: async () => ({ ok: false, error: 'invalid', field: 'phone' }) };
     },
     crypto: { randomUUID: () => 'a2f32c0e-5e75-453b-806d-ea893c76a977' },
-    AbortSignal, setTimeout, clearTimeout,
+    AbortSignal, URLSearchParams, setTimeout, clearTimeout,
   };
   vm.runInNewContext(readFileSync(new URL('../legacy-mirror/wp-content/ect-contact.js', import.meta.url), 'utf8'), context);
   await listener({ target: form, preventDefault() {}, stopImmediatePropagation() {} });
