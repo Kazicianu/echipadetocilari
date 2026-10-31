@@ -67,7 +67,15 @@ test('pages and the API get no Cache-Control from vercel.json', () => {
 
 test('the global security headers rule is kept', () => {
   const global = config.headers.find((rule) => rule.source === '/(.*)');
-  assert.deepEqual(global.headers.map(({ key }) => key), ['X-Content-Type-Options', 'Referrer-Policy', 'Permissions-Policy']);
+  assert.deepEqual(global.headers.map(({ key }) => key), ['X-Content-Type-Options', 'Referrer-Policy', 'Permissions-Policy', 'X-Frame-Options', 'Cross-Origin-Opener-Policy', 'Content-Security-Policy', 'Content-Security-Policy-Report-Only']);
+});
+
+test('framing is limited to the site, while the full CSP only reports', () => {
+  const headers = Object.fromEntries(config.headers.find((rule) => rule.source === '/(.*)').headers.map(({ key, value }) => [key, value]));
+  assert.equal(headers['X-Frame-Options'], 'SAMEORIGIN');
+  assert.match(headers['Content-Security-Policy'], /frame-ancestors 'self'/);
+  assert.doesNotMatch(headers['Content-Security-Policy'], /script-src|default-src/);
+  assert.match(headers['Content-Security-Policy-Report-Only'], /^default-src 'self'; script-src /);
 });
 
 test('every file under wp-content and wp-includes gets exactly one Cache-Control', () => {
