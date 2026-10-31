@@ -422,12 +422,12 @@ test('while the page is still loading the tag waits for load; a choice made befo
   assert.equal(page({ readyState: 'complete' }).gaScripts().length, 1, 'a finished page injects at once');
 });
 
-test('refuse and accept look the same in both views; no close button', () => {
+test('refuse is the white pill and accept the solid one in both views; no close button', () => {
   const view = page();
-  const solid = item => item.classList.contains('ect-consent__pill--solid');
-  assert.ok(solid(view.button(view.summary, ro.rejectAll)) && solid(view.button(view.summary, ro.acceptAll)));
-  assert.equal(view.button(view.customise, ro.rejectAll).className, view.button(view.customise, ro.acceptAll).className);
-  assert.equal(view.button(view.summary, ro.rejectAll).className, view.button(view.summary, ro.acceptAll).className);
+  for (const panel of [view.summary, view.customise]) {
+    assert.ok(view.button(panel, ro.rejectAll).classList.contains('ect-consent__pill--light'));
+    assert.ok(view.button(panel, ro.acceptAll).classList.contains('ect-consent__pill--solid'));
+  }
   // Settings view: refuse + accept as equal halves on the first row, save on the full second row (DOM order = visual order).
   assert.deepEqual(view.customise.querySelectorAll('button').map(item => item.textContent), [ro.rejectAll, ro.acceptAll, ro.save]);
   assert.ok(view.customise.querySelector('.ect-consent__actions').classList.contains('ect-consent__actions--customise'));

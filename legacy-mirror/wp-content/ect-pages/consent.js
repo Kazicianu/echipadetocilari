@@ -280,15 +280,15 @@
     ]);
   }
 
-  // Refuse and accept are always styled the same (equal prominence).
+  // Refuse is white with a dark outline, so it stays as easy to see as the solid accept.
   const summaryButtons = {
     customise: pill('ghost', text.customise),
-    reject: pill('solid', text.rejectAll),
+    reject: pill('light', text.rejectAll),
     accept: pill('solid', text.acceptAll),
   };
   // Refuse and accept share the first row as equal halves; save takes the second.
   const customiseButtons = {
-    reject: pill('solid', text.rejectAll),
+    reject: pill('light', text.rejectAll),
     accept: pill('solid', text.acceptAll),
     save: pill('solid', text.save, 'ect-consent__pill--wide'),
   };
