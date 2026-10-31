@@ -12,6 +12,11 @@
  * It is asked again after 183 days (about 6 months) or when VERSION changes. When
  * the browser blocks storage the banner still works for the current page.
  *
+ * Without a choice the banner waits on the page a visitor lands on, until the first
+ * of: ASK_AFTER_MS, a scroll of one screen, focus in a form. Any later page of the
+ * site asks at once, so nobody browses on without having been asked. Waiting is safe
+ * only because every signal stays `denied` until the visitor chooses.
+ *
  * window.ectConsent.trackLead({ email, phone }) reports a sent form: a generate_lead
  * event, with the hashed email and phone (user_data) only if Marketing is accepted.
  *
@@ -90,6 +95,7 @@
   // replaces the summary under the pointer, so the second click of a double-click
   // or double-tap on "Setări" would otherwise land on a choice.
   const OPEN_GUARD_MS = 500;
+  const ASK_AFTER_MS = 15000;
 
   if (window.ectConsent) return;
 
@@ -416,6 +422,33 @@
     close();
   }
 
+  function cameFromThisSite() {
+    const from = /^https?:\/\/([^/:]+)/.exec(document.referrer || '');
+    return Boolean(from) && from[1] === window.location.hostname;
+  }
+
+  /** Shows the question at the latest moment listed at the top of this file. A choice
+   *  made in the meantime (another tab, the footer control) cancels it. */
+  function askWhenDue() {
+    if (cameFromThisSite()) {
+      show('summary');
+      return;
+    }
+    let asked = false;
+    const ask = () => {
+      if (asked) return;
+      asked = true;
+      if (!choice && banner.hidden) show('summary');
+    };
+    window.setTimeout(ask, ASK_AFTER_MS);
+    window.addEventListener('scroll', () => {
+      if (window.scrollY >= window.innerHeight) ask();
+    }, { passive: true });
+    document.addEventListener('focusin', event => {
+      if (event.target && event.target.closest && event.target.closest('form')) ask();
+    });
+  }
+
   summaryButtons.customise.addEventListener('click', () => openSettings());
   summaryButtons.reject.addEventListener('click', () => decide(false, false));
   summaryButtons.accept.addEventListener('click', () => decide(true, true));
@@ -521,6 +554,6 @@
   else {
     clearCookies(GA_COOKIE);
     clearCookies(ADS_COOKIE);
-    show('summary');
+    askWhenDue();
   }
 })();

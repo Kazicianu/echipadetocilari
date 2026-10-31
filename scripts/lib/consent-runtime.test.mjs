@@ -77,6 +77,7 @@ class FakeElement extends FakeNode {
   get firstChild() { return this.childNodes[0] || null; }
   get firstElementChild() { return this.children[0] || null; }
   get parentElement() { return this.parentNode?.nodeType === 1 ? this.parentNode : null; }
+  closest(selector) { const match = parseSelector(selector); for (let node = this; node; node = node.parentNode) if (match(node)) return node; return null; }
   set textContent(value) { this.childNodes.forEach(node => { node.parentNode = null; }); this.childNodes = [new FakeText(this.ownerDocument, value)]; this.childNodes[0].parentNode = this; }
   get textContent() { return super.textContent; }
   setAttribute(name, value) { this.attributes.set(name, String(value)); }
@@ -161,11 +162,15 @@ const storedChoice = (analytics, marketing, ageDays = 10, v = 2) => JSON.stringi
 /**
  * Run consent.js on a page shaped like the built site: skip link, header,
  * footer list with the hidden cookie-settings button, and a state paragraph.
+ * The default referrer is an inner page of the site, where the banner asks at once;
+ * pass referrer: '' for the page a visitor lands on.
  */
-function page({ hostname = 'www.echipadetocilari.ro', lang = 'ro', storage = memoryStorage(), cookies = [], layout, allowedHosts = 'echipadetocilari.ro www.echipadetocilari.ro', run = 1, policyButton = false, readyState, adsId, adsLeadLabel } = {}) {
+function page({ hostname = 'www.echipadetocilari.ro', lang = 'ro', storage = memoryStorage(), cookies = [], layout, allowedHosts = 'echipadetocilari.ro www.echipadetocilari.ro', run = 1, policyButton = false, readyState, adsId, adsLeadLabel, referrer = `https://${hostname}/` } = {}) {
   const listeners = new Map();
+  const timers = [];
   const document = {
     listeners,
+    referrer,
     clock: { now: 0 },
     activeElement: null,
     layout: layout || { width: element => element.textContent.length * 7, clientWidth: () => 300 },
@@ -214,6 +219,7 @@ function page({ hostname = 'www.echipadetocilari.ro', lang = 'ro', storage = mem
     location: { hostname },
     performance: { now: () => document.clock.now },
     console,
+    setTimeout: (callback, delay) => timers.push({ callback, delay }),
     addEventListener: (type, callback) => { if (!windowListeners.has(type)) windowListeners.set(type, []); windowListeners.get(type).push(callback); },
   };
   if (storage === 'throws') {
@@ -235,7 +241,7 @@ function page({ hostname = 'www.echipadetocilari.ro', lang = 'ro', storage = mem
   const [summary, customise] = [views.find(view => view.classList.contains('ect-consent__view--summary')), views.find(view => view.classList.contains('ect-consent__view--customise'))];
   const button = (view, label) => view.querySelectorAll('button').find(item => item.textContent === label);
   return {
-    context, document, jar, storage, skip, header, state, opener, policyButton: inPage, banner, summary, customise, button,
+    context, document, jar, storage, skip, header, state, opener, policyButton: inPage, banner, summary, customise, button, timers,
     gaScripts: () => document.head.querySelectorAll('script').filter(item => String(item.src || '').includes('googletagmanager.com')),
     dataLayer: () => plain(Array.from(context.dataLayer || [], args => Array.from(args))),
     cookieNames: () => (jar.get() ? jar.get().split('; ').map(item => item.split('=')[0]) : []),
@@ -311,6 +317,64 @@ test('no stored choice: banner after the skip link, one Google tag with consent 
   assert.equal(view.opener.hidden, false, 'footer control is revealed');
   assert.equal(view.state.textContent, ro.stateNone);
   assert.equal(view.stored(), null);
+});
+
+test('landing page: the banner waits for 15 seconds, a scroll of one screen or focus in a form, with every signal denied meanwhile', () => {
+  const landing = (options = {}) => page({ referrer: '', ...options });
+
+  const waiting = landing({ cookies: allGoogleCookies });
+  assert.equal(waiting.banner.hidden, true, 'nothing on arrival');
+  assert.equal(waiting.document.documentElement.classList.contains('ect-consent-open'), false, 'no space reserved yet');
+  assert.equal(waiting.opener.hidden, false, 'the footer control already works');
+  assert.deepEqual(consentUpdates(waiting), []);
+  assert.ok(!JSON.stringify(waiting.dataLayer()).includes('granted'));
+  assert.deepEqual(waiting.cookieNames().sort(), ['_gax_keep', 'theme'], 'Google cookies are deleted before the banner shows');
+  assert.deepEqual(waiting.timers.map(timer => timer.delay), [15000]);
+  waiting.timers[0].callback();
+  assert.equal(waiting.banner.hidden, false, 'shown when the time is up');
+  assert.equal(waiting.summary.hidden, false);
+  assert.equal(waiting.document.activeElement, waiting.document.body, 'no focus stolen');
+
+  const scrolled = landing();
+  scrolled.context.innerHeight = 800;
+  scrolled.context.scrollY = 799;
+  scrolled.emitWindow('scroll');
+  assert.equal(scrolled.banner.hidden, true, 'less than one screen: still waiting');
+  scrolled.context.scrollY = 800;
+  scrolled.emitWindow('scroll');
+  assert.equal(scrolled.banner.hidden, false, 'one screen: shown');
+
+  const typing = landing();
+  const form = typing.document.body.appendChild(typing.document.createElement('form'));
+  const field = form.appendChild(typing.document.createElement('input'));
+  typing.header.dispatch('focusin');
+  assert.equal(typing.banner.hidden, true, 'focus outside a form changes nothing');
+  field.dispatch('focusin');
+  assert.equal(typing.banner.hidden, false, 'focus in a form: shown, so the choice comes before sending');
+
+  // Only a page of this same host counts as "already on the site".
+  assert.equal(page({ referrer: 'https://www.google.com/' }).banner.hidden, true);
+  assert.equal(page({ referrer: 'https://www.echipadetocilari.ro.example.com/' }).banner.hidden, true);
+  assert.equal(page({ referrer: 'https://www.echipadetocilari.ro/creare-site-web/' }).banner.hidden, false);
+
+  // Answered meanwhile: the question never appears, and a second trigger does not reopen a closed card.
+  const storage = memoryStorage();
+  const elsewhere = landing({ storage });
+  storage.setItem('ect-consent', storedChoice(true, true, 0));
+  elsewhere.emitWindow('storage', { key: 'ect-consent' });
+  elsewhere.timers[0].callback();
+  assert.equal(elsewhere.banner.hidden, true, 'answered in another tab');
+
+  const footer = landing();
+  footer.opener.click();
+  footer.button(footer.customise, ro.rejectAll).click();
+  footer.timers[0].callback();
+  assert.equal(footer.banner.hidden, true, 'answered through the footer control');
+
+  // A saved choice never schedules anything.
+  const saved = landing({ storage: memoryStorage({ 'ect-consent': storedChoice(false, false) }) });
+  assert.deepEqual(saved.timers, []);
+  assert.equal(saved.banner.hidden, true);
 });
 
 test('first visit: the dataLayer has the exact Consent Mode v2 order, and the tag script is injected once', () => {
