@@ -396,6 +396,13 @@
 .fb .fb-mz-vis{min-width:0}
 .fb .fb-mz-visbox{padding:clamp(10px,2.5vw,28px);border-radius:var(--fb-leaf);background:#fff5ed}
 .fb .fb-mz-svg{display:block;width:100%;height:auto}
+/* The beam rocks a little around its pivot; each pan follows its end of the beam and stays level. */
+@keyframes fbMzBeam{0%,100%{transform:rotate(0)}50%{transform:rotate(-3deg)}}
+@keyframes fbMzLeft{0%,100%{transform:translate(0,0)}50%{transform:translate(-1px,9px)}}
+@keyframes fbMzRight{0%,100%{transform:translate(0,0)}50%{transform:translate(1px,-9px)}}
+.fb .fb-mz-beam{transform-box:view-box;transform-origin:260px 140px;animation:fbMzBeam 5s ease-in-out infinite}
+.fb .fb-mz-l{animation:fbMzLeft 5s ease-in-out infinite}
+.fb .fb-mz-r{animation:fbMzRight 5s ease-in-out infinite}
 .fb .fb-mz-svg-t1{font-family:var(--fb-sans);font-size:18px;font-weight:500}
 .fb .fb-mz-svg-t2{font-family:var(--fb-sans);font-size:19px;font-weight:700}
 .fb .fb-mz-svg-t3{font-family:var(--fb-hand);font-size:31px;font-weight:600}
