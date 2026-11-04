@@ -6,6 +6,29 @@ Cercetare din 04.11.2026. 110 site-uri în 21 de domenii, majoritatea premiate s
 
 Exemple românești găsite: Golden Wine Company, Artone Studio, Identitate Brand, Alexandra Căpitănescu. La restul domeniilor nu a apărut niciun exemplu românesc destul de bun.
 
+## Verificate vizual (04.11.2026)
+
+Capturi desktop 1440×900 cu Chrome headless, doar partea de sus a paginii, pentru cele 16 site-uri care păreau cele mai apropiate de gustul echipei.
+
+**Se potrivesc (calm, crem/alb, serif, foto mare):**
+- [Core Atelier Pilates](https://coreatelierpilates.com/): interior cald în bej, titlu serif mare animat. Cel mai aproape de zachwyt.
+- [Studenterkilden](https://studenterkilden.dk/en): fundal alb-crem, serif mare centrat, butoane bej.
+- [Klearmind Clinics](https://klearmindclinics.com/): alb-crem, serif subțire, o floare în prim-plan, accent portocaliu.
+- [STILL / FORM](https://stillform.homes/): foto de arhitectură la apus, serif condensat, text mic spațiat.
+- [Frequency Breathwork](https://www.frequencybreathwork.com/): pădure verde închis, serif cu majuscule, foarte calm.
+- [Lingers](https://www.lingers.it/en): foto mare cu podgoria, logo serif subțire, fără elemente în plus.
+- [Poeza](https://poezabride.com/): textură de rochie albă, doar logoul serif. Minimal extrem.
+- [Augustinus Fonden](https://augustinusfonden.dk/da): serif mare și verde închis, dar captura e acoperită de bannerul de cookie.
+
+**Nu se potrivesc:**
+- [Maxima Therapy](https://maximatherapy.com/): ⚠ ilustrat, verde și roz aprins. E exact stilul respins.
+- [Butter Insurance](https://butterinsurance.com.au/): ⚠ galben strident, jucăuș.
+- [La Huella](https://lahuella.club): negru și galben, tipografie grea, agresiv.
+- [workbyw](https://workbyw.com/): experimental, cu o mână 3D. Interesant, dar nu e calm.
+- [Twofold Therapy](https://twofoldny.com/): captura a prins doar ecranul de încărcare, gri cu titlu mare. Neconcludent.
+
+**Fără captură:** Casa Momo și Goldust Spa (timeout), Shape Studio (pagină goală în headless). Trebuie deschise manual.
+
 
 ## Restaurante, cafenele, baruri
 
