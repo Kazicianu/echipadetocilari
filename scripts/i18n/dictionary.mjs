@@ -596,6 +596,30 @@ export const dictionary = [
   ['Și fără ședințe inutile!', 'And no pointless meetings!'],
   ['Glisează și vezi mai mult', 'Swipe to see more'],
 
+  // Home: portfolio showcase (Apple cards carousel, placeholder cards)
+  ['>Din portofoliu<', '>From our portfolio<'],
+  [
+    'Site-uri făcute de <span class="ect-showcase__hl">tocilari</span>',
+    'Websites built by <span class="ect-showcase__hl">nerds</span>',
+  ],
+  [
+    'Câteva dintre proiectele noastre. Deschide un card ca să vezi ce am făcut și pentru cine.',
+    'A few of our projects. Open a card to see what we built and who it was for.',
+  ],
+  ['Vezi tot portofoliul →', 'See the full portfolio →'],
+  ['aria-label="Proiecte din portofoliu"', 'aria-label="Portfolio projects"'],
+  ['aria-label="Derulează înapoi"', 'aria-label="Scroll back"'],
+  ['aria-label="Derulează înainte"', 'aria-label="Scroll forward"'],
+  ['aria-label="Închide"', 'aria-label="Close"'],
+  ['>[Categorie]<', '>[Category]<'],
+  ['>[Numele proiectului]<', '>[Project name]<'],
+  ['[Pe scurt, ce am făcut.]', '[What we did, in short.]'],
+  [
+    '[Descrierea proiectului: clientul, problema pe care o avea și ce am livrat.]',
+    '[Project description: the client, the problem they had and what we delivered.]',
+  ],
+  ['>Vreau un site ca acesta<', '>I want a site like this<'],
+
   // Chart phases. Anchored on the tags: "Apelul" alone is short enough to hit
   // unrelated copy elsewhere in the document.
   ['>Primul contact<', '>First contact<'],

@@ -1335,3 +1335,519 @@
 .elementor-element-0d2945c .e-lottie__animation > svg { position: absolute; inset: 0; }
 .elementor-element-0d2945c .e-lottie__animation:has(svg image) > .ect-lottie-poster { visibility: hidden; }
 @supports not selector(:has(*)) { .elementor-element-0d2945c .ect-lottie-poster { visibility: hidden; } }
+
+/* Portfolio showcase: vanilla port of Aceternity's Apple Cards Carousel (values from its Tailwind classes). */
+.ect-showcase {
+  position: relative;
+  padding: 56px 0 24px;
+  font-family: Montserrat, system-ui, sans-serif;
+  color: #27272d;
+}
+
+.ect-showcase__head {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 16px;
+  text-align: left;
+}
+
+.ect-showcase .ect-showcase__eyebrow {
+  margin: 0 0 10px;
+  font-size: 16px;
+  line-height: 22.4px;
+  font-weight: 300;
+  color: #fd8649;
+}
+
+.ect-showcase .ect-showcase__title {
+  margin: 0;
+  font-size: 7.5vw;
+  line-height: 1.2;
+  font-weight: 500;
+  text-transform: capitalize;
+  color: #27272d;
+}
+
+.ect-showcase .ect-showcase__hl {
+  display: inline-block;
+  padding: 0.02em 0.16em 0.08em;
+  border-radius: 15px;
+  background: #fd8649;
+}
+
+.ect-showcase .ect-showcase__lead {
+  max-width: 640px;
+  margin: 18px 0 0;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 300;
+}
+
+.ect-showcase .ect-showcase__more {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 16px;
+  font-size: 15px;
+  line-height: 21px;
+  font-weight: 500;
+  color: #27272d;
+  text-decoration: underline;
+  text-decoration-color: rgba(253, 134, 73, 0.6);
+  text-underline-offset: 5px;
+}
+
+.ect-showcase .ect-showcase__more:hover,
+.ect-showcase .ect-showcase__more:focus-visible {
+  color: #fd8649;
+}
+
+.ect-showcase .ect-showcase__more:focus-visible {
+  outline: 3px solid #27272d;
+  outline-offset: 5px;
+}
+
+.ect-showcase .ect-carousel {
+  position: relative;
+  width: 100%;
+}
+
+.ect-showcase .ect-carousel__scroller {
+  display: flex;
+  width: 100%;
+  overflow-x: scroll;
+  overscroll-behavior-x: auto;
+  scroll-behavior: smooth;
+  padding: 40px 0;
+  scrollbar-width: none;
+}
+
+.ect-showcase .ect-carousel__scroller::-webkit-scrollbar {
+  display: none;
+}
+
+.ect-showcase .ect-carousel__scroller:focus-visible {
+  outline: 3px solid #27272d;
+  outline-offset: -3px;
+}
+
+.ect-showcase .ect-carousel__row {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 16px;
+  margin: 0 auto;
+  padding: 0 0 0 16px;
+  max-width: 1280px;
+  list-style: none;
+}
+
+.ect-showcase .ect-carousel__item {
+  flex: 0 0 auto;
+  margin: 0;
+  border-radius: 24px;
+}
+
+.ect-showcase .ect-carousel__item:last-child {
+  padding-right: 5%;
+}
+
+.ect-showcase .ect-carousel__controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-right: 40px;
+}
+
+.ect-showcase .ect-carousel__controls[hidden] {
+  display: none;
+}
+
+.ect-showcase .ect-carousel__arrow,
+.ect-showcase .ect-carousel__arrow:hover,
+.ect-showcase .ect-carousel__arrow:focus,
+.ect-showcase .ect-carousel__arrow:active {
+  position: relative;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 9999px;
+  background: #f3f4f6;
+  color: #6b7280;
+  cursor: pointer;
+  box-shadow: none;
+}
+
+.ect-showcase .ect-carousel__arrow:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.ect-showcase .ect-carousel__arrow:focus-visible,
+.ect-showcase .ect-carousel-modal__close:focus-visible,
+.ect-showcase .ect-carousel-card:focus-visible {
+  outline: 3px solid #27272d;
+  outline-offset: 5px;
+}
+
+.ect-showcase .ect-carousel__arrow svg {
+  width: 24px;
+  height: 24px;
+}
+
+.ect-showcase .ect-carousel-card,
+.ect-showcase .ect-carousel-card:hover,
+.ect-showcase .ect-carousel-card:focus,
+.ect-showcase .ect-carousel-card:active {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  overflow: hidden;
+  width: 224px;
+  height: 320px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 24px;
+  background: #f3f4f6;
+  color: #fff;
+  font: inherit;
+  text-align: left;
+  text-transform: none;
+  cursor: pointer;
+  box-shadow: none;
+}
+
+.ect-showcase .ect-carousel-card__shade {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), transparent 50%, transparent);
+}
+
+.ect-showcase .ect-carousel-card__text {
+  position: relative;
+  z-index: 40;
+  display: block;
+  padding: 32px;
+}
+
+.ect-showcase .ect-carousel-card__category {
+  display: block;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.ect-showcase .ect-carousel-card__title {
+  display: block;
+  max-width: 320px;
+  margin-top: 8px;
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 600;
+  text-wrap: balance;
+  color: #fff;
+}
+
+.ect-showcase .ect-carousel-card__img {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: top;
+  transition: filter 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ect-showcase .ect-carousel-card__img.is-loading {
+  filter: blur(8px);
+}
+
+.ect-showcase .ect-carousel.is-armed .ect-carousel__item {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.ect-showcase .ect-carousel.is-armed.is-revealed .ect-carousel__item {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  transition-delay: calc(var(--i, 0) * 0.2s);
+}
+
+.ect-showcase .ect-carousel-modal {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: rgba(0, 0, 0, 0.8);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  overflow: auto;
+  overscroll-behavior: contain;
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.25, 0.1, 0.35, 1);
+}
+
+.ect-showcase .ect-carousel-modal.is-open {
+  opacity: 1;
+}
+
+.ect-showcase .ect-carousel-modal::backdrop {
+  background: transparent;
+}
+
+.ect-showcase .ect-carousel-modal:not([open]) {
+  display: none;
+}
+
+.ect-showcase .ect-carousel-modal__panel {
+  position: relative;
+  z-index: 60;
+  max-width: 1024px;
+  height: fit-content;
+  margin: 40px auto;
+  padding: 16px;
+  border-radius: 24px;
+  background: #fff;
+  font-family: Montserrat, system-ui, sans-serif;
+}
+
+.ect-showcase .ect-carousel-modal__close,
+.ect-showcase .ect-carousel-modal__close:hover,
+.ect-showcase .ect-carousel-modal__close:focus,
+.ect-showcase .ect-carousel-modal__close:active {
+  position: sticky;
+  top: 16px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin: 0 0 0 auto;
+  padding: 0;
+  border: 0;
+  border-radius: 9999px;
+  background: #000;
+  color: #f5f5f5;
+  cursor: pointer;
+  box-shadow: none;
+}
+
+.ect-showcase .ect-carousel-modal__close svg {
+  width: 24px;
+  height: 24px;
+}
+
+.ect-showcase .ect-carousel-modal__category {
+  margin: 0;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  color: #000;
+}
+
+.ect-showcase .ect-carousel-modal__title {
+  margin: 16px 0 0;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
+  color: #404040;
+  text-transform: none;
+}
+
+.ect-showcase .ect-carousel-modal__content {
+  padding: 40px 0;
+}
+
+.ect-showcase .ect-carousel-modal__block {
+  margin-bottom: 16px;
+  padding: 32px;
+  border-radius: 24px;
+  background: #f5f5f7;
+}
+
+.ect-showcase .ect-carousel-modal__text {
+  max-width: 768px;
+  margin: 0 auto;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  color: #525252;
+}
+
+.ect-showcase .ect-carousel-modal__text strong {
+  font-weight: 700;
+  color: #404040;
+}
+
+.ect-showcase .ect-carousel-modal__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  max-width: 768px;
+  margin: 24px auto 32px;
+}
+
+.ect-showcase .ect-carousel-modal__button,
+.ect-showcase .ect-carousel-modal__button:visited {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 28px;
+  border: 2px solid #fd8649;
+  border-radius: 30px;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.ect-showcase .ect-carousel-modal__button--filled,
+.ect-showcase .ect-carousel-modal__button--filled:visited {
+  background: #fd8649;
+  color: #fff;
+}
+
+.ect-showcase .ect-carousel-modal__button--filled:hover,
+.ect-showcase .ect-carousel-modal__button--filled:focus {
+  background: #fff;
+  color: #fd8649;
+}
+
+.ect-showcase .ect-carousel-modal__button--outline,
+.ect-showcase .ect-carousel-modal__button--outline:visited {
+  background: #fff;
+  color: #fd8649;
+}
+
+.ect-showcase .ect-carousel-modal__button--outline:hover,
+.ect-showcase .ect-carousel-modal__button--outline:focus {
+  background: #fd8649;
+  color: #fff;
+}
+
+.ect-showcase .ect-carousel-modal__button:focus-visible {
+  outline: 3px solid #27272d;
+  outline-offset: 5px;
+}
+
+.ect-showcase .ect-carousel-modal__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  margin: 0 auto;
+  border-radius: 0;
+}
+
+@media (min-width: 768px) {
+  .ect-showcase .ect-showcase__title {
+    font-size: 32px;
+    line-height: 38.4px;
+  }
+
+  .ect-showcase .ect-carousel__scroller {
+    padding: 80px 0;
+  }
+
+  .ect-showcase .ect-carousel__item:last-child {
+    padding-right: 33%;
+  }
+
+  .ect-showcase .ect-carousel-card,
+  .ect-showcase .ect-carousel-card:hover,
+  .ect-showcase .ect-carousel-card:focus,
+  .ect-showcase .ect-carousel-card:active {
+    width: 384px;
+    height: 640px;
+  }
+
+  .ect-showcase .ect-carousel-card__category {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .ect-showcase .ect-carousel-card__title {
+    font-size: 30px;
+    line-height: 36px;
+  }
+
+  .ect-showcase .ect-carousel-modal__panel {
+    padding: 40px;
+  }
+
+  .ect-showcase .ect-carousel-modal__title {
+    font-size: 48px;
+    line-height: 1;
+  }
+
+  .ect-showcase .ect-carousel-modal__block {
+    padding: 56px;
+  }
+
+  .ect-showcase .ect-carousel-modal__text {
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  .ect-showcase .ect-carousel-modal__img {
+    width: 50%;
+  }
+}
+
+@media (min-width: 1025px) {
+  .ect-showcase {
+    padding: 90px 0 40px;
+  }
+
+  .ect-showcase .ect-showcase__title {
+    font-size: 45px;
+    line-height: 54px;
+  }
+
+  .ect-showcase .ect-showcase__lead {
+    font-size: 18px;
+    line-height: 27px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ect-showcase .ect-carousel__scroller {
+    scroll-behavior: auto;
+  }
+
+  .ect-showcase .ect-carousel.is-armed .ect-carousel__item,
+  .ect-showcase .ect-carousel.is-armed.is-revealed .ect-carousel__item {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .ect-showcase .ect-carousel-card__img,
+  .ect-showcase .ect-carousel-modal {
+    transition: none;
+  }
+}
