@@ -14,9 +14,9 @@ export const roPageMeta = {
       'Cunoaște Echipa de Tocilari, agenție de marketing digital din București. Design, dezvoltare web și SEO, cu atenție la detalii și comunicare deschisă.',
   },
   '/creare-site-web/': {
-    title: 'Creare site web București | prezentare și landing',
+    title: 'Creare site web: prețuri de la 299 € | Echipa de Tocilari',
     description:
-      'Creare site web în București: site de prezentare, landing page și bază de magazin online. Design, viteză și SEO tehnic de la prima versiune.',
+      'Creare site web pentru firme: landing page de la 299 €, site de prezentare de la 499 €, magazin online și aplicații web. Consultație gratuită 30 min.',
   },
   '/creare-magazin-online/': {
     title: 'Creare magazin online de la 1.490 € | Echipa de Tocilari',

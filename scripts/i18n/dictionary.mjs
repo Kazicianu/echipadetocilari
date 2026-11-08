@@ -1,7 +1,8 @@
 import { googleAdsDictionary } from './google-ads.mjs';
 import { portfolioDictionary } from './portfolio.mjs';
 import { privacyPolicyDictionary } from './privacy-policy.mjs';
-export { googleAdsDictionary, portfolioDictionary, privacyPolicyDictionary };
+import { websiteDesignDictionary } from './website-design.mjs';
+export { googleAdsDictionary, portfolioDictionary, privacyPolicyDictionary, websiteDesignDictionary };
 
 /**
  * Page-only entries, keyed by the RO route. generate-en.mjs merges them with the
@@ -9,6 +10,7 @@ export { googleAdsDictionary, portfolioDictionary, privacyPolicyDictionary };
  */
 export const pageDictionaries = {
   '/agentie-google-ads/': googleAdsDictionary,
+  '/creare-site-web/': websiteDesignDictionary,
   '/portofoliu/': portfolioDictionary,
   '/politica-de-confidentialitate/': privacyPolicyDictionary,
 };
@@ -16,6 +18,7 @@ export const pageDictionaries = {
 /** Source files of the page dictionaries, for the sitemap <lastmod> of the EN pages. */
 export const pageDictionaryFiles = {
   '/agentie-google-ads/': 'scripts/i18n/google-ads.mjs',
+  '/creare-site-web/': 'scripts/i18n/website-design.mjs',
   '/portofoliu/': 'scripts/i18n/portfolio.mjs',
   '/politica-de-confidentialitate/': 'scripts/i18n/privacy-policy.mjs',
 };
@@ -1496,9 +1499,9 @@ export const enPageMeta = {
       'Meet Echipa de Tocilari, a digital marketing agency in Bucharest. Discover how we bring design, development, SEO, and clear communication to your project.',
   },
   '/en/website-design/': {
-    title: 'Website Design Bucharest | Business Sites & Landing Pages',
+    title: 'Website Design Bucharest: From €299 | Echipa de Tocilari',
     description:
-      'Website design in Bucharest: business sites, landing pages, and a solid base for online stores. Fast, mobile-first, with technical SEO from day one.',
+      'Website design in Bucharest, serving all of Romania: landing pages from €299, business websites from €499, online stores and custom projects.',
   },
   '/en/seo-services/': {
     title: 'SEO Services and AI Visibility | Echipa de Tocilari',

@@ -21,6 +21,7 @@ import {
 import { faqPage, organization, service, visibleDateModified, webPage, website } from '../lib/schema.mjs';
 import { extractGoogleAdsFaqs, extractHomeFaqs } from '../lib/faq.mjs';
 import { normalizeSocialMeta } from '../lib/social-meta.mjs';
+import { answeredFaqs } from '../lib/website-seo.mjs';
 
 /**
  * Longest phrase first, so "Servicii SEO" wins over "Servicii".
@@ -88,6 +89,7 @@ function schemasFor(route, meta, site, html) {
   ];
 
   if (route.en === '/en/') list.push(faqPage(extractHomeFaqs(html)));
+  if (route.en === '/en/website-design/') list.push(faqPage(answeredFaqs(extractHomeFaqs(html))));
   if (route.en === '/en/google-ads-agency/') list.push(faqPage(extractGoogleAdsFaqs(html)));
   if (route.service) {
     list.push(
