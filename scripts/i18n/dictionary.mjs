@@ -1130,6 +1130,18 @@ export const dictionary = [
     'This online marketing agency is the best choice for anyone who wants to promote their business online. Their specialists did an excellent job promoting my business and I saw a significant increase in sales. I am very happy with their services and we will work together on future campaigns.',
   ],
 
+  [
+    'Ce spun <span class="ect-quotes__hl">clienții</span> despre noi',
+    'What our <span class="ect-quotes__hl">clients</span> say about us',
+  ],
+  ['Nu trebuie să ne crezi pe cuvânt. Uite ce spun oamenii cu care am lucrat.', "You don't have to take our word for it. Here is what the people we worked with say."],
+  ['aria-label="Testimoniale de la clienți"', 'aria-label="Client testimonials"'],
+  ['aria-label="Pune pauză derulării"', 'aria-label="Pause scrolling"'],
+  ['>O experiență foarte plăcută<', '>A great experience<'],
+  ['>Impresionată de nivelul lor de expertiză<', '>Impressed by their expertise<'],
+  ['>O creștere semnificativă a vânzărilor<', '>A significant increase in sales<'],
+  ['>Primește o ofertă<', '>Get a quote<'],
+
   // More FAQ long answers (common Rank Math / Elementor text)
   [
     'Există mai multe opțiuni pentru a-ți mări bugetul pentru serviciile de marketing online. Una dintre ele este să optimizezi website-ul tău pentru conversii, astfel încât să maximizezi numărul de vizitatori care se transformă în clienți. De asemenea, poți să te concentrezi pe canalele care aduc cele mai bune rezultate pentru afacerea ta și să reduci bugetul pentru cele care nu generează un ROI favorabil. În final, poți să îți mărești bugetul global pentru marketingul online prin realocarea fondurilor din alte părți ale afacerii tale sau prin obținerea de investiții suplimentare.',

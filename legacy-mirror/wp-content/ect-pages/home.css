@@ -1851,3 +1851,385 @@
     transition: none;
   }
 }
+
+/* Testimonials: marquee of staggered quote cards (layout after the Unlimited Framer template). */
+.ect-quotes {
+  position: relative;
+  padding: 56px 0 64px;
+  background: #fff;
+  font-family: Montserrat, system-ui, sans-serif;
+  color: #27272d;
+  overflow: hidden;
+}
+
+.ect-quotes__head {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.ect-quotes .ect-quotes__eyebrow {
+  margin: 0 0 10px;
+  font-size: 16px;
+  line-height: 22.4px;
+  font-weight: 300;
+  color: #fd8649;
+}
+
+.ect-quotes .ect-quotes__title {
+  margin: 0;
+  font-size: 7.5vw;
+  line-height: 1.25;
+  font-weight: 500;
+  color: #27272d;
+}
+
+.ect-quotes .ect-quotes__hl {
+  display: inline-block;
+  padding: 0.02em 0.24em 0.1em;
+  margin: 0 0.04em;
+  border-radius: 15px;
+  background: #fd8649;
+  color: #27272d;
+  transform: rotate(-3deg);
+}
+
+.ect-quotes .ect-quotes__lead {
+  max-width: 560px;
+  margin: 16px auto 0;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 300;
+  color: #27272d;
+}
+
+.ect-quotes .ect-quotes__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  margin-top: 22px;
+  padding: 0 28px;
+  border: 3px solid #fd8649;
+  border-radius: 30px;
+  background: #fd8649;
+  color: #fffefe;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.ect-quotes .ect-quotes__cta:hover {
+  background: #fff;
+  color: #fd8649;
+}
+
+.ect-quotes .ect-quotes__cta:focus-visible {
+  outline: 3px solid #27272d;
+  outline-offset: 5px;
+}
+
+.ect-quotes .ect-quotes__viewport {
+  margin-top: 40px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding: 0 20px;
+  padding: 8px 0 12px;
+}
+
+.ect-quotes .ect-quotes__viewport:focus-visible {
+  outline: 3px solid #27272d;
+  outline-offset: -3px;
+}
+
+.ect-quotes .ect-quotes__track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  margin: 0;
+  padding: 0 4px 0 20px;
+  list-style: none;
+}
+
+.ect-quotes .ect-quotes__item {
+  flex: 0 0 auto;
+  margin: 0;
+  padding-right: 16px;
+  scroll-snap-align: start;
+}
+
+.ect-quotes .ect-quotes__item:nth-child(odd) {
+  padding-bottom: 24px;
+}
+
+.ect-quotes .ect-quotes__item:nth-child(even) {
+  padding-top: 24px;
+}
+
+.ect-quotes .ect-quotes__card {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  width: min(300px, calc(100vw - 72px));
+  margin: 0;
+  padding: 28px 22px 30px;
+  background: #fff;
+  border: 1.5px solid #27272d;
+  border-radius: 20px 20px 20px 40px;
+  text-align: center;
+}
+
+.ect-quotes .ect-quotes__mark {
+  width: 44px;
+  height: 44px;
+  color: #fd8649;
+}
+
+.ect-quotes .ect-quotes__item:nth-child(even) .ect-quotes__mark {
+  color: #27272d;
+}
+
+.ect-quotes .ect-quotes__card-title {
+  margin: 0;
+  font-size: 20px;
+  line-height: 26px;
+  font-weight: 600;
+  color: #27272d;
+}
+
+.ect-quotes .ect-quotes__text {
+  margin: 0;
+}
+
+.ect-quotes .ect-quotes__text p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: 300;
+  color: #27272d;
+}
+
+.ect-quotes .ect-quotes__cite {
+  display: flex;
+  font-style: normal;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 6px;
+  text-align: left;
+}
+
+.ect-quotes .ect-quotes__avatar {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #fd8649;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.ect-quotes .ect-quotes__item:nth-child(even) .ect-quotes__avatar {
+  background: #27272d;
+  color: #fd8649;
+}
+
+.ect-quotes .ect-quotes__who {
+  display: flex;
+  flex-direction: column;
+}
+
+.ect-quotes .ect-quotes__name {
+  font-size: 16px;
+  line-height: 21px;
+  font-weight: 600;
+  color: #27272d;
+}
+
+.ect-quotes .ect-quotes__company {
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #55555e;
+}
+
+.ect-quotes.is-marquee .ect-quotes__viewport {
+  overflow: hidden;
+  scroll-snap-type: none;
+  padding: 8px 0;
+}
+
+.ect-quotes.is-marquee .ect-quotes__track {
+  padding: 0;
+  animation: ect-quotes-scroll var(--ect-quotes-duration, 60s) linear infinite;
+  will-change: transform;
+}
+
+@keyframes ect-quotes-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.ect-quotes.is-paused .ect-quotes__track,
+.ect-quotes.is-marquee .ect-quotes__viewport:hover .ect-quotes__track {
+  animation-play-state: paused;
+}
+
+.ect-quotes .ect-quotes__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin: 20px auto 0;
+  padding: 0;
+  border: 1.5px solid #27272d;
+  border-radius: 50%;
+  background: #fff;
+  color: #27272d;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.ect-quotes .ect-quotes__toggle[hidden] {
+  display: none;
+}
+
+.ect-quotes .ect-quotes__toggle:hover {
+  background: #27272d;
+  color: #fff;
+}
+
+.ect-quotes .ect-quotes__toggle:focus-visible {
+  outline: 3px solid #27272d;
+  outline-offset: 5px;
+}
+
+.ect-quotes .ect-quotes__icon--play {
+  display: none;
+}
+
+.ect-quotes .ect-quotes__toggle[aria-pressed="true"] .ect-quotes__icon--pause {
+  display: none;
+}
+
+.ect-quotes .ect-quotes__toggle[aria-pressed="true"] .ect-quotes__icon--play {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .ect-quotes .ect-quotes__title {
+    font-size: 32px;
+    line-height: 40px;
+  }
+
+  .ect-quotes .ect-quotes__item:nth-child(odd) {
+    padding-bottom: 40px;
+  }
+
+  .ect-quotes .ect-quotes__item:nth-child(even) {
+    padding-top: 40px;
+  }
+
+  .ect-quotes .ect-quotes__card {
+    width: 440px;
+    padding: 38px 36px;
+    gap: 18px;
+    border-radius: 24px 24px 24px 70px;
+  }
+
+  .ect-quotes .ect-quotes__card-title {
+    font-size: 24px;
+    line-height: 31px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .ect-quotes {
+    padding: 100px 0 110px;
+  }
+
+  .ect-quotes .ect-quotes__eyebrow {
+    font-size: 18px;
+    line-height: 21.6px;
+  }
+
+  .ect-quotes .ect-quotes__title {
+    font-size: 45px;
+    line-height: 56px;
+  }
+
+  .ect-quotes .ect-quotes__lead {
+    font-size: 18px;
+    line-height: 27px;
+  }
+
+  .ect-quotes .ect-quotes__viewport {
+    margin-top: 56px;
+  }
+
+  .ect-quotes .ect-quotes__item {
+    padding-right: 24px;
+  }
+
+  .ect-quotes .ect-quotes__item:nth-child(odd) {
+    padding-bottom: 48px;
+  }
+
+  .ect-quotes .ect-quotes__item:nth-child(even) {
+    padding-top: 48px;
+  }
+
+  .ect-quotes .ect-quotes__card {
+    width: 520px;
+    padding: 44px 46px 46px;
+  }
+
+  .ect-quotes .ect-quotes__mark {
+    width: 54px;
+    height: 54px;
+  }
+
+  .ect-quotes .ect-quotes__text p {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .ect-quotes .ect-quotes__avatar {
+    width: 56px;
+    height: 56px;
+    font-size: 18px;
+  }
+
+  .ect-quotes .ect-quotes__name {
+    font-size: 17px;
+  }
+
+  .ect-quotes .ect-quotes__company {
+    font-size: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ect-quotes .ect-quotes__track {
+    animation: none !important;
+  }
+
+  .ect-quotes .ect-quotes__cta,
+  .ect-quotes .ect-quotes__toggle {
+    transition: none;
+  }
+}
