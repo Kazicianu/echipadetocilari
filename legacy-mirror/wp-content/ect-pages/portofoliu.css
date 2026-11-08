@@ -1,0 +1,124 @@
+/* Portfolio page styles copied from the approved Magic UI bento design (Design canvas, page E) and the store page buttons.
+   Rules stay inside the page content. The shared header, contact form and footer keep their own CSS. */
+.ect-page--portofoliu {
+  --orange: #fd8649;
+  --ink: #27272d;
+  --ink-muted: #55555e;
+  --white: #ffffff;
+  --white-warm: #fffefe;
+  --field: #fcfcfc;
+  --line: #e9e9e9;
+  --line-peach: #f5ddce;
+  --mute: #c9c9cf;
+  --peach: #fff0e7;
+  --blob-turquoise: #e3f8f9;
+  --blob-turquoise-deep: #cef3f5;
+  --radius-button: 30px;
+  --content-max: 1150px;
+  --section-max: 1400px;
+  min-width: 0;
+  overflow-x: clip;
+  background: var(--white);
+  color: var(--ink);
+  font: 400 16px/normal Montserrat, sans-serif;
+}
+.ect-page--portofoliu *, .ect-page--portofoliu *::before, .ect-page--portofoliu *::after { box-sizing: content-box; }
+.ect-page--portofoliu :is(h1,h2,h3,p,figure) { margin-block-start: 0; }
+.ect-page--portofoliu :is(h1,h2,h3) { font-family: inherit; font-style: normal; letter-spacing: normal; color: inherit; text-transform: none; }
+.ect-page--portofoliu [id] { scroll-margin-top: 24px; }
+.ect-page--portofoliu .screen-reader-text { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; border: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.ect-page--portofoliu :is(a,button):focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+
+/* Hero */
+.ect-page--portofoliu .pf-hero { position: relative; max-width: var(--content-max); margin: 0 auto; padding: 24px 20px 0; text-align: center; }
+.ect-page--portofoliu .pf-blob { position: absolute; left: 50%; top: 10px; width: 420px; height: 420px; max-width: 100%; transform: translateX(-50%); opacity: 0.9; border-radius: 46% 54% 41% 59% / 52% 38% 62% 48%; background: radial-gradient(circle at 35% 30%, #ffffff 0%, var(--blob-turquoise) 45%, var(--blob-turquoise-deep) 100%); }
+.ect-page--portofoliu .pf-hero__copy { position: relative; max-width: 760px; margin: 0 auto; text-align: center; }
+.ect-page--portofoliu .pf-kicker { margin-bottom: 0; font-size: 21px; line-height: 1.2; font-weight: 400; color: var(--ink); }
+.ect-page--portofoliu .pf-title { margin: 10px 0 0; font-size: clamp(30px, 7.5vw, 45px); line-height: 1.2; font-weight: 900; text-transform: uppercase; color: var(--orange); }
+.ect-page--portofoliu .pf-lead { max-width: 620px; margin: 20px auto 0; font-size: 18px; line-height: 1.45; font-weight: 400; color: var(--ink); }
+.ect-page--portofoliu .pf-actions { display: flex; justify-content: center; margin: 28px auto 0; }
+.ect-page--portofoliu .pf-note { margin: 16px 0 0; font-size: 14px; line-height: 1.5; font-weight: 400; color: var(--ink-muted); }
+.ect-page--portofoliu .pf-sit { position: relative; z-index: 3; height: 120px; max-width: var(--section-max); margin: 0 auto; pointer-events: none; }
+.ect-page--portofoliu .pf-sit img { position: absolute; right: 16px; bottom: -44px; width: 150px; height: auto; }
+
+/* Main button: orange pill with a white arrow chip */
+.ect-page--portofoliu .pf-cta { display: inline-flex; align-items: center; justify-content: space-between; gap: 14px; box-sizing: border-box; max-width: 100%; min-height: 56px; padding: 6px 6px 6px 26px; border: 2px solid var(--orange); border-radius: var(--radius-button); background: var(--orange); color: var(--white-warm); font-family: Montserrat, sans-serif; font-size: 16px; line-height: 1.3; font-weight: 600; text-align: left; text-decoration: none; cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: rgba(253, 134, 73, 0.2); box-shadow: rgba(253, 134, 73, 0.7) 0 14px 28px -14px; transition: border-color 180ms, box-shadow 0.3s, transform 0.3s; }
+.ect-page--portofoliu .pf-cta--main { border-color: var(--orange); background: var(--orange); color: var(--white-warm); }
+.ect-page--portofoliu .pf-cta__chip { flex: 0 0 auto; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--white); color: var(--ink); transition: background-color 180ms, transform 0.3s; }
+.ect-page--portofoliu .pf-cta__chip svg { width: 18px; height: 18px; fill: none; }
+.ect-page--portofoliu .pf-cta:active { transform: scale(0.98); }
+@media (hover: hover) and (pointer: fine) {
+  .ect-page--portofoliu .pf-cta--main:hover { transform: translateY(-2px); box-shadow: rgba(253, 134, 73, 0.85) 0 18px 32px -14px; }
+  .ect-page--portofoliu .pf-cta--main:hover .pf-cta__chip { transform: translateX(4px); }
+}
+
+/* Projects section */
+.ect-page--portofoliu .pf-projects { position: relative; max-width: var(--section-max); margin: 0 auto; padding: 20px 20px 110px; }
+
+/* Magic UI bento grid: one column on phones, three from 1024px */
+.ect-page--portofoliu .mb-grid { display: grid; width: 100%; grid-template-columns: minmax(0, 1fr); grid-auto-rows: 30rem; gap: 20px; }
+.ect-page--portofoliu .mb-card { position: relative; grid-column: span 1; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; border-radius: 12px; background: var(--white); box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.03), 0 2px 4px rgba(0, 0, 0, 0.05), 0 12px 24px rgba(0, 0, 0, 0.05); }
+.ect-page--portofoliu .mb-bg { position: absolute; inset: 0; pointer-events: none; }
+.ect-page--portofoliu .mb-shot { position: absolute; top: 16px; left: 16px; right: 16px; bottom: 205px; display: flex; flex-direction: column; border: 1px solid rgba(3, 7, 18, 0.1); border-radius: 12px; background: var(--white); overflow: hidden; -webkit-mask-image: linear-gradient(to bottom, #000 80%, transparent 100%); mask-image: linear-gradient(to bottom, #000 80%, transparent 100%); transform-origin: top center; transition: transform 0.3s ease-out; }
+.ect-page--portofoliu .mb-shot img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.ect-page--portofoliu .mb-bar { display: flex; align-items: center; gap: 6px; height: 28px; padding: 0 12px; border-bottom: 1px solid rgba(3, 7, 18, 0.08); background: #fafafa; }
+.ect-page--portofoliu .mb-bar i { width: 9px; height: 9px; border-radius: 50%; background: #e5e5e5; }
+.ect-page--portofoliu .mb-url { margin-left: 10px; flex: 1; height: 14px; border-radius: 999px; background: #f0f0f0; }
+.ect-page--portofoliu .mb-ph { flex: 1; margin: 12px; border: 2px dashed var(--mute); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 12px; line-height: 16px; font-weight: 700; letter-spacing: 0.96px; text-transform: uppercase; color: var(--ink-muted); text-align: center; padding: 0 12px; }
+.ect-page--portofoliu .mb-body { position: relative; z-index: 1; margin-top: auto; padding: 16px; }
+.ect-page--portofoliu .mb-content { pointer-events: none; display: flex; flex-direction: column; gap: 4px; transition: transform 0.3s; }
+.ect-page--portofoliu .mb-icon { width: 48px; height: 48px; color: #404040; transform-origin: left; transition: transform 0.3s ease-in-out; }
+.ect-page--portofoliu .mb-name { margin: 0; font-size: 24px; line-height: 30px; font-weight: 600; color: #404040; }
+.ect-page--portofoliu .mb-desc { margin: 0; max-width: 32rem; font-size: 16px; line-height: 24px; color: #737373; }
+.ect-page--portofoliu .mb-cta { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-size: 14px; font-weight: 600; color: var(--ink); text-decoration: none; }
+.ect-page--portofoliu a.mb-cta:hover { text-decoration: underline; text-underline-offset: 4px; }
+.ect-page--portofoliu .mb-cta svg { width: 16px; height: 16px; }
+.ect-page--portofoliu .mb-cta-desk { display: none; position: absolute; bottom: 0; left: 0; right: 0; z-index: 2; padding: 0 16px 4px; pointer-events: none; }
+.ect-page--portofoliu .mb-cta-desk .mb-cta { pointer-events: auto; }
+.ect-page--portofoliu .mb-cta-mob { display: flex; }
+.ect-page--portofoliu .mb-veil { position: absolute; inset: 0; pointer-events: none; transition: background-color 0.3s; }
+
+/* Intro card: marquee with the project names */
+.ect-page--portofoliu .mb-marquee { position: absolute; left: 0; right: 0; display: flex; overflow: hidden; gap: 16px; -webkit-mask-image: linear-gradient(to top, transparent 40%, #000 100%); mask-image: linear-gradient(to top, transparent 40%, #000 100%); }
+.ect-page--portofoliu .mb-track { display: flex; flex-shrink: 0; gap: 16px; animation: mb-scroll 20s linear infinite; }
+.ect-page--portofoliu .mb-fig { width: 200px; flex-shrink: 0; margin: 0; padding: 16px; border: 1px solid rgba(3, 7, 18, 0.1); border-radius: 12px; background: rgba(3, 7, 18, 0.01); filter: blur(1px); transition: filter 0.3s ease-out, background-color 0.3s; }
+.ect-page--portofoliu .mb-fig b { display: block; font-size: 14px; line-height: 20px; font-weight: 500; color: var(--ink); }
+.ect-page--portofoliu .mb-fig span { display: block; margin-top: 8px; font-size: 12px; line-height: 16px; color: var(--ink-muted); }
+.ect-page--portofoliu .mb-fig i { display: block; height: 90px; margin-bottom: 12px; border: 2px dashed var(--mute); border-radius: 8px; }
+.ect-page--portofoliu .mb-m1 { top: 16px; -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 35%); mask-image: linear-gradient(to top, transparent 0%, #000 35%); }
+.ect-page--portofoliu .mb-m2 { display: none; top: 230px; -webkit-mask-image: linear-gradient(to top, transparent 20%, #000 100%); mask-image: linear-gradient(to top, transparent 20%, #000 100%); }
+.ect-page--portofoliu .mb-m2 .mb-track { animation-direction: reverse; }
+@keyframes mb-scroll { to { transform: translateX(calc(-100% - 16px)); } }
+
+@media (min-width: 768px) {
+  .ect-page--portofoliu .pf-hero { padding-top: 50px; }
+  .ect-page--portofoliu .pf-blob { width: 760px; height: 380px; }
+  .ect-page--portofoliu .pf-sit { height: 150px; }
+  .ect-page--portofoliu .pf-sit img { right: 12%; bottom: -56px; width: 230px; }
+}
+@media (min-width: 1024px) {
+  .ect-page--portofoliu .mb-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: 38rem; }
+  .ect-page--portofoliu .mb-card { grid-column: span 3; }
+  .ect-page--portofoliu .mb-c1 { grid-column: span 1; }
+  .ect-page--portofoliu .mb-c2 { grid-column: span 2; }
+  .ect-page--portofoliu .mb-shot { bottom: 170px; }
+  .ect-page--portofoliu .mb-m2 { display: flex; }
+}
+@media (min-width: 1024px) and (hover: hover) {
+  .ect-page--portofoliu .mb-cta-mob { display: none; }
+  .ect-page--portofoliu .mb-cta-desk { display: flex; opacity: 0; transform: translateY(40px); transition: opacity 0.3s, transform 0.3s; }
+  .ect-page--portofoliu .mb-card:hover .mb-shot, .ect-page--portofoliu .mb-card:focus-within .mb-shot { transform: scale(1.03); }
+  .ect-page--portofoliu .mb-card:hover .mb-icon, .ect-page--portofoliu .mb-card:focus-within .mb-icon { transform: scale(0.75); }
+  .ect-page--portofoliu .mb-card:hover .mb-content, .ect-page--portofoliu .mb-card:focus-within .mb-content { transform: translateY(-40px); }
+  .ect-page--portofoliu .mb-card:hover .mb-cta-desk, .ect-page--portofoliu .mb-card:focus-within .mb-cta-desk { opacity: 1; transform: translateY(0); }
+  .ect-page--portofoliu .mb-card:hover .mb-veil { background: rgba(0, 0, 0, 0.03); }
+  .ect-page--portofoliu .mb-card:hover .mb-track { animation-play-state: paused; }
+  .ect-page--portofoliu .mb-fig:hover { filter: none; background: rgba(3, 7, 18, 0.05); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ect-page--portofoliu .mb-track { animation: none; }
+  .ect-page--portofoliu .mb-shot, .ect-page--portofoliu .mb-content, .ect-page--portofoliu .mb-icon, .ect-page--portofoliu .mb-cta-desk, .ect-page--portofoliu .mb-fig, .ect-page--portofoliu .mb-veil { transition: none; }
+  .ect-page--portofoliu .mb-card:hover .mb-shot, .ect-page--portofoliu .mb-card:focus-within .mb-shot, .ect-page--portofoliu .mb-card:hover .mb-icon, .ect-page--portofoliu .mb-card:focus-within .mb-icon, .ect-page--portofoliu .mb-card:hover .mb-content, .ect-page--portofoliu .mb-card:focus-within .mb-content { transform: none; }
+  .ect-page--portofoliu .pf-cta, .ect-page--portofoliu .pf-cta__chip { transition: none; }
+  .ect-page--portofoliu .pf-cta:active, .ect-page--portofoliu .pf-cta:hover, .ect-page--portofoliu .pf-cta:hover .pf-cta__chip { transform: none; }
+}

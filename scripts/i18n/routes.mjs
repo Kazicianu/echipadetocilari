@@ -96,7 +96,6 @@ export const routes = [
     enFile: 'en/portfolio/index.html',
     labelRo: 'Portofoliu',
     labelEn: 'Portfolio',
-    lcpImages: [{ href: '/wp-content/uploads/2024/02/Bg-Services.png' }],
     preloadFonts: true,
   },
   {

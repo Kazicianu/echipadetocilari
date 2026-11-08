@@ -44,9 +44,9 @@ export const roPageMeta = {
       'Contactează Echipa de Tocilari pentru creare site, SEO sau Google Ads. Consultație gratuită 30 de minute, lucrăm remote în toată România.',
   },
   '/portofoliu/': {
-    title: 'Modele de site-uri și portofoliu web design | Echipa de Tocilari',
+    title: 'Portofoliu web design: site-uri, magazine și aplicații | Echipa de Tocilari',
     description:
-      'Explorează 20 de modele demonstrative pentru site-uri de prezentare, magazine și bloguri. Alegem împreună un design pe care îl adaptăm afacerii tale.',
+      'Portofoliul Echipa de Tocilari: site-uri de prezentare, magazine online și aplicații web. Vezi tipul și domeniul fiecărui proiect și cere unul similar.',
   },
   '/agentie-google-ads/': {
   "title": "Agenție Google Ads: servicii și campanii | Echipa de Tocilari",

@@ -83,7 +83,7 @@ test('a document without a head is returned unchanged', () => {
 
 test('route LCP images are root-relative, have no query and exist in the mirror', () => {
   const configured = routes.filter((route) => route.lcpImages);
-  assert.ok(configured.length >= 7);
+  assert.ok(configured.length >= 6);
   for (const route of configured) {
     for (const { href, media } of route.lcpImages) {
       assert.match(href, /^\/wp-content\/[^?#]+$/, route.ro);

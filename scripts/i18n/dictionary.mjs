@@ -1,6 +1,7 @@
 import { googleAdsDictionary } from './google-ads.mjs';
+import { portfolioDictionary } from './portfolio.mjs';
 import { privacyPolicyDictionary } from './privacy-policy.mjs';
-export { googleAdsDictionary, privacyPolicyDictionary };
+export { googleAdsDictionary, portfolioDictionary, privacyPolicyDictionary };
 
 /**
  * Page-only entries, keyed by the RO route. generate-en.mjs merges them with the
@@ -8,12 +9,14 @@ export { googleAdsDictionary, privacyPolicyDictionary };
  */
 export const pageDictionaries = {
   '/agentie-google-ads/': googleAdsDictionary,
+  '/portofoliu/': portfolioDictionary,
   '/politica-de-confidentialitate/': privacyPolicyDictionary,
 };
 
 /** Source files of the page dictionaries, for the sitemap <lastmod> of the EN pages. */
 export const pageDictionaryFiles = {
   '/agentie-google-ads/': 'scripts/i18n/google-ads.mjs',
+  '/portofoliu/': 'scripts/i18n/portfolio.mjs',
   '/politica-de-confidentialitate/': 'scripts/i18n/privacy-policy.mjs',
 };
 
@@ -113,55 +116,9 @@ export const dictionary = [
   ["Puteți prelua un cont existent?","Can you take over an existing account?"],
   ["Da. Începem cu analiza campaniilor, a accesului și a măsurării. Îți explicăm ce propunem înainte de modificări.","Yes. We start by reviewing campaigns, access and measurement. We explain proposed changes before making them."],
   ["Hai să vedem ce caută viitorii tăi clienți.","Let’s see what your future customers search for."],
-  // Static portfolio catalogue: demos, not claims about completed client work.
-  ['Modele demonstrative de site-uri web, pe care le putem adapta afacerii tale. Previzualizările se deschid într-o filă nouă.', 'Website template demos that we can adapt to your business. Previews open in a new tab.'],
-  ['Nu am găsit modele pentru această căutare. Încearcă alt termen sau altă categorie.', 'No templates match this search. Try another term or category.'],
-  ['Modele de site-uri web', 'Website templates'],
-  ['Filtrează după categorie', 'Filter by category'],
-  ['Caută modele', 'Search templates'],
-  ['Caută un model...', 'Search templates...'],
-  ['Vezi modelul', 'View template'],
-  ['data-count-label="modele"', 'data-count-label="templates"'],
-  ['data-count-label-singular="model"', 'data-count-label-singular="template"'],
-  ['>20 modele<', '>20 templates<'],
+  // Filter labels still used by the store page.
   ['>Toate<', '>All<'],
   ['>Altele<', '>Other<'],
-  ['Blog de Fashion și Lifestyle', 'Fashion and Lifestyle Blog'],
-  ['Magazin de Dulciuri', 'Sweet Shop'],
-  ['>ONG<', '>Nonprofit<'],
-  ['Design de Interior', 'Interior Design'],
-  ['Agenție Digitală', 'Digital Agency'],
-  ['Artist Freelancer', 'Freelance Artist'],
-  ['>Agenție<', '>Agency<'],
-  ['Reparații Mașini', 'Car Repair'],
-  ['Firmă de Grădinărit', 'Gardening Company'],
-  ['Firmă de Construcții', 'Construction Company'],
-  ['Firmă de Avocatură', 'Law Firm'],
-  ['Invitație de Nuntă', 'Wedding Invitation'],
-  ['Clinică Dentară', 'Dental Clinic'],
-  ['Servicii de Curățenie', 'Cleaning Services'],
-  ['Hotel și Pensiune', 'Hotel and Guesthouse'],
-  // Portfolio screenshots (alt text rendered by scripts/import-portfolio.mjs)
-  ['alt="Captură de ecran a modelului de site Blog de Fashion și Lifestyle"', 'alt="Screenshot of the Fashion and Lifestyle Blog website template"'],
-  ['alt="Captură de ecran a modelului de site Magazin de Dulciuri"', 'alt="Screenshot of the Sweet Shop website template"'],
-  ['alt="Captură de ecran a modelului de site ONG"', 'alt="Screenshot of the Nonprofit website template"'],
-  ['alt="Captură de ecran a modelului de site Artist Freelancer"', 'alt="Screenshot of the Freelance Artist website template"'],
-  ['alt="Captură de ecran a modelului de site Design de Interior"', 'alt="Screenshot of the Interior Design website template"'],
-  ['alt="Captură de ecran a modelului de site Agenție"', 'alt="Screenshot of the Agency website template"'],
-  ['alt="Captură de ecran a modelului de site Spa"', 'alt="Screenshot of the Spa website template"'],
-  ['alt="Captură de ecran a modelului de site Freelancer"', 'alt="Screenshot of the Freelancer website template"'],
-  ['alt="Captură de ecran a modelului de site Reparații Mașini"', 'alt="Screenshot of the Car Repair website template"'],
-  ['alt="Captură de ecran a modelului de site Agenție Digitală"', 'alt="Screenshot of the Digital Agency website template"'],
-  ['alt="Captură de ecran a modelului de site Firmă de Grădinărit"', 'alt="Screenshot of the Gardening Company website template"'],
-  ['alt="Captură de ecran a modelului de site Firmă de Construcții"', 'alt="Screenshot of the Construction Company website template"'],
-  ['alt="Captură de ecran a modelului de site Co-Working Space"', 'alt="Screenshot of the Co-Working Space website template"'],
-  ['alt="Captură de ecran a modelului de site Firmă de Avocatură"', 'alt="Screenshot of the Law Firm website template"'],
-  ['alt="Captură de ecran a modelului de site Invitație de Nuntă"', 'alt="Screenshot of the Wedding Invitation website template"'],
-  ['alt="Captură de ecran a modelului de site Electrician"', 'alt="Screenshot of the Electrician website template"'],
-  ['alt="Captură de ecran a modelului de site Clinică Dentară"', 'alt="Screenshot of the Dental Clinic website template"'],
-  ['alt="Captură de ecran a modelului de site Makeup Artist"', 'alt="Screenshot of the Makeup Artist website template"'],
-  ['alt="Captură de ecran a modelului de site Servicii de Curățenie"', 'alt="Screenshot of the Cleaning Services website template"'],
-  ['alt="Captură de ecran a modelului de site Hotel și Pensiune"', 'alt="Screenshot of the Hotel and Guesthouse website template"'],
   // Brand / legal, never translate the company name
   ['ECHIPA DE TOCIALRI SRL', 'ECHIPA DE TOCILARI SRL'],
   ['ECHIPA DE TOCILARI SRL', 'ECHIPA DE TOCILARI SRL'],
@@ -1546,9 +1503,9 @@ export const enPageMeta = {
       'Contact Echipa de Tocilari for website design, SEO, or Google Ads. Free 30-minute consult, remote across Romania.',
   },
   '/en/portfolio/': {
-    title: 'Website Templates & Web Design Portfolio | Echipa de Tocilari',
+    title: 'Web Design Portfolio: Websites, Stores and Apps | Echipa de Tocilari',
     description:
-      'Explore 20 website template demos for businesses, shops, and blogs. Choose a design that Echipa de Tocilari can adapt to your brand.',
+      "Echipa de Tocilari portfolio: business websites, online stores and web apps. See each project's type and industry, then ask for a similar one.",
   },
   '/en/google-ads-agency/': {
   "title": "Google Ads Agency: Services and Campaigns | Echipa de Tocilari",

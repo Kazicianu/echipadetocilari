@@ -72,23 +72,12 @@ adaugă și ruta, traducerile și metadatele corespunzătoare.
 
 ## Portofoliu
 
-Catalogul local conține **20 de modele demonstrative de site-uri**, preluate
-din catalogul existent. Acestea sunt prezentate ca exemple de șabloane, nu ca
-proiecte realizate pentru clienți. Cardurile, imaginile, categoriile și căutarea
-funcționează fără cereri către WordPress. Linkurile de demonstrație se deschid
-pe serviciul extern `websitedemos.net`.
-
-Datele și imaginile sunt în `legacy-mirror/wp-content/ect-pages/portfolio/`.
-După modificarea catalogului local, regenerează secțiunea RO astfel:
-
-```powershell
-node scripts/import-portfolio.mjs
-npm run build
-```
-
-Opțiunea `--refresh` a scriptului este doar pentru un import explicit din vechiul
-WordPress, cât timp acel serviciu există. Build-ul normal nu o folosește și nu
-necesită acces la rețea.
+Pagina `/portofoliu/` folosește o grilă bento (Magic UI) cu CSS propriu în
+`legacy-mirror/wp-content/ect-pages/portofoliu.css`, fără JavaScript. Proiectele
+sunt deocamdată placeholdere, editate direct în `legacy-mirror/portofoliu/index.html`.
+Pentru un proiect real, captura înlocuiește `div.mb-ph`, iar `span.mb-cta` devine
+un link spre site-ul live, deschis într-o filă nouă. Textele EN sunt în
+`scripts/i18n/portfolio.mjs`. Nu există pagini separate pentru proiecte.
 
 ## Formulare și configurare Vercel
 
