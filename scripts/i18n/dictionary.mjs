@@ -1139,6 +1139,8 @@ export const dictionary = [
   ['aria-label="Pune pauză derulării"', 'aria-label="Pause scrolling"'],
   ['>O experiență foarte plăcută<', '>A great experience<'],
   ['>Impresionată de nivelul lor de expertiză<', '>Impressed by their expertise<'],
+  // Client name: the EN validator rejects Romanian diacritics, so English pages drop them.
+  ['Alexandru Drăgan', 'Alexandru Dragan'],
   ['>O creștere semnificativă a vânzărilor<', '>A significant increase in sales<'],
   ['>Primește o ofertă<', '>Get a quote<'],
 
