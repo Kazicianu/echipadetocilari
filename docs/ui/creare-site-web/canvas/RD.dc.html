@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<title>Creare site web · referințe · final</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/9a208eecc167134249e1c5e5f334b5d9">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;background:var(--cream)}
+.r{font-family:var(--font-sans);color:var(--ink);background:var(--cream);overflow-x:clip;padding-top:24px}
+.r-wrap{padding:0 20px}
+.r-panel{max-width:1300px;margin:0 auto 24px;box-sizing:border-box;padding:80px 75px;border:1px solid var(--line-peach);border-radius:44px;background:var(--white)}
+.r-pill{display:inline-flex;align-items:center;gap:8px;margin:0;padding:5px 14px;border:1px solid var(--orange);border-radius:var(--radius-pill);font-size:14px;line-height:20px;font-weight:500;color:var(--orange);background:var(--white)}
+.r-pill i{width:7px;height:7px;border-radius:50%;background:var(--orange)}
+.r-h2{margin:18px 0 0;font-size:50px;line-height:56px;font-weight:700;letter-spacing:-.04em}
+.r-sel{position:relative;display:inline-flex;align-items:center;gap:6px;margin:0 8px;padding:5px 8px;border:2px solid var(--orange);vertical-align:-6px;line-height:0}
+.r-sel>i{position:absolute;width:9px;height:9px;border:2px solid var(--orange);background:var(--white);box-sizing:border-box}
+.r-sel>i:nth-child(1){left:-6px;top:-6px}.r-sel>i:nth-child(2){right:-6px;top:-6px}.r-sel>i:nth-child(3){left:-6px;bottom:-6px}.r-sel>i:nth-child(4){right:-6px;bottom:-6px}
+.r-sel b{display:flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:50%;background:var(--orange);color:var(--white)}
+.r-sel b.t{background:var(--blob-turquoise-deep);color:var(--ink)}
+.r-sel b svg{width:24px;height:24px}
+.r-headrow{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,4fr);gap:60px;align-items:end}
+.r-side{margin:0;font-size:17px;line-height:27px;color:var(--ink-muted)}
+.r-nw{white-space:nowrap}
+.r-qa dd .d3-tbd,.r-choose dd .d3-tbd{display:inline-block}
+.d3-tbd{border:2px dashed var(--ink-soft);border-radius:var(--radius-card);padding:8px 12px;font-size:14px;line-height:20px;color:var(--ink-muted);background:var(--white)}
+
+.r-inc{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin:48px 0 0;padding:0;list-style:none}
+.r-inc li{padding:30px 28px 30px;border-radius:30px;background:var(--cream)}
+.r-inc li:nth-child(2),.r-inc li:nth-child(6){background:var(--wash-turquoise)}
+.r-inc li:nth-child(4){background:var(--blob-lavender)}
+.r-inc span{display:inline-flex;align-items:center;justify-content:center;min-width:44px;height:30px;padding:0 10px;border-radius:var(--radius-pill);background:var(--white);font-size:13px;font-weight:700;color:var(--orange);box-sizing:border-box}
+.r-inc h3{margin:18px 0 0;font-size:22px;line-height:28px;font-weight:700;letter-spacing:-.01em}
+.r-inc p{margin:10px 0 0;font-size:16px;line-height:25px}
+.r-inc .d3-tbd{margin-top:12px}
+
+.r-ai{max-width:1300px;margin:0 auto 24px;box-sizing:border-box;padding:80px 75px;border-radius:44px;color:var(--white);background:radial-gradient(circle at 92% 8%,color-mix(in srgb,var(--orange) 40%,transparent) 0,transparent 35%),var(--ink)}
+.r-ai .r-pill{background:transparent;border-color:var(--orange);color:var(--orange)}
+.r-ai .r-side{color:color-mix(in srgb,var(--white) 80%,transparent)}
+.r-ai .r-sel{border-color:var(--orange)}.r-ai .r-sel>i{background:var(--ink)}
+.r-ai3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:46px}
+.r-ai3 article{padding:30px 28px;border:1px solid color-mix(in srgb,var(--white) 18%,transparent);border-radius:30px}
+.r-ai3 b{display:block;font-size:44px;line-height:48px;font-weight:800;letter-spacing:-.04em;color:var(--orange)}
+.r-ai3 h3{margin:10px 0 0;font-size:20px;line-height:26px;font-weight:700}
+.r-ai3 p{margin:10px 0 0;font-size:16px;line-height:25px;color:color-mix(in srgb,var(--white) 85%,transparent)}
+.r-ai-note{margin:28px 0 0;font-size:15px;line-height:23px;color:color-mix(in srgb,var(--white) 75%,transparent)}
+.r-ai-note a{color:var(--orange);font-weight:600}
+
+.r-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin:48px 0 0;padding:0;list-style:none;counter-reset:s}
+.r-steps li{position:relative;display:flex;flex-direction:column;padding:28px 24px;border:1px solid var(--line-peach);border-radius:30px;counter-increment:s}
+.r-steps li::before{content:counter(s,decimal-leading-zero);font-size:56px;line-height:56px;font-weight:800;letter-spacing:-.05em;color:var(--orange)}
+.r-steps li:first-child{background:var(--orange);border-color:var(--orange);color:var(--white)}
+.r-steps li:first-child::before{color:var(--white)}
+.r-steps h3{margin:18px 0 0;font-size:22px;line-height:28px;font-weight:700}
+.r-steps p{flex-grow:1;margin:8px 0 0;font-size:16px;line-height:24px}
+.r-steps small{align-self:flex-start;margin-top:18px;padding:4px 12px;border-radius:var(--radius-pill);background:var(--cream);font-size:13px;line-height:18px;font-weight:700;color:var(--orange)}
+.r-steps li:first-child small{background:var(--white)}
+.r-steps .d3-tbd{margin-top:18px}
+
+.r-choose{margin:44px 0 0;border-top:2px solid var(--ink)}
+.r-choose>div{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,5fr) minmax(0,3fr);gap:30px;padding:22px 0;border-bottom:1px solid var(--line)}
+.r-choose .h{padding:14px 0;font-size:13px;line-height:18px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--orange)}
+.r-choose dt{font-size:18px;line-height:25px;font-weight:700}
+.r-choose dd{margin:0;font-size:16px;line-height:25px;color:var(--ink-muted)}
+.r-choose dd.u{color:var(--ink);font-weight:600}
+.r-choose dd.u::before{content:"";display:inline-block;width:10px;height:10px;margin-right:8px;border-radius:50%;background:var(--orange)}
+.r-choose dd .d3-tbd{display:inline-block}
+
+.r-after{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:44px}
+.r-after a{display:flex;flex-direction:column;gap:10px;padding:30px 28px;border-radius:30px;background:var(--cream);color:var(--ink);text-decoration:none;transition:background .2s}
+.r-after a:hover{background:var(--peach)}
+.r-after a:focus-visible{outline:3px solid var(--ink);outline-offset:4px}
+.r-after b{font-size:22px;line-height:28px}
+.r-after span{flex-grow:1;font-size:16px;line-height:24px;color:var(--ink-muted)}
+.r-after em{display:flex;align-items:center;gap:10px;font-style:normal;font-weight:700;color:var(--orange)}
+.r-after em i{display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:var(--orange);color:var(--white)}
+.r-after em svg{width:16px;height:16px}
+
+.r-chat{padding-top:70px;padding-bottom:70px}
+.r-chat .ect-faq-chat{padding:0;background:transparent}
+.r-chat figure{margin:0}
+.r-chat .ect-faq-chat__intro{justify-content:flex-start;align-self:start;gap:28px}
+.r-chat .ect-faq-chat__a .d3-tbd{display:inline-block;margin:0}
+.r-faq{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:60px;align-items:start}
+.r-faq-side img{display:block;width:190px;height:auto;margin:0 0 18px}
+.r-faq-side .ect-ask{margin-top:28px}
+
+
+@media (prefers-reduced-motion:reduce){.r-after a{transition:none}}
+@media (max-width:1024px){
+.r-panel,.r-ai{padding:56px 36px}
+.r-headrow,.r-faq{grid-template-columns:minmax(0,1fr);gap:28px}
+.r-h2{font-size:40px;line-height:46px}
+.r-inc,.r-ai3,.r-after{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.r-steps{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.r-choose>div{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.r-choose>div dd.u{grid-column:1/-1}
+}
+@media (max-width:767px){
+.r{padding-top:8px}
+.r-wrap{padding:0 8px}
+.r-panel,.r-ai{padding:44px 18px;border-radius:30px}
+.r-h2{font-size:31px;line-height:37px}
+.r-sel{margin:0 4px;padding:3px 5px;vertical-align:-4px}.r-sel b{width:32px;height:32px}.r-sel b svg{width:17px;height:17px}
+.r-side{font-size:16px;line-height:25px}
+.r-inc,.r-ai3,.r-after,.r-steps{grid-template-columns:minmax(0,1fr);gap:14px}
+.r-inc li,.r-ai3 article,.r-steps li,.r-after a{padding:24px 20px;border-radius:24px}
+.r-choose .h{display:none}
+.r-choose>div{grid-template-columns:minmax(0,1fr);gap:6px}
+.r-faq-side img{width:120px}
+}
+@media (max-width:767px){
+.r-after{display:flex;flex-direction:column;gap:0;margin-top:20px;border-top:1px solid var(--line)}
+.r-after a{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 14px;align-items:center;padding:16px 0;border-radius:0;background:transparent;border-bottom:1px solid var(--line)}
+.r-after b{font-size:18px;line-height:24px}
+.r-after span{grid-column:1;font-size:14.5px;line-height:21px}
+.r-after em{grid-column:2;grid-row:1/3;font-size:0;gap:0}
+.r-after em i{width:44px;height:44px}
+.r-chat{padding-top:36px;padding-bottom:36px}
+.r-chat .ect-faq-chat__intro{display:grid;grid-template-columns:minmax(0,1fr) 92px;align-items:end;gap:10px}
+.r-chat .ect-faq-chat__mascot{margin:0;width:92px}
+.r-chat .ect-faq-chat__mascot img{width:92px;height:auto}
+.r-chat .ect-faq-chat__title{font-size:32px;line-height:38px}
+.r-chat .ect-faq-chat__subtitle{font-size:16px}
+.r-chat .ect-btn--outline{min-height:44px}
+}
+.r .ect-contact__wave--top path{fill:var(--cream)}
+.r .ect-footer{margin-top:0;padding-top:64px}
+@media (max-width:767px){
+.r-wrap{padding:0}
+.r-panel,.r-why,.r-prices,.r-ai{position:relative;max-width:none;margin:-32px 0 0;border:0;border-radius:32px 32px 0 0;padding:60px 18px 64px;box-shadow:0 -14px 30px color-mix(in srgb,var(--ink) 7%,transparent)}
+.r{padding-top:0;background:var(--cream)}
+.r-panel[aria-labelledby="r-af"]{margin-top:0;background:var(--white)}
+.r-chat{background:var(--cream);padding-bottom:40px}
+.r .ect-contact{margin-top:0}
+}
+</style>
+</helmet>
+<div class="r" style="padding-top:24px">
+<div class="r-wrap">
+<section class="r-panel" aria-labelledby="r-af">
+<div class="r-headrow">
+<div><p class="r-pill">Mai departe</p>
+<h2 class="r-h2" id="r-af">Ce urmează după lansare</h2></div>
+<p class="r-side">Putem continua împreună cu serviciile care aduc vizitatori și țin site-ul în formă. Le alegi doar dacă au sens pentru tine.</p>
+</div>
+<div class="r-after">
+<a href="/servicii-seo/"><b>SEO și vizibilitate în AI</b><span>Lucrăm la structură, conținut și partea tehnică, ca site-ul să fie mai ușor de găsit în Google și în răspunsurile AI.</span><em><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i>Vezi serviciile SEO</em></a>
+<a href="/agentie-google-ads/"><b>Google Ads</b><span>Campanii Search care aduc pe site vizitatori interesați, cu urmărirea cererilor.</span><em><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i>Vezi Google Ads</em></a>
+<a href="/administrare-site/"><b>Mentenanță site</b><span>Actualizări, copii de siguranță și intervenții, ca site-ul să rămână rapid și sigur după lansare.</span><em><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i>Vezi mentenanța</em></a>
+</div>
+</section>
+
+<section class="r-panel r-chat" id="intrebari" aria-labelledby="r-fq">
+<div class="ect-faq-chat">
+<div class="ect-faq-chat__inner">
+<div class="ect-faq-chat__intro">
+<div>
+<p class="ect-faq-chat__eyebrow">Întrebări frecvente</p>
+<h2 class="ect-faq-chat__title" id="r-fq">Tu întrebi. Noi lămurim.</h2>
+<p class="ect-faq-chat__subtitle">Tot ce vrei să știi despre crearea unui site, pe înțeles, fără jargon.</p>
+<a class="ect-btn ect-btn--outline" href="#formular_contact_bottom">Hai să vorbim</a>
+</div>
+<figure class="ect-faq-chat__mascot"><img src="/_blob/4976fea3c600aece14923d5a62c95dc5" width="640" height="640" alt="Client 3D cu barbă care ridică degetul lângă o bulă cu semnul întrebării"></figure>
+</div>
+<div class="ect-faq-chat__conversation">
+<details class="ect-faq-chat__item" name="faq" open><summary class="ect-faq-chat__q"><span>Cât costă un site web?</span><span class="ect-faq-chat__sign" aria-hidden="true"></span></summary><div class="ect-faq-chat__a"><p>Landing page de la 299 €, site de prezentare de la 499 €, magazin online de la 1.490 €. Proiectele custom au preț pe proiect. Prețurile sunt orientative, iar costul exact îl afli înainte să începem, nu după.</p></div></details>
+<details class="ect-faq-chat__item" name="faq"><summary class="ect-faq-chat__q"><span>Ce este un site de prezentare?</span><span class="ect-faq-chat__sign" aria-hidden="true"></span></summary><div class="ect-faq-chat__a"><p>Cartea de vizită a firmei, doar că o găsești pe Google. Are mai multe pagini cu firma, serviciile și contactul. La noi, pachetul de bază are până la 6 pagini.</p></div></details>
+<details class="ect-faq-chat__item" name="faq"><summary class="ect-faq-chat__q"><span>Landing page sau site de prezentare?</span><span class="ect-faq-chat__sign" aria-hidden="true"></span></summary><div class="ect-faq-chat__a"><p>Ai o singură ofertă și trimiți oameni din reclame? Landing page. Ai mai multe servicii de explicat? Site de prezentare, cu până la 6 pagini în pachetul de bază.</p></div></details>
+<details class="ect-faq-chat__item" name="faq"><summary class="ect-faq-chat__q"><span>Pe ce platformă e construit site-ul?</span><span class="ect-faq-chat__sign" aria-hidden="true"></span></summary><div class="ect-faq-chat__a"><p>Landing page-urile și site-urile de prezentare pe WordPress și Elementor, magazinele online pe Shopify sau Medusa. Platforme cunoscute, nu ceva inventat de noi pe care nu-l mai poate atinge nimeni.</p></div></details>
+<details class="ect-faq-chat__item" name="faq"><summary class="ect-faq-chat__q"><span>Se vede bine pe telefon?</span><span class="ect-faq-chat__sign" aria-hidden="true"></span></summary><div class="ect-faq-chat__a"><p>Da. Pregătim afișarea pentru telefon, tabletă și desktop, din prima zi.</p></div></details>
+<details class="ect-faq-chat__item" name="faq"><summary class="ect-faq-chat__q"><span>Ce trebuie să vă trimit pentru o ofertă?</span><span class="ect-faq-chat__sign" aria-hidden="true"></span></summary><div class="ect-faq-chat__a"><p>Ce servicii vrei să prezinți, câte pagini ai în minte, ce funcții îți trebuie și ce texte și poze ai deja. Restul lămurim la telefon.</p></div></details>
+<details class="ect-faq-chat__item" name="faq"><summary class="ect-faq-chat__q"><span>SEO este inclus în preț?</span><span class="ect-faq-chat__sign" aria-hidden="true"></span></summary><div class="ect-faq-chat__a"><p>Da, în formele din pachet: optimizare SEO la landing page și site de prezentare, SEO tehnic la magazinul online. SEO-ul pe termen lung e un serviciu separat.</p></div></details>
+<details class="ect-faq-chat__item" name="faq"><summary class="ect-faq-chat__q"><span>Ce înseamnă AEO și GEO?</span><span class="ect-faq-chat__sign" aria-hidden="true"></span></summary><div class="ect-faq-chat__a"><p>AEO urmărește ca site-ul tău să răspundă clar la întrebări. GEO urmărește să apară în răspunsurile date de AI. Ambele se suprapun în mare parte cu SEO-ul făcut bine.</p></div></details>
+<details class="ect-faq-chat__item" name="faq"><summary class="ect-faq-chat__q"><span>Lucrați doar în București?</span><span class="ect-faq-chat__sign" aria-hidden="true"></span></summary><div class="ect-faq-chat__a"><p>Nu. Suntem în București, dar lucrăm la proiecte din toată țara.</p></div></details>
+<details class="ect-faq-chat__item" name="faq"><summary class="ect-faq-chat__q"><span>Cât durează să fie gata?</span><span class="ect-faq-chat__sign" aria-hidden="true"></span></summary><div class="ect-faq-chat__a"><p class="d3-tbd">De completat: durata tipică pentru fiecare tip de site.</p></div></details>
+<details class="ect-faq-chat__item" name="faq"><summary class="ect-faq-chat__q"><span>Prețurile includ TVA?</span><span class="ect-faq-chat__sign" aria-hidden="true"></span></summary><div class="ect-faq-chat__a"><p class="d3-tbd">De completat: formularea despre TVA.</p></div></details>
+<details class="ect-faq-chat__item" name="faq"><summary class="ect-faq-chat__q"><span>Al cui este site-ul după lansare?</span><span class="ect-faq-chat__sign" aria-hidden="true"></span></summary><div class="ect-faq-chat__a"><p class="d3-tbd">De completat: cine deține site-ul și conturile, și cum poți pleca.</p></div></details>
+</div>
+</div>
+</div>
+</section>
+
+
+
+</div>
+<section class="ect-contact" id="formular_contact_bottom" aria-labelledby="ct">
+  <div class="ect-contact__wave ect-contact__wave--top"><svg viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M790.5,93.1c-59.3-5.3-116.8-18-192.6-50c-29.6-12.7-76.9-31-100.5-35.9c-23.6-4.9-52.6-7.8-75.5-5.3 c-10.2,1.1-22.6,1.4-50.1,7.4c-27.2,6.3-58.2,16.6-79.4,24.7c-41.3,15.9-94.9,21.9-134,22.6C72,58.2,0,25.8,0,25.8V100h1000V65.3 c0,0-51.5,19.4-106.2,25.7C839.5,97,814.1,95.2,790.5,93.1z"/></svg></div>
+  <div class="ect-contact__inner">
+    <div class="ect-contact__copy">
+      <h2 class="ect-contact__title" id="ct"><b>Te putem ajuta</b>, indiferent de <b>orașul</b> din care ne scrii.</h2>
+      <p class="ect-contact__text">Ne-ar face <b>mare plăcere</b> să vorbim despre <b>proiectul</b> tău, fără slides.</p>
+    </div>
+    <div class="ect-contact__card">
+      <h3 class="ect-contact__card-title">Scrie-ne un mesaj astăzi</h3>
+      <form action="#" method="post" onsubmit="return false">
+        <div class="ect-field"><input type="text" name="name" placeholder="Nume" aria-label="Nume" autocomplete="name" required></div>
+        <div class="ect-field"><input type="text" name="company" placeholder="Nume Companie" aria-label="Nume companie (opțional)" autocomplete="organization"></div>
+        <div class="ect-field"><input type="email" name="email" placeholder="Email" aria-label="Email" autocomplete="email" required></div>
+        <div class="ect-field"><input type="tel" name="phone" placeholder="Telefon" aria-label="Telefon" autocomplete="tel" required></div>
+        <div class="ect-field"><textarea name="message" rows="3" placeholder="Mesaj" aria-label="Mesaj" required></textarea></div>
+        <button class="ect-btn ect-btn--submit" type="submit">Trimite</button>
+        <p class="ect-contact-privacy">Folosim datele din formular ca să-ți răspundem. <a href="/politica-de-confidentialitate/">Politica de confidențialitate</a>.</p>
+        </form>
+    </div>
+  </div>
+  <div class="ect-contact__wave ect-contact__wave--bottom"><svg viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M790.5,93.1c-59.3-5.3-116.8-18-192.6-50c-29.6-12.7-76.9-31-100.5-35.9c-23.6-4.9-52.6-7.8-75.5-5.3 c-10.2,1.1-22.6,1.4-50.1,7.4c-27.2,6.3-58.2,16.6-79.4,24.7c-41.3,15.9-94.9,21.9-134,22.6C72,58.2,0,25.8,0,25.8V100h1000V65.3 c0,0-51.5,19.4-106.2,25.7C839.5,97,814.1,95.2,790.5,93.1z"/></svg></div>
+</section>
+<footer class="ect-footer">
+  <div class="ect-footer__top">
+    <div class="ect-footer__logo"><a href="/"><img src="/_blob/7aa80be1e2da378d9747aec7d03ac7e0" width="115" height="120" alt="Logo Echipa de Tocilari"></a></div>
+    <div class="ect-footer__info">
+      <p><strong>ECHIPA DE TOCILARI SRL</strong></p>
+      <p>Adresa: Alexandru Zagoritz nr. 12, sector 2,<br>București, 021998, România</p>
+      <p>site: <strong><a href="/">echipadetocilari.ro</a></strong></p>
+      <p>telefon: <strong><a href="tel:+40750203466">0750 203 466</a></strong></p><p>program: Luni–Duminică, 09:00–20:00</p><p>email: <strong><a href="mailto:contact@echipadetocilari.ro">contact@echipadetocilari.ro</a></strong></p>
+      <p>CUI: 47591744 | J40/2298/2023</p>
+    </div>
+    <div class="ect-footer__links">
+      <p><strong>PAGINI IMPORTANTE</strong></p>
+      <p class="ect-footer__list">
+        <a href="/creare-site-web/">Creare Site Web</a>
+        <a href="/servicii-seo/">Servicii SEO</a>
+        <a href="/administrare-site/">Administrare Site</a>
+        <a href="/contact/">Contact</a>
+        <a href="/politica-de-confidentialitate/">Politica de confidențialitate</a>
+        <button class="ect-consent-open" type="button">Setări cookie-uri</button>
+      </p>
+    </div>
+  </div>
+  <div class="ect-footer__bottom">
+    <div class="ect-footer__follow">Urmărește-ne pe:
+      <ul class="ect-footer__social">
+        <li><a href="https://www.facebook.com/EchipadeTocilari/" aria-label="Facebook"><svg viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M400 32H48A48 48 0 0 0 0 80v352a48 48 0 0 0 48 48h137.25V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.27c-30.81 0-40.42 19.12-40.42 38.73V256h68.78l-11 71.69h-57.78V480H400a48 48 0 0 0 48-48V80a48 48 0 0 0-48-48z"/></svg></a></li>
+        <li><a href="https://www.linkedin.com/company/echipa-de-tocilari/" aria-label="LinkedIn"><svg viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg></a></li>
+      </ul>
+    </div>
+    <p class="ect-footer__copy">© 2026 Drepturi rezervate</p>
+  </div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":3180}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>
