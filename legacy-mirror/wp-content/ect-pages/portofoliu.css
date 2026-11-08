@@ -85,6 +85,7 @@
 .ect-page--portofoliu .mb-fig b { display: block; font-size: 14px; line-height: 20px; font-weight: 500; color: var(--ink); }
 .ect-page--portofoliu .mb-fig span { display: block; margin-top: 8px; font-size: 12px; line-height: 16px; color: var(--ink-muted); }
 .ect-page--portofoliu .mb-fig i { display: block; height: 90px; margin-bottom: 12px; border: 2px dashed var(--mute); border-radius: 8px; }
+.ect-page--portofoliu .mb-fig img { display: block; width: 100%; height: 90px; margin-bottom: 12px; border-radius: 8px; object-fit: cover; object-position: top; }
 .ect-page--portofoliu .mb-m1 { top: 16px; -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 35%); mask-image: linear-gradient(to top, transparent 0%, #000 35%); }
 .ect-page--portofoliu .mb-m2 { display: none; top: 230px; -webkit-mask-image: linear-gradient(to top, transparent 20%, #000 100%); mask-image: linear-gradient(to top, transparent 20%, #000 100%); }
 .ect-page--portofoliu .mb-m2 .mb-track { animation-direction: reverse; }

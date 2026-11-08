@@ -21,4 +21,7 @@ export const portfolioDictionary = [
   ["<span>Aplicație web</span>","<span>Web app</span>"],
   ["Vezi proiectul","View project"],
   ["Proiect real: div.mb-ph devine imaginea capturii (alt cu numele site-ului, width, height, loading lazy), iar fiecare span.mb-cta devine link a.mb-cta spre site-ul live, cu target _blank, rel noopener și textul ascuns (se deschide într-o filă nouă).","Real project: div.mb-ph becomes the screenshot image (alt with the site name, width, height, loading lazy), and each span.mb-cta becomes an a.mb-cta link to the live site, with target _blank, rel noopener and the hidden text (it opens in a new tab)."],
+  ["Producție video și foto. Site pentru un studio de film și fotografie din Berlin și București, în limba engleză.","Video and photo production. Website for a film and photography studio in Berlin and Bucharest, in English."],
+  ["Recrutare în Product Management. Site pentru o agenție care recrutează specialiști în Product Management pentru companii de tehnologie.","Product Management recruitment. Website for an agency that recruits Product Management specialists for tech companies."],
+  ["(se deschide într-o filă nouă)","(opens in a new tab)"],
 ];
