@@ -2083,51 +2083,8 @@
   }
 }
 
-.ect-quotes.is-paused .ect-quotes__track,
 .ect-quotes.is-marquee .ect-quotes__viewport:hover .ect-quotes__track {
   animation-play-state: paused;
-}
-
-.ect-quotes .ect-quotes__toggle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  margin: 20px auto 0;
-  padding: 0;
-  border: 1.5px solid #27272d;
-  border-radius: 50%;
-  background: #fff;
-  color: #27272d;
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.ect-quotes .ect-quotes__toggle[hidden] {
-  display: none;
-}
-
-.ect-quotes .ect-quotes__toggle:hover {
-  background: #27272d;
-  color: #fff;
-}
-
-.ect-quotes .ect-quotes__toggle:focus-visible {
-  outline: 3px solid #27272d;
-  outline-offset: 5px;
-}
-
-.ect-quotes .ect-quotes__icon--play {
-  display: none;
-}
-
-.ect-quotes .ect-quotes__toggle[aria-pressed="true"] .ect-quotes__icon--pause {
-  display: none;
-}
-
-.ect-quotes .ect-quotes__toggle[aria-pressed="true"] .ect-quotes__icon--play {
-  display: block;
 }
 
 @media (min-width: 768px) {
@@ -2228,8 +2185,7 @@
     animation: none !important;
   }
 
-  .ect-quotes .ect-quotes__cta,
-  .ect-quotes .ect-quotes__toggle {
+  .ect-quotes .ect-quotes__cta {
     transition: none;
   }
 }

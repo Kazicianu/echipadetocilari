@@ -6,8 +6,7 @@
 
   const viewport = root.querySelector('[data-ect-quotes-viewport]');
   const track = root.querySelector('[data-ect-quotes-track]');
-  const toggle = root.querySelector('[data-ect-quotes-toggle]');
-  if (!viewport || !track || !toggle) return;
+  if (!viewport || !track ) return;
 
   const originals = [...track.children];
   const reduce = matchMedia('(prefers-reduced-motion: reduce)');
@@ -32,16 +31,13 @@
     }
     root.classList.add('is-marquee');
     viewport.removeAttribute('tabindex');
-    toggle.hidden = false;
     update();
   }
 
   function disable() {
     track.querySelectorAll('[data-ect-quotes-clone]').forEach(node => node.remove());
-    root.classList.remove('is-marquee', 'is-paused');
+    root.classList.remove('is-marquee');
     viewport.setAttribute('tabindex', '0');
-    toggle.hidden = true;
-    toggle.setAttribute('aria-pressed', 'false');
     track.style.removeProperty('--ect-quotes-duration');
   }
 
@@ -71,9 +67,4 @@
     }).observe(viewport);
   }
 
-  toggle.addEventListener('click', () => {
-    const paused = toggle.getAttribute('aria-pressed') !== 'true';
-    toggle.setAttribute('aria-pressed', String(paused));
-    root.classList.toggle('is-paused', paused);
-  });
 })();

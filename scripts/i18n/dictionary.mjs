@@ -1136,7 +1136,6 @@ export const dictionary = [
   ],
   ['Nu trebuie să ne crezi pe cuvânt. Uite ce spun oamenii cu care am lucrat.', "You don't have to take our word for it. Here is what the people we worked with say."],
   ['aria-label="Testimoniale de la clienți"', 'aria-label="Client testimonials"'],
-  ['aria-label="Pune pauză derulării"', 'aria-label="Pause scrolling"'],
   ['>O experiență foarte plăcută<', '>A great experience<'],
   ['>Impresionată de nivelul lor de expertiză<', '>Impressed by their expertise<'],
   // Client name: the EN validator rejects Romanian diacritics, so English pages drop them.

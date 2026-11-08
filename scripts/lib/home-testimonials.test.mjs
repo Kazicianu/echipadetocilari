@@ -46,14 +46,12 @@ test('every quote and card title has an English dictionary entry', () => {
 
 test('accessibility hooks are in place', () => {
   const svgs = [...section.matchAll(/<svg\b[^>]*>/g)].map(m => m[0]);
-  assert.ok(svgs.length >= 5);
+  assert.ok(svgs.length >= 3);
   for (const svg of svgs) assert.match(svg, /aria-hidden="true"/);
   const labelled = section.match(/aria-labelledby="([^"]+)"/);
   assert.ok(labelled);
   assert.ok(section.includes(`id="${labelled[1]}"`));
-  const toggle = section.match(/<button[^>]*data-ect-quotes-toggle[^>]*>/)[0];
-  assert.match(toggle, /aria-pressed="false"/);
-  assert.match(toggle, /\shidden[\s>]/);
+  assert.doesNotMatch(section, /<button\b/, 'no pause/play button');
 });
 
 test('the section has no em dash, diagonal arrows or dead anchors', () => {
