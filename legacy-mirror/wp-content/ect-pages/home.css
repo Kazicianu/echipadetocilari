@@ -2083,10 +2083,6 @@
   }
 }
 
-.ect-quotes.is-marquee .ect-quotes__viewport:hover .ect-quotes__track {
-  animation-play-state: paused;
-}
-
 @media (min-width: 768px) {
   .ect-quotes .ect-quotes__title {
     font-size: 32px;
