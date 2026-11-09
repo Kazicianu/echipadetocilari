@@ -1337,6 +1337,10 @@
 @supports not selector(:has(*)) { .elementor-element-0d2945c .ect-lottie-poster { visibility: hidden; } }
 
 /* Portfolio showcase: vanilla port of Aceternity's Apple Cards Carousel (values from its Tailwind classes). */
+.ect-showcase[hidden] {
+  display: none !important;
+}
+
 .ect-showcase {
   position: relative;
   padding: 56px 0 24px;

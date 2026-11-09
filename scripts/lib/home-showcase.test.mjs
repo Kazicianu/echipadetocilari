@@ -10,6 +10,7 @@ const section = html.slice(start, end);
 
 test('the showcase is one section placed between the services and the process', () => {
   assert.equal(html.split('<section class="ect-showcase"').length, 2);
+  assert.ok(html.includes('<section class="ect-showcase" id="proiecte" aria-labelledby="ect-showcase-title" hidden>'), 'the showcase section is hidden');
   assert.ok(start > html.indexOf('Mentenanță site'), 'after the maintenance band');
   assert.ok(start < html.indexOf('<section class="ect-process">'), 'before the process section');
   assert.ok(end < html.indexOf('<section class="ect-process">'));

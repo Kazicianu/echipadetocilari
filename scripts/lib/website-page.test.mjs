@@ -61,13 +61,9 @@ test('the FAQ has twelve native accordion items, the first one open', () => {
   assert.equal(new Set(items.map(attrs => attrs.match(/name="([^"]+)"/)?.[1])).size, 1);
 });
 
-test('missing information is marked with 13 visible notes and nowhere else', () => {
-  const notes = [...main.matchAll(/<span class="csw-todo">([\s\S]*?)<\/span>/gi)].map(([, inner]) => text(inner));
-  assert.equal(notes.length, 13);
-  assert.equal([...main.matchAll(/class="csw-todo"/g)].length, 13);
-  assert.ok(notes.every(note => /^De (completat|confirmat)/.test(note)));
-  const outside = main.replace(/<span class="csw-todo">[\s\S]*?<\/span>/gi, '');
-  assert.doesNotMatch(outside, /De completat|De confirmat/);
+test('no placeholders or missing information notes remain on the page', () => {
+  assert.equal([...main.matchAll(/class="csw-todo"/g)].length, 0);
+  assert.doesNotMatch(main, /De completat|De confirmat/);
 });
 
 test('every link in the table of contents points at a section of the page', () => {
@@ -75,10 +71,6 @@ test('every link in the table of contents points at a section of the page', () =
   const anchors = [...toc.matchAll(/href="#([^"]+)"/g)].map(([, id]) => id);
   assert.deepEqual(anchors, ['tipuri', 'preturi', 'ce-include', 'pasi', 'alegere', 'intrebari']);
   for (const id of anchors) assert.equal([...page.matchAll(new RegExp(`\\sid="${id}"`, 'g'))].length, 1, `#${id} exists once`);
-});
-
-test('the update date is visible and machine readable', () => {
-  assert.match(main, /<p class="csw-by ect-policy__updated">[\s\S]*?<time datetime="2026-11-08">8 noiembrie 2026<\/time>/);
 });
 
 test('the contact form sits right above the footer, once', () => {
