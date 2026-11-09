@@ -54,4 +54,28 @@
     if (records.some(record => record.target.tagName === 'A')) settle();
   }).observe(list, { subtree: true, attributeFilter: ['class'] });
   window.addEventListener('resize', () => (current ? place(current) : hide()));
+
+  // Speed up SmartMenus closing (defaults to 500ms delay + 200ms fadeOut,
+  // which makes the dropdown linger for almost a second after unhovering).
+  const tuneSmartMenus = () => {
+    const $ = window.jQuery;
+    if (!$ || !$.fn || !$.fn.smartmenus) return;
+    $.fn.smartmenus.defaults.hideTimeout = 100;
+    $.fn.smartmenus.defaults.hideFunction = function($ul, complete) {
+      $ul.fadeOut(100, complete);
+    };
+    const sm = $(list).data('smartmenus');
+    if (sm && sm.opts) {
+      sm.opts.hideTimeout = 100;
+      sm.opts.hideFunction = function($ul, complete) {
+        $ul.fadeOut(100, complete);
+      };
+    }
+  };
+  tuneSmartMenus();
+  document.addEventListener('DOMContentLoaded', tuneSmartMenus);
+  window.addEventListener('elementor/frontend/init', tuneSmartMenus);
+  if (window.elementorFrontend && window.elementorFrontend.hooks) {
+    window.elementorFrontend.hooks.addAction('frontend/element_ready/nav-menu.default', tuneSmartMenus);
+  }
 })();
