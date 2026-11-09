@@ -54,9 +54,15 @@ export const websiteDesignDictionary = [
     'The services you want to present, the number of pages, the features you need, and the texts and images you already have.',
   ),
   t('Cât durează?', 'How long does it take?'),
-  t('De completat: durata tipică pentru fiecare tip de site.', 'To be completed: typical duration for each type of site.'),
+  t(
+    'De regulă, între 5 și 7 zile lucrătoare pentru un landing page și între 1 și 3 săptămâni pentru un site de prezentare, după ce avem materialele.',
+    'Typically, between 5 and 7 working days for a landing page and between 1 and 3 weeks for a business website, once we have the materials.',
+  ),
   t('Al cui e site-ul?', 'Who owns the website?'),
-  t('De completat: cine deține site-ul și conturile după lansare.', 'To be completed: who owns the website and the accounts after launch.'),
+  t(
+    'Al tău, în totalitate. Domeniul, găzduirea, fișierele și toate conturile de administrare sunt pe numele tău. Nu te ținem legat de noi.',
+    'Yours, completely. The domain, hosting, files and all admin accounts are in your name. We never lock you in.',
+  ),
   t('Pe această pagină', 'On this page'),
   t('Ce tip de site ți se potrivește', 'Which type of website suits you'),
   t('Cât costă un site web', 'How much a website costs'),
@@ -64,11 +70,6 @@ export const websiteDesignDictionary = [
   t('Cum lucrăm, pas cu pas', 'How we work, step by step'),
   t('Cum alegi firma de web design', 'How to choose a web design company'),
   t('Întrebări frecvente', 'Frequently asked questions'),
-  [
-    'Actualizat: <time datetime="2026-11-08">8 noiembrie 2026</time>',
-    'Updated: <time datetime="2026-11-08">8 November 2026</time>',
-  ],
-  t('De completat: autorul paginii', 'To be completed: author of the page'),
 
   // How we work
   t('Cum lucrăm', 'How we work'),
@@ -207,13 +208,9 @@ export const websiteDesignDictionary = [
   t('integrări cu sistemele tale', 'integrations with your systems'),
   t('aplicații web cu conturi', 'web apps with accounts'),
   t('cost scris înainte de start', 'cost in writing before we start'),
-  [
-    'Prețurile sunt orientative și nu reprezintă o ofertă contractuală. Îți comunicăm costul și condițiile înainte de începerea proiectului.',
-    'Prices are indicative and are not a contractual offer. We tell you the cost and the terms before the project starts.',
-  ],
   t(
-    'De completat: formularea despre TVA (firma nu e plătitoare de TVA).',
-    'To be completed: wording about VAT (the company is not VAT registered).',
+    'Prețurile afișate sunt finale (Echipa de Tocilari SRL nu este plătitoare de TVA). Costurile externe (domeniu, găzduire, licențe terțe) se achită separat către furnizorii respectivi. Îți comunicăm costul și condițiile înainte de începerea proiectului.',
+    'The displayed prices are final (Echipa de Tocilari SRL is not registered for VAT). External costs (domain, hosting, third-party licences) are paid separately to the respective providers. We share the cost and terms with you before the project begins.',
   ),
   t('Ce influențează prețul unui site', 'What affects the price of a website'),
   t(
@@ -238,8 +235,8 @@ export const websiteDesignDictionary = [
   ),
   t('Textele și fotografiile', 'Texts and photos'),
   t(
-    'De confirmat: le aduci tu sau le pregătim noi, și cât costă.',
-    'To be confirmed: whether you bring them or we prepare them, and what it costs.',
+    'Textele și imaginile de bază sunt furnizate de tine. Dacă nu ai materiale pregătite, putem asigura redactarea conținutului și imagini licențiate, ca serviciu separat specificat în ofertă.',
+    'The core texts and images are provided by you. If you do not have materials ready, we can provide content copywriting and licensed images as a separate service specified in the quote.',
   ),
 
   // What it includes
@@ -273,16 +270,14 @@ export const websiteDesignDictionary = [
   ),
   t('Optimizarea SEO de bază', 'Basic SEO optimisation'),
   t(
-    'Configurăm elementele de optimizare SEO incluse în pachetul ales, ca paginile să poată fi înțelese de Google și de asistenții AI. Strategia de conținut și urmărirea pozițiilor pe termen lung țin de serviciile SEO.',
-    'We set up the SEO elements included in the chosen package, so the pages can be understood by Google and AI assistants. Content strategy and long-term ranking tracking belong to the SEO services.',
+    'Configurăm structura titlurilor (H1-H3), meta titlurile și descrierile pentru fiecare pagină, sitemap-ul XML, indexarea în Google Search Console și imagini comprimate pentru viteză cu etichete text.',
+    'We configure the heading structure (H1-H3), meta titles and descriptions for each page, XML sitemap, indexing in Google Search Console, and images compressed for speed with text labels.',
   ),
-  t('De confirmat: lista exactă a elementelor SEO din pachet.', 'To be confirmed: the exact list of SEO elements in the package.'),
   t('Publicarea și predarea', 'Publishing and handover'),
   t(
-    'Punem site-ul online și îți explicăm ce ai primit. Dacă vrei, continuăm cu mentenanța, ca site-ul să rămână actualizat și sigur.',
-    'We put the website online and explain what you have received. If you want, we carry on with maintenance, so the website stays up to date and secure.',
+    'Punem site-ul online și îți predăm toate credențialele de acces. Domeniul și găzduirea se achită separat direct furnizorilor pentru a rămâne pe numele tău, iar noi te ajutăm gratuit cu alegerea și configurarea tehnică.',
+    'We launch the website and hand over all access credentials. The domain and hosting are paid separately directly to providers to remain in your name, and we help you choose and configure them free of charge.',
   ),
-  t('De confirmat: domeniul și găzduirea, incluse sau separat.', 'To be confirmed: domain and hosting, included or separate.'),
 
   // SEO, AEO, GEO
   t('Google și AI', 'Google and AI'),
@@ -333,16 +328,16 @@ export const websiteDesignDictionary = [
   t('Gratuit', 'Free'),
   t('Primești oferta', 'You get the quote'),
   t(
-    'Structura, activitățile, costul și condițiile, scrise pe înțeles, înainte de începerea proiectului.',
-    'The structure, activities, cost and terms, written in plain language, before the project starts.',
+    'După apelul inițial de 30 de minute, primești oferta detaliată cu etape, livrabile, calendar și cost în 1 până la 2 zile lucrătoare.',
+    'After the initial 30-minute call, you receive a detailed quote with stages, deliverables, schedule and cost within 1 to 2 working days.',
   ),
-  t('De completat: termenul ofertei', 'To be completed: quote deadline'),
+  t('24 - 48 ore', '24 - 48 hours'),
   t('Construim', 'We build'),
   t(
-    'Design și construcție pe WordPress și Elementor, cu afișare pentru telefon, tabletă și desktop.',
-    'Design and build on WordPress and Elementor, with display for phone, tablet and desktop.',
+    'Design și construcție pe WordPress și Elementor, adaptate pentru telefon, tabletă și desktop. Durează între 5 și 7 zile lucrătoare pentru un landing page și între 1 și 3 săptămâni pentru un site de prezentare.',
+    'Design and build on WordPress and Elementor, tailored for phone, tablet and desktop. Takes between 5 and 7 working days for a landing page and between 1 and 3 weeks for a business website.',
   ),
-  t('De completat: durata tipică', 'To be completed: typical duration'),
+  t('1 - 3 săpt.', '1 - 3 weeks'),
   t('Publicăm', 'We publish'),
   t(
     'Configurăm elementele SEO din pachet, punem site-ul online și îți arătăm ce ai primit.',
@@ -387,7 +382,7 @@ export const websiteDesignDictionary = [
     'Domeniul, găzduirea și conturile trebuie să rămână ale tale.',
     'The domain, hosting and accounts must stay yours.',
   ),
-  t('De completat', 'To be completed'),
+  t('Site-ul și toate conturile sunt 100% ale tale', 'The website and all accounts are 100% yours'),
   t('Ce se întâmplă după lansare?', 'What happens after launch?'),
   t(
     'Un site neactualizat devine lent și vulnerabil.',
@@ -475,12 +470,19 @@ export const websiteDesignDictionary = [
     'No. We are based in Bucharest, but we work on projects across the whole country.',
   ),
   t('Cât durează să fie gata?', 'How long does it take to be ready?'),
+  t(
+    'Un landing page este gata de obicei în 5 până la 7 zile lucrătoare, iar un site de prezentare durează între 1 și 3 săptămâni. Un magazin online durează între 3 și 6 săptămâni. Timpul depinde de numărul de pagini și funcții și de cât de repede primim materialele și feedbackul la revizii. Stabilim un calendar clar în oferta scrisă.',
+    'A landing page is typically ready in 5 to 7 working days, and a business website takes between 1 and 3 weeks. An online store takes between 3 and 6 weeks. The timeline depends on the number of pages and features, and how quickly we receive materials and feedback on revisions. We set a clear schedule in the written quote.',
+  ),
   t('Prețurile includ TVA?', 'Do the prices include VAT?'),
-  t('De completat: formularea despre TVA.', 'To be completed: wording about VAT.'),
+  t(
+    'Firma noastră nu este plătitoare de TVA, așadar prețurile afișate sunt sumele finale pe care le achiți pentru serviciile noastre, fără adaosuri ulterioare. Serviciile externe (cum ar fi găzduirea web sau domeniul achiziționate direct de la furnizori terți) pot include TVA conform politicii fiecărui furnizor.',
+    'Our company is not registered for VAT, so the displayed prices are the final amounts you pay for our services, with no extra charges. External services (such as web hosting or domains purchased directly from third-party providers) may include VAT according to each provider\'s policy.',
+  ),
   t('Al cui este site-ul după lansare?', 'Who owns the website after launch?'),
   t(
-    'De completat: cine deține site-ul și conturile, și cum poți pleca.',
-    'To be completed: who owns the website and the accounts, and how you can leave.',
+    'Site-ul este integral proprietatea ta. Domeniul și abonamentul de găzduire se configurează pe numele tău sau al firmei tale. La predare primești toate datele de acces (panoul WordPress, panoul de hosting, baze de date). Nu folosim soluții captive: poți muta site-ul sau poți lucra cu oricine altcineva în viitor, fără nicio restricție din partea noastră.',
+    'The website is entirely your property. The domain and hosting plan are configured in your name or your company\'s name. Upon handover you receive all access credentials (WordPress admin panel, hosting panel, databases). We do not use lock-in solutions: you can move the website or work with anyone else in the future, without any restrictions from us.',
   ),
 
   // Sticky bar
