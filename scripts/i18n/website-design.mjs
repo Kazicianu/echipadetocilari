@@ -145,8 +145,8 @@ export const websiteDesignDictionary = [
   t('Vezi pagina de creare magazin online', 'See the online store creation page'),
   ['<small>de la</small><b>1.490&nbsp;€</b>', '<small>from</small><b>€1,490</b>'],
   t(
-    'Pentru ideile care nu încap în niciun pachet: un site cu design gândit de la zero, funcții construite special pentru afacerea ta, integrări cu sistemele pe care le folosești deja sau o aplicație web cu conturi de utilizator. Aici facem cea mai nebună muncă a noastră.',
-    'For the ideas that fit no package: a website with a design thought through from scratch, features built specially for your business, integrations with the systems you already use, or a web app with user accounts. This is where we do our wildest work.',
+    'Pentru ideile care nu încap în niciun pachet: un site cu design gândit de la zero, funcții construite special pentru afacerea ta, integrări cu sistemele pe care le folosești deja sau o aplicație web cu conturi de utilizator. Aici construim pentru cei care au idei mari și vor un site care nu seamănă cu nimic din piață.',
+    'For the ideas that fit no package: a website with a design thought through from scratch, features built specially for your business, integrations with the systems you already use, or a web app with user accounts. This is where we build for those with big ideas who want a website unlike anything on the market.',
   ),
   t(
     'Nu are preț afișat pentru că nu seamănă cu nimic din ce am făcut înainte. Pornim de la un apel, scriem împreună ce trebuie să facă și primești costul și condițiile înainte să începem.',
@@ -197,7 +197,7 @@ export const websiteDesignDictionary = [
   t('SEO tehnic și măsurarea comenzilor', 'technical SEO and order tracking'),
   t('instruire și 30 de zile de corectare a erorilor', 'training and 30 days of bug fixing'),
   t('Vezi pachetele', 'See the packages'),
-  t('Cea mai nebună muncă', 'Our wildest work'),
+  t('Proiecte curajoase', 'Bold projects'),
   t('Pentru ideile care nu încap în niciun pachet.', 'For the ideas that fit no package.'),
   [
     '<p class="csw-pcard__from">preț</p><p class="csw-pcard__price csw-pcard__price--word">pe proiect</p>',

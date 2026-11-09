@@ -1,3 +1,11 @@
+/* Keep the header and dropdown menu above overlapping hero sections */
+.elementor-location-header,
+.elementor-3359,
+#top {
+  position: relative;
+  z-index: 100 !important;
+}
+
 .elementor-3359 .elementor-nav-menu--main .menu-item-has-children {
   position: relative;
 }
