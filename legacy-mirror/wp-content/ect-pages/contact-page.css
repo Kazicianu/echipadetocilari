@@ -61,6 +61,16 @@
   outline-offset: 5px;
 }
 
+/* Side by side, the form card keeps its own height instead of stretching to the
+   taller copy column, and its top lines up with the H1 (column padding-top 80px). */
+@media (min-width: 768px) {
+  .elementor-3461 .elementor-element.elementor-element-fff4485 {
+    --align-self: flex-start;
+    --margin-top: 80px;
+    align-self: flex-start;
+  }
+}
+
 @media (min-width: 1025px) {
   .ect-contact-page {
     font-size: 18px;
