@@ -20,6 +20,7 @@ import {
 import path from 'path';
 import { fileURLToPath } from 'url';
 
+import { minifyAssets } from './lib/minify-assets.mjs';
 import { routes, pairedRoutes, isOwnedPage, isSystemPage, routeByPath, routeByRo } from './i18n/routes.mjs';
 import { roPageMeta, roOrg } from './i18n/meta-ro.mjs';
 import { generateEnglishPages, patchRomanianPages } from './i18n/generate-en.mjs';
@@ -193,6 +194,22 @@ writeFileSync(
   'utf8'
 );
 console.log('  wrote 404.html (system page, noindex)');
+
+console.log('→ Minifying CSS/JS in dist/ (before asset hashing)…');
+{
+  const minified = await minifyAssets(outDir);
+  const saved = minified.bytesBefore - minified.bytesAfter;
+  console.log(
+    `  minified ${minified.minified} files (${minified.unchanged} unchanged, ${minified.failed.length} failed): ` +
+      `${minified.bytesBefore} → ${minified.bytesAfter} bytes (−${saved})`
+  );
+  for (const item of minified.failed) console.warn(`  ⚠ minify failed: ${item.file}: ${item.message}`);
+  const ownFailures = minified.failed.filter(item => /^wp-content\/ect-/.test(item.file));
+  if (ownFailures.length) {
+    console.error(`✗ Minification failed for our own assets: ${ownFailures.map(item => item.file).join(', ')}`);
+    process.exit(1);
+  }
+}
 
 // ─── per-page enhancement ───────────────────────────────────────────────────
 
