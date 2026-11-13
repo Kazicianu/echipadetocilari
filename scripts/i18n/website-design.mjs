@@ -43,10 +43,10 @@ export const websiteDesignDictionary = [
     'Landing page de la 299&nbsp;€, site de prezentare de la 499&nbsp;€, magazin online de la 1.490&nbsp;€. Proiectele custom au preț pe proiect. <a href="#preturi">Vezi ce include fiecare</a>.',
     'Landing page from €299, business website from €499, online store from €1,490. Custom projects are priced per project. <a href="#preturi">See what each one includes</a>.',
   ],
-  t('Pe ce platformă?', 'On which platform?'),
+  t('În ce e construit?', 'What is it built with?'),
   [
-    'Landing page-urile și site-urile de prezentare pe WordPress și Elementor, magazinele online pe Shopify sau Medusa.',
-    'Landing pages and business websites on WordPress and Elementor, online stores on Shopify or Medusa.',
+    'Landing page-urile și site-urile de prezentare le scriem direct în cod, cu Next.js sau Astro. Magazinele online, pe Shopify sau Medusa.',
+    'We write landing pages and business websites directly in code, with Next.js or Astro. Online stores run on Shopify or Medusa.',
   ],
   t('Ce pregătești tu?', 'What do you prepare?'),
   t(
@@ -176,7 +176,7 @@ export const websiteDesignDictionary = [
   t('o singură pagină', 'one page only'),
   t('optimizare SEO', 'SEO optimisation'),
   t('consultanță', 'consultancy'),
-  t('template WordPress / Elementor', 'WordPress / Elementor template'),
+  t('design scris în cod, fără template', 'design written in code, no template'),
   t('o singură limbă', 'one language'),
   t('Cere ofertă', 'Request a quote'),
   t('Recomandat pentru firme', 'Recommended for businesses'),
@@ -255,13 +255,13 @@ export const websiteDesignDictionary = [
   ),
   t('Designul și experiența vizitatorului', 'Design and visitor experience'),
   t(
-    'Designul înseamnă culorile, fonturile, imaginile și felul în care sunt așezate informațiile. Experiența vizitatorului (UX) înseamnă cât de ușor înțelege pagina și cât de ușor ajunge la butonul de contact. Le lucrăm împreună, pe o tematică pornită de la un template WordPress și Elementor.',
-    'Design means the colours, fonts, images and the way the information is laid out. Visitor experience (UX) means how easily people understand the page and how easily they reach the contact button. We work on both together, on a theme that starts from a WordPress and Elementor template.',
+    'Designul înseamnă culorile, fonturile, imaginile și felul în care sunt așezate informațiile. Experiența vizitatorului (UX) înseamnă cât de ușor înțelege pagina și cât de ușor ajunge la butonul de contact. Le lucrăm împreună și nu pornim de la un template: totul se scrie direct în cod.',
+    'Design means the colours, fonts, images and the way the information is laid out. Visitor experience (UX) means how easily people understand the page and how easily they reach the contact button. We work on both together and do not start from a template: everything is written directly in code.',
   ),
   t('Construcția site-ului', 'Building the website'),
   t(
-    'Construim landing page-urile și site-urile de prezentare pe WordPress și Elementor, iar magazinele online pe Shopify sau Medusa, cu funcțiile convenite în ofertă. WordPress e cea mai răspândită platformă pentru site-uri, deci găsești ușor ajutor și după lansare.',
-    'We build landing pages and business websites on WordPress and Elementor, and online stores on Shopify or Medusa, with the features agreed in the quote. WordPress is the most widely used platform for websites, so you can easily find help after launch.',
+    'Scriem landing page-urile și site-urile de prezentare direct în cod, cu Next.js sau Astro, iar magazinele online le construim pe Shopify sau Medusa, cu funcțiile convenite în ofertă. Sunt tehnologii folosite pe scară largă, deci găsești ușor ajutor și după lansare.',
+    'We write landing pages and business websites directly in code, with Next.js or Astro, and build online stores on Shopify or Medusa, with the features agreed in the quote. These are widely used technologies, so you can easily find help after launch.',
   ),
   t('Telefon, tabletă și desktop', 'Phone, tablet and desktop'),
   t(
@@ -334,8 +334,8 @@ export const websiteDesignDictionary = [
   t('24 - 48 ore', '24 - 48 hours'),
   t('Construim', 'We build'),
   t(
-    'Design și construcție pe WordPress și Elementor, adaptate pentru telefon, tabletă și desktop. Durează între 5 și 7 zile lucrătoare pentru un landing page și între 1 și 3 săptămâni pentru un site de prezentare.',
-    'Design and build on WordPress and Elementor, tailored for phone, tablet and desktop. Takes between 5 and 7 working days for a landing page and between 1 and 3 weeks for a business website.',
+    'Design și construcție direct în cod, adaptate pentru telefon, tabletă și desktop. Durează între 5 și 7 zile lucrătoare pentru un landing page și între 1 și 3 săptămâni pentru un site de prezentare.',
+    'Design and build directly in code, tailored for phone, tablet and desktop. Takes between 5 and 7 working days for a landing page and between 1 and 3 weeks for a business website.',
   ),
   t('1 - 3 săpt.', '1 - 3 weeks'),
   t('Publicăm', 'We publish'),
@@ -361,12 +361,12 @@ export const websiteDesignDictionary = [
     'A price without a list of deliverables can double along the way.',
   ),
   t('Prețuri afișate și ofertă scrisă înainte de start', 'Prices shown and a written quote before we start'),
-  t('Pe ce platformă e construit site-ul?', 'Which platform is the website built on?'),
+  t('În ce tehnologie e construit site-ul?', 'What technology is the website built with?'),
   t(
-    'O platformă cunoscută îți permite să schimbi oricând furnizorul.',
-    'A well-known platform lets you change supplier at any time.',
+    'O tehnologie cunoscută îți permite să schimbi oricând furnizorul.',
+    'A well-known technology lets you change supplier at any time.',
   ),
-  t('WordPress și Elementor, Shopify sau Medusa', 'WordPress and Elementor, Shopify or Medusa'),
+  t('Cod scris de noi (Next.js, Astro), Shopify sau Medusa', 'Code we write (Next.js, Astro), Shopify or Medusa'),
   t('Cu cine vorbesc pe durata proiectului?', 'Who do I talk to during the project?'),
   t(
     'Mesajele pierdute între mai mulți oameni întârzie proiectul.',
@@ -442,8 +442,8 @@ export const websiteDesignDictionary = [
     'Do you have a single offer and send people from ads? A landing page. Do you have several services to explain? A business website, with up to 6 pages in the basic package.',
   ),
   t(
-    'Landing page-urile și site-urile de prezentare pe WordPress și Elementor, magazinele online pe Shopify sau Medusa. Platforme cunoscute, nu ceva inventat de noi pe care nu-l mai poate atinge nimeni.',
-    'Landing pages and business websites on WordPress and Elementor, online stores on Shopify or Medusa. Well-known platforms, not something we invented that nobody else can touch.',
+    'Landing page-urile și site-urile de prezentare le scriem direct în cod, cu Next.js sau Astro. Magazinele online, pe Shopify sau Medusa. Platforme cunoscute, nu ceva inventat de noi pe care nu-l mai poate atinge nimeni.',
+    'We write landing pages and business websites directly in code, with Next.js or Astro. Online stores run on Shopify or Medusa. Well-known platforms, not something we invented that nobody else can touch.',
   ),
   t(
     'Da. Pregătim afișarea pentru telefon, tabletă și desktop, din prima zi.',
@@ -481,8 +481,8 @@ export const websiteDesignDictionary = [
   ),
   t('Al cui este site-ul după lansare?', 'Who owns the website after launch?'),
   t(
-    'Site-ul este integral proprietatea ta. Domeniul și abonamentul de găzduire se configurează pe numele tău sau al firmei tale. La predare primești toate datele de acces (panoul WordPress, panoul de hosting, baze de date). Nu folosim soluții captive: poți muta site-ul sau poți lucra cu oricine altcineva în viitor, fără nicio restricție din partea noastră.',
-    'The website is entirely your property. The domain and hosting plan are configured in your name or your company\'s name. Upon handover you receive all access credentials (WordPress admin panel, hosting panel, databases). We do not use lock-in solutions: you can move the website or work with anyone else in the future, without any restrictions from us.',
+    'Site-ul este integral proprietatea ta. Domeniul și abonamentul de găzduire se configurează pe numele tău sau al firmei tale. La predare primești toate datele de acces (codul sursă, panoul de hosting, contul domeniului). Nu folosim soluții captive: poți muta site-ul sau poți lucra cu oricine altcineva în viitor, fără nicio restricție din partea noastră.',
+    'The website is entirely your property. The domain and hosting plan are configured in your name or your company\'s name. Upon handover you receive all access credentials (source code, hosting panel, domain account). We do not use lock-in solutions: you can move the website or work with anyone else in the future, without any restrictions from us.',
   ),
 
   // Sticky bar
