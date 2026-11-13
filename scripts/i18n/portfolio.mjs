@@ -24,4 +24,5 @@ export const portfolioDictionary = [
   ["Producție video și foto. Site pentru un studio de film și fotografie din Berlin și București, în limba engleză.","Video and photo production. Website for a film and photography studio in Berlin and Bucharest, in English."],
   ["Recrutare în Product Management. Site pentru o agenție care recrutează specialiști în Product Management pentru companii de tehnologie.","Product Management recruitment. Website for an agency that recruits Product Management specialists for tech companies."],
   ["(se deschide într-o filă nouă)","(opens in a new tab)"],
+  ["Sprijin pentru persoane neurodivergente. Site în limba română pentru programe dedicate copiilor, adulților și familiilor neurodivergente.","Support for neurodivergent people. Romanian-language website with programmes for neurodivergent children, adults and families."],
 ];
