@@ -247,7 +247,7 @@ separat înregistrările necesare site-ului și expeditorului Resend.
 | RO | EN |
 | --- | --- |
 | `/` | `/en/` |
-| `/about-2/` | `/en/about/` |
+| `/despre-noi/` | `/en/about/` |
 | `/creare-site-web/` | `/en/website-design/` |
 | `/creare-magazin-online/` | Exclusiv RO |
 | `/dezvoltare-aplicatii/` | Exclusiv RO |

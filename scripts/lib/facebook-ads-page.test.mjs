@@ -55,7 +55,7 @@ test('page content has one h1, no inline styles and none of the banned character
 });
 
 test('every Romanian page header and the homepage card link to the Facebook Ads page', () => {
-  for (const file of ['index.html', 'about-2/index.html', 'creare-site-web/index.html', 'creare-magazin-online/index.html',
+  for (const file of ['index.html', 'despre-noi/index.html', 'creare-site-web/index.html', 'creare-magazin-online/index.html',
     'dezvoltare-aplicatii/index.html', 'servicii-seo/index.html', 'agentie-google-ads/index.html', 'administrare-site/index.html',
     'contact/index.html', 'portofoliu/index.html', 'politica-de-confidentialitate/index.html', 'agentie-facebook-ads/index.html']) {
     const header = read(file).match(/<header\b[\s\S]*?<\/header>/i)[0];

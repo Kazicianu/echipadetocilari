@@ -51,7 +51,7 @@ test('build validation rejects retired internal links, including scraped relativ
     writeFileSync(logo, '');
     const options = { outDir: directory, files, urlPathOf: file => publicPaths.get(file), indexable: false };
     assert.deepEqual(validateBuild(options), []);
-    const file = path.join(directory, 'about-2/index.html');
+    const file = path.join(directory, 'despre-noi/index.html');
     const html = readFileSync(file, 'utf8');
     for (const href of [...formerPages, '../clients/index.html', 'https://echipadetocilari.ro/logo-design?old=1#offer', '../services/']) {
       writeFileSync(file, html.replace('</body>', `<a href="${href}">Old page</a></body>`));

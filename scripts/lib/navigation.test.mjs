@@ -143,3 +143,9 @@ test('English menus omit untranslated pages while Romanian menus and contextual 
   assert.equal(removeUnavailableMenuLinks(sourceHtml, 'ro'), sourceHtml);
   assert.equal(removeUnavailableMenuLinks(english, 'en'), english);
 });
+
+test('the retired about-2 link resolves to the despre-noi route in both languages', () => {
+  const html = '<a href="about-2/index.html">x</a>';
+  assert.equal(normalizePageLinks(html, { pageUrl: '/' }), '<a href="/despre-noi/">x</a>');
+  assert.equal(normalizePageLinks(html, { pageUrl: '/', language: 'en' }), '<a href="/en/about/">x</a>');
+});

@@ -8,6 +8,7 @@ const pageRoutes = new Map(routes.flatMap(route => [
 const routeAliases = new Map([
   ['/pay-per-click/', '/agentie-google-ads/'],
   ['/en/ppc-advertising/', '/en/google-ads-agency/'],
+  ['/about-2/', '/despre-noi/'],
 ]);
 const ownHosts = new Set(['echipadetocilari.ro', 'www.echipadetocilari.ro']);
 

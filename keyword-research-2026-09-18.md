@@ -57,7 +57,7 @@ Raportul resource_organic pentru echipadetocilari.ro, baza ro, a returnat NOTHIN
 | /logo-design/ | creare logo firma | creare logo; identitate vizuala; pret creare logo | Schimbă accentul englezesc spre cereri comerciale în română și înlocuiește textele demonstrative. |
 | /services/ | servicii marketing online | servicii marketing digital | Transformă pagina într-un sumar real al serviciilor, cu linkuri către paginile dedicate; elimină Lorem ipsum. |
 | /portofoliu/ | modele site-uri | modele site; portofoliu web design | Păstrează scopul demonstrativ. Conținutul local prezintă modele, nu trebuie prezentate ca proiecte reale pentru clienți. |
-| /about-2/ | Echipa de Tocilari despre noi | echipa; agenție | Păstrează rolul de brand și încredere; nu concura cu homepage-ul. Keyword de brand propus, nemăsurat. |
+| /despre-noi/ | Echipa de Tocilari despre noi | echipa; agenție | Păstrează rolul de brand și încredere; nu concura cu homepage-ul. Keyword de brand propus, nemăsurat. |
 | /contact/ | Echipa de Tocilari contact | contact agenție | Titlu și H1 clare pentru contact; keyword de brand propus, nemăsurat. |
 | /clients/ | clienți Echipa de Tocilari | testimoniale Echipa de Tocilari | Înlocuiește conținutul demonstrativ cu dovezi reale înainte de promovarea paginii. Keywords propuse, nemăsurate. |
 

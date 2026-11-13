@@ -8,7 +8,7 @@ export const roPageMeta = {
     description:
       'Agenție de marketing digital din București. Facem promovare online, web design, SEO și Google Ads. Consultație gratuită 30 de minute, remote în toată România.',
   },
-  '/about-2/': {
+  '/despre-noi/': {
     title: 'Despre noi | Cunoaște Echipa de Tocilari',
     description:
       'Cunoaște Echipa de Tocilari, agenție de marketing digital din București. Design, dezvoltare web și SEO, cu atenție la detalii și comunicare deschisă.',

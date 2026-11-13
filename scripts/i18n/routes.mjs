@@ -29,9 +29,9 @@ export const routes = [
     ],
   },
   {
-    ro: '/about-2/',
+    ro: '/despre-noi/',
     en: '/en/about/',
-    roFile: 'about-2/index.html',
+    roFile: 'despre-noi/index.html',
     enFile: 'en/about/index.html',
     labelRo: 'Despre noi',
     labelEn: 'About us',

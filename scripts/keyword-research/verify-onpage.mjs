@@ -4,7 +4,7 @@ const base = process.env.BASE_URL || 'http://localhost:54537';
 
 const pages = [
   ['/', 'Agenție marketing online București', 'Agenție de marketing online în București'],
-  ['/about-2/', 'Despre noi', 'Despre noi'],
+  ['/despre-noi/', 'Despre noi', 'Despre noi'],
   ['/creare-site-web/', 'Creare site web București', 'Creare site web de prezentare in Bucuresti'],
   ['/servicii-seo/', 'Servicii SEO București', 'Servicii de optimizare SEO pentru Google'],
   ['/administrare-site/', 'Administrare și mentenanță site', 'Administrare si mentenanta site web'],

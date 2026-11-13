@@ -105,7 +105,7 @@ const OWNED = {
   logo: '/logo-design/',
   port: '/portofoliu/',
   svc: '/services/',
-  about: '/about-2/',
+  about: '/despre-noi/',
   clients: '/clients/',
   contact: '/contact/',
 };
