@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { stripWordPressLinks } from './html.mjs';
+import { stripCmsMarkers, stripWordPressLinks } from './html.mjs';
 
 const head = [
   '<link rel="stylesheet" href="/a.css">',
@@ -25,4 +25,22 @@ test('stripWordPressLinks leaves no blank lines behind and is idempotent', () =>
   const once = stripWordPressLinks(`<head>\r\n${head.replace(/\n/g, '\r\n')}\r\n</head>`);
   assert.doesNotMatch(once, /\r\n\s*\r\n/);
   assert.equal(stripWordPressLinks(once), once);
+});
+
+test('stripCmsMarkers removes generator tags and Rank Math comments only', () => {
+  const input = [
+    '<head>',
+    '<!-- Search Engine Optimization by Rank Math - https://rankmath.com/ -->',
+    '<meta name="description" content="Creare site web">',
+    '<!-- /Rank Math WordPress SEO plugin -->',
+    '<meta name="generator" content="WordPress 7.0.2">',
+    '<meta name="generator" content="Elementor 4.1.4; features: e_font_icon_svg">',
+    '<!-- keep me -->',
+    '</head>',
+  ].join('\n');
+  const out = stripCmsMarkers(input);
+  assert.doesNotMatch(out, /generator|Rank Math|WordPress|Elementor/);
+  assert.match(out, /name="description"/);
+  assert.match(out, /<!-- keep me -->/);
+  assert.equal(stripCmsMarkers(out), out);
 });

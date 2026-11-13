@@ -31,6 +31,7 @@ import {
   renderJsonLd,
   setLang,
   stripJsonLd,
+  stripCmsMarkers,
   stripWordPressLinks,
   upsertMeta,
   upsertTitle,
@@ -255,6 +256,8 @@ function enhanceHtml(file) {
   html = stripJsonLd(html);
   // The scraped feed and shortlink links go nowhere on this host.
   html = stripWordPressLinks(html);
+  // Generator tags and plugin comments name the old CMS; the site is built in code.
+  html = stripCmsMarkers(html);
 
   if (owned && meta) {
     html = upsertTitle(html, meta.title);

@@ -139,6 +139,9 @@ function checkWordPressLeftovers(html, name, errors) {
   if (/<link\b[^>]*\btype\s*=\s*["']application\/rss\+xml["']/i.test(html)) {
     errors.push(`${name}: RSS feed link (application/rss+xml) left in the head; the site has no feeds`);
   }
+  if (/<meta\b[^>]*\bname\s*=\s*["']generator["']/i.test(html) || /<!--[^>]*?Rank Math/i.test(html)) {
+    errors.push(`${name}: CMS generator tag or Rank Math comment left in the head; strip it in build-static.mjs`);
+  }
 }
 
 /**

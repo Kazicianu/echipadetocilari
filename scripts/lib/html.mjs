@@ -129,6 +129,16 @@ export function stripWordPressLinks(html) {
   );
 }
 
+/**
+ * Drop the head markers that name the old CMS: generator meta tags
+ * (WordPress, Elementor) and the Rank Math plugin comments around its SEO block.
+ */
+export function stripCmsMarkers(html) {
+  return html
+    .replace(/[ \t]*<meta\b(?=[^>]*\bname\s*=\s*["']generator["'])[^>]*>[ \t]*\r?\n?/gi, '')
+    .replace(/[ \t]*<!--[^>]*?Rank Math[\s\S]*?-->[ \t]*\r?\n?/gi, '');
+}
+
 /** ro / en / x-default alternates; x-default points at Romanian (primary market). */
 export function injectHreflang(html, { site, roPath, enPath }) {
   const ro = `${site}${roPath === '/' ? '/' : roPath}`;
