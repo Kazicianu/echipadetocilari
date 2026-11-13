@@ -1,8 +1,9 @@
+import { contactDictionary } from './contact-page.mjs';
 import { googleAdsDictionary } from './google-ads.mjs';
 import { portfolioDictionary } from './portfolio.mjs';
 import { privacyPolicyDictionary } from './privacy-policy.mjs';
 import { websiteDesignDictionary } from './website-design.mjs';
-export { googleAdsDictionary, portfolioDictionary, privacyPolicyDictionary, websiteDesignDictionary };
+export { contactDictionary, googleAdsDictionary, portfolioDictionary, privacyPolicyDictionary, websiteDesignDictionary };
 
 /**
  * Page-only entries, keyed by the RO route. generate-en.mjs merges them with the
@@ -10,6 +11,7 @@ export { googleAdsDictionary, portfolioDictionary, privacyPolicyDictionary, webs
  */
 export const pageDictionaries = {
   '/agentie-google-ads/': googleAdsDictionary,
+  '/contact/': contactDictionary,
   '/creare-site-web/': websiteDesignDictionary,
   '/portofoliu/': portfolioDictionary,
   '/politica-de-confidentialitate/': privacyPolicyDictionary,
@@ -18,6 +20,7 @@ export const pageDictionaries = {
 /** Source files of the page dictionaries, for the sitemap <lastmod> of the EN pages. */
 export const pageDictionaryFiles = {
   '/agentie-google-ads/': 'scripts/i18n/google-ads.mjs',
+  '/contact/': 'scripts/i18n/contact-page.mjs',
   '/creare-site-web/': 'scripts/i18n/website-design.mjs',
   '/portofoliu/': 'scripts/i18n/portfolio.mjs',
   '/politica-de-confidentialitate/': 'scripts/i18n/privacy-policy.mjs',
