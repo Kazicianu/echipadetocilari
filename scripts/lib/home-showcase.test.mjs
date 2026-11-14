@@ -46,13 +46,30 @@ test('images carry width, height and alt, and their files exist', () => {
   }
 });
 
+test('card videos are muted, inline and point at existing files', () => {
+  const videos = [...section.matchAll(/<video\b[^>]*>[\s\S]*?<\/video>/g)].map(m => m[0]);
+  assert.equal(videos.length, 2);
+  for (const video of videos) {
+    const open = video.match(/<video\b[^>]*>/)[0];
+    assert.match(open, /\smuted(\s|>)/);
+    assert.match(open, /\splaysinline(\s|>)/);
+    assert.match(open, /preload="none"/);
+    assert.doesNotMatch(open, /autoplay|poster=/);
+    const sources = [...video.matchAll(/<source\b[^>]*\ssrc="([^"]+)"/g)].map(m => m[1]);
+    assert.ok(sources.length > 0);
+    for (const url of sources) assert.ok(existsSync(new URL(url.replace(/^\//, ''), root)), url);
+  }
+});
+
 test('the section has no em dash, diagonal arrows or dead anchors', () => {
   assert.doesNotMatch(section, /[\u2014\u2196-\u2199]/);
   assert.doesNotMatch(section, /href="#"/);
 });
 
-test('the showcase script is loaded with defer', () => {
+test('the showcase scripts are loaded with defer and exist', () => {
   assert.match(html, /<script src="\/wp-content\/ect-pages\/home\/showcase\.js" defer><\/script>/);
+  assert.match(html, /<script src="\/wp-content\/ect-pages\/home\/showcase-media\.js" defer><\/script>/);
+  assert.ok(existsSync(new URL('wp-content/ect-pages/home/showcase-media.js', root)));
 });
 
 test('the showcase has no placeholders left and links open safely', () => {
