@@ -559,7 +559,7 @@ export const dictionary = [
   ['Și fără ședințe inutile!', 'And no pointless meetings!'],
   ['Glisează și vezi mai mult', 'Swipe to see more'],
 
-  // Home: portfolio showcase (Apple cards carousel, placeholder cards)
+  // Home: portfolio showcase (Apple cards carousel, real projects)
   ['>Din portofoliu<', '>From our portfolio<'],
   [
     'Site-uri făcute de <span class="ect-showcase__hl">tocilari</span>',
@@ -574,12 +574,41 @@ export const dictionary = [
   ['aria-label="Derulează înapoi"', 'aria-label="Scroll back"'],
   ['aria-label="Derulează înainte"', 'aria-label="Scroll forward"'],
   ['aria-label="Închide"', 'aria-label="Close"'],
-  ['>[Categorie]<', '>[Category]<'],
-  ['>[Numele proiectului]<', '>[Project name]<'],
-  ['[Pe scurt, ce am făcut.]', '[What we did, in short.]'],
   [
-    '[Descrierea proiectului: clientul, problema pe care o avea și ce am livrat.]',
-    '[Project description: the client, the problem they had and what we delivered.]',
+    '>Producție video și foto<',
+    '>Video and photo production<',
+  ],
+  [
+    '>Recrutare în Product Management<',
+    '>Product Management recruitment<',
+  ],
+  [
+    '>Sprijin pentru persoane neurodivergente<',
+    '>Support for neurodivergent people<',
+  ],
+  [
+    '<strong>Site de prezentare în limba engleză.</strong> Site pentru un studio de film și fotografie din Berlin și București.',
+    '<strong>An English-language business website.</strong> A site for a film and photography studio based in Berlin and Bucharest.',
+  ],
+  [
+    '<strong>Site de prezentare pentru o agenție de recrutare.</strong> Agenția recrutează specialiști în Product Management pentru companii de tehnologie.',
+    '<strong>A business website for a recruitment agency.</strong> The agency recruits Product Management specialists for technology companies.',
+  ],
+  [
+    '<strong>Site de prezentare în limba română.</strong> Site pentru programe dedicate copiilor, adulților și familiilor neurodivergente.',
+    '<strong>A Romanian-language business website.</strong> A site for programmes dedicated to neurodivergent children, adults and families.',
+  ],
+  [
+    '>Vezi site-ul<span class="screen-reader-text"> ',
+    '>See the website<span class="screen-reader-text"> ',
+  ],
+  [
+    ' (se deschide într-o filă nouă)</span></a>',
+    ' (opens in a new tab)</span></a>',
+  ],
+  [
+    'alt="Captură din site-ul ',
+    'alt="Screenshot of the website ',
   ],
   ['>Vreau un site ca acesta<', '>I want a site like this<'],
 
