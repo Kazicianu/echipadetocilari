@@ -183,6 +183,7 @@
   padding: 0.02em 0.16em 0.08em;
   border-radius: 15px;
   background: #fd8649;
+  color: #fff;
 }
 
 .ect-process__lead {
@@ -1895,7 +1896,7 @@
   margin: 0 0.04em;
   border-radius: 15px;
   background: #fd8649;
-  color: #27272d;
+  color: #fff;
   transform: rotate(-3deg);
 }
 
