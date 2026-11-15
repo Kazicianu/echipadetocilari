@@ -14,4 +14,5 @@ export const portfolioDictionary = [
   ["Recrutare în Product Management. Site pentru o agenție care recrutează specialiști în Product Management pentru companii de tehnologie.","Product Management recruitment. Website for an agency that recruits Product Management specialists for tech companies."],
   ["(se deschide într-o filă nouă)","(opens in a new tab)"],
   ["Sprijin pentru persoane neurodivergente. Site în limba română pentru programe dedicate copiilor, adulților și familiilor neurodivergente.","Support for neurodivergent people. Romanian-language website with programmes for neurodivergent children, adults and families."],
+  ["Studio de unghii în București. Site pentru un studio de unghii din București, cu rezervări, servicii cu prețuri, vouchere cadou cu formular de comandă și un brand animat în stil anii '70.","Nail studio in Bucharest. Website for a nail studio in Bucharest, with bookings, services with prices, gift vouchers with an order form and an animated 1970s-style brand."],
 ];

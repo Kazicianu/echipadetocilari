@@ -1535,6 +1535,7 @@
 .ect-showcase .ect-carousel-card.ect-carousel-card--torjai { background: #0b0b0c; }
 .ect-showcase .ect-carousel-card.ect-carousel-card--funera { background: #315fe8; }
 .ect-showcase .ect-carousel-card.ect-carousel-card--2noi { background: #fcc83f; }
+.ect-showcase .ect-carousel-card.ect-carousel-card--zuzel { background: #dada00; }
 
 .ect-showcase .ect-carousel-card__text {
   position: relative;
@@ -1563,7 +1564,9 @@
 }
 
 .ect-showcase .ect-carousel-card--2noi .ect-carousel-card__category,
-.ect-showcase .ect-carousel-card--2noi .ect-carousel-card__title {
+.ect-showcase .ect-carousel-card--2noi .ect-carousel-card__title,
+.ect-showcase .ect-carousel-card--zuzel .ect-carousel-card__category,
+.ect-showcase .ect-carousel-card--zuzel .ect-carousel-card__title {
   color: #27272d;
 }
 

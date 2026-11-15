@@ -595,6 +595,14 @@ export const dictionary = [
     '<strong>A business website for a recruitment agency.</strong> The agency recruits Product Management specialists for technology companies.',
   ],
   [
+    '>Studio de unghii în București<',
+    '>Nail studio in Bucharest<',
+  ],
+  [
+    '<strong>Site de prezentare cu rezervări și vouchere cadou.</strong> Site pentru un studio de unghii din București, cu servicii și prețuri și un brand animat în stil anii \'70.',
+    '<strong>A business website with bookings and gift vouchers.</strong> A site for a nail studio in Bucharest, with services and prices and an animated 1970s-style brand.',
+  ],
+  [
     '<strong>Site de prezentare în limba română.</strong> Site pentru programe dedicate copiilor, adulților și familiilor neurodivergente.',
     '<strong>A Romanian-language business website.</strong> A site for programmes dedicated to neurodivergent children, adults and families.',
   ],

@@ -16,14 +16,14 @@ test('the showcase is one section placed between the services and the process', 
   assert.ok(end < html.indexOf('<section class="ect-process">'));
 });
 
-test('three cards each point at a dialog with the same id', () => {
+test('four cards each point at a dialog with the same id', () => {
   const cards = [...section.matchAll(/<button[^>]*data-ect-card="([^"]+)"[^>]*>/g)];
-  assert.equal(cards.length, 3);
+  assert.equal(cards.length, 4);
   for (const [tag, id] of cards) {
     assert.match(tag, new RegExp(`aria-controls="${id}"`));
     assert.equal(section.split(`<dialog class="ect-carousel-modal" id="${id}"`).length, 2, `dialog ${id}`);
   }
-  assert.equal([...section.matchAll(/<dialog /g)].length, 3);
+  assert.equal([...section.matchAll(/<dialog /g)].length, 4);
 });
 
 test('every aria-labelledby points at an existing id', () => {
@@ -34,7 +34,7 @@ test('every aria-labelledby points at an existing id', () => {
 
 test('images carry width, height and alt, and their files exist', () => {
   const imgs = [...section.matchAll(/<img\b[^>]*>/g)].map(m => m[0]);
-  assert.equal(imgs.length, 6);
+  assert.equal(imgs.length, 8);
   for (const img of imgs) {
     assert.match(img, /\swidth="\d+"/);
     assert.match(img, /\sheight="\d+"/);
@@ -48,7 +48,7 @@ test('images carry width, height and alt, and their files exist', () => {
 
 test('card videos are muted, inline and point at existing files', () => {
   const videos = [...section.matchAll(/<video\b[^>]*>[\s\S]*?<\/video>/g)].map(m => m[0]);
-  assert.equal(videos.length, 2);
+  assert.equal(videos.length, 3);
   for (const video of videos) {
     const open = video.match(/<video\b[^>]*>/)[0];
     assert.match(open, /\smuted(\s|>)/);
