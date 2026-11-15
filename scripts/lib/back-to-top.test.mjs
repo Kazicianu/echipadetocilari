@@ -16,6 +16,10 @@ test('leaves a page without href="#top" unchanged', () => {
   assert.equal(enhanceBackToTop(withoutTop), withoutTop);
 });
 
+test('the arrow stays hidden while a section mutes it', () => {
+  assert.match(enhanceBackToTop(withTop), /html\.ect-scrolled:not\(\.ect-top-muted\) /);
+});
+
 test('the style only hides the arrow when scripting is enabled', () => {
   assert.match(enhanceBackToTop(withTop), /@media \(scripting:enabled\)/);
 });
