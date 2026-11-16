@@ -1526,6 +1526,11 @@
   .ect-showcase [data-dir="next"]:not(:disabled):hover .ect-carousel__chev-head { transform: translateX(2px); }
 }
 
+/* The theme rings every focused button; keep the ring for keyboard focus only. */
+.ect-showcase .ect-carousel__arrow:focus:not(:focus-visible) {
+  outline: none;
+}
+
 .ect-showcase .ect-carousel__arrow:focus-visible {
   background: #e5e7eb;
   color: #27272d;

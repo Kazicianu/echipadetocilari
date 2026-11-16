@@ -50,8 +50,15 @@
     });
 
     if (prev && next) {
-      prev.addEventListener('click', () => scroller.scrollBy({ left: -300, behavior: behavior() }));
-      next.addEventListener('click', () => scroller.scrollBy({ left: 300, behavior: behavior() }));
+      // Move by whole cards so the row always lands where the first card started.
+      const items = [...root.querySelectorAll('[data-ect-carousel-item]')];
+      const step = dir => {
+        const pitch = items.length > 1 ? items[1].offsetLeft - items[0].offsetLeft : scroller.clientWidth;
+        const index = Math.round(scroller.scrollLeft / pitch) + dir;
+        scroller.scrollTo({ left: Math.max(0, index * pitch), behavior: behavior() });
+      };
+      prev.addEventListener('click', () => step(-1));
+      next.addEventListener('click', () => step(1));
       scroller.addEventListener('scroll', update, { passive: true });
       window.addEventListener('resize', update);
       if (controls) controls.hidden = false;
