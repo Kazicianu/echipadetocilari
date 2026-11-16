@@ -1,13 +1,13 @@
 # Footer
 
-The shared footer: the logo, the company details, the "PAGINI IMPORTANTE" list with the cookie settings, then a hairline and the social links with the copyright line.
+The shared footer, in the Leedlime style: logo, tagline and social links, three link columns (Servicii, Companie, Contact), the opening hours with an orange dot, the legal line, and the painting of Bucharest (the Romanian Athenaeum) across the full width of the screen at the bottom.
 
-Markup: `footer.ect-footer` with `.ect-footer__top` (three columns: `.ect-footer__logo`, `.ect-footer__info`, `.ect-footer__links`) and `.ect-footer__bottom` (`p.ect-footer__follow` with `ul.ect-footer__social`, and `p.ect-footer__copy`). The links column holds `p > strong` for the heading and `p.ect-footer__list` with the links and a `button.ect-consent-open` ("Setări cookie-uri") that reopens the `CookieConsent` banner.
+Markup: `footer.ect-footer` (keeps the Elementor classes `elementor-3355 elementor-location-footer` so the fixed "back to top" widget keeps its position) with `.ect-footer__inner` (`.ect-footer__top` grid: `.ect-footer__brand`, two `nav.ect-footer__col` and `.ect-footer__col--contact` with an `address`; then `p.ect-footer__status` and `.ect-footer__bottom` with the company line and `ul.ect-footer__legal`) and `.ect-footer__art` (decorative `img`, `alt=""`, inside an `aria-hidden` container).
 
-- Columns sit in a row `contact-max` wide, 50px apart and centred vertically; the logo is 115px wide in the first column.
-- Company details are 16px on 27.2px, `ink`, with the company name and the site and email values in 700. Links are `footer-link` (16/32) on 44px rows, `ink`, `orange` on hover.
-- The bottom row starts 50px under a 1px `line` rule: "Urmărește-ne pe:" (16/19.2) with the Facebook and LinkedIn marks (22px, `orange`, `accent` on hover), and "© 2026 Drepturi rezervate" (14/16.8, capitalised).
-- From 1024px down the text drops to 15px; up to 767px the columns stack and the bottom row centres.
-- Every link and the cookie button keep a 44px row. Label the social links (`aria-label="Facebook"`) since they are icons only.
+- Content is `contact-max` (1200px) wide with a 20px gutter; the white background and the painting run edge to edge. Fonts and colours: Montserrat, `ink`, `ink-muted` (#55555e), `orange` for hover and the status dot.
+- Column labels are 12px uppercase paragraphs, not headings. Links are 15px on 44px rows; the legal links and the social icons are 44px targets too.
+- Mobile first: brand on top, Servicii and Companie in two columns, Contact below, legal links above the company line, all centred. From 768px the columns sit in one row under the brand; from 1025px brand and the three columns share one row.
+- The painting is 220px high on phones and `26vw` (max 720px) on larger screens, anchored to the bottom (`object-position: 53% 100%`), with a 35% white gradient over its top so it blends into the page.
+- `button.ect-consent-open` ("Setări cookie-uri") is hidden until `consent.js` runs and then reopens the `CookieConsent` banner.
 
-Hand-written from the Elementor footer (post 3355) and the footer rules in `consent.css`.
+Source of truth: `legacy-mirror/wp-content/ect-pages/site-footer.css` and `scripts/lib/site-footer.mjs`; the approved previews and screenshots are in `docs/ui/footer/`. The preview here hides the fixed back-to-top widget (see `BackToTop`).

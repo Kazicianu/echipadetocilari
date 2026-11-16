@@ -436,7 +436,7 @@ test('refuse is the white pill and accept the solid one in both views; no close 
   assert.equal(view.banner.querySelectorAll('button').length, 6, 'only the three choices per view');
 });
 
-test('consent.css: phone styles are the base, refuse and accept are equal in the settings view, footer rows are even 44px targets', () => {
+test('consent.css: phone styles are the base, refuse and accept are equal in the settings view', () => {
   const css = readFileSync(stylesUrl, 'utf8').replace(/\r\n/g, '\n');
   assert.doesNotMatch(css, /@media \(max-width/, 'mobile first: no max-width overrides');
   assert.match(css, /@media \(min-width: 481px\) \{\n {2}\.ect-consent \{/);
@@ -444,9 +444,6 @@ test('consent.css: phone styles are the base, refuse and accept are equal in the
   assert.match(css, /\.ect-consent \.ect-consent__actions--summary \{ grid-template-columns: repeat\(3, minmax\(0, 1fr\)\); \}/);
   assert.match(css, /\.ect-consent \.ect-consent__actions--customise \.ect-consent__pill--wide \{ grid-column: 1 \/ -1; \}/);
   assert.doesNotMatch(css, /\bflex: 1 1 auto/, 'no stretched single pill');
-  assert.match(css, /footer \.ect-footer-links \{\n\s*display: flex;\n\s*flex-direction: column;/);
-  assert.match(css, /footer \.ect-footer-links > br \{ display: none; \}/);
-  assert.match(css, /footer \.ect-footer-links > a,\nfooter \.ect-footer-links > \.ect-consent-open \{[^}]*min-height: 44px;/);
   assert.doesNotMatch(css, /\.ect-consent-open\.ect-consent-open \{[^}]*line-height:/, 'the button keeps the line height of the footer links');
   assert.match(css, /html\.ect-consent-open \{ scroll-padding-bottom: var\(--ect-consent-space, 0px\); \}/);
   assert.match(css, /html\.ect-consent-open body \{ padding-bottom: var\(--ect-consent-space, 0px\); \}/);

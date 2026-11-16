@@ -16,7 +16,6 @@ import {
   GOOGLE_ADS,
   PRIVACY_PATHS,
   addConsentManager,
-  addFooterPrivacyLinks,
   consentCopy,
   pageLanguage,
 } from './privacy.mjs';
@@ -46,38 +45,10 @@ test('privacy routes and footer labels come from one place', () => {
   assert.equal(pageLanguage('<html lang="ro">'), 'ro');
 });
 
-test('every RO and EN page gets one policy link and one hidden cookie-settings button in the footer list', () => {
-  const copy = consentCopy();
-  for (const { language, url, html } of sourcePages()) {
-    const label = `${url} (${language})`;
-    const result = addFooterPrivacyLinks(html);
-    assert.equal(addFooterPrivacyLinks(result), result, `${label}: idempotent`);
-    assert.equal(count(result, /data-ect-footer-privacy/g), 1, label);
-    const footer = result.match(/<footer\b[\s\S]*<\/footer>/i)[0];
-    assert.equal(count(footer, /data-ect-consent-open/g), 1, label);
-    // The policy page has its own "change cookie settings" button in #cookies.
-    const ownControls = url === PRIVACY_PATHS[language] ? 1 : 0;
-    assert.equal(count(result, /data-ect-consent-open/g), 1 + ownControls, label);
-    const list = footer.match(/elementor-element-3cc1c00[\s\S]*?<\/strong><\/p>\s*<p class="ect-footer-links">([\s\S]*?)<\/p>/)[1];
-    assert.ok(list.endsWith(
-      `<br><a href="${PRIVACY_PATHS[language]}" data-ect-footer-privacy>${copy[language].footerPolicy}</a>` +
-      `<button type="button" class="ect-consent-open" data-ect-consent-open hidden>${copy[language].footerSettings}</button>`,
-    ), `${label}: appended after the existing links, in the page language`);
-    assert.equal(count(footer, /class="ect-footer-links"/g), 1, `${label}: the list is marked for its 44px rows`);
-    assert.equal(
-      result.replace(/<br><a href="[^"]*" data-ect-footer-privacy>[^<]*<\/a><button\b[^>]*>[^<]*<\/button>/, '').replace('<p class="ect-footer-links">', '<p>'),
-      html, `${label}: nothing else changes`);
-  }
-});
-
-test('the footer transform fails loudly when the footer list is missing', () => {
-  assert.throws(() => addFooterPrivacyLinks('<html lang="ro"><body><footer><p>x</p></footer></body></html>'), /elementor-element-3cc1c00/);
-});
-
 test('every page loads consent.css and exactly one deferred consent.js with the GA ID, hosts and policy anchor', () => {
   for (const { language, url, html } of sourcePages()) {
     const label = `${url} (${language})`;
-    const result = makeStandaloneAssets(addConsentManager(addFooterPrivacyLinks(html), { gaId: GA_ID }));
+    const result = makeStandaloneAssets(addConsentManager(html, { gaId: GA_ID }));
     assert.equal(addConsentManager(result, { gaId: GA_ID }), result, `${label}: idempotent`);
     assert.equal(count(result, /<script\b[^>]*\bsrc="\/wp-content\/ect-pages\/consent\.js"/g), 1, label);
     assert.equal(count(result, /<link rel="stylesheet" href="\/wp-content\/ect-pages\/consent\.css">/g), 1, label);
@@ -110,15 +81,15 @@ test('the Google Ads IDs reach the script tag only when set, and are validated',
   assert.throws(() => addConsentManager(page, { gaId: GA_ID, ads: { id: 'AW-1', leadLabel: 'a b' } }), /conversion label/);
 });
 
-test('the build adds no Google tag of its own and wires the footer and consent transforms', () => {
+test('the build adds no Google tag of its own and wires the footer and consent transforms in order', () => {
   const build = readFileSync(path.join(root, 'scripts/build-static.mjs'), 'utf8');
   assert.doesNotMatch(build, /googletagmanager\.com\/gtag\/js/);
   assert.doesNotMatch(build, /gtag\(\s*['"]config['"]/);
   assert.match(build, /google_gtagjs/, 'the inherited WordPress tag is still removed');
-  assert.match(build, /addConsentManager\(addFooterPrivacyLinks\(html\), \{ gaId: GA4_MEASUREMENT_ID \}\)/);
+  assert.match(build, /html = renderSiteFooter\(html\);\s*html = addConsentManager\(html, \{ gaId: GA4_MEASUREMENT_ID \}\);/);
   assert.match(build, /const GA4_MEASUREMENT_ID = 'G-PGM4B3VM9Z';/);
-  const loop = build.slice(build.indexOf('addFooterPrivacyLinks(html)'));
-  assert.ok(loop.indexOf('makeStandaloneAssets(html)') > 0, 'consent assets are added before asset normalisation');
+  const loop = build.slice(build.indexOf('renderSiteFooter(html)'));
+  assert.ok(loop.indexOf('addConsentManager(html') > 0 && loop.indexOf('addConsentManager(html') < loop.indexOf('makeStandaloneAssets(html)'), 'the footer and consent assets are added before asset normalisation');
 });
 
 test('validation rejects a page whose static HTML loads the Google tag', () => {

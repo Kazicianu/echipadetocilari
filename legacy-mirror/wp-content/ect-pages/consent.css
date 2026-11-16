@@ -286,26 +286,7 @@ html.ect-consent-open body { padding-bottom: var(--ect-consent-space, 0px); }
   color: rgba(37, 37, 34, .72);
 }
 
-/* ─── footer: privacy link and "cookie settings" button ─── */
-
-/* The "PAGINI IMPORTANTE" list (class added by scripts/lib/privacy.mjs): every link
-   and the settings button sit on the same 44px row, so the rhythm stays even and
-   each one is a 44px target. */
-footer .ect-footer-links {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-footer .ect-footer-links > br { display: none; }
-
-footer .ect-footer-links > a,
-footer .ect-footer-links > .ect-consent-open {
-  display: flex;
-  align-items: center;
-  max-width: 100%;
-  min-height: 44px;
-}
+/* ─── footer: "cookie settings" button (markup in scripts/lib/site-footer.mjs) ─── */
 
 button.ect-consent-open.ect-consent-open {
   -webkit-appearance: none;

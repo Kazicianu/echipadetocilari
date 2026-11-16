@@ -1,0 +1,348 @@
+/* Site footer (Leedlime style + Bucharest painting). Scoped under .ect-footer. */
+@font-face {
+  font-family: "ECT Footer Montserrat";
+  src: url("/wp-content/ect-pages/fonts/Montserrat-Variable-latin-ro.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+.ect-footer {
+  display: block;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  background: #fff;
+  color: #27272d;
+  font-family: "ECT Footer Montserrat", Montserrat, system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.4;
+  text-align: left;
+  -webkit-font-smoothing: antialiased;
+}
+
+.ect-footer *,
+.ect-footer *::before,
+.ect-footer *::after {
+  box-sizing: border-box;
+}
+
+.ect-footer p,
+.ect-footer ul,
+.ect-footer li,
+.ect-footer address {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-style: normal;
+}
+
+.ect-footer a {
+  color: #27272d;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+.ect-footer a:hover {
+  color: #fd8649;
+}
+
+.ect-footer a:focus-visible,
+.ect-footer button:focus-visible {
+  outline: 3px solid #27272d;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Elementor only fixes the "back to top" widget inside .e-con / .elementor-widget-wrap; here it is a direct child. */
+.ect-footer > .elementor-element.elementor-fixed {
+  position: fixed;
+}
+
+.ect-footer__inner {
+  width: min(100% - 40px, 1200px);
+  margin-inline: auto;
+  padding-top: 64px;
+}
+
+/* Grid */
+.ect-footer__top {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: 32px 20px;
+}
+
+.ect-footer__brand,
+.ect-footer__col--contact {
+  grid-column: 1 / -1;
+}
+
+/* Brand */
+.ect-footer__brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.ect-footer .ect-footer__logo {
+  display: inline-block;
+  align-self: center;
+  line-height: 0;
+}
+
+.ect-footer__logo img {
+  display: block;
+  width: 140px;
+  height: auto;
+  max-width: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.ect-footer .ect-footer__tagline {
+  max-width: 40ch;
+  margin-top: 16px;
+  text-wrap: pretty;
+  color: #55555e;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.65;
+}
+
+.ect-footer .ect-footer__social {
+  display: flex;
+  gap: 4px;
+  margin: 12px 0 0 -12px;
+}
+
+.ect-footer .ect-footer__social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  color: #27272d;
+}
+
+.ect-footer__social svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+/* Columns */
+.ect-footer .ect-footer__label {
+  margin: 0 0 4px;
+  color: #55555e;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.ect-footer__col ul {
+  display: flex;
+  flex-direction: column;
+}
+
+.ect-footer .ect-footer__col a,
+.ect-footer .ect-footer__contact > span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: #27272d;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.ect-footer .ect-footer__col a:hover {
+  color: #fd8649;
+}
+
+.ect-footer .ect-footer__contact {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.ect-footer .ect-footer__contact > a {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.ect-footer .ect-footer__contact > span {
+  padding-block: 8px;
+  max-width: 34ch;
+}
+
+/* Status */
+.ect-footer .ect-footer__status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 32px;
+  color: #27272d;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.ect-footer__dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #fd8649;
+}
+
+/* Bottom row */
+.ect-footer__bottom {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 4px;
+  margin-top: 16px;
+  text-align: center;
+}
+
+.ect-footer .ect-footer__company {
+  color: #55555e;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.ect-footer .ect-footer__legal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  column-gap: 20px;
+}
+
+.ect-footer .ect-footer__legal li:has(> [hidden]) {
+  display: none;
+}
+
+.ect-footer .ect-footer__legal a,
+.ect-footer .ect-footer__legal button.ect-consent-open.ect-consent-open {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  min-width: 44px;
+  margin: 0;
+  padding: 0;
+  color: #55555e;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.ect-footer .ect-footer__legal a:hover,
+.ect-footer .ect-footer__legal button.ect-consent-open.ect-consent-open:hover {
+  color: #fd8649;
+}
+
+/* Painting */
+.ect-footer__art {
+  position: relative;
+  margin-top: clamp(0px, 2vw, 24px);
+}
+
+.ect-footer__art img {
+  display: block;
+  width: 100%;
+  max-width: none;
+  height: clamp(220px, 26vw, 720px);
+  object-fit: cover;
+  object-position: 53% 100%;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.ect-footer__art::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 35%;
+  background: linear-gradient(#fff, rgba(255, 255, 255, 0));
+  pointer-events: none;
+  z-index: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ect-footer a,
+  .ect-footer button.ect-consent-open.ect-consent-open {
+    transition: color 0.15s ease;
+  }
+}
+
+@media (min-width: 768px) {
+  .ect-footer__top {
+    grid-template-columns: 1.1fr 0.8fr 1.3fr;
+  }
+
+  .ect-footer__brand {
+    grid-column: 1 / -1;
+  }
+
+  .ect-footer .ect-footer__tagline {
+    max-width: 56ch;
+  }
+
+  .ect-footer .ect-footer__logo {
+    align-self: flex-start;
+  }
+
+  .ect-footer__logo img {
+    width: 115px;
+  }
+
+  .ect-footer__col--contact {
+    grid-column: auto;
+  }
+
+  .ect-footer__bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    text-align: left;
+  }
+
+  .ect-footer .ect-footer__legal {
+    flex: none;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+  }
+}
+
+@media (min-width: 1025px) {
+  .ect-footer__inner {
+    padding-top: 96px;
+  }
+
+  .ect-footer__top {
+    grid-template-columns: 1.35fr 1fr 0.75fr 1.2fr;
+    column-gap: 40px;
+  }
+
+  .ect-footer__brand {
+    grid-column: auto;
+  }
+
+  .ect-footer .ect-footer__tagline {
+    font-size: 16px;
+  }
+
+  .ect-footer .ect-footer__status {
+    margin-top: 48px;
+  }
+
+  .ect-footer__bottom {
+    margin-top: 24px;
+  }
+}
