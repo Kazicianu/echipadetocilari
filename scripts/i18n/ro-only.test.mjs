@@ -9,7 +9,8 @@ import { injectLangSwitcher } from './lang-switcher.mjs';
 import { injectHreflang } from '../lib/html.mjs';
 import { extractHomeFaqs } from '../lib/faq.mjs';
 import { validateBuild } from '../lib/validate.mjs';
-import { fallbackOgImage, normalizeSocialMeta } from '../lib/social-meta.mjs';
+import { allOgImagePaths } from '../lib/og-pages.mjs';
+import { normalizeSocialMeta } from '../lib/social-meta.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const source = path.join(root, 'legacy-mirror');
@@ -125,9 +126,11 @@ test('build validation requires only approved language variants and rejects stal
         publicPaths.set(file, url);
       }
     }
-    const logo = path.join(scratch.directory, fallbackOgImage.path);
-    mkdirSync(path.dirname(logo), { recursive: true });
-    writeFileSync(logo, '');
+    for (const image of allOgImagePaths()) {
+      const file = path.join(scratch.directory, image);
+      mkdirSync(path.dirname(file), { recursive: true });
+      writeFileSync(file, '');
+    }
     const options = { outDir: scratch.directory, files, urlPathOf: file => publicPaths.get(file), indexable: false };
     assert.deepEqual(validateBuild(options), []);
     const shopFile = path.join(scratch.directory, shop.roFile);

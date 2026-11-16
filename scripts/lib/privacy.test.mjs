@@ -7,7 +7,8 @@ import { routes } from '../i18n/routes.mjs';
 import { injectLangSwitcher } from '../i18n/lang-switcher.mjs';
 import { injectHreflang, setLang } from './html.mjs';
 import { makeStandaloneAssets } from './standalone-assets.mjs';
-import { fallbackOgImage, normalizeSocialMeta } from './social-meta.mjs';
+import { allOgImagePaths } from './og-pages.mjs';
+import { normalizeSocialMeta } from './social-meta.mjs';
 import { validateBuild } from './validate.mjs';
 import {
   CONSENT_SCRIPT,
@@ -113,9 +114,11 @@ test('validation rejects a page whose static HTML loads the Google tag', () => {
         publicPaths.set(file, route[language]);
       }
     }
-    const logo = path.join(directory, fallbackOgImage.path);
-    mkdirSync(path.dirname(logo), { recursive: true });
-    writeFileSync(logo, '');
+    for (const image of allOgImagePaths()) {
+      const file = path.join(directory, image);
+      mkdirSync(path.dirname(file), { recursive: true });
+      writeFileSync(file, '');
+    }
     const options = { outDir: directory, files, urlPathOf: file => publicPaths.get(file), indexable: false };
     assert.deepEqual(validateBuild(options), [], 'consent.js alone passes');
     const file = files[0];

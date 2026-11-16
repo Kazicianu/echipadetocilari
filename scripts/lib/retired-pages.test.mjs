@@ -9,7 +9,8 @@ import { enPageMeta } from '../i18n/dictionary.mjs';
 import { injectHreflang } from './html.mjs';
 import { injectLangSwitcher } from '../i18n/lang-switcher.mjs';
 import { validateBuild } from './validate.mjs';
-import { fallbackOgImage, normalizeSocialMeta } from './social-meta.mjs';
+import { allOgImagePaths } from './og-pages.mjs';
+import { normalizeSocialMeta } from './social-meta.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const formerPages = ['/services/', '/en/services/', '/clients/', '/en/clients/', '/logo-design/', '/en/logo-design/'];
@@ -46,9 +47,11 @@ test('build validation rejects retired internal links, including scraped relativ
         files.push(file); publicPaths.set(file, route[language]);
       }
     }
-    const logo = path.join(directory, fallbackOgImage.path);
-    mkdirSync(path.dirname(logo), { recursive: true });
-    writeFileSync(logo, '');
+    for (const image of allOgImagePaths()) {
+      const file = path.join(directory, image);
+      mkdirSync(path.dirname(file), { recursive: true });
+      writeFileSync(file, '');
+    }
     const options = { outDir: directory, files, urlPathOf: file => publicPaths.get(file), indexable: false };
     assert.deepEqual(validateBuild(options), []);
     const file = path.join(directory, 'despre-noi/index.html');

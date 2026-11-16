@@ -263,6 +263,28 @@ header. Build-ul generează titluri, descrieri, date structurate
 Organization/WebSite/WebPage și, unde se aplică, FAQ/Service, plus `llms.txt`.
 Sunt păstrate adaptările pentru mobil și `prefers-reduced-motion`.
 
+### Imagini de previzualizare (Open Graph)
+
+Fiecare pagină publică din tabelul `scripts/lib/og-pages.mjs` (12 RO + 9 EN) are
+propria imagine de share 1200×630, în `legacy-mirror/wp-content/ect-pages/og/<slug>.jpg`,
+iar `default.jpg` se aplică paginilor fără intrare proprie. `scripts/lib/social-meta.mjs`
+pune în build `og:image` (+ width, height, type, alt), `twitter:image` și
+`twitter:card` = `summary_large_image`, pe URL absolut. Textele, personajul și
+oglindirea se schimbă doar în `og-pages.mjs`; după orice modificare imaginile se
+regenerează și se comit:
+
+```
+node scripts/og/make-og-images.mjs                   # toate cele 22
+node scripts/og/make-og-images.mjs home contact      # doar unele (după slug)
+node scripts/og/make-og-images.mjs --sheet <folder>  # plus foi de verificare PNG
+```
+
+Generatorul are nevoie de Google Chrome (captură headless) și de `ffmpeg`
+(PNG în JPEG), fără pachete npm; calea Chrome se poate schimba cu `CHROME_PATH`.
+Personajele se citesc din `legacy-mirror/wp-content/ect-assets/illustrations-2026-11/`
+(folder neurmărit în git) și logoul din `design-assets/`. Scriptul oprește cu eroare
+dacă un titlu nu încape în 3 rânduri la 46 px sau dacă un fișier depășește 250 KB.
+
 Paginile demo vechi, duplicatele și paginile de atașament sunt excluse din
 publicare; redirecturile lor sunt menținute împreună în
 `scripts/lib/junk-redirects.mjs` și `vercel.json`.
