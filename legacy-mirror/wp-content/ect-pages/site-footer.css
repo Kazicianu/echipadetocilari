@@ -81,7 +81,8 @@
 .ect-footer__brand {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  text-align: center;
 }
 
 .ect-footer .ect-footer__logo {
@@ -112,7 +113,7 @@
 .ect-footer .ect-footer__social {
   display: flex;
   gap: 4px;
-  margin: 12px 0 0 -12px;
+  margin: 12px 0 0;
 }
 
 .ect-footer .ect-footer__social a {
@@ -287,6 +288,12 @@
 
   .ect-footer__brand {
     grid-column: 1 / -1;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .ect-footer .ect-footer__social {
+    margin-left: -12px;
   }
 
   .ect-footer .ect-footer__tagline {
