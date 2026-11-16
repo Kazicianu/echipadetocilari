@@ -150,6 +150,9 @@ window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(argumen
     /* The hero image slides in from the right (fadeInRight); clip it sideways so the
        page does not grow wider than the screen while it moves. */
     .elementor-4105 .elementor-element.elementor-element-1f94aed{overflow-x:clip}
+    /* "Punctele noastre forte" (1f16484d) used the kit's 1400px default width; on wide
+       screens align it with the 1200px Elementor sections around it. */
+    @media (min-width:768px){.elementor-4105 .elementor-element.elementor-element-1f16484d{--content-width:1200px}}
     /* Background blobs: each sheet must fit its painting box, so no drawn shape
        ends in a straight line at a section edge. */
     @media (min-width:768px) and (max-width:1024px){
