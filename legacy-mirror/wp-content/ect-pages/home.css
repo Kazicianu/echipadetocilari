@@ -1369,7 +1369,7 @@
   font-size: 7.5vw;
   line-height: 1.2;
   font-weight: 500;
-  text-transform: capitalize;
+  text-transform: none;
   color: #27272d;
 }
 
@@ -1620,7 +1620,9 @@
 }
 
 .ect-showcase .ect-carousel-card__category {
-  display: block;
+  display: flex;
+  align-items: flex-end;
+  min-height: 40px;
   font-size: 14px;
   line-height: 20px;
   font-weight: 500;
@@ -1845,6 +1847,7 @@
   }
 
   .ect-showcase .ect-carousel-card__category {
+    min-height: 48px;
     font-size: 16px;
     line-height: 24px;
   }
