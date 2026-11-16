@@ -106,15 +106,25 @@
   .ect-page--portofoliu .mb-name { font-size: 24px; line-height: 30px; }
   .ect-page--portofoliu .mb-desc { max-width: 32rem; font-size: 16px; line-height: 24px; }
 }
+/* Narrow cards: the phone version of the site in a phone, on the site colour (same as the homepage carousel). */
+@media (min-width: 1024px) {
+  .ect-page--portofoliu .mb-shot--phone { border: 0; }
+  .ect-page--portofoliu .mb-shot--funera { background: #315fe8; }
+  .ect-page--portofoliu .mb-shot--zuzel { background: #dada00; }
+  .ect-page--portofoliu .mb-shot--phone .mb-bar { display: none; }
+  .ect-page--portofoliu .mb-shot--phone .mb-view { position: absolute; top: 28px; left: 50%; flex: none; box-sizing: border-box; width: min(64%, 280px); aspect-ratio: 2 / 3; border: 7px solid #1d1d1f; border-radius: 34px; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.16), 0 28px 56px -16px rgba(0, 0, 0, 0.5); transform: translateX(-50%); transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1); }
+}
 @media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
   .ect-page--portofoliu .mb-card { transition: transform 0.3s ease-out, box-shadow 0.3s ease-out; }
   .ect-page--portofoliu .mb-card:hover, .ect-page--portofoliu .mb-card:has(.mb-link:focus-visible) { transform: translateY(-4px); box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.04), 0 4px 8px rgba(0, 0, 0, 0.07), 0 18px 32px rgba(0, 0, 0, 0.1); }
+  .ect-page--portofoliu .mb-card:hover .mb-shot--phone .mb-view, .ect-page--portofoliu .mb-card:has(.mb-link:focus-visible) .mb-shot--phone .mb-view { transform: translate(-50%, -12px); }
   .ect-page--portofoliu .mb-card:hover .mb-page img, .ect-page--portofoliu .mb-card:has(.mb-link:focus-visible) .mb-page img { transform: translateY(var(--pan, 0px)); transition: transform var(--dur, 10s) linear 0.15s; }
 }
 @media (prefers-reduced-motion: reduce) {
   .ect-page--portofoliu .mb-card, .ect-page--portofoliu .mb-card:hover, .ect-page--portofoliu .mb-card:has(.mb-link:focus-visible) { transform: none; transition: none; }
   .ect-page--portofoliu .mb-page img, .ect-page--portofoliu .mb-card:hover .mb-page img, .ect-page--portofoliu .mb-card:has(.mb-link:focus-visible) .mb-page img, .ect-page--portofoliu .mb-card.is-panning .mb-page img { transform: none; transition: none; animation: none; }
   .ect-page--portofoliu .mb-vid { transition: none; }
+  .ect-page--portofoliu .mb-shot--phone .mb-view, .ect-page--portofoliu .mb-card:hover .mb-shot--phone .mb-view { transition: none; transform: translateX(-50%); }
   .ect-page--portofoliu .pf-cta, .ect-page--portofoliu .pf-cta__chip { transition: none; }
   .ect-page--portofoliu .pf-cta:active, .ect-page--portofoliu .pf-cta:hover, .ect-page--portofoliu .pf-cta:hover .pf-cta__chip { transform: none; }
 }

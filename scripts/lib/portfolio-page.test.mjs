@@ -35,7 +35,7 @@ test('each card has one link that covers it, opens in a new tab and names the pr
   }
 });
 
-test('clips are muted, inline, not preloaded, without autoplay, and both sources exist', () => {
+test('clips are muted, inline, not preloaded, without autoplay, and their sources exist', () => {
   const videos = [...grid.matchAll(/<video\b([^>]*)>([\s\S]*?)<\/video>/g)];
   assert.equal(videos.length, 3);
   for (const [, attrs, inner] of videos) {
@@ -43,9 +43,14 @@ test('clips are muted, inline, not preloaded, without autoplay, and both sources
     assert.match(attrs, /preload="none"/);
     assert.doesNotMatch(attrs, /autoplay|poster/);
     const sources = [...inner.matchAll(/<source\b([^>]*)>/g)].map(m => m[1]);
-    assert.equal(sources.length, 2);
-    assert.match(sources[0], /media="\(max-width: 1023px\)"/);
-    assert.doesNotMatch(sources[1], /media=/);
+    if (sources.length === 1) {
+      // Narrow (phone) cards play the phone clip at every width.
+      assert.match(sources[0], /-mobil\.mp4"/);
+    } else {
+      assert.equal(sources.length, 2);
+      assert.match(sources[0], /media="\(max-width: 1023px\)"/);
+      assert.doesNotMatch(sources[1], /media=/);
+    }
     for (const attrsSource of sources) {
       const src = attrsSource.match(/src="([^"]+)"/)?.[1];
       assert.ok(src && existsSync(fileFor(src)), `${src} exists`);
@@ -70,4 +75,12 @@ test('every Romanian key in the English dictionary appears in the page', () => {
 
 test('cards carry no hover hint or hover button', () => {
   for (const gone of ['mb-go', 'Treci cu mouse-ul', '>Vezi site-ul<']) assert.ok(!grid.includes(gone), `${gone} must not appear`);
+});
+
+test('narrow cards show the phone version of the site in a phone frame', () => {
+  for (const card of cards.filter(c => c.cls === 'mb-c1')) {
+    assert.match(card.inner, /<div class="mb-shot mb-shot--phone mb-shot--[a-z0-9]+">/);
+    assert.doesNotMatch(card.inner, /<source media=/);
+    for (const [, src] of card.inner.matchAll(/\ssrc="([^"]+\.(?:webp|mp4))"/g)) assert.match(src, /-mobil\.(webp|mp4)$/);
+  }
 });
