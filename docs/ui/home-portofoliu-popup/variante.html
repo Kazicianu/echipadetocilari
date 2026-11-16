@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Portofoliu fără popup: variante</title>
+<link rel="stylesheet" href="../../../legacy-mirror/wp-content/ect-pages/home.css">
+<style>
+@font-face { font-family: Montserrat; src: url(../../../legacy-mirror/wp-content/ect-pages/fonts/Montserrat-Variable-latin-ro.woff2) format('woff2'); font-weight: 100 900; font-style: normal; font-display: swap; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: #fff; color: #27272d; font-family: Montserrat, system-ui, sans-serif; overflow-x: hidden; }
+.pv-top { max-width: 1280px; margin: 0 auto; padding: 24px 16px 0; }
+.pv-top h1 { margin: 0; font-size: 16px; line-height: 24px; font-weight: 600; }
+.pv-top p { margin: 6px 0 0; font-size: 14px; line-height: 21px; color: #52525b; max-width: 720px; }
+.screen-reader-text { position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.pv-variant { margin-top: 40px; border-top: 1px solid #e4e4e7; }
+.pv-label { max-width: 1280px; margin: 0 auto; padding: 14px 16px 0; font-size: 13px; line-height: 18px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: #71717a; }
+.pv-variant .ect-showcase { padding-top: 24px; }
+
+/* shared: Funera page pan + clip */
+.ect-showcase .ect-carousel-card__page img { transform: translateY(0); }
+
+/* ---------- A: card = link to the live site ---------- */
+.pv-a .ect-carousel-card,
+.pv-a .ect-carousel-card:hover,
+.pv-a .ect-carousel-card:focus,
+.pv-a .ect-carousel-card:active,
+.pv-a .ect-carousel-card:visited { text-decoration: none; }
+.pv-a .ect-carousel-card__text { padding-right: 22px; }
+.pv-a .pv-desc { display: block; margin-top: 10px; font-size: 14px; line-height: 20px; font-weight: 400; color: rgba(255,255,255,.86); text-wrap: pretty; }
+.pv-a .ect-carousel-card--2noi .pv-desc,
+.pv-a .ect-carousel-card--zuzel .pv-desc { color: rgba(39,39,45,.82); }
+.pv-a .ect-carousel-card__phone { top: 48%; }
+.pv-go {
+  position: absolute; z-index: 45; bottom: 16px; right: 16px;
+  display: inline-flex; box-shadow: 0 8px 20px -8px rgba(0,0,0,.45); align-items: center; justify-content: flex-end; gap: 0;
+  height: 44px; min-width: 44px; padding: 0 12px; box-sizing: border-box;
+  border-radius: 999px; background: #fff; color: #27272d;
+  font-size: 15px; line-height: 20px; font-weight: 600; white-space: nowrap;
+  transition: background-color .2s, color .2s, gap .25s;
+}
+.pv-go__label { display: inline-block; max-width: 0; overflow: hidden; transition: max-width .25s; }
+.pv-go svg { flex: 0 0 auto; width: 20px; height: 20px; }
+.pv-a .ect-carousel-card:hover .pv-go,
+.pv-a .ect-carousel-card:focus-visible .pv-go { background: #fd8649; color: #fff; gap: 6px; padding: 0 16px; }
+.pv-a .ect-carousel-card:hover .pv-go__label,
+.pv-a .ect-carousel-card:focus-visible .pv-go__label { max-width: 120px; }
+.pv-a-cta { max-width: 1280px; margin: 0 auto; padding: 0 16px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
+.pv-a-cta p { margin: 0; font-size: 16px; line-height: 24px; font-weight: 300; }
+.pv-a-cta .pv-a-cta__group { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.pv-a .ect-carousel__controls { margin-right: 0; }
+
+/* buttons (same look as the current modal buttons) */
+.pv-btn, .pv-btn:visited {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 44px; padding: 10px 24px; box-sizing: border-box;
+  border: 2px solid #fd8649; border-radius: 30px;
+  font: inherit; font-size: 16px; line-height: 24px; font-weight: 600; text-decoration: none; cursor: pointer;
+  transition: background-color .2s, color .2s;
+}
+.pv-btn--filled, .pv-btn--filled:visited { background: #fd8649; color: #fff; }
+.pv-btn--filled:hover, .pv-btn--filled:focus-visible { background: #fff; color: #fd8649; }
+.pv-btn--outline, .pv-btn--outline:visited { background: #fff; color: #fd8649; }
+.pv-btn--outline:hover, .pv-btn--outline:focus-visible { background: #fd8649; color: #fff; }
+.pv-btn:focus-visible { outline: 3px solid #27272d; outline-offset: 4px; }
+.pv-btn svg { width: 18px; height: 18px; }
+
+/* ---------- B: the card opens in place ---------- */
+.pv-b .ect-carousel__item { border-radius: 24px; }
+.pv-bcard { position: relative; display: flex; width: 264px; height: 396px; border-radius: 24px; overflow: hidden; transition: width .45s cubic-bezier(.2,.7,.2,1); }
+.pv-bcard--torjai { background: #0b0b0c; }
+.pv-bcard--funera { background: #315fe8; }
+.pv-bcard--2noi { background: #fcc83f; }
+.pv-bcard--zuzel { background: #dada00; }
+.pv-b .ect-carousel-card { flex: 0 0 auto; }
+.pv-b .ect-carousel-card__text { padding-right: 68px; }
+.pv-more {
+  position: absolute; z-index: 45; top: 16px; right: 16px;
+  display: flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; border-radius: 999px;
+  background: rgba(255,255,255,.18); color: #fff; transition: transform .3s, background-color .2s;
+}
+.pv-bcard--2noi .pv-more, .pv-bcard--zuzel .pv-more { background: rgba(39,39,45,.1); color: #27272d; }
+.pv-more svg { width: 22px; height: 22px; }
+.pv-b .ect-carousel-card:hover .pv-more,
+.pv-b .ect-carousel-card:focus-visible .pv-more { background: #fd8649; color: #fff; }
+.pv-bcard.is-open .pv-more { transform: rotate(45deg); background: #fd8649; color: #fff; }
+
+.pv-panel {
+  position: absolute; z-index: 50; left: 8px; right: 8px; bottom: 8px;
+  box-sizing: border-box; padding: 16px; border-radius: 18px; background: #fff; color: #27272d;
+  transform: translateY(calc(100% + 12px)); visibility: hidden;
+  transition: transform .4s cubic-bezier(.2,.7,.2,1), visibility 0s linear .4s;
+}
+.pv-bcard.is-open .pv-panel { transform: none; visibility: visible; transition: transform .4s cubic-bezier(.2,.7,.2,1), visibility 0s; }
+.pv-panel__text { margin: 0; font-size: 14px; line-height: 20px; font-weight: 400; }
+.pv-panel__text strong { font-weight: 600; }
+.pv-panel__img { display: none; }
+.pv-panel__actions { display: flex; flex-direction: column; gap: 8px; margin: 12px 0 0; }
+.pv-panel__actions .pv-btn { width: 100%; padding: 8px 12px; font-size: 15px; }
+
+@media (min-width: 768px) {
+  .pv-bcard { width: 384px; height: 576px; }
+  .pv-bcard.is-open { width: 776px; }
+  .pv-panel {
+    position: relative; left: auto; right: auto; bottom: auto;
+    flex: 0 0 376px; width: 376px; margin: 8px 8px 8px 0; padding: 32px 28px;
+    display: flex; flex-direction: column; justify-content: center;
+    transform: translateX(24px); opacity: 0;
+    transition: transform .4s cubic-bezier(.2,.7,.2,1), opacity .3s, visibility 0s linear .4s;
+  }
+  .pv-bcard.is-open .pv-panel { transform: none; opacity: 1; transition: transform .45s cubic-bezier(.2,.7,.2,1) .1s, opacity .35s .1s, visibility 0s; }
+  .pv-panel__text { font-size: 18px; line-height: 27px; }
+  .pv-panel__img { display: block; width: 100%; height: auto; margin: 0 0 24px; border-radius: 12px; box-shadow: 0 0 0 1px #e4e4e7, 0 16px 32px -18px rgba(0,0,0,.35); }
+  .pv-panel__actions { flex-direction: row; flex-wrap: wrap; margin-top: 24px; }
+  .pv-panel__actions .pv-btn { width: auto; padding: 10px 24px; font-size: 16px; }
+  .pv-a .pv-desc { font-size: 16px; line-height: 24px; margin-top: 12px; }
+  .pv-a .ect-carousel-card__phone { top: 40%; }
+  .pv-b .ect-carousel__item:last-child { padding-right: 20%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pv-bcard, .pv-panel, .pv-bcard.is-open .pv-panel, .pv-go, .pv-go__label, .pv-more { transition: none !important; }
+}
+</style>
+</head>
+<body>
+<header class="pv-top">
+  <h1>Homepage, „Din portofoliu”: fără popup</h1>
+  <p>Prototip static. Nu modifică site-ul. Media e cea reală din <code>legacy-mirror/</code>. Treci cu mouse-ul peste carduri; în B apasă pe un card.</p>
+</header>
+
+<!-- ======================= A ======================= -->
+<section class="pv-variant pv-a" id="a">
+  <p class="pv-label">A · Cardul duce direct pe site</p>
+  <section class="ect-showcase" aria-labelledby="a-title">
+    <div class="ect-showcase__head">
+      <p class="ect-showcase__eyebrow">Din portofoliu</p>
+      <h2 class="ect-showcase__title" id="a-title">Site-uri făcute de <span class="ect-showcase__hl">tocilari</span></h2>
+      <p class="ect-showcase__lead">Câteva dintre proiectele noastre. Apasă pe un card ca să vezi site-ul live.</p>
+    </div>
+    <div class="ect-carousel" data-pv-carousel>
+      <div class="ect-carousel__scroller" data-pv-scroller tabindex="0" role="region" aria-label="Proiecte din portofoliu">
+        <ul class="ect-carousel__row" role="list">
+          <li class="ect-carousel__item">
+            <a class="ect-carousel-card ect-carousel-card--torjai" href="https://torjaiproductions.com/" target="_blank" rel="noopener noreferrer" data-pv-media>
+              <span class="ect-carousel-card__text">
+                <span class="ect-carousel-card__category">Producție video și foto</span>
+                <span class="ect-carousel-card__title">Torjai Productions</span>
+                <span class="pv-desc">Site în engleză pentru un studio de film din Berlin și București.</span>
+              </span>
+              <span class="pv-go" aria-hidden="true"><span class="pv-go__label">Vezi site-ul</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+              <span class="screen-reader-text"> (se deschide într-o filă nouă)</span>
+              <span class="ect-carousel-card__phone"><span class="ect-carousel-card__screen"><img class="ect-carousel-card__still" src="../../../legacy-mirror/wp-content/ect-pages/portofoliu/torjai-productions-clip-mobil.webp" width="540" height="810" alt="" decoding="async"><video class="ect-carousel-card__video" muted playsinline loop preload="none" tabindex="-1" aria-hidden="true"><source src="../../../legacy-mirror/wp-content/ect-pages/portofoliu/torjai-productions-clip-mobil.mp4" type="video/mp4"></video></span></span>
+            </a>
+          </li>
+          <li class="ect-carousel__item">
+            <a class="ect-carousel-card ect-carousel-card--funera" href="https://funera.ro/" target="_blank" rel="noopener noreferrer" data-pv-media>
+              <span class="ect-carousel-card__text">
+                <span class="ect-carousel-card__category">Recrutare în Product Management</span>
+                <span class="ect-carousel-card__title">Funera</span>
+                <span class="pv-desc">Site pentru o agenție care recrutează specialiști în tech.</span>
+              </span>
+              <span class="pv-go" aria-hidden="true"><span class="pv-go__label">Vezi site-ul</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+              <span class="screen-reader-text"> (se deschide într-o filă nouă)</span>
+              <span class="ect-carousel-card__phone"><span class="ect-carousel-card__screen"><span class="ect-carousel-card__page"><img src="../../../legacy-mirror/wp-content/ect-pages/portofoliu/funera-pagina-mobil.webp" width="540" height="7572" alt="" decoding="async"></span></span></span>
+            </a>
+          </li>
+          <li class="ect-carousel__item">
+            <a class="ect-carousel-card ect-carousel-card--2noi" href="https://2noi.ro/" target="_blank" rel="noopener noreferrer" data-pv-media>
+              <span class="ect-carousel-card__text">
+                <span class="ect-carousel-card__category">Sprijin pentru persoane neurodivergente</span>
+                <span class="ect-carousel-card__title">2noi</span>
+                <span class="pv-desc">Programe pentru copii, adulți și familii neurodivergente.</span>
+              </span>
+              <span class="pv-go" aria-hidden="true"><span class="pv-go__label">Vezi site-ul</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+              <span class="screen-reader-text"> (se deschide într-o filă nouă)</span>
+              <span class="ect-carousel-card__phone"><span class="ect-carousel-card__screen"><img class="ect-carousel-card__still" src="../../../legacy-mirror/wp-content/ect-pages/portofoliu/2noi-clip-mobil.webp" width="540" height="810" alt="" decoding="async"><video class="ect-carousel-card__video" muted playsinline loop preload="none" tabindex="-1" aria-hidden="true"><source src="../../../legacy-mirror/wp-content/ect-pages/portofoliu/2noi-clip-mobil.mp4" type="video/mp4"></video></span></span>
+            </a>
+          </li>
+          <li class="ect-carousel__item">
+            <a class="ect-carousel-card ect-carousel-card--zuzel" href="https://zuzel.ro/" target="_blank" rel="noopener noreferrer" data-pv-media>
+              <span class="ect-carousel-card__text">
+                <span class="ect-carousel-card__category">Studio de unghii în București</span>
+                <span class="ect-carousel-card__title">Zuzel</span>
+                <span class="pv-desc">Rezervări, vouchere cadou și un brand animat în stil anii '70.</span>
+              </span>
+              <span class="pv-go" aria-hidden="true"><span class="pv-go__label">Vezi site-ul</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+              <span class="screen-reader-text"> (se deschide într-o filă nouă)</span>
+              <span class="ect-carousel-card__phone"><span class="ect-carousel-card__screen"><img class="ect-carousel-card__still" src="../../../legacy-mirror/wp-content/ect-pages/portofoliu/zuzel-clip-mobil.webp" width="540" height="810" alt="" decoding="async"><video class="ect-carousel-card__video" muted playsinline loop preload="none" tabindex="-1" aria-hidden="true"><source src="../../../legacy-mirror/wp-content/ect-pages/portofoliu/zuzel-clip-mobil.mp4" type="video/mp4"></video></span></span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="pv-a-cta">
+        <div class="pv-a-cta__group">
+          <a class="pv-btn pv-btn--filled" href="#a">Vreau un site ca acestea</a>
+          <a class="ect-showcase__more" href="#a" style="margin-top:0">Vezi tot portofoliul →</a>
+        </div>
+        <div class="ect-carousel__controls" data-pv-controls>
+          <button class="ect-carousel__arrow" type="button" data-pv-prev aria-label="Derulează înapoi"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M5 12l4 4M5 12l4-4"/></svg></button>
+          <button class="ect-carousel__arrow" type="button" data-pv-next aria-label="Derulează înainte"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M15 16l4-4M15 8l4 4"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- ======================= B ======================= -->
+<section class="pv-variant pv-b" id="b">
+  <p class="pv-label">B · Cardul se deschide pe loc</p>
+  <section class="ect-showcase" aria-labelledby="b-title">
+    <div class="ect-showcase__head">
+      <p class="ect-showcase__eyebrow">Din portofoliu</p>
+      <h2 class="ect-showcase__title" id="b-title">Site-uri făcute de <span class="ect-showcase__hl">tocilari</span></h2>
+      <p class="ect-showcase__lead">Câteva dintre proiectele noastre. Deschide un card ca să vezi ce am făcut și pentru cine.</p>
+      <a class="ect-showcase__more" href="#b">Vezi tot portofoliul →</a>
+    </div>
+    <div class="ect-carousel" data-pv-carousel>
+      <div class="ect-carousel__scroller" data-pv-scroller tabindex="0" role="region" aria-label="Proiecte din portofoliu">
+        <ul class="ect-carousel__row" role="list">
+          <li class="ect-carousel__item">
+            <div class="pv-bcard pv-bcard--torjai">
+              <button class="ect-carousel-card ect-carousel-card--torjai" type="button" aria-expanded="false" aria-controls="b-p1" data-pv-media data-pv-toggle>
+                <span class="ect-carousel-card__text">
+                  <span class="ect-carousel-card__category">Producție video și foto</span>
+                  <span class="ect-carousel-card__title">Torjai Productions</span>
+                </span>
+                <span class="pv-more" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+                <span class="ect-carousel-card__phone"><span class="ect-carousel-card__screen"><img class="ect-carousel-card__still" src="../../../legacy-mirror/wp-content/ect-pages/portofoliu/torjai-productions-clip-mobil.webp" width="540" height="810" alt="" decoding="async"><video class="ect-carousel-card__video" muted playsinline loop preload="none" tabindex="-1" aria-hidden="true"><source src="../../../legacy-mirror/wp-content/ect-pages/portofoliu/torjai-productions-clip-mobil.mp4" type="video/mp4"></video></span></span>
+              </button>
+              <div class="pv-panel" id="b-p1" role="region" aria-label="Despre Torjai Productions">
+                <img class="pv-panel__img" src="../../../legacy-mirror/wp-content/ect-pages/portofoliu/torjai-productions.webp" width="1440" height="900" alt="Captură din site-ul Torjai Productions pe desktop" loading="lazy" decoding="async">
+                <p class="pv-panel__text"><strong>Site de prezentare în limba engleză.</strong> Pentru un studio de film și fotografie din Berlin și București.</p>
+                <p class="pv-panel__actions">
+                  <a class="pv-btn pv-btn--outline" href="https://torjaiproductions.com/" target="_blank" rel="noopener noreferrer">Vezi site-ul <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg><span class="screen-reader-text"> (se deschide într-o filă nouă)</span></a>
+                  <a class="pv-btn pv-btn--filled" href="#b">Vreau un site ca acesta</a>
+                </p>
+              </div>
+            </div>
+          </li>
+          <li class="ect-carousel__item">
+            <div class="pv-bcard pv-bcard--funera">
+              <button class="ect-carousel-card ect-carousel-card--funera" type="button" aria-expanded="false" aria-controls="b-p2" data-pv-media data-pv-toggle>
+                <span class="ect-carousel-card__text">
+                  <span class="ect-carousel-card__category">Recrutare în Product Management</span>
+                  <span class="ect-carousel-card__title">Funera</span>
+                </span>
+                <span class="pv-more" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+                <span class="ect-carousel-card__phone"><span class="ect-carousel-card__screen"><span class="ect-carousel-card__page"><img src="../../../legacy-mirror/wp-content/ect-pages/portofoliu/funera-pagina-mobil.webp" width="540" height="7572" alt="" decoding="async"></span></span></span>
+              </button>
+              <div class="pv-panel" id="b-p2" role="region" aria-label="Despre Funera">
+                <img class="pv-panel__img" src="../../../legacy-mirror/wp-content/ect-pages/portofoliu/funera.webp" width="1440" height="900" alt="Captură din site-ul Funera pe desktop" loading="lazy" decoding="async">
+                <p class="pv-panel__text"><strong>Site de prezentare pentru o agenție de recrutare.</strong> Agenția caută specialiști în Product Management pentru companii de tehnologie.</p>
+                <p class="pv-panel__actions">
+                  <a class="pv-btn pv-btn--outline" href="https://funera.ro/" target="_blank" rel="noopener noreferrer">Vezi site-ul <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg><span class="screen-reader-text"> (se deschide într-o filă nouă)</span></a>
+                  <a class="pv-btn pv-btn--filled" href="#b">Vreau un site ca acesta</a>
+                </p>
+              </div>
+            </div>
+          </li>
+          <li class="ect-carousel__item">
+            <div class="pv-bcard pv-bcard--2noi">
+              <button class="ect-carousel-card ect-carousel-card--2noi" type="button" aria-expanded="false" aria-controls="b-p3" data-pv-media data-pv-toggle>
+                <span class="ect-carousel-card__text">
+                  <span class="ect-carousel-card__category">Sprijin pentru persoane neurodivergente</span>
+                  <span class="ect-carousel-card__title">2noi</span>
+                </span>
+                <span class="pv-more" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+                <span class="ect-carousel-card__phone"><span class="ect-carousel-card__screen"><img class="ect-carousel-card__still" src="../../../legacy-mirror/wp-content/ect-pages/portofoliu/2noi-clip-mobil.webp" width="540" height="810" alt="" decoding="async"><video class="ect-carousel-card__video" muted playsinline loop preload="none" tabindex="-1" aria-hidden="true"><source src="../../../legacy-mirror/wp-content/ect-pages/portofoliu/2noi-clip-mobil.mp4" type="video/mp4"></video></span></span>
+              </button>
+              <div class="pv-panel" id="b-p3" role="region" aria-label="Despre 2noi">
+                <img class="pv-panel__img" src="../../../legacy-mirror/wp-content/ect-pages/portofoliu/2noi.webp" width="1440" height="900" alt="Captură din site-ul 2noi pe desktop" loading="lazy" decoding="async">
+                <p class="pv-panel__text"><strong>Site de prezentare în limba română.</strong> Programe pentru copii, adulți și familii neurodivergente.</p>
+                <p class="pv-panel__actions">
+                  <a class="pv-btn pv-btn--outline" href="https://2noi.ro/" target="_blank" rel="noopener noreferrer">Vezi site-ul <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg><span class="screen-reader-text"> (se deschide într-o filă nouă)</span></a>
+                  <a class="pv-btn pv-btn--filled" href="#b">Vreau un site ca acesta</a>
+                </p>
+              </div>
+            </div>
+          </li>
+          <li class="ect-carousel__item">
+            <div class="pv-bcard pv-bcard--zuzel">
+              <button class="ect-carousel-card ect-carousel-card--zuzel" type="button" aria-expanded="false" aria-controls="b-p4" data-pv-media data-pv-toggle>
+                <span class="ect-carousel-card__text">
+                  <span class="ect-carousel-card__category">Studio de unghii în București</span>
+                  <span class="ect-carousel-card__title">Zuzel</span>
+                </span>
+                <span class="pv-more" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+                <span class="ect-carousel-card__phone"><span class="ect-carousel-card__screen"><img class="ect-carousel-card__still" src="../../../legacy-mirror/wp-content/ect-pages/portofoliu/zuzel-clip-mobil.webp" width="540" height="810" alt="" decoding="async"><video class="ect-carousel-card__video" muted playsinline loop preload="none" tabindex="-1" aria-hidden="true"><source src="../../../legacy-mirror/wp-content/ect-pages/portofoliu/zuzel-clip-mobil.mp4" type="video/mp4"></video></span></span>
+              </button>
+              <div class="pv-panel" id="b-p4" role="region" aria-label="Despre Zuzel">
+                <img class="pv-panel__img" src="../../../legacy-mirror/wp-content/ect-pages/portofoliu/zuzel.webp" width="1440" height="900" alt="Captură din site-ul Zuzel pe desktop" loading="lazy" decoding="async">
+                <p class="pv-panel__text"><strong>Site de prezentare cu rezervări și vouchere cadou.</strong> Pentru un studio de unghii din București, cu un brand animat în stil anii '70.</p>
+                <p class="pv-panel__actions">
+                  <a class="pv-btn pv-btn--outline" href="https://zuzel.ro/" target="_blank" rel="noopener noreferrer">Vezi site-ul <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg><span class="screen-reader-text"> (se deschide într-o filă nouă)</span></a>
+                  <a class="pv-btn pv-btn--filled" href="#b">Vreau un site ca acesta</a>
+                </p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="ect-carousel__controls" data-pv-controls>
+        <button class="ect-carousel__arrow" type="button" data-pv-prev aria-label="Derulează înapoi"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M5 12l4 4M5 12l4-4"/></svg></button>
+        <button class="ect-carousel__arrow" type="button" data-pv-next aria-label="Derulează înainte"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M15 16l4-4M15 8l4 4"/></svg></button>
+      </div>
+    </div>
+  </section>
+</section>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  document.querySelectorAll('[data-pv-carousel]').forEach(c => {
+    const sc = c.querySelector('[data-pv-scroller]');
+    const step = () => (sc.querySelector('.ect-carousel__item')?.offsetWidth || 300) + 16;
+    c.querySelector('[data-pv-prev]')?.addEventListener('click', () => sc.scrollBy({ left: -step(), behavior: reduce ? 'auto' : 'smooth' }));
+    c.querySelector('[data-pv-next]')?.addEventListener('click', () => sc.scrollBy({ left: step(), behavior: reduce ? 'auto' : 'smooth' }));
+  });
+
+  const setPan = card => {
+    const page = card.querySelector('.ect-carousel-card__page');
+    const img = page?.querySelector('img');
+    if (!img) return;
+    const apply = () => { const d = img.offsetHeight - page.offsetHeight; if (d > 0) { card.style.setProperty('--pan', -d + 'px'); card.style.setProperty('--dur', Math.round(d / 120) + 's'); } };
+    img.complete ? apply() : img.addEventListener('load', apply, { once: true });
+    addEventListener('resize', apply);
+  };
+  const play = card => { if (reduce) return; const v = card.querySelector('video'); if (v) { v.play().then(() => card.classList.add('is-playing')).catch(() => {}); } };
+  const stop = card => { const v = card.querySelector('video'); if (v) { v.pause(); card.classList.remove('is-playing'); } };
+
+  document.querySelectorAll('[data-pv-media]').forEach(card => {
+    setPan(card);
+    if (fine) {
+      card.addEventListener('pointerenter', () => play(card));
+      card.addEventListener('pointerleave', () => stop(card));
+      card.addEventListener('focus', () => play(card));
+      card.addEventListener('blur', () => stop(card));
+    }
+  });
+  if (!fine && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting ? play(e.target) : stop(e.target)), { threshold: 0.6 });
+    document.querySelectorAll('[data-pv-media]').forEach(c => io.observe(c));
+  }
+
+  // B: open in place, one at a time
+  const toggles = [...document.querySelectorAll('[data-pv-toggle]')];
+  const setOpen = (btn, open) => {
+    btn.setAttribute('aria-expanded', String(open));
+    btn.closest('.pv-bcard').classList.toggle('is-open', open);
+  };
+  toggles.forEach(btn => btn.addEventListener('click', () => {
+    const open = btn.getAttribute('aria-expanded') !== 'true';
+    toggles.forEach(t => t !== btn && setOpen(t, false));
+    setOpen(btn, open);
+    if (open) setTimeout(() => btn.closest('.ect-carousel__item').scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: reduce ? 'auto' : 'smooth' }), 460);
+  }));
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'Escape') return;
+    const open = toggles.find(t => t.getAttribute('aria-expanded') === 'true');
+    if (open) { setOpen(open, false); open.focus(); }
+  });
+})();
+</script>
+</body>
+</html>
