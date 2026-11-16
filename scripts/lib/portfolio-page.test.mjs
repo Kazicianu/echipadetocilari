@@ -11,9 +11,9 @@ const fileFor = url => new URL(url.replace(/^\//, ''), root);
 
 test('the portfolio shows four real projects in the approved order and widths', () => {
   assert.equal((grid.match(/<article\b/g) ?? []).length, 4);
-  assert.deepEqual(cards.map(c => c.cls), ['mb-c2', 'mb-c1', 'mb-c2', 'mb-c1']);
+  assert.deepEqual(cards.map(c => c.cls), ['mb-c2', 'mb-c1', 'mb-c1', 'mb-c2']);
   const names = cards.map(c => c.inner.match(/<a class="mb-link"[^>]*>([^<]*)</)?.[1]);
-  assert.deepEqual(names, ['Torjai Productions', 'Funera', '2noi', 'Zuzel']);
+  assert.deepEqual(names, ['Torjai Productions', 'Funera', 'Zuzel', '2noi']);
 });
 
 test('no placeholder, marquee or old button copy is left', () => {
