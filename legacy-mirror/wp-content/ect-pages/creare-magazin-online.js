@@ -126,7 +126,7 @@
     '.mg-receipt', '.mg-receipt__list > li', '.mg-receipt__total', '.mg-barcode', '.mg-barcode-code',
     '.mg-prices__title', '.mg-prices__sub', '.mg-prices__intro', '.mg-pcard',
     '.mg-scope__title', '.mg-scope__panel', '.mg-scope__notes',
-    '.ect-home-faq__copy', '.ect-home-faq__mascot', '.ect-home-faq__item',
+    '.ect-home-faq__copy', '.ect-home-faq__mascot', '.ect-home-faq__conversation',
     '.ect-section-head', '.ect-card',
   ];
   /* The receipt and its lines print in a queue and a ticket's cut row

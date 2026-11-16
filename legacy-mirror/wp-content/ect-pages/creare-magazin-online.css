@@ -919,7 +919,7 @@
 @media (hover: hover) and (pointer: fine) {
 .ect-page.ect-page--creare-magazin-online .ect-home-faq__trigger:hover { --ect-faq-outline: var(--line-faq); }
 }
-.ect-page.ect-page--creare-magazin-online .ect-home-faq__item[open] .ect-home-faq__trigger { --ect-faq-outline: var(--orange); }
+.ect-page.ect-page--creare-magazin-online .ect-home-faq__item[open]:not([data-fqp-closing]) .ect-home-faq__trigger { --ect-faq-outline: var(--orange); }
 
 .ect-page.ect-page--creare-magazin-online .ect-home-faq__indicator { position: relative; flex: 0 0 14px; width: 14px; height: 14px; }
 
@@ -927,9 +927,9 @@
 
 .ect-page.ect-page--creare-magazin-online .ect-home-faq__indicator::after { transform: rotate(90deg); }
 
-.ect-page.ect-page--creare-magazin-online .ect-home-faq__item[open] .ect-home-faq__indicator::before { background: var(--orange); }
+.ect-page.ect-page--creare-magazin-online .ect-home-faq__item[open]:not([data-fqp-closing]) .ect-home-faq__indicator::before { background: var(--orange); }
 
-.ect-page.ect-page--creare-magazin-online .ect-home-faq__item[open] .ect-home-faq__indicator::after { display: none; }
+.ect-page.ect-page--creare-magazin-online .ect-home-faq__item[open]:not([data-fqp-closing]) .ect-home-faq__indicator::after { display: none; }
 
 .ect-page.ect-page--creare-magazin-online .ect-home-faq__answer { position: relative; width: calc(100% - 18px); margin: 14px 0px 4px auto; padding: 21px 22px; border-radius: 24px 24px 5px; background: var(--orange); color: var(--white); font-size: 15px; font-weight: 400; line-height: 1.75; overflow-wrap: anywhere; }
 
@@ -1047,13 +1047,13 @@
   100% { opacity: 1; clip-path: inset(0px 0px 0px 0px); }
 }
 /* FAQ: the answer grows out of the question it replies to, like a chat message. */
-.ect-page.ect-page--creare-magazin-online .ect-home-faq__item[open] > .ect-home-faq__answer { transform-origin: 0px 0px; animation: 0.22s cubic-bezier(0.2, 0.8, 0.2, 1) 0s 1 normal backwards running mg-bubble; }
+.ect-page.ect-page--creare-magazin-online .ect-home-faq__item[open]:not([data-fqp-closing]) > .ect-home-faq__answer { transform-origin: 0px 0px; animation: 0.22s cubic-bezier(0.2, 0.8, 0.2, 1) 0s 1 normal backwards running mg-bubble; }
 
 /* Where a closed answer is kept as skipped content its own animation would run only once, so there the content slot carries it and restarts on every open. */
 @supports selector(::details-content) {
-.ect-page.ect-page--creare-magazin-online .ect-home-faq__item[open]::details-content { transform-origin: 0px 0px; animation: 0.22s cubic-bezier(0.2, 0.8, 0.2, 1) 0s 1 normal backwards running mg-bubble; }
+.ect-page.ect-page--creare-magazin-online .ect-home-faq__item[open]:not([data-fqp-closing])::details-content { transform-origin: 0px 0px; animation: 0.22s cubic-bezier(0.2, 0.8, 0.2, 1) 0s 1 normal backwards running mg-bubble; }
 
-.ect-page.ect-page--creare-magazin-online .ect-home-faq__item[open] > .ect-home-faq__answer { animation: none; }
+.ect-page.ect-page--creare-magazin-online .ect-home-faq__item[open]:not([data-fqp-closing]) > .ect-home-faq__answer { animation: none; }
 }
 @keyframes mg-bubble {
   0% { opacity: 0; transform: translateY(-6px) scale(0.94); }
@@ -1063,8 +1063,20 @@
 .ect-page.ect-page--creare-magazin-online .mg-rv.mg-in, .ect-page.ect-page--creare-magazin-online .mg-t3__cut.mg-in::after, .ect-page.ect-page--creare-magazin-online .mg-t3__cut.mg-in .mg-t3__sc, .ect-page.ect-page--creare-magazin-online .mg-t3 .mg-t3__top { animation: none !important; }
 
 /* The answer shows its final frame at once. The animation stays attached, so nothing replays if the preference changes while the page is open. */
-.ect-page.ect-page--creare-magazin-online .ect-home-faq__item[open] > .ect-home-faq__answer { animation-timing-function: step-start !important; }
+.ect-page.ect-page--creare-magazin-online .ect-home-faq__item[open]:not([data-fqp-closing]) > .ect-home-faq__answer { animation-timing-function: step-start !important; }
 }
 @media (prefers-reduced-motion: reduce) {
-.ect-page.ect-page--creare-magazin-online .ect-home-faq__item[open]::details-content { animation-timing-function: step-start !important; }
+.ect-page.ect-page--creare-magazin-online .ect-home-faq__item[open]:not([data-fqp-closing])::details-content { animation-timing-function: step-start !important; }
+}
+/* FAQ panel motion: one shared panel slides under the open answer (faq-panel.js). */
+.ect-page.ect-page--creare-magazin-online .ect-home-faq__conversation > .fqp-panel { background: var(--orange); border-radius: 24px 24px 5px; }
+.ect-page.ect-page--creare-magazin-online .ect-home-faq__conversation > .fqp-panel::after { content: ""; position: absolute; right: -7px; bottom: 0; width: 13px; height: 13px; background: var(--orange); clip-path: polygon(0 0, 100% 100%, 0 100%); }
+.ect-page.ect-page--creare-magazin-online .ect-home-faq__conversation[data-fqp-ready] .ect-home-faq__answer { background: transparent; }
+.ect-page.ect-page--creare-magazin-online .ect-home-faq__conversation[data-fqp-ready] .ect-home-faq__answer::after { content: none; }
+.ect-page.ect-page--creare-magazin-online .ect-home-faq__conversation[data-fqp-ready] .ect-home-faq__indicator::before, .ect-page.ect-page--creare-magazin-online .ect-home-faq__conversation[data-fqp-ready] .ect-home-faq__indicator::after { transition: transform var(--fqp-move) var(--fqp-ease), background-color var(--fqp-move) var(--fqp-ease); }
+.ect-page.ect-page--creare-magazin-online .ect-home-faq__conversation[data-fqp-ready] .ect-home-faq__item[open]:not([data-fqp-closing]) .ect-home-faq__indicator::after { display: block; transform: rotate(0deg); background: var(--orange); }
+/* The panel carries the motion, so the old bubble pop-in steps aside. */
+.ect-page.ect-page--creare-magazin-online .ect-home-faq__conversation[data-fqp-ready] > .ect-home-faq__item[open]:not([data-fqp-closing]) .ect-home-faq__answer, .ect-page.ect-page--creare-magazin-online .ect-home-faq__conversation[data-fqp-ready] > .ect-home-faq__item[open]:not([data-fqp-closing])::details-content { animation: none; }
+@media (prefers-reduced-motion: reduce) {
+  .ect-page.ect-page--creare-magazin-online .ect-home-faq__conversation[data-fqp-ready] .ect-home-faq__indicator::before, .ect-page.ect-page--creare-magazin-online .ect-home-faq__conversation[data-fqp-ready] .ect-home-faq__indicator::after { transition: none; }
 }

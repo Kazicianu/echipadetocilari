@@ -168,7 +168,7 @@
 .gads-comparison tr > :nth-child(2) { padding-right: 3.5px !important; }
 .gads-comparison tr > :nth-child(4) { padding-left: 3.5px !important; }
 .gads-faq-item { border-radius: 15px; background: #fff; box-shadow: 0 0 20px rgba(0,0,0,.05); transition: box-shadow .2s; }
-.gads-faq-item[open] { box-shadow: inset 0 0 0 2px var(--gads-orange), 0 0 20px rgba(0,0,0,.05); }
+.gads-faq-item[open]:not([data-fqp-closing]) { box-shadow: inset 0 0 0 2px var(--gads-orange), 0 0 20px rgba(0,0,0,.05); }
 .gads-faq-item > summary { box-sizing: border-box; display: flex; align-items: center; gap: 18px; min-height: 68px; padding: 20px 22px; list-style: none; cursor: pointer; color: #27272d; font: 500 clamp(16px,1.4cqi,17px)/1.35 Montserrat,sans-serif; }
 .gads-faq-item > summary::-webkit-details-marker { display: none; }
 .gads-page .gads-faq-item > summary { border-radius: 15px; }
@@ -178,7 +178,7 @@
 .gads-faq-plus { flex: 0 0 32px; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: var(--gads-orange); color: #fff; }
 .gads-faq-plus::before { content: '+'; font: 500 22px/1 Montserrat,sans-serif; }
 .gads-faq-plus svg { display: none; }
-.gads-faq-item[open] .gads-faq-plus::before { content: '−'; }
+.gads-faq-item[open]:not([data-fqp-closing]) .gads-faq-plus::before { content: '−'; }
 .gads-faq-answer { padding: 0 22px 22px; }
 .gads-faq-answer p { margin: 0; }
 .gads-faq-answer .gads-source { margin-top: 12px; font-size: 14px; line-height: 1.5; }
@@ -240,7 +240,7 @@
 }
 @media (prefers-contrast:more) {
   .gads-services > article, .gads-page .gads-plan, .gads-faq-item { outline: 1px solid #27272d; box-shadow: none; }
-  .gads-faq-item[open] { box-shadow: inset 0 0 0 2px var(--gads-orange); }
+  .gads-faq-item[open]:not([data-fqp-closing]) { box-shadow: inset 0 0 0 2px var(--gads-orange); }
 }
 /* Controls respond on press. Informational cards stay still. */
 .gads-page a[class*='gads-v3-hover-'] { transition: background 160ms, color 160ms, transform 160ms, box-shadow 160ms !important; }
@@ -377,4 +377,10 @@
 .gads-v3-page #formular_contact_bottom .ect-contact-status:empty ~ .ect-contact-fallback { display: none; }
 @media (forced-colors:active) {
   .gads-page .gads-comparison > summary:is(*,:hover,:active) svg { fill: CanvasText !important; }
+}
+/* FAQ panel motion: one shared ring slides over the open card (faq-panel.js). */
+.gads-page [data-faq-panel] > .fqp-panel { z-index: 1; border-radius: 15px; box-shadow: inset 0 0 0 2px var(--gads-orange); }
+.gads-page [data-faq-panel][data-fqp-ready] .gads-faq-item[open]:not([data-fqp-closing]) { box-shadow: 0 0 20px rgba(0,0,0,.05); }
+@media (prefers-contrast:more) {
+  .gads-page [data-faq-panel][data-fqp-ready] .gads-faq-item[open]:not([data-fqp-closing]) { box-shadow: none; }
 }

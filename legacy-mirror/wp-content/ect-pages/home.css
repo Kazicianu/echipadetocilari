@@ -1139,7 +1139,7 @@
   --ect-faq-outline: var(--line-faq, #efd9ce);
 }
 
-.ect-home-faq__item[open] .ect-home-faq__trigger {
+.ect-home-faq__item[open]:not([data-fqp-closing]) .ect-home-faq__trigger {
   --ect-faq-outline: var(--e-global-color-primary, #fd8649);
 }
 
@@ -1164,11 +1164,11 @@
   transform: rotate(90deg);
 }
 
-.ect-home-faq__item[open] .ect-home-faq__indicator::before {
+.ect-home-faq__item[open]:not([data-fqp-closing]) .ect-home-faq__indicator::before {
   background: var(--e-global-color-primary, #fd8649);
 }
 
-.ect-home-faq__item[open] .ect-home-faq__indicator::after {
+.ect-home-faq__item[open]:not([data-fqp-closing]) .ect-home-faq__indicator::after {
   display: none;
 }
 
@@ -2257,4 +2257,14 @@
   .ect-quotes .ect-quotes__cta {
     transition: none;
   }
+}
+/* FAQ panel motion: one shared panel slides under the open answer (faq-panel.js). */
+.ect-home-faq__conversation > .fqp-panel { background: var(--e-global-color-primary, #fd8649); border-radius: 24px 24px 5px 24px; }
+.ect-home-faq__conversation > .fqp-panel::after { content: ""; position: absolute; right: -7px; bottom: 0; width: 13px; height: 13px; background: var(--e-global-color-primary, #fd8649); clip-path: polygon(0 0, 100% 100%, 0 100%); }
+.ect-home-faq__conversation[data-fqp-ready] .ect-home-faq__answer { background: transparent; }
+.ect-home-faq__conversation[data-fqp-ready] .ect-home-faq__answer::after { content: none; }
+.ect-home-faq__conversation[data-fqp-ready] .ect-home-faq__indicator::before, .ect-home-faq__conversation[data-fqp-ready] .ect-home-faq__indicator::after { transition: transform var(--fqp-move) var(--fqp-ease), background-color var(--fqp-move) var(--fqp-ease); }
+.ect-home-faq__conversation[data-fqp-ready] .ect-home-faq__item[open]:not([data-fqp-closing]) .ect-home-faq__indicator::after { display: block; transform: rotate(0deg); background: var(--e-global-color-primary, #fd8649); }
+@media (prefers-reduced-motion: reduce) {
+  .ect-home-faq__conversation[data-fqp-ready] .ect-home-faq__indicator::before, .ect-home-faq__conversation[data-fqp-ready] .ect-home-faq__indicator::after { transition: none; }
 }

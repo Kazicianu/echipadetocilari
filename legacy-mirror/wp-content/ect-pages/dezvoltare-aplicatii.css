@@ -599,12 +599,12 @@ body.ap-landing{margin:0}
 .ap-page .ect-home-faq__trigger::before{bottom:-1px;left:-16px;width:0;height:0;border-width:0 0 16px 16px;border-color:transparent transparent var(--ect-faq-outline) transparent}
 .ap-page .ect-home-faq__trigger::after{bottom:0;left:-14px;width:0;height:0;border-width:0 0 14px 14px;border-color:transparent transparent var(--white) transparent}
 .ap-page .ect-home-faq__trigger:hover{--ect-faq-outline:var(--line-faq)}
-.ap-page .ect-home-faq__item[open] .ect-home-faq__trigger{--ect-faq-outline:var(--orange)}
+.ap-page .ect-home-faq__item[open]:not([data-fqp-closing]) .ect-home-faq__trigger{--ect-faq-outline:var(--orange)}
 .ap-page .ect-home-faq__indicator{position:relative;flex:0 0 14px;width:14px;height:14px}
 .ap-page .ect-home-faq__indicator::before,.ap-page .ect-home-faq__indicator::after{content:"";position:absolute;inset:6px 0 auto;height:2px;border-radius:2px;background:var(--ink)}
 .ap-page .ect-home-faq__indicator::after{transform:rotate(90deg)}
-.ap-page .ect-home-faq__item[open] .ect-home-faq__indicator::before{background:var(--orange)}
-.ap-page .ect-home-faq__item[open] .ect-home-faq__indicator::after{display:none}
+.ap-page .ect-home-faq__item[open]:not([data-fqp-closing]) .ect-home-faq__indicator::before{background:var(--orange)}
+.ap-page .ect-home-faq__item[open]:not([data-fqp-closing]) .ect-home-faq__indicator::after{display:none}
 .ap-page .ect-home-faq__answer{position:relative;width:calc(100% - 18px);margin:12px 0 4px auto;padding:18px 20px;border-radius:24px 24px 5px 24px;background:var(--orange);color:var(--white);font-size:15px;font-weight:400;line-height:1.65;overflow-wrap:anywhere}
 .ap-page .ect-home-faq__answer::after{content:"";position:absolute;right:-7px;bottom:0;width:13px;height:13px;background:var(--orange);clip-path:polygon(0 0,100% 100%,0 100%)}
 .ap-page .ect-home-faq__answer p{margin:0}
@@ -633,4 +633,14 @@ body.ap-landing #formular_contact_bottom input:not([type="hidden"]),
 body.ap-landing #formular_contact_bottom textarea{font-size:16px;min-height:44px}
 @media(max-width:767px){
   body.ap-landing .ect-shared-contact #formular_contact_bottom{padding-top:70px}
+}
+/* FAQ panel motion: one shared panel slides under the open answer (faq-panel.js). */
+.ap-page .ect-home-faq__conversation > .fqp-panel { background: var(--orange); border-radius: 24px 24px 5px 24px; }
+.ap-page .ect-home-faq__conversation > .fqp-panel::after { content: ""; position: absolute; right: -7px; bottom: 0; width: 13px; height: 13px; background: var(--orange); clip-path: polygon(0 0, 100% 100%, 0 100%); }
+.ap-page .ect-home-faq__conversation[data-fqp-ready] .ect-home-faq__answer { background: transparent; }
+.ap-page .ect-home-faq__conversation[data-fqp-ready] .ect-home-faq__answer::after { content: none; }
+.ap-page .ect-home-faq__conversation[data-fqp-ready] .ect-home-faq__indicator::before, .ap-page .ect-home-faq__conversation[data-fqp-ready] .ect-home-faq__indicator::after { transition: transform var(--fqp-move) var(--fqp-ease), background-color var(--fqp-move) var(--fqp-ease); }
+.ap-page .ect-home-faq__conversation[data-fqp-ready] .ect-home-faq__item[open]:not([data-fqp-closing]) .ect-home-faq__indicator::after { display: block; transform: rotate(0deg); background: var(--orange); }
+@media (prefers-reduced-motion: reduce) {
+  .ap-page .ect-home-faq__conversation[data-fqp-ready] .ect-home-faq__indicator::before, .ap-page .ect-home-faq__conversation[data-fqp-ready] .ect-home-faq__indicator::after { transition: none; }
 }

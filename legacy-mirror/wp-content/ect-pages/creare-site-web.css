@@ -270,13 +270,13 @@
 .ect-page.ect-page--creare-site-web .ect-home-faq__trigger::before { bottom: -1px; left: -16px; border-width: 0 0 16px 16px; border-color: transparent transparent var(--ect-faq-outline) transparent; }
 .ect-page.ect-page--creare-site-web .ect-home-faq__trigger::after { bottom: 0; left: -14px; border-width: 0 0 14px 14px; border-color: transparent transparent var(--white) transparent; }
 .ect-page.ect-page--creare-site-web .ect-home-faq__trigger:hover { --ect-faq-outline: var(--line-faq); }
-.ect-page.ect-page--creare-site-web .ect-home-faq__item[open] .ect-home-faq__trigger { --ect-faq-outline: var(--orange); }
+.ect-page.ect-page--creare-site-web .ect-home-faq__item[open]:not([data-fqp-closing]) .ect-home-faq__trigger { --ect-faq-outline: var(--orange); }
 .ect-page.ect-page--creare-site-web .ect-home-faq__trigger:focus-visible { outline: 3px solid var(--ink); outline-offset: 5px; }
 .ect-page.ect-page--creare-site-web .ect-home-faq__indicator { position: relative; flex: 0 0 14px; width: 14px; height: 14px; }
 .ect-page.ect-page--creare-site-web .ect-home-faq__indicator::before, .ect-page.ect-page--creare-site-web .ect-home-faq__indicator::after { content: ""; position: absolute; inset: 6px 0 auto; height: 2px; border-radius: 2px; background: var(--ink); }
 .ect-page.ect-page--creare-site-web .ect-home-faq__indicator::after { transform: rotate(90deg); }
-.ect-page.ect-page--creare-site-web .ect-home-faq__item[open] .ect-home-faq__indicator::before { background: var(--orange); }
-.ect-page.ect-page--creare-site-web .ect-home-faq__item[open] .ect-home-faq__indicator::after { display: none; }
+.ect-page.ect-page--creare-site-web .ect-home-faq__item[open]:not([data-fqp-closing]) .ect-home-faq__indicator::before { background: var(--orange); }
+.ect-page.ect-page--creare-site-web .ect-home-faq__item[open]:not([data-fqp-closing]) .ect-home-faq__indicator::after { display: none; }
 .ect-page.ect-page--creare-site-web .ect-home-faq__answer { position: relative; width: calc(100% - 18px); margin: 14px 0 4px auto; padding: 21px 22px; border-radius: var(--radius-panel) var(--radius-panel) var(--radius-xs) var(--radius-panel); background: var(--orange); color: var(--white); font-size: 15px; font-weight: 400; line-height: 1.75; overflow-wrap: anywhere; }
 .ect-page.ect-page--creare-site-web .ect-home-faq__answer::after { content: ""; position: absolute; right: -7px; bottom: 0; width: 13px; height: 13px; background: var(--orange); clip-path: polygon(0 0, 100% 100%, 0 100%); }
 .ect-page.ect-page--creare-site-web .ect-home-faq__answer p { margin: 0; }
@@ -449,4 +449,14 @@ body:has(.ect-page--creare-site-web) .ect-shared-contact .elementor-shape-top .e
   .ect-page.ect-page--creare-site-web .ect-home-faq__mascot { align-self: center; width: 280px; margin: 0 0 12px; }
   .ect-page.ect-page--creare-site-web .ect-home-faq__trigger { max-width: calc(100% - 38px); padding: 17px 24px; }
   .ect-page.ect-page--creare-site-web .ect-home-faq__answer { width: calc(100% - 62px); padding: 23px 27px; }
+}
+/* FAQ panel motion: one shared panel slides under the open answer (faq-panel.js). */
+.ect-page.ect-page--creare-site-web .ect-home-faq__conversation > .fqp-panel { background: var(--orange); border-radius: var(--radius-panel) var(--radius-panel) var(--radius-xs) var(--radius-panel); }
+.ect-page.ect-page--creare-site-web .ect-home-faq__conversation > .fqp-panel::after { content: ""; position: absolute; right: -7px; bottom: 0; width: 13px; height: 13px; background: var(--orange); clip-path: polygon(0 0, 100% 100%, 0 100%); }
+.ect-page.ect-page--creare-site-web .ect-home-faq__conversation[data-fqp-ready] .ect-home-faq__answer { background: transparent; }
+.ect-page.ect-page--creare-site-web .ect-home-faq__conversation[data-fqp-ready] .ect-home-faq__answer::after { content: none; }
+.ect-page.ect-page--creare-site-web .ect-home-faq__conversation[data-fqp-ready] .ect-home-faq__indicator::before, .ect-page.ect-page--creare-site-web .ect-home-faq__conversation[data-fqp-ready] .ect-home-faq__indicator::after { transition: transform var(--fqp-move) var(--fqp-ease), background-color var(--fqp-move) var(--fqp-ease); }
+.ect-page.ect-page--creare-site-web .ect-home-faq__conversation[data-fqp-ready] .ect-home-faq__item[open]:not([data-fqp-closing]) .ect-home-faq__indicator::after { display: block; transform: rotate(0deg); background: var(--orange); }
+@media (prefers-reduced-motion: reduce) {
+  .ect-page.ect-page--creare-site-web .ect-home-faq__conversation[data-fqp-ready] .ect-home-faq__indicator::before, .ect-page.ect-page--creare-site-web .ect-home-faq__conversation[data-fqp-ready] .ect-home-faq__indicator::after { transition: none; }
 }

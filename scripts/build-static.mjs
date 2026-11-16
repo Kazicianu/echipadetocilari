@@ -60,6 +60,7 @@ import { optimizeRenderPath, validateRenderPath } from './lib/render-path.mjs';
 import { versionAssets } from './lib/asset-versions.mjs';
 import { nameFooterIconLinks } from './lib/footer-a11y.mjs';
 import { enhanceBackToTop } from './lib/back-to-top.mjs';
+import { enhanceFaqPanel } from './lib/faq-panel.mjs';
 import { buildNotFoundPage } from './lib/not-found-page.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -323,6 +324,7 @@ for (const file of walkHtml(outDir)) {
   html = addConsentManager(html, { gaId: GA4_MEASUREMENT_ID });
   html = nameFooterIconLinks(html);
   html = enhanceBackToTop(html);
+  html = enhanceFaqPanel(html);
   html = makeStandaloneAssets(html);
   html = optimizeRenderPath(html);
   // Preloads keep the unversioned URL; only stylesheets and scripts get ?v=.
