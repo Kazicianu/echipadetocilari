@@ -11,7 +11,7 @@ const fileFor = url => new URL(url.replace(/^\//, ''), root);
 
 test('the portfolio shows four real projects in the approved order and widths', () => {
   assert.equal((grid.match(/<article\b/g) ?? []).length, 4);
-  assert.deepEqual(cards.map(c => c.cls), ['mb-c2', 'mb-c1', 'mb-c1', 'mb-c2']);
+  assert.deepEqual(cards.map(c => c.cls), ['mb-c2', 'mb-c1', 'mb-c2', 'mb-c1']);
   const names = cards.map(c => c.inner.match(/<a class="mb-link"[^>]*>([^<]*)</)?.[1]);
   assert.deepEqual(names, ['Torjai Productions', 'Funera', '2noi', 'Zuzel']);
 });
@@ -66,7 +66,8 @@ test('the page script is included with defer', () => {
 
 test('every Romanian key in the English dictionary appears in the page', () => {
   for (const [ro] of portfolioDictionary) assert.ok(page.includes(ro), `unused key: ${ro.slice(0, 50)}`);
-  for (const ro of ['Treci cu mouse-ul: pornește clipul', 'Treci cu mouse-ul: vezi tot site-ul', 'Vezi site-ul']) {
-    assert.ok(portfolioDictionary.some(([key]) => key === ro), `${ro} has an English pair`);
-  }
+});
+
+test('cards carry no hover hint or hover button', () => {
+  for (const gone of ['mb-go', 'Treci cu mouse-ul', '>Vezi site-ul<']) assert.ok(!grid.includes(gone), `${gone} must not appear`);
 });
