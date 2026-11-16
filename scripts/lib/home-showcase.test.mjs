@@ -16,25 +16,28 @@ test('the showcase is one section placed between the services and the process', 
   assert.ok(end < html.indexOf('<section class="ect-process">'));
 });
 
-test('four cards each point at a dialog with the same id', () => {
-  const cards = [...section.matchAll(/<button[^>]*data-ect-card="([^"]+)"[^>]*>/g)];
+test('four cards link straight to the live sites, with no popup', () => {
+  const cards = [...section.matchAll(/<a class="ect-carousel-card [^"]+"[^>]*>([\s\S]*?)<\/a>/g)];
   assert.equal(cards.length, 4);
-  for (const [tag, id] of cards) {
-    assert.match(tag, new RegExp(`aria-controls="${id}"`));
-    assert.equal(section.split(`<dialog class="ect-carousel-modal" id="${id}"`).length, 2, `dialog ${id}`);
+  for (const [tag, inner] of cards) {
+    assert.match(tag, /href="https:\/\/[^"]+"/);
+    assert.match(tag, /target="_blank" rel="noopener noreferrer"/);
+    assert.match(inner, /<span class="ect-carousel-card__desc">[^<]+<\/span>/);
+    assert.match(inner, /<span class="ect-carousel-card__go" aria-hidden="true">/);
+    assert.match(inner, /<span class="screen-reader-text"> \(se deschide într-o filă nouă\)<\/span>$/);
   }
-  assert.equal([...section.matchAll(/<dialog /g)].length, 4);
+  assert.doesNotMatch(section, /<dialog|<button[^>]*data-ect-card|ect-carousel-modal/);
 });
 
 test('every aria-labelledby points at an existing id', () => {
   const refs = [...section.matchAll(/aria-labelledby="([^"]+)"/g)].map(m => m[1]);
-  assert.ok(refs.length >= 4);
+  assert.ok(refs.length >= 1);
   for (const id of refs) assert.ok(section.includes(`id="${id}"`), id);
 });
 
 test('images carry width, height and alt, and their files exist', () => {
   const imgs = [...section.matchAll(/<img\b[^>]*>/g)].map(m => m[0]);
-  assert.equal(imgs.length, 8);
+  assert.equal(imgs.length, 4);
   for (const img of imgs) {
     assert.match(img, /\swidth="\d+"/);
     assert.match(img, /\sheight="\d+"/);

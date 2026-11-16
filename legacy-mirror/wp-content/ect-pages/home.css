@@ -1489,21 +1489,91 @@
   box-shadow: none;
 }
 
+/* Chevron morph: the chevron turns into an arrow on hover (fine pointers) and focus. */
+.ect-showcase .ect-carousel__arrow {
+  touch-action: manipulation;
+  transition: background-color 190ms cubic-bezier(0.19, 1, 0.22, 1), color 190ms cubic-bezier(0.19, 1, 0.22, 1), transform 160ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.ect-showcase .ect-carousel__chev-head,
+.ect-showcase .ect-carousel__chev-stem {
+  transition: transform 190ms cubic-bezier(0.19, 1, 0.22, 1), opacity 190ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.ect-showcase .ect-carousel__chev-stem {
+  opacity: 0;
+  transform: scaleX(0.5);
+  transform-box: fill-box;
+  transform-origin: left center;
+}
+
+.ect-showcase [data-dir="prev"] .ect-carousel__chev-stem {
+  transform-origin: right center;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ect-showcase .ect-carousel__arrow:not(:disabled):hover {
+    background: #e5e7eb;
+    color: #27272d;
+  }
+
+  .ect-showcase .ect-carousel__arrow:not(:disabled):hover .ect-carousel__chev-stem {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+
+  .ect-showcase [data-dir="prev"]:not(:disabled):hover .ect-carousel__chev-head { transform: translateX(-2px); }
+  .ect-showcase [data-dir="next"]:not(:disabled):hover .ect-carousel__chev-head { transform: translateX(2px); }
+}
+
+.ect-showcase .ect-carousel__arrow:focus-visible {
+  background: #e5e7eb;
+  color: #27272d;
+  transition-duration: 0ms;
+}
+
+.ect-showcase .ect-carousel__arrow:focus-visible .ect-carousel__chev-head,
+.ect-showcase .ect-carousel__arrow:focus-visible .ect-carousel__chev-stem {
+  transition-duration: 0ms;
+}
+
+.ect-showcase .ect-carousel__arrow:focus-visible .ect-carousel__chev-stem {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.ect-showcase [data-dir="prev"]:focus-visible .ect-carousel__chev-head { transform: translateX(-2px); }
+.ect-showcase [data-dir="next"]:focus-visible .ect-carousel__chev-head { transform: translateX(2px); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .ect-showcase .ect-carousel__arrow:not(:disabled):not(:focus-visible):active {
+    transform: scale(0.96);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ect-showcase .ect-carousel__arrow,
+  .ect-showcase .ect-carousel__chev-head,
+  .ect-showcase .ect-carousel__chev-stem {
+    transition: none;
+  }
+}
+
 .ect-showcase .ect-carousel__arrow:disabled {
   opacity: 0.5;
   cursor: default;
 }
 
 .ect-showcase .ect-carousel__arrow:focus-visible,
-.ect-showcase .ect-carousel-modal__close:focus-visible,
 .ect-showcase .ect-carousel-card:focus-visible {
   outline: 3px solid #27272d;
   outline-offset: 5px;
 }
 
 .ect-showcase .ect-carousel__arrow svg {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
+  overflow: visible;
 }
 
 .ect-showcase .ect-carousel-card,
@@ -1642,6 +1712,86 @@
   to { transform: translateY(var(--pan, 0px)); }
 }
 
+.ect-showcase a.ect-carousel-card,
+.ect-showcase a.ect-carousel-card:visited,
+.ect-showcase a.ect-carousel-card:hover,
+.ect-showcase a.ect-carousel-card:focus {
+  text-decoration: none;
+}
+
+.ect-showcase .ect-carousel-card__desc {
+  display: block;
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  text-wrap: pretty;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.ect-showcase .ect-carousel-card--2noi .ect-carousel-card__desc,
+.ect-showcase .ect-carousel-card--zuzel .ect-carousel-card__desc {
+  color: rgba(39, 39, 45, 0.85);
+}
+
+.ect-showcase .ect-carousel-card .ect-carousel-card__phone {
+  top: 48%;
+}
+
+/* "Vezi site-ul" pill: only where a mouse can hover; on touch the card opens the site directly. */
+.ect-showcase .ect-carousel-card__go {
+  display: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ect-showcase .ect-carousel-card__go {
+    position: absolute;
+    z-index: 45;
+    right: 20px;
+    bottom: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    min-width: 44px;
+    height: 44px;
+    padding: 0 12px;
+    border-radius: 9999px;
+    background: #fff;
+    color: #27272d;
+    font-size: 15px;
+    line-height: 20px;
+    font-weight: 600;
+    white-space: nowrap;
+    box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.45);
+    transition: padding 0.25s;
+  }
+
+  .ect-showcase .ect-carousel-card__go svg {
+    flex: 0 0 auto;
+    width: 20px;
+    height: 20px;
+  }
+
+  .ect-showcase .ect-carousel-card__go-label {
+    display: inline-block;
+    max-width: 0;
+    overflow: hidden;
+    transition: max-width 0.25s, margin 0.25s;
+  }
+
+  .ect-showcase .ect-carousel-card:hover .ect-carousel-card__go,
+  .ect-showcase .ect-carousel-card:focus-visible .ect-carousel-card__go {
+    padding: 0 16px;
+  }
+
+  .ect-showcase .ect-carousel-card:hover .ect-carousel-card__go-label,
+  .ect-showcase .ect-carousel-card:focus-visible .ect-carousel-card__go-label {
+    max-width: 120px;
+    margin-right: 6px;
+  }
+}
+
 .ect-showcase .ect-carousel.is-armed .ect-carousel__item {
   opacity: 0;
   transform: translateY(20px);
@@ -1652,181 +1802,6 @@
   transform: none;
   transition: opacity 0.5s ease-out, transform 0.5s ease-out;
   transition-delay: calc(var(--i, 0) * 0.2s);
-}
-
-.ect-showcase .ect-carousel-modal {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  max-width: none;
-  max-height: none;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  background: rgba(0, 0, 0, 0.8);
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
-  overflow: auto;
-  overscroll-behavior: contain;
-  opacity: 0;
-  transition: opacity 0.3s cubic-bezier(0.25, 0.1, 0.35, 1);
-}
-
-.ect-showcase .ect-carousel-modal.is-open {
-  opacity: 1;
-}
-
-.ect-showcase .ect-carousel-modal::backdrop {
-  background: transparent;
-}
-
-.ect-showcase .ect-carousel-modal:not([open]) {
-  display: none;
-}
-
-.ect-showcase .ect-carousel-modal__panel {
-  position: relative;
-  z-index: 60;
-  max-width: 1024px;
-  height: fit-content;
-  margin: 40px auto;
-  padding: 16px;
-  border-radius: 24px;
-  background: #fff;
-  font-family: Montserrat, system-ui, sans-serif;
-}
-
-.ect-showcase .ect-carousel-modal__close,
-.ect-showcase .ect-carousel-modal__close:hover,
-.ect-showcase .ect-carousel-modal__close:focus,
-.ect-showcase .ect-carousel-modal__close:active {
-  position: sticky;
-  top: 16px;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  margin: 0 0 0 auto;
-  padding: 0;
-  border: 0;
-  border-radius: 9999px;
-  background: #000;
-  color: #f5f5f5;
-  cursor: pointer;
-  box-shadow: none;
-}
-
-.ect-showcase .ect-carousel-modal__close svg {
-  width: 24px;
-  height: 24px;
-}
-
-.ect-showcase .ect-carousel-modal__category {
-  margin: 0;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 500;
-  color: #000;
-}
-
-.ect-showcase .ect-carousel-modal__title {
-  margin: 16px 0 0;
-  font-size: 24px;
-  line-height: 32px;
-  font-weight: 600;
-  color: #404040;
-  text-transform: none;
-}
-
-.ect-showcase .ect-carousel-modal__content {
-  padding: 40px 0;
-}
-
-.ect-showcase .ect-carousel-modal__block {
-  margin-bottom: 16px;
-  padding: 32px;
-  border-radius: 24px;
-  background: #f5f5f7;
-}
-
-.ect-showcase .ect-carousel-modal__text {
-  max-width: 768px;
-  margin: 0 auto;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
-  color: #525252;
-}
-
-.ect-showcase .ect-carousel-modal__text strong {
-  font-weight: 700;
-  color: #404040;
-}
-
-.ect-showcase .ect-carousel-modal__actions {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
-  max-width: 768px;
-  margin: 24px auto 32px;
-}
-
-.ect-showcase .ect-carousel-modal__button,
-.ect-showcase .ect-carousel-modal__button:visited {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 44px;
-  padding: 10px 28px;
-  border: 2px solid #fd8649;
-  border-radius: 30px;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 600;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.ect-showcase .ect-carousel-modal__button--filled,
-.ect-showcase .ect-carousel-modal__button--filled:visited {
-  background: #fd8649;
-  color: #fff;
-}
-
-.ect-showcase .ect-carousel-modal__button--filled:hover,
-.ect-showcase .ect-carousel-modal__button--filled:focus {
-  background: #fff;
-  color: #fd8649;
-}
-
-.ect-showcase .ect-carousel-modal__button--outline,
-.ect-showcase .ect-carousel-modal__button--outline:visited {
-  background: #fff;
-  color: #fd8649;
-}
-
-.ect-showcase .ect-carousel-modal__button--outline:hover,
-.ect-showcase .ect-carousel-modal__button--outline:focus {
-  background: #fd8649;
-  color: #fff;
-}
-
-.ect-showcase .ect-carousel-modal__button:focus-visible {
-  outline: 3px solid #27272d;
-  outline-offset: 5px;
-}
-
-.ect-showcase .ect-carousel-modal__img {
-  display: block;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  margin: 0 auto;
-  border-radius: 0;
 }
 
 @media (min-width: 768px) {
@@ -1874,26 +1849,14 @@
     line-height: 36px;
   }
 
-  .ect-showcase .ect-carousel-modal__panel {
-    padding: 40px;
+  .ect-showcase .ect-carousel-card__desc {
+    margin-top: 12px;
+    font-size: 16px;
+    line-height: 24px;
   }
 
-  .ect-showcase .ect-carousel-modal__title {
-    font-size: 48px;
-    line-height: 1;
-  }
-
-  .ect-showcase .ect-carousel-modal__block {
-    padding: 56px;
-  }
-
-  .ect-showcase .ect-carousel-modal__text {
-    font-size: 24px;
-    line-height: 32px;
-  }
-
-  .ect-showcase .ect-carousel-modal__img {
-    width: 50%;
+  .ect-showcase .ect-carousel-card .ect-carousel-card__phone {
+    top: 40%;
   }
 }
 
@@ -1940,9 +1903,10 @@
     transition: none;
   }
 
-  .ect-showcase .ect-carousel-modal,
   .ect-showcase .ect-carousel-card__phone,
-  .ect-showcase .ect-carousel-card__video {
+  .ect-showcase .ect-carousel-card__video,
+  .ect-showcase .ect-carousel-card__go,
+  .ect-showcase .ect-carousel-card__go-label {
     transition: none;
   }
 

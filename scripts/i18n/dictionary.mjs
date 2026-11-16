@@ -566,14 +566,13 @@ export const dictionary = [
     'Websites built by <span class="ect-showcase__hl">nerds</span>',
   ],
   [
-    'Câteva dintre proiectele noastre. Deschide un card ca să vezi ce am făcut și pentru cine.',
-    'A few of our projects. Open a card to see what we built and who it was for.',
+    'Câteva dintre proiectele noastre. Apasă pe un card ca să vezi site-ul live.',
+    'A few of our projects. Tap a card to see the live website.',
   ],
   ['Vezi tot portofoliul →', 'See the full portfolio →'],
   ['aria-label="Proiecte din portofoliu"', 'aria-label="Portfolio projects"'],
   ['aria-label="Derulează înapoi"', 'aria-label="Scroll back"'],
   ['aria-label="Derulează înainte"', 'aria-label="Scroll forward"'],
-  ['aria-label="Închide"', 'aria-label="Close"'],
   [
     '>Producție video și foto<',
     '>Video and photo production<',
@@ -587,25 +586,14 @@ export const dictionary = [
     '>Support for neurodivergent people<',
   ],
   [
-    '<strong>Site de prezentare în limba engleză.</strong> Site pentru un studio de film și fotografie din Berlin și București.',
-    '<strong>An English-language business website.</strong> A site for a film and photography studio based in Berlin and Bucharest.',
-  ],
-  [
-    '<strong>Site de prezentare pentru o agenție de recrutare.</strong> Agenția recrutează specialiști în Product Management pentru companii de tehnologie.',
-    '<strong>A business website for a recruitment agency.</strong> The agency recruits Product Management specialists for technology companies.',
-  ],
-  [
     '>Studio de unghii în București<',
     '>Nail studio in Bucharest<',
   ],
-  [
-    '<strong>Site de prezentare cu rezervări și vouchere cadou.</strong> Site pentru un studio de unghii din București, cu servicii și prețuri și un brand animat în stil anii \'70.',
-    '<strong>A business website with bookings and gift vouchers.</strong> A site for a nail studio in Bucharest, with services and prices and an animated 1970s-style brand.',
-  ],
-  [
-    '<strong>Site de prezentare în limba română.</strong> Site pentru programe dedicate copiilor, adulților și familiilor neurodivergente.',
-    '<strong>A Romanian-language business website.</strong> A site for programmes dedicated to neurodivergent children, adults and families.',
-  ],
+  ['>Site în engleză pentru un studio de film din Berlin și București.<', '>An English-language site for a film studio in Berlin and Bucharest.<'],
+  ['>Site pentru o agenție care recrutează specialiști în tech.<', '>A site for an agency that recruits tech specialists.<'],
+  ['>Programe pentru copii, adulți și familii neurodivergente.<', '>Programmes for neurodivergent children, adults and families.<'],
+  [">Rezervări, vouchere cadou și un brand animat în stil anii '70.<", '>Bookings, gift vouchers and an animated 1970s-style brand.<'],
+  ['>Vezi site-ul</span>', '>See the website</span>'],
   [
     '>Vezi site-ul<span class="screen-reader-text"> ',
     '>See the website<span class="screen-reader-text"> ',
@@ -614,11 +602,6 @@ export const dictionary = [
     ' (se deschide într-o filă nouă)</span></a>',
     ' (opens in a new tab)</span></a>',
   ],
-  [
-    'alt="Captură din site-ul ',
-    'alt="Screenshot of the website ',
-  ],
-  ['>Vreau un site ca acesta<', '>I want a site like this<'],
 
   // Chart phases. Anchored on the tags: "Apelul" alone is short enough to hit
   // unrelated copy elsewhere in the document.
