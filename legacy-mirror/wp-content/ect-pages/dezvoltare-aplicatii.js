@@ -201,10 +201,13 @@
     render();
   }
 
-  /* Phone carousels ("Ce construim" and "Cum lucrăm"): the dots follow the swipe, and a dot scrolls to its card.
+  /* Phone carousels ("Ce construim" and "Cum lucrăm"): the dots are worm dots (shared worm-dots.js), which follow the swipe
+     and scroll to their card. If that script is missing, the fallback below keeps the plain dot behaviour.
      From 768px (bento) and 1100px (steps) the dots are hidden and the cards stand in a grid. */
   $$('[data-js="rail"]').forEach((rail) => {
-    const dots = $$(`[data-rail="${rail.id}"] .lp-dot`);
+    const strip = $(`[data-rail="${rail.id}"] .wd-strip`);
+    if (strip && window.ectWormDots?.attach?.(strip, { track: rail })) return;
+    const dots = $$(`[data-rail="${rail.id}"] .wd-dot`);
     if (!dots.length) return;
     let lockUntil = 0;
     const setCurrent = (index) => dots.forEach((dot, k) => dot.setAttribute('aria-current', String(k === index)));

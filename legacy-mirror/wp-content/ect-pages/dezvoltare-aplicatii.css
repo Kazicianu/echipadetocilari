@@ -408,11 +408,6 @@ body.ap-landing{margin:0}
 .ap-page .lp-swipe{display:flex;flex-direction:column;align-items:flex-end;width:max-content;max-width:100%;margin:12px 18px 0 auto;font-family:var(--font-hand);font-size:14px;line-height:1.1;font-weight:600;color:var(--ink);transform:rotate(-5deg);transform-origin:right top}
 .ap-page .lp-swipe__arrow{display:block;width:82px;height:25px;margin:2px 8px 0 0;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .ap-page .lp-dots{display:flex;justify-content:center;margin:0}
-.ap-page .lp-dot{display:grid;place-items:center;width:44px;height:44px;padding:0;border:0;border-radius:12px;background:none;cursor:pointer}
-.ap-page .lp-dot::before{content:"";width:22px;height:5px;border-radius:3px;background:var(--line-step);transition:width .25s,background-color .25s}
-.ap-page .lp-dot[aria-current="true"]::before{width:32px;background:var(--orange)}
-.ap-page .lp-dot:focus-visible{outline-offset:-4px}
-@media (hover:hover) and (pointer:fine){.ap-page .lp-dot:hover::before{background:var(--orange-light)}}
 @media (min-width:768px){.ap-page .lp-swipe,.ap-page .lp-dots--bento{display:none}}
 @media (min-width:1100px){.ap-page .lp-dots--pipe{display:none}}
 

@@ -1,0 +1,224 @@
+/*
+ * Worm dots, microinteractions.dev, MIT License.
+ * Source: https://microinteractions.dev/worm-dots/
+ * Permission is granted, free of charge, to use, copy, modify, merge, publish and distribute this
+ * software, provided this notice is kept in all copies or substantial portions of it. The software is
+ * provided "as is", without warranty of any kind.
+ *
+ * Adapted for echipadetocilari.ro: plain classes instead of a custom element, site tokens for colour,
+ * 44px touch pitch on coarse pointers, no counter. Pair with worm-dots.js.
+ */
+
+/* Registered, so the script reads them in px whatever unit they are written in. */
+@property --wd-dot {
+  syntax: '<length>';
+  inherits: true;
+  initial-value: 8px;
+}
+
+@property --wd-pill {
+  syntax: '<length>';
+  inherits: true;
+  initial-value: 16px;
+}
+
+@property --wd-gap {
+  syntax: '<length>';
+  inherits: true;
+  initial-value: 24px;
+}
+
+@property --wd-ring {
+  syntax: '<length>';
+  inherits: true;
+  initial-value: 20px;
+}
+
+/* The whole strip is the hit area: each dot's button fills its slot, and the padding reaches past both ends. */
+.wd-strip {
+  --wd-color: var(--orange, #fd8649);
+  --wd-quiet: var(--line-step, #ebc6b2);
+  --wd-press: var(--orange-light, #ff9762);
+  --wd-ink: var(--ink, #27272d);
+  --wd-dot: 8px;
+  --wd-pill: 16px;
+  --wd-gap: 24px;
+  --wd-hit: 44px;
+  --wd-reach: 12px;
+  --wd-ring: 20px;
+
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  width: max-content;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 0 var(--wd-reach);
+  margin: 0;
+  touch-action: pan-y;
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Touch: 44px wide slots, so every dot is a 44 x 44 target and the ends need no extra reach. */
+@media (pointer: coarse) {
+  .wd-strip {
+    --wd-gap: 44px;
+    --wd-reach: 0px;
+  }
+}
+
+.wd-strip[data-wd-scrubbing] {
+  cursor: grabbing;
+}
+
+/* Out-specifies the WordPress theme's bare button and [type=button]:hover / :focus rules. */
+.wd-strip .wd-dot {
+  position: relative;
+  flex: 0 0 auto;
+  width: var(--wd-gap);
+  height: var(--wd-hit);
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  cursor: inherit;
+  box-sizing: border-box;
+}
+
+.wd-strip .wd-dot:is(:hover, :focus, :active) {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  color: inherit;
+  outline: none;
+}
+
+.wd-strip .wd-dot::before {
+  position: absolute;
+  top: calc(50% - var(--wd-dot) / 2);
+  left: calc(50% - var(--wd-dot) / 2);
+  width: var(--wd-dot);
+  height: var(--wd-dot);
+  border-radius: 999px;
+  background: var(--wd-quiet);
+  content: '';
+  transition: background-color 150ms ease-out;
+}
+
+.wd-strip .wd-dot[data-pressed]::before {
+  background: var(--wd-press);
+}
+
+.wd-strip[data-wd-ready] .wd-dot:focus-visible {
+  outline: none;
+}
+
+/* Before the script runs (or without it) the current dot is a plain pill, and focus rings the dot. */
+.wd-strip:not([data-wd-ready]) .wd-dot[aria-current="true"]::before {
+  left: calc(50% - var(--wd-pill) / 2);
+  width: var(--wd-pill);
+  background: var(--wd-color);
+}
+
+.wd-strip:not([data-wd-ready]) .wd-dot:focus-visible {
+  outline: 2px solid var(--wd-ink);
+  outline-offset: -6px;
+}
+
+/* Placed and sized from the position on every frame, so it never transitions.
+   Same box, radius and vertical placement as the dots, so both snap to the same pixels. */
+.wd-strip .wd-worm {
+  position: absolute;
+  top: calc(50% - var(--wd-dot) / 2);
+  left: var(--wd-reach);
+  z-index: 1;
+  width: var(--wd-pill);
+  height: var(--wd-dot);
+  border-radius: 999px;
+  background: var(--wd-color);
+  pointer-events: none;
+  transform: translateX(calc(var(--wd-gap) / 2 - var(--wd-pill) / 2));
+}
+
+/* Keyboard focus rings the worm, so the ring stretches and moves with it. */
+.wd-strip:has(.wd-dot:focus-visible) .wd-worm {
+  outline: 2px solid var(--wd-ink);
+  outline-offset: 3px;
+}
+
+/* Behind the dots: the dot nearest the mouse, ringed. Glides on a short ease-out that retargets mid-move. */
+.wd-strip .wd-ring {
+  position: absolute;
+  top: calc(50% - var(--wd-ring) / 2);
+  left: var(--wd-reach);
+  width: var(--wd-ring);
+  height: var(--wd-ring);
+  border-radius: 999px;
+  background: color-mix(in oklch, var(--wd-ink) 8%, transparent);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform 80ms ease-out,
+    width 80ms ease-out,
+    opacity 80ms ease-out;
+}
+
+.wd-strip .wd-ring[data-visible] {
+  opacity: 1;
+}
+
+.wd-vh {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wd-strip .wd-ring {
+    transition: opacity 80ms ease-out;
+  }
+
+  .wd-strip .wd-dot::before {
+    transition: none;
+  }
+}
+
+/* Forced colors would paint every background with Canvas and erase the dots and the worm.
+   The strip opts out and uses system colors instead, so it follows the user's theme. */
+@media (forced-colors: active) {
+  .wd-strip {
+    forced-color-adjust: none;
+  }
+
+  .wd-strip .wd-dot::before {
+    background: GrayText;
+  }
+
+  .wd-strip .wd-dot[data-pressed]::before,
+  .wd-strip:not([data-wd-ready]) .wd-dot[aria-current="true"]::before,
+  .wd-strip .wd-worm {
+    background: CanvasText;
+  }
+
+  .wd-strip .wd-ring {
+    background: transparent;
+    box-shadow: inset 0 0 0 1px CanvasText;
+  }
+
+  .wd-strip:has(.wd-dot:focus-visible) .wd-worm {
+    outline-color: Highlight;
+  }
+
+  .wd-strip:not([data-wd-ready]) .wd-dot:focus-visible {
+    outline-color: Highlight;
+  }
+}

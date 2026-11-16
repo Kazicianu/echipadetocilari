@@ -33,13 +33,7 @@
   const renderPhone = () => {
     screens.forEach((screen, index) => { screen.hidden = index !== current; });
     dots.forEach((dot, index) => {
-      const active = index === current;
-      dot.setAttribute('aria-pressed', String(active));
-      const marker = dot.firstElementChild;
-      if (marker) {
-        marker.style.width = active ? '26px' : '10px';
-        marker.style.background = active ? 'var(--orange)' : 'var(--line-step)';
-      }
+      dot.setAttribute('aria-current', String(index === current));
     });
     visual?.classList.toggle('mg-phone-paused', reduceMotion || document.hidden);
   };
@@ -54,6 +48,7 @@
     timer = window.setTimeout(() => {
       current = (current + 1) % screens.length;
       renderPhone();
+      wormDots?.goTo(current);
       schedulePhone();
     }, delay);
   };
@@ -68,12 +63,24 @@
     if (away) held = rest;
   };
 
-  dots.forEach((dot, index) => dot.addEventListener('click', () => {
-    if (index >= screens.length) return;
-    current = index;
-    renderPhone();
-    schedulePhone();
-  }));
+  const dotStrip = $('[data-js="dot-strip"]');
+  const wormDots = window.ectWormDots?.attach?.(dotStrip, {
+    onSelect: (index) => {
+      if (index >= screens.length) return;
+      current = index;
+      renderPhone();
+      schedulePhone();
+    },
+  }) ?? null;
+  /* Without the shared worm-dots script the dots stay plain buttons. */
+  if (!wormDots) {
+    dots.forEach((dot, index) => dot.addEventListener('click', () => {
+      if (index >= screens.length) return;
+      current = index;
+      renderPhone();
+      schedulePhone();
+    }));
+  }
 
   const metro = $('.mg-metro');
   const renderMetro = () => {

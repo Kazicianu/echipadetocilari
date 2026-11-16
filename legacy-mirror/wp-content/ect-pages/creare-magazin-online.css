@@ -350,8 +350,6 @@
 
 .ect-page.ect-page--creare-magazin-online .mg-notif--3 { animation-delay: 4s; }
 
-.ect-page.ect-page--creare-magazin-online .mg-ctrl:focus:not(:focus-visible) { outline: none; }
-.ect-page.ect-page--creare-magazin-online .mg-ctrl:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
 
 @media (max-width: 520px) {
 .ect-page.ect-page--creare-magazin-online .mg-banner { width: 206px; }
@@ -998,12 +996,10 @@
 /* Accessible controls preserve the approved geometry and palette. */
 .ect-page.ect-page--creare-magazin-online .ect-link { position: relative; }
 .ect-page.ect-page--creare-magazin-online .ect-link::after { content: ""; position: absolute; inset: 50% 0 auto; min-height: 44px; transform: translateY(-50%); }
-.ect-page.ect-page--creare-magazin-online .mg-ctrl { box-sizing: border-box; min-width: 44px; min-height: 44px; }
 .ect-page.ect-page--creare-magazin-online .mg-hero-visual.mg-phone-paused *, .ect-page.ect-page--creare-magazin-online .mg-hero-visual.mg-phone-paused *::before, .ect-page.ect-page--creare-magazin-online .mg-hero-visual.mg-phone-paused *::after { animation-play-state: paused !important; }
 .ect-page.ect-page--creare-magazin-online .mg-hero-visual.mg-phone-paused :is(.mg-scr,.mg-success) { animation: none; opacity: 1; transform: none; }
 .ect-page.ect-page--creare-magazin-online .mg-hero-visual.mg-phone-paused .mg-notif { opacity: 1; animation: none; transform: none; }
 .ect-page.ect-page--creare-magazin-online .mg-hero-visual.mg-phone-paused :is(.mg-tap,.mg-confetti) { animation: none; opacity: 0; }
-@media (prefers-reduced-motion: reduce) { .ect-page.ect-page--creare-magazin-online .mg-ctrl span { transition: none !important; } }
 
 /* Loops away from the viewport wait where they stopped. The script sets the class on the phone and on the delivery line. */
 .ect-page.ect-page--creare-magazin-online .mg-hero-visual.mg-offscreen *, .ect-page.ect-page--creare-magazin-online .mg-hero-visual.mg-offscreen *::before, .ect-page.ect-page--creare-magazin-online .mg-hero-visual.mg-offscreen *::after { animation-play-state: paused !important; }

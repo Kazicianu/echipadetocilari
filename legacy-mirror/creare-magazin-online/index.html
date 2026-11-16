@@ -113,8 +113,10 @@ window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(argumen
 <link rel="apple-touch-icon" href="../wp-content/uploads/2024/02/Logo_Echipa_de_Tocilari-1024x1024.webp">
 <meta name="msapplication-TileImage" content="/wp-content/uploads/2024/02/Logo_Echipa_de_Tocilari-1024x1024.webp">
   <style>/* ect-invis-fallback */.elementor-invisible{opacity:0}.elementor-invisible.animated,.elementor-invisible[data-ect-revealed="1"]{opacity:1}@media(prefers-reduced-motion:reduce){.elementor-invisible{opacity:1!important}}</style>
+  <link rel="stylesheet" href="/wp-content/ect-pages/worm-dots.css">
   <link rel="stylesheet" href="/wp-content/ect-pages/creare-magazin-online.css">
 <link rel="stylesheet" id="elementor-post-3381-css" href="/wp-content/uploads/elementor/css/post-3381_ver=1785969245.css" media="all">
+<script defer src="/wp-content/ect-pages/worm-dots.js"></script>
 <script defer src="/wp-content/ect-pages/creare-magazin-online.js"></script>
 </head>
 <body class="wp-singular page-template page-template-elementor_header_footer page wp-custom-logo wp-theme-hello-elementor elementor-default elementor-template-full-width elementor-kit-3353 elementor-page ">
@@ -402,11 +404,13 @@ window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(argumen
 <div class="mg-banner mg-notif mg-notif--2" aria-hidden="true" style="right: 0; top: 268px"><span class="mg-banner__icon">AL</span><div style="min-width: 0"><p class="mg-banner__head">Atelier Lut<span>acum</span></p><p class="mg-banner__text">Plata cu cardul a fost confirmată.</p></div></div>
 <div class="mg-banner mg-notif mg-notif--3" aria-hidden="true" style="left: 0; top: 448px"><span class="mg-banner__icon">AL</span><div style="min-width: 0"><p class="mg-banner__head">Atelier Lut<span>acum</span></p><p class="mg-banner__text">Coletul #1042 a plecat spre client.</p></div></div>
 
-<div style="position: absolute; left: 0; right: 0; bottom: 30px; z-index: 4; display: flex; align-items: center; justify-content: center; gap: 2px">
-<button class="mg-ctrl" type="button" aria-label="Ecranul 1: prima pagină a magazinului" aria-pressed="true" data-js="dot" data-index="0" style="width: 44px; height: 44px; padding: 0; border: 0; border-radius: 22px; background: transparent; cursor: pointer; display: grid; place-items: center"><span style="display: block; width: 26px; height: 10px; border-radius: 5px; background: var(--orange); transition: width 0.3s ease"></span></button>
-<button class="mg-ctrl" type="button" aria-label="Ecranul 2: pagina produsului" aria-pressed="false" data-js="dot" data-index="1" style="width: 44px; height: 44px; padding: 0; border: 0; border-radius: 22px; background: transparent; cursor: pointer; display: grid; place-items: center"><span style="display: block; width: 10px; height: 10px; border-radius: 5px; background: var(--line-step); transition: width 0.3s ease"></span></button>
-<button class="mg-ctrl" type="button" aria-label="Ecranul 3: finalizarea comenzii" aria-pressed="false" data-js="dot" data-index="2" style="width: 44px; height: 44px; padding: 0; border: 0; border-radius: 22px; background: transparent; cursor: pointer; display: grid; place-items: center"><span style="display: block; width: 10px; height: 10px; border-radius: 5px; background: var(--line-step); transition: width 0.3s ease"></span></button>
-<button class="mg-ctrl" type="button" aria-label="Ecranul 4: comanda confirmată" aria-pressed="false" data-js="dot" data-index="3" style="width: 44px; height: 44px; padding: 0; border: 0; border-radius: 22px; background: transparent; cursor: pointer; display: grid; place-items: center"><span style="display: block; width: 10px; height: 10px; border-radius: 5px; background: var(--line-step); transition: width 0.3s ease"></span></button>
+<div style="position: absolute; left: 0; right: 0; bottom: 30px; z-index: 4; display: flex; align-items: center; justify-content: center">
+<div class="wd-strip" data-js="dot-strip">
+<button class="wd-dot" type="button" aria-label="Ecranul 1: prima pagină a magazinului" aria-current="true" data-js="dot" data-index="0"></button>
+<button class="wd-dot" type="button" aria-label="Ecranul 2: pagina produsului" aria-current="false" data-js="dot" data-index="1"></button>
+<button class="wd-dot" type="button" aria-label="Ecranul 3: finalizarea comenzii" aria-current="false" data-js="dot" data-index="2"></button>
+<button class="wd-dot" type="button" aria-label="Ecranul 4: comanda confirmată" aria-current="false" data-js="dot" data-index="3"></button>
+</div>
 </div>
 
 </div>

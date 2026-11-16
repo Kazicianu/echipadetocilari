@@ -175,7 +175,7 @@ function fixture({
 
 function assertScreen(fixture, index) {
   assert.deepEqual(fixture.screens.map(screen => screen.hidden), fixture.screens.map((_, position) => position !== index));
-  assert.deepEqual(fixture.dots.map(dot => dot.attributes.get('aria-pressed')), fixture.dots.map((_, position) => String(position === index)));
+  assert.deepEqual(fixture.dots.map(dot => dot.attributes.get('aria-current')), fixture.dots.map((_, position) => String(position === index)));
 }
 
 test('selecting a hero dot shows that screen, keeps CSS motion running and resumes autoplay', () => {
