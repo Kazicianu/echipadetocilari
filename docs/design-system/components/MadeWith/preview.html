@@ -1,0 +1,32 @@
+<!-- @dsCard group="Navigation" height=260 width=900 -->
+<!doctype html>
+<html lang="ro">
+<head>
+<link rel="stylesheet" href="../../tokens.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MadeWith</title>
+<style>
+  html, body { margin: 0; }
+  body { font-family: var(--font-sans, Montserrat, Arial, sans-serif); }
+  .stage { display: flex; justify-content: center; padding: 48px 16px; }
+  .stage--light { background: #efeef0; }
+  .stage--dark { background: #16161a; }
+
+  .ect-madewith { margin: 0; display: inline-flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .4em; font-size: 15px; line-height: 1.4; color: var(--ink-muted, #55555e); }
+  .ect-madewith__cup { width: 2.6em; height: auto; flex: none; }
+  .ect-madewith a { display: inline-flex; align-items: center; min-height: 44px; color: var(--orange, #fd8649); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+  .ect-madewith a:hover { text-decoration-thickness: 2px; }
+  .ect-madewith a:focus-visible { outline: 2px solid var(--orange, #fd8649); outline-offset: 3px; border-radius: 4px; }
+  .stage--dark .ect-madewith { color: #c9c9ce; }
+</style>
+</head>
+<body>
+<div class="stage stage--light">
+  <p class="ect-madewith">Făcut cu <img class="ect-madewith__cup" src="coffee-cup.svg" width="30" height="40" alt="cafea"> de <a href="https://echipadetocilari.ro/" rel="noopener">Echipa de Tocilari</a></p>
+</div>
+<div class="stage stage--dark">
+  <p class="ect-madewith">Făcut cu <img class="ect-madewith__cup" src="coffee-cup.svg" width="30" height="40" alt="cafea"> de <a href="https://echipadetocilari.ro/" rel="noopener">Echipa de Tocilari</a></p>
+</div>
+</body>
+</html>
