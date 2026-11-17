@@ -26,6 +26,22 @@ Rol: în secțiunea despre AEO și GEO, lângă taburile Google, ChatGPT, Gemini
 3D character illustration, the same nerd mascot with round black glasses, orange bow tie (#fd8649) and three hair strands, sitting cross-legged and having a friendly conversation with a small cute floating robot assistant made of white glossy plastic with an orange (#fd8649) glowing face screen showing two simple dot eyes, between them three empty rounded speech bubbles in white and orange, curious and happy mood, soft studio lighting on a white background, warm colourful 3D style like the reference, transparent background, no text, no brand logos, no ground shadow, 1600x1600
 ```
 
+## IMG-03 · Rezultate și raport (`seo-raport.png`)
+
+Rol: în V5, în secțiunea „Ce rezultate poți aștepta și cum le măsurăm”, pe forma portocalie din dreapta.
+
+```
+3D character illustration, the same nerd mascot with round black glasses, orange bow tie (#fd8649) and three hair strands, standing and proudly holding up a large white report sheet with simple abstract orange bars and a small upward line (no numbers, no text), a pencil behind his ear, satisfied smile, full body, three-quarter view, soft studio lighting, warm colourful 3D style like the reference, transparent background, no text, no logos, no ground shadow, 1600x1600
+```
+
+## IMG-04 · Prețuri (`seo-pret.png`)
+
+Rol: în V5, în secțiunea „Cât costă: abonamente de la 439 € pe lună”, pe forma portocalie din stânga.
+
+```
+3D character illustration, the same nerd mascot with round black glasses, orange bow tie (#fd8649) and three hair strands, sitting relaxed next to a big glossy white piggy bank with an orange (#fd8649) coin slot, dropping a shiny orange coin into it, friendly and calm expression, full body, three-quarter view, soft studio lighting, warm colourful 3D style like the reference, transparent background, no text, no currency symbols, no logos, no ground shadow, 1600x1600
+```
+
 ## IMG-05 · Banda finală de contact (`seo-cta.png`)
 
 Rol: iese din banda portocalie de la final și arată spre butonul „Vreau analiza gratuită”.
