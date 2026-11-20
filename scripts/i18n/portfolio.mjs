@@ -7,9 +7,9 @@ export const portfolioDictionary = [
   ["Vreau un proiect similar","I want a similar project"],
   ["Proiecte din portofoliu","Portfolio projects"],
   ["Site de prezentare · ","Business website · "],
-  ["Producție video și foto. Site pentru un studio de film și fotografie din Berlin și București, în limba engleză.","Video and photo production. Website for a film and photography studio in Berlin and Bucharest, in English."],
-  ["Recrutare în Product Management. Site pentru o agenție care recrutează specialiști în Product Management pentru companii de tehnologie.","Product Management recruitment. Website for an agency that recruits Product Management specialists for tech companies."],
+  ["Producție video și foto. Un studio din Berlin și București, prezentat în limba engleză.","Video and photo production. A studio in Berlin and Bucharest, presented in English."],
+  ["Recrutare în Product Management. O agenție care caută specialiști pentru companii de tehnologie.","Product Management recruitment. An agency that sources specialists for tech companies."],
   ["(se deschide într-o filă nouă)","(opens in a new tab)"],
-  ["Sprijin pentru persoane neurodivergente. Site în limba română pentru programe dedicate copiilor, adulților și familiilor neurodivergente.","Support for neurodivergent people. Romanian-language website with programmes for neurodivergent children, adults and families."],
-  ["Studio de unghii în București. Site pentru un studio de unghii din București, cu rezervări, servicii cu prețuri, vouchere cadou cu formular de comandă și un brand animat în stil anii '70.","Nail studio in Bucharest. Website for a nail studio in Bucharest, with bookings, services with prices, gift vouchers with an order form and an animated 1970s-style brand."],
+  ["Sprijin pentru persoane neurodivergente. Programe pentru copii, adulți și familii.","Support for neurodivergent people. Programmes for children, adults and families."],
+  ["Studio de unghii în București. Rezervări, servicii cu prețuri, vouchere cadou cu formular de comandă și un brand animat în stil anii '70.","Nail studio in Bucharest. Bookings, services with prices, gift vouchers with an order form and an animated 1970s-style brand."],
 ];
