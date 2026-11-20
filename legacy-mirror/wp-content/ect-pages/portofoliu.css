@@ -78,7 +78,6 @@
 .ect-page--portofoliu .mb-icon { display: none; }
 .ect-page--portofoliu .mb-name { margin: 0; font-size: 20px; line-height: 26px; font-weight: 600; color: #404040; }
 .ect-page--portofoliu .mb-meta { margin: 2px 0 0; font-size: 13px; line-height: 20px; font-weight: 600; color: #737373; }
-.ect-page--portofoliu .mb-desc { margin: 6px 0 0; font-size: 14px; line-height: 21px; color: #525252; }
 .ect-page--portofoliu .mb-link, .ect-page--portofoliu .mb-link:hover, .ect-page--portofoliu .mb-link:focus { color: inherit; text-decoration: none; }
 .ect-page--portofoliu .mb-link::after { content: ""; position: absolute; inset: 0; z-index: 3; border-radius: 12px; }
 .ect-page--portofoliu .mb-link:focus-visible { outline: none; }
@@ -102,11 +101,10 @@
   .ect-page--portofoliu .mb-bg { flex: 1 1 auto; min-height: 0; margin: 16px 16px 0; }
   .ect-page--portofoliu .mb-shot { position: absolute; inset: 0; }
   .ect-page--portofoliu .mb-view { aspect-ratio: auto; }
-  .ect-page--portofoliu .mb-body { box-sizing: border-box; flex: none; min-height: 206px; padding: 16px; }
+  .ect-page--portofoliu .mb-body { box-sizing: border-box; flex: none; padding: 16px; }
   .ect-page--portofoliu .mb-icon { display: block; width: 48px; height: 48px; color: #404040; }
   .ect-page--portofoliu .mb-name { font-size: 24px; line-height: 30px; }
   .ect-page--portofoliu .mb-meta { font-size: 14px; line-height: 20px; }
-  .ect-page--portofoliu .mb-desc { max-width: 32rem; font-size: 16px; line-height: 24px; }
 }
 /* Narrow cards: the phone version of the site in a phone, on the site colour (same as the homepage carousel). */
 @media (min-width: 1024px) {
