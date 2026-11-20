@@ -42,6 +42,7 @@ import { storeOfferCatalog } from './lib/store-seo.mjs';
 import { appsOfferCatalog } from './lib/apps-seo.mjs';
 import { answeredFaqs, websiteOfferCatalog } from './lib/website-seo.mjs';
 import { facebookAdsOfferCatalog } from './lib/facebook-ads-seo.mjs';
+import { seoServicesOfferCatalog } from './lib/seo-services-seo.mjs';
 import { junkRedirects, vercelRedirects } from './lib/junk-redirects.mjs';
 import { validateBuild } from './lib/validate.mjs';
 import { enhanceContactForms } from './lib/contact-forms.mjs';
@@ -149,6 +150,7 @@ function schemasFor(urlPath, meta, html) {
   if (urlPath === '/creare-magazin-online/') list.push(faqPage(extractHomeFaqs(html)));
   if (urlPath === '/dezvoltare-aplicatii/') list.push(faqPage(extractHomeFaqs(html)));
   if (urlPath === '/creare-site-web/') list.push(faqPage(answeredFaqs(extractHomeFaqs(html))));
+  if (urlPath === '/servicii-seo/') list.push(faqPage(answeredFaqs(extractHomeFaqs(html))));
   if (urlPath === '/agentie-google-ads/') list.push(faqPage(extractGoogleAdsFaqs(html)));
   if (urlPath === '/agentie-facebook-ads/') list.push(faqPage(extractFacebookAdsFaqs(html)));
   if (route?.service) {
@@ -171,6 +173,11 @@ function schemasFor(urlPath, meta, html) {
     }
     if (urlPath === '/creare-site-web/') {
       serviceSchema.hasOfferCatalog = websiteOfferCatalog({
+        html, site: SITE, url: urlPath, serviceName: route.service.ro,
+      });
+    }
+    if (urlPath === '/servicii-seo/') {
+      serviceSchema.hasOfferCatalog = seoServicesOfferCatalog({
         html, site: SITE, url: urlPath, serviceName: route.service.ro,
       });
     }

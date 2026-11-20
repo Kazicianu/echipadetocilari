@@ -66,7 +66,6 @@ export const routes = [
     enFile: 'en/seo-services/index.html',
     labelRo: 'Servicii SEO',
     labelEn: 'SEO services',
-    lcpImages: [{ href: '/wp-content/uploads/2022/04/daycare-hero-bg.png' }],
     service: { ro: 'Servicii SEO', en: 'SEO services' },
   },
   {

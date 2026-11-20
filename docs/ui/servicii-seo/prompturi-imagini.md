@@ -1,5 +1,7 @@
 # Prompturi pentru imaginile paginii /servicii-seo/ (Direcția 2)
 
+Caduc din 20.11.2026: pagina implementată după V6 nu mai folosește imagini cu mascota. Promptul rămâne doar ca istoric.
+
 16.11.2026 · imaginile apar în mockup ca cercuri punctate marcate IMG-01, IMG-02, IMG-05 și IMG-06 … IMG-08. După ce le generezi, pune-le în `design-assets/servicii-seo/` cu numele de mai jos și le montez în canvas.
 
 ## Reguli comune (le-am inclus deja în fiecare prompt)

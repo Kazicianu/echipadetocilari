@@ -2,8 +2,9 @@ import { contactDictionary } from './contact-page.mjs';
 import { googleAdsDictionary } from './google-ads.mjs';
 import { portfolioDictionary } from './portfolio.mjs';
 import { privacyPolicyDictionary } from './privacy-policy.mjs';
+import { seoServicesDictionary } from './seo-services.mjs';
 import { websiteDesignDictionary } from './website-design.mjs';
-export { contactDictionary, googleAdsDictionary, portfolioDictionary, privacyPolicyDictionary, websiteDesignDictionary };
+export { contactDictionary, googleAdsDictionary, portfolioDictionary, privacyPolicyDictionary, seoServicesDictionary, websiteDesignDictionary };
 
 /**
  * Page-only entries, keyed by the RO route. generate-en.mjs merges them with the
@@ -15,6 +16,7 @@ export const pageDictionaries = {
   '/creare-site-web/': websiteDesignDictionary,
   '/portofoliu/': portfolioDictionary,
   '/politica-de-confidentialitate/': privacyPolicyDictionary,
+  '/servicii-seo/': seoServicesDictionary,
 };
 
 /** Source files of the page dictionaries, for the sitemap <lastmod> of the EN pages. */
@@ -24,6 +26,7 @@ export const pageDictionaryFiles = {
   '/creare-site-web/': 'scripts/i18n/website-design.mjs',
   '/portofoliu/': 'scripts/i18n/portfolio.mjs',
   '/politica-de-confidentialitate/': 'scripts/i18n/privacy-policy.mjs',
+  '/servicii-seo/': 'scripts/i18n/seo-services.mjs',
 };
 
 /**
@@ -1527,9 +1530,9 @@ export const enPageMeta = {
       'Website design in Bucharest, serving all of Romania: landing pages from €299, business websites from €499, online stores and custom projects.',
   },
   '/en/seo-services/': {
-    title: 'SEO Services and AI Visibility | Echipa de Tocilari',
+    title: 'SEO Services: Monthly Plans from €439 | Echipa de Tocilari',
     description:
-      'SEO services from Bucharest: audits, technical improvements and clear content for Google and AI-assisted search. See how we work and what plans include.',
+      'SEO services from Bucharest for Google and AI answers: monthly plans from €439, a report every month and no promise of first place.',
   },
   '/en/website-maintenance/': {
     title: 'Website Management & Maintenance | WordPress Support',

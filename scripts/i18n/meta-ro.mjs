@@ -29,9 +29,9 @@ export const roPageMeta = {
       'Dezvoltare aplicații mobile iOS și Android și aplicații web, de la 4.900 € fără TVA. Vezi pachetele, funcțiile incluse și cere o ofertă scrisă.',
   },
   '/servicii-seo/': {
-    title: 'Servicii SEO și vizibilitate în AI | Echipa de Tocilari',
+    title: 'Servicii SEO: abonamente de la 439 € | Echipa de Tocilari',
     description:
-      'Servicii SEO în București: audit, optimizare tehnică și conținut clar pentru Google și răspunsurile AI. Vezi cum lucrăm și ce includ abonamentele.',
+      'Servicii SEO în București, pentru Google și răspunsurile AI: abonament lunar de la 439 €, raport în fiecare lună, fără promisiuni de locul 1.',
   },
   '/administrare-site/': {
     title: 'Administrare și mentenanță site | WordPress',

@@ -90,6 +90,7 @@ function schemasFor(route, meta, site, html) {
 
   if (route.en === '/en/') list.push(faqPage(extractHomeFaqs(html)));
   if (route.en === '/en/website-design/') list.push(faqPage(answeredFaqs(extractHomeFaqs(html))));
+  if (route.en === '/en/seo-services/') list.push(faqPage(answeredFaqs(extractHomeFaqs(html))));
   if (route.en === '/en/google-ads-agency/') list.push(faqPage(extractGoogleAdsFaqs(html)));
   if (route.service) {
     list.push(
