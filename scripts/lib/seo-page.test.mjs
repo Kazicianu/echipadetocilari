@@ -49,17 +49,11 @@ test('the head loads the page assets and drops the old inline styles', () => {
   assert.ok(!main.includes('data-elementor-type'));
 });
 
-test('the AI assistant tabs have four panels and only one is visible', () => {
-  const tabs = [...main.matchAll(/<button\b[^>]*role="tab"[^>]*>/gi)].map(([tag]) => tag);
-  assert.equal(tabs.length, 4);
-  assert.equal(tabs.filter(tag => /aria-selected="true"/.test(tag)).length, 1);
-  const panels = [...main.matchAll(/<div class="seo-panel"[^>]*role="tabpanel"[^>]*>/gi)].map(([tag]) => tag);
-  assert.equal(panels.length, 4);
-  assert.equal(panels.filter(tag => !/\shidden\b/.test(tag)).length, 1);
-  assert.ok(!/\shidden\b/.test(panels[0]), 'the Google panel is the visible one');
-  for (const id of ['google', 'chatgpt', 'gemini', 'perplexity']) {
-    assert.ok(main.includes(`id="seo-tab-${id}"`) && main.includes(`id="seo-panel-${id}"`), `tab and panel ${id}`);
-  }
+test('the AI section keeps the definitions and the crawler list, without assistant tabs', () => {
+  assert.equal(count(main, /role="tab(?:list|panel)?"/g), 0);
+  assert.equal(count(main, /<li class="seo-def">/g), 6);
+  assert.equal(count(main, /<div class="seo-bot">/g), 4);
+  assert.doesNotMatch(main, /class="seo-limit"/);
 });
 
 test('the six monthly jobs are native accordion rows sharing one name, the first open', () => {
@@ -89,9 +83,9 @@ test('the GPTBot switch is a real switch and the other three are decorative', ()
   assert.equal(count(main, /<span class="seo-sw is-on" aria-hidden="true">/g), 3);
 });
 
-test('the FAQ has eight native accordion items sharing one name, the first open', () => {
+test('the FAQ has eleven native accordion items sharing one name, the first open', () => {
   const items = [...main.matchAll(/<details class="ect-home-faq__item"([^>]*)>/gi)].map(([, attrs]) => attrs);
-  assert.equal(items.length, 8);
+  assert.equal(items.length, 11);
   assert.equal(items.filter(attrs => /\sopen\b/.test(attrs)).length, 1);
   assert.match(items[0], /\sopen\b/);
   assert.equal(new Set(items.map(attrs => attrs.match(/name="([^"]+)"/)?.[1])).size, 1);
@@ -99,15 +93,14 @@ test('the FAQ has eight native accordion items sharing one name, the first open'
   assert.ok(!/<div\b/i.test(main.match(/<div class="ect-home-faq__answer">([\s\S]*?)<\/div>/)?.[1] ?? ''), 'answers hold no div');
 });
 
-test('twenty-two visible placeholders and no placeholder wording anywhere else', () => {
-  assert.equal(count(main, /<span class="seo-todo">/g), 22);
-  const outside = main.replace(/<span class="seo-todo">[\s\S]*?<\/span>/g, '');
-  assert.doesNotMatch(outside, /De completat|De confirmat|de completat|de confirmat/);
+test('no visible placeholders remain in the content', () => {
+  assert.equal(count(main, /<span class="seo-todo">/g), 0);
+  assert.doesNotMatch(main, /De completat|De confirmat|de completat|de confirmat/);
 });
 
-test('the illustrative label appears nine times', () => {
-  assert.equal(count(main, /<em class="seo-ex">Exemplu ilustrativ<\/em>/g), 9);
-  assert.equal(count(main, /Exemplu ilustrativ/g), 9);
+test('the illustrative label appears four times', () => {
+  assert.equal(count(main, /<em class="seo-ex">Exemplu ilustrativ<\/em>/g), 4);
+  assert.equal(count(main, /Exemplu ilustrativ/g), 4);
 });
 
 test('the content holds no images and no inline styles', () => {
@@ -143,6 +136,33 @@ test('the headings keep a clean order and the VAT sentence replaces the placehol
   levels.forEach((level, i) => { if (i) assert.ok(level <= levels[i - 1] + 1, `heading ${i} jumps from h${levels[i - 1]} to h${level}`); });
   assert.equal(count(main, /<h4 class="seo-h4">(?:Garantăm|Nu garantăm)<\/h4>/g), 2);
   assert.ok(main.includes('Prețurile afișate sunt finale (Echipa de Tocilari SRL nu este plătitoare de TVA).'));
+});
+
+test('the sections follow the approved order', () => {
+  const ids = [...main.matchAll(/<section\b[^>]*aria-labelledby="([^"]+)"/g)].map(([, id]) => id);
+  assert.deepEqual(ids, ['seo-h1', 'seo-potrivit-t', 'seo-lucrari-t', 'seo-dece-t', 'seo-ai-t', 'seo-3luni-t', 'seo-rezultate-t', 'seo-preturi-t', 'seo-intrebari-t']);
+});
+
+test('the page shows no case-study placeholders and no illustrative results chart', () => {
+  assert.doesNotMatch(main, /seo-cazuri-t|class="seo-case"|class="seo-chart"|class="seo-periods"/);
+});
+
+test('the why-us section gives three reasons and links the related services', () => {
+  const why = main.match(/<section class="seo-sec" aria-labelledby="seo-dece-t">([\s\S]*?)<\/section>/)?.[1] ?? '';
+  assert.equal(count(why, /<li class="seo-def">/g), 3);
+  assert.ok(why.includes('href="/creare-site-web/"'));
+  assert.ok(why.includes('href="/agentie-google-ads/"'));
+});
+
+test('the entry plan includes the technical SEO and AI monitoring promised in the monthly jobs', () => {
+  const start = main.match(/<article class="seo-price">([\s\S]*?)<\/article>/)?.[1] ?? '';
+  assert.match(start, /<li>SEO tehnic: indexare, viteză, sitemap, date structurate<\/li>/);
+  assert.match(start, /<li>Monitorizare lunară în asistenții AI<\/li>/);
+});
+
+test('the terms state the minimum contract and the audit shows its price', () => {
+  assert.ok(main.includes('Contractul e pe minimum 3 luni, apoi continuă lunar, cu preaviz de 30 de zile.'));
+  assert.match(main, /<span class="seo-strip__amt">299 €<\/span>/);
 });
 
 test('the page avoids em dashes and diagonal arrows', () => {
