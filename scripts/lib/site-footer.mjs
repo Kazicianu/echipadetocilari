@@ -1,7 +1,8 @@
 /**
  * The shared site footer (RO, EN and 404): contact details, links, the
- * Bucharest painting. Runs in the second build loop, after the EN pages exist,
- * so the footer never passes through the translation dictionary.
+ * Bucharest painting and the coffee-cup signature. Runs in the second build
+ * loop, after the EN pages exist, so the footer never passes through the
+ * translation dictionary.
  *
  * The <footer> tag keeps its Elementor attributes (class elementor-3355) because
  * the fixed "back to top" widget is positioned by post-3355.css, and the widget
@@ -22,6 +23,7 @@ const FOOTER = /<footer\b[^>]*\belementor-location-footer\b[^>]*>[\s\S]*?<\/foot
 
 const LOGO_BASE = '/wp-content/uploads/2024/02/Logo_Echipa_de_Tocilari-e1708028624694';
 const ART_BASE = '/wp-content/ect-pages/footer/bucuresti-ateneu';
+const CUP = '/wp-content/ect-pages/footer/pahar-cafea.webp';
 const COMPANY_LEGAL = 'ECHIPA DE TOCILARI SRL · CUI 47591744 · J40/2298/2023';
 const COMPANY_PATHS = ['/despre-noi/', '/portofoliu/', '/contact/'];
 
@@ -35,6 +37,9 @@ const COPY = {
     contact: 'Contact',
     hours: 'Program: luni-duminică',
     country: 'România',
+    madeWith: 'Făcut cu',
+    cupAlt: 'cafea',
+    madeBy: 'de',
     org: roOrg,
   },
   en: {
@@ -46,6 +51,9 @@ const COPY = {
     contact: 'Contact',
     hours: 'Hours: Monday-Sunday',
     country: 'Romania',
+    madeWith: 'Made with',
+    cupAlt: 'coffee',
+    madeBy: 'by',
     org: enOrg,
   },
 };
@@ -122,6 +130,7 @@ export function footerMarkup(language, openTag, year = new Date().getFullYear())
    <p class="ect-footer__company">© ${year} ${escapeHtml(COMPANY_LEGAL)}</p>
    <ul class="ect-footer__legal"><li><a href="${escapeAttr(PRIVACY_PATHS[language])}" data-ect-footer-privacy>${escapeHtml(consent.footerPolicy)}</a></li><li><button type="button" class="ect-consent-open" data-ect-consent-open hidden>${escapeHtml(consent.footerSettings)}</button></li></ul>
   </div>
+  <p class="ect-footer__madewith">${escapeHtml(copy.madeWith)} <img class="ect-footer__cup" src="${CUP}" width="117" height="128" alt="${escapeAttr(copy.cupAlt)}" loading="lazy" decoding="async"> ${escapeHtml(copy.madeBy)} <a class="ect-footer__team" href="${escapeAttr(copy.home)}">Echipa de Tocilari</a></p>
  </div>
  <div class="ect-footer__art" aria-hidden="true"><img src="${ART_BASE}-1280.webp" srcset="${ART_BASE}-640.webp 640w, ${ART_BASE}-1280.webp 1280w, ${ART_BASE}-2000.webp 2000w" sizes="(max-width: 692px) 540px, 100vw" width="2000" height="667" alt="" loading="lazy" decoding="async"></div>
 ${backToTop(BACK_TO_TOP[language])}

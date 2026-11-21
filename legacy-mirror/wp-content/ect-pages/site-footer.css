@@ -247,6 +247,65 @@
   color: #fd8649;
 }
 
+/* Signature: "Făcut cu [cup] de Echipa de Tocilari" (team rule, MadeWith component) */
+.ect-footer .ect-footer__madewith {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 4px 0.4em;
+  margin-top: 16px;
+  color: #55555e;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.ect-footer .ect-footer__cup {
+  display: block;
+  width: auto;
+  max-width: none;
+  height: 2.5em;
+  margin: -0.6em 0;
+  border-radius: 0;
+  box-shadow: none;
+  transform: rotate(-4deg);
+}
+
+.ect-footer .ect-footer__madewith .ect-footer__team {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3em 0.7em;
+  border-radius: 0.5em;
+  background: #f1f1f3;
+  color: #27272d;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* 44px hit area without changing the pill's size */
+.ect-footer .ect-footer__team::after {
+  content: "";
+  position: absolute;
+  inset: 50% 0 auto;
+  height: 44px;
+  transform: translateY(-50%);
+}
+
+.ect-footer .ect-footer__madewith .ect-footer__team:hover,
+.ect-footer .ect-footer__madewith .ect-footer__team:focus-visible {
+  background: #fd8649;
+  color: #fff;
+}
+
+.ect-footer .ect-footer__madewith .ect-footer__team:focus-visible {
+  outline: 3px solid #27272d;
+  outline-offset: 3px;
+  border-radius: 0.5em;
+}
+
 /* Painting */
 .ect-footer__art {
   position: relative;
@@ -279,6 +338,15 @@
   .ect-footer button.ect-consent-open.ect-consent-open {
     transition: color 0.15s ease;
   }
+
+  .ect-footer .ect-footer__cup { transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); }
+  .ect-footer .ect-footer__madewith:hover .ect-footer__cup,
+  .ect-footer .ect-footer__madewith:focus-within .ect-footer__cup { transform: rotate(8deg) scale(1.06); }
+  .ect-footer .ect-footer__madewith .ect-footer__team { transition: background-color 0.2s ease, color 0.2s ease; }
+}
+
+@media (max-width: 359px) {
+  .ect-footer .ect-footer__madewith { font-size: 13px; }
 }
 
 @media (min-width: 768px) {

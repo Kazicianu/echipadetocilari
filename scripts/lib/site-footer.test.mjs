@@ -134,3 +134,26 @@ test('the build renders the footer before the consent manager', () => {
   assert.match(build, /import \{ renderSiteFooter \} from '\.\/lib\/site-footer\.mjs';/);
   assert.ok(build.indexOf('renderSiteFooter(html)') < build.indexOf('addConsentManager(html'), 'footer first');
 });
+
+test('the coffee-cup signature closes the footer text, in the page language', () => {
+  const buf = readFileSync(path.join(root, 'legacy-mirror/wp-content/ect-pages/footer/pahar-cafea.webp'));
+  assert.equal(buf.toString('latin1', 0, 4), 'RIFF');
+  assert.equal(buf.toString('latin1', 8, 16), 'WEBPVP8L', 'lossless');
+  const bits = buf.readUInt32LE(21);
+  const w = (bits & 0x3fff) + 1;
+  const h = ((bits >> 14) & 0x3fff) + 1;
+  assert.deepEqual([w, h], [117, 128]);
+  const WORDS = { ro: ['Făcut cu', 'cafea', 'de', '/'], en: ['Made with', 'coffee', 'by', '/en/'] };
+  for (const { language, url, html } of sourcePages()) {
+    const label = `${url} (${language})`;
+    const footer = footerOf(renderSiteFooter(html));
+    const found = footer.match(/<p class="ect-footer__madewith">[\s\S]*?<\/p>/g) || [];
+    assert.equal(found.length, 1, `${label}: one signature`);
+    const [madeWith, alt, madeBy, home] = WORDS[language];
+    const expected = `<p class="ect-footer__madewith">${madeWith} <img class="ect-footer__cup" src="/wp-content/ect-pages/footer/pahar-cafea.webp" width="${w}" height="${h}" alt="${alt}" loading="lazy" decoding="async"> ${madeBy} <a class="ect-footer__team" href="${home}">Echipa de Tocilari</a></p>`;
+    assert.equal(found[0], expected, label);
+    const at = footer.indexOf('class="ect-footer__madewith"');
+    assert.ok(footer.indexOf('class="ect-footer__bottom"') < at && at < footer.indexOf('class="ect-footer__art"'), `${label}: order`);
+    assert.doesNotMatch(found[0], /target=/, label);
+  }
+});
