@@ -21,6 +21,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 import { minifyAssets } from './lib/minify-assets.mjs';
+import { closeMobileBreakpointGap, closeMobileBreakpointGapInAssets } from './lib/breakpoint-gap.mjs';
 import { routes, pairedRoutes, isOwnedPage, isSystemPage, routeByPath, routeByRo } from './i18n/routes.mjs';
 import { roPageMeta, roOrg } from './i18n/meta-ro.mjs';
 import { generateEnglishPages, patchRomanianPages } from './i18n/generate-en.mjs';
@@ -205,6 +206,8 @@ writeFileSync(
 );
 console.log('  wrote 404.html (system page, noindex)');
 
+console.log(`→ Closing the 767/768px breakpoint gap in ${closeMobileBreakpointGapInAssets(outDir)} CSS/JS files…`);
+
 console.log('→ Minifying CSS/JS in dist/ (before asset hashing)…');
 {
   const minified = await minifyAssets(outDir);
@@ -337,6 +340,7 @@ for (const file of walkHtml(outDir)) {
   // Preloads keep the unversioned URL; only stylesheets and scripts get ?v=.
   const route = routeByPath(urlPath);
   html = addPreloadHints(html, { lcpImages: route?.lcpImages, fonts: route?.preloadFonts });
+  html = closeMobileBreakpointGap(html);
   html = versionAssets(html, { outDir, cache: assetHashes });
   writeFileSync(file, html, 'utf8');
 }
