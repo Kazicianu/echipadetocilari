@@ -26,7 +26,7 @@
 /* ---------- Type ---------- */
 .ect-page.ect-page--servicii-seo .seo-kick { display: flex; align-items: center; gap: 10px; margin: 0 0 14px; font: 700 12px/1 var(--font-sans); letter-spacing: .1em; text-transform: uppercase; color: var(--k); }
 .ect-page.ect-page--servicii-seo .seo-kick::before { content: ""; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--o); }
-.ect-page.ect-page--servicii-seo .seo-h1 { margin: 0 0 24px; font: 800 clamp(36px, 4.4vw, 60px)/1.06 var(--font-sans); letter-spacing: -.03em; }
+.ect-page.ect-page--servicii-seo .seo-h1 { margin: 0 0 24px; font: 800 clamp(30px, 9vw, 36px)/1.06 var(--font-sans); letter-spacing: -.03em; }
 .ect-page.ect-page--servicii-seo .seo-h2 { margin: 0 0 18px; max-width: 880px; font: 800 clamp(28px, 3vw, 40px)/1.12 var(--font-sans); letter-spacing: -.025em; }
 .ect-page.ect-page--servicii-seo .seo-h3, .ect-page.ect-page--servicii-seo .seo-h4 { margin: 0 0 12px; font: 800 20px/1.25 var(--font-sans); letter-spacing: -.01em; }
 .ect-page.ect-page--servicii-seo .seo-lead { margin: 0 0 36px; max-width: 700px; font-size: 17px; line-height: 1.6; color: var(--m); }
@@ -91,10 +91,10 @@
 .ect-page.ect-page--servicii-seo .seo-meta li { display: flex; align-items: center; gap: 10px; }
 .ect-page.ect-page--servicii-seo .seo-meta li::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--o); }
 .ect-page.ect-page--servicii-seo .seo-stage { position: relative; max-width: 560px; padding-bottom: 20px; }
-.ect-page.ect-page--servicii-seo .seo-serp { position: absolute; z-index: 1; top: 0; left: 0; width: 88%; padding: 14px 16px 44px; border: 1px solid var(--line); border-radius: 16px; background: #fff; box-shadow: var(--sh-s); transform: rotate(-1.8deg); transform-origin: left top; }
-.ect-page.ect-page--servicii-seo .seo-serp__bar { display: flex; align-items: center; gap: 10px; min-height: 40px; padding: 0 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--bg); font-size: 14px; color: var(--k); }
-.ect-page.ect-page--servicii-seo .seo-serp__bar svg { width: 18px; height: 18px; color: var(--m); }
-.ect-page.ect-page--servicii-seo .seo-serp__q { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ect-page.ect-page--servicii-seo .seo-serp { position: absolute; z-index: 1; top: 0; left: 0; width: 92%; padding: 14px 16px 44px; border: 1px solid var(--line); border-radius: 16px; background: #fff; box-shadow: var(--sh-s); transform: rotate(-1.8deg); transform-origin: left top; }
+.ect-page.ect-page--servicii-seo .seo-serp__bar { display: flex; align-items: center; gap: 10px; min-height: 40px; padding: 8px 14px; border: 1px solid var(--line); border-radius: 20px; background: var(--bg); font-size: 13px; line-height: 1.35; color: var(--k); }
+.ect-page.ect-page--servicii-seo .seo-serp__bar svg { flex: none; width: 18px; height: 18px; color: var(--m); }
+.ect-page.ect-page--servicii-seo .seo-serp__q { min-width: 0; }
 .ect-page.ect-page--servicii-seo .seo-serp__res { display: grid; gap: 4px; padding: 14px 4px 0; }
 .ect-page.ect-page--servicii-seo .seo-serp__res small { font-size: 12px; color: var(--m); }
 .ect-page.ect-page--servicii-seo .seo-serp__res b { font: 700 15px/1.3 var(--font-sans); }
@@ -102,6 +102,7 @@
 .ect-page.ect-page--servicii-seo .seo-ul { text-decoration: underline; text-decoration-color: var(--o); text-decoration-thickness: 2px; text-underline-offset: 3px; }
 .ect-page.ect-page--servicii-seo .seo-serp__res > span { font-size: 13.5px; line-height: 1.45; color: var(--m); }
 .ect-page.ect-page--servicii-seo .seo-win--hero { margin: 150px 0 0 6%; }
+@media (max-width: 379px) { .ect-page.ect-page--servicii-seo .seo-win--hero { margin-top: 172px; } }
 .ect-page.ect-page--servicii-seo .seo-win--ai { min-height: 424px; }
 
 /* ---------- Section 2: SEO, AEO, GEO and the AI assistants ---------- */
@@ -392,6 +393,8 @@
   .ect-page.ect-page--servicii-seo .seo-meta { margin-top: 36px; }
   .ect-page.ect-page--servicii-seo .seo-stage { padding-bottom: 8px; }
   .ect-page.ect-page--servicii-seo .seo-serp { width: 74%; }
+  .ect-page.ect-page--servicii-seo .seo-h1 { font-size: clamp(36px, 4.4vw, 60px); }
+  .ect-page.ect-page--servicii-seo .seo-serp__bar { font-size: 14px; }
   .ect-page.ect-page--servicii-seo .seo-serp__res b { font-size: 16px; }
   .ect-page.ect-page--servicii-seo .seo-win--hero { margin: 148px 0 0 12%; }
   .ect-page.ect-page--servicii-seo .seo-blob--hero { right: -7%; bottom: -9%; width: 72%; height: 82%; }
