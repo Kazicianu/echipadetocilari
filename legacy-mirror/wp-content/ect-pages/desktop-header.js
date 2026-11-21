@@ -3,7 +3,7 @@
 (() => {
   const list = document.querySelector('#top .elementor-nav-menu--main > .elementor-nav-menu');
   if (!list) return;
-  const desktop = window.matchMedia('(min-width: 1025px)');
+  const desktop = window.matchMedia('(min-width: 768px)');
   let current = null;
 
   // The item under the highlight gets white text (see desktop-header.css).
