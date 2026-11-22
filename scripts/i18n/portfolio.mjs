@@ -15,4 +15,5 @@ export const portfolioDictionary = [
   ["Showroom de mobilier","Furniture showroom"],
   ["Firmă de curățenie","Cleaning company"],
   ["Amenajări peisagistice","Landscaping"],
+  ["Aplicație de catering","Catering app"],
 ];

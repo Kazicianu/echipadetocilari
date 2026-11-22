@@ -605,6 +605,8 @@ export const dictionary = [
   ['>Colecții, jurnal de design și programări pentru consultanță.<', '>Collections, a design journal and consultation bookings.<'],
   ['>Servicii pentru case și birouri, pachete în lei și programări.<', '>Home and office cleaning, packages priced in lei and bookings.<'],
   ['>Amenajare de grădini, gazon și întreținere, cu proiecte și blog.<', '>Garden design, lawns and maintenance, with projects and a blog.<'],
+  ['>Software de catering pentru cămine<', '>Catering software for care homes<'],
+  ['>Meniuri, alergeni, costuri și bugete într-o singură aplicație.<', '>Menus, allergens, costs and budgets in one app.<'],
   ['>Vezi site-ul</span>', '>See the website</span>'],
   [
     '>Vezi site-ul<span class="screen-reader-text"> ',
