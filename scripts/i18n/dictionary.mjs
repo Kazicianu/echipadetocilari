@@ -592,10 +592,17 @@ export const dictionary = [
     '>Studio de unghii în București<',
     '>Nail studio in Bucharest<',
   ],
+  [
+    '>Showroom de mobilier în București<',
+    '>Furniture showroom in Bucharest<',
+  ],
+  ['>Firmă de curățenie în Constanța<', '>Cleaning company in Constanta<'],
   ['>Site în engleză pentru un studio de film din Berlin și București.<', '>An English-language site for a film studio in Berlin and Bucharest.<'],
   ['>Site pentru o agenție care recrutează specialiști în tech.<', '>A site for an agency that recruits tech specialists.<'],
   ['>Programe pentru copii, adulți și familii neurodivergente.<', '>Programmes for neurodivergent children, adults and families.<'],
   [">Rezervări, vouchere cadou și un brand animat în stil anii '70.<", '>Bookings, gift vouchers and an animated 1970s-style brand.<'],
+  ['>Colecții, jurnal de design și programări pentru consultanță.<', '>Collections, a design journal and consultation bookings.<'],
+  ['>Servicii pentru case și birouri, pachete în lei și programări.<', '>Home and office cleaning, packages priced in lei and bookings.<'],
   ['>Vezi site-ul</span>', '>See the website</span>'],
   [
     '>Vezi site-ul<span class="screen-reader-text"> ',

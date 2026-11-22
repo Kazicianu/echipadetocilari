@@ -9,11 +9,11 @@ const grid = page.match(/<div class="mb-grid">([\s\S]*?)<\/section>/)?.[1] ?? ''
 const cards = [...grid.matchAll(/<article class="mb-card ([^"]*)">([\s\S]*?)<\/article>/g)].map(([, cls, inner]) => ({ cls, inner }));
 const fileFor = url => new URL(url.replace(/^\//, ''), root);
 
-test('the portfolio shows four real projects in the approved order and widths', () => {
-  assert.equal((grid.match(/<article\b/g) ?? []).length, 4);
-  assert.deepEqual(cards.map(c => c.cls), ['mb-c2', 'mb-c1', 'mb-c1', 'mb-c2']);
+test('the portfolio shows six real projects in the approved order and widths', () => {
+  assert.equal((grid.match(/<article\b/g) ?? []).length, 6);
+  assert.deepEqual(cards.map(c => c.cls), ['mb-c2', 'mb-c1', 'mb-c1', 'mb-c2', 'mb-c2', 'mb-c1']);
   const names = cards.map(c => c.inner.match(/<a class="mb-link"[^>]*>([^<]*)</)?.[1]);
-  assert.deepEqual(names, ['Torjai Productions', 'Funera', 'Zuzel', '2noi']);
+  assert.deepEqual(names, ['Torjai Productions', 'Funera', 'Zuzel', '2noi', 'Norwen', 'Tidora']);
 });
 
 test('no placeholder, marquee or old button copy is left', () => {
@@ -37,7 +37,7 @@ test('each card has one link that covers it, opens in a new tab and names the pr
 
 test('clips are muted, inline, not preloaded, without autoplay, and their sources exist', () => {
   const videos = [...grid.matchAll(/<video\b([^>]*)>([\s\S]*?)<\/video>/g)];
-  assert.equal(videos.length, 3);
+  assert.equal(videos.length, 5);
   for (const [, attrs, inner] of videos) {
     for (const attr of ['muted', 'playsinline', 'loop']) assert.match(attrs, new RegExp(`\\b${attr}\\b`));
     assert.match(attrs, /preload="none"/);

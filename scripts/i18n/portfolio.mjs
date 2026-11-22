@@ -12,4 +12,6 @@ export const portfolioDictionary = [
   ["(se deschide într-o filă nouă)","(opens in a new tab)"],
   ["Sprijin pentru persoane neurodivergente","Support for neurodivergent people"],
   ["Studio de unghii","Nail studio"],
+  ["Showroom de mobilier","Furniture showroom"],
+  ["Firmă de curățenie","Cleaning company"],
 ];
