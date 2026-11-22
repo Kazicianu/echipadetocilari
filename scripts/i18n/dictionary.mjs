@@ -1543,9 +1543,9 @@ export const enPageMeta = {
       'Website design in Bucharest, serving all of Romania: landing pages from €299, business websites from €499, online stores and custom projects.',
   },
   '/en/seo-services/': {
-    title: 'SEO Services: Monthly Plans from €439 | Echipa de Tocilari',
+    title: 'SEO Services: Monthly Plans from €299 | Echipa de Tocilari',
     description:
-      'SEO services from Bucharest for Google and AI answers: monthly plans from €439, a report every month and no promise of first place.',
+      'SEO services from Bucharest for Google and AI answers: monthly plans from €299, a report every month and no promise of first place.',
   },
   '/en/website-maintenance/': {
     title: 'Website Management & Maintenance | WordPress Support',

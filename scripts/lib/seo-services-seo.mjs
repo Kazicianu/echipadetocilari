@@ -47,7 +47,7 @@ function monthlyEuro(text) {
   return amount;
 }
 
-/** Monthly plans exactly as the three visible price cards show them. */
+/** Monthly plans exactly as the four visible price cards show them. */
 export function seoServicesOfferCatalog({ html, site, url, serviceName }) {
   const visibleHtml = html.replace(/<!--[\s\S]*?-->|<(script|style)\b[^>]*>[\s\S]*?<\/\1>/gi, '');
   const section = [...visibleHtml.matchAll(/<section\b([^>]*)>([\s\S]*?)<\/section>/gi)]
@@ -64,8 +64,9 @@ export function seoServicesOfferCatalog({ html, site, url, serviceName }) {
     const price = monthlyEuro(field(content, 'p', 'seo-price__amt'));
     const audience = find(content, 'p', 'seo-price__for');
     const audienceText = audience && !/seo-todo/.test(audience.raw) ? audience.text : '';
-    const items = [...(find(content, 'ul', 'seo-price__list')?.raw.matchAll(/<li\b[^>]*>([\s\S]*?)<\/li>/gi) ?? [])]
-      .map(([, item]) => plainText(item))
+    const items = [...(find(content, 'ul', 'seo-price__list')?.raw.matchAll(/<li\b([^>]*)>([\s\S]*?)<\/li>/gi) ?? [])]
+      .filter(([, itemAttributes]) => !hasClass(itemAttributes, 'seo-price__plus'))
+      .map(([, , item]) => plainText(item))
       .filter(Boolean);
     if (!items.length) throw new Error(`SEO services pricing has no list items for ${name}.`);
     offers.push({
@@ -88,7 +89,7 @@ export function seoServicesOfferCatalog({ html, site, url, serviceName }) {
       },
     });
   }
-  if (offers.length !== 3) throw new Error('SEO services page must display exactly three price cards.');
+  if (offers.length !== 4) throw new Error('SEO services page must display exactly four price cards.');
   return {
     '@type': 'OfferCatalog',
     name: field(section, 'h2', 'seo-prices__title'),

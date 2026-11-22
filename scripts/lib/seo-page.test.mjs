@@ -21,19 +21,29 @@ test('the page has one H1 with the approved wording', () => {
   assert.ok(h1[0][1].includes('<span class="seo-chip">AI</span>'));
 });
 
-test('three price cards carry the approved names and monthly sums', () => {
+test('four price cards carry the approved names and monthly sums, the recommended one flagged', () => {
   const cards = [...main.matchAll(/<article class="seo-price\b[^"]*">([\s\S]*?)<\/article>/gi)].map(([, inner]) => inner);
-  assert.equal(cards.length, 3);
-  assert.deepEqual(cards.map(card => text(card.match(/<h3 class="seo-price__name">([\s\S]*?)<\/h3>/)?.[1] ?? '')), ['SEO Start', 'SEO Avansat', 'SEO Premium']);
-  assert.deepEqual(cards.map(card => text(card.match(/<p class="seo-price__amt">([\s\S]*?)<\/p>/)?.[1] ?? '')), ['439 € / lună', '699 € / lună', '999 € / lună']);
-  for (const card of cards) assert.match(card, /<p class="seo-price__amt">\d+ €<small>\/ lună<\/small><\/p>/);
+  assert.equal(cards.length, 4);
+  assert.deepEqual(cards.map(card => text(card.match(/<h3 class="seo-price__name">([\s\S]*?)<\/h3>/)?.[1] ?? '')), ['Local', 'Creștere', 'Avansat', 'Premium']);
+  assert.deepEqual(cards.map(card => text(card.match(/<p class="seo-price__amt">([\s\S]*?)<\/p>/)?.[1] ?? '')), ['299 € / lună', '499 € / lună', '749 € / lună', '1.190 € / lună']);
+  for (const card of cards) assert.match(card, /<p class="seo-price__amt">\d{1,3}(?:\.\d{3})?&nbsp;€<small>\/ lună<\/small><\/p>/);
   assert.equal(count(main, /<article class="seo-price seo-price--hot">/g), 1);
+  const hot = main.match(/<article class="seo-price seo-price--hot">([\s\S]*?)<\/article>/)?.[1] ?? '';
+  assert.match(hot, /<h3 class="seo-price__name">Creștere<\/h3>/);
+  assert.ok(hot.includes('<span class="seo-price__badge">Recomandat</span>'));
+});
+
+test('the table header, hero and FAQ repeat the card prices', () => {
+  const heads = [...main.matchAll(/<th scope="col" data-p="[lcap]"[^>]*>[^<]*<span>([^<]*)<\/span>/g)].map(([, s]) => text(s));
+  assert.deepEqual(heads, ['299 € / lună', '499 € / lună', '749 € / lună', '1.190 € / lună']);
+  assert.ok(text(main).includes('Abonament lunar de la 299 €, cu raport în fiecare lună.'));
+  assert.ok(text(main).includes('Abonamentele lunare costă 299 €, 499 €, 749 € sau 1.190 €, în funcție de pachet.'));
 });
 
 test('the Romanian title and description come from the page meta and name the entry price', () => {
   const { title, description } = roPageMeta['/servicii-seo/'];
   assert.ok(title.length <= 60, `title has ${title.length} characters`);
-  assert.match(description, /439 €/);
+  assert.match(description, /299 €/);
   assert.ok(page.includes(`<title>${title}</title>`));
   assert.ok(page.includes(`<meta name="description" content="${description}">`));
   assert.ok(page.includes(`<meta property="og:title" content="${title}">`));
@@ -56,18 +66,18 @@ test('the AI section keeps the definitions and the crawler list, without assista
   assert.doesNotMatch(main, /class="seo-limit"/);
 });
 
-test('the six monthly jobs are tiles with a heading, a Start quantity and a decorative example', () => {
+test('the six monthly jobs are tiles with a heading, a Growth quantity and a decorative example', () => {
   const section = main.match(/<section class="seo-sec" aria-labelledby="seo-lucrari-t">([\s\S]*?)<\/section>/)?.[1] ?? '';
   const jobs = [...section.matchAll(/<li class="seo-job">([\s\S]*?)<\/li>/g)].map(([, inner]) => inner);
   assert.equal(jobs.length, 6);
   assert.deepEqual(jobs.map(job => text(job.match(/<h3 class="seo-job__t">([\s\S]*?)<\/h3>/)?.[1] ?? '')), ['SEO tehnic', 'Conținut', 'SEO local', 'Autoritate', 'Vizibilitate în AI', 'Raport lunar']);
-  assert.deepEqual(jobs.map(job => text(job.match(/<p class="seo-job__v">([\s\S]*?)<\/p>/)?.[1] ?? '')), ['4 verificări', '1 + 3 pagină + articole', '1 profil Google', '4 linkuri', '3 asistenți', '1 raport']);
+  assert.deepEqual(jobs.map(job => text(job.match(/<p class="seo-job__v">([\s\S]*?)<\/p>/)?.[1] ?? '')), ['4 verificări', '1 + 2 pagină + articole', '1 profil Google', '1 apariție', '3 asistenți', '1 raport']);
   for (const job of jobs) assert.match(job, /<div class="seo-job__vis" aria-hidden="true">/);
   assert.doesNotMatch(main, /<details class="seo-row"|class="seo-bento"/);
   assert.match(section, /<a class="seo-link seo-jobs__more" href="#preturi">/);
-  const start = main.match(/<article class="seo-price">([\s\S]*?)<\/article>/)?.[1] ?? '';
-  assert.match(start, /<li>1 pagină optimizată și 3 articole pe lună<\/li>/);
-  assert.match(start, /<li>4 linkuri externe relevante<\/li>/);
+  const hot = main.match(/<article class="seo-price seo-price--hot">([\s\S]*?)<\/article>/)?.[1] ?? '';
+  assert.ok(hot.includes('<li>3 texte noi pe lună: 1 pagină și 2 articole</li>'));
+  assert.ok(hot.includes('<li>1 apariție pe lună pe un site din domeniul tău</li>'));
 });
 
 test('the monthly report has five parts, one chosen, and one visible example', () => {
@@ -162,10 +172,36 @@ test('the why-us section gives three reasons and links the related services', ()
   assert.ok(why.includes('href="/agentie-google-ads/"'));
 });
 
-test('the entry plan includes the technical SEO and AI monitoring promised in the monthly jobs', () => {
-  const start = main.match(/<article class="seo-price">([\s\S]*?)<\/article>/)?.[1] ?? '';
-  assert.match(start, /<li>SEO tehnic: indexare, viteză, sitemap, date structurate<\/li>/);
-  assert.match(start, /<li>Monitorizare lunară în asistenții AI<\/li>/);
+test('every plan includes the shared groundwork promised in the monthly jobs', () => {
+  const base = main.match(/<div class="seo-pblock" id="inclus">([\s\S]*?)<\/ul>/)?.[1] ?? '';
+  assert.equal(count(base, /<li class="seo-base__it">/g), 6);
+  assert.deepEqual([...base.matchAll(/<h4 class="seo-base__t">([\s\S]*?)<\/h4>/g)].map(([, h4]) => text(h4)), ['SEO tehnic, verificat lunar', 'Profilul Companiei pe Google', 'Recenzii de la clienți reali', 'Aceleași date în până la 10 directoare', 'Monitorizare în asistenții AI', 'Raport lunar, pe înțeles']);
+  assert.equal(count(main, /href="#inclus"/g), 4);
+});
+
+test('the comparison table has nine rows of four plan cells and a CSS-only plan picker', () => {
+  const table = main.match(/<table class="seo-cmp__table"[^>]*>([\s\S]*?)<\/table>/)?.[1] ?? '';
+  const rows = [...(table.match(/<tbody>([\s\S]*?)<\/tbody>/)?.[1] ?? '').matchAll(/<tr>([\s\S]*?)<\/tr>/g)].map(([, row]) => row);
+  assert.equal(rows.length, 9);
+  for (const row of rows) {
+    assert.deepEqual([...row.matchAll(/<td data-p="([lcap])"/g)].map(([, plan]) => plan), ['l', 'c', 'a', 'p']);
+  }
+  const radios = [...main.matchAll(/<input class="seo-cmp__r"[^>]*>/g)].map(([tag]) => tag);
+  assert.equal(radios.length, 4);
+  for (const tag of radios) assert.match(tag, /type="radio" name="seo-cmp"/);
+  assert.equal(radios.filter(tag => /\schecked\b/.test(tag)).length, 1);
+  assert.match(radios.find(tag => /\schecked\b/.test(tag)) ?? '', /id="seo-cmp-c"/);
+  for (const tag of radios) {
+    const id = tag.match(/id="([^"]+)"/)?.[1];
+    assert.ok(main.includes(`<label for="${id}">`), `${id} has a label`);
+  }
+});
+
+test('the extras list holds eight items, each with a fixed price', () => {
+  const extras = main.match(/<ul class="seo-extras">([\s\S]*?)<\/ul>/)?.[1] ?? '';
+  const items = [...extras.matchAll(/<li>([\s\S]*?)<\/li>/g)].map(([, item]) => item);
+  assert.equal(items.length, 8);
+  for (const item of items) assert.match(item, /<span class="seo-extras__p">\d+&nbsp;€/);
 });
 
 test('the terms state the minimum contract and the audit shows its price', () => {
