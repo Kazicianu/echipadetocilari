@@ -1613,6 +1613,7 @@
 .ect-showcase .ect-carousel-card.ect-carousel-card--zuzel { background: #dada00; }
 .ect-showcase .ect-carousel-card.ect-carousel-card--norwen { background: #8D493A; }
 .ect-showcase .ect-carousel-card.ect-carousel-card--tidora { background: #163b35; }
+.ect-showcase .ect-carousel-card.ect-carousel-card--grovely { background: #d8ea5e; }
 
 .ect-showcase .ect-carousel-card__text {
   position: relative;
@@ -1645,7 +1646,9 @@
 .ect-showcase .ect-carousel-card--2noi .ect-carousel-card__category,
 .ect-showcase .ect-carousel-card--2noi .ect-carousel-card__title,
 .ect-showcase .ect-carousel-card--zuzel .ect-carousel-card__category,
-.ect-showcase .ect-carousel-card--zuzel .ect-carousel-card__title {
+.ect-showcase .ect-carousel-card--zuzel .ect-carousel-card__title,
+.ect-showcase .ect-carousel-card--grovely .ect-carousel-card__category,
+.ect-showcase .ect-carousel-card--grovely .ect-carousel-card__title {
   color: #27272d;
 }
 
@@ -1739,7 +1742,8 @@
 }
 
 .ect-showcase .ect-carousel-card--2noi .ect-carousel-card__desc,
-.ect-showcase .ect-carousel-card--zuzel .ect-carousel-card__desc {
+.ect-showcase .ect-carousel-card--zuzel .ect-carousel-card__desc,
+.ect-showcase .ect-carousel-card--grovely .ect-carousel-card__desc {
   color: rgba(39, 39, 45, 0.85);
 }
 

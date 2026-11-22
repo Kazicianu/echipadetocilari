@@ -14,4 +14,5 @@ export const portfolioDictionary = [
   ["Studio de unghii","Nail studio"],
   ["Showroom de mobilier","Furniture showroom"],
   ["Firmă de curățenie","Cleaning company"],
+  ["Amenajări peisagistice","Landscaping"],
 ];
