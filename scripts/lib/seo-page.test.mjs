@@ -56,12 +56,18 @@ test('the AI section keeps the definitions and the crawler list, without assista
   assert.doesNotMatch(main, /class="seo-limit"/);
 });
 
-test('the six monthly jobs are native accordion rows sharing one name, the first open', () => {
-  const rows = [...main.matchAll(/<details class="seo-row"([^>]*)>/gi)].map(([, attrs]) => attrs);
-  assert.equal(rows.length, 6);
-  assert.equal(new Set(rows.map(attrs => attrs.match(/name="([^"]+)"/)?.[1])).size, 1);
-  assert.equal(rows.filter(attrs => /\sopen\b/.test(attrs)).length, 1);
-  assert.match(rows[0], /\sopen\b/);
+test('the six monthly jobs are tiles with a heading, a Start quantity and a decorative example', () => {
+  const section = main.match(/<section class="seo-sec" aria-labelledby="seo-lucrari-t">([\s\S]*?)<\/section>/)?.[1] ?? '';
+  const jobs = [...section.matchAll(/<li class="seo-job">([\s\S]*?)<\/li>/g)].map(([, inner]) => inner);
+  assert.equal(jobs.length, 6);
+  assert.deepEqual(jobs.map(job => text(job.match(/<h3 class="seo-job__t">([\s\S]*?)<\/h3>/)?.[1] ?? '')), ['SEO tehnic', 'Conținut', 'SEO local', 'Autoritate', 'Vizibilitate în AI', 'Raport lunar']);
+  assert.deepEqual(jobs.map(job => text(job.match(/<p class="seo-job__v">([\s\S]*?)<\/p>/)?.[1] ?? '')), ['4 verificări', '1 + 3 pagină + articole', '1 profil Google', '4 linkuri', '3 asistenți', '1 raport']);
+  for (const job of jobs) assert.match(job, /<div class="seo-job__vis" aria-hidden="true">/);
+  assert.doesNotMatch(main, /<details class="seo-row"|class="seo-bento"/);
+  assert.match(section, /<a class="seo-link seo-jobs__more" href="#preturi">/);
+  const start = main.match(/<article class="seo-price">([\s\S]*?)<\/article>/)?.[1] ?? '';
+  assert.match(start, /<li>1 pagină optimizată și 3 articole pe lună<\/li>/);
+  assert.match(start, /<li>4 linkuri externe relevante<\/li>/);
 });
 
 test('the monthly report has five parts, one chosen, and one visible example', () => {
@@ -98,9 +104,11 @@ test('no visible placeholders remain in the content', () => {
   assert.doesNotMatch(main, /De completat|De confirmat|de completat|de confirmat/);
 });
 
-test('the illustrative label appears four times', () => {
-  assert.equal(count(main, /<em class="seo-ex">Exemplu ilustrativ<\/em>/g), 4);
-  assert.equal(count(main, /Exemplu ilustrativ/g), 4);
+test('every illustrative example is labelled as such', () => {
+  assert.equal(count(main, /<em class="seo-ex">Exemplu ilustrativ<\/em>/g), 2);
+  assert.equal(count(main, /Exemplu ilustrativ/g), 2);
+  assert.equal(count(main, /<span>exemplu<\/span>/g), 3);
+  assert.ok(main.includes('Datele din grafice sunt exemple.'));
 });
 
 test('the content holds no images and no inline styles', () => {
