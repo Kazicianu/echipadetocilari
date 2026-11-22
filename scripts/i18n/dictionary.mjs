@@ -607,6 +607,8 @@ export const dictionary = [
   ['>Amenajare de grădini, gazon și întreținere, cu proiecte și blog.<', '>Garden design, lawns and maintenance, with projects and a blog.<'],
   ['>Software de catering pentru cămine<', '>Catering software for care homes<'],
   ['>Meniuri, alergeni, costuri și bugete într-o singură aplicație.<', '>Menus, allergens, costs and budgets in one app.<'],
+  ['>Studio de peisagistică în Ilfov<', '>Landscape design studio in Ilfov<'],
+  ['>Proiecte înainte și după, servicii, galerie și jurnal de grădină.<', '>Before-and-after projects, services, a gallery and a garden journal.<'],
   ['>Vezi site-ul</span>', '>See the website</span>'],
   [
     '>Vezi site-ul<span class="screen-reader-text"> ',
