@@ -197,10 +197,11 @@ test('the comparison table has nine rows of four plan cells and a CSS-only plan 
   }
 });
 
-test('the extras list holds eight items, each with a fixed price', () => {
+test('the extras list holds seven items, each with a fixed price', () => {
   const extras = main.match(/<ul class="seo-extras">([\s\S]*?)<\/ul>/)?.[1] ?? '';
   const items = [...extras.matchAll(/<li>([\s\S]*?)<\/li>/g)].map(([, item]) => item);
-  assert.equal(items.length, 8);
+  assert.equal(items.length, 7);
+  assert.doesNotMatch(extras, /Setarea Profilului/, 'the Google profile setup is included in every plan, not sold as an extra');
   for (const item of items) assert.match(item, /<span class="seo-extras__p">\d+&nbsp;€/);
 });
 

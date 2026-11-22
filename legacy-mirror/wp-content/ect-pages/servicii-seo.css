@@ -404,7 +404,9 @@
   .ect-page.ect-page--servicii-seo .seo-gl, .ect-page.ect-page--servicii-seo .seo-who, .ect-page.ect-page--servicii-seo .seo-notes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .ect-page.ect-page--servicii-seo .seo-prices { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .ect-page.ect-page--servicii-seo .seo-base { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px 32px; padding: 28px; }
-  .ect-page.ect-page--servicii-seo .seo-extras { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ect-page.ect-page--servicii-seo .seo-extras { grid-template-columns: repeat(2, minmax(0, 1fr)); border-bottom: 0; }
+  .ect-page.ect-page--servicii-seo .seo-extras li { border-top: 0; border-bottom: 1px solid var(--line); }
+  .ect-page.ect-page--servicii-seo .seo-extras li:nth-child(-n+2) { border-top: 1px solid var(--line); }
   .ect-page.ect-page--servicii-seo .seo-gcol { padding: 30px 32px; }
   .ect-page.ect-page--servicii-seo .seo-wc { padding: 32px 34px; }
   .ect-page.ect-page--servicii-seo .seo-price { padding: 34px 30px; }
