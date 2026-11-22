@@ -1,6 +1,6 @@
 /**
- * The shared site footer (RO, EN and 404): contact details, links, the
- * Bucharest painting and the coffee-cup signature. Runs in the second build
+ * The shared site footer (RO, EN and 404): contact details, links
+ * and the coffee-cup signature, set on the sky of the Bucharest illustration (its flat sky is the footer background). Runs in the second build
  * loop, after the EN pages exist, so the footer never passes through the
  * translation dictionary.
  *
@@ -8,7 +8,7 @@
  * the fixed "back to top" widget is positioned by post-3355.css, and the widget
  * is carried over unchanged. Everything else is rebuilt here from `routes`,
  * `roOrg`/`enOrg`, consent.js and footer-a11y.mjs. Styles: site-footer.css.
- * The approved reference is docs/ui/footer/ (footer.ro.html, footer.en.html).
+ * The first approved version (white sky) is in docs/ui/footer/; the current one is documented in docs/design-system/components/Footer/.
  */
 import { routes } from '../i18n/routes.mjs';
 import { roOrg } from '../i18n/meta-ro.mjs';
@@ -22,7 +22,7 @@ export const FOOTER_MARK = 'data-ect-footer="2"';
 const FOOTER = /<footer\b[^>]*\belementor-location-footer\b[^>]*>[\s\S]*?<\/footer>/i;
 
 const LOGO_BASE = '/wp-content/uploads/2024/02/Logo_Echipa_de_Tocilari-e1708028624694';
-const ART_BASE = '/wp-content/ect-pages/footer/bucuresti-ateneu';
+const ART_BASE = '/wp-content/ect-pages/footer/bucuresti-cer';
 const CUP = '/wp-content/ect-pages/footer/pahar-cafea.webp';
 const COMPANY_LEGAL = 'ECHIPA DE TOCILARI SRL · CUI 47591744 · J40/2298/2023';
 const COMPANY_PATHS = ['/despre-noi/', '/portofoliu/', '/contact/'];
@@ -132,7 +132,7 @@ export function footerMarkup(language, openTag, year = new Date().getFullYear())
   </div>
   <p class="ect-footer__madewith">${escapeHtml(copy.madeWith)} <img class="ect-footer__cup" src="${CUP}" width="117" height="128" alt="${escapeAttr(copy.cupAlt)}" loading="lazy" decoding="async"> ${escapeHtml(copy.madeBy)} <a class="ect-footer__team" href="${escapeAttr(copy.home)}">Echipa de Tocilari</a></p>
  </div>
- <div class="ect-footer__art" aria-hidden="true"><img src="${ART_BASE}-1280.webp" srcset="${ART_BASE}-640.webp 640w, ${ART_BASE}-1280.webp 1280w, ${ART_BASE}-2000.webp 2000w" sizes="(max-width: 692px) 540px, 100vw" width="2000" height="667" alt="" loading="lazy" decoding="async"></div>
+ <div class="ect-footer__art" aria-hidden="true"><img src="${ART_BASE}-1152.webp" srcset="${ART_BASE}-768.webp 768w, ${ART_BASE}-1152.webp 1152w, ${ART_BASE}-1536.webp 1536w" sizes="(max-width: 767px) 624px, 100vw" width="1536" height="1024" alt="" loading="lazy" decoding="async"></div>
 ${backToTop(BACK_TO_TOP[language])}
 </footer>`;
 }

@@ -1,4 +1,4 @@
-/* Site footer (Leedlime style + Bucharest painting). Scoped under .ect-footer. */
+/* Site footer (Leedlime style): the text sits on the sky of the Bucharest illustration. Scoped under .ect-footer, except the contact-section wave rule at the end. */
 @font-face {
   font-family: "ECT Footer Montserrat";
   src: url("/wp-content/ect-pages/fonts/Montserrat-Variable-latin-ro.woff2") format("woff2");
@@ -12,7 +12,9 @@
   position: relative;
   margin: 0;
   padding: 0;
-  background: #fff;
+  background: #e1effa; /* the flat sky at the top of bucuresti-cer-*.webp */
+  overflow: hidden;
+  overflow: clip;
   color: #27272d;
   font-family: "ECT Footer Montserrat", Montserrat, system-ui, sans-serif;
   font-size: 15px;
@@ -63,6 +65,8 @@
   width: min(100% - 40px, 1200px);
   margin-inline: auto;
   padding-top: 64px;
+  position: relative;
+  z-index: 1;
 }
 
 /* Grid */
@@ -279,7 +283,7 @@
   align-items: center;
   padding: 0.3em 0.7em;
   border-radius: 0.5em;
-  background: #f1f1f3;
+  background: #fff;
   color: #27272d;
   font-weight: 600;
   white-space: nowrap;
@@ -306,31 +310,25 @@
   border-radius: 0.5em;
 }
 
-/* Painting */
+/* Illustration: its flat sky continues the footer background, so it is pulled up behind
+   the text until the scene (first non-sky pixels at 53.3% of its height) starts just under
+   the signature. Phones: at least 416px high, cropped around the Athenaeum. */
 .ect-footer__art {
   position: relative;
-  margin-top: clamp(0px, 2vw, 24px);
+  z-index: 0;
+  margin-top: calc(24px - 0.53 * max(416px, 66.667vw));
+  pointer-events: none;
 }
 
 .ect-footer__art img {
   display: block;
   width: 100%;
   max-width: none;
-  height: clamp(220px, 26vw, 720px);
+  height: max(416px, 66.667vw);
   object-fit: cover;
   object-position: 53% 100%;
   border-radius: 0;
   box-shadow: none;
-}
-
-.ect-footer__art::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto;
-  height: 35%;
-  background: linear-gradient(#fff, rgba(255, 255, 255, 0));
-  pointer-events: none;
-  z-index: 1;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -393,6 +391,15 @@
     flex-wrap: nowrap;
     justify-content: flex-end;
   }
+
+  /* Full width at the natural 3:2 height: 35.33% of the width = 53% of the image height. */
+  .ect-footer__art {
+    margin-top: calc(32px - 35.33%);
+  }
+
+  .ect-footer__art img {
+    height: auto;
+  }
 }
 
 @media (min-width: 1025px) {
@@ -420,4 +427,27 @@
   .ect-footer__bottom {
     margin-top: 24px;
   }
+}
+
+/* The bottom wave of the contact section above the footer takes the same sky, so the orange
+   section runs straight into the footer (9884c62: homepage, EN, 404 and the shared contact;
+   bc8091b: portofoliu; 466dc9d: administrare-site; 228851e: contact). */
+.elementor-element-9884c62 > .elementor-shape-bottom .elementor-shape-fill,
+.elementor-element-9884c62 > .e-con-inner > .elementor-shape-bottom .elementor-shape-fill,
+.elementor-element-bc8091b > .elementor-shape-bottom .elementor-shape-fill,
+.elementor-element-bc8091b > .e-con-inner > .elementor-shape-bottom .elementor-shape-fill,
+.elementor-element-466dc9d > .elementor-shape-bottom .elementor-shape-fill,
+.elementor-element-466dc9d > .e-con-inner > .elementor-shape-bottom .elementor-shape-fill,
+.elementor-element-228851e > .elementor-shape-bottom .elementor-shape-fill,
+.elementor-element-228851e > .e-con-inner > .elementor-shape-bottom .elementor-shape-fill {
+  fill: #e1effa;
+}
+
+/* Servicii SEO has no wave: its white band under the orange blob fades into the same sky. */
+.seo-contact.seo-contact {
+  background: linear-gradient(#fff calc(100% - 64px), #e1effa);
+}
+
+.seo-contact.seo-contact #formular_contact_bottom {
+  background: transparent;
 }

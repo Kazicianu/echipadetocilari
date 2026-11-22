@@ -106,10 +106,10 @@ test('the painting is a decorative lazy image with its real size, and the styles
     const result = renderSiteFooter(html);
     const art = footerOf(result).match(/<div class="ect-footer__art" aria-hidden="true">(<img [^>]*>)<\/div>/)[1];
     assert.match(art, /\salt=""/, label);
-    assert.match(art, /\swidth="2000" height="667"/, label);
+    assert.match(art, /\swidth="1536" height="1024"/, label);
     assert.match(art, /\sloading="lazy"/, label);
     assert.match(art, /\sdecoding="async"/, label);
-    assert.match(art, /bucuresti-ateneu-640\.webp 640w, [^"]*-1280\.webp 1280w, [^"]*-2000\.webp 2000w/, label);
+    assert.match(art, /bucuresti-cer-768\.webp 768w, [^"]*-1152\.webp 1152w, [^"]*-1536\.webp 1536w/, label);
     assert.equal(count(result, new RegExp(`<link rel="stylesheet" href="${FOOTER_STYLESHEET}">`, 'g')), 1, label);
     const head = result.slice(0, result.search(/<\/head>/i));
     assert.ok(head.includes(FOOTER_STYLESHEET), `${label}: stylesheet is in <head>`);
@@ -118,6 +118,26 @@ test('the painting is a decorative lazy image with its real size, and the styles
     }
   }
   assert.doesNotThrow(() => readFileSync(path.join(root, 'legacy-mirror', FOOTER_STYLESHEET)));
+});
+
+test('the illustration files are WebP with the sizes the srcset promises', () => {
+  for (const [w, h] of [[768, 512], [1152, 768], [1536, 1024]]) {
+    const file = `legacy-mirror/wp-content/ect-pages/footer/bucuresti-cer-${w}.webp`;
+    const buf = readFileSync(path.join(root, file));
+    assert.equal(buf.toString('latin1', 0, 4), 'RIFF', file);
+    assert.equal(buf.toString('latin1', 8, 12), 'WEBP', file);
+    const kind = buf.toString('latin1', 12, 16);
+    let size;
+    if (kind === 'VP8X') {
+      size = [1 + buf.readUIntLE(24, 3), 1 + buf.readUIntLE(27, 3)];
+    } else if (kind === 'VP8L') {
+      const bits = buf.readUInt32LE(21);
+      size = [(bits & 0x3fff) + 1, ((bits >> 14) & 0x3fff) + 1];
+    } else {
+      size = [buf.readUInt16LE(26) & 0x3fff, buf.readUInt16LE(28) & 0x3fff];
+    }
+    assert.deepEqual(size, [w, h], file);
+  }
 });
 
 test('rendering twice changes nothing, and a page without the footer fails loudly', () => {
