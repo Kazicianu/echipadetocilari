@@ -6,6 +6,30 @@
   font-display: swap;
 }
 
+@supports (mask-image: linear-gradient(black, black)) {
+  body:has(.e-con:not(.seo-contact *) > .e-con-inner > .elementor-shape-bottom ~ .e-con form[data-ect-contact]) {
+    --ect-footer-wave-overlap: 30px;
+  }
+
+  /* Cut away the white side of the Elementor wave to reveal the footer underneath. */
+  .e-con:has(> .e-con-inner > .elementor-shape-bottom):has(form[data-ect-contact]):not(.seo-contact *) {
+    position: relative;
+    z-index: 2;
+    mask:
+      linear-gradient(black, black) top / 100% calc(100% - var(--ect-footer-wave-overlap) + 1px) no-repeat,
+      url("/wp-content/ect-pages/footer/contact-wave-mask.svg") bottom / 100% var(--ect-footer-wave-overlap) no-repeat;
+  }
+
+  .e-con:has(form[data-ect-contact]):not(.seo-contact *) > .e-con-inner > .elementor-shape-bottom {
+    display: none;
+  }
+
+  .e-con:has(> .e-con-inner > .elementor-shape-bottom):not(.seo-contact *) > .e-con-inner > .e-con:has(form[data-ect-contact]) {
+    position: relative;
+    inset-block-start: clamp(12px, 1.5vw, 24px);
+  }
+}
+
 /* The 2:1 city illustration runs edge to edge, with open sky to the left of the tree canopy. */
 .ect-footer {
   --ect-footer-art: max(50cqw, 290px);
@@ -14,7 +38,7 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   position: relative;
-  margin: 0;
+  margin: calc(0px - var(--ect-footer-wave-overlap, 0px)) 0 0;
   padding: 0;
   border: 0;
   border-radius: 0;
@@ -77,10 +101,11 @@
 
 /* Phones: the copy ends where the artwork begins; its top band blends into the footer background. */
 .ect-footer__inner {
+  --ect-footer-content-top: clamp(24px, 3.5vw, 48px);
   grid-area: 1 / 1;
   width: min(100% - 40px, 1200px);
   margin-inline: auto;
-  padding-block: clamp(24px, 3.5vw, 48px) max(50%, 298px);
+  padding-block: calc(var(--ect-footer-content-top) + var(--ect-footer-wave-overlap, 0px) / 2) max(50%, 298px);
   position: relative;
   z-index: 1;
 }
@@ -379,9 +404,9 @@
   }
 
   .ect-footer__inner {
+    --ect-footer-content-top: max(20px, 2%);
     width: auto;
     margin-inline: 3.2%;
-    padding-top: max(20px, 2%);
     padding-bottom: 19%;
   }
 
@@ -424,7 +449,7 @@
   }
 
   .ect-footer__inner {
-    padding-top: clamp(24px, 2.2vw, 40px);
+    --ect-footer-content-top: clamp(24px, 2.2vw, 40px);
     padding-bottom: 18%;
   }
 
