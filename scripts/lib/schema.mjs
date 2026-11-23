@@ -22,7 +22,7 @@ export const websiteId = (site, lang) => `${site}/#website${lang === 'en' ? '-en
  * @param {string[]} opts.knowsAbout
  * @param {{ streetAddress: string, addressLocality: string, postalCode: string, addressCountry: string }} [opts.address]
  * @param {string} [opts.telephone] omit rather than invent
- * @param {{ dayOfWeek: string[], opens: string, closes: string }} [opts.openingHours] keep in step with the footer
+ * @param {{ dayOfWeek: string[], opens: string, closes: string }} [opts.openingHours] keep in step with the contact page
  */
 export function organization({ site, lang, description, knowsAbout, address, telephone, openingHours }) {
   const org = {

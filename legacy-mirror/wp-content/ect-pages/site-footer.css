@@ -14,11 +14,12 @@
  * Free sky in balconul-tocilarilor-*.webp (1858x941, % of width / height):
  * - x 0-44% -> 65%, 46-52% -> 62%, 54-57% -> 58%, 59-64% -> 45%, 66-80% -> 39% to 28% (eaves),
  *   x >= 82% -> branches from the top edge down to ~14%.
- * Desktop columns stay within x <= 59.8%, legal lines <= 52% and the signature <= 45%, while
- * bottom padding keeps every line clear of the city skyline, plant, laptop and characters.
+ * From 1200px the Metricra row (brand, Services, Company, Contact, Legal) ends at x <= 78% and stays
+ * above the eaves; the signature stays at x <= 45%. Every placement is checked on pixels by the
+ * footer QA script (copy only on sky, no horizontal scroll).
  */
 .ect-footer {
-  /* Native 1858x941 ratio -> height is 50.646% of width (90% zoom scale, full bleed); min 290px on phones. */
+  /* Native 1858x941 ratio -> height is 50.646% of width (full bleed); min 290px on phones. */
   --ect-footer-art: max(50.646cqw, 290px);
   --ect-footer-fade: 18%;
   display: grid;
@@ -95,30 +96,36 @@
   z-index: 1;
 }
 
-/* Grid */
+/* Grid: brand, then Services | Company, then Contact and Legal across the width.
+   Services gets the wider track so "Creare magazin online" and "Agenție Facebook Ads" stay on one line from 360px. */
 .ect-footer__top {
   display: grid;
   grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  grid-template-areas:
+    "brand brand"
+    "services company"
+    "contact contact"
+    "legal legal";
   gap: 24px 20px;
+  align-items: start;
 }
 
-.ect-footer__brand,
-.ect-footer__col--contact {
-  grid-column: 1 / -1;
-}
+.ect-footer__brand { grid-area: brand; }
+.ect-footer__col--services { grid-area: services; }
+.ect-footer__col--company { grid-area: company; }
+.ect-footer__col--contact { grid-area: contact; }
+.ect-footer__col--legal { grid-area: legal; }
 
-/* Brand */
+/* Brand: the logo with the two social discs beside it (stacked under it from 1200px). */
 .ect-footer__brand {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
+  display: flex;
   align-items: center;
-  column-gap: 18px;
+  gap: 16px;
 }
 
 .ect-footer .ect-footer__logo {
   display: inline-block;
-  grid-row: span 2;
-  align-self: start;
+  flex: none;
   line-height: 0;
 }
 
@@ -131,39 +138,45 @@
   box-shadow: none;
 }
 
-.ect-footer .ect-footer__tagline {
-  max-width: 40ch;
-  text-wrap: pretty;
-  color: #3d4459;
-  font-size: 15px;
-  font-weight: 400;
-  line-height: 1.5;
-}
-
 .ect-footer .ect-footer__social {
   display: flex;
-  gap: 4px;
-  margin: 2px 0 0 -12px;
+  gap: 6px;
 }
 
+/*
+ * A 40px white disc with a 2px #fd8649 ring inside a 44x44 target: the transparent 2px border leaves
+ * the sky around the disc, the inset shadow draws the ring. Hover and focus fill the disc orange.
+ */
 .ect-footer .ect-footer__social a {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   width: 44px;
   height: 44px;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  background: #ffffff padding-box;
+  box-shadow: inset 0 0 0 2px #fd8649;
   color: #27272d;
 }
 
-.ect-footer .ect-footer__social a:hover {
-  color: #fd8649;
+.ect-footer .ect-footer__social a:hover,
+.ect-footer .ect-footer__social a:focus-visible {
+  background-color: #fd8649;
+  color: #ffffff;
+}
+
+.ect-footer .ect-footer__social a:focus-visible {
+  outline: 3px solid #27272d;
+  outline-offset: 2px;
+  border-radius: 50%;
 }
 
 .ect-footer__social svg {
   display: block;
   width: 20px;
   height: 20px;
-  fill: currentColor;
+  overflow: visible;
 }
 
 /* Columns */
@@ -175,115 +188,39 @@
   line-height: 1.35;
 }
 
-.ect-footer__col ul {
-  display: flex;
-  flex-direction: column;
-}
-
-.ect-footer .ect-footer__col a,
-.ect-footer .ect-footer__contact > span {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  color: #27272d;
-  font-size: 15px;
-  font-weight: 400;
-  line-height: 1.4;
-}
-
-.ect-footer .ect-footer__col a:hover {
-  color: #fd8649;
-}
-
+.ect-footer__col ul,
 .ect-footer .ect-footer__contact {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
-.ect-footer .ect-footer__contact > a {
-  max-width: 100%;
-  overflow-wrap: anywhere;
-}
-
-.ect-footer .ect-footer__contact > span {
-  padding-block: 8px;
-  max-width: 34ch;
-}
-
-/* Status */
-.ect-footer .ect-footer__status {
-  position: relative;
-  margin-top: 10px;
-  padding-left: 18px;
-  color: #27272d;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.4;
-}
-
-/* Keep the time range on one line when the hours wrap. */
-.ect-footer__hours {
-  white-space: nowrap;
-}
-
-.ect-footer__dot {
-  position: absolute;
-  top: calc(0.7em - 4px);
-  left: 0;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #fd8649;
-}
-
-/* Bottom row */
-.ect-footer__bottom {
-  display: flex;
-  flex-direction: column-reverse;
-  align-items: center;
-  gap: 4px;
-  margin-top: 24px;
-  padding-top: 12px;
-  border-top: 1px solid rgb(39 39 45 / 14%);
-  text-align: center;
-}
-
-.ect-footer .ect-footer__company {
-  color: #3d4459;
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 1.5;
-}
-
-.ect-footer .ect-footer__legal {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  column-gap: 20px;
-}
-
-.ect-footer .ect-footer__legal li:has(> [hidden]) {
+.ect-footer .ect-footer__col li:has(> [hidden]) {
   display: none;
 }
 
-.ect-footer .ect-footer__legal a,
-.ect-footer .ect-footer__legal button.ect-consent-open.ect-consent-open {
+.ect-footer .ect-footer__col a,
+.ect-footer .ect-footer__col button.ect-consent-open.ect-consent-open {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  min-width: 44px;
+  max-width: 100%;
   margin: 0;
   padding: 0;
+  border: 0;
+  background: none;
   color: #3d4459;
   font-family: inherit;
-  font-size: 13px;
-  font-weight: 500;
+  font-size: 15px;
+  font-weight: 400;
   line-height: 1.4;
+  text-align: left;
+  overflow-wrap: anywhere;
+  cursor: pointer;
 }
 
-.ect-footer .ect-footer__legal a:hover,
-.ect-footer .ect-footer__legal button.ect-consent-open.ect-consent-open:hover {
+.ect-footer .ect-footer__col a:hover,
+.ect-footer .ect-footer__col button.ect-consent-open.ect-consent-open:hover {
   color: #fd8649;
 }
 
@@ -292,14 +229,14 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 4px 0.4em;
-  margin-top: 14px;
+  margin-top: 22px;
   color: #3d4459;
   font-size: 14px;
   font-weight: 400;
   line-height: 1.4;
-  text-align: center;
+  text-align: left;
 }
 
 .ect-footer .ect-footer__cup {
@@ -382,6 +319,15 @@
     transition: color 0.15s ease;
   }
 
+  .ect-footer .ect-footer__social a {
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  }
+
+  .ect-footer .ect-footer__social a:hover,
+  .ect-footer .ect-footer__social a:focus-visible {
+    transform: scale(1.06);
+  }
+
   .ect-footer .ect-footer__cup { transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); }
   .ect-footer .ect-footer__madewith:hover .ect-footer__cup,
   .ect-footer .ect-footer__madewith:focus-within .ect-footer__cup { transform: rotate(8deg) scale(1.06); }
@@ -392,7 +338,7 @@
   .ect-footer .ect-footer__madewith { font-size: 13px; }
 }
 
-/* 640-919: brand on top, three columns in a row, full 100% edge-to-edge extended artwork (no left fade). */
+/* 640-919: brand on top, Services on the left, Company, Contact and Legal stacked beside it. */
 @media (min-width: 640px) {
   .ect-footer {
     --ect-footer-fade: 14%;
@@ -400,7 +346,6 @@
   }
 
   .ect-footer__art img {
-    width: 100%;
     object-position: 50% 100%;
   }
 
@@ -410,45 +355,28 @@
   }
 
   .ect-footer__top {
-    grid-template-columns: 1.1fr 0.8fr 1.3fr;
+    grid-template-columns: max-content max-content;
+    grid-template-areas:
+      "brand brand"
+      "services company"
+      "services contact"
+      "services legal";
+    gap: 20px 64px;
   }
 
-  .ect-footer__col--contact {
-    grid-column: auto;
-  }
-
-  .ect-footer__bottom {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0;
-    width: fit-content;
-    max-width: 50%;
-    margin-top: 18px;
-    padding-top: 10px;
-    text-align: left;
-  }
-
-  .ect-footer .ect-footer__legal {
-    justify-content: flex-start;
-  }
-
-  .ect-footer .ect-footer__madewith {
-    justify-content: flex-start;
-    max-width: 48%;
-    margin-top: 6px;
-    text-align: left;
-  }
-
-  .ect-footer .ect-footer__madewith .ect-footer__team {
-    background: #f1f1f3;
-  }
+  .ect-footer__col--services { align-self: start; }
 }
 
 /*
- * From 920px the inner frame tracks the footer width in %, so the copy stays on the bright cloudy
- * sky left of the orange roof eaves (x = 64%) and top-right branches (x = 82%).
+ * 920-1199: the same two-row idea, wider: brand on top, then the four columns in one row,
+ * all inside the left part of the footer, in % so the copy tracks the scene.
  */
 @media (min-width: 920px) {
+  /* Extend the sky by the same 100px in RO and EN so Legal clears the eaves even with fewer EN services. */
+  .ect-footer::before {
+    min-height: calc(50.646vw + 100px);
+  }
+
   .ect-footer__inner {
     width: auto;
     margin-inline: 3.2%;
@@ -457,33 +385,15 @@
   }
 
   .ect-footer__top {
-    width: 60.5%;
-    grid-template-columns: minmax(max-content, 33%) minmax(max-content, 21%) minmax(0, 1fr);
-    gap: 18px 3%;
-  }
-
-  /* Break cleanly after "sector 2," where the column allows it. */
-  .ect-footer .ect-footer__contact > span {
-    max-width: 19em;
-  }
-
-  .ect-footer__brand {
-    display: flex;
-    align-items: center;
-    gap: 12px 20px;
-  }
-
-  .ect-footer .ect-footer__tagline {
-    max-width: 52ch;
-    font-size: 14px;
-  }
-
-  .ect-footer .ect-footer__social {
-    margin: 0;
+    grid-template-columns: repeat(4, max-content);
+    grid-template-areas:
+      "brand brand brand brand"
+      "services company contact legal";
+    gap: 20px 40px;
   }
 
   .ect-footer .ect-footer__col a,
-  .ect-footer .ect-footer__contact > span {
+  .ect-footer .ect-footer__col button.ect-consent-open.ect-consent-open {
     font-size: 14px;
   }
 
@@ -492,46 +402,44 @@
     font-weight: 600;
   }
 
-  .ect-footer__bottom {
-    max-width: 50%;
-  }
-
   .ect-footer .ect-footer__madewith {
-    max-width: 45%;
+    margin-top: 18px;
   }
 }
 
 /*
- * 1200+: full-bleed Metricra layout. Narrow brand column (logo + vertically stacked social icons),
- * then Services, Company and Contact sitting directly on the bright cloudy sky, ending at 59.8%
- * width (left of the orange roof eave at 64%). Legal lines stay <= 52% and the signature <= 45%,
- * cleanly above the city skyline and plant, so the footer locks 1:1 to the native 1376x768 artwork.
+ * 1200+: Metricra. One row, aligned at the top: an 84px brand column (logo, then the two social
+ * discs stacked under it on the logo axis), then Services, Company, Contact and Legal spread out
+ * across 79% of the inner frame, which ends at x = 77.1% of the footer, above the eaves and left of
+ * the branches. The signature follows under the row on the left. The footer is exactly as tall
+ * as the illustration.
  */
 @media (min-width: 1200px) {
   .ect-footer {
     --ect-footer-fade: 12%;
   }
 
-  .ect-footer__inner {
-    padding-top: clamp(18px, 1.8vw, 32px);
-    padding-bottom: 18.5%;
+  .ect-footer::before {
+    min-height: 0;
   }
 
-  /* 60.5% of the 93.6% inner frame ends at 59.8% of the footer, clear of the orange eaves. */
+  .ect-footer__inner {
+    padding-top: clamp(24px, 2.2vw, 40px);
+    padding-bottom: 18%;
+  }
+
   .ect-footer__top {
-    width: 60.5%;
-    grid-template-columns: 84px minmax(max-content, 24%) minmax(max-content, 15%) minmax(0, 1fr);
-    grid-template-rows: auto 1fr auto;
-    gap: 0 2.5%;
+    width: 79%;
+    grid-template-columns: 84px repeat(4, max-content);
+    grid-template-areas: "brand services company contact legal";
+    justify-content: space-between;
+    gap: 0 24px;
   }
 
   .ect-footer__brand {
-    display: contents;
-  }
-
-  .ect-footer .ect-footer__logo {
-    grid-column: 1;
-    grid-row: 1;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
   }
 
   .ect-footer__logo img {
@@ -539,74 +447,25 @@
   }
 
   .ect-footer .ect-footer__social {
-    grid-column: 1;
-    grid-row: 2;
-    align-self: start;
     flex-direction: column;
-    gap: 0;
-    margin: 8px 0 0 -12px;
+    align-items: center;
+    gap: 6px;
   }
-
-  .ect-footer__col {
-    grid-row: 1 / span 2;
-  }
-
-  .ect-footer__col--services { grid-column: 2; }
-  .ect-footer__col--company { grid-column: 3; }
-  .ect-footer .ect-footer__col--contact { grid-column: 4; }
 
   .ect-footer .ect-footer__label {
     margin-bottom: 6px;
   }
 
-  .ect-footer .ect-footer__tagline {
-    grid-column: 1 / -1;
-    grid-row: 3;
-    max-width: min(56ch, 82%);
-    margin-top: 14px;
-    font-size: 14px;
-    line-height: 1.42;
-  }
-
-  .ect-footer .ect-footer__status {
-    margin-top: 6px;
-    font-size: 13px;
-    white-space: nowrap;
-  }
-
-  /* Keep links in crisp ink (#27272d) so contrast stays >= 9.5:1 even over cloud undersides. */
-  .ect-footer .ect-footer__col a {
-    color: #27272d;
-  }
-
-  .ect-footer .ect-footer__col a:hover {
-    color: #fd8649;
-  }
-
-  .ect-footer__bottom {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 2px;
-    max-width: 52%;
-    margin-top: 12px;
-    padding-top: 10px;
-  }
-
   .ect-footer .ect-footer__madewith {
-    margin-top: 6px;
-    max-width: 45%;
+    margin-top: 20px;
     font-size: 13.5px;
   }
 }
 
 @media (min-width: 1440px) {
   .ect-footer .ect-footer__col a,
-  .ect-footer .ect-footer__contact > span {
+  .ect-footer .ect-footer__col button.ect-consent-open.ect-consent-open {
     font-size: 15px;
-  }
-
-  .ect-footer .ect-footer__status {
-    font-size: 14px;
   }
 
   .ect-footer .ect-footer__label {
@@ -619,17 +478,8 @@
 }
 
 @media (min-width: 920px) and (pointer: fine) {
-  .ect-footer .ect-footer__col a {
-    min-height: 28px;
-  }
-
-  .ect-footer .ect-footer__contact > span {
-    min-height: 0;
-    padding-block: 4px;
-  }
-
-  .ect-footer .ect-footer__legal a,
-  .ect-footer .ect-footer__legal button.ect-consent-open.ect-consent-open {
+  .ect-footer .ect-footer__col a,
+  .ect-footer .ect-footer__col button.ect-consent-open.ect-consent-open {
     min-height: 28px;
   }
 

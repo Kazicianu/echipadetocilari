@@ -9,7 +9,7 @@ import { enOrg } from '../i18n/dictionary.mjs';
 import { setLang } from './html.mjs';
 import { unnamedFooterIconLinks } from './footer-a11y.mjs';
 import { PRIVACY_PATHS, consentCopy } from './privacy.mjs';
-import { FOOTER_STYLESHEET, renderSiteFooter } from './site-footer.mjs';
+import { FOOTER_STYLESHEET, TERMS_PATHS, renderSiteFooter } from './site-footer.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const count = (html, pattern) => (html.match(pattern) || []).length;
@@ -42,19 +42,27 @@ test('every RO and EN page keeps one footer tag, its Elementor class and the bac
   }
 });
 
-test('the privacy link and the hidden cookie-settings button follow the page language', () => {
+test('the Legal column links the terms and the privacy policy and holds the hidden cookie-settings button, in the page language', () => {
   const copy = consentCopy();
+  const TERMS = { ro: 'Termeni și condiții', en: 'Terms and conditions' };
   for (const { language, url, html } of sourcePages()) {
     const label = `${url} (${language})`;
     const footer = footerOf(renderSiteFooter(html));
+    const legal = footer.match(/<nav class="ect-footer__col ect-footer__col--legal" aria-label="Legal"><p class="ect-footer__label">Legal<\/p><ul>[\s\S]*?<\/ul><\/nav>/);
+    assert.ok(legal, `${label}: Legal column`);
+    assert.equal(count(legal[0], /<li>/g), 3, label);
+    assert.ok(legal[0].includes(`<li><a href="${TERMS_PATHS[language]}">${TERMS[language]}</a></li>`), `${label}: terms link`);
     assert.equal(count(footer, /data-ect-footer-privacy/g), 1, label);
-    assert.match(footer, new RegExp(`<a href="${PRIVACY_PATHS[language]}" data-ect-footer-privacy>${copy[language].footerPolicy}</a>`), label);
+    assert.match(legal[0], new RegExp(`<a href="${PRIVACY_PATHS[language]}" data-ect-footer-privacy>${copy[language].footerPolicy}</a>`), label);
     assert.equal(count(footer, /data-ect-consent-open/g), 1, label);
-    assert.match(footer, new RegExp(`<button type="button" class="ect-consent-open" data-ect-consent-open hidden>${copy[language].footerSettings}</button>`), label);
+    assert.match(legal[0], new RegExp(`<button type="button" class="ect-consent-open" data-ect-consent-open hidden>${copy[language].footerSettings}</button>`), label);
     // The policy page has its own "change cookie settings" button in #cookies.
     const ownControls = url === PRIVACY_PATHS[language] ? 1 : 0;
     assert.equal(count(renderSiteFooter(html), /data-ect-consent-open/g), 1 + ownControls, label);
   }
+  assert.deepEqual(TERMS_PATHS, { ro: '/termeni-si-conditii/', en: '/en/terms-and-conditions/' });
+  const css = readFileSync(path.join(root, 'legacy-mirror', FOOTER_STYLESHEET), 'utf8');
+  assert.match(css, /li:has\(> \[hidden\]\)\s*\{\s*display: none;/, 'the hidden button leaves no empty row');
 });
 
 test('the links come from routes: all seven services in RO, only the translated ones in EN', () => {
@@ -72,32 +80,64 @@ test('the links come from routes: all seven services in RO, only the translated 
   for (const route of services.filter((item) => !item.en)) assert.ok(!en.includes(route.ro), `${route.ro} has no EN page`);
   for (const [footer, language] of [[ro, 'ro'], [en, 'en']]) {
     const company = footer.match(/<nav class="ect-footer__col ect-footer__col--company"[\s\S]*?<\/nav>/)[0];
-    for (const ro of ['/despre-noi/', '/portofoliu/', '/contact/']) {
+    assert.equal(count(company, /<li>/g), 2, `${language}: only About and Portfolio`);
+    for (const ro of ['/despre-noi/', '/portofoliu/']) {
       assert.ok(company.includes(`href="${routes.find((route) => route.ro === ro)[language]}"`), `${language}: ${ro}`);
     }
+    assert.ok(!company.includes(`href="${routes.find((route) => route.ro === '/contact/')[language]}"`), `${language}: no Contact link`);
   }
   assert.match(ro, /<a class="ect-footer__logo" href="\/">/);
   assert.match(en, /<a class="ect-footer__logo" href="\/en\/">/);
 });
 
-test('address, phone and hours match the organisation data; the English footer has no Romanian text', () => {
+test('Contact holds only the phone and the email; the English footer has no Romanian text', () => {
+  const PHONE = { ro: '0750 203 466', en: '+40 750 203 466' };
   for (const { language, url, html } of sourcePages()) {
     const label = `${url} (${language})`;
     const org = ORGS[language];
     const footer = footerOf(renderSiteFooter(html));
-    assert.ok(footer.includes(`<a href="tel:${org.telephone}">`), `${label}: phone`);
-    const { streetAddress, addressLocality, postalCode } = org.address;
-    assert.ok(footer.includes(`<span>${streetAddress}, ${addressLocality}, ${postalCode}, ${language === 'en' ? 'Romania' : 'România'}</span>`), `${label}: address`);
-    assert.ok(footer.includes(`<span class="ect-footer__hours">${org.openingHours.opens}-${org.openingHours.closes}</span></p>`), `${label}: hours`);
-    assert.ok(footer.includes('contact@echipadetocilari.ro') && footer.includes('CUI 47591744 · J40/2298/2023'), `${label}: legal details`);
-    assert.ok(footer.includes(`© ${new Date().getFullYear()} ECHIPA DE TOCILARI SRL`), `${label}: build year`);
+    const contact = footer.match(/<address class="ect-footer__contact">([\s\S]*?)<\/address>/)[1];
+    assert.equal(contact, `<a href="tel:${org.telephone}">${PHONE[language]}</a><a href="mailto:contact@echipadetocilari.ro">contact@echipadetocilari.ro</a>`, `${label}: contact`);
     if (language === 'en') {
-      assert.ok(footer.includes('Hours: Monday-Sunday, <span class="ect-footer__hours">09:00-20:00') && footer.includes('Bucharest, 021998, Romania'), label);
       assert.doesNotMatch(footer.replace(/<svg\b[\s\S]*?<\/svg>/g, ''), /[ăâîșțşţĂÂÎȘȚŞŢ]/, `${label}: no Romanian text`);
-    } else {
-      assert.ok(footer.includes('Program: luni-duminică, <span class="ect-footer__hours">09:00-20:00') && footer.includes('București, 021998, România'), label);
     }
   }
+});
+
+test('the footer keeps only what it needs: no address, hours, copyright, company ids or tagline', () => {
+  for (const { language, url, html } of sourcePages()) {
+    const label = `${url} (${language})`;
+    const org = ORGS[language];
+    const footer = footerOf(renderSiteFooter(html));
+    assert.ok(!footer.includes(org.address.streetAddress) && !footer.includes(org.address.postalCode), `${label}: no address`);
+    assert.ok(!footer.includes(`${org.openingHours.opens}-${org.openingHours.closes}`), `${label}: no hours`);
+    for (const gone of ['©', 'CUI', 'J40/', 'Agenție de marketing digital', 'Digital marketing agency', 'Program:', 'Hours:']) {
+      assert.ok(!footer.includes(gone), `${label}: no ${gone}`);
+    }
+    assert.doesNotMatch(footer, /ect-footer__(bottom|status|dot|hours|tagline|company|legal)\b/, `${label}: old blocks are gone`);
+    assert.doesNotMatch(footer, /viewBox="0 0 448 512"[^>]*><path d="M4(00|16) 32H/, `${label}: no Font Awesome squares`);
+  }
+});
+
+test('the social links are named discs with monoline marks', () => {
+  for (const { language, url, html } of sourcePages()) {
+    const label = `${url} (${language})`;
+    const footer = footerOf(renderSiteFooter(html));
+    const social = footer.match(/<ul class="ect-footer__social">([\s\S]*?)<\/ul>/)[1];
+    const links = social.match(/<a\b[^>]*>[\s\S]*?<\/a>/g);
+    assert.equal(links.length, 2, label);
+    assert.deepEqual(links.map((link) => link.match(/aria-label="([^"]+)"/)[1]), ['Facebook', 'LinkedIn'], label);
+    assert.ok(links[0].includes('href="https://www.facebook.com/EchipadeTocilari/"') && links[1].includes('href="https://www.linkedin.com/company/echipa-de-tocilari/"'), label);
+    for (const link of links) {
+      const svg = link.match(/<svg\b[^>]*>/)[0];
+      for (const attr of ['aria-hidden="true"', 'focusable="false"', 'viewBox="0 0 24 24"', 'fill="none"', 'stroke="currentColor"', 'stroke-width="2"', 'stroke-linecap="round"', 'stroke-linejoin="round"']) {
+        assert.ok(svg.includes(attr), `${label}: ${attr}`);
+      }
+    }
+  }
+  const css = readFileSync(path.join(root, 'legacy-mirror', FOOTER_STYLESHEET), 'utf8');
+  assert.match(css, /\.ect-footer__social a \{[^}]*width: 44px;[^}]*height: 44px;[^}]*border: 2px solid transparent;[^}]*background: #ffffff padding-box;[^}]*box-shadow: inset 0 0 0 2px #fd8649;/, 'a 40px white disc with a 2px orange ring in a 44px target');
+  assert.match(css, /\.ect-footer__social a:hover,\s*\.ect-footer \.ect-footer__social a:focus-visible \{\s*background-color: #fd8649;\s*color: #ffffff;/, 'hover and focus fill the disc');
 });
 
 test('the balcony illustration is a decorative lazy image with its real size, and the stylesheet loads once', () => {
@@ -174,7 +214,7 @@ test('the coffee-cup signature closes the footer text, in the page language', ()
     const expected = `<p class="ect-footer__madewith">${madeWith} <img class="ect-footer__cup" src="/wp-content/ect-pages/footer/pahar-cafea.webp" width="${w}" height="${h}" alt="${alt}" loading="lazy" decoding="async"> ${madeBy} <a class="ect-footer__team" href="${home}">Echipa de Tocilari</a></p>`;
     assert.equal(found[0], expected, label);
     const at = footer.indexOf('class="ect-footer__madewith"');
-    assert.ok(footer.indexOf('class="ect-footer__bottom"') < at && at < footer.indexOf('class="ect-footer__art"'), `${label}: order`);
+    assert.ok(footer.indexOf('class="ect-footer__top"') < at && footer.lastIndexOf('</nav>') < at && at < footer.indexOf('class="ect-footer__art"'), `${label}: order`);
     assert.doesNotMatch(found[0], /target=/, label);
   }
 });

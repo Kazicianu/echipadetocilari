@@ -1,6 +1,6 @@
 /**
  * Accessible names for the footer links that hold only an icon: the Facebook
- * and LinkedIn squares and the back-to-top arrow. Elementor leaves them empty,
+ * and LinkedIn discs and the back-to-top arrow. Elementor leaves them empty,
  * so a screen reader announces just "link".
  */
 import { pageLanguage } from './privacy.mjs';
