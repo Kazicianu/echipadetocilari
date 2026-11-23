@@ -1403,14 +1403,7 @@
 /* Hover or keyboard focus on the other half: no fill, an `ink` label. On the site the `orange` drop also leans about 10px toward it; this preview has no drop. */
 .ect-lang a:not([aria-current="true"]):hover, .ect-lang a:not([aria-current="true"]):focus-visible { background: transparent; color: var(--ink); }
 .ect-lang a:focus-visible { outline: 2px solid var(--orange-deep); outline-offset: 3px; }
-/* In the header from 768 to 1024px: a 2px `orange` outline with `shadow-switch`, square halves split by a faint line */
-@container ect-header (max-width: 1024px) {
-  .ect-header .ect-lang { overflow: hidden; border: 2px solid var(--orange); box-shadow: var(--shadow-switch); }
-  .ect-header .ect-lang a { min-height: 44px; border-radius: 0; color: var(--orange); }
-  .ect-header .ect-lang a[aria-current="true"] { color: var(--white); }
-  .ect-header .ect-lang a:not([aria-current="true"]):hover { background: var(--orange-logo); color: var(--white); }
-  .ect-header .ect-lang a + a { border-left: 1px solid color-mix(in srgb, var(--orange) 35%, transparent); }
-}
+/* The header keeps this round switch at every width from 768px; the site has no compact form. */
 
 /* ---------- MobileMenu (phones, up to 767px) ---------- */
 .ect-menu-toggle { box-sizing: border-box; display: flex; align-items: center; justify-content: center; flex: none; width: 48px; height: 48px; padding: 0; border: 0; border-radius: 200px; background: var(--white); cursor: pointer; transition: background-color 200ms; }

@@ -14,7 +14,7 @@ From 1025px:
 
 From 768 to 1024px:
 - No pill: links are 14/14, 600, `slate`, 30px apart, with a solid 8 × 5 caret 10px after "Servicii". Hover, focus, the open submenu and the current page turn the label `orange-logo` and show a 2px `orange` underline at the bottom of the 44px row.
-- The language switch sits 6px after "Contact" in its compact form (2px `orange` outline, `shadow-switch`); the hairline goes and the button keeps the right edge with a 14px label. The submenu drops straight under "Servicii" in its bordered form.
+- The language switch sits 6px after "Contact" and keeps its round form (see `LanguageSwitch`); the hairline goes and the button keeps the right edge with a 14px label. The submenu drops straight under "Servicii" in its bordered form.
 
 Up to 767px:
 - The logo shrinks to 53 × 55 and the burger (`MobileMenu`) takes the right edge; the menu, the switch and the button move into the phone menu.
