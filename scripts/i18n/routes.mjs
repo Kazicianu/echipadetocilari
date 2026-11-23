@@ -115,6 +115,16 @@ export const routes = [
     service: { ro: 'Administrare campanii Facebook Ads și Instagram' },
   },
   {
+    // Company details required by Law 365/2002 art. 5 and Law 31/1990 art. 74 (decided 23.11.2026). Not a service: no Service schema.
+    ro: '/termeni-si-conditii/',
+    en: '/en/terms-and-conditions/',
+    roFile: 'termeni-si-conditii/index.html',
+    enFile: 'en/terms-and-conditions/index.html',
+    labelRo: 'Termeni și condiții',
+    labelEn: 'Terms and conditions',
+    preloadFonts: true,
+  },
+  {
     // Privacy and cookie policy (decided 22.10.2026). Not a service: no Service schema.
     ro: '/politica-de-confidentialitate/',
     en: '/en/privacy-policy/',

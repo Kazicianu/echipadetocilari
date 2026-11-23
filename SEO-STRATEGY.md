@@ -69,6 +69,10 @@ Schema Service include catalogul extras din pachetele vizibile, cu `minPrice` pe
 
 Pagina `/politica-de-confidentialitate/` și varianta generată `/en/privacy-policy/` au fost decise de utilizator la 22.10.2026, odată cu bannerul de cookie-uri. Nu este pagină de serviciu și nu țintește keywords: răspunde direct la întrebările despre date (cine le folosește, care, de ce, cât timp, cine le mai primește, drepturile și plângerea la ANSPDCP), cu rezumatul „Pe scurt” la început și formularul comun deasupra footerului. Datele structurate sunt doar Organization, WebSite și WebPage, cu `dateModified` egal cu data afișată; fără FAQPage și fără Service. Pagina intră în sitemap, hreflang și `llms.txt` ca celelalte perechi RO/EN, iar indexarea rămâne controlată exclusiv de `PUBLIC_INDEXABLE`. Footerul fiecărei pagini trimite la ea, alături de butonul „Setări cookie-uri”.
 
+## Termeni și condiții (23.11.2026)
+
+Pagina `/termeni-si-conditii/` și varianta generată `/en/terms-and-conditions/` există pentru că Legea 365/2002 art. 5 și Legea 31/1990 art. 74 cer ca datele firmei (denumire, formă juridică, sediu social, număr de Registrul Comerțului, CUI, capital social) să fie accesibile facil și permanent pe site, iar footerul nu le mai afișează. Nu este pagină de serviciu și nu țintește keywords: publică datele firmei, contactul, cui se adresează serviciile și mențiunea că firma nu este plătitoare de TVA. Datele structurate sunt doar Organization, WebSite și WebPage, fără FAQPage și fără Service. Pagina intră în sitemap, hreflang și `llms.txt` ca celelalte perechi RO/EN, iar indexarea rămâne controlată exclusiv de `PUBLIC_INDEXABLE`. Footerul fiecărei pagini trimite la ea, în coloana „Legal”.
+
 ## Conținut de suport propus
 
 Acestea sunt idei editoriale, nu keywords cu volume validate separat. Răspunde întâi întrebărilor esențiale în pagina serviciului. Creează articole separate numai când există informație suficientă, distinctă și utilă.

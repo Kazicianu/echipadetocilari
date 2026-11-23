@@ -26,6 +26,7 @@ const rows = [
   ['/agentie-google-ads/', 'agentie-google-ads', 'Agenție Google Ads pentru firme', 'Campanii Search, conversii măsurate și rapoarte', '05-google-ads', false],
   ['/agentie-facebook-ads/', 'agentie-facebook-ads', 'Agenție Facebook Ads', 'Reclame pe Facebook și Instagram pentru firme', '06-social-ads', false],
   ['/politica-de-confidentialitate/', 'politica-de-confidentialitate', 'Politica de confidențialitate și cookie-uri', 'Ce date folosim și cum le protejăm', '10-raport-explicat', true],
+  ['/termeni-si-conditii/', 'termeni-si-conditii', 'Termeni și condiții', 'Datele firmei, contact și prețuri', '10-raport-explicat', true],
   ['/en/', 'en-home', 'Digital marketing agency in Bucharest', 'Web design, SEO, Google Ads and Facebook Ads', '09-contact-salut', false],
   ['/en/about/', 'en-about', 'Nerds by nature. Teammates by choice.', 'Design, web development and SEO', '10-raport-explicat', false],
   ['/en/website-design/', 'en-website-design', 'Create a website for your business', 'Landing pages, business websites, online stores', '02-web-responsive', false],
@@ -35,6 +36,7 @@ const rows = [
   ['/en/portfolio/', 'en-portfolio', 'Portfolio', 'Business websites, online stores and web apps', '02-web-responsive', true],
   ['/en/google-ads-agency/', 'en-google-ads-agency', 'Google Ads agency for businesses', 'Search campaigns, conversion tracking and reports', '05-google-ads', false],
   ['/en/privacy-policy/', 'en-privacy-policy', 'Privacy and cookie policy', 'What data we use and how we protect it', '10-raport-explicat', true],
+  ['/en/terms-and-conditions/', 'en-terms-and-conditions', 'Terms and conditions', 'Company details, contact and prices', '10-raport-explicat', true],
 ];
 
 export const ogPages = rows.map(([page, slug, title, subtitle, illustration, mirror]) => ({

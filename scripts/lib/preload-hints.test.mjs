@@ -49,7 +49,7 @@ test('the local variable font is never preloaded (measured: slower LCP, no shift
 
 test('font preloads go only to the pages where the font swap shifted the layout', () => {
   const opted = routes.filter((route) => route.preloadFonts).map((route) => route.ro);
-  assert.deepEqual(opted, ['/administrare-site/', '/contact/', '/portofoliu/', '/politica-de-confidentialitate/']);
+  assert.deepEqual(opted, ['/administrare-site/', '/contact/', '/portofoliu/', '/termeni-si-conditii/', '/politica-de-confidentialitate/']);
 });
 
 test('LCP images are preloaded with high priority and an optional media condition', () => {

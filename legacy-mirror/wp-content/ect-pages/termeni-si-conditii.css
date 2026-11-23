@@ -1,0 +1,109 @@
+/* Terms and conditions (/termeni-si-conditii/ and the generated /en/terms-and-conditions/).
+   Same reading column and type as the privacy policy, with only the rules this page uses.
+   Mobile first. Rules stay inside the page content; the shared header, contact form and
+   footer keep their own CSS. */
+@font-face { font-family: "ECT Policy Montserrat"; src: url("fonts/Montserrat-Variable-latin-ro.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; }
+
+.ect-page.ect-page--termeni-si-conditii {
+  --orange: #fd8649;
+  --ink: #27272d;
+  --ink-muted: #55555e;
+  --white: #ffffff;
+  --surface-soft: #f9f9f9;
+  --line: #e9e9e9;
+  --shadow-card: 0 0 20px 0 rgba(0, 0, 0, 0.05);
+  --radius-card: 15px;
+  --radius-leaf-sm: 40px;
+  --radius-button: 30px;
+  --content-max: 1150px;
+  --prose-max: 46rem;
+  --target-min: 44px;
+  --font-sans: "ECT Policy Montserrat", Montserrat, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  display: block;
+  min-width: 0;
+  background: var(--white);
+  color: var(--ink);
+  font: 400 16px/1.6 var(--font-sans);
+}
+
+.ect-page .ect-policy,
+.ect-page .ect-policy *,
+.ect-page .ect-policy *::before,
+.ect-page .ect-policy *::after { box-sizing: border-box; }
+.ect-page .ect-policy [id] { scroll-margin-top: 24px; }
+
+/* One centred reading column. */
+.ect-page .ect-policy {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 40px 20px 72px;
+}
+.ect-page .ect-policy > * { max-width: var(--prose-max); margin-inline: auto; }
+@media (min-width: 768px) {
+  .ect-page .ect-policy { padding: 64px 32px 96px; }
+}
+@media (min-width: 1100px) {
+  .ect-page .ect-policy { padding: 72px 20px 112px; }
+}
+
+/* Type. */
+.ect-page .ect-policy :is(h1, h2, h3, h4) {
+  font-family: inherit;
+  font-style: normal;
+  letter-spacing: normal;
+  color: var(--ink);
+  text-transform: none;
+}
+.ect-page .ect-policy h1 {
+  margin: 0 0 10px;
+  font-size: clamp(22px, 6.6vw, 45px);
+  line-height: 1.2;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--orange);
+  overflow-wrap: break-word;
+  text-wrap: balance;
+}
+.ect-page .ect-policy .ect-policy__updated { margin: 0; font-size: 14px; line-height: 1.5; color: var(--ink-muted); }
+.ect-page .ect-policy h2 {
+  margin: 0 0 16px;
+  font-size: clamp(24px, 6vw, 30px);
+  line-height: 1.2;
+  font-weight: 500;
+  text-wrap: balance;
+}
+.ect-page .ect-policy p { margin: 0 0 14px; }
+.ect-page .ect-policy strong { font-weight: 600; }
+.ect-page .ect-policy ul { margin: 0 0 16px; padding-left: 1.25em; }
+.ect-page .ect-policy li + li { margin-top: 8px; }
+.ect-page .ect-policy li::marker { color: var(--orange); }
+.ect-page .ect-policy a {
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--orange);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  overflow-wrap: anywhere;
+}
+.ect-page .ect-policy a:hover { color: var(--ink); text-decoration-thickness: 3px; }
+.ect-page .ect-policy :is(a, button):focus-visible { outline: 3px solid var(--ink); outline-offset: 5px; }
+
+/* ── Sections ── */
+.ect-page .ect-policy > section:not(.ect-policy__summary) {
+  margin-top: 40px;
+  padding-top: 40px;
+  border-top: 1px solid var(--line);
+}
+.ect-page .ect-policy > section > :last-child { margin-bottom: 0; }
+
+/* Company and authority details. */
+.ect-page .ect-policy .ect-policy__facts {
+  margin: 0 0 16px;
+  padding: 16px 20px 20px 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card) var(--radius-card) var(--radius-card) var(--radius-leaf-sm);
+  list-style: none;
+}
+.ect-page .ect-policy .ect-policy__facts li + li { margin-top: 6px; }

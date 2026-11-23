@@ -62,6 +62,11 @@ export const roPageMeta = {
     description:
       'Ce date folosim din formularul de contact, cât timp le păstrăm, ce cookie-uri setează Google Analytics după acordul tău și cum îți exerciți drepturile GDPR.',
   },
+  '/termeni-si-conditii/': {
+    title: 'Termeni și condiții | Echipa de Tocilari',
+    description:
+      'Datele de identificare ale ECHIPA DE TOCILARI SRL (sediu, CUI, Registrul Comerțului, capital social), cum ne contactezi și cum citești prețurile de pe site.',
+  },
 };
 
 export const roOrg = {

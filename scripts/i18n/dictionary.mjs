@@ -2,9 +2,10 @@ import { contactDictionary } from './contact-page.mjs';
 import { googleAdsDictionary } from './google-ads.mjs';
 import { portfolioDictionary } from './portfolio.mjs';
 import { privacyPolicyDictionary } from './privacy-policy.mjs';
+import { termsDictionary } from './terms.mjs';
 import { seoServicesDictionary } from './seo-services.mjs';
 import { websiteDesignDictionary } from './website-design.mjs';
-export { contactDictionary, googleAdsDictionary, portfolioDictionary, privacyPolicyDictionary, seoServicesDictionary, websiteDesignDictionary };
+export { contactDictionary, googleAdsDictionary, portfolioDictionary, privacyPolicyDictionary, seoServicesDictionary, termsDictionary, websiteDesignDictionary };
 
 /**
  * Page-only entries, keyed by the RO route. generate-en.mjs merges them with the
@@ -17,6 +18,7 @@ export const pageDictionaries = {
   '/portofoliu/': portfolioDictionary,
   '/politica-de-confidentialitate/': privacyPolicyDictionary,
   '/servicii-seo/': seoServicesDictionary,
+  '/termeni-si-conditii/': termsDictionary,
 };
 
 /** Source files of the page dictionaries, for the sitemap <lastmod> of the EN pages. */
@@ -27,6 +29,7 @@ export const pageDictionaryFiles = {
   '/portofoliu/': 'scripts/i18n/portfolio.mjs',
   '/politica-de-confidentialitate/': 'scripts/i18n/privacy-policy.mjs',
   '/servicii-seo/': 'scripts/i18n/seo-services.mjs',
+  '/termeni-si-conditii/': 'scripts/i18n/terms.mjs',
 };
 
 /**
@@ -1570,6 +1573,11 @@ export const enPageMeta = {
     title: 'Privacy and Cookie Policy | Echipa de Tocilari',
     description:
       'What we do with contact form details, how long we keep them, which cookies Google Analytics sets once you consent, and how to exercise your GDPR rights.',
+  },
+  '/en/terms-and-conditions/': {
+    title: 'Terms and Conditions | Echipa de Tocilari',
+    description:
+      'Company details of ECHIPA DE TOCILARI SRL (registered office, tax ID, trade register number, share capital), how to reach us and how to read our prices.',
   },
 };
 

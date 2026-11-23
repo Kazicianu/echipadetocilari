@@ -89,7 +89,7 @@ test('an English page from the table gets its own image on the build site', () =
 });
 
 test('every table entry has a unique slug, a 1200x630 JPEG on disk and no forbidden characters', () => {
-  assert.equal(ogPages.length, 21);
+  assert.equal(ogPages.length, 23);
   assert.equal(new Set(ogPages.map((page) => page.slug)).size, ogPages.length);
   assert.equal(new Set(ogPages.map((page) => page.page)).size, ogPages.length);
   const forbidden = /[\u2014\u2196-\u2199\u015e\u015f\u0162\u0163]|\d+\s*(?:lei|RON|EUR|\u20ac)/i;
