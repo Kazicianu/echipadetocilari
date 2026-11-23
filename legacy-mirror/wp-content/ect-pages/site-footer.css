@@ -391,8 +391,26 @@
 
 /* 640-919: brand on top, three columns in a row, legal details in the open sky on the left. */
 @media (min-width: 640px) {
+  /* Zoomed out a little: the artwork takes 88% of the width on the right and its left edge
+     dissolves into the sky, so the scene sits smaller in more open sky. */
   .ect-footer {
     --ect-footer-fade: 18%;
+    --ect-footer-zoom: 0.88;
+    --ect-footer-art: calc(56.25cqw * var(--ect-footer-zoom));
+  }
+
+  .ect-footer::before {
+    aspect-ratio: 16 / 7.92;
+  }
+
+  .ect-footer__art img {
+    align-self: flex-end;
+    width: calc(100% * var(--ect-footer-zoom));
+    object-position: 50% 100%;
+    mask-image:
+      linear-gradient(to right, transparent, black 16%),
+      linear-gradient(to bottom, transparent, black clamp(0px, 100cqh - var(--ect-footer-art), var(--ect-footer-fade)));
+    mask-composite: intersect;
   }
 
   /* The copy ends at 36% of the artwork's height, clear of the faded branches. */
