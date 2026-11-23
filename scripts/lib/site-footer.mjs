@@ -1,6 +1,6 @@
 /**
  * The shared site footer (RO, EN and 404): contact details, links
- * and the coffee-cup signature, set on the sky of the Bucharest illustration (its flat sky is the footer background). Runs in the second build
+ * and the coffee-cup signature, set on the sky of the illustrated office balcony. Runs in the second build
  * loop, after the EN pages exist, so the footer never passes through the
  * translation dictionary.
  *
@@ -22,7 +22,7 @@ export const FOOTER_MARK = 'data-ect-footer="2"';
 const FOOTER = /<footer\b[^>]*\belementor-location-footer\b[^>]*>[\s\S]*?<\/footer>/i;
 
 const LOGO_BASE = '/wp-content/uploads/2024/02/Logo_Echipa_de_Tocilari-e1708028624694';
-const ART_BASE = '/wp-content/ect-pages/footer/bucuresti-cer';
+const ART_BASE = '/wp-content/ect-pages/footer/balconul-tocilarilor';
 const CUP = '/wp-content/ect-pages/footer/pahar-cafea.webp';
 const COMPANY_LEGAL = 'ECHIPA DE TOCILARI SRL · CUI 47591744 · J40/2298/2023';
 const COMPANY_PATHS = ['/despre-noi/', '/portofoliu/', '/contact/'];
@@ -114,7 +114,7 @@ export function footerMarkup(language, openTag, year = new Date().getFullYear())
  <div class="ect-footer__inner">
   <div class="ect-footer__top">
    <div class="ect-footer__brand">
-    <a class="ect-footer__logo" href="${escapeAttr(copy.home)}"><img src="${logo}.webp" srcset="${logo}-288x300.webp 288w, ${logo}-768x799.webp 768w, ${logo}.webp 836w" sizes="(max-width: 767px) 140px, 115px" width="836" height="870" alt="${escapeAttr(copy.logoAlt)}" loading="lazy" decoding="async"></a>
+    <a class="ect-footer__logo" href="${escapeAttr(copy.home)}"><img src="${logo}.webp" srcset="${logo}-288x300.webp 288w, ${logo}-768x799.webp 768w, ${logo}.webp 836w" sizes="(max-width: 919px) 80px, 100px" width="836" height="870" alt="${escapeAttr(copy.logoAlt)}" loading="lazy" decoding="async"></a>
     <p class="ect-footer__tagline">${escapeHtml(copy.tagline)}</p>
     <ul class="ect-footer__social">
      <li><a href="${FACEBOOK_URL}" aria-label="Facebook">${svg(SOCIAL_ICONS.facebook)}</a></li>
@@ -123,16 +123,19 @@ export function footerMarkup(language, openTag, year = new Date().getFullYear())
    </div>
    <nav class="ect-footer__col ect-footer__col--services" aria-label="${escapeAttr(copy.services)}"><p class="ect-footer__label">${escapeHtml(copy.services)}</p>${list(serviceRoutes, language)}</nav>
    <nav class="ect-footer__col ect-footer__col--company" aria-label="${escapeAttr(copy.company)}"><p class="ect-footer__label">${escapeHtml(copy.company)}</p>${list(companyRoutes, language)}</nav>
-   <div class="ect-footer__col ect-footer__col--contact"><p class="ect-footer__label">${escapeHtml(copy.contact)}</p><address class="ect-footer__contact"><a href="tel:${escapeAttr(tel)}">${escapeHtml(displayPhone(tel))}</a><a href="mailto:contact@echipadetocilari.ro">contact@echipadetocilari.ro</a><span>${escapeHtml(address)}</span></address></div>
+   <div class="ect-footer__col ect-footer__col--contact">
+    <p class="ect-footer__label">${escapeHtml(copy.contact)}</p>
+    <address class="ect-footer__contact"><a href="tel:${escapeAttr(tel)}">${escapeHtml(displayPhone(tel))}</a><a href="mailto:contact@echipadetocilari.ro">contact@echipadetocilari.ro</a><span>${escapeHtml(address)}</span></address>
+    <p class="ect-footer__status"><span class="ect-footer__dot" aria-hidden="true"></span>${escapeHtml(`${copy.hours}, `)}<span class="ect-footer__hours">${escapeHtml(`${opens}-${closes}`)}</span></p>
+   </div>
   </div>
-  <p class="ect-footer__status"><span class="ect-footer__dot" aria-hidden="true"></span>${escapeHtml(`${copy.hours}, ${opens}-${closes}`)}</p>
   <div class="ect-footer__bottom">
    <p class="ect-footer__company">© ${year} ${escapeHtml(COMPANY_LEGAL)}</p>
    <ul class="ect-footer__legal"><li><a href="${escapeAttr(PRIVACY_PATHS[language])}" data-ect-footer-privacy>${escapeHtml(consent.footerPolicy)}</a></li><li><button type="button" class="ect-consent-open" data-ect-consent-open hidden>${escapeHtml(consent.footerSettings)}</button></li></ul>
   </div>
   <p class="ect-footer__madewith">${escapeHtml(copy.madeWith)} <img class="ect-footer__cup" src="${CUP}" width="117" height="128" alt="${escapeAttr(copy.cupAlt)}" loading="lazy" decoding="async"> ${escapeHtml(copy.madeBy)} <a class="ect-footer__team" href="${escapeAttr(copy.home)}">Echipa de Tocilari</a></p>
  </div>
- <div class="ect-footer__art" aria-hidden="true"><img src="${ART_BASE}-1152.webp" srcset="${ART_BASE}-768.webp 768w, ${ART_BASE}-1152.webp 1152w, ${ART_BASE}-1536.webp 1536w" sizes="(max-width: 767px) 624px, 100vw" width="1536" height="1024" alt="" loading="lazy" decoding="async"></div>
+ <div class="ect-footer__art" aria-hidden="true"><img src="${ART_BASE}-1152.webp" srcset="${ART_BASE}-768.webp 768w, ${ART_BASE}-1152.webp 1152w, ${ART_BASE}-1536.webp 1536w, ${ART_BASE}-1672.webp 1672w" sizes="(max-width: 639px) 540px, 100vw" width="1536" height="864" alt="" loading="lazy" decoding="async"></div>
 ${backToTop(BACK_TO_TOP[language])}
 </footer>`;
 }

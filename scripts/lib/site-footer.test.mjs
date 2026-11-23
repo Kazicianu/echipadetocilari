@@ -88,28 +88,29 @@ test('address, phone and hours match the organisation data; the English footer h
     assert.ok(footer.includes(`<a href="tel:${org.telephone}">`), `${label}: phone`);
     const { streetAddress, addressLocality, postalCode } = org.address;
     assert.ok(footer.includes(`<span>${streetAddress}, ${addressLocality}, ${postalCode}, ${language === 'en' ? 'Romania' : 'România'}</span>`), `${label}: address`);
-    assert.ok(footer.includes(`${org.openingHours.opens}-${org.openingHours.closes}</p>`), `${label}: hours`);
+    assert.ok(footer.includes(`<span class="ect-footer__hours">${org.openingHours.opens}-${org.openingHours.closes}</span></p>`), `${label}: hours`);
     assert.ok(footer.includes('contact@echipadetocilari.ro') && footer.includes('CUI 47591744 · J40/2298/2023'), `${label}: legal details`);
     assert.ok(footer.includes(`© ${new Date().getFullYear()} ECHIPA DE TOCILARI SRL`), `${label}: build year`);
     if (language === 'en') {
-      assert.ok(footer.includes('Hours: Monday-Sunday, 09:00-20:00') && footer.includes('Bucharest, 021998, Romania'), label);
+      assert.ok(footer.includes('Hours: Monday-Sunday, <span class="ect-footer__hours">09:00-20:00') && footer.includes('Bucharest, 021998, Romania'), label);
       assert.doesNotMatch(footer.replace(/<svg\b[\s\S]*?<\/svg>/g, ''), /[ăâîșțşţĂÂÎȘȚŞŢ]/, `${label}: no Romanian text`);
     } else {
-      assert.ok(footer.includes('Program: luni-duminică, 09:00-20:00') && footer.includes('București, 021998, România'), label);
+      assert.ok(footer.includes('Program: luni-duminică, <span class="ect-footer__hours">09:00-20:00') && footer.includes('București, 021998, România'), label);
     }
   }
 });
 
-test('the painting is a decorative lazy image with its real size, and the stylesheet loads once', () => {
+test('the balcony illustration is a decorative lazy image with its real size, and the stylesheet loads once', () => {
   for (const { language, url, html } of sourcePages()) {
     const label = `${url} (${language})`;
     const result = renderSiteFooter(html);
     const art = footerOf(result).match(/<div class="ect-footer__art" aria-hidden="true">(<img [^>]*>)<\/div>/)[1];
     assert.match(art, /\salt=""/, label);
-    assert.match(art, /\swidth="1536" height="1024"/, label);
+    assert.match(art, /\swidth="1536" height="864"/, label);
     assert.match(art, /\sloading="lazy"/, label);
     assert.match(art, /\sdecoding="async"/, label);
-    assert.match(art, /bucuresti-cer-768\.webp 768w, [^"]*-1152\.webp 1152w, [^"]*-1536\.webp 1536w/, label);
+    assert.match(art, /\ssrcset="[^"]*balconul-tocilarilor-768\.webp 768w, [^"]*-1152\.webp 1152w, [^"]*-1536\.webp 1536w, [^"]*-1672\.webp 1672w"/, label);
+    assert.match(art, /\ssizes="\(max-width: 639px\) 540px, 100vw"/, label);
     assert.equal(count(result, new RegExp(`<link rel="stylesheet" href="${FOOTER_STYLESHEET}">`, 'g')), 1, label);
     const head = result.slice(0, result.search(/<\/head>/i));
     assert.ok(head.includes(FOOTER_STYLESHEET), `${label}: stylesheet is in <head>`);
@@ -121,8 +122,8 @@ test('the painting is a decorative lazy image with its real size, and the styles
 });
 
 test('the illustration files are WebP with the sizes the srcset promises', () => {
-  for (const [w, h] of [[768, 512], [1152, 768], [1536, 1024]]) {
-    const file = `legacy-mirror/wp-content/ect-pages/footer/bucuresti-cer-${w}.webp`;
+  for (const [w, h] of [[768, 432], [1152, 648], [1536, 864], [1672, 941]]) {
+    const file = `legacy-mirror/wp-content/ect-pages/footer/balconul-tocilarilor-${w}.webp`;
     const buf = readFileSync(path.join(root, file));
     assert.equal(buf.toString('latin1', 0, 4), 'RIFF', file);
     assert.equal(buf.toString('latin1', 8, 12), 'WEBP', file);
