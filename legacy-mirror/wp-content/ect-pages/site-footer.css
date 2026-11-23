@@ -121,6 +121,11 @@
   display: block;
 }
 
+/* Phones: the logo is centred above the columns. */
+@media (max-width: 639px) {
+  .ect-footer__brand { text-align: center; }
+}
+
 .ect-footer .ect-footer__logo {
   display: inline-block;
   flex: none;
