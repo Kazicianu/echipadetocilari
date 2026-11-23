@@ -38,13 +38,14 @@ function field(content, tag, className) {
   return found.text;
 }
 
-function monthlyEuro(text) {
-  const match = text.match(/^(\d{1,3}(?:\.\d{3})+|\d+)\s*€\s*\/\s*lună$/);
+/** @returns {{ amount: number, from: boolean }} the amount and whether the card prefixes it with "de la". */
+function monthlyEuro(text, from) {
+  const match = text.replace(/^de la\s+/i, '').match(/^(\d{1,3}(?:\.\d{3})+|\d+)\s*€\s*\/\s*lună$/);
   const amount = match && Number(match[1].replace(/\./g, ''));
   if (!amount || !Number.isFinite(amount)) {
     throw new Error(`SEO services pricing must be a monthly EUR price: ${text}`);
   }
-  return amount;
+  return { amount, from };
 }
 
 /** Monthly plans exactly as the four visible price cards show them. */
@@ -61,7 +62,11 @@ export function seoServicesOfferCatalog({ html, site, url, serviceName }) {
     const name = field(content, 'h3', 'seo-price__name');
     if (names.has(name)) throw new Error(`SEO services pricing has a duplicate plan: ${name}`);
     names.add(name);
-    const price = monthlyEuro(field(content, 'p', 'seo-price__amt'));
+    const amt = find(content, 'p', 'seo-price__amt');
+    const { amount, from } = monthlyEuro(
+      field(content, 'p', 'seo-price__amt'),
+      [...(amt?.raw.matchAll(/<span\b([^>]*)>/gi) ?? [])].some(([, attributes]) => hasClass(attributes, 'seo-price__from')),
+    );
     const audience = find(content, 'p', 'seo-price__for');
     const audienceText = audience && !/seo-todo/.test(audience.raw) ? audience.text : '';
     const items = [...(find(content, 'ul', 'seo-price__list')?.raw.matchAll(/<li\b([^>]*)>([\s\S]*?)<\/li>/gi) ?? [])]
@@ -75,7 +80,7 @@ export function seoServicesOfferCatalog({ html, site, url, serviceName }) {
       url: catalogUrl,
       priceSpecification: {
         '@type': 'UnitPriceSpecification',
-        price,
+        ...(from ? { minPrice: amount } : { price: amount }),
         priceCurrency: 'EUR',
         unitCode: 'MON',
         unitText: 'lună',
