@@ -1,6 +1,6 @@
 # Footer
 
-The shared footer is a full-width band with the extended office-balcony illustration (`1858×941`) spanning 100% of its surface edge to edge: the original 16:9 scene occupies the right 90% (two teammates on an office balcony above a tree-lined city), while seamlessly outpainted cityscape continues across the left 10% so there is zero left-edge fade. The copy sits on the open white sky in the Metricra layout: the logo top left, then four short columns packed to the left, with the two social circles in the Contact column.
+The shared footer uses a 2:1 illustration of two teammates on a balcony over a modern city. On desktop the image spans the footer edge to edge. The logo and four link groups sit on the pale sky to the left of the tree canopy.
 
 ## Content (same DOM order at every width)
 
@@ -23,14 +23,15 @@ There are no headings in the footer: labels are `p.ect-footer__label` and the st
 
 ## Layout
 
-- The footer background is `#fefefe`, the decoded colour of the illustration's flat sky, so the sky added above the image when the copy is taller than `1858:941` continues it without a seam. A conditional mask fades the top of the image only by that overflow (at most 14% on tablet, 18% on phones; 0px from 1200px), so the branches in the top right corner never show a cut edge.
-- Free sky in the artwork (% of its width and height): `x 0-44%` down to `65%`, `46-52%` to `62%`, `54-57%` to `58%`, `59-64%` to `45%`, `66-80%` from `39%` to `28%` (the eaves), `x 82%` and beyond only below the branches (from the top edge to about `14%`). The QA script checks every text line, icon and the pill on pixels at 11 widths, RO and EN.
-- Under 640px: the logo alone on the first row (80px), Services | Company in two columns, then Contact (with the circles) and Legal across the width, the signature, and the image cropped on the teammates (`object-position: 88% 100%`). Labels 17px / 700, links 15px, 44px rows.
+- The footer background uses `#f8f2eb`, sampled from the pale sky. A conditional mask blends the artwork into that background when the copy extends above it. From 640px, a subtle gradient softens the clouds behind the links and signature.
+- The top-right canopy starts at roughly two-thirds of the image width. The QA script checks the background beneath every text line, icon and signature pill in both languages.
+- Under 640px, the logo sits on the first row, with Services and Company side by side. Contact, Legal and the signature follow. The illustration is cropped around both teammates (`object-position: 88% 100%`). Labels 17px / 700, links 15px, 44px rows.
 - 640-919px: the logo alone on top, Services on the left and Company, Contact and Legal stacked beside it, the signature below; the copy ends above the scene.
-- 920-1199px: the logo alone on top, the four columns in one row, the signature below. The sky is extended by 100px above the image in both languages, so Legal clears the eaves even with the shorter EN service list.
-- 1200px and wider (Metricra): one compact row aligned at the top, `grid-template-columns: 84px repeat(4, max-content)` packed to the left (`justify-content: start`, `column-gap: clamp(48px, 4.2vw, 80px)`): the logo, then Services, Company, Contact and Legal, above the eaves and left of the branches. The signature sits under the row at the left edge (`margin-top: 30px`). The footer is exactly as tall as the illustration.
+- At 920–1199px the logo sits above three columns, with Legal below Company. At least 170px of sky above the image keeps the signature above the skyline.
+- From 1200px the logo, Services, Company, Contact and Legal share one row. The column gaps grow with the viewport so the row stays left of the canopy. The signature sits below the row with a 30px top margin.
 - Labels are `#27272d`, 600 from 920px (15px, 16px from 1440px). Links are `#3d4459`, 400, 14px from 920px and 15px from 1440px, turning `#fd8649` on hover with a 3px `#27272d` focus outline. Rows are 28px with a fine pointer from 920px and 44px on touch screens (including the signature pill).
-- The WebP comes in `768×389`, `1152×583`, `1536×778` and `1858×941` (native, so wide screens never upscale) under `wp-content/ect-pages/footer/balconul-tocilarilor-*.webp`; phones request the 580px candidate because the image is cropped wider than the screen.
+- Wide touch screens reserve extra sky below the taller link rows.
+- The WebP sizes are `768×384`, `1152×576`, `1536×768` and `2048×1024` under `wp-content/ect-pages/footer/balcon-urban-v8-*.webp`. Below 640px the source size is 580px to account for the crop.
 - The footer runs edge to edge with no gutter, border or rounded corners; the bottom wave of the contact form meets its near-white sky.
 - The signature pill is `#f1f1f3` without a border on the sky, turning `#fd8649` with `#ffffff` text on hover/focus.
 

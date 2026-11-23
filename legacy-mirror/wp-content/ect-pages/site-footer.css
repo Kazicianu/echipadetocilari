@@ -6,22 +6,11 @@
   font-display: swap;
 }
 
-/*
- * A full-width band with the extended 1858x941 office-balcony illustration spanning 100% of the footer
- * (the original 16:9 scene occupies the right 90%, with seamlessly generated cityscape continuing across
- * the left 10% so there is zero left-edge fade).
- *
- * Free sky in balconul-tocilarilor-*.webp (1858x941, % of width / height):
- * - x 0-44% -> 65%, 46-52% -> 62%, 54-57% -> 58%, 59-64% -> 45%, 66-80% -> 39% to 28% (eaves),
- *   x >= 82% -> branches from the top edge down to ~14%.
- * From 1200px the Metricra row (brand, Services, Company, Contact, Legal) is packed to the left, ends
- * at x <= 78% and stays above the eaves; the signature stays at x <= 45%. Every placement is checked on pixels by the
- * footer QA script (copy only on sky, no horizontal scroll).
- */
+/* The 2:1 city illustration runs edge to edge, with open sky to the left of the tree canopy. */
 .ect-footer {
-  /* Native 1858x941 ratio -> height is 50.646% of width (full bleed); min 290px on phones. */
-  --ect-footer-art: max(50.646cqw, 290px);
+  --ect-footer-art: max(50cqw, 290px);
   --ect-footer-fade: 18%;
+  --ect-footer-sky: #f8f2eb;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   position: relative;
@@ -29,7 +18,7 @@
   padding: 0;
   border: 0;
   border-radius: 0;
-  background: #fefefe; /* matches the decoded sky of balconul-tocilarilor-*.webp */
+  background: var(--ect-footer-sky);
   overflow: hidden;
   overflow: clip;
   color: #27272d;
@@ -44,7 +33,7 @@
 .ect-footer::before {
   content: "";
   grid-area: 1 / 1;
-  aspect-ratio: 1858 / 941;
+  aspect-ratio: 2 / 1;
   pointer-events: none;
 }
 
@@ -86,12 +75,12 @@
   position: fixed;
 }
 
-/* Phones: the copy ends where the artwork begins; its top band blends softly into the white sky. */
+/* Phones: the copy ends where the artwork begins; its top band blends into the footer background. */
 .ect-footer__inner {
   grid-area: 1 / 1;
   width: min(100% - 40px, 1200px);
   margin-inline: auto;
-  padding-block: clamp(24px, 3.5vw, 48px) max(50.646%, 298px);
+  padding-block: clamp(24px, 3.5vw, 48px) max(50%, 298px);
   position: relative;
   z-index: 1;
 }
@@ -315,7 +304,7 @@
   border-radius: 0;
   box-shadow: none;
   mask-image: linear-gradient(to bottom, transparent, black var(--ect-footer-fade));
-  /* Blend only when stacked copy extends the white sky above the artwork (0px on desktop). */
+  /* Blend when stacked copy extends the sky above the artwork. */
   mask-image: linear-gradient(to bottom, transparent, black clamp(0px, 100cqh - var(--ect-footer-art), var(--ect-footer-fade)));
 }
 
@@ -348,11 +337,21 @@
 @media (min-width: 640px) {
   .ect-footer {
     --ect-footer-fade: 14%;
-    --ect-footer-art: 50.646cqw;
+    --ect-footer-art: 50cqw;
   }
 
   .ect-footer__art img {
     object-position: 50% 100%;
+  }
+
+  /* Soften the clouds behind the copy while leaving the canopy and city clear. */
+  .ect-footer__art::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0;
+    height: var(--ect-footer-art);
+    background: linear-gradient(to right, color-mix(in srgb, var(--ect-footer-sky) 48%, transparent) 32%, transparent 56%);
+    mask-image: linear-gradient(black 45%, transparent 56%);
   }
 
   /* Keep the copy clear of the city skyline, plant and teammates below. */
@@ -373,14 +372,10 @@
   .ect-footer__col--services { align-self: start; }
 }
 
-/*
- * 920-1199: the same two-row idea, wider: brand on top, then the four columns in one row,
- * all inside the left part of the footer, in % so the copy tracks the scene.
- */
+/* 920-1199: the Legal group sits under Company so the row clears the canopy. */
 @media (min-width: 920px) {
-  /* Extend the sky by the same 100px in RO and EN so Legal clears the eaves even with fewer EN services. */
   .ect-footer::before {
-    min-height: calc(50.646vw + 100px);
+    min-height: calc(50vw + 170px);
   }
 
   .ect-footer__inner {
@@ -391,11 +386,12 @@
   }
 
   .ect-footer__top {
-    grid-template-columns: repeat(4, max-content);
+    grid-template-columns: repeat(3, max-content);
     grid-template-areas:
-      "brand brand brand brand"
-      "services company contact legal";
-    gap: 20px 40px;
+      "brand brand brand"
+      "services company contact"
+      "services legal contact";
+    gap: 20px;
   }
 
   .ect-footer .ect-footer__col a,
@@ -416,8 +412,7 @@
 /*
  * 1200+: Metricra. One compact row aligned at the top: an 84px brand column with the logo, then
  * Services, Company, Contact (with the social circles) and Legal, packed to the left with a fluid
- * gap, above the eaves and left of the branches. The signature follows under the row on the left.
- * The footer is exactly as tall as the illustration.
+ * gap, left of the branches. The signature follows under the row on the left.
  */
 @media (min-width: 1200px) {
   .ect-footer {
@@ -438,7 +433,7 @@
     grid-template-columns: 84px repeat(4, max-content);
     grid-template-areas: "brand services company contact legal";
     justify-content: start;
-    column-gap: clamp(48px, 4.2vw, 80px);
+    column-gap: clamp(12px, 11vw - 120px, 80px);
     row-gap: 0;
   }
 
@@ -480,5 +475,12 @@
   .ect-footer .ect-footer__madewith .ect-footer__team {
     min-height: 0;
     padding: 0.25em 0.65em;
+  }
+}
+
+@media (min-width: 920px) and (pointer: coarse) {
+  /* The taller touch rows need more sky below the signature. */
+  .ect-footer__inner {
+    padding-bottom: 26%;
   }
 }

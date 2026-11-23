@@ -28,7 +28,7 @@ export const TERMS_PATHS = { ro: '/termeni-si-conditii/', en: '/en/terms-and-con
 const FOOTER = /<footer\b[^>]*\belementor-location-footer\b[^>]*>[\s\S]*?<\/footer>/i;
 
 const LOGO_BASE = '/wp-content/uploads/2024/02/Logo_Echipa_de_Tocilari-e1708028624694';
-const ART_BASE = '/wp-content/ect-pages/footer/balconul-tocilarilor';
+const ART_BASE = '/wp-content/ect-pages/footer/balcon-urban-v8';
 const CUP = '/wp-content/ect-pages/footer/pahar-cafea.webp';
 const EMAIL = 'contact@echipadetocilari.ro';
 const COMPANY_PATHS = ['/despre-noi/', '/portofoliu/'];
@@ -133,7 +133,7 @@ export function footerMarkup(language, openTag) {
   </div>
   <p class="ect-footer__madewith">${escapeHtml(copy.madeWith)} <img class="ect-footer__cup" src="${CUP}" width="117" height="128" alt="${escapeAttr(copy.cupAlt)}" loading="lazy" decoding="async"> ${escapeHtml(copy.madeBy)} <a class="ect-footer__team" href="${escapeAttr(copy.home)}">Echipa de Tocilari</a></p>
  </div>
- <div class="ect-footer__art" aria-hidden="true"><img src="${ART_BASE}-1152.webp" srcset="${ART_BASE}-768.webp 768w, ${ART_BASE}-1152.webp 1152w, ${ART_BASE}-1536.webp 1536w, ${ART_BASE}-1858.webp 1858w" sizes="(max-width: 639px) 580px, 100vw" width="1858" height="941" alt="" loading="lazy" decoding="async"></div>
+ <div class="ect-footer__art" aria-hidden="true"><img src="${ART_BASE}-1152.webp" srcset="${ART_BASE}-768.webp 768w, ${ART_BASE}-1152.webp 1152w, ${ART_BASE}-1536.webp 1536w, ${ART_BASE}-2048.webp 2048w" sizes="(max-width: 639px) 580px, 100vw" width="2048" height="1024" alt="" loading="lazy" decoding="async"></div>
 ${backToTop(BACK_TO_TOP[language])}
 </footer>`;
 }

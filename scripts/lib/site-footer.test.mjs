@@ -155,7 +155,7 @@ test('the 1200px grid packs the brand and four columns to the left with the sign
   const wide = css.slice(css.indexOf('@media (min-width: 1200px)'));
   assert.match(wide, /grid-template-columns: 84px repeat\(4, max-content\);/);
   assert.match(wide, /justify-content: start;/);
-  assert.match(wide, /column-gap: clamp\(48px, 4\.2vw, 80px\);/);
+  assert.match(wide, /column-gap: clamp\(12px, 11vw - 120px, 80px\);/);
   assert.match(wide, /\.ect-footer__madewith \{\s*margin-top: 30px;/);
   assert.doesNotMatch(css, /width: 79%|space-between/, 'no stretched row');
   for (const { language, url, html } of sourcePages().filter((page) => page.url === '/' || page.url === '/en/')) {
@@ -172,10 +172,10 @@ test('the balcony illustration is a decorative lazy image with its real size, an
     const result = renderSiteFooter(html);
     const art = footerOf(result).match(/<div class="ect-footer__art" aria-hidden="true">(<img [^>]*>)<\/div>/)[1];
     assert.match(art, /\salt=""/, label);
-    assert.match(art, /\swidth="1858" height="941"/, label);
+    assert.match(art, /\swidth="2048" height="1024"/, label);
     assert.match(art, /\sloading="lazy"/, label);
     assert.match(art, /\sdecoding="async"/, label);
-    assert.match(art, /\ssrcset="[^"]*balconul-tocilarilor-768\.webp 768w, [^"]*-1152\.webp 1152w, [^"]*-1536\.webp 1536w, [^"]*-1858\.webp 1858w"/, label);
+    assert.match(art, /\ssrcset="[^"]*balcon-urban-v8-768\.webp 768w, [^"]*-1152\.webp 1152w, [^"]*-1536\.webp 1536w, [^"]*-2048\.webp 2048w"/, label);
     assert.match(art, /\ssizes="\(max-width: 639px\) 580px, 100vw"/, label);
     assert.equal(count(result, new RegExp(`<link rel="stylesheet" href="${FOOTER_STYLESHEET}">`, 'g')), 1, label);
     const head = result.slice(0, result.search(/<\/head>/i));
@@ -188,8 +188,8 @@ test('the balcony illustration is a decorative lazy image with its real size, an
 });
 
 test('the illustration files are WebP with the sizes the srcset promises', () => {
-  for (const [w, h] of [[768, 389], [1152, 583], [1536, 778], [1858, 941]]) {
-    const file = `legacy-mirror/wp-content/ect-pages/footer/balconul-tocilarilor-${w}.webp`;
+  for (const w of [768, 1152, 1536, 2048]) {
+    const file = `legacy-mirror/wp-content/ect-pages/footer/balcon-urban-v8-${w}.webp`;
     const buf = readFileSync(path.join(root, file));
     assert.equal(buf.toString('latin1', 0, 4), 'RIFF', file);
     assert.equal(buf.toString('latin1', 8, 12), 'WEBP', file);
@@ -203,7 +203,7 @@ test('the illustration files are WebP with the sizes the srcset promises', () =>
     } else {
       size = [buf.readUInt16LE(26) & 0x3fff, buf.readUInt16LE(28) & 0x3fff];
     }
-    assert.deepEqual(size, [w, h], file);
+    assert.deepEqual(size, [w, w / 2], file);
   }
 });
 
