@@ -1,8 +1,8 @@
 /**
  * The shared site footer (RO, EN and 404): contact details, links
- * and the coffee-cup signature, set on the sky of the illustrated office balcony. Runs in the second build
- * loop, after the EN pages exist, so the footer never passes through the
- * translation dictionary.
+ * and the coffee-cup signature, set on the cloudy sky of the illustrated 3D rooftop cityscape.
+ * Runs in the second build loop, after the EN pages exist, so the footer never passes through
+ * the translation dictionary.
  *
  * The <footer> tag keeps its Elementor attributes (class elementor-3355) because
  * the fixed "back to top" widget is positioned by post-3355.css, and the widget
@@ -135,7 +135,7 @@ export function footerMarkup(language, openTag, year = new Date().getFullYear())
   </div>
   <p class="ect-footer__madewith">${escapeHtml(copy.madeWith)} <img class="ect-footer__cup" src="${CUP}" width="117" height="128" alt="${escapeAttr(copy.cupAlt)}" loading="lazy" decoding="async"> ${escapeHtml(copy.madeBy)} <a class="ect-footer__team" href="${escapeAttr(copy.home)}">Echipa de Tocilari</a></p>
  </div>
- <div class="ect-footer__art" aria-hidden="true"><img src="${ART_BASE}-1152.webp" srcset="${ART_BASE}-768.webp 768w, ${ART_BASE}-1152.webp 1152w, ${ART_BASE}-1536.webp 1536w, ${ART_BASE}-1672.webp 1672w" sizes="(max-width: 639px) 540px, 100vw" width="1536" height="864" alt="" loading="lazy" decoding="async"></div>
+ <div class="ect-footer__art" aria-hidden="true"><img src="${ART_BASE}-1152.webp" srcset="${ART_BASE}-768.webp 768w, ${ART_BASE}-1152.webp 1152w, ${ART_BASE}-1536.webp 1536w, ${ART_BASE}-1858.webp 1858w" sizes="(max-width: 639px) 580px, 100vw" width="1858" height="941" alt="" loading="lazy" decoding="async"></div>
 ${backToTop(BACK_TO_TOP[language])}
 </footer>`;
 }

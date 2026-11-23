@@ -106,11 +106,11 @@ test('the balcony illustration is a decorative lazy image with its real size, an
     const result = renderSiteFooter(html);
     const art = footerOf(result).match(/<div class="ect-footer__art" aria-hidden="true">(<img [^>]*>)<\/div>/)[1];
     assert.match(art, /\salt=""/, label);
-    assert.match(art, /\swidth="1536" height="864"/, label);
+    assert.match(art, /\swidth="1858" height="941"/, label);
     assert.match(art, /\sloading="lazy"/, label);
     assert.match(art, /\sdecoding="async"/, label);
-    assert.match(art, /\ssrcset="[^"]*balconul-tocilarilor-768\.webp 768w, [^"]*-1152\.webp 1152w, [^"]*-1536\.webp 1536w, [^"]*-1672\.webp 1672w"/, label);
-    assert.match(art, /\ssizes="\(max-width: 639px\) 540px, 100vw"/, label);
+    assert.match(art, /\ssrcset="[^"]*balconul-tocilarilor-768\.webp 768w, [^"]*-1152\.webp 1152w, [^"]*-1536\.webp 1536w, [^"]*-1858\.webp 1858w"/, label);
+    assert.match(art, /\ssizes="\(max-width: 639px\) 580px, 100vw"/, label);
     assert.equal(count(result, new RegExp(`<link rel="stylesheet" href="${FOOTER_STYLESHEET}">`, 'g')), 1, label);
     const head = result.slice(0, result.search(/<\/head>/i));
     assert.ok(head.includes(FOOTER_STYLESHEET), `${label}: stylesheet is in <head>`);
@@ -122,7 +122,7 @@ test('the balcony illustration is a decorative lazy image with its real size, an
 });
 
 test('the illustration files are WebP with the sizes the srcset promises', () => {
-  for (const [w, h] of [[768, 432], [1152, 648], [1536, 864], [1672, 941]]) {
+  for (const [w, h] of [[768, 389], [1152, 583], [1536, 778], [1858, 941]]) {
     const file = `legacy-mirror/wp-content/ect-pages/footer/balconul-tocilarilor-${w}.webp`;
     const buf = readFileSync(path.join(root, file));
     assert.equal(buf.toString('latin1', 0, 4), 'RIFF', file);

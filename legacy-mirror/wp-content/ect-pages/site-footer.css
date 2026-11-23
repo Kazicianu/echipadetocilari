@@ -7,18 +7,20 @@
 }
 
 /*
- * A full-width band with the office-balcony illustration across its whole surface. The copy sits
- * on the white sky (top left), the scene fills the bottom and climbs on the right.
- * Free sky in the artwork, as % of its width / height (first non-sky pixel from the top):
- * x 0-38% -> 65%, 40-46% -> 62%, 48-52% -> 58%, 54-60% -> 45%, 62-78% -> 39% to 28%,
- * x >= 80% -> branches from the top edge down to ~14%.
- * The copy never crosses those lines: horizontal limits are % of the footer width (the artwork
- * scales with it) and the inner padding-bottom keeps the lower part of the artwork clear.
+ * A full-width band with the extended 1858x941 office-balcony illustration spanning 100% of the footer
+ * (the original 16:9 scene occupies the right 90%, with seamlessly generated cityscape continuing across
+ * the left 10% so there is zero left-edge fade).
+ *
+ * Free sky in balconul-tocilarilor-*.webp (1858x941, % of width / height):
+ * - x 0-44% -> 65%, 46-52% -> 62%, 54-57% -> 58%, 59-64% -> 45%, 66-80% -> 39% to 28% (eaves),
+ *   x >= 82% -> branches from the top edge down to ~14%.
+ * Desktop columns stay within x <= 59.8%, legal lines <= 52% and the signature <= 45%, while
+ * bottom padding keeps every line clear of the city skyline, plant, laptop and characters.
  */
 .ect-footer {
-  /* Height of the artwork: its own 16:9 ratio, never shorter than 300px (phones crop the sides). */
-  --ect-footer-art: max(56.25cqw, 300px);
-  --ect-footer-fade: 22%;
+  /* Native 1858x941 ratio -> height is 50.646% of width (90% zoom scale, full bleed); min 290px on phones. */
+  --ect-footer-art: max(50.646cqw, 290px);
+  --ect-footer-fade: 18%;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   position: relative;
@@ -26,7 +28,7 @@
   padding: 0;
   border: 0;
   border-radius: 0;
-  background: #fefefe; /* the flat sky of balconul-tocilarilor-*.webp, as decoded */
+  background: #fefefe; /* matches the decoded sky of balconul-tocilarilor-*.webp */
   overflow: hidden;
   overflow: clip;
   color: #27272d;
@@ -37,11 +39,11 @@
   -webkit-font-smoothing: antialiased;
 }
 
-/* The scene sets the minimum height. The links can add sky above it when they wrap. */
+/* The scene sets the minimum height. Stacked copy on smaller screens can extend the sky above it. */
 .ect-footer::before {
   content: "";
   grid-area: 1 / 1;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 1858 / 941;
   pointer-events: none;
 }
 
@@ -83,12 +85,12 @@
   position: fixed;
 }
 
-/* Phones: the copy ends where the artwork begins; its top band fades into the sky. */
+/* Phones: the copy ends where the artwork begins; its top band blends softly into the white sky. */
 .ect-footer__inner {
   grid-area: 1 / 1;
   width: min(100% - 40px, 1200px);
   margin-inline: auto;
-  padding-block: clamp(24px, 3.5vw, 52px) max(56.25%, 300px);
+  padding-block: clamp(24px, 3.5vw, 48px) max(50.646%, 298px);
   position: relative;
   z-index: 1;
 }
@@ -132,10 +134,10 @@
 .ect-footer .ect-footer__tagline {
   max-width: 40ch;
   text-wrap: pretty;
-  color: #55555e;
+  color: #3d4459;
   font-size: 15px;
   font-weight: 400;
-  line-height: 1.55;
+  line-height: 1.5;
 }
 
 .ect-footer .ect-footer__social {
@@ -243,12 +245,12 @@
   gap: 4px;
   margin-top: 24px;
   padding-top: 12px;
-  border-top: 1px solid rgb(39 39 45 / 15%);
+  border-top: 1px solid rgb(39 39 45 / 14%);
   text-align: center;
 }
 
 .ect-footer .ect-footer__company {
-  color: #55555e;
+  color: #3d4459;
   font-size: 13px;
   font-weight: 400;
   line-height: 1.5;
@@ -273,10 +275,10 @@
   min-width: 44px;
   margin: 0;
   padding: 0;
-  color: #55555e;
+  color: #3d4459;
   font-family: inherit;
   font-size: 13px;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.4;
 }
 
@@ -292,8 +294,8 @@
   align-items: center;
   justify-content: center;
   gap: 4px 0.4em;
-  margin-top: 16px;
-  color: #55555e;
+  margin-top: 14px;
+  color: #3d4459;
   font-size: 14px;
   font-weight: 400;
   line-height: 1.4;
@@ -315,7 +317,8 @@
   position: relative;
   display: inline-flex;
   align-items: center;
-  padding: 0.3em 0.7em;
+  min-height: 44px;
+  padding: 0 0.8em;
   border: 0;
   border-radius: 0.5em;
   background: #f1f1f3;
@@ -324,7 +327,7 @@
   white-space: nowrap;
 }
 
-/* 44px hit area without changing the pill's size */
+/* 44px hit area without changing the pill's size on desktop */
 .ect-footer .ect-footer__team::after {
   content: "";
   position: absolute;
@@ -336,7 +339,7 @@
 .ect-footer .ect-footer__madewith .ect-footer__team:hover,
 .ect-footer .ect-footer__madewith .ect-footer__team:focus-visible {
   background: #fd8649;
-  color: #fff;
+  color: #ffffff;
 }
 
 .ect-footer .ect-footer__madewith .ect-footer__team:focus-visible {
@@ -345,7 +348,7 @@
   border-radius: 0.5em;
 }
 
-/* Anchor the artwork to the bottom of the card. Only its sky meets the copy. */
+/* Anchor the full-width artwork to the bottom of the footer. Only its open cloudy sky meets the copy. */
 .ect-footer__art {
   position: absolute;
   inset: 0;
@@ -364,12 +367,12 @@
   max-width: none;
   height: var(--ect-footer-art);
   object-fit: cover;
-  /* Phones crop the sides: keep both nerds whole, shoes included. */
-  object-position: 85% 100%;
+  /* Phones crop the left cityscape: keep both teammates whole, shoes included, plus plant and street. */
+  object-position: 88% 100%;
   border-radius: 0;
   box-shadow: none;
   mask-image: linear-gradient(to bottom, transparent, black var(--ect-footer-fade));
-  /* Blend only where the copy has extended the sky above the artwork. */
+  /* Blend only when stacked copy extends the white sky above the artwork (0px on desktop). */
   mask-image: linear-gradient(to bottom, transparent, black clamp(0px, 100cqh - var(--ect-footer-art), var(--ect-footer-fade)));
 }
 
@@ -389,33 +392,21 @@
   .ect-footer .ect-footer__madewith { font-size: 13px; }
 }
 
-/* 640-919: brand on top, three columns in a row, legal details in the open sky on the left. */
+/* 640-919: brand on top, three columns in a row, full 100% edge-to-edge extended artwork (no left fade). */
 @media (min-width: 640px) {
-  /* Zoomed out a little: the artwork takes 88% of the width on the right and its left edge
-     dissolves into the sky, so the scene sits smaller in more open sky. */
   .ect-footer {
-    --ect-footer-fade: 18%;
-    --ect-footer-zoom: 0.88;
-    --ect-footer-art: calc(56.25cqw * var(--ect-footer-zoom));
-  }
-
-  .ect-footer::before {
-    aspect-ratio: 16 / 7.92;
+    --ect-footer-fade: 14%;
+    --ect-footer-art: 50.646cqw;
   }
 
   .ect-footer__art img {
-    align-self: flex-end;
-    width: calc(100% * var(--ect-footer-zoom));
+    width: 100%;
     object-position: 50% 100%;
-    mask-image:
-      linear-gradient(to right, transparent, black 16%),
-      linear-gradient(to bottom, transparent, black clamp(0px, 100cqh - var(--ect-footer-art), var(--ect-footer-fade)));
-    mask-composite: intersect;
   }
 
-  /* The copy ends at 36% of the artwork's height, clear of the faded branches. */
+  /* Keep the copy clear of the city skyline, plant and teammates below. */
   .ect-footer__inner {
-    padding-bottom: 36%;
+    padding-bottom: 30%;
   }
 
   .ect-footer__top {
@@ -432,7 +423,7 @@
     gap: 0;
     width: fit-content;
     max-width: 50%;
-    margin-top: 20px;
+    margin-top: 18px;
     padding-top: 10px;
     text-align: left;
   }
@@ -443,43 +434,48 @@
 
   .ect-footer .ect-footer__madewith {
     justify-content: flex-start;
-    max-width: 50%;
-    margin-top: 8px;
+    max-width: 48%;
+    margin-top: 6px;
     text-align: left;
+  }
+
+  .ect-footer .ect-footer__madewith .ect-footer__team {
+    background: #f1f1f3;
   }
 }
 
 /*
- * From 920px the inner frame is set in % of the footer width (3.2% each side), so the copy
- * keeps its place on the artwork at every width. The columns end before 60% of the footer.
+ * From 920px the inner frame tracks the footer width in %, so the copy stays on the bright cloudy
+ * sky left of the orange roof eaves (x = 64%) and top-right branches (x = 82%).
  */
 @media (min-width: 920px) {
-  /* The copy ends at 58% of the artwork's height. */
   .ect-footer__inner {
     width: auto;
     margin-inline: 3.2%;
-    padding-top: max(28px, 3%);
-    padding-bottom: 23.6%;
+    padding-top: max(20px, 2%);
+    padding-bottom: 19%;
   }
 
   .ect-footer__top {
-    grid-template-columns: minmax(max-content, 19%) minmax(max-content, 9.5%) minmax(0, 26.9%) minmax(0, 1fr);
-    gap: 24px 2%;
+    width: 60.5%;
+    grid-template-columns: minmax(max-content, 33%) minmax(max-content, 21%) minmax(0, 1fr);
+    gap: 18px 3%;
   }
 
-  /* Break after "sector 2," where the column allows it. */
+  /* Break cleanly after "sector 2," where the column allows it. */
   .ect-footer .ect-footer__contact > span {
-    max-width: 18em;
+    max-width: 19em;
   }
 
   .ect-footer__brand {
     display: flex;
     align-items: center;
-    gap: 12px 24px;
+    gap: 12px 20px;
   }
 
   .ect-footer .ect-footer__tagline {
     max-width: 52ch;
+    font-size: 14px;
   }
 
   .ect-footer .ect-footer__social {
@@ -496,10 +492,6 @@
     font-weight: 600;
   }
 
-  /*
-   * The signature is the lowest line: 45% of the inner frame ends at 45.3% of the footer,
-   * left of the plant. The legal lines above it may reach 50% (open sky down to 58%).
-   */
   .ect-footer__bottom {
     max-width: 50%;
   }
@@ -510,21 +502,27 @@
 }
 
 /*
- * 1200+: the Metricra layout. A narrow brand column (logo, social icons stacked below it),
- * then Services, Company and Contact on the sky; the tagline moves under the columns.
- * The tagline stays in .ect-footer__brand in the DOM (display: contents).
+ * 1200+: full-bleed Metricra layout. Narrow brand column (logo + vertically stacked social icons),
+ * then Services, Company and Contact sitting directly on the bright cloudy sky, ending at 59.8%
+ * width (left of the orange roof eave at 64%). Legal lines stay <= 52% and the signature <= 45%,
+ * cleanly above the city skyline and plant, so the footer locks 1:1 to the native 1376x768 artwork.
  */
 @media (min-width: 1200px) {
-  .ect-footer__inner {
-    padding-top: 3%;
+  .ect-footer {
+    --ect-footer-fade: 12%;
   }
 
-  /* 60.5% of the inner frame ends at 59.8% of the footer. */
+  .ect-footer__inner {
+    padding-top: clamp(18px, 1.8vw, 32px);
+    padding-bottom: 18.5%;
+  }
+
+  /* 60.5% of the 93.6% inner frame ends at 59.8% of the footer, clear of the orange eaves. */
   .ect-footer__top {
     width: 60.5%;
-    grid-template-columns: 88px minmax(max-content, 22%) minmax(max-content, 13%) 1fr;
+    grid-template-columns: 84px minmax(max-content, 24%) minmax(max-content, 15%) minmax(0, 1fr);
     grid-template-rows: auto 1fr auto;
-    gap: 0 2.8%;
+    gap: 0 2.5%;
   }
 
   .ect-footer__brand {
@@ -537,7 +535,7 @@
   }
 
   .ect-footer__logo img {
-    width: 88px;
+    width: 84px;
   }
 
   .ect-footer .ect-footer__social {
@@ -546,7 +544,7 @@
     align-self: start;
     flex-direction: column;
     gap: 0;
-    margin: 12px 0 0 -12px;
+    margin: 8px 0 0 -12px;
   }
 
   .ect-footer__col {
@@ -557,20 +555,28 @@
   .ect-footer__col--company { grid-column: 3; }
   .ect-footer .ect-footer__col--contact { grid-column: 4; }
 
+  .ect-footer .ect-footer__label {
+    margin-bottom: 6px;
+  }
+
   .ect-footer .ect-footer__tagline {
     grid-column: 1 / -1;
     grid-row: 3;
-    max-width: min(60ch, 74%);
-    margin-top: 24px;
+    max-width: min(56ch, 82%);
+    margin-top: 14px;
+    font-size: 14px;
+    line-height: 1.42;
   }
 
   .ect-footer .ect-footer__status {
+    margin-top: 6px;
     font-size: 13px;
     white-space: nowrap;
   }
 
+  /* Keep links in crisp ink (#27272d) so contrast stays >= 9.5:1 even over cloud undersides. */
   .ect-footer .ect-footer__col a {
-    color: #55555e;
+    color: #27272d;
   }
 
   .ect-footer .ect-footer__col a:hover {
@@ -578,7 +584,18 @@
   }
 
   .ect-footer__bottom {
-    margin-top: 18px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    max-width: 52%;
+    margin-top: 12px;
+    padding-top: 10px;
+  }
+
+  .ect-footer .ect-footer__madewith {
+    margin-top: 6px;
+    max-width: 45%;
+    font-size: 13.5px;
   }
 }
 
@@ -595,10 +612,29 @@
   .ect-footer .ect-footer__label {
     font-size: 16px;
   }
+
+  .ect-footer .ect-footer__madewith {
+    font-size: 14px;
+  }
 }
 
 @media (min-width: 920px) and (pointer: fine) {
   .ect-footer .ect-footer__col a {
-    min-height: 32px;
+    min-height: 28px;
+  }
+
+  .ect-footer .ect-footer__contact > span {
+    min-height: 0;
+    padding-block: 4px;
+  }
+
+  .ect-footer .ect-footer__legal a,
+  .ect-footer .ect-footer__legal button.ect-consent-open.ect-consent-open {
+    min-height: 28px;
+  }
+
+  .ect-footer .ect-footer__madewith .ect-footer__team {
+    min-height: 0;
+    padding: 0.25em 0.65em;
   }
 }
