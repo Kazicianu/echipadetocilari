@@ -119,10 +119,14 @@ test('the footer keeps only what it needs: no address, hours, copyright, company
   }
 });
 
-test('the social links are named discs with monoline marks', () => {
+test('the social links are named orange circles with solid official marks, in the Contact column', () => {
   for (const { language, url, html } of sourcePages()) {
     const label = `${url} (${language})`;
     const footer = footerOf(renderSiteFooter(html));
+    const contact = footer.match(/<div class="ect-footer__col ect-footer__col--contact">[\s\S]*?<\/ul>\s*<\/div>/)[0];
+    assert.match(contact, /<\/address>\s*<ul class="ect-footer__social">/, `${label}: the social list follows the email inside Contact`);
+    const brand = footer.match(/<div class="ect-footer__brand">[\s\S]*?<\/div>/)[0];
+    assert.doesNotMatch(brand, /ect-footer__social|<svg/, `${label}: the brand holds only the logo`);
     const social = footer.match(/<ul class="ect-footer__social">([\s\S]*?)<\/ul>/)[1];
     const links = social.match(/<a\b[^>]*>[\s\S]*?<\/a>/g);
     assert.equal(links.length, 2, label);
@@ -130,14 +134,36 @@ test('the social links are named discs with monoline marks', () => {
     assert.ok(links[0].includes('href="https://www.facebook.com/EchipadeTocilari/"') && links[1].includes('href="https://www.linkedin.com/company/echipa-de-tocilari/"'), label);
     for (const link of links) {
       const svg = link.match(/<svg\b[^>]*>/)[0];
-      for (const attr of ['aria-hidden="true"', 'focusable="false"', 'viewBox="0 0 24 24"', 'fill="none"', 'stroke="currentColor"', 'stroke-width="2"', 'stroke-linecap="round"', 'stroke-linejoin="round"']) {
+      for (const attr of ['aria-hidden="true"', 'focusable="false"', 'fill="currentColor"']) {
         assert.ok(svg.includes(attr), `${label}: ${attr}`);
       }
+      assert.doesNotMatch(svg, /\bstroke/, `${label}: solid marks, no stroke`);
     }
+    assert.ok(links[0].includes('viewBox="0 0 320 512"') && links[1].includes('viewBox="0 0 448 512"'), `${label}: Font Awesome 5 brand boxes`);
   }
   const css = readFileSync(path.join(root, 'legacy-mirror', FOOTER_STYLESHEET), 'utf8');
-  assert.match(css, /\.ect-footer__social a \{[^}]*width: 44px;[^}]*height: 44px;[^}]*border: 2px solid transparent;[^}]*background: #ffffff padding-box;[^}]*box-shadow: inset 0 0 0 2px #fd8649;/, 'a 40px white disc with a 2px orange ring in a 44px target');
-  assert.match(css, /\.ect-footer__social a:hover,\s*\.ect-footer \.ect-footer__social a:focus-visible \{\s*background-color: #fd8649;\s*color: #ffffff;/, 'hover and focus fill the disc');
+  assert.match(css, /\.ect-footer__social a \{[^}]*width: 44px;[^}]*height: 44px;[^}]*border-radius: 50%;[^}]*background: #fd8649;[^}]*box-shadow: 0 0 20px rgba\(0, 0, 0, 0\.05\);[^}]*color: #ffffff;/, 'a solid orange 44px circle with a white mark');
+  assert.match(css, /\.ect-footer__social a:hover,\s*\.ect-footer \.ect-footer__col \.ect-footer__social a:focus-visible \{[^}]*color: #ffffff;[^}]*box-shadow: 0 0 20px rgba\(253, 134, 73, 0\.69\);/, 'hover and focus glow orange');
+  const motion = css.slice(css.indexOf('@media (prefers-reduced-motion: no-preference)'));
+  assert.match(motion, /\.ect-footer__social a:focus-visible \{\s*transform: translateY\(-2px\);/, 'the lift only under no-preference');
+  assert.equal(count(css.replace(motion, ''), /translateY\(-2px\)/g), 0, 'no lift outside the motion query');
+  assert.match(css, /outline: 3px solid #27272d;\s*outline-offset: 2px;\s*border-radius: 50%;/, 'round focus ring');
+});
+
+test('the 1200px grid packs the brand and four columns to the left with the signature under it', () => {
+  const css = readFileSync(path.join(root, 'legacy-mirror', FOOTER_STYLESHEET), 'utf8');
+  const wide = css.slice(css.indexOf('@media (min-width: 1200px)'));
+  assert.match(wide, /grid-template-columns: 84px repeat\(4, max-content\);/);
+  assert.match(wide, /justify-content: start;/);
+  assert.match(wide, /column-gap: clamp\(48px, 4\.2vw, 80px\);/);
+  assert.match(wide, /\.ect-footer__madewith \{\s*margin-top: 30px;/);
+  assert.doesNotMatch(css, /width: 79%|space-between/, 'no stretched row');
+  for (const { language, url, html } of sourcePages().filter((page) => page.url === '/' || page.url === '/en/')) {
+    const footer = footerOf(renderSiteFooter(html));
+    const top = footer.match(/<div class="ect-footer__top">([\s\S]*?)<\/div>\s*<p class="ect-footer__madewith">/);
+    assert.ok(top, `${url} (${language}): the signature follows the grid`);
+    assert.match(top[1], /^\s*<div class="ect-footer__brand">\s*<a class="ect-footer__logo"[^>]*><img [^>]*><\/a>\s*<\/div>\s*<nav class="ect-footer__col ect-footer__col--services"/, `${url} (${language}): the logo stands alone before the columns`);
+  }
 });
 
 test('the balcony illustration is a decorative lazy image with its real size, and the stylesheet loads once', () => {

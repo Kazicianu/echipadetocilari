@@ -1,6 +1,6 @@
 /**
- * The shared site footer (RO, EN and 404) in the Metricra layout: the logo with the two social
- * discs stacked under it, then Services, Company, Contact and Legal, and the coffee-cup signature,
+ * The shared site footer (RO, EN and 404) in the Metricra layout: the logo, then Services, Company,
+ * Contact (with the two orange social discs under the email) and Legal, and the coffee-cup signature,
  * all on the cloudy sky of the balcony illustration. Runs in the second build loop, after the EN
  * pages exist, so the footer never passes through the translation dictionary.
  *
@@ -62,15 +62,16 @@ const COPY = {
   },
 };
 
-/** Monoline marks on a 24px grid, drawn inside the white disc (the disc is the frame, not the SVG). */
+// Font Awesome Free 5 brands (facebook-f, linkedin-in), CC BY 4.0: https://fontawesome.com/license/free
+// The official solid marks, painted white inside the orange disc (the disc is the link's background, not the SVG).
 const SOCIAL_MARKS = {
-  facebook: ['M15.5 5H14a3 3 0 0 0-3 3v11', 'M8.5 10.5h6.5'],
-  linkedin: ['M7.25 7.5v.01', 'M7.25 11v6', 'M11.25 17v-6', 'M11.25 13.75a2.75 2.75 0 0 1 5.5 0V17'],
+  facebook: { box: '0 0 320 512', d: 'M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z' },
+  linkedin: { box: '0 0 448 512', d: 'M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 77.1V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z' },
 };
 
 const ARROW_UP = 'M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z';
 
-const mark = (paths) => `<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">${paths.map((d) => `<path d="${d}"></path>`).join('')}</svg>`;
+const mark = ({ box, d }) => `<svg aria-hidden="true" focusable="false" viewBox="${box}" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="${d}"></path></svg>`;
 
 /** The "back to top" widget, identical to the Elementor one it replaces (the label comes from footer-a11y.mjs). */
 function backToTop(label) {
@@ -117,16 +118,16 @@ export function footerMarkup(language, openTag) {
   <div class="ect-footer__top">
    <div class="ect-footer__brand">
     <a class="ect-footer__logo" href="${escapeAttr(copy.home)}"><img src="${logo}.webp" srcset="${logo}-288x300.webp 288w, ${logo}-768x799.webp 768w, ${logo}.webp 836w" sizes="(max-width: 919px) 80px, 100px" width="836" height="870" alt="${escapeAttr(copy.logoAlt)}" loading="lazy" decoding="async"></a>
-    <ul class="ect-footer__social">
-     <li><a href="${FACEBOOK_URL}" aria-label="Facebook">${mark(SOCIAL_MARKS.facebook)}</a></li>
-     <li><a href="${LINKEDIN_URL}" aria-label="LinkedIn">${mark(SOCIAL_MARKS.linkedin)}</a></li>
-    </ul>
    </div>
    <nav class="ect-footer__col ect-footer__col--services" aria-label="${escapeAttr(copy.services)}"><p class="ect-footer__label">${escapeHtml(copy.services)}</p>${list(serviceRoutes, language)}</nav>
    <nav class="ect-footer__col ect-footer__col--company" aria-label="${escapeAttr(copy.company)}"><p class="ect-footer__label">${escapeHtml(copy.company)}</p>${list(companyRoutes, language)}</nav>
    <div class="ect-footer__col ect-footer__col--contact">
     <p class="ect-footer__label">${escapeHtml(copy.contact)}</p>
     <address class="ect-footer__contact"><a href="tel:${escapeAttr(tel)}">${escapeHtml(displayPhone(tel, language))}</a><a href="mailto:${EMAIL}">${EMAIL}</a></address>
+    <ul class="ect-footer__social">
+     <li><a href="${FACEBOOK_URL}" aria-label="Facebook">${mark(SOCIAL_MARKS.facebook)}</a></li>
+     <li><a href="${LINKEDIN_URL}" aria-label="LinkedIn">${mark(SOCIAL_MARKS.linkedin)}</a></li>
+    </ul>
    </div>
    <nav class="ect-footer__col ect-footer__col--legal" aria-label="${escapeAttr(copy.legal)}"><p class="ect-footer__label">${escapeHtml(copy.legal)}</p><ul><li><a href="${escapeAttr(TERMS_PATHS[language])}">${escapeHtml(copy.terms)}</a></li><li><a href="${escapeAttr(PRIVACY_PATHS[language])}" data-ect-footer-privacy>${escapeHtml(consent.footerPolicy)}</a></li><li><button type="button" class="ect-consent-open" data-ect-consent-open hidden>${escapeHtml(consent.footerSettings)}</button></li></ul></nav>
   </div>

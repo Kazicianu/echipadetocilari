@@ -64,7 +64,7 @@ Echipa de Tocilari ("the team of nerds") is a digital marketing agency in Buchar
 - Service marks (homepage tiles, the maintenance band, Google Ads related cards) are custom outline drawings on a 75 × 66 box, `orange`, the first path a faint blob.
 - Interface icons are 24px strokes with round caps and joins: the services menu (1.6, `orange`), the store's tickets, stops and cards (1.5 to 1.8, `orange-deep` or `ink`), the Google Ads checks, crosses and refresh. Paint them with `currentColor` when inlined.
 - Glyphs from Font Awesome 5 Free: back-to-top arrow, the "Despre noi" arrow, the comparison chevron, the check-circle in price lists.
-- Footer social icons (Facebook "f", LinkedIn "in") are 24px monoline strokes in a 40px white disc with a 2px orange ring; the disc fills orange with a white mark on hover and focus.
+- Footer social icons (Facebook "f", LinkedIn "in") are the official solid Font Awesome Free 5 brands glyphs, 18px and white, in a 44px solid orange circle; hover and focus add an orange glow (and a 2px lift when motion is allowed).
 - Typographic marks do the rest: "+" and "−" on FAQ toggles, "→" and "↓" on links. Never emoji, never diagonal arrows; `service-seo.svg` and `service-google-ads.svg` draw one and stay only where they are today.
 - Icons beside text that says the same are `aria-hidden="true"`; a check or dash that is the only content of a table cell gets an `aria-label`.
 

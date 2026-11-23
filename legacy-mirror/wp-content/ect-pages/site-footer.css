@@ -14,8 +14,8 @@
  * Free sky in balconul-tocilarilor-*.webp (1858x941, % of width / height):
  * - x 0-44% -> 65%, 46-52% -> 62%, 54-57% -> 58%, 59-64% -> 45%, 66-80% -> 39% to 28% (eaves),
  *   x >= 82% -> branches from the top edge down to ~14%.
- * From 1200px the Metricra row (brand, Services, Company, Contact, Legal) ends at x <= 78% and stays
- * above the eaves; the signature stays at x <= 45%. Every placement is checked on pixels by the
+ * From 1200px the Metricra row (brand, Services, Company, Contact, Legal) is packed to the left, ends
+ * at x <= 78% and stays above the eaves; the signature stays at x <= 45%. Every placement is checked on pixels by the
  * footer QA script (copy only on sky, no horizontal scroll).
  */
 .ect-footer {
@@ -116,11 +116,9 @@
 .ect-footer__col--contact { grid-area: contact; }
 .ect-footer__col--legal { grid-area: legal; }
 
-/* Brand: the logo with the two social discs beside it (stacked under it from 1200px). */
+/* Brand: the logo alone. It sits on its own row above every column below 1200px and in its own column from 1200px. */
 .ect-footer__brand {
-  display: flex;
-  align-items: center;
-  gap: 16px;
+  display: block;
 }
 
 .ect-footer .ect-footer__logo {
@@ -138,35 +136,37 @@
   box-shadow: none;
 }
 
+/* Social: two solid #fd8649 circles with the white official marks, in the Contact column under the email. */
 .ect-footer .ect-footer__social {
   display: flex;
-  gap: 6px;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
 }
 
-/*
- * A 40px white disc with a 2px #fd8649 ring inside a 44x44 target: the transparent 2px border leaves
- * the sky around the disc, the inset shadow draws the ring. Hover and focus fill the disc orange.
- */
-.ect-footer .ect-footer__social a {
+/* The three-class selector beats the generic column link rules (colour, hover colour, 28px rows). */
+.ect-footer .ect-footer__col .ect-footer__social a {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 44px;
   height: 44px;
-  border: 2px solid transparent;
+  min-height: 44px;
+  padding: 0;
   border-radius: 50%;
-  background: #ffffff padding-box;
-  box-shadow: inset 0 0 0 2px #fd8649;
-  color: #27272d;
-}
-
-.ect-footer .ect-footer__social a:hover,
-.ect-footer .ect-footer__social a:focus-visible {
-  background-color: #fd8649;
+  background: #fd8649;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
   color: #ffffff;
 }
 
-.ect-footer .ect-footer__social a:focus-visible {
+.ect-footer .ect-footer__col .ect-footer__social a:hover,
+.ect-footer .ect-footer__col .ect-footer__social a:focus-visible {
+  color: #ffffff;
+  box-shadow: 0 0 20px rgba(253, 134, 73, 0.69);
+}
+
+.ect-footer .ect-footer__col .ect-footer__social a:focus-visible {
   outline: 3px solid #27272d;
   outline-offset: 2px;
   border-radius: 50%;
@@ -174,8 +174,8 @@
 
 .ect-footer__social svg {
   display: block;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   overflow: visible;
 }
 
@@ -319,13 +319,13 @@
     transition: color 0.15s ease;
   }
 
-  .ect-footer .ect-footer__social a {
-    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  .ect-footer .ect-footer__col .ect-footer__social a {
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
   }
 
-  .ect-footer .ect-footer__social a:hover,
-  .ect-footer .ect-footer__social a:focus-visible {
-    transform: scale(1.06);
+  .ect-footer .ect-footer__col .ect-footer__social a:hover,
+  .ect-footer .ect-footer__col .ect-footer__social a:focus-visible {
+    transform: translateY(-2px);
   }
 
   .ect-footer .ect-footer__cup { transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); }
@@ -408,11 +408,10 @@
 }
 
 /*
- * 1200+: Metricra. One row, aligned at the top: an 84px brand column (logo, then the two social
- * discs stacked under it on the logo axis), then Services, Company, Contact and Legal spread out
- * across 79% of the inner frame, which ends at x = 77.1% of the footer, above the eaves and left of
- * the branches. The signature follows under the row on the left. The footer is exactly as tall
- * as the illustration.
+ * 1200+: Metricra. One compact row aligned at the top: an 84px brand column with the logo, then
+ * Services, Company, Contact (with the social circles) and Legal, packed to the left with a fluid
+ * gap, above the eaves and left of the branches. The signature follows under the row on the left.
+ * The footer is exactly as tall as the illustration.
  */
 @media (min-width: 1200px) {
   .ect-footer {
@@ -429,27 +428,16 @@
   }
 
   .ect-footer__top {
-    width: 79%;
+    width: auto;
     grid-template-columns: 84px repeat(4, max-content);
     grid-template-areas: "brand services company contact legal";
-    justify-content: space-between;
-    gap: 0 24px;
-  }
-
-  .ect-footer__brand {
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
+    justify-content: start;
+    column-gap: clamp(48px, 4.2vw, 80px);
+    row-gap: 0;
   }
 
   .ect-footer__logo img {
     width: 84px;
-  }
-
-  .ect-footer .ect-footer__social {
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
   }
 
   .ect-footer .ect-footer__label {
@@ -457,7 +445,7 @@
   }
 
   .ect-footer .ect-footer__madewith {
-    margin-top: 20px;
+    margin-top: 30px;
     font-size: 13.5px;
   }
 }
