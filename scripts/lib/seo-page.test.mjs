@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
+import { dictionary } from '../i18n/dictionary.mjs';
+import { seoServicesDictionary } from '../i18n/seo-services.mjs';
 import { roPageMeta } from '../i18n/meta-ro.mjs';
 
 const read = file => readFileSync(new URL(`../../${file}`, import.meta.url), 'utf8');
@@ -80,14 +82,52 @@ test('the six monthly jobs are tiles with a heading, a Growth quantity and a dec
   assert.ok(hot.includes('<li>1 apariție pe lună pe un site din domeniul tău</li>'));
 });
 
-test('the monthly report has five parts, one chosen, and one visible example', () => {
-  const keys = [...main.matchAll(/<button class="seo-key[^"]*"[^>]*>/gi)].map(([tag]) => tag);
-  assert.equal(keys.length, 5);
-  assert.equal(keys.filter(tag => /aria-pressed="true"/.test(tag)).length, 1);
-  assert.equal(count(main, /data-seo-key="\d"/g), 5);
-  const parts = [...main.matchAll(/<div class="seo-dsec[^"]*">[\s\S]*?<\/p><\/div><\/div>/gi)].map(([part]) => part);
-  assert.equal(parts.length, 5);
-  assert.equal(parts.filter(part => !/<p hidden>/.test(part)).length, 1);
+test('the results section separates what we guarantee from what we measure', () => {
+  const section = main.match(/<section class="seo-sec seo-sec--s5" aria-labelledby="seo-rezultate-t">([\s\S]*?)<\/section>/)?.[1] ?? '';
+  assert.equal(text(section.match(/<h2 class="seo-h2" id="seo-rezultate-t">([\s\S]*?)<\/h2>/)?.[1] ?? ''), 'Cum știi dacă SEO-ul funcționează');
+  assert.deepEqual([...section.matchAll(/<h3 class="seo-res__hd">[\s\S]*?<b>([^<]+)<\/b>/g)].map(([, b]) => b), ['Garantăm', 'Măsurăm']);
+  // The three guarantees are the ones the FAQ promises.
+  assert.ok(section.includes('<h4 class="seo-res-card__t">Lucrările din pachet</h4>'));
+  assert.deepEqual([...section.matchAll(/<h4 class="seo-res-also__t">([\s\S]*?)<\/h4>/g)].map(([, h]) => text(h)), ['Raport în fiecare lună', 'Doar metode acceptate de Google']);
+  assert.ok(text(main).includes('Garantăm lucrările din pachet, raportul lunar și metode acceptate de Google.'));
+  // The checklist repeats the Growth card.
+  const done = [...(section.match(/<ul class="seo-res-done">([\s\S]*?)<\/ul>/)?.[1] ?? '').matchAll(/<li>([\s\S]*?)<\/li>/g)].map(([, li]) => text(li));
+  assert.deepEqual(done, ['1 pagină publicată', '2 articole publicate', '1 apariție nouă', 'Corecturi: până la 2 ore']);
+  const hot = main.match(/<article class="seo-price seo-price--hot">([\s\S]*?)<\/article>/)?.[1] ?? '';
+  assert.ok(hot.includes('<li>3 texte noi pe lună: 1 pagină și 2 articole</li>'));
+  assert.ok(hot.includes('<li>1 apariție pe lună pe un site din domeniul tău</li>'));
+  assert.ok(hot.includes('<li>Corecturi tehnice până la 2 ore pe lună</li>'));
+  // Three measured steps, each saying what we measure and where you see it.
+  const chain = section.match(/<ol class="seo-res-chain">([\s\S]*?)<\/ol>/)?.[1] ?? '';
+  assert.deepEqual([...chain.matchAll(/<h4 class="seo-res-card__t">([\s\S]*?)<\/h4>/g)].map(([, h]) => text(h)), ['Google te arată', 'Oamenii intră pe site', 'Te contactează']);
+  assert.equal(count(chain, /<dt>Ce măsurăm<\/dt>/g), 3);
+  assert.equal(count(chain, /<dt>Unde vezi<\/dt>/g), 3);
+  assert.equal(count(chain, /<span class="seo-res-badge">cel mai important<\/span>/g), 1);
+  // The AI card counts the questions of the four plans.
+  assert.ok(section.includes('<h4 class="seo-res-card__t">Apari în răspunsurile AI</h4>'));
+  assert.ok(section.includes('Verificăm noi 10, 20, 30 sau 50 de întrebări, după pachet.'));
+  assert.match(section, /<a class="seo-link" href="https:\/\/developers\.google\.com\/search\/docs\/fundamentals\/do-i-need-seo">O spune chiar Google<\/a>/);
+});
+
+test('the old interactive report is gone from the page, its stylesheet and its script', () => {
+  assert.doesNotMatch(main, /data-seo-key|class="seo-key|class="seo-doc|class="seo-dsec|class="seo-gl"|class="seo-h4"/);
+  const css = read('legacy-mirror/wp-content/ect-pages/servicii-seo.css');
+  assert.doesNotMatch(css, /\.seo-(?:rep|keys|key|doc|dsec|gl|gcol|h4)\b/);
+  const js = read('legacy-mirror/wp-content/ect-pages/servicii-seo.js');
+  assert.doesNotMatch(js, /seo-key|seo-doc|seo-dsec/);
+  assert.match(js, /data-seo-gpt/);
+});
+
+test('every text of the results section has an English pair', () => {
+  const section = main.match(/<section class="seo-sec seo-sec--s5" aria-labelledby="seo-rezultate-t">([\s\S]*?)<\/section>/)?.[1] ?? '';
+  const keys = new Set([...seoServicesDictionary, ...dictionary].map(([ro]) => ro));
+  const same = new Set(['Search Console', 'Google Analytics', 'ChatGPT', 'Gemini', 'Perplexity']);
+  const nodes = [...section.matchAll(/>([^<>]*[A-Za-zĂÂÎȘȚăâîșț][^<>]*)</g)].map(([, node]) => node);
+  assert.ok(nodes.length > 40, `found ${nodes.length} text nodes`);
+  for (const node of nodes) {
+    if (same.has(node.trim())) continue;
+    assert.ok(keys.has(`>${node}<`), `no English pair for ">${node}<"`);
+  }
 });
 
 test('the GPTBot switch is a real switch and the other three are decorative', () => {
@@ -115,8 +155,8 @@ test('no visible placeholders remain in the content', () => {
 });
 
 test('every illustrative example is labelled as such', () => {
-  assert.equal(count(main, /<em class="seo-ex">Exemplu ilustrativ<\/em>/g), 2);
-  assert.equal(count(main, /Exemplu ilustrativ/g), 2);
+  assert.equal(count(main, /<em class="seo-ex">Exemplu ilustrativ<\/em>/g), 1);
+  assert.equal(count(main, /Exemplu ilustrativ/g), 1);
   assert.equal(count(main, /<span>exemplu<\/span>/g), 3);
   assert.ok(main.includes('Datele din grafice sunt exemple.'));
 });
@@ -152,7 +192,7 @@ test('the headings keep a clean order and the VAT sentence replaces the placehol
   const levels = [...main.matchAll(/<h([1-6])\b/g)].map(([, level]) => Number(level));
   assert.equal(levels[0], 1);
   levels.forEach((level, i) => { if (i) assert.ok(level <= levels[i - 1] + 1, `heading ${i} jumps from h${levels[i - 1]} to h${level}`); });
-  assert.equal(count(main, /<h4 class="seo-h4">(?:Garantăm|Nu garantăm)<\/h4>/g), 2);
+  assert.equal(count(main, /<h3 class="seo-res__hd">/g), 2);
   assert.ok(main.includes('Prețurile afișate sunt finale (Echipa de Tocilari SRL nu este plătitoare de TVA).'));
 });
 

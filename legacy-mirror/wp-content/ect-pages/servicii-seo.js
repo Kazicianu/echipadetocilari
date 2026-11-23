@@ -1,5 +1,5 @@
-/* Page script for /servicii-seo/: the GPTBot switch and the monthly report parts.
-   The markup already holds all the content: without this script the first report part stays visible. */
+/* Page script for /servicii-seo/: the GPTBot switch.
+   The markup already holds all the content: without this script the switch keeps its default state. */
 (() => {
   const page = document.querySelector('.ect-page--servicii-seo');
   if (!page) return;
@@ -13,28 +13,6 @@
       gpt.setAttribute('aria-checked', String(on));
       gpt.classList.toggle('is-on', on);
       if (label) label.textContent = gpt.getAttribute(on ? 'data-on' : 'data-off') || label.textContent;
-    });
-  }
-
-  /* Monthly report: pick a part to see its example in the preview. */
-  const keys = [...page.querySelectorAll('[data-seo-key]')];
-  const parts = [...page.querySelectorAll('.seo-doc .seo-dsec')];
-  if (keys.length && keys.length === parts.length) {
-    const pick = (index) => {
-      keys.forEach((key, i) => {
-        const on = i === index;
-        key.setAttribute('aria-pressed', String(on));
-        key.classList.toggle('is-on', on);
-        parts[i].classList.toggle('is-on', on);
-        const example = parts[i].querySelector('p');
-        if (example) example.hidden = !on;
-      });
-    };
-    keys.forEach((key, i) => {
-      const choose = () => pick(i);
-      key.addEventListener('click', choose);
-      key.addEventListener('focus', choose);
-      key.addEventListener('mouseenter', choose);
     });
   }
 })();
