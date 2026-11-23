@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
+import vm from 'node:vm';
 import { dictionary } from '../i18n/dictionary.mjs';
 import { seoServicesDictionary } from '../i18n/seo-services.mjs';
 import { roPageMeta } from '../i18n/meta-ro.mjs';
@@ -62,7 +63,9 @@ test('the head loads the page assets and drops the old inline styles', () => {
 });
 
 test('the AI section keeps the definitions and the crawler list, without assistant tabs', () => {
-  assert.equal(count(main, /role="tab(?:list|panel)?"/g), 0);
+  const ai = main.match(/<section class="seo-sec" id="ai" aria-labelledby="seo-ai-t">([\s\S]*?)<\/section>/)?.[1] ?? '';
+  assert.ok(ai.includes('class="seo-bot"'), 'the AI section is found');
+  assert.equal(count(ai, /role="tab(?:list|panel)?"/g), 0);
   assert.equal(count(main, /<li class="seo-def">/g), 6);
   assert.equal(count(main, /<div class="seo-bot">/g), 4);
   assert.doesNotMatch(main, /class="seo-limit"/);
@@ -253,4 +256,136 @@ test('the terms state the minimum contract and the audit shows its price', () =>
 test('the page avoids em dashes and diagonal arrows', () => {
   assert.doesNotMatch(page, /—/);
   assert.doesNotMatch(page, /[↖-↙]/);
+});
+
+const attrOf = (tag, name) => tag.match(new RegExp(`\\s${name}="([^"]*)"`))?.[1] ?? null;
+const planSection = () => main.match(/<section class="seo-sec seo-sec--s4" aria-labelledby="seo-3luni-t">([\s\S]*?)<\/section>/)?.[1] ?? '';
+
+test('the work plan shows one phase at a time in real tabs, with every phase in the markup', () => {
+  const section = planSection();
+  assert.equal(text(section.match(/<h2 class="seo-h2" id="seo-3luni-t">([\s\S]*?)<\/h2>/)?.[1] ?? ''), 'Ce se întâmplă după ce începem');
+  assert.doesNotMatch(section, /<input\b|seo-gantt|seo-steps|seo-c2/);
+  const lists = [...section.matchAll(/<div\b[^>]*role="tablist"[^>]*>/g)].map(([tag]) => tag);
+  assert.equal(lists.length, 1);
+  assert.equal(attrOf(lists[0], 'aria-label'), 'Etapele planului de lucru');
+  const tabs = [...section.matchAll(/(<button\b[^>]*role="tab"[^>]*>)([\s\S]*?)<\/button>/g)].map(([, tag, inner]) => ({ tag, inner }));
+  assert.equal(tabs.length, 3);
+  assert.deepEqual(tabs.map(({ tag }) => attrOf(tag, 'type')), ['button', 'button', 'button']);
+  assert.deepEqual(tabs.map(({ tag }) => attrOf(tag, 'aria-selected')), ['true', 'false', 'false']);
+  assert.deepEqual(tabs.map(({ tag }) => attrOf(tag, 'tabindex')), ['0', '-1', '-1']);
+  assert.deepEqual(tabs.map(({ inner }) => text(inner.match(/<span class="seo-phase-when">([\s\S]*?)<\/span>/)?.[1] ?? '')), ['Luna 1', 'Lunile 2-3', 'De la luna 4']);
+  assert.deepEqual(tabs.map(({ inner }) => text(inner.match(/<span class="seo-phase-t">([\s\S]*?)<\/span>/)?.[1] ?? '')), ['Audit și corecturi', 'Primele lucrări', 'Lună de lună']);
+  // The months strip and the contract pill repeat the phase, so the tab hides them from screen readers.
+  assert.equal(count(section, /class="seo-phase-x"/g), 6);
+  assert.equal(count(section, /<span class="seo-phase-x" aria-hidden="true">/g), 6);
+  const panels = [...section.matchAll(/<div\b[^>]*role="tabpanel"[^>]*>/g)].map(([tag]) => tag);
+  assert.equal(panels.length, 3);
+  tabs.forEach(({ tag }, i) => {
+    const panel = panels.find(candidate => attrOf(candidate, 'id') === attrOf(tag, 'aria-controls'));
+    assert.ok(panel, `tab ${i + 1} controls a panel`);
+    assert.equal(attrOf(panel, 'aria-labelledby'), attrOf(tag, 'id'));
+    assert.equal(attrOf(panel, 'tabindex'), '0');
+    assert.equal(/\shidden\b/.test(panel), i > 0, 'only the first phase starts visible');
+  });
+  assert.deepEqual([...section.matchAll(/<h3 class="seo-phase-h3">([^<]+)<\/h3>/g)].map(([, h3]) => h3), ['Audit și corecturi', 'Primele lucrări', 'Lună de lună']);
+  const bodies = section.split(/<div\b[^>]*role="tabpanel"[^>]*>/).slice(1);
+  assert.equal(bodies.length, 3);
+  for (const body of bodies) {
+    assert.deepEqual([...body.matchAll(/<h4 class="seo-phase-lt">[\s\S]*?<span>([^<]+)<\/span><\/h4>/g)].map(([, h4]) => h4), ['Ce facem noi', 'Ce faci tu', 'Ce vezi tu']);
+  }
+  // What the client does is plain text with a frequency chip, never a checkbox.
+  const chips = [...section.matchAll(/<span class="seo-phase-freq">[\s\S]*?<span class="seo-sr">Când: <\/span>([^<]+)<\/span>/g)].map(([, chip]) => chip);
+  assert.deepEqual(chips, ['o dată', 'o discuție', 'în 5 zile lucrătoare', 'când ai ocazia', 'lunar', 'lunar']);
+  assert.equal(count(section, /<span class="seo-phase-pill">Contract minim · 3 luni<\/span>/g), 2);
+  assert.equal(count(section, /<span class="seo-phase-pill seo-phase-pill--next">Apoi lunar · preaviz de 30 de zile<\/span>/g), 2);
+  assert.ok(text(section).includes('Etapele sunt aceleași în toate cele 4 pachete. Diferă cantitățile, nu ordinea.'));
+});
+
+test('every text of the work plan has an English pair', () => {
+  const section = planSection();
+  const keys = new Set([...seoServicesDictionary, ...dictionary].map(([ro]) => ro));
+  const nodes = [...section.matchAll(/>([^<>]*[A-Za-zĂÂÎȘȚăâîșț][^<>]*)</g)].map(([, node]) => node);
+  assert.ok(nodes.length > 60, `found ${nodes.length} text nodes`);
+  for (const node of nodes) assert.ok(keys.has(`>${node}<`), `no English pair for ">${node}<"`);
+  for (const [, label] of section.matchAll(/aria-label="([^"]+)"/g)) assert.ok(keys.has(`aria-label="${label}"`), `no English pair for aria-label="${label}"`);
+});
+
+test('the stylesheet drops the old roadmap and keeps every phase readable without scripting', () => {
+  const css = read('legacy-mirror/wp-content/ect-pages/servicii-seo.css');
+  assert.doesNotMatch(css, /\.seo-(?:gantt|track|bar|steps|step|two)(?![a-z])/);
+  assert.doesNotMatch(css, /seo-c2/);
+  assert.match(css, /\.seo-phase-panel\[hidden\] \{ display: none; \}/);
+  assert.match(css, /\.seo-phase-tab\[aria-selected="true"\]/);
+  // The frequency chips are small text on white: dark text, only the clock stays orange (#ff6c2a on white is 2.83:1).
+  assert.match(css, /\.seo-phase-freq \{[^}]*color: var\(--k\); \}/);
+  assert.match(css, /\.seo-phase-freq svg \{[^}]*color: var\(--o2\); \}/);
+  const fallback = css.match(/@media \(scripting: none\) \{([\s\S]*?)\n\}/)?.[1] ?? '';
+  assert.match(fallback, /\.seo-phase-tabs \{ display: none; \}/);
+  assert.match(fallback, /\.seo-phase-panel\[hidden\] \{ display: flex;[^}]*visibility: visible;/);
+});
+
+test('the plan tabs switch phases on click and with the keyboard, like WAI-ARIA tabs', () => {
+  const js = read('legacy-mirror/wp-content/ect-pages/servicii-seo.js');
+  const doc = { activeElement: null };
+  class Node {
+    constructor(attributes = {}) {
+      this.attributes = new Map(Object.entries(attributes));
+      this.listeners = new Map();
+      this.hidden = false;
+      this.tabIndex = 0;
+    }
+    setAttribute(name, value) { this.attributes.set(name, String(value)); }
+    getAttribute(name) { return this.attributes.has(name) ? this.attributes.get(name) : null; }
+    addEventListener(type, callback) {
+      if (!this.listeners.has(type)) this.listeners.set(type, []);
+      this.listeners.get(type).push(callback);
+    }
+    emit(type, properties = {}) {
+      const event = { defaultPrevented: false, preventDefault() { this.defaultPrevented = true; }, ...properties };
+      for (const callback of this.listeners.get(type) || []) callback(event);
+      return event;
+    }
+    focus() { doc.activeElement = this; }
+  }
+  const tabs = [1, 2, 3].map(n => new Node({ role: 'tab', 'aria-controls': `p${n}`, 'aria-selected': String(n === 1) }));
+  const panels = new Map([1, 2, 3].map(n => [`p${n}`, Object.assign(new Node({ role: 'tabpanel' }), { hidden: n !== 1 })]));
+  const tablist = new Node({ role: 'tablist' });
+  tablist.querySelectorAll = selector => (selector === '[role="tab"]' ? tabs : []);
+  const page = new Node();
+  page.querySelector = selector => (selector === '[data-seo-tabs] [role="tablist"]' ? tablist : null);
+  const column = { matches: false, listeners: [], addEventListener(type, callback) { if (type === 'change') this.listeners.push(callback); } };
+  doc.querySelector = selector => (selector === '.ect-page--servicii-seo' ? page : null);
+  doc.getElementById = id => panels.get(id) ?? null;
+  vm.runInNewContext(js, { document: doc, window: { matchMedia: query => (query === '(min-width: 1025px)' ? column : { matches: false }) } }, { filename: 'servicii-seo.js' });
+
+  const state = () => [
+    tabs.map(tab => (tab.getAttribute('aria-selected') === 'true' ? 1 : 0)).join(''),
+    [...panels.values()].map(panel => (panel.hidden ? 0 : 1)).join(''),
+    tabs.map(tab => tab.tabIndex).join(','),
+  ].join('|');
+  const first = '100|100|0,-1,-1';
+  const third = '001|001|-1,-1,0';
+  assert.equal(tablist.getAttribute('aria-orientation'), 'horizontal');
+  assert.equal(state(), first);
+  tabs[2].emit('click');
+  assert.equal(state(), third);
+  assert.ok(tabs[2].emit('keydown', { key: 'ArrowRight' }).defaultPrevented);
+  assert.equal(state(), first, 'the right arrow wraps to the first phase');
+  assert.equal(doc.activeElement, tabs[0]);
+  tabs[0].emit('keydown', { key: 'ArrowLeft' });
+  assert.equal(state(), third, 'the left arrow wraps to the last phase');
+  tabs[2].emit('keydown', { key: 'Home' });
+  assert.equal(state(), first);
+  tabs[0].emit('keydown', { key: 'End' });
+  assert.equal(state(), third);
+  assert.equal(tabs[2].emit('keydown', { key: 'ArrowDown' }).defaultPrevented, false, 'in a row of tabs the down arrow still scrolls the page');
+  assert.equal(state(), third);
+  column.matches = true;
+  column.listeners.forEach(callback => callback());
+  assert.equal(tablist.getAttribute('aria-orientation'), 'vertical');
+  tabs[2].emit('keydown', { key: 'ArrowDown' });
+  assert.equal(state(), first, 'in a column of tabs the down arrow moves on');
+  tabs[0].emit('keydown', { key: 'ArrowUp' });
+  assert.equal(state(), third);
+  assert.equal(tabs[2].emit('keydown', { key: 'Enter' }).defaultPrevented, false);
 });

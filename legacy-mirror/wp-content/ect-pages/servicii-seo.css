@@ -170,33 +170,153 @@
 .ect-page.ect-page--servicii-seo .seo-jobs__more { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; color: var(--k); }
 .ect-page.ect-page--servicii-seo .seo-jobs__more svg { width: 16px; height: 16px; transition: transform .3s var(--ease); }
 
-/* ---------- Section 4: plan and steps ---------- */
-.ect-page.ect-page--servicii-seo .seo-gantt { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 14px; padding: 20px 16px 24px; border: 1px solid var(--line); border-radius: 16px; background: #fff; box-shadow: var(--sh-s); }
-.ect-page.ect-page--servicii-seo .seo-gantt::before { content: ""; position: absolute; inset: 0 16px; background-image: linear-gradient(var(--line), var(--line)), linear-gradient(var(--line), var(--line)); background-size: 1px 100%, 1px 100%; background-position: 33.333% 0, 66.666% 0; background-repeat: no-repeat; pointer-events: none; }
-.ect-page.ect-page--servicii-seo .seo-gantt__hd { display: contents; }
-.ect-page.ect-page--servicii-seo .seo-gantt__hd span { padding: 0 0 14px 2px; border-bottom: 1px solid var(--line); font: 700 12px/1 var(--font-sans); letter-spacing: .02em; text-transform: uppercase; color: var(--k); }
-.ect-page.ect-page--servicii-seo .seo-gantt__hd span:nth-child(n+2) { padding-left: 8px; }
-.ect-page.ect-page--servicii-seo .seo-track { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); position: relative; }
-.ect-page.ect-page--servicii-seo .seo-track small { grid-column: 1 / -1; margin: 0 8px 8px 4px; font-size: 13px; font-weight: 600; line-height: 1.3; color: var(--k); }
-.ect-page.ect-page--servicii-seo .seo-track--c2 small { grid-column: 2 / 4; }
-.ect-page.ect-page--servicii-seo .seo-track--c3 small { grid-column: 2 / 4; text-align: right; }
-.ect-page.ect-page--servicii-seo .seo-bar { display: block; height: 10px; border-radius: 999px; background: linear-gradient(90deg, var(--o), var(--o2)); }
-.ect-page.ect-page--servicii-seo .seo-bar--c1 { grid-column: 1; margin: 0 8px 0 4px; }
-.ect-page.ect-page--servicii-seo .seo-bar--c2 { grid-column: 2; margin: 0 8px 0 4px; }
-.ect-page.ect-page--servicii-seo .seo-bar--c2b { grid-column: 2; margin: 0 8px 0 24%; }
-.ect-page.ect-page--servicii-seo .seo-bar--c3 { grid-column: 3; margin: 0 4px; background: linear-gradient(90deg, var(--o) 0%, rgba(255, 108, 42, 0) 100%); }
-.ect-page.ect-page--servicii-seo .seo-steps { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; margin-top: 20px; }
-.ect-page.ect-page--servicii-seo .seo-step { padding: 28px; border: 1px solid var(--line); border-radius: 16px; background: #fff; box-shadow: var(--sh-s); transition: transform .35s var(--ease), box-shadow .35s; }
-.ect-page.ect-page--servicii-seo .seo-step__hd { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
-.ect-page.ect-page--servicii-seo .seo-step__n { display: grid; place-items: center; width: 32px; height: 32px; border: 1.5px solid var(--o); border-radius: 50%; background: #fff; color: var(--k); font: 800 14px/1 var(--font-sans); }
-.ect-page.ect-page--servicii-seo .seo-step__hd small { font: 700 12px/1 var(--font-sans); letter-spacing: .08em; text-transform: uppercase; }
-.ect-page.ect-page--servicii-seo .seo-step h3 { margin: 0 0 20px; font: 800 22px/1.2 var(--font-sans); letter-spacing: -.01em; }
-.ect-page.ect-page--servicii-seo .seo-two { display: grid; gap: 20px; }
-.ect-page.ect-page--servicii-seo .seo-two h4 { display: flex; align-items: center; gap: 8px; margin: 0 0 10px; font: 700 12px/1 var(--font-sans); letter-spacing: .08em; text-transform: uppercase; color: var(--k); }
-.ect-page.ect-page--servicii-seo .seo-two h4::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--o); }
-.ect-page.ect-page--servicii-seo .seo-two ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
-.ect-page.ect-page--servicii-seo .seo-two li { position: relative; padding-left: 16px; font-size: 14.5px; line-height: 1.5; color: var(--m); }
-.ect-page.ect-page--servicii-seo .seo-two li::before { content: ""; position: absolute; left: 0; top: .62em; width: 5px; height: 1.5px; background: var(--k); }
+/* ---------- Section 4: the work plan, one phase at a time ---------- */
+/* Built from mockup C2 approved on 23.11.2026. The tabs follow the WAI-ARIA pattern (servicii-seo.js toggles aria-selected and hidden).
+   Phone: three tabs in a row (number and months), the chosen phase under them.
+   768px: the tabs show the phase title, and the phases share one grid cell, so the block is as tall as the longest phase and nothing jumps.
+   1025px: tabs in columns 1-4, the phase in columns 5-12.
+   Without scripting the tabs cannot switch: the tab row hides and every phase shows (rules at the end of this block). */
+.ect-page.ect-page--servicii-seo .seo-phase { --ph-or: var(--grain), linear-gradient(135deg, var(--o2) 0%, var(--o) 100%); position: relative; display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; }
+.ect-page.ect-page--servicii-seo .seo-phase-tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); min-width: 0; border-bottom: 1px solid var(--line); }
+.ect-page.ect-page--servicii-seo .seo-phase-tab { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; width: 100%; min-width: 0; min-height: 72px; margin: 0; padding: 10px 4px 16px; border: 0; border-radius: 0; background: none; color: var(--k); font: inherit; text-align: center; white-space: normal; cursor: pointer; -webkit-appearance: none; appearance: none; transition: none; }
+.ect-page.ect-page--servicii-seo .seo-phase-tab:focus { outline: none; }
+.ect-page.ect-page--servicii-seo .seo-phase-tab:focus-visible { outline: 3px solid var(--k); outline-offset: 2px; border-radius: 12px; }
+.ect-page.ect-page--servicii-seo .seo-phase-tab::after { content: ""; position: absolute; left: 10px; right: 10px; bottom: -1px; height: 3px; border-radius: 3px; background: var(--o); opacity: 0; transition: opacity .2s var(--ease); }
+.ect-page.ect-page--servicii-seo .seo-phase-tab[aria-selected="true"]::after { opacity: 1; }
+.ect-page.ect-page--servicii-seo .seo-phase-blob { --r: -6deg; --s: 1; position: relative; flex: none; display: grid; place-items: center; width: 44px; height: 44px; border: 2px solid var(--o); border-radius: 58% 42% 55% 45% / 52% 48% 52% 48%; background: #fff; transform: rotate(var(--r)) scale(var(--s)); transition: transform .3s var(--ease), border-color .3s var(--ease), box-shadow .3s var(--ease); }
+.ect-page.ect-page--servicii-seo .seo-phase-tab--2 .seo-phase-blob { --r: 4deg; }
+.ect-page.ect-page--servicii-seo .seo-phase-tab--3 .seo-phase-blob { --r: -2deg; }
+.ect-page.ect-page--servicii-seo .seo-phase-blob::before { content: ""; position: absolute; inset: -2px; border-radius: inherit; background: var(--ph-or); background-blend-mode: soft-light, normal; opacity: 0; transition: opacity .25s var(--ease); }
+.ect-page.ect-page--servicii-seo .seo-phase-blob b { position: relative; display: block; font: 900 22px/1 var(--font-sans); color: var(--o2); transform: rotate(calc(var(--r) * -1)); transition: color .25s var(--ease); }
+.ect-page.ect-page--servicii-seo .seo-phase-tab[aria-selected="true"] .seo-phase-blob { box-shadow: 0 12px 24px -12px rgba(253, 134, 73, .75); }
+.ect-page.ect-page--servicii-seo .seo-phase-tab[aria-selected="true"] .seo-phase-blob::before { opacity: 1; }
+.ect-page.ect-page--servicii-seo .seo-phase-tab[aria-selected="true"] .seo-phase-blob b { color: #fff; }
+.ect-page.ect-page--servicii-seo .seo-phase-txt { display: block; min-width: 0; }
+.ect-page.ect-page--servicii-seo .seo-phase-when { display: block; font: 700 13px/1.25 var(--font-sans); color: var(--k); text-wrap: balance; }
+/* On a phone the tab shows only the months; the title stays in the tab name for screen readers. */
+.ect-page.ect-page--servicii-seo .seo-phase-t { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+.ect-page.ect-page--servicii-seo .seo-phase-x { display: none; }
+.ect-page.ect-page--servicii-seo .seo-phase-strip { display: flex; align-items: flex-start; gap: 12px; }
+.ect-page.ect-page--servicii-seo .seo-phase-ms { display: flex; gap: 6px; }
+.ect-page.ect-page--servicii-seo .seo-phase-m { display: flex; flex-direction: column; align-items: center; gap: 5px; width: 30px; }
+.ect-page.ect-page--servicii-seo .seo-phase-m i { display: block; width: 30px; height: 10px; border-radius: 999px; background: #ececef; }
+.ect-page.ect-page--servicii-seo .seo-phase-m.is-on i { background: var(--ph-or); background-blend-mode: soft-light, normal; }
+.ect-page.ect-page--servicii-seo .seo-phase-m em { font: 700 11px/1 var(--mono); font-style: normal; color: var(--m); }
+.ect-page.ect-page--servicii-seo .seo-phase-more { display: block; width: 18px; height: 18px; margin-top: -4px; color: var(--o); }
+.ect-page.ect-page--servicii-seo .seo-phase-more svg { display: block; width: 18px; height: 18px; }
+.ect-page.ect-page--servicii-seo .seo-phase-pill { display: inline-block; padding: 7px 14px; border: 1.5px solid var(--o); border-radius: 999px; background: #fff; font: 700 13px/1.3 var(--font-sans); color: var(--k); }
+.ect-page.ect-page--servicii-seo .seo-phase-pill--next { border: 1.5px dashed #b4b4bd; font-weight: 600; }
+.ect-page.ect-page--servicii-seo .seo-phase-stage { display: grid; min-width: 0; }
+.ect-page.ect-page--servicii-seo .seo-phase-panel { position: relative; display: flex; flex-direction: column; min-width: 0; }
+.ect-page.ect-page--servicii-seo .seo-phase-panel[hidden] { display: none; }
+.ect-page.ect-page--servicii-seo .seo-phase-panel:not([hidden]) { animation: seo-phase-in .26s var(--ease) backwards; }
+.ect-page.ect-page--servicii-seo .seo-phase-panel:focus-visible { outline-offset: 6px; border-radius: 24px; }
+@keyframes seo-phase-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.ect-page.ect-page--servicii-seo .seo-phase-h3 { margin: 0 0 14px; font: 800 24px/1.15 var(--font-sans); letter-spacing: -.02em; color: var(--k); }
+.ect-page.ect-page--servicii-seo .seo-phase-pinfo { margin: 0 0 20px; }
+.ect-page.ect-page--servicii-seo .seo-phase-pinfo .seo-phase-strip { margin: 0 0 16px; }
+.ect-page.ect-page--servicii-seo .seo-phase-pinfo p { margin: 0; }
+.ect-page.ect-page--servicii-seo .seo-phase-bento { flex: 1; display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; min-width: 0; }
+.ect-page.ect-page--servicii-seo .seo-phase-tile { position: relative; min-width: 0; padding: 22px 20px 24px; border: 1px solid var(--line); border-radius: 24px; background: #fff; box-shadow: var(--sh-s); transition: transform .35s var(--ease), box-shadow .35s var(--ease); }
+.ect-page.ect-page--servicii-seo .seo-phase-tile--you { border-color: transparent; background: var(--ph-or); background-blend-mode: soft-light, normal; box-shadow: 0 24px 48px -24px rgba(253, 134, 73, .6); color: #fff; }
+.ect-page.ect-page--servicii-seo .seo-phase-lt { display: flex; align-items: center; gap: 10px; margin: 0 0 16px; font: 800 13px/1.2 var(--font-sans); letter-spacing: .1em; text-transform: uppercase; color: var(--k); }
+.ect-page.ect-page--servicii-seo .seo-phase-li { flex: none; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--o); color: #fff; }
+.ect-page.ect-page--servicii-seo .seo-phase-li svg { display: block; width: 15px; height: 15px; }
+.ect-page.ect-page--servicii-seo .seo-phase-tile--you .seo-phase-lt { color: #fff; }
+.ect-page.ect-page--servicii-seo .seo-phase-tile--you .seo-phase-li { background: #fff; color: var(--o); }
+.ect-page.ect-page--servicii-seo .seo-phase-tile--see .seo-phase-li { background: transparent; color: var(--k); box-shadow: inset 0 0 0 1.5px var(--k); }
+.ect-page.ect-page--servicii-seo .seo-phase-we, .ect-page.ect-page--servicii-seo .seo-phase-you, .ect-page.ect-page--servicii-seo .seo-phase-see { display: grid; margin: 0; padding: 0; list-style: none; }
+.ect-page.ect-page--servicii-seo .seo-phase-we, .ect-page.ect-page--servicii-seo .seo-phase-see { gap: 14px; }
+.ect-page.ect-page--servicii-seo .seo-phase-we li { position: relative; margin: 0; padding-left: 22px; font-size: 16px; line-height: 1.55; color: var(--m); }
+.ect-page.ect-page--servicii-seo .seo-phase-we li::before { content: ""; position: absolute; left: 0; top: .6em; width: 8px; height: 8px; border-radius: 50%; background: var(--o); }
+.ect-page.ect-page--servicii-seo .seo-phase-ghost { display: none; }
+.ect-page.ect-page--servicii-seo .seo-phase-task { margin: 0; padding: 12px 0; border-top: 1px solid rgba(255, 255, 255, .4); }
+.ect-page.ect-page--servicii-seo .seo-phase-task:first-child { padding-top: 0; border-top: 0; }
+.ect-page.ect-page--servicii-seo .seo-phase-task:last-child { padding-bottom: 0; }
+.ect-page.ect-page--servicii-seo .seo-phase-task > div { min-width: 0; }
+.ect-page.ect-page--servicii-seo .seo-phase-tt { display: block; font: 700 16px/1.4 var(--font-sans); color: var(--k); }
+.ect-page.ect-page--servicii-seo .seo-phase-tile--you .seo-phase-tt { color: #fff; }
+.ect-page.ect-page--servicii-seo .seo-phase-sub { display: block; margin-top: 3px; font: 500 15px/1.5 var(--font-sans); color: var(--m); }
+.ect-page.ect-page--servicii-seo .seo-phase-tile--you .seo-phase-sub { color: #fff; font-weight: 600; }
+.ect-page.ect-page--servicii-seo .seo-phase-freq { display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; padding: 5px 9px; border-radius: 8px; background: #fff; font: 700 12.5px/1.2 var(--mono); color: var(--k); }
+.ect-page.ect-page--servicii-seo .seo-phase-freq svg { flex: none; width: 14px; height: 14px; color: var(--o2); }
+.ect-page.ect-page--servicii-seo .seo-phase-get { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 14px; align-items: center; margin: 0; padding: 0; }
+.ect-page.ect-page--servicii-seo .seo-phase-gi { display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg); color: var(--o); }
+.ect-page.ect-page--servicii-seo .seo-phase-gi svg { display: block; width: 20px; height: 20px; }
+.ect-page.ect-page--servicii-seo .seo-phase-get .seo-phase-sub { margin-top: 2px; font-size: 14px; font-weight: 400; line-height: 1.5; }
+.ect-page.ect-page--servicii-seo .seo-phase-fn { display: flex; align-items: flex-start; gap: 10px; margin: 16px 0 0; font-size: 14.5px; line-height: 1.5; color: var(--m); }
+.ect-page.ect-page--servicii-seo .seo-phase-fn svg { flex: none; width: 18px; height: 18px; margin-top: 2px; color: var(--k); }
+@media (min-width: 768px) {
+  .ect-page.ect-page--servicii-seo .seo-phase { gap: 28px; }
+  .ect-page.ect-page--servicii-seo .seo-phase-tab { flex-direction: row; align-items: flex-start; gap: 14px; min-height: 88px; padding: 16px 12px 18px 4px; text-align: left; }
+  .ect-page.ect-page--servicii-seo .seo-phase-tab::after { left: 0; right: 12px; }
+  .ect-page.ect-page--servicii-seo .seo-phase-txt { padding-top: 7px; }
+  .ect-page.ect-page--servicii-seo .seo-phase-blob { width: 52px; height: 52px; }
+  .ect-page.ect-page--servicii-seo .seo-phase-blob b { font-size: 26px; }
+  .ect-page.ect-page--servicii-seo .seo-phase-when { font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+  .ect-page.ect-page--servicii-seo .seo-phase-t { position: static; display: block; width: auto; height: auto; margin: 5px 0 0; overflow: visible; clip-path: none; white-space: normal; font: 700 20px/1.15 var(--font-sans); letter-spacing: -.02em; color: var(--k); text-wrap: balance; }
+  .ect-page.ect-page--servicii-seo .seo-phase-tab[aria-selected="true"] .seo-phase-t { font-weight: 800; }
+  .ect-page.ect-page--servicii-seo .seo-phase-panel { grid-area: 1 / 1; }
+  .ect-page.ect-page--servicii-seo .seo-phase-panel[hidden] { display: flex; visibility: hidden; pointer-events: none; }
+  .ect-page.ect-page--servicii-seo .seo-phase-h3 { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+  .ect-page.ect-page--servicii-seo .seo-phase-pinfo { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; margin: 0 0 22px; }
+  .ect-page.ect-page--servicii-seo .seo-phase-pinfo .seo-phase-strip { margin: 0; }
+  .ect-page.ect-page--servicii-seo .seo-phase-bento { grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr); gap: 16px; }
+  .ect-page.ect-page--servicii-seo .seo-phase-tile { padding: 24px 22px 26px; }
+  .ect-page.ect-page--servicii-seo .seo-phase-tile--we { grid-row: 1 / span 2; overflow: hidden; }
+  .ect-page.ect-page--servicii-seo .seo-phase-tile--we .seo-phase-lt, .ect-page.ect-page--servicii-seo .seo-phase-tile--we .seo-phase-we { position: relative; z-index: 1; }
+  .ect-page.ect-page--servicii-seo .seo-phase-ghost { position: absolute; right: 26px; bottom: 14px; z-index: 0; display: block; font: 900 168px/.8 var(--font-sans); color: #f1f1f4; pointer-events: none; user-select: none; }
+  .ect-page.ect-page--servicii-seo .seo-phase-fn { margin-top: 12px; }
+}
+@media (min-width: 1025px) {
+  .ect-page.ect-page--servicii-seo .seo-phase { grid-template-columns: repeat(12, minmax(0, 1fr)); grid-template-rows: auto minmax(0, 1fr); column-gap: 24px; row-gap: 0; }
+  .ect-page.ect-page--servicii-seo .seo-phase-tabs { grid-column: 1 / span 4; grid-row: 1; align-self: start; display: block; border-top: 1px solid var(--line); border-bottom: 0; }
+  .ect-page.ect-page--servicii-seo .seo-phase-tab { align-items: flex-start; gap: 16px; min-height: 88px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+  .ect-page.ect-page--servicii-seo .seo-phase-tab::after { display: none; }
+  .ect-page.ect-page--servicii-seo .seo-phase-blob { width: 64px; height: 64px; }
+  .ect-page.ect-page--servicii-seo .seo-phase-blob b { font-size: 32px; }
+  .ect-page.ect-page--servicii-seo .seo-phase-txt { padding-top: 6px; }
+  .ect-page.ect-page--servicii-seo .seo-phase-when { font-size: 13px; }
+  .ect-page.ect-page--servicii-seo .seo-phase-t { margin-top: 6px; font-size: 24px; line-height: 1.15; }
+  .ect-page.ect-page--servicii-seo .seo-phase-x { margin-top: 14px; }
+  .ect-page.ect-page--servicii-seo .seo-phase-tab[aria-selected="true"] .seo-phase-x { display: block; }
+  /* The selected tab shows the months and the contract; in the phase they stay only for screen readers. */
+  .ect-page.ect-page--servicii-seo .seo-phase-pinfo { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+  .ect-page.ect-page--servicii-seo .seo-phase-stage { grid-column: 5 / span 8; grid-row: 1 / span 2; }
+  .ect-page.ect-page--servicii-seo .seo-phase-bento { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 24px; }
+  .ect-page.ect-page--servicii-seo .seo-phase-tile { padding: 27px 28px 30px; }
+  .ect-page.ect-page--servicii-seo .seo-phase-tile--you { padding: 27px 26px 26px; }
+  .ect-page.ect-page--servicii-seo .seo-phase-tile--see { padding: 24px 26px 26px; }
+  .ect-page.ect-page--servicii-seo .seo-phase-fn { grid-column: 1 / span 4; grid-row: 2; align-self: start; margin: 24px 0 0; }
+}
+@media (min-width: 1025px) and (max-width: 1279px) {
+  .ect-page.ect-page--servicii-seo .seo-phase-tab { gap: 14px; }
+  .ect-page.ect-page--servicii-seo .seo-phase-strip { gap: 8px; }
+  .ect-page.ect-page--servicii-seo .seo-phase-ms { gap: 5px; }
+  .ect-page.ect-page--servicii-seo .seo-phase-m, .ect-page.ect-page--servicii-seo .seo-phase-m i { width: 26px; }
+}
+@media (hover: hover) {
+  .ect-page.ect-page--servicii-seo .seo-phase-tab:hover .seo-phase-blob { --s: 1.06; border-color: var(--o2); }
+}
+@media (hover: hover) and (min-width: 1025px) {
+  .ect-page.ect-page--servicii-seo .seo-phase-tile:hover { transform: translateY(-4px); box-shadow: var(--sh); }
+  .ect-page.ect-page--servicii-seo .seo-phase-tile--you:hover { box-shadow: 0 32px 56px -22px rgba(253, 134, 73, .8); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ect-page.ect-page--servicii-seo .seo-phase-tab:hover .seo-phase-blob { --s: 1; }
+  .ect-page.ect-page--servicii-seo .seo-phase-tab .seo-phase-blob:hover { transform: rotate(var(--r)) !important; }
+}
+@media (scripting: none) {
+  .ect-page.ect-page--servicii-seo .seo-phase-tabs { display: none; }
+  .ect-page.ect-page--servicii-seo .seo-phase-stage { gap: 40px; }
+  .ect-page.ect-page--servicii-seo .seo-phase-panel, .ect-page.ect-page--servicii-seo .seo-phase-panel[hidden] { display: flex; grid-area: auto; visibility: visible; pointer-events: auto; }
+  .ect-page.ect-page--servicii-seo .seo-phase-h3 { position: static; width: auto; height: auto; margin: 0 0 14px; overflow: visible; clip-path: none; white-space: normal; }
+  .ect-page.ect-page--servicii-seo .seo-phase-pinfo { position: static; width: auto; height: auto; overflow: visible; clip-path: none; white-space: normal; }
+}
+@media (scripting: none) and (min-width: 1025px) {
+  .ect-page.ect-page--servicii-seo .seo-phase-pinfo { margin: 0 0 22px; }
+  .ect-page.ect-page--servicii-seo .seo-phase-stage, .ect-page.ect-page--servicii-seo .seo-phase-fn { grid-column: 1 / -1; grid-row: auto; }
+}
 
 /* ---------- Section 5: how you know SEO works (what we guarantee, what we measure) ---------- */
 .ect-page.ect-page--servicii-seo .seo-res { display: grid; grid-template-columns: minmax(0, 1fr); }
@@ -437,13 +557,6 @@
   .ect-page.ect-page--servicii-seo .seo-band__in { flex-direction: row; align-items: center; gap: 32px; }
   .ect-page.ect-page--servicii-seo .seo-jobs { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
   .ect-page.ect-page--servicii-seo .seo-jobs__foot { margin-top: 20px; }
-  .ect-page.ect-page--servicii-seo .seo-gantt { padding: 24px 28px 28px; }
-  .ect-page.ect-page--servicii-seo .seo-gantt::before { inset: 0 28px; }
-  .ect-page.ect-page--servicii-seo .seo-gantt__hd span { padding: 0 0 14px 4px; letter-spacing: .08em; }
-  .ect-page.ect-page--servicii-seo .seo-gantt__hd span:nth-child(n+2) { padding-left: 16px; }
-  .ect-page.ect-page--servicii-seo .seo-track small { font-size: 13.5px; }
-  .ect-page.ect-page--servicii-seo .seo-track--c3 small { grid-column: 3; text-align: left; }
-  .ect-page.ect-page--servicii-seo .seo-steps { gap: 20px; }
   .ect-page.ect-page--servicii-seo .seo-who, .ect-page.ect-page--servicii-seo .seo-notes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .ect-page.ect-page--servicii-seo .seo-prices { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .ect-page.ect-page--servicii-seo .seo-base { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px 32px; padding: 28px; }
@@ -489,7 +602,7 @@
   .ect-page.ect-page--servicii-seo .seo-res-also li + li { padding-top: 0; border-top: 0; }
 }
 @media (min-width: 768px) and (hover: hover) {
-  .ect-page.ect-page--servicii-seo .seo-def:hover, .ect-page.ect-page--servicii-seo .seo-step:hover, .ect-page.ect-page--servicii-seo .seo-job:hover { transform: translateY(-3px); box-shadow: var(--sh); }
+  .ect-page.ect-page--servicii-seo .seo-def:hover, .ect-page.ect-page--servicii-seo .seo-job:hover { transform: translateY(-3px); box-shadow: var(--sh); }
   .ect-page.ect-page--servicii-seo .seo-jobs__more:hover svg { transform: translateX(3px); }
   .ect-page.ect-page--servicii-seo .seo-res-card:hover { transform: translateY(-3px); box-shadow: var(--sh); }
   .ect-page.ect-page--servicii-seo .seo-res-card--us:hover { box-shadow: 0 1px 2px rgba(39, 39, 45, .04), 0 28px 52px -24px rgba(253, 134, 73, .7); }
@@ -508,8 +621,6 @@
   .ect-page.ect-page--servicii-seo .seo-cwv { gap: 10px; }
   .ect-page.ect-page--servicii-seo .seo-cite { gap: 9px; }
   .ect-page.ect-page--servicii-seo .seo-plan__doc { width: 38px; height: 46px; background-position: 5px 8px, 5px 16px, 5px 22px, 5px 28px; }
-  .ect-page.ect-page--servicii-seo .seo-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
-  .ect-page.ect-page--servicii-seo .seo-step { padding: 24px 22px; }
   .ect-page.ect-page--servicii-seo .seo-notes { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 64px; }
   .ect-page.ect-page--servicii-seo .seo-pblock { margin-top: 88px; }
   .ect-page.ect-page--servicii-seo .seo-pblock__t { font-size: 28px; }
@@ -573,7 +684,6 @@
   .ect-page.ect-page--servicii-seo .seo-hero__grid { gap: 56px; }
   .ect-page.ect-page--servicii-seo .seo-price__for { min-height: 3.2em; }
   .ect-page.ect-page--servicii-seo .seo-bots { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .ect-page.ect-page--servicii-seo .seo-step { padding: 28px; }
   .ect-page.ect-page--servicii-seo .seo-prices { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
   .ect-page.ect-page--servicii-seo .seo-price { padding: 28px 22px; }
   .ect-page.ect-page--servicii-seo .seo-price__amt { font-size: 46px; }
