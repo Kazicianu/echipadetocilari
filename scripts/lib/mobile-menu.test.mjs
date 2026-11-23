@@ -80,6 +80,10 @@ test('the expanding mobile menu preserves every available translated link on eac
         { href: route.en || '/en/', current: language === 'en' ? 'true' : undefined, label: 'EN' },
       ], `${label}: footer offers the matching translation or the English homepage`);
       if (!route.en) assert.match(enhanced, /aria-label="EN: English homepage"/, `${label}: fallback destination is named clearly`);
+      assert.ok(original.includes('class="ect-lang-liquid"'), `${label}: the desktop chip carries its motion layer`);
+      const footer = enhanced.match(/<div class="ect-mobile-menu-footer">([\s\S]*?)<\/div>/i)?.[1] || '';
+      assert.equal((footer.match(/<a\b/g) || []).length, 2, `${label}: the phone menu footer holds exactly the two language links`);
+      assert.ok(!footer.includes('ect-lang-liquid'), `${label}: the chip's motion layer is not copied into the phone menu`);
     }
   }
   assert.ok(checkedCurrentLinks >= 4, 'covers actual current-page mobile links in both languages');

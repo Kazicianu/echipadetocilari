@@ -36,7 +36,9 @@ export function enhanceMobileMenu(html, { pageUrl } = {}) {
       .replace(/\s(?:tabindex|id)="[^"]*"/g, '')}</li>`).join('\n');
   // The header switch already names a RO-only page's EN link as the English homepage.
   const language = header.match(/<nav\b[^>]*id="ect-lang-switch"[^>]*>([\s\S]*?)<\/nav>/i)?.[1] || '';
-  const footer = language.replace(/<a\b/g, '<a class="ect-mobile-menu-footer-link"');
+  // Only the links: the chip's decorative motion layer must not be copied into the phone menu.
+  const footer = [...language.matchAll(/<a\b[\s\S]*?<\/a>/gi)]
+    .map(([anchor]) => anchor.replace(/<a\b/, '<a class="ect-mobile-menu-footer-link"')).join('\n');
   const button = `<span class="ect-mobile-menu-slot"><button type="button" class="ect-mobile-menu-toggle" aria-expanded="false" aria-controls="ect-mobile-menu" aria-label="${open}" data-open-label="${open}" data-close-label="${close}"><span class="ect-mobile-menu-icon" aria-hidden="true"><span></span><span></span></span></button></span>`;
   // Keep the original links available even if JavaScript fails to load.
   const fallback = menu.replace('aria-hidden="true"', 'aria-hidden="false"')

@@ -154,6 +154,11 @@
     gap: 20px;
   }
 
+  /* "Got an idea?" is longer than "Ai o idee?": one width for both keeps the RO | EN switch in place between languages. */
+  #top .elementor-element-682f9a60 .elementor-button {
+    min-width: calc(6.25em + 60px);
+  }
+
   #top .elementor-element-682f9a60::before {
     content: "";
     display: block;
