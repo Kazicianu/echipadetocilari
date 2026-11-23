@@ -124,6 +124,7 @@
 /* Phones: the logo is centred above the columns. */
 @media (max-width: 639px) {
   .ect-footer__brand { text-align: center; }
+  .ect-footer__brand .ect-footer__logo img { width: 112px; }
 }
 
 .ect-footer .ect-footer__logo {
