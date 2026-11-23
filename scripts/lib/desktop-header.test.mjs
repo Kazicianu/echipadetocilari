@@ -107,3 +107,8 @@ test('menu copy follows the content rules', () => {
   assert.doesNotMatch(text, /[↖-↙]/, 'no diagonal arrows');
   assert.doesNotMatch(text, /[ŞşŢţ]/, 'comma-below ș and ț only');
 });
+
+test('the current language link stays clear under the drop, so a leaning drop keeps its shape', () => {
+  const css = readFileSync(path.join(source, 'wp-content/ect-pages/desktop-header.css'), 'utf8');
+  assert.match(css, /#top #ect-lang-switch:has\(\.ect-lang-liquid\) a\[aria-current="true"\],\s*#top #ect-lang-switch:has\(\.ect-lang-liquid\) a\[aria-current="true"\]:hover \{\s*background: transparent;\s*\}/);
+});

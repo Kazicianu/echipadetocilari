@@ -97,12 +97,24 @@ const STYLES = `
 html.ect-lang-anim #ect-lang-switch a{background:transparent!important;color:#5b6575!important;transition:none!important}
 /* At rest a focused link sits above the drop, so its keyboard ring shows whole; while it moves, the drop's labels stay on top. */
 html:not(.ect-lang-anim) #ect-lang-switch a:focus-visible{position:relative;z-index:2}
-html.ect-lang-anim.ect-lang-leave.ect-lang-to-en #ect-lang-switch .ect-lang-liquid{animation:ect-lang-stretch-en .245s cubic-bezier(.6,0,.4,1) both}
-html.ect-lang-anim.ect-lang-leave.ect-lang-to-ro #ect-lang-switch .ect-lang-liquid{animation:ect-lang-stretch-ro .245s cubic-bezier(.6,0,.4,1) both}
+/* Hover (on devices that hover) or keyboard focus on the other language: the drop leans about 10px toward it. */
+#ect-lang-switch:has(a[lang="en"]:not([aria-current="true"]):focus-visible) .ect-lang-liquid{clip-path:inset(2px 34px 2px 0 round 20px)}
+#ect-lang-switch:has(a[lang="ro"]:not([aria-current="true"]):focus-visible) .ect-lang-liquid{clip-path:inset(2px 0 2px 34px round 20px)}
+@media (hover:hover){
+#ect-lang-switch:has(a[lang="en"]:not([aria-current="true"]):hover) .ect-lang-liquid{clip-path:inset(2px 34px 2px 0 round 20px)}
+#ect-lang-switch:has(a[lang="ro"]:not([aria-current="true"]):hover) .ect-lang-liquid{clip-path:inset(2px 0 2px 34px round 20px)}
+}
+/* It leans out in .26s and springs back in .42s; with reduced motion it simply changes. */
+@media (prefers-reduced-motion:no-preference){
+#ect-lang-switch .ect-lang-liquid{transition:clip-path .42s cubic-bezier(.34,1.56,.64,1)}
+#ect-lang-switch:has(a:not([aria-current="true"]):is(:hover,:focus-visible)) .ect-lang-liquid{transition-duration:.26s;transition-timing-function:cubic-bezier(.3,0,.3,1)}
+}
+/* While the switch runs nothing transitions, and the stretch has no fixed start: it leaves from wherever the drop is, at rest or leaning. */
+html.ect-lang-anim #ect-lang-switch .ect-lang-liquid{transition:none!important}
+html.ect-lang-anim.ect-lang-leave #ect-lang-switch .ect-lang-liquid{animation:ect-lang-stretch .245s cubic-bezier(.6,0,.4,1) both}
 html.ect-lang-anim.ect-lang-arrive.ect-lang-to-en #ect-lang-switch .ect-lang-liquid{animation:ect-lang-settle-en .475s both}
 html.ect-lang-anim.ect-lang-arrive.ect-lang-to-ro #ect-lang-switch .ect-lang-liquid{animation:ect-lang-settle-ro .475s both}
-@keyframes ect-lang-stretch-en{from{clip-path:inset(0 44px 0 0 round 22px)}to{clip-path:inset(3px 0 3px 0 round 19px)}}
-@keyframes ect-lang-stretch-ro{from{clip-path:inset(0 0 0 44px round 22px)}to{clip-path:inset(3px 0 3px 0 round 19px)}}
+@keyframes ect-lang-stretch{to{clip-path:inset(3px 0 3px 0 round 19px)}}
 @keyframes ect-lang-settle-en{
   0%{clip-path:inset(3px 0 3px 0 round 19px);animation-timing-function:cubic-bezier(.7,0,.3,1)}
   39.4%{clip-path:inset(0 0 0 49px round 22px);animation-timing-function:cubic-bezier(.3,0,.3,1)}

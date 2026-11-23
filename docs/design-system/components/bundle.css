@@ -1400,7 +1400,8 @@
 .ect-lang { position: relative; display: inline-flex; align-items: center; border: 1px solid var(--line-menu); border-radius: var(--radius-pill); background: var(--white); font-family: var(--font-sans); line-height: 1; }
 .ect-lang a { box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; width: 44px; min-width: 44px; height: 44px; padding: 0; border-radius: var(--radius-pill); background: transparent; color: var(--slate); font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-decoration: none; transition: background 0.15s, color 0.15s; }
 .ect-lang a[aria-current="true"], .ect-lang a[aria-current="true"]:hover { background: var(--orange); color: var(--white); }
-.ect-lang a:not([aria-current="true"]):hover { background: var(--peach-menu); color: var(--orange-deep); }
+/* Hover or keyboard focus on the other half: no fill, an `ink` label. On the site the `orange` drop also leans about 10px toward it; this preview has no drop. */
+.ect-lang a:not([aria-current="true"]):hover, .ect-lang a:not([aria-current="true"]):focus-visible { background: transparent; color: var(--ink); }
 .ect-lang a:focus-visible { outline: 2px solid var(--orange-deep); outline-offset: 3px; }
 /* In the header from 768 to 1024px: a 2px `orange` outline with `shadow-switch`, square halves split by a faint line */
 @container ect-header (max-width: 1024px) {

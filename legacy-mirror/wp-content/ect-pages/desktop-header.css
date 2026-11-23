@@ -342,9 +342,17 @@
     color: #fff;
   }
 
-  #top #ect-lang-switch a:not([aria-current="true"]):hover {
-    background: #fff2eb;
-    color: #ad420f;
+  /* With the orange drop (#ect-lang-css) in place, the drop paints the current half: the link stays clear, so a leaning drop keeps its shape. */
+  #top #ect-lang-switch:has(.ect-lang-liquid) a[aria-current="true"],
+  #top #ect-lang-switch:has(.ect-lang-liquid) a[aria-current="true"]:hover {
+    background: transparent;
+  }
+
+  /* The other language on hover or keyboard focus: no fill, a darker label; the orange drop leans toward it (#ect-lang-css). */
+  #top #ect-lang-switch a:not([aria-current="true"]):hover,
+  #top #ect-lang-switch a:not([aria-current="true"]):focus-visible {
+    background: transparent;
+    color: #27272d;
   }
 
   #top #ect-lang-switch a:focus-visible {

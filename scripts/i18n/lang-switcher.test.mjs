@@ -11,6 +11,7 @@ const roOnly = routes.filter(route => !route.en).map(route => route.ro);
 const nav = html => html.match(/<nav id="ect-lang-switch"[\s\S]*?<\/nav>/i)?.[0] || '';
 const dataFrom = html => html.match(/<script id="ect-lang-js" data-from="([^"]*)">/)?.[1];
 const count = (html, pattern) => (html.match(pattern) || []).length;
+const switchCss = html => (html.match(/<style id="ect-lang-css">([\s\S]*?)<\/style>/)?.[1] || '').replace(/\n\s*/g, '');
 
 test('the chip carries an aria-hidden motion layer after the links, marked with the current language', () => {
   const cases = [
@@ -58,6 +59,22 @@ test('a keyboard-focused link rises above the drop only at rest, never while it 
   const html = injectLangSwitcher(PAGE, 'ro', '/', '/en/');
   assert.ok(html.includes('html:not(.ect-lang-anim) #ect-lang-switch a:focus-visible{position:relative;z-index:2}'));
   assert.equal(count(html, /#ect-lang-switch a:focus-visible\{[^}]*z-index/g), 1, 'no unscoped rule that would lift a link over the moving drop');
+});
+
+test('hover or keyboard focus on the other language makes the drop lean toward it', () => {
+  const css = switchCss(injectLangSwitcher(PAGE, 'ro', '/', '/en/'));
+  assert.ok(css.includes('#ect-lang-switch:has(a[lang="en"]:not([aria-current="true"]):focus-visible) .ect-lang-liquid{clip-path:inset(2px 34px 2px 0 round 20px)}'));
+  assert.ok(css.includes('#ect-lang-switch:has(a[lang="ro"]:not([aria-current="true"]):focus-visible) .ect-lang-liquid{clip-path:inset(2px 0 2px 34px round 20px)}'));
+  assert.ok(css.includes('@media (hover:hover){#ect-lang-switch:has(a[lang="en"]:not([aria-current="true"]):hover) .ect-lang-liquid{clip-path:inset(2px 34px 2px 0 round 20px)}#ect-lang-switch:has(a[lang="ro"]:not([aria-current="true"]):hover) .ect-lang-liquid{clip-path:inset(2px 0 2px 34px round 20px)}}'), 'the mouse lean only on devices that hover');
+  assert.ok(css.includes('@media (prefers-reduced-motion:no-preference){#ect-lang-switch .ect-lang-liquid{transition:clip-path .42s cubic-bezier(.34,1.56,.64,1)}'), 'the lean moves only for visitors who accept motion');
+});
+
+test('the stretch leaves from wherever the drop is, with transitions off while the switch runs', () => {
+  const css = switchCss(injectLangSwitcher(PAGE, 'ro', '/', '/en/'));
+  assert.ok(css.includes('@keyframes ect-lang-stretch{to{clip-path:inset(3px 0 3px 0 round 19px)}}'));
+  assert.ok(!/@keyframes ect-lang-stretch[^{]*\{from/.test(css), 'no fixed start: a leaning drop must not jump back before it stretches');
+  assert.ok(css.includes('html.ect-lang-anim #ect-lang-switch .ect-lang-liquid{transition:none!important}'));
+  assert.ok(css.includes('html.ect-lang-anim.ect-lang-leave #ect-lang-switch .ect-lang-liquid{animation:ect-lang-stretch .245s cubic-bezier(.6,0,.4,1) both}'));
 });
 
 test('the script is plain, self-contained and stores nothing in the browser', () => {
