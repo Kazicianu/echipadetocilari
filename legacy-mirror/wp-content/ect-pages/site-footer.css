@@ -7,7 +7,7 @@
 }
 
 /*
- * A rounded card with the office-balcony illustration across its whole surface. The copy sits
+ * A full-width band with the office-balcony illustration across its whole surface. The copy sits
  * on the white sky (top left), the scene fills the bottom and climbs on the right.
  * Free sky in the artwork, as % of its width / height (first non-sky pixel from the top):
  * x 0-38% -> 65%, 40-46% -> 62%, 48-52% -> 58%, 54-60% -> 45%, 62-78% -> 39% to 28%,
@@ -16,17 +16,16 @@
  * scales with it) and the inner padding-bottom keeps the lower part of the artwork clear.
  */
 .ect-footer {
-  --ect-footer-gutter: clamp(8px, 1.1vw, 20px);
   /* Height of the artwork: its own 16:9 ratio, never shorter than 300px (phones crop the sides). */
   --ect-footer-art: max(56.25cqw, 300px);
   --ect-footer-fade: 22%;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   position: relative;
-  margin: 0 max(var(--ect-footer-gutter), (100% - 1880px) / 2) var(--ect-footer-gutter);
+  margin: 0;
   padding: 0;
-  border: 1px solid #e9e9e9;
-  border-radius: clamp(16px, 1.8vw, 28px);
+  border: 0;
+  border-radius: 0;
   background: #fefefe; /* the flat sky of balconul-tocilarilor-*.webp, as decoded */
   overflow: hidden;
   overflow: clip;
@@ -396,9 +395,9 @@
     --ect-footer-fade: 18%;
   }
 
-  /* The copy ends at 46% of the artwork's height. */
+  /* The copy ends at 36% of the artwork's height, clear of the faded branches. */
   .ect-footer__inner {
-    padding-bottom: 30.4%;
+    padding-bottom: 36%;
   }
 
   .ect-footer__top {
