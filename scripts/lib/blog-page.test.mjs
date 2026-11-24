@@ -198,3 +198,11 @@ test('Blog, BlogPosting and BreadcrumbList schema helpers emit valid linked enti
   assert.equal(bc.itemListElement[1].item, `${site}/blog/`);
   assert.equal('item' in bc.itemListElement[2], false);
 });
+
+test('/blog/ keeps peach out of the index styles (white with orange outlines instead)', () => {
+  const lower = css.toLowerCase();
+  for (const hex of ['#fff0e7', '#fff5ed', '#ffe6d7', '#fff6f0', '#ffe8db', '#f5ddce']) {
+    assert.ok(!lower.includes(hex), `blog.css still uses ${hex}`);
+  }
+  assert.doesNotMatch(css, /--bg-peach|--bg-warm|--border-warm/);
+});
