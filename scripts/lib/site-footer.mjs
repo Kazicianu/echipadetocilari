@@ -1,8 +1,10 @@
 /**
- * The shared site footer (RO, EN and 404) in the Metricra layout: the logo, then Services, Company,
- * Contact (with the two orange social discs under the email) and Legal, and the coffee-cup signature,
- * all on the cloudy sky of the balcony illustration. Runs in the second build loop, after the EN
- * pages exist, so the footer never passes through the translation dictionary.
+ * The shared site footer (RO, EN and 404) in the Metricra layout: the logo, then Services, Company
+ * and Contact (with the two orange social discs under the email) on the cloudy sky of the balcony
+ * illustration, and a bar with Legal and the coffee-cup signature (`.ect-footer__bar`). On phones
+ * and tablets below 920px the bar flows in the text, last, under the columns; from 920px it is a
+ * white 72px strip under the illustration. One HTML for every width. Runs in the second build
+ * loop, after the EN pages exist, so the footer never passes through the translation dictionary.
  *
  * Only what the law and good practice need stays here (decided 23.11.2026): the company details
  * required by Law 365/2002 art. 5 and Law 31/1990 art. 74 live on the terms page linked under
@@ -129,9 +131,11 @@ export function footerMarkup(language, openTag) {
      <li><a href="${LINKEDIN_URL}" aria-label="LinkedIn">${mark(SOCIAL_MARKS.linkedin)}</a></li>
     </ul>
    </div>
-   <nav class="ect-footer__col ect-footer__col--legal" aria-label="${escapeAttr(copy.legal)}"><p class="ect-footer__label">${escapeHtml(copy.legal)}</p><ul><li><a href="${escapeAttr(TERMS_PATHS[language])}">${escapeHtml(copy.terms)}</a></li><li><a href="${escapeAttr(PRIVACY_PATHS[language])}" data-ect-footer-privacy>${escapeHtml(consent.footerPolicy)}</a></li><li><button type="button" class="ect-consent-open" data-ect-consent-open hidden>${escapeHtml(consent.footerSettings)}</button></li></ul></nav>
   </div>
-  <p class="ect-footer__madewith">${escapeHtml(copy.madeWith)} <img class="ect-footer__cup" src="${CUP}" width="117" height="128" alt="${escapeAttr(copy.cupAlt)}" loading="lazy" decoding="async"> ${escapeHtml(copy.madeBy)} <a class="ect-footer__team" href="${escapeAttr(copy.home)}">Echipa de Tocilari</a></p>
+  <div class="ect-footer__bar">
+   <nav class="ect-footer__col ect-footer__col--legal" aria-label="${escapeAttr(copy.legal)}"><p class="ect-footer__label">${escapeHtml(copy.legal)}</p><ul><li><a href="${escapeAttr(TERMS_PATHS[language])}">${escapeHtml(copy.terms)}</a></li><li><a href="${escapeAttr(PRIVACY_PATHS[language])}" data-ect-footer-privacy>${escapeHtml(consent.footerPolicy)}</a></li><li><button type="button" class="ect-consent-open" data-ect-consent-open hidden>${escapeHtml(consent.footerSettings)}</button></li></ul></nav>
+   <p class="ect-footer__madewith">${escapeHtml(copy.madeWith)} <img class="ect-footer__cup" src="${CUP}" width="117" height="128" alt="${escapeAttr(copy.cupAlt)}" loading="lazy" decoding="async"> ${escapeHtml(copy.madeBy)} <a class="ect-footer__team" href="${escapeAttr(copy.home)}">Echipa de Tocilari</a></p>
+  </div>
  </div>
  <div class="ect-footer__art" aria-hidden="true"><img src="${ART_BASE}-1152.webp" srcset="${ART_BASE}-768.webp 768w, ${ART_BASE}-1152.webp 1152w, ${ART_BASE}-1536.webp 1536w, ${ART_BASE}-2048.webp 2048w" sizes="(max-width: 639px) 580px, 100vw" width="2048" height="1024" alt="" loading="lazy" decoding="async"></div>
 ${backToTop(BACK_TO_TOP[language])}

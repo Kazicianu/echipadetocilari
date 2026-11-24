@@ -94,18 +94,18 @@
   position: fixed;
 }
 
-/* Phones: the copy ends where the artwork begins; its top band blends into the footer background. */
+/* Phones (variant A): the copy ends 24px above the artwork (50% is of the footer width, like the artwork, which is 290px at minimum); its top band blends into the footer background. */
 .ect-footer__inner {
   --ect-footer-content-top: clamp(24px, 3.5vw, 48px);
   grid-area: 1 / 1;
   width: min(100% - 40px, 1200px);
   margin-inline: auto;
-  padding-block: calc(var(--ect-footer-content-top) + var(--ect-footer-wave-overlap, 0px) / 2) max(50%, 298px);
+  padding-block: calc(var(--ect-footer-content-top) + var(--ect-footer-wave-overlap, 0px) / 2) max(calc(50% + 24px), 314px);
   position: relative;
   z-index: 1;
 }
 
-/* Grid: brand, then Services | Company, then Contact and Legal across the width.
+/* Grid: brand, then Services | Company, then Contact across the width. Legal and the signature follow in the bar.
    Services gets the wider track so "Creare magazin online" and "Agenție Facebook Ads" stay on one line from 360px. */
 .ect-footer__top {
   display: grid;
@@ -113,8 +113,7 @@
   grid-template-areas:
     "brand brand"
     "services company"
-    "contact contact"
-    "legal legal";
+    "contact contact";
   gap: 24px 20px;
   align-items: start;
 }
@@ -123,7 +122,11 @@
 .ect-footer__col--services { grid-area: services; }
 .ect-footer__col--company { grid-area: company; }
 .ect-footer__col--contact { grid-area: contact; }
-.ect-footer__col--legal { grid-area: legal; }
+
+/* The bar holds Legal and the signature. It flows in the text below 920px; from 920px it is the white strip under the artwork. */
+.ect-footer__bar {
+  margin-top: 24px;
+}
 
 /* Brand: the logo alone. It sits on its own row above every column below 1200px and in its own column from 1200px. */
 .ect-footer__brand {
@@ -244,14 +247,14 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   gap: 4px 0.4em;
-  margin-top: 22px;
+  margin-top: 24px;
   color: #3d4459;
   font-size: 14px;
   font-weight: 400;
   line-height: 1.4;
-  text-align: left;
+  text-align: center;
 }
 
 .ect-footer .ect-footer__cup {
@@ -353,7 +356,7 @@
   .ect-footer .ect-footer__madewith { font-size: 13px; }
 }
 
-/* 640-919: brand on top, Services on the left, Company, Contact and Legal stacked beside it. */
+/* 640-919 (variant A, two columns): brand on top, Services on the left, Company and Contact stacked beside it; Legal and the signature follow, left aligned. */
 @media (min-width: 640px) {
   .ect-footer {
     --ect-footer-fade: 14%;
@@ -376,7 +379,7 @@
 
   /* Keep the copy clear of the city skyline, plant and teammates below. */
   .ect-footer__inner {
-    padding-bottom: 30%;
+    padding-bottom: 32%;
   }
 
   .ect-footer__top {
@@ -384,34 +387,86 @@
     grid-template-areas:
       "brand brand"
       "services company"
-      "services contact"
-      "services legal";
+      "services contact";
     gap: 20px 64px;
+  }
+
+  .ect-footer__bar {
+    margin-top: 20px;
+  }
+
+  .ect-footer .ect-footer__madewith {
+    justify-content: flex-start;
+    margin-top: 22px;
+    text-align: left;
   }
 
   .ect-footer__col--services { align-self: start; }
 }
 
-/* 920-1199: the Legal group sits under Company so the row clears the canopy. */
+/*
+ * 920-1199 (variant B): the logo on its own row above three columns, Services, Company and Contact, on the 1200px
+ * grid and the sky. Legal and the signature sit in a white 72px bar under the artwork, on the same grid.
+ */
 @media (min-width: 920px) {
+  .ect-footer {
+    --ect-footer-bar: 72px;
+    background: linear-gradient(to top, #ffffff var(--ect-footer-bar), var(--ect-footer-sky) var(--ect-footer-bar));
+  }
+
   .ect-footer::before {
-    min-height: calc(50vw + 170px);
+    min-height: calc(50vw + 170px + var(--ect-footer-bar));
+  }
+
+  .ect-footer__art {
+    bottom: var(--ect-footer-bar);
   }
 
   .ect-footer__inner {
-    --ect-footer-content-top: max(20px, 2%);
-    width: auto;
-    margin-inline: 3.2%;
-    padding-bottom: 19%;
+    --ect-footer-content-top: clamp(40px, 3.5vw, 64px);
+    width: min(1200px, 100% - 80px);
+    margin-inline: auto;
+    padding-bottom: calc(19% + var(--ect-footer-bar));
   }
 
   .ect-footer__top {
     grid-template-columns: repeat(3, max-content);
     grid-template-areas:
       "brand brand brand"
-      "services company contact"
-      "services legal contact";
-    gap: 20px;
+      "services company contact";
+    column-gap: clamp(48px, 4vw + 4px, 80px);
+    row-gap: 20px;
+  }
+
+  .ect-footer__bar {
+    position: absolute;
+    inset: auto 0 0;
+    height: var(--ect-footer-bar);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0 40px;
+  }
+
+  /* The Legal label stays in the accessibility tree, hidden visually. */
+  .ect-footer .ect-footer__col--legal .ect-footer__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .ect-footer .ect-footer__col--legal ul {
+    flex-direction: row;
+    align-items: center;
+    column-gap: 32px;
   }
 
   .ect-footer .ect-footer__col a,
@@ -425,14 +480,18 @@
   }
 
   .ect-footer .ect-footer__madewith {
-    margin-top: 18px;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    margin: 0;
+    text-align: right;
+    white-space: nowrap;
   }
 }
 
 /*
  * 1200+: Metricra. One compact row aligned at the top: an 84px brand column with the logo, then
- * Services, Company, Contact (with the social circles) and Legal, packed to the left with a fluid
- * gap, left of the branches. The signature follows under the row on the left.
+ * Services, Company and Contact (with the social circles), packed to the left with a fluid gap,
+ * left of the branches. Legal and the signature stay in the white bar below the artwork.
  */
 @media (min-width: 1200px) {
   .ect-footer {
@@ -440,20 +499,19 @@
   }
 
   .ect-footer::before {
-    min-height: 0;
+    min-height: calc(50vw + var(--ect-footer-bar));
   }
 
   .ect-footer__inner {
-    --ect-footer-content-top: clamp(24px, 2.2vw, 40px);
-    padding-bottom: 18%;
+    padding-bottom: calc(18% + var(--ect-footer-bar));
   }
 
   .ect-footer__top {
     width: auto;
-    grid-template-columns: 84px repeat(4, max-content);
-    grid-template-areas: "brand services company contact legal";
+    grid-template-columns: 84px repeat(3, max-content);
+    grid-template-areas: "brand services company contact";
     justify-content: start;
-    column-gap: clamp(12px, 11vw - 120px, 80px);
+    column-gap: clamp(48px, 4vw + 4px, 80px);
     row-gap: 0;
   }
 
@@ -466,7 +524,6 @@
   }
 
   .ect-footer .ect-footer__madewith {
-    margin-top: 30px;
     font-size: 13.5px;
   }
 }
@@ -499,8 +556,8 @@
 }
 
 @media (min-width: 920px) and (pointer: coarse) {
-  /* The taller touch rows need more sky below the signature. */
+  /* The taller touch rows need more sky below the columns. */
   .ect-footer__inner {
-    padding-bottom: 26%;
+    padding-bottom: calc(32% + var(--ect-footer-bar));
   }
 }

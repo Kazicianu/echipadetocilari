@@ -50,6 +50,7 @@ test('the Legal column links the terms and the privacy policy and holds the hidd
     const footer = footerOf(renderSiteFooter(html));
     const legal = footer.match(/<nav class="ect-footer__col ect-footer__col--legal" aria-label="Legal"><p class="ect-footer__label">Legal<\/p><ul>[\s\S]*?<\/ul><\/nav>/);
     assert.ok(legal, `${label}: Legal column`);
+    assert.match(footer, /<div class="ect-footer__bar">\s*<nav class="ect-footer__col ect-footer__col--legal"/, `${label}: Legal opens the bar`);
     assert.equal(count(legal[0], /<li>/g), 3, label);
     assert.ok(legal[0].includes(`<li><a href="${TERMS_PATHS[language]}">${TERMS[language]}</a></li>`), `${label}: terms link`);
     assert.equal(count(footer, /data-ect-footer-privacy/g), 1, label);
@@ -154,20 +155,45 @@ test('the social links are named orange circles with solid official marks, in th
   assert.match(css, /outline: 3px solid #27272d;\s*outline-offset: 2px;\s*border-radius: 50%;/, 'round focus ring');
 });
 
-test('the 1200px grid packs the brand and four columns to the left with the signature under it', () => {
-  const css = readFileSync(path.join(root, 'legacy-mirror', FOOTER_STYLESHEET), 'utf8');
-  const wide = css.slice(css.indexOf('@media (min-width: 1200px)'));
-  assert.match(wide, /grid-template-columns: 84px repeat\(4, max-content\);/);
-  assert.match(wide, /justify-content: start;/);
-  assert.match(wide, /column-gap: clamp\(12px, 11vw - 120px, 80px\);/);
-  assert.match(wide, /\.ect-footer__madewith \{\s*margin-top: 30px;/);
-  assert.doesNotMatch(css, /width: 79%|space-between/, 'no stretched row');
+test('the grid holds the logo and three columns, and the bar under it holds Legal and the signature', () => {
   for (const { language, url, html } of sourcePages().filter((page) => page.url === '/' || page.url === '/en/')) {
+    const label = `${url} (${language})`;
     const footer = footerOf(renderSiteFooter(html));
-    const top = footer.match(/<div class="ect-footer__top">([\s\S]*?)<\/div>\s*<p class="ect-footer__madewith">/);
-    assert.ok(top, `${url} (${language}): the signature follows the grid`);
-    assert.match(top[1], /^\s*<div class="ect-footer__brand">\s*<a class="ect-footer__logo"[^>]*><img [^>]*><\/a>\s*<\/div>\s*<nav class="ect-footer__col ect-footer__col--services"/, `${url} (${language}): the logo stands alone before the columns`);
+    const inner = footer.match(/<div class="ect-footer__inner">([\s\S]*?)\n <\/div>\n <div class="ect-footer__art"/);
+    assert.ok(inner, `${label}: inner wrapper`);
+    const top = inner[1].match(/^\s*<div class="ect-footer__top">([\s\S]*?)\n  <\/div>\n  <div class="ect-footer__bar">([\s\S]*?)\n  <\/div>\s*$/);
+    assert.ok(top, `${label}: the grid closes before the bar, and the bar is last in the inner wrapper`);
+    const order = ['ect-footer__brand', 'ect-footer__col--services', 'ect-footer__col--company', 'ect-footer__col--contact'].map((name) => top[1].indexOf(`class="${name === 'ect-footer__brand' ? name : `ect-footer__col ${name}`}`));
+    assert.ok(order.every((at) => at >= 0) && order.every((at, i) => i === 0 || at > order[i - 1]), `${label}: brand, services, company, contact`);
+    assert.doesNotMatch(top[1], /ect-footer__col--legal|ect-footer__madewith/, `${label}: Legal and the signature are not in the grid`);
+    assert.match(top[1], /^\s*<div class="ect-footer__brand">\s*<a class="ect-footer__logo"[^>]*><img [^>]*><\/a>\s*<\/div>\s*<nav class="ect-footer__col ect-footer__col--services"/, `${label}: the logo stands alone before the columns`);
+    assert.match(top[2], /^\s*<nav class="ect-footer__col ect-footer__col--legal"[\s\S]*<\/nav>\s*<p class="ect-footer__madewith">[\s\S]*<\/p>$/, `${label}: Legal, then the signature`);
+    assert.equal(count(inner[1], /<div class="ect-footer__bar">/g), 1, label);
   }
+});
+
+test('the CSS: phones follow variant A, 920px and up variant B with a white 72px bar', () => {
+  const css = readFileSync(path.join(root, 'legacy-mirror', FOOTER_STYLESHEET), 'utf8');
+  const phone = css.slice(0, css.indexOf('@media (min-width: 640px)'));
+  const wide = css.slice(css.indexOf('@media (min-width: 920px) {'));
+  const huge = css.slice(css.indexOf('@media (min-width: 1200px)'));
+  assert.match(phone, /"services company"\s*"contact contact";/, 'phones: brand, services and company, contact');
+  assert.match(phone, /\.ect-footer \.ect-footer__madewith \{[^}]*justify-content: center;[^}]*margin-top: 24px;[^}]*text-align: center;/, 'phones: the signature is centred');
+  assert.match(phone, /max\(calc\(50% \+ 24px\), 314px\);/, 'phones: 24px of sky between the signature and the artwork');
+  assert.match(wide, /--ect-footer-bar: 72px;/);
+  assert.match(wide, /background: linear-gradient\(to top, #ffffff var\(--ect-footer-bar\), var\(--ect-footer-sky\) var\(--ect-footer-bar\)\);/, 'the bar is white');
+  assert.match(wide, /\.ect-footer__art \{\s*bottom: var\(--ect-footer-bar\);/, 'the illustration stops where the bar begins');
+  assert.match(wide, /width: min\(1200px, 100% - 80px\);/);
+  assert.match(wide, /\.ect-footer__bar \{\s*position: absolute;[^}]*height: var\(--ect-footer-bar\);/, 'the bar is absolute and 72px tall');
+  assert.match(wide, /\.ect-footer__col--legal \.ect-footer__label \{[^}]*clip-path: inset\(50%\);/, 'the Legal label is hidden visually');
+  assert.match(huge, /grid-template-columns: 84px repeat\(3, max-content\);/);
+  assert.match(huge, /grid-template-areas: "brand services company contact";/);
+  assert.match(huge, /justify-content: start;/);
+  assert.match(huge, /column-gap: clamp\(48px, 4vw \+ 4px, 80px\);/);
+  assert.doesNotMatch(css, /width: 79%/, 'no stretched row');
+  const topRules = css.match(/\.ect-footer__top \{[^}]*\}/g) || [];
+  assert.ok(topRules.length >= 3);
+  for (const rule of topRules) assert.doesNotMatch(rule, /space-between/, 'the grid is packed, not spread');
 });
 
 test('the balcony illustration is a decorative lazy image with its real size, and the stylesheet loads once', () => {
