@@ -2,7 +2,7 @@
 
 ```yaml
 titlu_h1: "Optimizare site WordPress: ce merită făcut și în ce ordine"
-title_tag: "Optimizare site WordPress: ce merită făcut și în ce ordine | Echipa de Tocilari"
+title_tag: "Optimizare site WordPress: ce faci, în ce ordine | Echipa de Tocilari"
 meta_description: "Cum optimizezi un site WordPress în ordinea impactului: backup, PHP și server, cache, imagini WebP, pluginuri și bază de date, fără să strici site-ul."
 slug: "/blog/optimizare-site-wordpress/"
 keyword_principal: "optimizare site wordpress"       # Semrush RO 15.11.2026: 140 / KD 6 (Ordine #1 Val 1)
@@ -22,4 +22,5 @@ data_actualizarii: "2026-11-24"
 - WordPress.org Requirements (`https://wordpress.org/about/requirements/`): PHP 8.3+, MariaDB 10.11+ / MySQL 8.4+, HTTPS.
 - Google web.dev (`https://web.dev/articles/vitals`, `https://web.dev/articles/ttfb`): LCP <= 2,5 s, INP <= 200 ms, CLS <= 0,1, TTFB <= 800 ms.
 - Echipa de Tocilari (`/administrare-site/`, `/termeni-si-conditii/`): Starter 50 €, Premium 75 €, Advanced 100 €/lună (include optimizare viteză site), 30 €/oră suplimentar, firmă neplătitoare de TVA.
+- Google Search Central (`https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap`): sitemap trimis în Search Console (secțiunea SEO de bază).
 - Delimitare: performanță și mentenanță tehnică WordPress (fără canibalizare cu `/servicii-seo/`, fără WooCommerce).

@@ -3,16 +3,16 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 
-<title>Viteza de încărcare a site-ului: cum o testezi și ce o încetinește | Echipa de Tocilari</title>
+<title>Viteza de încărcare a site-ului: test și cauze | Echipa de Tocilari</title>
 <meta name="description" content="Cum faci un test de viteză site cu PageSpeed Insights și Search Console, ce praguri au LCP, INP, CLS și TTFB și cele 6 cauze ale unui site lent.">
 <link rel="canonical" href="/blog/viteza-de-incarcare-a-site-ului/">
 <meta property="og:locale" content="ro_RO">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Viteza de încărcare a site-ului: cum o testezi și ce o încetinește | Echipa de Tocilari">
+<meta property="og:title" content="Viteza de încărcare a site-ului: test și cauze | Echipa de Tocilari">
 <meta property="og:description" content="Cum faci un test de viteză site cu PageSpeed Insights și Search Console, ce praguri au LCP, INP, CLS și TTFB și cele 6 cauze ale unui site lent.">
 <meta property="og:url" content="/blog/viteza-de-incarcare-a-site-ului/">
 <meta property="og:site_name" content="Echipa de Tocilari">
-<meta name="twitter:title" content="Viteza de încărcare a site-ului: cum o testezi și ce o încetinește | Echipa de Tocilari">
+<meta name="twitter:title" content="Viteza de încărcare a site-ului: test și cauze | Echipa de Tocilari">
 <meta name="twitter:description" content="Cum faci un test de viteză site cu PageSpeed Insights și Search Console, ce praguri au LCP, INP, CLS și TTFB și cele 6 cauze ale unui site lent.">
 
 <link rel="alternate" type="application/rss+xml" title="Echipa de Tocilari » Feed" href="https://www.echipadetocilari.ro/feed/">
@@ -197,9 +197,9 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
             <span class="art-byline__dot" aria-hidden="true">·</span>
             <span>Publicat <time datetime="2026-11-24">24.11.2026</time></span>
             <span class="art-byline__dot" aria-hidden="true">·</span>
-            <span>Actualizat <time datetime="2026-11-24">24.11.2026</time></span>
+            <span>Actualizat <time datetime="2026-11-25">25.11.2026</time></span>
             <span class="art-byline__dot" aria-hidden="true">·</span>
-            <span>6 min de citit</span>
+            <span>7 min de citit</span>
           </div>
 
           <div class="art-bluf">
@@ -257,11 +257,12 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
         <aside class="art-toc-aside" aria-label="Navigare articol">
           <details class="art-toc" data-js="art-toc">
             <summary>
-              <span>Cuprins · 6 secțiuni</span>
+              <span>Cuprins · 7 secțiuni</span>
               <span class="art-toc__chev" aria-hidden="true"></span>
             </summary>
             <ol>
               <li><a href="#cum-testezi-corect">Cum faci un test corect</a></li>
+              <li><a href="#alte-unelte-test">Alte unelte de test</a></li>
               <li><a href="#metrici-core-web-vitals">LCP, INP, CLS și TTFB</a></li>
               <li><a href="#date-reale-vs-laborator">Scorul 100 vs. date reale</a></li>
               <li><a href="#cauze-site-lent">6 cauze ale unui site lent</a></li>
@@ -308,6 +309,42 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
                 </div>
               </li>
             </ol>
+          </section>
+
+          <section id="alte-unelte-test">
+            <h2>Când folosești altă unealtă decât PageSpeed Insights?</h2>
+            <p>PageSpeed Insights rămâne punctul de plecare, pentru că arată datele reale din Chrome. Când vrei să vezi ce se încarcă, în ce ordine și cât durează fiecare fișier, sau să testezi din altă țară, folosește o a doua unealtă:</p>
+
+            <div class="art-table-wrap" tabindex="0">
+              <table class="art-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Unealtă</th>
+                    <th scope="col">Ce adaugă</th>
+                    <th scope="col">Când o folosești</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row"><a href="https://gtmetrix.com/" rel="noopener">GTmetrix</a></th>
+                    <td>Cascada de cereri și alegerea locației de test</td>
+                    <td>Ca să vezi care fișier întârzie pagina și cum se schimbă timpul în funcție de locație.</td>
+                  </tr>
+                  <tr>
+                    <th scope="row"><a href="https://www.webpagetest.org/" rel="noopener">WebPageTest</a></th>
+                    <td>Cascadă detaliată, alegerea locației, a dispozitivului și a conexiunii</td>
+                    <td>Pentru diagnostic fin, când scorul din PageSpeed Insights nu explică problema.</td>
+                  </tr>
+                  <tr>
+                    <th scope="row"><a href="https://tools.pingdom.com/" rel="noopener">Pingdom</a></th>
+                    <td>Test din mai multe locații și lista fișierelor încărcate</td>
+                    <td>Pentru o verificare rapidă a timpului de încărcare și a fișierelor mari.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="art-table-hint">Pe telefon, glisează tabelul spre stânga pentru toate coloanele.</p>
+            <p>Cascada de cereri (waterfall) arată fiecare fișier ca o bară pe o axă de timp: vezi imediat o imagine de câțiva megabytes sau un script extern care blochează restul paginii. Rulează testul din locația cea mai apropiată de clienții tăi; dacă vinzi în România, un test din SUA poate arăta timpi mai mari decât cei reali. Cifrele diferă de la o unealtă la alta, deci compară rezultatele doar între teste făcute cu aceeași unealtă și aceleași setări.</p>
           </section>
 
           <section id="metrici-core-web-vitals">
@@ -400,8 +437,8 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
                 <span>Fișiere PNG sau JPG de 2-5 MB, afișate într-un spațiu de 400 px, consumă banda de 4G și trag în jos LCP. Lipsa atributelor width și height provoacă salturi de layout (CLS).</span>
               </li>
               <li>
-                <strong>2. Server lent sau lipsa cache-ului de pagină</strong>
-                <span>Un TTFB de 1,5-2 secunde înseamnă că browserul așteaptă serverul înainte să primească primul rând de HTML. Fără cache de pagină, fiecare vizită reface interogările din baza de date.</span>
+                <strong>2. Server lent, lipsa cache-ului de pagină sau lipsa unui CDN</strong>
+                <span>Un TTFB de 1,5-2 secunde înseamnă că browserul așteaptă serverul înainte să primească primul rând de HTML. Fără cache de pagină, fiecare vizită reface interogările din baza de date. Un CDN (rețea de livrare de conținut) servește imaginile, CSS-ul și JavaScript-ul de pe un server apropiat de vizitator, ceea ce ajută mai ales dacă ai clienți în mai multe țări.</span>
               </li>
               <li>
                 <strong>3. CSS și JavaScript care blochează afișarea</strong>
@@ -567,7 +604,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
           <h3>Optimizare site WordPress: ce merită făcut și în ce ordine</h3>
           <p>Pașii concreți, în ordinea impactului: PHP 8.3+, cache, imagini WebP, audit de pluginuri și baza de date.</p>
           <div class="art-rel-card__foot">
-            <span>7 min de citit</span>
+            <span>8 min de citit</span>
             <span class="art-rel-card__cta">Citește →</span>
           </div>
         </a>

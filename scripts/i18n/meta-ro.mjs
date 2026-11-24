@@ -63,17 +63,17 @@ export const roPageMeta = {
       'Ghiduri practice pentru firme din România: cât costă un site sau un magazin online, cum funcționează SEO și reclamele și cum alegi platforma potrivită.',
   },
   '/blog/optimizare-site-wordpress/': {
-    title: 'Optimizare site WordPress: ce merită făcut și în ce ordine | Echipa de Tocilari',
+    title: 'Optimizare site WordPress: ce faci, în ce ordine | Echipa de Tocilari',
     description:
       'Cum optimizezi un site WordPress în ordinea impactului: backup, PHP și server, cache, imagini WebP, pluginuri și bază de date, fără să strici site-ul.',
   },
   '/blog/viteza-de-incarcare-a-site-ului/': {
-    title: 'Viteza de încărcare a site-ului: cum o testezi și ce o încetinește | Echipa de Tocilari',
+    title: 'Viteza de încărcare a site-ului: test și cauze | Echipa de Tocilari',
     description:
       'Cum faci un test de viteză site cu PageSpeed Insights și Search Console, ce praguri au LCP, INP, CLS și TTFB și cele 6 cauze ale unui site lent.',
   },
   '/blog/cat-costa-un-magazin-online/': {
-    title: 'Cât costă un magazin online în 2027 și ce plătești separat | Echipa de Tocilari',
+    title: 'Cât costă să deschizi un magazin online în 2027 | Echipa de Tocilari',
     description:
       'Cât costă un magazin online în 2027 în România: pachete de la 1.490 € pe Shopify sau de la 4.490 € pe Medusa, plus domeniu .ro, abonament și aplicații.',
   },
