@@ -23,11 +23,6 @@
   .e-con:has(form[data-ect-contact]):not(.seo-contact *) > .e-con-inner > .elementor-shape-bottom {
     display: none;
   }
-
-  .e-con:has(> .e-con-inner > .elementor-shape-bottom):not(.seo-contact *) > .e-con-inner > .e-con:has(form[data-ect-contact]) {
-    position: relative;
-    inset-block-start: clamp(12px, 1.5vw, 24px);
-  }
 }
 
 /* The 2:1 city illustration runs edge to edge, with open sky to the left of the tree canopy. */
