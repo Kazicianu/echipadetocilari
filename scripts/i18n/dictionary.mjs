@@ -1541,9 +1541,9 @@ export const enPageMeta = {
       'Meet Echipa de Tocilari, a digital marketing agency in Bucharest. Discover how we bring design, development, SEO, and clear communication to your project.',
   },
   '/en/website-design/': {
-    title: 'Website Design Bucharest: From €299 | Echipa de Tocilari',
+    title: 'Website Design: 4 Packages from €299 | Echipa de Tocilari',
     description:
-      'Website design in Bucharest, serving all of Romania: landing pages from €299, business websites from €499, online stores and custom projects.',
+      'Website design in Bucharest, written in code: Landing from €299, Brochure from €590, Business from €1,090. Final prices, free consultation.',
   },
   '/en/seo-services/': {
     title: 'SEO and AI Services: From €299 | Echipa de Tocilari',
