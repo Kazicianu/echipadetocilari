@@ -2,7 +2,7 @@
 
 Prototipuri statice responsive (mobile first) pentru pagina hub `/blog/` și pagina unui articol individual (`/blog/[slug]/`) ale site-ului `echipadetocilari.ro`, aliniate cu `docs/design-system/README.md`, `SEO-STRATEGY.md`, `docs/blog/template-articol.md` și planul de articole din `docs/research/blog-100-articole-2026-10-30/README.md`.
 
-Pagina `/blog/` a fost implementată în site-ul real la `legacy-mirror/blog/index.html` (+ `legacy-mirror/wp-content/ect-pages/blog.css` și `blog.js`), cu formularul de contact și footerul comune din build și cu headerul integrat în fundal.
+Pagina `/blog/` a fost implementată în site-ul real la `legacy-mirror/blog/index.html` (+ `legacy-mirror/wp-content/ect-pages/blog.css`), cu formularul de contact și footerul comune din build și cu headerul integrat în fundal. Pe 24.11.2026 pagina live a fost simplificată (vezi „Distilare 24.11.2026” mai jos), iar `blog.js` a fost scos.
 
 ## Ce e în folder
 
@@ -42,3 +42,21 @@ Pornește un server static din rădăcina repo-ului și deschide `/docs/ui/blog/
 - **Autorul**: nume real, rol, fotografie, profil LinkedIn și pagina `/autor/[slug]/` (nu s-a inventat nicio persoană).
 - **Elementul original**: date verificabile din proiecte reale Echipa de Tocilari (interval real brief-lansare sau structură anonimizată).
 - **Legarea `/blog/` în meniul global / footer**: după publicarea primelor articole reale, decide dacă intră în header și în coloana „Companie” din footer (cu actualizarea testelor de navigare și footer).
+
+## Distilare 24.11.2026 (pagina live)
+
+După critica `/impeccable critique /blog/` din 24.11.2026 (25/40), utilizatorul a decis ca pagina să arate doar ghidurile publicate. Ce s-a schimbat în `legacy-mirror/blog/index.html` și `blog.css`:
+
+- Cele 6 carduri „În pregătire” au fost scoase. Un ghid intră în grilă doar după ce e publicat. Titlurile planificate, cu tema lor:
+  - Ce înseamnă SEO și cum aduce clienți unui site de firmă (SEO și AI, ghid pilon)
+  - Cum promovezi o afacere online: canale și ordine (Strategie)
+  - Promovare pe Instagram: reclame plătite sau postări organice (Facebook și Instagram Ads)
+  - Cât costă Google Ads: buget, cost pe click și onorariul agenției (Google Ads)
+  - Cât costă o aplicație mobilă și de ce diferă ofertele (Aplicații)
+  - Cât costă un site web în România în 2027: prețuri și ce influențează costul (Creare site web)
+- Filtrele pe teme, căutarea, rândul de stare și starea goală au ieșit împreună cu `blog.js`, pentru că la 3 ghiduri pe 2 teme nu ajută. Revin când sunt destule ghiduri publicate pe mai multe teme; markup-ul, stilurile și scriptul vechi sunt în commitul `2440661` (și în `pagina.html` / `pagina.js` din acest folder).
+- Ghidul recomandat („Cât costă un magazin online în 2027...”) nu se mai repetă în grilă, iar badge-ul „Publicat” a dispărut de pe carduri (data rămâne).
+- Din hero a ieșit punctul „Organizate pe cele 7 servicii ale noastre”, iar secțiunea de ghiduri are titlul „Ce mai poți citi acum”.
+- Grila folosește `repeat(auto-fit, minmax(300px, 1fr))` de la 1025 px, ca două carduri să umple rândul.
+
+Rămân deschise: structura paginii (trece printr-o machetă nouă), banda de servicii, piersica (decizie: alb cu contur portocaliu) și contrastul badge-urilor.

@@ -13,7 +13,6 @@ const route = routeByRo('/blog/');
 const articleRoutes = routes.filter((r) => r.blogArticle);
 const page = read('legacy-mirror/blog/index.html');
 const css = read('legacy-mirror/wp-content/ect-pages/blog.css');
-const js = read('legacy-mirror/wp-content/ect-pages/blog.js');
 const artCss = read('legacy-mirror/wp-content/ect-pages/blog-article.css');
 const artJs = read('legacy-mirror/wp-content/ect-pages/blog-article.js');
 const main = page.match(/<main\b[\s\S]*<\/main>/i)?.[0] ?? '';
@@ -45,7 +44,7 @@ test('source /blog/ page keeps one H1, shared header, shared contact form above 
   assert.match(page, /<header[^>]*elementor-location-header/);
   assert.match(page, /<main id="content" class="ect-page ect-page--blog">/);
   assert.match(page, /<link rel="stylesheet" href="\/wp-content\/ect-pages\/blog\.css">/);
-  assert.match(page, /<script src="\/wp-content\/ect-pages\/blog\.js" defer><\/script>/);
+  assert.doesNotMatch(page, /ect-pages\/blog\.js/, 'no catalog script while filters and search are parked');
   const mainEnd = page.indexOf('</main>');
   const form = page.search(/<form\b[^>]*class="elementor-form"/);
   const footer = page.search(/<footer\b/);
@@ -55,24 +54,26 @@ test('source /blog/ page keeps one H1, shared header, shared contact form above 
   assert.doesNotMatch(page, /creare-magazin-online\.(?:css|js)|google_gtagjs|googletagmanager/);
 });
 
-test('/blog/ links to all published articles, keeps 2027 in annual titles and covers all seven services', () => {
-  const filters = [...main.matchAll(/data-filter="([^"]+)"/g)].map(([, f]) => f);
-  assert.deepEqual(filters, [
-    'toate',
-    'creare-site-web',
-    'magazin-online',
-    'aplicatii',
-    'seo-ai',
-    'google-ads',
-    'facebook-ads',
-    'mentenanta',
-    'strategie',
-  ]);
-  const cards = [...main.matchAll(/class="bl-card(?:\s+[^"]*)?"[^>]*data-category="([^"]+)"/g)].map(([, c]) => c);
-  assert.equal(cards.length, 9);
-  for (const cat of filters.filter((f) => f !== 'toate')) {
-    assert.ok(cards.includes(cat), `at least one guide card for ${cat}`);
+test('/blog/ shows only published guides, features one without repeating it and links to all seven services', () => {
+  assert.doesNotMatch(main, /data-filter=|data-js="blog-|class="bl-(?:search|filters-wrap|status-row|empty)\b/, 'filters, search and empty state stay parked until there are more guides');
+  assert.doesNotMatch(main, /În pregătire/, 'unwritten guides stay hidden');
+  assert.doesNotMatch(main, /bl-badge--orange|>Publicat</, 'no Publicat badge on cards');
+  assert.doesNotMatch(main, /cele 7 servicii/, 'no claim of a catalog organised on all seven services');
+
+  const published = articleRoutes.map((r) => r.ro);
+  const featured = main.match(/<article class="bl-featured">[\s\S]*?<\/article>/)?.[0] ?? '';
+  const featuredHref = featured.match(/href="(\/blog\/[^"]+)"/)?.[1];
+  assert.ok(published.includes(featuredHref), `featured guide is published: ${featuredHref}`);
+
+  const cards = [...main.matchAll(/<article class="bl-card[^"]*"[\s\S]*?<\/article>/g)].map(([c]) => c);
+  assert.equal(cards.length, published.length - 1, 'every other published guide gets one card');
+  for (const card of cards) {
+    const hrefs = [...new Set([...card.matchAll(/href="(\/blog\/[^"]+)"/g)].map(([, h]) => h))];
+    assert.equal(hrefs.length, 1, 'one guide per card');
+    assert.ok(published.includes(hrefs[0]), `card links to a published guide: ${hrefs[0]}`);
+    assert.notEqual(hrefs[0], featuredHref, 'featured guide is not repeated in the grid');
   }
+
   for (const art of articleRoutes) {
     assert.ok(main.includes(`href="${art.ro}"`), `/blog/ links to ${art.ro}`);
   }
@@ -154,7 +155,6 @@ test('blog and article CSS are mobile first, keep exact #fd8649 orange and place
     assert.match(sheet, /prefers-reduced-motion:\s*reduce/, name);
     assert.doesNotMatch(sheet, BANNED, name);
   }
-  assert.doesNotMatch(js, BANNED, 'blog.js');
   assert.doesNotMatch(artJs, BANNED, 'blog-article.js');
 });
 
