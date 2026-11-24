@@ -71,7 +71,7 @@ export function website({ site, lang }) {
   };
 }
 
-export function webPage({ site, lang, url, name, description, dateModified }) {
+export function webPage({ site, lang, url, name, description, dateModified, breadcrumb }) {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
@@ -83,6 +83,7 @@ export function webPage({ site, lang, url, name, description, dateModified }) {
     isPartOf: { '@id': websiteId(site, lang) },
     about: { '@id': orgId(site) },
     ...(dateModified ? { dateModified } : {}),
+    ...(breadcrumb ? { breadcrumb: { '@id': `${site}${url}#breadcrumb` } } : {}),
   };
 }
 
@@ -154,7 +155,6 @@ export function blogPosting({ site, lang, url, headline, description, datePublis
     author: { '@id': orgId(site) },
     publisher: { '@id': orgId(site) },
     isPartOf: { '@id': `${site}/blog/#blog` },
-    breadcrumb: { '@id': `${site}${url}#breadcrumb` },
   };
 }
 

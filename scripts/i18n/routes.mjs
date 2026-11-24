@@ -139,6 +139,36 @@ export const routes = [
     blogArticle: true,
   },
   {
+    ro: '/blog/cat-costa-un-site-web/',
+    roFile: 'blog/cat-costa-un-site-web/index.html',
+    labelRo: 'Cât costă un site web în 2027',
+    blogArticle: true,
+  },
+  {
+    ro: '/blog/cum-promovezi-o-afacere-online/',
+    roFile: 'blog/cum-promovezi-o-afacere-online/index.html',
+    labelRo: 'Cum promovezi o afacere online',
+    blogArticle: true,
+  },
+  {
+    ro: '/blog/ce-inseamna-seo/',
+    roFile: 'blog/ce-inseamna-seo/index.html',
+    labelRo: 'Ce înseamnă SEO',
+    blogArticle: true,
+  },
+  {
+    ro: '/blog/promovare-pe-instagram-reclame-sau-organic/',
+    roFile: 'blog/promovare-pe-instagram-reclame-sau-organic/index.html',
+    labelRo: 'Promovare pe Instagram',
+    blogArticle: true,
+  },
+  {
+    ro: '/blog/cat-costa-mentenanta-unui-site/',
+    roFile: 'blog/cat-costa-mentenanta-unui-site/index.html',
+    labelRo: 'Cât costă mentenanța unui site',
+    blogArticle: true,
+  },
+  {
     // Company details required by Law 365/2002 art. 5 and Law 31/1990 art. 74 (decided 23.11.2026). Not a service: no Service schema.
     ro: '/termeni-si-conditii/',
     en: '/en/terms-and-conditions/',

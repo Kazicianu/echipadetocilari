@@ -5,7 +5,8 @@ import { fileURLToPath } from 'node:url';
 import test from 'node:test';
 import { routes, routeByRo } from '../i18n/routes.mjs';
 import { roPageMeta } from '../i18n/meta-ro.mjs';
-import { blog, blogPosting, breadcrumbList, visibleArticleDates, visibleHeadline } from './schema.mjs';
+import { blog, blogPosting, breadcrumbList, visibleArticleDates, visibleHeadline, webPage } from './schema.mjs';
+import { normalizeSocialMeta } from './social-meta.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const read = (file) => readFileSync(path.join(root, file), 'utf8').replace(/\r\n/g, '\n');
@@ -85,17 +86,29 @@ test('/blog/ shows only published guides, features one without repeating it and 
   assert.doesNotMatch(main, /WooCommerce/i, 'withdrawn platform never appears');
 });
 
-test('the first three published articles have valid routes, meta, 2027 annual titles, TOC anchors and shared layout', () => {
+test('all eight published articles have valid routes, meta, 2027 annual titles, TOC anchors and shared layout', () => {
   assert.deepEqual(
     articleRoutes.map((r) => r.ro),
     [
       '/blog/optimizare-site-wordpress/',
       '/blog/viteza-de-incarcare-a-site-ului/',
       '/blog/cat-costa-un-magazin-online/',
+      '/blog/cat-costa-un-site-web/',
+      '/blog/cum-promovezi-o-afacere-online/',
+      '/blog/ce-inseamna-seo/',
+      '/blog/promovare-pe-instagram-reclame-sau-organic/',
+      '/blog/cat-costa-mentenanta-unui-site/',
     ]
   );
 
   const termsIdx = routes.indexOf(routeByRo('/termeni-si-conditii/'));
+  const conciseTitles = new Set([
+    '/blog/cat-costa-un-site-web/',
+    '/blog/cum-promovezi-o-afacere-online/',
+    '/blog/ce-inseamna-seo/',
+    '/blog/promovare-pe-instagram-reclame-sau-organic/',
+    '/blog/cat-costa-mentenanta-unui-site/',
+  ]);
   for (const art of articleRoutes) {
     assert.equal('service' in art, false, `${art.ro}: not a service route`);
     assert.equal('en' in art, false, `${art.ro}: Romanian-only`);
@@ -104,6 +117,9 @@ test('the first three published articles have valid routes, meta, 2027 annual ti
     const meta = roPageMeta[art.ro];
     assert.ok(meta, `${art.ro}: has RO metadata`);
     assert.ok(meta.title.endsWith(' | Echipa de Tocilari'), art.ro);
+    if (conciseTitles.has(art.ro)) {
+      assert.ok(meta.title.length <= 70, `${art.ro}: title <= 70 chars (${meta.title.length})`);
+    }
     assert.ok(meta.description.length >= 50 && meta.description.length <= 160, `${art.ro}: ${meta.description.length}`);
     assert.doesNotMatch(meta.title, /\b2026\b/, `${art.ro}: no 2026 in title`);
     assert.doesNotMatch(meta.title + meta.description, BANNED, art.ro);
@@ -140,6 +156,7 @@ test('the first three published articles have valid routes, meta, 2027 annual ti
   }
 
   assert.match(roPageMeta['/blog/cat-costa-un-magazin-online/'].title, /\b2027\b/);
+  assert.match(roPageMeta['/blog/cat-costa-un-site-web/'].title, /\b2027\b/);
 });
 
 test('blog and article CSS are mobile first, keep exact #fd8649 orange and place the header inside the top background', () => {
@@ -180,8 +197,27 @@ test('Blog, BlogPosting and BreadcrumbList schema helpers emit valid linked enti
   assert.equal(post.author['@id'], `${site}/#organization`);
   assert.equal(post.publisher['@id'], `${site}/#organization`);
   assert.equal(post.isPartOf['@id'], `${site}/blog/#blog`);
+  assert.equal('breadcrumb' in post, false, 'Schema.org puts breadcrumb on WebPage, not BlogPosting');
   assert.equal(post.datePublished, '2026-11-24T09:00:00+02:00');
   assert.equal(post.dateModified, '2026-11-24T09:00:00+02:00');
+
+  const wp = webPage({
+    site,
+    lang: 'ro',
+    url: '/blog/cat-costa-un-site-web/',
+    name: 'Cât costă un site web în 2027',
+    description: 'Prețuri reale.',
+    breadcrumb: true,
+  });
+  assert.equal(wp.breadcrumb['@id'], `${site}/blog/cat-costa-un-site-web/#breadcrumb`);
+
+  const articleOg = normalizeSocialMeta('<html><head></head><body></body></html>', {
+    site,
+    pageUrl: '/blog/cat-costa-un-site-web/',
+    locale: 'ro_RO',
+    ogType: 'article',
+  });
+  assert.match(articleOg, /<meta property="og:type" content="article">/);
 
   const bc = breadcrumbList({
     site,

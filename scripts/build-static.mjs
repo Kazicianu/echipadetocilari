@@ -151,12 +151,14 @@ function assertVercelRedirects() {
 function schemasFor(urlPath, meta, html) {
   const route = routeByRo(urlPath);
   const articleDates = route?.blogArticle ? visibleArticleDates(html) : undefined;
+  const hasBreadcrumb = urlPath === '/blog/' || Boolean(route?.blogArticle);
   const list = [
     organization({ site: SITE, lang: 'ro', ...roOrg }),
     website({ site: SITE, lang: 'ro' }),
     webPage({
       site: SITE, lang: 'ro', url: urlPath, name: meta.title, description: meta.description,
       dateModified: visibleDateModified(html) || articleDates?.dateModified,
+      breadcrumb: hasBreadcrumb,
     }),
   ];
 
@@ -321,6 +323,7 @@ function enhanceHtml(file) {
   html = stripCmsMarkers(html);
 
   if (owned && meta) {
+    const route = routeByRo(urlPath);
     html = upsertTitle(html, meta.title);
     html = upsertMeta(html, 'name="description"', meta.description);
     html = upsertMeta(html, 'property="og:title"', meta.title);
@@ -328,7 +331,12 @@ function enhanceHtml(file) {
     html = upsertMeta(html, 'property="og:url"', `${SITE}${urlPath}`);
     html = upsertMeta(html, 'name="twitter:title"', meta.title);
     html = upsertMeta(html, 'name="twitter:description"', meta.description);
-    html = normalizeSocialMeta(html, { site: SITE, pageUrl: urlPath, locale: 'ro_RO' });
+    html = normalizeSocialMeta(html, {
+      site: SITE,
+      pageUrl: urlPath,
+      locale: 'ro_RO',
+      ogType: route?.blogArticle ? 'article' : 'website',
+    });
     html = appendToHead(html, renderJsonLd(schemasFor(urlPath, meta, html)));
   }
 

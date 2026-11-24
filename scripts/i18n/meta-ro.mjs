@@ -77,6 +77,31 @@ export const roPageMeta = {
     description:
       'Cât costă un magazin online în 2027 în România: pachete de la 1.490 € pe Shopify sau de la 4.490 € pe Medusa, plus domeniu .ro, abonament și aplicații.',
   },
+  '/blog/cat-costa-un-site-web/': {
+    title: 'Cât costă un site web în 2027: prețuri reale | Echipa de Tocilari',
+    description:
+      'Cât costă un site web în 2027 în România: Landing de la 299 €, Prezentare de la 590 €, Business de la 1.090 €, scrise în cod, plus domeniu și găzduire.',
+  },
+  '/blog/cum-promovezi-o-afacere-online/': {
+    title: 'Cum promovezi o afacere online: canale, ordine | Echipa de Tocilari',
+    description:
+      'Cum faci promovare online pentru o firmă mică din România: în ce ordine legi site-ul, Google Business Profile, Google Ads, Facebook/Instagram Ads și SEO.',
+  },
+  '/blog/ce-inseamna-seo/': {
+    title: 'Ce înseamnă SEO și cum aduce clienți firmei | Echipa de Tocilari',
+    description:
+      'Ce înseamnă SEO (Search Engine Optimization), cum funcționează în Google și în răspunsurile AI, cei 4 piloni ai optimizării și în cât timp apar rezultatele.',
+  },
+  '/blog/promovare-pe-instagram-reclame-sau-organic/': {
+    title: 'Promovare pe Instagram: reclame sau organic | Echipa de Tocilari',
+    description:
+      'Promovare pe Instagram pentru firme din România: diferența dintre postări organice, Boost (și taxa iOS de 30%) și Meta Ads Manager, plus ce alegi după buget.',
+  },
+  '/blog/cat-costa-mentenanta-unui-site/': {
+    title: 'Cât costă mentenanța unui site: preț și pachete | Echipa de Tocilari',
+    description:
+      'Cât costă mentenanța unui site în România: abonamente de la 50 € la 100 €/lună (Starter, Premium, Advanced), tarife pe oră și ce verifici într-un contract.',
+  },
   '/politica-de-confidentialitate/': {
     title: 'Politica de confidențialitate și cookie-uri | Echipa de Tocilari',
     description:

@@ -45,11 +45,12 @@ function setImage(html, image) {
  * @param {string} opts.site     origin without trailing slash
  * @param {string} opts.pageUrl  public path of the page, e.g. /contact/
  * @param {string} opts.locale   ro_RO or en_US
+ * @param {string} [opts.ogType] Open Graph type (defaults to 'website')
  */
-export function normalizeSocialMeta(html, { site, pageUrl, locale }) {
+export function normalizeSocialMeta(html, { site, pageUrl, locale, ogType = 'website' }) {
   html = html.replace(staleMeta, '');
   html = upsertMeta(html, 'property="og:locale"', locale);
-  html = upsertMeta(html, 'property="og:type"', 'website');
+  html = upsertMeta(html, 'property="og:type"', ogType);
   html = html.replace(imageMeta, (_m, start, value, end) => `${start}${absoluteUrl(value, site, pageUrl)}${end}`);
 
   const entry = ogByPage.get(pageUrl);
