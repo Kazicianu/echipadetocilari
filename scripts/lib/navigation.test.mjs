@@ -113,7 +113,7 @@ test('desktop and mobile menus expose current service pages on every page', () =
         .map(match => match[0])
         .find(nav => nav.includes(menuClass));
       assert.ok(menu, `${route.ro}: ${menuClass} missing`);
-      for (const servicePath of servicePaths) {
+      for (const servicePath of [...servicePaths, '/blog/']) {
         assert.ok(menu.includes(`href="${servicePath}"`), `${route.ro}: ${menuClass} missing ${servicePath}`);
       }
     }

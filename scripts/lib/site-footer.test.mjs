@@ -78,12 +78,16 @@ test('the links come from routes: all seven services in RO, only the translated 
   assert.equal(count(enNav, /<li>/g), translated.length);
   for (const route of translated) assert.ok(enNav.includes(`<a href="${route.en}">${route.labelEn}</a>`), route.en);
   for (const route of services.filter((item) => !item.en)) assert.ok(!en.includes(route.ro), `${route.ro} has no EN page`);
-  for (const [footer, language] of [[ro, 'ro'], [en, 'en']]) {
+  for (const [footer, language, expectedCompany] of [
+    [ro, 'ro', ['/despre-noi/', '/portofoliu/', '/blog/']],
+    [en, 'en', ['/despre-noi/', '/portofoliu/']],
+  ]) {
     const company = footer.match(/<nav class="ect-footer__col ect-footer__col--company"[\s\S]*?<\/nav>/)[0];
-    assert.equal(count(company, /<li>/g), 2, `${language}: only About and Portfolio`);
-    for (const ro of ['/despre-noi/', '/portofoliu/']) {
-      assert.ok(company.includes(`href="${routes.find((route) => route.ro === ro)[language]}"`), `${language}: ${ro}`);
+    assert.equal(count(company, /<li>/g), expectedCompany.length, `${language}: expected Company links`);
+    for (const roPath of expectedCompany) {
+      assert.ok(company.includes(`href="${routes.find((route) => route.ro === roPath)[language]}"`), `${language}: ${roPath}`);
     }
+    if (language === 'en') assert.ok(!company.includes('href="/blog/"'), 'en: no RO-only Blog link');
     assert.ok(!company.includes(`href="${routes.find((route) => route.ro === '/contact/')[language]}"`), `${language}: no Contact link`);
   }
   assert.match(ro, /<a class="ect-footer__logo" href="\/">/);

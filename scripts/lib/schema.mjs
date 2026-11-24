@@ -107,6 +107,71 @@ export function service({ site, lang, name, description, url }) {
   };
 }
 
+export function blog({ site, lang, url, name, description }) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    '@id': `${site}${url}#blog`,
+    url: `${site}${url}`,
+    name,
+    description,
+    inLanguage: lang === 'en' ? 'en-US' : 'ro-RO',
+    publisher: { '@id': orgId(site) },
+    isPartOf: { '@id': websiteId(site, lang) },
+  };
+}
+
+/**
+ * Published and updated ISO dates visible inside the article byline
+ * (`Publicat <time datetime="YYYY-MM-DD">` and `Actualizat <time datetime="YYYY-MM-DD">`).
+ */
+export function visibleArticleDates(html) {
+  const byline = html.match(/<div\b[^>]*\bclass="[^"]*\bart-byline\b[^"]*"[^>]*>[\s\S]*?<\/div>/i)?.[0] || '';
+  const datePublished = byline.match(/Publicat\s*<time\b[^>]*\bdatetime="(\d{4}-\d{2}-\d{2})"/i)?.[1];
+  const dateModified = byline.match(/Actualizat\s*<time\b[^>]*\bdatetime="(\d{4}-\d{2}-\d{2})"/i)?.[1];
+  return datePublished ? { datePublished, dateModified: dateModified || datePublished } : undefined;
+}
+
+/** Visible H1 text for BlogPosting.headline, stripped of tags and collapsed whitespace. */
+export function visibleHeadline(html) {
+  const match = html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i);
+  return match ? match[1].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim() : undefined;
+}
+
+export function blogPosting({ site, lang, url, headline, description, datePublished, dateModified, image }) {
+  const toIso = (date) => (date && /^\d{4}-\d{2}-\d{2}$/.test(date) ? `${date}T09:00:00+02:00` : date);
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    '@id': `${site}${url}#article`,
+    mainEntityOfPage: { '@id': `${site}${url}#webpage` },
+    headline,
+    description,
+    ...(image ? { image: Array.isArray(image) ? image : [image] } : {}),
+    ...(datePublished ? { datePublished: toIso(datePublished) } : {}),
+    ...(dateModified || datePublished ? { dateModified: toIso(dateModified || datePublished) } : {}),
+    inLanguage: lang === 'en' ? 'en-US' : 'ro-RO',
+    author: { '@id': orgId(site) },
+    publisher: { '@id': orgId(site) },
+    isPartOf: { '@id': `${site}/blog/#blog` },
+    breadcrumb: { '@id': `${site}${url}#breadcrumb` },
+  };
+}
+
+export function breadcrumbList({ site, url, items }) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    '@id': `${site}${url}#breadcrumb`,
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      ...(item.url ? { item: `${site}${item.url}` } : {}),
+    })),
+  };
+}
+
 /** @param {Array<{q: string, a: string}>} faqs */
 export function faqPage(faqs) {
   return {

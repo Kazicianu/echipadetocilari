@@ -37,7 +37,19 @@ import {
   upsertMeta,
   upsertTitle,
 } from './lib/html.mjs';
-import { faqPage, organization, service, visibleDateModified, webPage, website } from './lib/schema.mjs';
+import {
+  blog,
+  blogPosting,
+  breadcrumbList,
+  faqPage,
+  organization,
+  service,
+  visibleArticleDates,
+  visibleDateModified,
+  visibleHeadline,
+  webPage,
+  website,
+} from './lib/schema.mjs';
 import { extractFacebookAdsFaqs, extractGoogleAdsFaqs, extractHomeFaqs } from './lib/faq.mjs';
 import { storeOfferCatalog } from './lib/store-seo.mjs';
 import { appsOfferCatalog } from './lib/apps-seo.mjs';
@@ -138,12 +150,13 @@ function assertVercelRedirects() {
 
 function schemasFor(urlPath, meta, html) {
   const route = routeByRo(urlPath);
+  const articleDates = route?.blogArticle ? visibleArticleDates(html) : undefined;
   const list = [
     organization({ site: SITE, lang: 'ro', ...roOrg }),
     website({ site: SITE, lang: 'ro' }),
     webPage({
       site: SITE, lang: 'ro', url: urlPath, name: meta.title, description: meta.description,
-      dateModified: visibleDateModified(html),
+      dateModified: visibleDateModified(html) || articleDates?.dateModified,
     }),
   ];
 
@@ -154,6 +167,42 @@ function schemasFor(urlPath, meta, html) {
   if (urlPath === '/servicii-seo/') list.push(faqPage(answeredFaqs(extractHomeFaqs(html))));
   if (urlPath === '/agentie-google-ads/') list.push(faqPage(extractGoogleAdsFaqs(html)));
   if (urlPath === '/agentie-facebook-ads/') list.push(faqPage(extractFacebookAdsFaqs(html)));
+  if (urlPath === '/blog/') {
+    list.push(
+      blog({ site: SITE, lang: 'ro', url: urlPath, name: meta.title, description: meta.description }),
+      breadcrumbList({
+        site: SITE,
+        url: urlPath,
+        items: [
+          { name: 'Acasă', url: '/' },
+          { name: 'Blog' },
+        ],
+      })
+    );
+  }
+  if (route?.blogArticle) {
+    list.push(
+      blogPosting({
+        site: SITE,
+        lang: 'ro',
+        url: urlPath,
+        headline: visibleHeadline(html) || meta.title,
+        description: meta.description,
+        datePublished: articleDates?.datePublished,
+        dateModified: articleDates?.dateModified,
+        image: `${SITE}/wp-content/ect-pages/og/default.jpg`,
+      }),
+      breadcrumbList({
+        site: SITE,
+        url: urlPath,
+        items: [
+          { name: 'Acasă', url: '/' },
+          { name: 'Blog', url: '/blog/' },
+          { name: route.labelRo },
+        ],
+      })
+    );
+  }
   if (route?.service) {
     const serviceSchema = service({
       site: SITE,

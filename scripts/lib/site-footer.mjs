@@ -31,7 +31,7 @@ const LOGO_BASE = '/wp-content/uploads/2024/02/Logo_Echipa_de_Tocilari-e17080286
 const ART_BASE = '/wp-content/ect-pages/footer/balcon-urban-v8';
 const CUP = '/wp-content/ect-pages/footer/pahar-cafea.webp';
 const EMAIL = 'contact@echipadetocilari.ro';
-const COMPANY_PATHS = ['/despre-noi/', '/portofoliu/'];
+const COMPANY_PATHS = ['/despre-noi/', '/portofoliu/', '/blog/'];
 
 const COPY = {
   ro: {

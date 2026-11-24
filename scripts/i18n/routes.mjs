@@ -115,6 +115,30 @@ export const routes = [
     service: { ro: 'Administrare campanii Facebook Ads și Instagram' },
   },
   {
+    // Editorial hub approved 24.11.2026. Romanian only until an EN version is approved. Not a service: no Service schema.
+    ro: '/blog/',
+    roFile: 'blog/index.html',
+    labelRo: 'Blog',
+  },
+  {
+    ro: '/blog/optimizare-site-wordpress/',
+    roFile: 'blog/optimizare-site-wordpress/index.html',
+    labelRo: 'Optimizare site WordPress',
+    blogArticle: true,
+  },
+  {
+    ro: '/blog/viteza-de-incarcare-a-site-ului/',
+    roFile: 'blog/viteza-de-incarcare-a-site-ului/index.html',
+    labelRo: 'Viteza de încărcare a site-ului',
+    blogArticle: true,
+  },
+  {
+    ro: '/blog/cat-costa-un-magazin-online/',
+    roFile: 'blog/cat-costa-un-magazin-online/index.html',
+    labelRo: 'Cât costă un magazin online în 2027',
+    blogArticle: true,
+  },
+  {
     // Company details required by Law 365/2002 art. 5 and Law 31/1990 art. 74 (decided 23.11.2026). Not a service: no Service schema.
     ro: '/termeni-si-conditii/',
     en: '/en/terms-and-conditions/',
