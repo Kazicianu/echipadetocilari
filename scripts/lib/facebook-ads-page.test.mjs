@@ -37,9 +37,9 @@ test('FAQ schema copy comes from the question element, not the comment decoratio
   }]);
 });
 
-test('the page shows nine visible FAQ answers that feed the schema', () => {
+test('the page shows eleven visible FAQ answers that feed the schema', () => {
   const faqs = extractFacebookAdsFaqs(page);
-  assert.equal(faqs.length, 9);
+  assert.equal(faqs.length, 11);
   for (const { q, a } of faqs) {
     assert.match(q, /\?$/);
     assert.ok(a.length > 40);

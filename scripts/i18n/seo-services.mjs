@@ -45,8 +45,8 @@ export const seoServicesDictionary = [
   t('toate tipurile de SEO', 'every type of SEO'),
   t('Acoperim fiecare tip de optimizare SEO, de la local la internațional', 'We cover every type of SEO optimisation, from local to international'),
   t(
-    'Nu aplicăm același șablon pentru o clinică din București și pentru un magazin online cu mii de produse. Lucrăm pe șase zone clare, activate progresiv în pachetele noastre.',
-    'We do not apply the same template to a clinic in Bucharest and to an online shop with thousands of products. We work across six clear areas, activated progressively in our plans.',
+    'Nu aplicăm același șablon pentru o clinică din București și pentru un magazin online cu mii de produse. Lucrăm pe șase zone clare, activate progresiv în pachetele noastre. Serviciile de optimizare SEO pornesc mereu de la un audit, iar serviciile SEO din București și din restul țării urmează aceeași metodă, adaptată la concurența din nișa ta.',
+    'We do not apply the same template to a clinic in Bucharest and to an online shop with thousands of products. We work across six clear areas, activated progressively in our plans. Our SEO optimisation services always start from an audit, and our SEO services in Bucharest and in the rest of the country follow the same method, adapted to the competition in your niche.',
   ),
   t('din Local', 'from Local'),
   t('din Creștere · complet în Scale', 'from Growth · complete in Scale'),
@@ -73,8 +73,8 @@ export const seoServicesDictionary = [
   ),
   t('Autoritate, Digital PR și Search Everywhere', 'Authority, Digital PR and Search Everywhere'),
   t(
-    'Apariții editoriale pe site-uri din domeniu, mențiuni de brand citate de LLM-uri, campanii PR bazate pe date, YouTube SEO și monitorizare în comunități (Reddit, forumuri).',
-    'Editorial mentions on websites in your field, brand mentions cited by LLMs, data-driven PR campaigns, YouTube SEO and monitoring of communities (Reddit, forums).',
+    'Apariții editoriale pe site-uri din domeniu, mențiuni de brand citate de LLM-uri, campanii PR bazate pe date, YouTube SEO și monitorizare în comunități (Reddit, forumuri). Este partea de off-page: ce se spune despre firma ta în afara site-ului, adică mențiuni și linkuri câștigate din surse relevante, nu cumpărate în masă.',
+    'Editorial mentions on websites in your field, brand mentions cited by LLMs, data-driven PR campaigns, YouTube SEO and monitoring of communities (Reddit, forums). This is the off-page side: what is said about your business outside your site, meaning mentions and links earned from relevant sources, not bought in bulk.',
   ),
   t('SEO internațional, multilingv și programmatic', 'International, multilingual and programmatic SEO'),
   t(
@@ -576,10 +576,12 @@ export const seoServicesDictionary = [
     'Yes. For small shops (up to 500 products), the category basics and the Merchant Center check come with the Growth plan. For medium and large catalogues (500-10,000+ products), the Scale and Dominance plans cover the architecture of filters and facets, Answer-First product pages, Google Merchant Center for AI Mode and ChatGPT Shopping readiness. If the shop has to be rebuilt, we can also work together on',
   ),
   t('creare magazin online', 'online shop development'),
+  t('. Dacă magazinul sau site-ul rulează pe WordPress și e lent, începe cu ghidul de ', '. If the shop or site runs on WordPress and is slow, start with our guide on '),
+  t('optimizare site WordPress', 'WordPress site optimisation (in Romanian)'),
   t('Oferiți consultanță SEO punctuală sau servicii de SEO internațional?', 'Do you offer one-off SEO consultancy or international SEO services?'),
   t(
-    'Da. Dacă ai deja o echipă internă de dezvoltare sau conținut, oferim consultanță SEO la oră (45&nbsp;€/oră) sau audit punctual cu plan de implementare. Pentru extinderea pe alte piețe, pachetul Dominare (sau modulul de setup internațional) acoperă arhitectura URL, implementarea hreflang conform ISO, cercetarea nativă pe fiecare limbă și apariții pe domenii locale din țările vizate.',
-    'Yes. If you already have an in-house development or content team, we offer SEO consultancy by the hour (€45/hour) or a one-off audit with an implementation plan. For expanding into other markets, the Dominance plan (or the international setup module) covers the URL architecture, ISO-compliant hreflang implementation, native research for each language and mentions on local domains in the target countries.',
+    'Da. Dacă ai deja o echipă internă de dezvoltare sau conținut, oferim consultanță SEO la oră (45&nbsp;€/oră) sau audit punctual cu plan de implementare. Dacă ești din București sau din alt oraș, consultanța SEO se face la distanță, iar în funcție de buget și de obiectiv îți spunem sincer dacă ai nevoie de un abonament sau ajunge o intervenție unică. Pentru extinderea pe alte piețe, pachetul Dominare (sau modulul de setup internațional) acoperă arhitectura URL, implementarea hreflang conform ISO, cercetarea nativă pe fiecare limbă și apariții pe domenii locale din țările vizate.',
+    'Yes. If you already have an in-house development or content team, we offer SEO consultancy by the hour (€45/hour) or a one-off audit with an implementation plan. If you are in Bucharest or in another city, the SEO consultancy is done remotely, and depending on your budget and goal we tell you honestly whether you need a subscription or a one-off intervention is enough. For expanding into other markets, the Dominance plan (or the international setup module) covers the URL architecture, ISO-compliant hreflang implementation, native research for each language and mentions on local domains in the target countries.',
   ),
   t('Cum gestionați migrarea unui site sau magazin nou fără să pierdem traficul din Google?', 'How do you handle migrating to a new website or shop without losing our Google traffic?'),
   t(

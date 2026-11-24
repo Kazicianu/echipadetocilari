@@ -54,6 +54,7 @@
 
 /* Projects section */
 .ect-page--portofoliu .pf-projects { position: relative; max-width: var(--section-max); margin: 0 auto; padding: 20px 20px 110px; }
+.ect-page--portofoliu .pf-more { margin-top: 56px; }
 
 /* Project cards: phone first (site preview large, portrait), bento grid from 1024px. The whole card is one link on the project name. */
 .ect-page--portofoliu .mb-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; width: 100%; }

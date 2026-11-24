@@ -12,6 +12,35 @@ export { contactDictionary, googleAdsDictionary, portfolioDictionary, privacyPol
  * global dictionary for that page alone (longest first, like the global entries).
  */
 export const pageDictionaries = {
+  '/': [
+    [
+      'Cauți o agenție de marketing online din București? Lucrăm ca o echipă care răspunde de tot lanțul: site, Google, social media și raportare. Încă de la început stabilim ce înseamnă succes pentru tine (apeluri, cereri de ofertă sau comenzi) și abia apoi alegem unde merită să investești în mediul online. Așa vezi rezultate reale, pe care le poți măsura.',
+      'Looking for an online marketing agency in Bucharest? We work as one team that owns the whole chain: website, Google, social media and reporting. From the start we define what success means for you (calls, quote requests or orders), and only then do we pick where it makes sense to invest online. That way you see real results you can measure.',
+    ],
+    [
+      'Pe scurt, în mediul online contează trei lucruri: să fii găsit (SEO și Google Ads), să înțeleagă omul repede ce oferi când ajunge pe site și să rămâi în minte prin social media și conținut. O agenție de marketing bună le leagă între ele, ca fiecare leu dat pe promovare să aducă ceva ce poți măsura.',
+      'In short, three things matter online: being found (SEO and Google Ads), making it clear what you offer as soon as someone lands on your site, and staying in people\'s minds through social media and content. A good marketing agency ties them together, so every leu spent on promotion brings something you can measure.',
+    ],
+    [
+      'Ce aduce rezultate mai repede: o ofertă clară, un site care se încarcă bine pe telefon și un răspuns rapid la mesaje. Din prima lună îți arătăm ce s-a schimbat, ca să vezi dacă direcția e bună, fără să aștepți jumătate de an.',
+      'What brings results faster: a clear offer, a site that loads well on mobile and a quick reply to messages. From the first month we show you what changed, so you can tell whether the direction is right without waiting half a year.',
+    ],
+    [
+      'Un prim pas simplu: ne uităm la ce rulează deja la tine (site, campanii, social media) și vedem ce aduce rezultate și ce nu. Bugetul crește doar când un canal arată că aduce clienți, nu pentru că așa face toată lumea.',
+      'A simple first step: we look at what already runs on your side (site, campaigns, social media) and see what brings results and what does not. The budget goes up only when a channel shows it brings customers, not because everyone else does it.',
+    ],
+  ],
+  '/administrare-site/': [
+    ['Mentenanță site web și administrare site WordPress', 'Website maintenance and WordPress site management'],
+    [
+      'Mentenanța WordPress începe cu lucrurile pe care nu le vezi: platforma, temele și pluginurile apar în versiuni noi, iar o actualizare amânată lasă site-ul cu funcții vechi, probleme de compatibilitate și un risc în plus de securitate. În toate pachetele, actualizările, monitorizarea și backup-ul zilnic sunt făcute de noi, așa că ai o copie la care te poți întoarce dacă ceva nu merge. Mentenanța site-ului nu înlocuiește un proiect nou, ci păstrează în stare bună ce ai deja.',
+      'WordPress maintenance starts with what you do not see: the platform, themes and plugins get new versions, and a postponed update leaves your site with outdated features, compatibility problems and extra security risk. In every plan, updates, monitoring and the daily backup are handled by us, so you have a copy to go back to if something breaks. Maintenance does not replace a new project; it keeps what you already have in good shape.',
+    ],
+    [
+      '<strong>Cum alegi pachetul?</strong> Starter (50 € pe lună, 2 ore) se potrivește dacă site-ul se schimbă rar și vrei doar să fie la zi și monitorizat. Premium (75 € pe lună, 4 ore) adaugă modificări de design, util când ajustezi periodic paginile. Advanced (100 € pe lună, 6 ore) include și optimizarea vitezei site-ului, potrivită când paginile se încarcă greu sau ai multe imagini și pagini. Dacă nu ești sigur, ne spui ce platformă folosești și cât de des îți schimbi conținutul, iar împreună alegem varianta care are sens.',
+      '<strong>How do you choose a plan?</strong> Starter (50 EUR per month, 2 hours) fits if your site rarely changes and you just want it up to date and monitored. Premium (75 EUR per month, 4 hours) adds design changes, useful when you tweak pages regularly. Advanced (100 EUR per month, 6 hours) also includes site speed optimization, a good fit when pages load slowly or you have many images and pages. If you are not sure, tell us which platform you use and how often you change content, and we will pick the option that makes sense together.',
+    ],
+  ],
   '/agentie-google-ads/': googleAdsDictionary,
   '/contact/': contactDictionary,
   '/creare-site-web/': websiteDesignDictionary,
