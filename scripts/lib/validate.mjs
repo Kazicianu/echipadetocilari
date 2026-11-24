@@ -194,7 +194,7 @@ function checkSocialMeta(html, locale, outDir, name, errors) {
     [...html.matchAll(new RegExp(`<meta\\s+[^>]*${attr}[^>]*>`, 'gi'))].map(([tag]) => tag.match(/\scontent=["']([^"']*)["']/i)?.[1]);
   const [ogLocale] = meta('property=["\']og:locale["\']');
   if (ogLocale !== locale) errors.push(`${name}: og:locale is ${ogLocale}, expected ${locale}`);
-  if (/<meta\s+[^>]*(?:property=["'](?:og:updated_time|article:[\w:]+)["']|name=["']twitter:(?:label|data)\d+["'])/i.test(html)) {
+  if (/<meta\s+[^>]*(?:property=["'](?:og:updated_time|article:(?!published_time|modified_time)[\w:]+)["']|name=["']twitter:(?:label|data)\d+["'])/i.test(html)) {
     errors.push(`${name}: stale WordPress share meta (og:updated_time, article:*, twitter:label)`);
   }
   for (const [label, attr] of [['og:image', 'property=["\']og:image["\']'], ['twitter:image', 'name=["\']twitter:image["\']']]) {

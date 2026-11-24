@@ -9,6 +9,7 @@
  * default 1200x630 one, with a `summary_large_image` card.
  */
 import { upsertMeta } from './html.mjs';
+import { visibleArticleDates } from './schema.mjs';
 import { defaultOgImage, ogImagePath, ogImageSize, ogPages } from './og-pages.mjs';
 
 export const fallbackOgImage = defaultOgImage;
@@ -17,7 +18,7 @@ const ogByPage = new Map(ogPages.map((entry) => [entry.page, entry]));
 
 const ownHosts = new Set(['echipadetocilari.ro', 'www.echipadetocilari.ro']);
 const staleMeta =
-  /<meta\s+[^>]*(?:property=["'](?:og:updated_time|article:[\w:]+)["']|name=["']twitter:(?:label|data)\d+["'])[^>]*>\s*/gi;
+  /[ \t]*<meta\s+[^>]*(?:property=["'](?:og:updated_time|article:[\w:]+)["']|name=["']twitter:(?:label|data)\d+["'])[^>]*>\s*/gi;
 const ownImageMeta =
   /[ \t]*<meta\s+[^>]*(?:property=["']og:image(?::\w+)?["']|name=["']twitter:image(?::alt)?["'])[^>]*>[ \t]*(?:\r?\n)?/gi;
 const imageMeta =
@@ -45,12 +46,14 @@ function setImage(html, image) {
  * @param {string} opts.site     origin without trailing slash
  * @param {string} opts.pageUrl  public path of the page, e.g. /contact/
  * @param {string} opts.locale   ro_RO or en_US
- * @param {string} [opts.ogType] Open Graph type (defaults to 'website')
+ * @param {string} [opts.ogType] Open Graph type (defaults to 'article' when the page shows article dates, else 'website')
  */
-export function normalizeSocialMeta(html, { site, pageUrl, locale, ogType = 'website' }) {
+export function normalizeSocialMeta(html, { site, pageUrl, locale, ogType }) {
+  // Blog articles carry a byline with visible dates; they also get article:*_time.
+  const articleDates = visibleArticleDates(html);
   html = html.replace(staleMeta, '');
   html = upsertMeta(html, 'property="og:locale"', locale);
-  html = upsertMeta(html, 'property="og:type"', ogType);
+  html = upsertMeta(html, 'property="og:type"', ogType ?? (articleDates ? 'article' : 'website'));
   html = html.replace(imageMeta, (_m, start, value, end) => `${start}${absoluteUrl(value, site, pageUrl)}${end}`);
 
   const entry = ogByPage.get(pageUrl);
@@ -64,6 +67,11 @@ export function normalizeSocialMeta(html, { site, pageUrl, locale, ogType = 'web
     });
   } else if (!/<meta\s+[^>]*property=["']og:image["']/i.test(html)) {
     html = setImage(html, { url: `${site}${defaultOgImage.path}`, ...defaultOgImage });
+  }
+  if (articleDates) {
+    const iso = (date) => `${date}T09:00:00+02:00`;
+    html = upsertMeta(html, 'property="article:published_time"', iso(articleDates.datePublished));
+    html = upsertMeta(html, 'property="article:modified_time"', iso(articleDates.dateModified));
   }
   return html;
 }

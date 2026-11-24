@@ -71,6 +71,7 @@ export function website({ site, lang }) {
   };
 }
 
+/** @param {boolean} [breadcrumb] link the page's BreadcrumbList (`${url}#breadcrumb`); only when that node is emitted */
 export function webPage({ site, lang, url, name, description, dateModified, breadcrumb }) {
   return {
     '@context': 'https://schema.org',
