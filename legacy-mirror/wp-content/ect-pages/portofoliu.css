@@ -115,6 +115,7 @@
   .ect-page--portofoliu .mb-shot--tidora { background: #163b35; }
   .ect-page--portofoliu .mb-shot--grovely { background: #d8ea5e; }
   .ect-page--portofoliu .mb-shot--fernly { background: #1f3829; }
+  .ect-page--portofoliu .mb-shot--lumo { background: #1C1C1C; }
   .ect-page--portofoliu .mb-shot--phone .mb-bar { display: none; }
   .ect-page--portofoliu .mb-shot--phone .mb-view { position: absolute; top: 28px; left: 50%; flex: none; box-sizing: border-box; width: min(64%, 280px); aspect-ratio: 2 / 3; border: 7px solid #1d1d1f; border-radius: 34px; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.16), 0 28px 56px -16px rgba(0, 0, 0, 0.5); transform: translateX(-50%); transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1); }
 }

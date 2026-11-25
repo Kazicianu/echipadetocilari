@@ -13,6 +13,17 @@
 // Options: --playwright=<dir with node_modules/playwright> (the repo has no Playwright dependency),
 //          --ffmpeg=<dir with ffmpeg.exe> (or FFMPEG_DIR), --seconds=6, --fps=60, --settle=2500 (ms of page time before frame 0),
 //          --scroll=<px per second of wheel input> (default desktop 520, mobile 420), --max-bytes=1000000.
+// Heavy WebGL pages (e.g. a Spline 3D model):
+//          --chrome-args=a,b  extra Chrome flags (comma separated), added after the built-in ones. For WebGL in headless Chrome use
+//                             --chrome-args=--use-angle=swiftshader-webgl,--enable-unsafe-swiftshader,--ignore-gpu-blocklist
+//                             (plain --use-angle=swiftshader also draws the scene but sends the whole compositor through the software
+//                             renderer, about 20x slower per frame),
+//          --ready=<JS expression>  after --settle, the page clock advances in small steps until the expression is truthy AND the clipped
+//                             area is not blank (luma standard deviation >= --ready-luma, default 8, on a 0-255 scale). The page clock is
+//                             faked, so an asynchronous scene load only progresses while the clock is advanced,
+//          --ready-timeout=<ms of real time, default 120000>  the run fails if the page is still not ready by then,
+//          --ready-luma=<min luma standard deviation>.
+//          Without these options the behaviour and the output are the same as before.
 import { spawnSync } from 'node:child_process';
 import { mkdirSync, mkdtempSync, rmSync, statSync } from 'node:fs';
 import { createRequire } from 'node:module';
@@ -46,6 +57,10 @@ const seconds = Number(args.seconds ?? 6);
 const settle = Number(args.settle ?? 2500);
 const scrollPerSecond = Number(args.scroll ?? vp.scroll);
 const maxBytes = Number(args['max-bytes'] ?? 1_000_000);
+const extraChromeArgs = args['chrome-args'] ? args['chrome-args'].split(',').map(a => a.trim()).filter(Boolean) : [];
+const readyExpression = args.ready;
+const readyTimeout = Number(args['ready-timeout'] ?? 120_000);
+const readyLuma = Number(args['ready-luma'] ?? 8);
 const ffmpegDir = args.ffmpeg ?? process.env.FFMPEG_DIR ?? '';
 const ffmpeg = ffmpegDir ? path.join(ffmpegDir, process.platform === 'win32' ? 'ffmpeg.exe' : 'ffmpeg') : 'ffmpeg';
 
@@ -62,12 +77,48 @@ function run(cmd, cmdArgs) {
   if (r.status !== 0) throw new Error(`${path.basename(cmd)} failed: ${r.stderr?.slice(-800)}`);
 }
 
+// Standard deviation of the luma (0-255) of a PNG, computed in a separate clean context so the page under test is not touched.
+async function lumaSpread(analysis, png) {
+  return analysis.evaluate(async b64 => {
+    const bitmap = await createImageBitmap(new Blob([Uint8Array.from(atob(b64), c => c.charCodeAt(0))], { type: 'image/png' }));
+    const canvas = new OffscreenCanvas(bitmap.width, bitmap.height);
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(bitmap, 0, 0);
+    const { data } = ctx.getImageData(0, 0, bitmap.width, bitmap.height);
+    let sum = 0, sumSq = 0;
+    const n = data.length / 4;
+    for (let i = 0; i < data.length; i += 4) { const y = 0.2126 * data[i] + 0.7152 * data[i + 1] + 0.0722 * data[i + 2]; sum += y; sumSq += y * y; }
+    const mean = sum / n;
+    return Math.sqrt(Math.max(0, sumSq / n - mean * mean));
+  }, png.toString('base64'));
+}
+
+async function waitUntilReady(page) {
+  const analysisContext = await browser.newContext();
+  const analysis = await analysisContext.newPage();
+  const started = Date.now();
+  let spread = 0;
+  try {
+    while (Date.now() - started < readyTimeout) {
+      await page.clock.runFor(100);
+      await page.waitForTimeout(150);
+      if (!(await page.evaluate(readyExpression))) continue;
+      const png = await page.screenshot({ clip: { x: 0, y: 0, ...VIEWPORTS[args.vp ?? 'desktop'].clip }, animations: 'allow', timeout: Math.max(5000, readyTimeout - (Date.now() - started)) });
+      spread = await lumaSpread(analysis, png);
+      if (spread >= readyLuma) { console.log(`ready after ${Date.now() - started} ms (luma spread ${spread.toFixed(1)})`); return; }
+    }
+    throw new Error(`Page not ready after ${readyTimeout} ms (expression: ${readyExpression}; last luma spread ${spread.toFixed(1)}, needs ${readyLuma})`);
+  } finally {
+    await analysisContext.close();
+  }
+}
+
 const playwright = await loadPlaywright();
 const { chromium } = playwright.chromium ? playwright : playwright.default;
 const browser = await chromium.launch({
   channel: 'chrome',
   headless: true,
-  args: ['--host-resolver-rules=MAP * ~NOTFOUND, EXCLUDE 127.0.0.1, EXCLUDE localhost', '--hide-scrollbars'],
+  args: ['--host-resolver-rules=MAP * ~NOTFOUND, EXCLUDE 127.0.0.1, EXCLUDE localhost', '--hide-scrollbars', ...extraChromeArgs],
 });
 const frames = mkdtempSync(path.join(os.tmpdir(), 'portfolio-clip-'));
 try {
@@ -80,6 +131,7 @@ try {
   await page.goto(url, { waitUntil: 'load' });
   await page.evaluate(() => document.fonts.ready);
   await page.clock.runFor(settle);
+  if (readyExpression) await waitUntilReady(page);
   await page.mouse.move(clip.width / 2, clip.height / 2);
 
   const total = Math.round(fps * seconds);

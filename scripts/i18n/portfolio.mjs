@@ -4,7 +4,7 @@ export const portfolioDictionary = [
   ["Consultație gratuită · 30 de minute · Fără obligații","Free consultation · 30 minutes · No obligation"],
   ["Proiecte făcute de tocilari","Projects built by our nerds"],
   [">Portofoliu web design: modele de site-uri</h1>",">Portfolio web design: website examples</h1>"],
-  ["Aici găsești modele de site-uri de prezentare pentru domenii foarte diferite: producție video (Torjai Productions), recrutare și product management (Funera), studio de unghii (Zuzel), sprijin pentru persoane neurodivergente (2noi), showroom de mobilier (Norwen), firmă de curățenie (Tidora), amenajări peisagistice (Grovely), aplicație de catering (Mesa) și studio de peisagistică (Fernly).","Here you will find website examples for very different industries: video production (Torjai Productions), recruitment and product management (Funera), a nail studio (Zuzel), support for neurodivergent people (2noi), a furniture showroom (Norwen), a cleaning company (Tidora), landscaping (Grovely), a catering app (Mesa) and a landscape design studio (Fernly)."],
+  ["Aici găsești modele de site-uri de prezentare pentru domenii foarte diferite: producție video (Torjai Productions), recrutare și product management (Funera), studio de unghii (Zuzel), sprijin pentru persoane neurodivergente (2noi), showroom de mobilier (Norwen), firmă de curățenie (Tidora), amenajări peisagistice (Grovely), aplicație de catering (Mesa), studio de peisagistică (Fernly) și asistent vocal cu AI (Lumo).","Here you will find website examples for very different industries: video production (Torjai Productions), recruitment and product management (Funera), a nail studio (Zuzel), support for neurodivergent people (2noi), a furniture showroom (Norwen), a cleaning company (Tidora), landscaping (Grovely), a catering app (Mesa), a landscape design studio (Fernly) and an AI voice assistant (Lumo)."],
   ["Fiecare proiect se deschide live într-o filă nouă, așa că poți vedea cum se încarcă site-ul, cum arată pe telefon și cum sunt organizate paginile. Dacă un model ți se potrivește, scrie-ne ce domeniu ai și ce pagini îți trebuie, iar detaliile le discutăm în consultația gratuită de 30 de minute.","Each project opens live in a new tab, so you can see how the site loads, how it looks on a phone and how its pages are organized. If an example fits, tell us your industry and which pages you need, and we will go through the details in the free 30-minute consultation."],
   ["Vreau un proiect similar","I want a similar project"],
   ["Proiecte din portofoliu","Portfolio projects"],
@@ -19,4 +19,5 @@ export const portfolioDictionary = [
   ["Amenajări peisagistice","Landscaping"],
   ["Aplicație de catering","Catering app"],
   ["Studio de peisagistică","Landscape design studio"],
+  ["Asistent vocal cu AI","AI voice assistant"],
 ];
