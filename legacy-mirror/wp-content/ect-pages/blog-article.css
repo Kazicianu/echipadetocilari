@@ -34,6 +34,10 @@ body.ect-article-body {
   margin: 0;
   overflow-x: clip;
   background: var(--art-white);
+}
+
+/* Tipografia articolului sta in <main>; contactul si footerul comune pastreaza fonturile de pe celelalte pagini. */
+body.ect-article-body > main.ect-page--article {
   color: var(--art-ink);
   font-family: var(--art-font);
   -webkit-font-smoothing: antialiased;
@@ -52,10 +56,9 @@ body.ect-article-body::before {
     linear-gradient(180deg, #fff6f0 0%, #fffaf7 46%, rgba(255, 255, 255, 0) 100%);
 }
 
+/* Contactul si footerul comune raman fara z-index, ca pe celelalte pagini: valul formularului (z-index 2 in site-footer.css) trece peste marginea de sus a footerului. */
 body.ect-article-body > header.elementor-location-header,
-body.ect-article-body > main.ect-page--article,
-body.ect-article-body > .ect-shared-contact,
-body.ect-article-body > footer.elementor-location-footer {
+body.ect-article-body > main.ect-page--article {
   position: relative;
   z-index: 1;
 }

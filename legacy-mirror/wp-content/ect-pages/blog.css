@@ -41,10 +41,9 @@ body.ect-blog-body::before {
     linear-gradient(180deg, #fffaf6 0%, #ffffff 100%);
 }
 
+/* Contactul si footerul comune raman fara z-index, ca pe celelalte pagini: valul formularului (z-index 2 in site-footer.css) trece peste marginea de sus a footerului. */
 body.ect-blog-body > header.elementor-location-header,
-body.ect-blog-body > main.ect-page--blog,
-body.ect-blog-body > .ect-shared-contact,
-body.ect-blog-body > footer.elementor-location-footer {
+body.ect-blog-body > main.ect-page--blog {
   position: relative;
   z-index: 1;
 }

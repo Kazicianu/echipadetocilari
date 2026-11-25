@@ -242,3 +242,13 @@ test('/blog/ keeps peach out of the index styles (white with orange outlines ins
   }
   assert.doesNotMatch(css, /--bg-peach|--bg-warm|--border-warm/);
 });
+
+test('blog pages leave the shared contact and footer unstacked, so the contact wave overlaps the footer like on other pages', () => {
+  for (const [name, source] of [['blog.css', css], ['blog-article.css', artCss]]) {
+    assert.doesNotMatch(source, />\s*\.ect-shared-contact\b/, `${name} must not restyle the shared contact wrapper`);
+    assert.doesNotMatch(source, />\s*footer\.elementor-location-footer\b/, `${name} must not restyle the shared footer`);
+  }
+  const artBody = artCss.match(/body\.ect-article-body\s*\{[^}]*\}/)?.[0] ?? '';
+  assert.ok(artBody, 'article body rule found');
+  assert.doesNotMatch(artBody, /font-family|(?<![-\w])color\s*:/, 'article typography stays on <main>, not on <body>');
+});
